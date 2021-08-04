@@ -1,0 +1,100 @@
+#tools-list {
+    display: none;
+    height: 300px;
+    overflow-y: scroll;
+}
+
+div.tool-entry {
+    background-color: #FFFFFF;
+    float: left;
+    clear: left;
+    border: 2px outset #596275;
+    border-radius: 10px;
+    width: 200px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+div.tool-icon {
+  float: left;
+  clear: left;
+  background-color: white;
+  height: 40px;
+  width: 40px;
+  border: 2px outset black;
+  border-radius: 36px;
+  position: relative;
+  margin-left: 2px;
+}
+
+#search-box > input {
+    width: 200px;
+}
+
+div.tool-icon > img {
+  max-height: 70%;
+  max-width: 70%;
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+div.tool-name {
+  float: left;
+  height: 40px;
+  background-color: #FFFFFF;
+  width: 150px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 40px; 
+  color: white;
+  font-size: 8vw;
+   text-shadow: 1px 1px #000000;
+}
+
+#error-msg, #warning-msg {
+  display: none;
+  width: 200px;
+  height: 30px;
+  border: 2px solid #AA0000;
+  border-radius: 5px;
+  line-height: 30px;
+  color: #111111;
+  padding-left: 5px;
+  vertical-align: middle;
+}
+
+#error-msg {
+  background-color: #FF8888;
+}
+
+#warning-msg {
+  border: 2px solid #AAAA00;
+  background-color: #FFFF88;
+}
+
+#plugin-icon {
+    width: 200px;
+}
+
+#plugin-icon > img {
+    width: 100px;
+    margin-top: 5px;
+    margin-left: 25%;
+    opacity: 0.75;
+}
+
+#plugin-icon > div {
+    width: 100%;
+    text-align: center;
+    margin-top: 5px;
+    font-family: Verdana, sans-serif;
+    font-weight: bold;
+    color: #333333;
+    font-size: 2em;
+}

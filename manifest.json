@@ -1,0 +1,34 @@
+{
+	"manifest_version": 2,
+	"name": "FoxyRecon",
+	"version": "0.1",
+
+	"description": "A Firefox add-on for OSINT investigations",
+
+	"icons": {
+		"16": "data/icons/foxyrecon-icon-16.png",
+		"48": "data/icons/foxyrecon-icon-48.png"
+	},
+    
+    "content_security_policy": "default-src 'self'",
+
+    "background": {
+        "scripts": ["src/utils/jquery-3.5.1.min.js", "src/utils/utils.js","src/background.js"]
+    },
+
+    "content_scripts": [{
+        "matches": ["http://*/*", "https://*/*"],
+        "js": ["src/utils/jquery-3.5.1.min.js", "src/utils/utils.js", "src/content_script.js"]
+    }],
+
+	"permissions": [
+		"contextMenus"
+	],
+
+	"browser_action": {
+			"default_icon": "data/icons/foxyrecon-icon-48.png",
+			"default_title": "FoxyRecon",
+			"default_popup": "src/popup/main_popup.html"
+	}
+
+}

@@ -1,0 +1,235 @@
+{
+	"tools": [
+		{
+			"name": "URLVoid",
+			"url":  "https://urlvoid.com/scan/%s",
+			"icon": "/data/tools-icons/urlvoid.png",
+            "color": "#FFAC0D",
+			"tags": ["domain"]
+		},
+		{
+			"name": "urlscan",
+			"url":  "https://urlscan.io/domain/%s",
+			"icon": "/data/tools-icons/urlscan.png",
+            "color": "#E25A45",
+			"tags": ["domain"]
+		},
+		{
+			"name": "BGP Hurricane",
+			"url":  "https://bgp.he.net/dns/%s",
+			"icon": "/data/tools-icons/bgphe.png",
+			"borderColor": "#000065",
+			"fontColor": "#000000",
+			"tags": ["domain"]
+		},
+        {
+			"name": "BGP Hurricane",
+			"url":  "https://bgp.he.net/ip/%s",
+			"icon": "/data/tools-icons/bgphe.png",
+			"borderColor": "#000065",
+			"fontColor": "#000000",
+			"tags": ["ip"]
+		},	
+		{
+			"name": "Domain Tools",
+			"url":  "https://whois.domaintools.com/%s",
+			"icon": "/data/tools-icons/domaintools.png",
+			"fontColor": "#888888",
+			"borderColor": "#888888",
+			"tags": ["domain"]
+		},
+		{
+			"name": "URLhaus",
+			"url":  "https://urlhaus.abuse.ch/browse.php?search=%s",
+			"icon": "/data/tools-icons/urlhaus.png",
+			"color": "#A20300",
+			"tags": ["domain","url","ip"]
+		},
+		{
+			"name": "AbuseIPDB",
+			"url":  "https://www.abuseipdb.com/check/%s",
+			"icon": "/data/tools-icons/abuseipdb.png",
+			"color": "#4E7E14",
+			"tags": ["domain","ip"]
+		},
+		{
+			"name": "Talos Intelligence",
+			"url":  "https://talosintelligence.com/reputation_center/lookup?search=%s",
+			"icon": "/data/tools-icons/talos.png",
+			"color": "#0077BE",
+			"tags": ["domain","ip"]
+		},
+		{
+			"name": "crt.sh",
+			"url":  "https://crt.sh/?q=%s",
+			"icon": "/data/tools-icons/crtsh.png",
+			"color": "#00B373",
+			"tags": ["domain"]
+		},
+		{
+			"name": "VirusTotal",
+			"url":  "https://virustotal.com/gui/domain/%s",
+			"icon": "/data/tools-icons/virustotal.png",
+			"color": "#394EFF",
+			"tags": ["domain"]
+		},
+        {
+            "name": "VirusTotal",
+            "url": "https://virustotal.com/gui/ip-address/%s",
+            "icon": "/data/tools-icons/virustotal.png",
+            "color": "#394EFF",
+            "tags": ["ip"]
+        },
+        {
+            "name": "VirusTotal",
+            "url": "https://www.virustotal.com/gui/file/%s/detection",
+            "icon": "/data/tools-icons/virustotal.png",
+            "color": "#394EFF",
+            "tags": ["hash"]
+        },
+		{
+			"name": "hashdd",
+			"url":  "https://www.hashdd.com/search/%s",
+			"icon": "/data/tools-icons/hashdd.png",
+			"fontColor": "#222222",
+			"borderColor": "#222222",
+			"tags": ["hash"]
+		},
+        {
+            "name": "MALWARE bazaar",
+            "url": "https://bazaar.abuse.ch/browse/?search=md5%3A%s",
+            "icon": "/data/tools-icons/malwarebazaar.png",
+            "color": "#6C757D",
+            "tags": ["hash"]
+        },
+        {
+            "name": "THREATfox",
+            "url": "https://threatfox.abuse.ch/browse.php?search=ioc%3A%s",
+            "icon": "/data/tools-icons/malwarebazaar.png",
+            "color": "#000000",
+            "tags": ["hash","domain","ip"]
+        },
+        {
+            "name": "AlienVault",
+            "url": "https://otx.alienvault.com/indicator/ip/%s",
+            "icon": "/data/tools-icons/alienvault.png",
+            "color": "#000000",
+            "tags": ["ip"]
+        },
+        {
+            "name": "AlienVault",
+            "url": "https://otx.alienvault.com/indicator/domain/%s",
+            "icon": "/data/tools-icons/alienvault.png",
+            "color": "#000000",
+            "tags": ["domain"]
+        },
+        {
+            "name": "AlienVault",
+            "url": "https://otx.alienvault.com/indicator/file/%s",
+            "icon": "/data/tools-icons/alienvault.png",
+            "color": "#000000",
+            "tags": ["hash"]
+        },
+        {
+            "name": "HybridAnalysis",
+            "url": "https://www.hybrid-analysis.com/search?query=%s",
+            "icon": "/data/tools-icons/hybrid.png",
+            "color": "#33A6C8",
+            "tags": ["hash"]
+        },
+        {
+            "name": "Kaspersky",
+            "url": "https://opentip.kaspersky.com/%s/",
+            "icon": "/data/tools-icons/kaspersky.png",
+            "color": "#00A88E",
+            "tags": ["ip","domain","hash"]
+        },
+        {
+            "name": "Pulsedive",
+            "url": "https://pulsedive.com/indicator/?ioc=%b",
+            "icon": "/data/tools-icons/pulsedive.png",
+            "color": "#0E2C3E",
+            "tags": ["ip","domain","hash"]
+        },
+        {
+            "name": "IntelligenceX",
+            "url": "https://intelx.io/?s=%s",
+            "icon": "/data/tools-icons/intelx.png",
+            "color": "#0E2C3E",
+            "tags": ["ip","domain"]
+        },
+        {
+            "name": "Norton Safeweb",
+            "url": "https://safeweb.norton.com/report/show?url=%s",
+            "icon": "/data/tools-icons/norton.png",
+            "color": "#FFFFFF",
+            "fontColor": "#000000",
+            "borderColor": "#FCBC34",
+            "tags": ["domain","url"]
+        },
+        {
+            "name": "Alexa",
+            "url": "https://www.alexa.com/siteinfo/%s",
+            "icon": "/data/tools-icons/alexa.png",
+            "color": "#F89A3A",
+            "borderColor": "#1B334B",
+            "tags": ["domain"]
+        },
+        {
+            "name": "Spyse",
+            "url": "https://spyse.com/target/domain/%s",
+            "icon": "/data/tools-icons/spyse.png",
+            "color": "#0D3A86",
+            "tags": ["domain"]
+        },
+        {
+            "name": "Spyse",
+            "url": "https://spyse.com/target/ip/%s",
+            "icon": "/data/tools-icons/spyse.png",
+            "color": "#0D3A86",
+            "tags": ["ip"]
+        },
+        {
+            "name": "WebArchive",
+            "url": "https://web.archive.org/web/*/%s",
+            "icon": "/data/tools-icons/webarchive.png",
+            "color": "#222222",
+            "fontColor": "#FFFFFF",
+            "tags": ["url"]
+        },
+        {
+            "name": "Google Cache",
+            "url": "https://webcache.googleusercontent.com/search?q=cache:%s",
+            "icon": "/data/tools-icons/googlecache.png",
+            "color": "#FFFFFF",
+            "fontColor": "#000000",
+            "borderColor": "#EA4335",
+            "tags": ["url"]
+        },
+        {
+            "name": "Host.io",
+            "url": "https://host.io/%s",
+            "icon": "/data/tools-icons/hostio.png",
+            "color": "#F35928",
+            "fontColor": "#FFFFFF",
+            "tags": ["domain"]
+        },
+        {
+            "name": "Shodan",
+            "url": "https://www.shodan.io/search?query=%s",
+            "icon": "/data/tools-icons/shodan.png",
+            "color": "#151515",
+            "fontColor": "#FFFFFF",
+            "tags": ["domain","ip"]
+        },
+        {
+            "name": "Censys",
+            "url": "https://censys.io/ipv4/%s",
+            "icon": "/data/tools-icons/censys.png",
+            "color": "#FFFFFF",
+            "fontColor": "#000000",
+            "borderColor": "#FF7A38",
+            "tags": ["ip"]
+        }
+    ]
+}
