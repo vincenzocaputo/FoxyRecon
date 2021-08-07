@@ -1,8 +1,13 @@
 ![Mozilla Add-on](https://img.shields.io/amo/v/foxyrecon?style=plastic)
 
+<p align="left">
+  <img src="images/get-the-addon-129x45px.8041c789.png" src="https://addons.mozilla.org/en-US/firefox/addon/foxyrecon/"/>
+</p>
+
+
+
 <p align="center">
-  
-  <img src="addon/data/icons/foxyrecon-icon.png" width="200" height="200" />
+  <img src="images/foxyrecon.png" width="200" height="200" />
 </p>
 
 # FoxyRecon
