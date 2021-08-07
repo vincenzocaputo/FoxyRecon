@@ -1,11 +1,13 @@
-# FoxyRecon
-FoxyRecon is a Firefox that helps you to carry out searching and investigation activities by using free Open Source Intelligence Source (OSINT) web resources.
+![Mozilla Add-on](https://img.shields.io/amo/v/foxyrecon?style=plastic)
 
-You can use FoxyRecon addon in two ways:
+# FoxyRecon
+FoxyRecon is a Firefox add-on that helps you to carry out searching and investigation activities by using free Open Source Intelligence Source (OSINT) web resources.
+
+You can perform researches through FoxyRecon in two ways:
 - Via popup\
-  You can enter the indicator you want to analyze in the textbox located in the popup. FoxyRecon will choose the most suitable tools for your indicator.
+  You can enter the indicator you want to analyze in the textbox located in the popup. FoxyRecon will suggest you the most suitable tools for your indicator.
 - Via context menu\
-  You can highlight the indicator you want to analyze and by right clicking you can choose one of the suggested tools in the FoxyRecon context menù.
+  On whatever website you are visiting, you can highlight the indicator you want to analyze and, by right clicking on it, you can choose one of the suggested tools in the FoxyRecon context menu.
   
   
 ## Features
