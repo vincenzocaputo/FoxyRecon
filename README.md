@@ -1,7 +1,9 @@
 ![Mozilla Add-on](https://img.shields.io/amo/v/foxyrecon?style=plastic)
 
 <p align="left">
-  <img src="images/get-the-addon-129x45px.8041c789.png" src="https://addons.mozilla.org/en-US/firefox/addon/foxyrecon/"/>
+  <a href="https://addons.mozilla.org/en-US/firefox/addon/foxyrecon/">
+  <img src="images/get-the-addon-129x45px.8041c789.png"/>
+  </a>
 </p>
 
 
