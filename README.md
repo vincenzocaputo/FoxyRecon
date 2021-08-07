@@ -25,7 +25,7 @@ You can perform researches through FoxyRecon in two ways:
   
   
 ## Features
-Currently, FoxyRecon provides support for the following indicators type:
+Currently, FoxyRecon supports the following indicator types:
 - Domains
 - IPv4 addresses
 - URLs
