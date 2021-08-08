@@ -19,7 +19,7 @@ function loadToolsList(callbackFunc) {
                 callbackFunc(tools);
             },
 
-            error=>{console.error(error.message)}
+            error=>{console.error(error)}
         );
     } else {
         // Load the tools list from the local storage
