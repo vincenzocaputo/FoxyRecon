@@ -28,14 +28,15 @@ The following web resources are included in FoxyRecon:
 |Tool|Domain|IP|URL|Hash|
 |----|:-:|:-:|:-:|:-:|
 |[URLVoid](https://urlvoid.com/)|:heavy_check_mark:| - | - | - |
-|[Urlscan](https://urlscan.io/)|:heavy_check_mark:| - | - | - |
+|[Urlscan](https://urlscan.io/)|:heavy_check_mark:| :heavy_check_mark: | - | - |
+|[Urlscan Liveshot](https://urlscan.io/)| - | :heavy_check_mark: | :heavy_check_mark: | - |
 |[Hurricane Electric BGP Toolkit](https://bgp.he.net/)|:heavy_check_mark:|:heavy_check_mark:| - | - |
 |[Domain Tools](https://whois.domaintools.com/)|:heavy_check_mark:| - | - | - |
 |[URLhaus](https://urlhaus.abuse.ch/)|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| - |
 |[AbuseIPDB](https://www.abuseipdb.com/)|:heavy_check_mark:|:heavy_check_mark:| - | - |
 |[Talos Intelligence](https://talosintelligence.com/)|:heavy_check_mark:|:heavy_check_mark:| - | - |
 |[crt.sh](https://crt.sh/)|:heavy_check_mark:| - | - | - |
-|[VirusTotal](https://virustotal.com/)|:heavy_check_mark:|:heavy_check_mark:| - |:heavy_check_mark:|
+|[VirusTotal](https://virustotal.com/)|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
 |[hashdd](https://www.hashdd.com/)| - | - | - |:heavy_check_mark:|
 |[MALWARE bazaar](https://bazaar.abuse.ch/)| - | - | - |:heavy_check_mark:|
 |[THREATfox](https://threatfox.abuse.ch/)|:heavy_check_mark:|:heavy_check_mark:| - |:heavy_check_mark:|
@@ -51,4 +52,5 @@ The following web resources are included in FoxyRecon:
 |[Google Cache](https://webcache.googleusercontent.com)| - | - |:heavy_check_mark:| - |
 |[Host.io](https://host.io/)|:heavy_check_mark:| - | - | - |
 |[Shodan](https://www.shodan.io/)|:heavy_check_mark:|:heavy_check_mark:| - | - |
-|[Censys](https://censys.io/)|:heavy_check_mark:| - | - | - |
+|[Censys](https://censys.io/)|:heavy_check_mark:|:heavy_check_mark:| - | - |
+|[Threatcrowd](https://www.threatcrowd.org/)|:heavy_check_mark:|:heavy_check_mark:| - | - |
