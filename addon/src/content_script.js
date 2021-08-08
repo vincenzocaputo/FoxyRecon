@@ -5,7 +5,7 @@ var regex=loadRegex();
  * Selection change event
  */
 document.addEventListener('selectionchange', () => {
-    selectedText = document.getSelection().toString();
+    selectedText = document.getSelection().toString().trim();
     
     if(selectedText) {
         // Determine the type of the indicator selected

@@ -278,6 +278,7 @@
             "desc": "A Search Engine for Threats",
             "icon": "/data/tools-icons/threatcrowd.png",
             "color": "#00B3D9",
+            "imgbackcolor": "#323B43",
             "tags": ["ip"]
         }
     ]
