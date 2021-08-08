@@ -19,7 +19,7 @@ function loadToolsList(callbackFunc) {
                 callbackFunc(tools);
             },
 
-            error=>{console.error(error.message)}
+            error=>{console.error(error)}
         );
     } else {
         // Load the tools list from the local storage
@@ -66,9 +66,6 @@ function cookURL(originalURL, paramString) {
     // plaintext parameter
     if(originalURL.includes('\%s')){
         finalURL = originalURL.replace('\%s',encodeURIComponent(paramString));
-    } else if(originalURL.includes('\%b')){ 
-        //Base64 encoded parameter
-        finalURL = originalURL.replace('\%b',btoa(paramString));
     }
     return finalURL;
 }

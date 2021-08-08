@@ -6,6 +6,7 @@ var regex=loadRegex();
  */
 document.addEventListener('selectionchange', () => {
     selectedText = document.getSelection().toString();
+    
     if(selectedText) {
         // Determine the type of the indicator selected
         if(selectedText.match(regex['ip'])){
@@ -17,7 +18,7 @@ document.addEventListener('selectionchange', () => {
             type = "domain";
         } else if(selectedText.match(regex['url'])){
             type = "url";
-        } else if(selectedText.match(regex['md5'])){
+        } else if(selectedText.match(regex['hash'])){
             type = "hash";
         } else {
             type = "none";

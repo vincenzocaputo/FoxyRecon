@@ -134,8 +134,14 @@ function showButtonsByTag(tag, inputString) {
         $('#error-msg').css('display','none');       
         $('#warning-msg').css('display','none');       
         for (var i=0; i<nodes_len; i++) {
-            if(tools[i]['tags'].includes(tag)) {            
+            if (tools[i]['tags'].includes(tag)) {            
                 $(nodes[i]).css('display','block');
+                // Set tool description as div title
+                $(nodes[i]).prop('title',tools[i]['desc']);
+                // If present, set the image background color
+                if (tools[i]['imgbackcolor'] !== '') {
+                    $(nodes[i]).find('div.tool-icon').css('background-color',tools[i]['imgbackcolor'])
+                }
                 // Replace the placholder with the input string
                 let url = tools[i]['url'];
                 url = cookURL(url, inputString);
