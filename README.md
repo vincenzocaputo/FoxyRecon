@@ -45,7 +45,7 @@ The following web resources are included in FoxyRecon:
 |[AbuseIPDB](https://www.abuseipdb.com/)|:heavy_check_mark:|:heavy_check_mark:| - | - |
 |[Talos Intelligence](https://talosintelligence.com/)|:heavy_check_mark:|:heavy_check_mark:| - | - |
 |[crt.sh](https://crt.sh/)|:heavy_check_mark:| - | - | - |
-|[VirusTotal](https://virustotal.com/)|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|[VirusTotal](https://virustotal.com/)|:heavy_check_mark:|:heavy_check_mark:| - |:heavy_check_mark:|
 |[hashdd](https://www.hashdd.com/)| - | - | - |:heavy_check_mark:|
 |[MALWARE bazaar](https://bazaar.abuse.ch/)| - | - | - |:heavy_check_mark:|
 |[THREATfox](https://threatfox.abuse.ch/)|:heavy_check_mark:|:heavy_check_mark:| - |:heavy_check_mark:|
@@ -63,3 +63,5 @@ The following web resources are included in FoxyRecon:
 |[Shodan](https://www.shodan.io/)|:heavy_check_mark:|:heavy_check_mark:| - | - |
 |[Censys](https://censys.io/)|:heavy_check_mark:|:heavy_check_mark:| - | - |
 |[Threatcrowd](https://www.threatcrowd.org/)|:heavy_check_mark:|:heavy_check_mark:| - | - |
+|[Checkphish Lookup](https://checkphish.ai/)|:heavy_check_mark:|:heavy_check_mark:| - | - |
+|[Checkphish Scan](https://checkphish.ai/)|:heavy_check_mark:| - | :heavy_check_mark: | - |
