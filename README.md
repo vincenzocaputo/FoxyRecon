@@ -1,8 +1,15 @@
 ![Mozilla Add-on](https://img.shields.io/amo/v/foxyrecon?style=plastic)
 
+<p align="left">
+  <a href="https://addons.mozilla.org/en-US/firefox/addon/foxyrecon/">
+  <img src="images/get-the-addon-129x45px.8041c789.png"/>
+  </a>
+</p>
+
+
+
 <p align="center">
-  
-  <img src="addon/data/icons/foxyrecon-icon.png" width="200" height="200" />
+  <img src="images/foxyrecon.png" width="200" height="200" />
 </p>
 
 # FoxyRecon
@@ -20,7 +27,7 @@ You can perform researches through FoxyRecon in two ways:
   
   
 ## Features
-Currently, FoxyRecon provides support for the following indicators type:
+Currently, FoxyRecon supports the following indicator types:
 - Domains
 - IPv4 addresses
 - URLs
