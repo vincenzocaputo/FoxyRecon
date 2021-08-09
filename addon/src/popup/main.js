@@ -139,7 +139,7 @@ function showButtonsByTag(tag, inputString) {
                 // Set tool description as div title
                 $(nodes[i]).prop('title',tools[i]['desc']);
                 // If present, set the image background color
-                if (tools[i]['imgbackcolor'] !== '') {
+                if (tools[i]['imgbackcolor'] !== undefined) {
                     $(nodes[i]).find('div.tool-icon').css('background-color',tools[i]['imgbackcolor'])
                 }
                 // Replace the placholder with the input string
