@@ -89,7 +89,7 @@
             "desc": "Analyze suspicious files and URLs to detect types of malware", 
 			"icon": "/data/tools-icons/virustotal.png",
 			"color": "#394EFF",
-			"tags": ["domain","ip","url","hash"]
+			"tags": ["domain","ip","hash"]
 		},
 		{
 			"name": "hashdd",
@@ -280,6 +280,33 @@
             "color": "#00B3D9",
             "imgbackcolor": "#323B43",
             "tags": ["ip"]
+        },
+        {
+            "name": "Checkphish Scan",
+            "url": "https://checkphish.ai/scan?data={\"searchText\":\"%s\",\"privateScan\":true,\"customUserAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36\"}",
+            "desc": "Free scanner to detect phishing & fraudulent sites in real-time.",
+            "icon": "/data/tools-icons/checkphish.png",
+            "color": "#4479F3",
+            "fontColor": "#FFFFFF",
+            "tags": ["domain","url"]
+        },
+        {
+            "name": "Checkphish Lookup",
+            "url": "https://checkphish.ai/ip/%s",
+            "desc": "Free scanner to detect phishing & fraudulent sites in real-time.",
+            "icon": "/data/tools-icons/checkphish.png",
+            "color": "#4479F3",
+            "fontColor": "#FFFFFF",
+            "tags": ["ip"]
+        },
+        {
+            "name": "Checkphish Lookup",
+            "url": "https://checkphish.ai/domain/%s",
+            "desc": "Free scanner to detect phishing & fraudulent sites in real-time.",
+            "icon": "/data/tools-icons/checkphish.png",
+            "color": "#4479F3",
+            "fontColor": "#FFFFFF",
+            "tags": ["domain"]
         }
     ]
 }
