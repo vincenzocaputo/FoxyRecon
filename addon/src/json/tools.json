@@ -29,8 +29,7 @@
 			"url":  "https://bgp.he.net/dns/%s",
             "desc": "Hurricane Electric BGP Toolkit",
 			"icon": "/data/tools-icons/bgphe.png",
-			"borderColor": "#000065",
-			"fontColor": "#000000",
+			"color": "#000065",
 			"tags": ["domain"]
 		},
         {
@@ -38,8 +37,7 @@
 			"url":  "https://bgp.he.net/ip/%s",
             "desc": "Hurricane Electric BGP Toolkit",
 			"icon": "/data/tools-icons/bgphe.png",
-			"borderColor": "#000065",
-			"fontColor": "#000000",
+			"color": "#000065",
 			"tags": ["ip"]
 		},	
 		{
@@ -47,15 +45,14 @@
 			"url":  "https://whois.domaintools.com/%s",
             "desc": "Whois Lookup, Domain Availability and IP Search",
 			"icon": "/data/tools-icons/domaintools.png",
-			"fontColor": "#888888",
-			"borderColor": "#888888",
+			"color": "#888888",
 			"tags": ["domain", "ip"]
 		},
 		{
 			"name": "URLhaus",
 			"url":  "https://urlhaus.abuse.ch/browse.php?search=%s",
             "desc": "Lookup malicious URLs that are being used for malware distribution",
-			"icon": "/data/tools-icons/urlhaus.png",
+			"icon": "/data/tools-icons/abuse.png",
 			"color": "#A20300",
 			"tags": ["domain","url","ip"]
 		},
@@ -96,15 +93,14 @@
 			"url":  "https://www.hashdd.com/search/%s",
             "desc": "Known good cryptographic hashes",
 			"icon": "/data/tools-icons/hashdd.png",
-			"fontColor": "#222222",
-			"borderColor": "#222222",
+			"color": "#222222",
 			"tags": ["hash"]
 		},
         {
             "name": "MALWARE bazaar",
             "url": "https://bazaar.abuse.ch/browse/?search=md5%3A%s",
             "desc": "Malware samples sharing",
-            "icon": "/data/tools-icons/malwarebazaar.png",
+            "icon": "/data/tools-icons/abuse.png",
             "color": "#6C757D",
             "tags": ["hash"]
         },
@@ -112,7 +108,7 @@
             "name": "THREATfox",
             "url": "https://threatfox.abuse.ch/browse.php?search=ioc%3A%s",
             "desc": "Indicators of Comprimes sharing",
-            "icon": "/data/tools-icons/malwarebazaar.png",
+            "icon": "/data/tools-icons/abuse.png",
             "color": "#000000",
             "tags": ["hash","domain","ip"]
         },
@@ -177,8 +173,7 @@
             "desc": "Lookup a site. Get Norton rating",
             "icon": "/data/tools-icons/norton.png",
             "color": "#FFFFFF",
-            "fontColor": "#000000",
-            "borderColor": "#FCBC34",
+            "color": "#FCBC34",
             "tags": ["domain","url"]
         },
         {
@@ -187,7 +182,6 @@
             "desc": "Keyword Research, Competitive Analysis & Website",
             "icon": "/data/tools-icons/alexa.png",
             "color": "#F89A3A",
-            "borderColor": "#1B334B",
             "tags": ["domain"]
         },
         {
@@ -212,7 +206,6 @@
             "desc": "Internet Archive",
             "icon": "/data/tools-icons/webarchive.png",
             "color": "#222222",
-            "fontColor": "#FFFFFF",
             "tags": ["url"]
         },
         {
@@ -220,9 +213,7 @@
             "url": "https://webcache.googleusercontent.com/search?q=cache:%s",
             "desc": "View web pages cached in Google Search Results",
             "icon": "/data/tools-icons/googlecache.png",
-            "color": "#FFFFFF",
-            "fontColor": "#000000",
-            "borderColor": "#EA4335",
+            "color": "#EA4335",
             "tags": ["url"]
         },
         {
@@ -231,7 +222,6 @@
             "desc": "Domain Name Data",
             "icon": "/data/tools-icons/hostio.png",
             "color": "#F35928",
-            "fontColor": "#FFFFFF",
             "tags": ["domain"]
         },
         {
@@ -240,7 +230,6 @@
             "desc": "Search Engine for the Internet of Everything",
             "icon": "/data/tools-icons/shodan.png",
             "color": "#151515",
-            "fontColor": "#FFFFFF",
             "tags": ["domain","ip"]
         },
         {
@@ -248,9 +237,7 @@
             "url": "https://censys.io/ipv4/%s",
             "desc": "Hosts and networks search enginge",
             "icon": "/data/tools-icons/censys.png",
-            "color": "#FFFFFF",
-            "fontColor": "#000000",
-            "borderColor": "#FF7A38",
+            "color": "#FF7A38",
             "tags": ["ip"]
         },
         {
@@ -258,9 +245,7 @@
             "url": "https://censys.io/domain/%s",
             "desc": "Hosts and networks search enginge",
             "icon": "/data/tools-icons/censys.png",
-            "color": "#FFFFFF",
-            "fontColor": "#000000",
-            "borderColor": "#FF7A38",
+            "color": "#FF7A38",
             "tags": ["domain"]
         },
         {
@@ -269,7 +254,6 @@
             "desc": "A Search Engine for Threats",
             "icon": "/data/tools-icons/threatcrowd.png",
             "color": "#00B3D9",
-            "imgbackcolor": "#323B43",
             "tags": ["domain"]
         },
         {
@@ -278,7 +262,6 @@
             "desc": "A Search Engine for Threats",
             "icon": "/data/tools-icons/threatcrowd.png",
             "color": "#00B3D9",
-            "imgbackcolor": "#323B43",
             "tags": ["ip"]
         },
         {
@@ -287,7 +270,6 @@
             "desc": "Free scanner to detect phishing & fraudulent sites in real-time.",
             "icon": "/data/tools-icons/checkphish.png",
             "color": "#4479F3",
-            "fontColor": "#FFFFFF",
             "tags": ["domain","url"]
         },
         {
@@ -296,7 +278,6 @@
             "desc": "Free scanner to detect phishing & fraudulent sites in real-time.",
             "icon": "/data/tools-icons/checkphish.png",
             "color": "#4479F3",
-            "fontColor": "#FFFFFF",
             "tags": ["ip"]
         },
         {
@@ -305,8 +286,39 @@
             "desc": "Free scanner to detect phishing & fraudulent sites in real-time.",
             "icon": "/data/tools-icons/checkphish.png",
             "color": "#4479F3",
-            "fontColor": "#FFFFFF",
             "tags": ["domain"]
+        },
+        {
+            "name": "ViewDNS DNS Lookup",
+            "url": "https://viewdns.info/dnsrecord/?domain=%s",
+            "desc": "View all configured DNS records (A, MX, CNAME etc.) for a specified domain name.",
+            "icon": "/data/tools-icons/viewdns.png",
+            "color": "#00721E",
+            "tags": ["domain"]
+        },
+        {
+            "name": "ViewDNS WHOIS",
+            "url": "https://viewdns.info/whois/?domain=%s",
+            "desc": "Displays owner/contact information for a domain name or IP address. Can also be used to determine if a domain name is registered or not.",
+            "icon": "/data/tools-icons/viewdns.png",
+            "color": "#00721E",
+            "tags": ["domain","ip"]
+        },
+        {
+            "name": "ViewDNS HTTP Headers",
+            "url": "https://viewdns.info/httpheaders/?domain=%s",
+            "desc": "Retrieves the HTTP headers of a remote domain. Useful in determining the web server (and version) in use and much more.",
+            "icon": "/data/tools-icons/viewdns.png",
+            "color": "#00721E",
+            "tags": ["domain"]
+        },
+        {
+            "name": "Netcraft",
+            "url": "https://sitereport.netcraft.com/?url=%s",
+            "desc": "Find out the infrastructure and technologies used by any site using results from Netcraft internet data mining",
+            "icon": "/data/tools-icons/netcraft.png",
+            "color": "#4FBDAC",
+            "tags": ["domain","url"]
         }
     ]
 }

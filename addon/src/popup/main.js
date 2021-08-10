@@ -67,7 +67,13 @@ function createToolsList(toolsList){
         nodeImage.attr('src',tool['icon']);
 
         let nodeText = $("<div></div>");
+
         nodeText.text(toolsList[i]['name']);
+        if(toolsList[i]['name'].length > 15 && toolsList[i]['name'].length < 20) {
+            nodeText.css('font-size','6vw');
+        } else if(toolsList[i]['name'].length > 19) {
+            nodeText.css('font-size','5vw');
+        }
         nodeText.addClass("tool-name");
 
         
@@ -138,10 +144,6 @@ function showButtonsByTag(tag, inputString) {
                 $(nodes[i]).css('display','block');
                 // Set tool description as div title
                 $(nodes[i]).prop('title',tools[i]['desc']);
-                // If present, set the image background color
-                if (tools[i]['imgbackcolor'] !== undefined) {
-                    $(nodes[i]).find('div.tool-icon').css('background-color',tools[i]['imgbackcolor'])
-                }
                 // Replace the placholder with the input string
                 let url = tools[i]['url'];
                 url = cookURL(url, inputString);

@@ -11,7 +11,7 @@ div.tool-entry {
     border: 2px outset #596275;
     border-radius: 10px;
     width: 200px;
-    margin-top: 10px;
+    margin-top: 5px;
     cursor: pointer;
 }
 
@@ -29,6 +29,7 @@ div.tool-icon {
 
 #search-box > input {
     width: 200px;
+    height: 20px;
 }
 
 div.tool-icon > img {
@@ -42,9 +43,12 @@ div.tool-icon > img {
   left: 0;
   right: 0;
   margin: auto;
+  width: 25px;
+  border-radius: 20px;
 }
 
 div.tool-name {
+  font-family: Verdana;
   float: left;
   margin-left: 3px;
   height: 40px;
@@ -55,7 +59,7 @@ div.tool-name {
   line-height: 40px; 
   color: white;
   font-size: 7vw;
-  text-shadow: 1px 1px #000000;
+  text-shadow: 1px 0 #000000, -1px 0 #000000, 0 1px #000000, 0 -1px #000000;
 }
 
 #error-msg, #warning-msg {
