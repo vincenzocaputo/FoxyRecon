@@ -65,3 +65,7 @@ The following web resources are included in FoxyRecon:
 |[Threatcrowd](https://www.threatcrowd.org/)|:heavy_check_mark:|:heavy_check_mark:| - | - |
 |[Checkphish Lookup](https://checkphish.ai/)|:heavy_check_mark:|:heavy_check_mark:| - | - |
 |[Checkphish Scan](https://checkphish.ai/)|:heavy_check_mark:| - | :heavy_check_mark: | - |
+|[ViewDNS WHOIS](https://viewdns.info/)|:heavy_check_mark:| :heavy_check_mark: | - | - |
+|[ViewDNS DNS Lookup](https://viewdns.info/)|:heavy_check_mark:| - | - | - |
+|[ViewDNS HTTP Headers](https://viewdns.info/)|:heavy_check_mark:| - | - | - |
+|[Netcraft Site Report](https://sitereport.netcraft.com)|:heavy_check_mark:| - | :heavy_check_mark: | - |
