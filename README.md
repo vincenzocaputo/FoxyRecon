@@ -1,4 +1,4 @@
-![Mozilla Add-on](https://img.shields.io/amo/v/foxyrecon?style=plastic)
+![Mozilla Add-on](https://img.shields.io/amo/v/foxyrecon?style=plastic) ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/vincenzocaputo/FoxyRecon?style=plastic)
 
 <p align="left">
   <a href="https://addons.mozilla.org/en-US/firefox/addon/foxyrecon/">
