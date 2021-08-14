@@ -319,6 +319,63 @@
             "icon": "/data/tools-icons/netcraft.png",
             "color": "#4FBDAC",
             "tags": ["domain","url"]
+        },
+        {
+            "name": "dnsdumpster",
+            "url": "https://dnsdumpster.com/",
+            "desc": "dns recon & research, find & lookup dns records",
+            "icon": "/data/tools-icons/dnsdumpster.png",
+            "color": "#323232",
+            "tags": ["domain"]
+        },
+        {
+            "name": "HIBP",
+            "url": "https://haveibeenpwned.com/",
+            "desc": "Check if your email or phone is in a data breach",
+            "icon": "/data/tools-icons/hibp.png",
+            "color": "#2A698A",
+            "tags": ["email"]
+        },
+        {
+            "name": "hunter",
+            "url": "https://hunter.io/verify/%s",
+            "desc": "Verify the validity of any professional email address with the most complete email checker.",
+            "icon": "/data/tools-icons/hunter.png",
+            "color": "#FF5722",
+            "tags": ["email"]
+        },
+        {
+            "name": "CentralOps",
+            "url": "https://centralops.net/co/domaindossier.aspx",
+            "desc": "Domain Dossier: investigate domains and IP addresses",
+            "icon": "/data/tools-icons/centralops.png",
+            "color": "#005D9B",
+            "tags": ["domain", "ip"]
+        },
+        {
+            "name": "CentralOps",
+            "url": "https://centralops.net/co/emaildossier.aspx",
+            "desc": "Email Dossier: investigate email addresses",
+            "icon": "/data/tools-icons/centralops.png",
+            "color": "#005D9B",
+            "tags": ["email"]
+        },
+        {
+            "name": "Dehashed",
+            "url": "https://dehashed.com/search?query=%s",
+            "desc": "DeHashed provides free deep-web scans and protection against credential leaks.",
+            "icon": "/data/tools-icons/dehashed.png",
+            "color": "#151725",
+            "tags": ["email"]
+        },
+        {
+            "name": "Emailrep",
+            "url": "https://emailrep.io/%r",
+            "desc": "Simple Email Reputation.",
+            "icon": "/data/tools-icons/emailrep.png",
+            "color": "#2FD3AA",
+            "tags": ["email"]
         }
+
     ]
 }

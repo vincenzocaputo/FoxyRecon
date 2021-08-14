@@ -62,10 +62,13 @@ function loadRegex(){
  * @return {finalURL} resulting URL
  */
 function cookURL(originalURL, paramString) {
-    var finalURL = '';
+    var finalURL = originalURL;
     // plaintext parameter
     if(originalURL.includes('\%s')){
         finalURL = originalURL.replace('\%s',encodeURIComponent(paramString));
+    } else if(originalURL.includes('\%r')){
+        // Do not encode the input string
+        finalURL = originalURL.replace('\%r',paramString);
     }
     return finalURL;
 }
