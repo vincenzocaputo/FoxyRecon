@@ -1,381 +1,416 @@
 {
 	"tools": [
 		{
-			"name": "URLVoid",
-			"url":  "https://urlvoid.com/scan/%s",
-            "desc": "Website Reputation Checker",
-			"icon": "/data/tools-icons/urlvoid.png",
-            "color": "#FFAC0D",
-			"tags": ["domain"]
-		},
-		{
-			"name": "urlscan",
-			"url":  "https://urlscan.io/domain/%s",
-            "desc": "A sandbox for the web",
-			"icon": "/data/tools-icons/urlscan.png",
-            "color": "#E25A45",
-			"tags": ["domain","ip"]
-		},
-        {
-            "name": "urlscan",
-            "url": "https://urlscan.io/liveshot/?url=%s",
-            "desc": "urlscan website liveshot",
-            "icon": "/data/tools-icons/urlscan.png",
-            "color": "#E25A45",
-            "tags": ["url"]
-        },
-		{
-			"name": "BGP Hurricane",
-			"url":  "https://bgp.he.net/dns/%s",
-            "desc": "Hurricane Electric BGP Toolkit",
-			"icon": "/data/tools-icons/bgphe.png",
-			"color": "#000065",
-			"tags": ["domain"]
-		},
-        {
-			"name": "BGP Hurricane",
-			"url":  "https://bgp.he.net/ip/%s",
-            "desc": "Hurricane Electric BGP Toolkit",
-			"icon": "/data/tools-icons/bgphe.png",
-			"color": "#000065",
-			"tags": ["ip"]
-		},	
-		{
-			"name": "Domain Tools",
-			"url":  "https://whois.domaintools.com/%s",
-            "desc": "Whois Lookup, Domain Availability and IP Search",
-			"icon": "/data/tools-icons/domaintools.png",
-			"color": "#888888",
-			"tags": ["domain", "ip"]
-		},
-		{
-			"name": "URLhaus",
-			"url":  "https://urlhaus.abuse.ch/browse.php?search=%s",
-            "desc": "Lookup malicious URLs that are being used for malware distribution",
-			"icon": "/data/tools-icons/abuse.png",
-			"color": "#A20300",
-			"tags": ["domain","url","ip"]
-		},
-		{
 			"name": "AbuseIPDB",
-			"url":  "https://www.abuseipdb.com/check/%s",
+			"url":  {
+                "domain": "https://www.abuseipdb.com/check/%s",
+                "ip": "https://www.abuseipdb.com/check/%s"
+            },
 			"desc": "IP address abuse reports",
             "icon": "/data/tools-icons/abuseipdb.png",
 			"color": "#4E7E14",
 			"tags": ["domain","ip"]
 		},
-		{
-			"name": "Talos Intelligence",
-			"url":  "https://talosintelligence.com/reputation_center/lookup?search=%s",
-            "desc": "Cisco Talos Intelligence Group IP, domain reputation lookup",
-			"icon": "/data/tools-icons/talos.png",
-			"color": "#0077BE",
-			"tags": ["domain","ip"]
-		},
-		{
-			"name": "crt.sh",
-			"url":  "https://crt.sh/?q=%s",
-            "desc": "Certificate search",
-			"icon": "/data/tools-icons/crtsh.png",
-			"color": "#00B373",
-			"tags": ["domain"]
-		},
-		{
-			"name": "VirusTotal",
-			"url":  "https://virustotal.com/gui/search/%s",
-            "desc": "Analyze suspicious files and URLs to detect types of malware", 
-			"icon": "/data/tools-icons/virustotal.png",
-			"color": "#394EFF",
-			"tags": ["domain","ip","hash"]
-		},
-		{
-			"name": "hashdd",
-			"url":  "https://www.hashdd.com/search/%s",
-            "desc": "Known good cryptographic hashes",
-			"icon": "/data/tools-icons/hashdd.png",
-			"color": "#222222",
-			"tags": ["hash"]
-		},
-        {
-            "name": "MALWARE bazaar",
-            "url": "https://bazaar.abuse.ch/browse/?search=md5%3A%s",
-            "desc": "Malware samples sharing",
-            "icon": "/data/tools-icons/abuse.png",
-            "color": "#6C757D",
-            "tags": ["hash"]
-        },
-        {
-            "name": "THREATfox",
-            "url": "https://threatfox.abuse.ch/browse.php?search=ioc%3A%s",
-            "desc": "Indicators of Comprimes sharing",
-            "icon": "/data/tools-icons/abuse.png",
-            "color": "#000000",
-            "tags": ["hash","domain","ip"]
-        },
-        {
-            "name": "AlienVault",
-            "url": "https://otx.alienvault.com/indicator/ip/%s",
-            "icon": "/data/tools-icons/alienvault.png",
-            "color": "#000000",
-            "tags": ["ip"]
-        },
-        {
-            "name": "AlienVault",
-            "url": "https://otx.alienvault.com/indicator/domain/%s",
-            "desc": "Open Threat Exchange",
-            "icon": "/data/tools-icons/alienvault.png",
-            "color": "#000000",
-            "tags": ["domain"]
-        },
-        {
-            "name": "AlienVault",
-            "url": "https://otx.alienvault.com/indicator/file/%s",
-            "desc": "Open Threat Exchange",
-            "icon": "/data/tools-icons/alienvault.png",
-            "color": "#000000",
-            "tags": ["hash"]
-        },
-        {
-            "name": "HybridAnalysis",
-            "url": "https://www.hybrid-analysis.com/search?query=%s",
-            "desc": "Free Automated Malware Analysis Service",
-            "icon": "/data/tools-icons/hybrid.png",
-            "color": "#33A6C8",
-            "tags": ["hash"]
-        },
-        {
-            "name": "Kaspersky",
-            "url": "https://opentip.kaspersky.com/%s/",
-            "desc": "Kaspersky Threat Intelligence Portal",
-            "icon": "/data/tools-icons/kaspersky.png",
-            "color": "#00A88E",
-            "tags": ["ip","domain","hash"]
-        },
-        {
-            "name": "Pulsedive",
-            "url": "https://pulsedive.com/indicator/%s",
-            "desc": "Free Threat Intelligence platform",
-            "icon": "/data/tools-icons/pulsedive.png",
-            "color": "#0E2C3E",
-            "tags": ["ip","domain","hash"]
-        },
-        {
-            "name": "IntelligenceX",
-            "url": "https://intelx.io/?s=%s",
-            "desc": "Search engine and data archive",
-            "icon": "/data/tools-icons/intelx.png",
-            "color": "#0E2C3E",
-            "tags": ["ip","domain"]
-        },
-        {
-            "name": "Norton Safeweb",
-            "url": "https://safeweb.norton.com/report/show?url=%s",
-            "desc": "Lookup a site. Get Norton rating",
-            "icon": "/data/tools-icons/norton.png",
-            "color": "#FFFFFF",
-            "color": "#FCBC34",
-            "tags": ["domain","url"]
-        },
         {
             "name": "Alexa",
-            "url": "https://www.alexa.com/siteinfo/%s",
+            "url": {
+                "domain": "https://www.alexa.com/siteinfo/%s"
+            },
             "desc": "Keyword Research, Competitive Analysis & Website",
             "icon": "/data/tools-icons/alexa.png",
             "color": "#F89A3A",
             "tags": ["domain"]
         },
         {
-            "name": "Spyse",
-            "url": "https://spyse.com/target/domain/%s",
-            "desc": "Internet Assets Search Engine",
-            "icon": "/data/tools-icons/spyse.png",
-            "color": "#0D3A86",
-            "tags": ["domain"]
+            "name": "AlienVault",
+            "url": {
+                "ip": "https://otx.alienvault.com/indicator/ip/%s",
+                "domain":"https://otx.alienvault.com/indicator/domain/%s",
+                "hash": "https://otx.alienvault.com/indicator/file/%s"
+            },
+            "desc": "Open Threat Exchange",
+            "icon": "/data/tools-icons/alienvault.png",
+            "color": "#000000",
+            "tags": ["ip","domain","hash"]
         },
-        {
-            "name": "Spyse",
-            "url": "https://spyse.com/target/ip/%s",
-            "desc": "Internet Assets Search Engine",
-            "icon": "/data/tools-icons/spyse.png",
-            "color": "#0D3A86",
-            "tags": ["ip"]
-        },
-        {
-            "name": "WebArchive",
-            "url": "https://web.archive.org/web/*/%s",
-            "desc": "Internet Archive",
-            "icon": "/data/tools-icons/webarchive.png",
-            "color": "#222222",
-            "tags": ["url"]
-        },
-        {
-            "name": "Google Cache",
-            "url": "https://webcache.googleusercontent.com/search?q=cache:%s",
-            "desc": "View web pages cached in Google Search Results",
-            "icon": "/data/tools-icons/googlecache.png",
-            "color": "#EA4335",
-            "tags": ["url"]
-        },
-        {
-            "name": "Host.io",
-            "url": "https://host.io/%s",
-            "desc": "Domain Name Data",
-            "icon": "/data/tools-icons/hostio.png",
-            "color": "#F35928",
-            "tags": ["domain"]
-        },
-        {
-            "name": "Shodan",
-            "url": "https://www.shodan.io/search?query=%s",
-            "desc": "Search Engine for the Internet of Everything",
-            "icon": "/data/tools-icons/shodan.png",
-            "color": "#151515",
-            "tags": ["domain","ip"]
-        },
+		{
+			"name": "BGP Hurricane",
+			"url": { 
+                "domain": "https://bgp.he.net/dns/%s",
+                "ip": "https://bgp.he.net/ip/%s"
+            },
+            "desc": "Hurricane Electric BGP Toolkit",
+			"icon": "/data/tools-icons/bgphe.png",
+			"color": "#000065",
+			"tags": ["domain","ip"]
+		},
         {
             "name": "Censys",
-            "url": "https://censys.io/ipv4/%s",
+            "url": {
+                "domain": "https://censys.io/domain/%s", 
+                "ip": "https://censys.io/ipv4/%s"
+            },
             "desc": "Hosts and networks search enginge",
             "icon": "/data/tools-icons/censys.png",
             "color": "#FF7A38",
-            "tags": ["ip"]
-        },
-        {
-            "name": "Censys",
-            "url": "https://censys.io/domain/%s",
-            "desc": "Hosts and networks search enginge",
-            "icon": "/data/tools-icons/censys.png",
-            "color": "#FF7A38",
-            "tags": ["domain"]
-        },
-        {
-            "name": "Threatcrowd",
-            "url": "https://www.threatcrowd.org/domain.php?domain=%s",
-            "desc": "A Search Engine for Threats",
-            "icon": "/data/tools-icons/threatcrowd.png",
-            "color": "#00B3D9",
-            "tags": ["domain"]
-        },
-        {
-            "name": "Threatcrowd",
-            "url": "https://www.threatcrowd.org/ip.php?ip=%s",
-            "desc": "A Search Engine for Threats",
-            "icon": "/data/tools-icons/threatcrowd.png",
-            "color": "#00B3D9",
-            "tags": ["ip"]
-        },
-        {
-            "name": "Checkphish Scan",
-            "url": "https://checkphish.ai/scan?data={\"searchText\":\"%s\",\"privateScan\":true,\"customUserAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36\"}",
-            "desc": "Free scanner to detect phishing & fraudulent sites in real-time.",
-            "icon": "/data/tools-icons/checkphish.png",
-            "color": "#4479F3",
-            "tags": ["domain","url"]
-        },
-        {
-            "name": "Checkphish Lookup",
-            "url": "https://checkphish.ai/ip/%s",
-            "desc": "Free scanner to detect phishing & fraudulent sites in real-time.",
-            "icon": "/data/tools-icons/checkphish.png",
-            "color": "#4479F3",
-            "tags": ["ip"]
-        },
-        {
-            "name": "Checkphish Lookup",
-            "url": "https://checkphish.ai/domain/%s",
-            "desc": "Free scanner to detect phishing & fraudulent sites in real-time.",
-            "icon": "/data/tools-icons/checkphish.png",
-            "color": "#4479F3",
-            "tags": ["domain"]
-        },
-        {
-            "name": "ViewDNS DNS Lookup",
-            "url": "https://viewdns.info/dnsrecord/?domain=%s",
-            "desc": "View all configured DNS records (A, MX, CNAME etc.) for a specified domain name.",
-            "icon": "/data/tools-icons/viewdns.png",
-            "color": "#00721E",
-            "tags": ["domain"]
-        },
-        {
-            "name": "ViewDNS WHOIS",
-            "url": "https://viewdns.info/whois/?domain=%s",
-            "desc": "Displays owner/contact information for a domain name or IP address. Can also be used to determine if a domain name is registered or not.",
-            "icon": "/data/tools-icons/viewdns.png",
-            "color": "#00721E",
             "tags": ["domain","ip"]
         },
         {
-            "name": "ViewDNS HTTP Headers",
-            "url": "https://viewdns.info/httpheaders/?domain=%s",
-            "desc": "Retrieves the HTTP headers of a remote domain. Useful in determining the web server (and version) in use and much more.",
-            "icon": "/data/tools-icons/viewdns.png",
-            "color": "#00721E",
-            "tags": ["domain"]
-        },
-        {
-            "name": "Netcraft",
-            "url": "https://sitereport.netcraft.com/?url=%s",
-            "desc": "Find out the infrastructure and technologies used by any site using results from Netcraft internet data mining",
-            "icon": "/data/tools-icons/netcraft.png",
-            "color": "#4FBDAC",
-            "tags": ["domain","url"]
-        },
-        {
-            "name": "dnsdumpster",
-            "url": "https://dnsdumpster.com/",
-            "desc": "dns recon & research, find & lookup dns records",
-            "icon": "/data/tools-icons/dnsdumpster.png",
-            "color": "#323232",
-            "tags": ["domain"]
-        },
-        {
-            "name": "HIBP",
-            "url": "https://haveibeenpwned.com/",
-            "desc": "Check if your email or phone is in a data breach",
-            "icon": "/data/tools-icons/hibp.png",
-            "color": "#2A698A",
-            "tags": ["email"]
-        },
-        {
-            "name": "hunter",
-            "url": "https://hunter.io/verify/%s",
-            "desc": "Verify the validity of any professional email address with the most complete email checker.",
-            "icon": "/data/tools-icons/hunter.png",
-            "color": "#FF5722",
-            "tags": ["email"]
-        },
-        {
             "name": "CentralOps",
-            "url": "https://centralops.net/co/domaindossier.aspx",
-            "desc": "Domain Dossier: investigate domains and IP addresses",
-            "icon": "/data/tools-icons/centralops.png",
-            "color": "#005D9B",
-            "tags": ["domain", "ip"]
-        },
-        {
-            "name": "CentralOps",
-            "url": "https://centralops.net/co/emaildossier.aspx",
+            "url": {
+                "domain": "https://centralops.net/co/domaindossier.aspx",
+                "ip": "https://centralops.net/co/domaindossier.aspx",
+                "email": "https://centralops.net/co/emaildossier.aspx"
+            },
             "desc": "Email Dossier: investigate email addresses",
             "icon": "/data/tools-icons/centralops.png",
             "color": "#005D9B",
-            "tags": ["email"]
+            "tags": ["domain","ip","email"]
         },
         {
+            "name": "Checkphish Scan",
+            "url": {
+                "domain": "https://checkphish.ai/scan?data={\"searchText\":\"%s\",\"privateScan\":true,\"customUserAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36\"}",
+                "url": "https://checkphish.ai/scan?data={\"searchText\":\"%s\",\"privateScan\":true,\"customUserAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36\"}"
+            },
+            "desc": "Free scanner to detect phishing & fraudulent sites in real-time.",
+            "icon": "/data/tools-icons/checkphish.png",
+            "color": "#4479F3",
+            "tags": ["domain","url"]
+        },
+        {
+            "name": "Checkphish Lookup",
+            "url": {
+                "domain": "https://checkphish.ai/domain/%s",
+                "ip": "https://checkphish.ai/ip/%s"
+            },
+            "desc": "Free scanner to detect phishing & fraudulent sites in real-time.",
+            "icon": "/data/tools-icons/checkphish.png",
+            "color": "#4479F3",
+            "tags": ["domain","ip"]
+        },
+        {
+			"name": "crt.sh",
+			"url": {
+                "domain": "https://crt.sh/?q=%s"
+            },
+            "desc": "Certificate search",
+			"icon": "/data/tools-icons/crtsh.png",
+			"color": "#00B373",
+			"tags": ["domain"]
+		},
+        {
             "name": "Dehashed",
-            "url": "https://dehashed.com/search?query=%s",
+            "url": {
+                "email": "https://dehashed.com/search?query=%s"
+            },
             "desc": "DeHashed provides free deep-web scans and protection against credential leaks.",
             "icon": "/data/tools-icons/dehashed.png",
             "color": "#151725",
             "tags": ["email"]
         },
         {
+            "name": "dnsdumpster",
+            "url": {
+                "domain": "https://dnsdumpster.com/"
+            },
+            "desc": "dns recon & research, find & lookup dns records",
+            "icon": "/data/tools-icons/dnsdumpster.png",
+            "color": "#323232",
+            "tags": ["domain"]
+        },
+		{
+			"name": "Domain Tools",
+			"url": {
+                "domain": "https://whois.domaintools.com/%s",
+                "ip": "https://whois.domaintools.com/%s"
+            },
+            "desc": "Whois Lookup, Domain Availability and IP Search",
+			"icon": "/data/tools-icons/domaintools.png",
+			"color": "#888888",
+			"tags": ["domain", "ip"]
+		},
+        {
+            "name": "Google Cache",
+            "url": {
+                "url": "https://webcache.googleusercontent.com/search?q=cache:%s"
+            },
+            "desc": "View web pages cached in Google Search Results",
+            "icon": "/data/tools-icons/googlecache.png",
+            "color": "#EA4335",
+            "tags": ["url"]
+        },
+        {
             "name": "Emailrep",
-            "url": "https://emailrep.io/%r",
+            "url": {
+                "email": "https://emailrep.io/%r"
+            },
             "desc": "Simple Email Reputation.",
             "icon": "/data/tools-icons/emailrep.png",
             "color": "#2FD3AA",
             "tags": ["email"]
-        }
-
+        },
+		{
+			"name": "hashdd",
+			"url": {
+                "hash": "https://www.hashdd.com/search/%s"
+            },
+            "desc": "Known good cryptographic hashes",
+			"icon": "/data/tools-icons/hashdd.png",
+			"color": "#222222",
+			"tags": ["hash"]
+		},
+        {
+            "name": "HIBP",
+            "url": {
+                "email": "https://haveibeenpwned.com/"
+            },
+            "desc": "Check if your email or phone is in a data breach",
+            "icon": "/data/tools-icons/hibp.png",
+            "color": "#2A698A",
+            "tags": ["email"]
+        },
+        {
+            "name": "Host.io",
+            "url": {
+                "domain": "https://host.io/%s"
+            },
+            "desc": "Domain Name Data",
+            "icon": "/data/tools-icons/hostio.png",
+            "color": "#F35928",
+            "tags": ["domain"]
+        },
+        {
+            "name": "hunter",
+            "url": {
+                "email": "https://hunter.io/verify/%s"
+            },
+            "desc": "Verify the validity of any professional email address with the most complete email checker.",
+            "icon": "/data/tools-icons/hunter.png",
+            "color": "#FF5722",
+            "tags": ["email"]
+        },
+        {
+            "name": "HybridAnalysis",
+            "url": {
+                "hash": "https://www.hybrid-analysis.com/search?query=%s"
+            },
+            "desc": "Free Automated Malware Analysis Service",
+            "icon": "/data/tools-icons/hybrid.png",
+            "color": "#33A6C8",
+            "tags": ["hash"]
+        },
+        {
+            "name": "IntelligenceX",
+            "url": {
+                "ip": "https://intelx.io/?s=%s",
+                "domain": "https://intelx.io/?s=%s",
+                "email": "https://intelx.io/?s=%s"
+            },
+            "desc": "Search engine and data archive",
+            "icon": "/data/tools-icons/intelx.png",
+            "color": "#0E2C3E",
+            "tags": ["ip","domain","email"]
+        },
+        {
+            "name": "Kaspersky",
+            "url": {
+                "ip": "https://opentip.kaspersky.com/%s/",
+                "domain": "https://opentip.kaspersky.com/%s/",
+                "hash": "https://opentip.kaspersky.com/%s/"
+            },
+            "desc": "Kaspersky Threat Intelligence Portal",
+            "icon": "/data/tools-icons/kaspersky.png",
+            "color": "#00A88E",
+            "tags": ["ip","domain","hash"]
+        },
+        {
+            "name": "MALWARE bazaar",
+            "url": {
+                "hash": "https://bazaar.abuse.ch/browse/?search=md5%3A%s"
+            },
+            "desc": "Malware samples sharing",
+            "icon": "/data/tools-icons/abuse.png",
+            "color": "#6C757D",
+            "tags": ["hash"]
+        },
+        {
+            "name": "Netcraft",
+            "url": {
+                "domain": "https://sitereport.netcraft.com/?url=%s",
+                "url": "https://sitereport.netcraft.com/?url=%s"
+            },
+            "desc": "Find out the infrastructure and technologies used by any site using results from Netcraft internet data mining",
+            "icon": "/data/tools-icons/netcraft.png",
+            "color": "#4FBDAC",
+            "tags": ["domain","url"]
+        },
+        {
+            "name": "Norton Safeweb",
+            "url": {
+                "domain": "https://safeweb.norton.com/report/show?url=%s",
+                "url": "https://safeweb.norton.com/report/show?url=%s"
+            },
+            "desc": "Lookup a site. Get Norton rating",
+            "icon": "/data/tools-icons/norton.png",
+            "color": "#FCBC34",
+            "tags": ["domain","url"]
+        },
+        {
+            "name": "Pulsedive",
+            "url": {
+                "ip": "https://pulsedive.com/indicator/%s",
+                "domain": "https://pulsedive.com/indicator/%s",
+                "hash": "https://pulsedive.com/indicator/%s"
+            },
+            "desc": "Free Threat Intelligence platform",
+            "icon": "/data/tools-icons/pulsedive.png",
+            "color": "#0E2C3E",
+            "tags": ["ip","domain","hash"]
+        },
+        {
+            "name": "Shodan",
+            "url": {
+                "domain": "https://www.shodan.io/search?query=%s",
+                "ip": "https://www.shodan.io/search?query=%s"
+            },
+            "desc": "Search Engine for the Internet of Everything",
+            "icon": "/data/tools-icons/shodan.png",
+            "color": "#151515",
+            "tags": ["domain","ip"]
+        },
+        {
+            "name": "Spyse",
+            "url": {
+                "domain": "https://spyse.com/target/domain/%s",
+                "ip": "https://spyse.com/target/ip/%s"
+            },
+            "desc": "Internet Assets Search Engine",
+            "icon": "/data/tools-icons/spyse.png",
+            "color": "#0D3A86",
+            "tags": ["domain"]
+        },
+		{
+			"name": "Talos Intelligence",
+			"url": {
+                "domain": "https://talosintelligence.com/reputation_center/lookup?search=%s",
+                "ip": "https://talosintelligence.com/reputation_center/lookup?search=%s"
+            },
+            "desc": "Cisco Talos Intelligence Group IP, domain reputation lookup",
+			"icon": "/data/tools-icons/talos.png",
+			"color": "#0077BE",
+			"tags": ["domain","ip"]
+		},
+        {
+            "name": "THREATfox",
+            "url": {
+                "hash": "https://threatfox.abuse.ch/browse.php?search=ioc%3A%s",
+                "domain": "https://threatfox.abuse.ch/browse.php?search=ioc%3A%s",
+                "ip": "https://threatfox.abuse.ch/browse.php?search=ioc%3A%s"
+            },
+            "desc": "Indicators of Comprimes sharing",
+            "icon": "/data/tools-icons/abuse.png",
+            "color": "#000000",
+            "tags": ["hash","domain","ip"]
+        },
+        {
+            "name": "WebArchive",
+            "url": {
+                "url": "https://web.archive.org/web/*/%s"
+            },
+            "desc": "Internet Archive",
+            "icon": "/data/tools-icons/webarchive.png",
+            "color": "#222222",
+            "tags": ["url"]
+        },
+        {
+            "name": "Threat Crowd",
+            "url": {
+                "domain": "https://www.threatcrowd.org/domain.php?domain=%s",
+                "ip": "https://www.threatcrowd.org/ip.php?ip=%s",
+                "email": "https://www.threatcrowd.org/email.php?email=%s" 
+            },
+            "desc": "A Search Engine for Threats",
+            "icon": "/data/tools-icons/threatcrowd.png",
+            "color": "#00B3D9",
+            "tags": ["domain","ip","email"]
+        },
+		{
+			"name": "URLhaus",
+			"url": {
+                "domain": "https://urlhaus.abuse.ch/browse.php?search=%s",
+                "url": "https://urlhaus.abuse.ch/browse.php?search=%s",
+                "ip": "https://urlhaus.abuse.ch/browse.php?search=%s"
+            },
+            "desc": "Lookup malicious URLs that are being used for malware distribution",
+			"icon": "/data/tools-icons/abuse.png",
+			"color": "#A20300",
+			"tags": ["domain","url","ip"]
+		},
+		{
+			"name": "urlscan",
+			"url": {
+                "domain": "https://urlscan.io/domain/%s",
+                "ip": "https://urlscan.io/domain/%s",
+                "url": "https://urlscan.io/liveshot/?url=%s"
+            },
+            "desc": "A sandbox for the web",
+			"icon": "/data/tools-icons/urlscan.png",
+            "color": "#E25A45",
+			"tags": ["domain","ip","url"]
+		},
+        {
+			"name": "URLVoid",
+			"url": {
+                "domain": "https://urlvoid.com/scan/%s"
+            },
+            "desc": "Website Reputation Checker",
+			"icon": "/data/tools-icons/urlvoid.png",
+            "color": "#FFAC0D",
+			"tags": ["domain"]
+		},
+        {
+            "name": "ViewDNS DNS Lookup",
+            "url": {
+                "domain": "https://viewdns.info/dnsrecord/?domain=%s"
+            },
+            "desc": "View all configured DNS records (A, MX, CNAME etc.) for a specified domain name.",
+            "icon": "/data/tools-icons/viewdns.png",
+            "color": "#00721E",
+            "tags": ["domain"]
+        },
+        {
+            "name": "ViewDNS HTTP Headers",
+            "url": {
+                "domain": "https://viewdns.info/httpheaders/?domain=%s"
+            },
+            "desc": "Retrieves the HTTP headers of a remote domain. Useful in determining the web server (and version) in use and much more.",
+            "icon": "/data/tools-icons/viewdns.png",
+            "color": "#00721E",
+            "tags": ["domain"]
+        },
+        {
+            "name": "ViewDNS WHOIS",
+            "url": {
+                "domain": "https://viewdns.info/whois/?domain=%s",
+                "ip": "https://viewdns.info/whois/?domain=%s"
+            },
+            "desc": "Displays owner/contact information for a domain name or IP address. Can also be used to determine if a domain name is registered or not.",
+            "icon": "/data/tools-icons/viewdns.png",
+            "color": "#00721E",
+            "tags": ["domain","ip"]
+        },
+		{
+			"name": "VirusTotal",
+			"url": {
+                "domain": "https://virustotal.com/gui/search/%s",
+                "ip": "https://virustotal.com/gui/search/%s",
+                "hash": "https://virustotal.com/gui/search/%s"
+            },
+            "desc": "Analyze suspicious files and URLs to detect types of malware", 
+			"icon": "/data/tools-icons/virustotal.png",
+			"color": "#394EFF",
+			"tags": ["domain","ip","hash"]
+		}
     ]
 }

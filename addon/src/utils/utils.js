@@ -69,6 +69,6 @@ function cookURL(originalURL, paramString) {
     } else if(originalURL.includes('\%r')){
         // Do not encode the input string
         finalURL = originalURL.replace('\%r',paramString);
-    }
+    }     
     return finalURL;
 }

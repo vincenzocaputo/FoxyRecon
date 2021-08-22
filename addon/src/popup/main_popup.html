@@ -6,22 +6,42 @@
 		<link rel="stylesheet" href="main_popup.css"/>
 	</head>
 	<body>
-		<div id="search-box">
-			<input type="text" id="input-box" placeholder="Domain | IP | URL | hash | Email"/>
-		</div>
-        <div id="error-msg">
-            Please insert a valid input.
+        <div id="search-box">
+            <input type="text" id="input-box" placeholder="Domain | IP | URL | hash | Email"/>
         </div>
-        <div id="warning-msg">
-            The IP address is internal!
-        </div>
-        <div id="plugin-icon">
-            <img src="../../data/icons/foxyrecon-icon.png"/>
-            <div>FoxyRecon</div>
-        </div>
+        <div id="content">
+            <div id="error-msg-container">
+                <div id="error-msg">
+                    <div id="error-msg-symbol">
+                        <div>
+                        X
+                        </div>
+                    </div>
+                    <div id="error-msg-text">
+                    Please insert a valid input.
+                    </div>
+                </div>
+            </div>
+            <div id="warn-msg-container">
+                <div id="warn-msg">
+                    <div id="warn-msg-symbol">
+                        <div>
+                        !
+                        </div>
+                    </div>
+                    <div id="warn-msg-text">
+                    The IP address is internal.
+                    </div>
+                </div>
+            </div>
+            <div id="addon-logo">
+                <img src="../../data/icons/logo.png"/>
+                <div id="version-tag"></div>
+            </div>
 
-        <div id="tools-list">
+            <div id="tools-list">
 
+            </div>
         </div>
         <script type="text/javascript" src="../utils/jquery-3.5.1.min.js"></script>
         <script type="text/javascript" src="../utils/utils.js"></script>
