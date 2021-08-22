@@ -27,9 +27,7 @@ document.addEventListener("selectionchange", () => {
         } else {
             type = "none";
         }
-        
-        console.log("Last type: "+lastType);
-        console.log("type: "+type);
+
         if(type != "none"){
             // Send the selected text to background script along with its type
             browser.runtime.sendMessage({

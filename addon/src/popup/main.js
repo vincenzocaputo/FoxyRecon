@@ -1,3 +1,7 @@
+// Get addon version from manifest
+var manifest = browser.runtime.getManifest();
+$("#version-tag").text("Version "+manifest.version);
+
 var tools;
 loadToolsList(function(ts){
     tools = ts;
@@ -112,42 +116,51 @@ function createToolsList(toolsList){
 function showButtonsByTag(tag, inputString) {
     var visibility;
 
-    if($("#tools-list").css("display") == "none"){
-        $("#plugin-icon").css("display","none");
-        $("#tools-list").css("display","block");
-    }
-    // If the input is empty, hide the buttons
+    // If the input is empty, hide buttons and show addon logo
     if(inputString === ""){
-        $("#plugin-icon").css("display","block");
+        $("#addon-logo").css("display","block");
         $("#tools-list").css("display","none");
+        $("#error-msg-container").css("display","none");        
+        $("#warn-msg-container").css("display","none");
+        return;
     }
+
+    $("#addon-logo").css("display","none");
+
+    /*if($("#tools-list").css("display") == "none"){
+        $("#addon-logo").css("display","none");
+        $("#tools-list").css("display","block");
+    }*/
 
     nodes = $("#tools-list").children();
     let nodes_len = nodes.length;
     // If the input is not valid, show a error message
     if (tag === "invalid") {
-        $("#error-msg").css("display","block");        
-        $("#warning-msg").css("display","none");
+        $("#error-msg-container").css("display","block");        
+        $("#warn-msg-container").css("display","none");
+        $("#tools-list").css("display","none");
         for (var i=0; i<nodes_len; i++) {
             $(nodes[i]).css("display","none");
         }
     } else if (tag === "internal") { // If the IP address is internal, show a warning message
-        $("#warning-msg").css("display","block");
-        $("#error-msg").css("display","none");       
+        $("#warn-msg-container").css("display","block");
+        $("#error-msg-container").css("display","none");       
+        $("#tools-list").css("display","none");
         for (var i=0; i<nodes_len; i++) {
             $(nodes[i]).css("display","none");
         }
     } else {
         // Hide the error message
-        $("#error-msg").css("display","none");       
-        $("#warning-msg").css("display","none");       
+        $("#error-msg-container").css("display","none");       
+        $("#warn-msg-container").css("display","none");       
+        $("#tools-list").css("display","block");
         for (var i=0; i<nodes_len; i++) {
             if (tools[i]["tags"].includes(tag)) {            
                 $(nodes[i]).css("display","block");
                 // Set tool description as div title
                 $(nodes[i]).prop("title",tools[i]["desc"]);
                 // Replace the placholder with the input string
-                let url = tools[i]["url"];
+                let url = tools[i]["url"][tag];
                 url = cookURL(url, inputString);
                 // Remove revious click event listener
                 $(nodes[i]).off("click");

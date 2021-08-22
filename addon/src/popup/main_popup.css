@@ -1,5 +1,15 @@
+body {
+    width: 220px;
+}
+
+#content {
+    height: 300px;
+}
+
 #tools-list {
     display: none;
+    margin-top: 5px;
+    width: 220px;
     height: 300px;
     overflow-y: scroll;
 }
@@ -11,6 +21,7 @@ div.tool-entry {
     border: 2px outset #596275;
     border-radius: 10px;
     width: 200px;
+    margin-right: 5px;
     margin-top: 5px;
     cursor: pointer;
 }
@@ -28,8 +39,7 @@ div.tool-icon {
 }
 
 #search-box > input {
-    width: 200px;
-    height: 20px;
+    width: 185px;
 }
 
 div.tool-icon > img {
@@ -62,44 +72,105 @@ div.tool-name {
   text-shadow: 1px 0 #000000, -1px 0 #000000, 0 1px #000000, 0 -1px #000000;
 }
 
-#error-msg, #warning-msg {
+#error-msg-container, #warn-msg-container {
   display: none;
-  width: 200px;
-  height: 30px;
-  border: 2px solid #AA0000;
+  width: 195px;
+  height: 300px;
   border-radius: 5px;
-  line-height: 30px;
-  color: #111111;
-  padding-left: 5px;
+  margin-top: 5px;
   vertical-align: middle;
 }
 
-#error-msg {
-  background-color: #FF8888;
+#error-msg-container {
+  background-color: #FFAAAA;
+  border: 2px solid #AA0000;
+
 }
 
-#warning-msg {
-  border: 2px solid #AAAA00;
-  background-color: #FFFF88;
+#error-msg-container > #error-msg {
+    height: inherit;
+    display: table-cell;
+    vertical-align: middle;
 }
 
-#plugin-icon {
+#error-msg-container  #error-msg-text {
+    color: #BB0000;
+    margin-left: 5px;
+}
+
+#error-msg-container  #error-msg-symbol {
+    font-family: "Lucida Console", "Courier New", monospace;
+    text-align: center;
+    margin-left: 0px;
+    color: #FF0000;
+}
+
+#error-msg-container  #error-msg-symbol > div {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 50px;
+    border: 2px solid #FF3333;
+    font-size: 1.5em;
+}
+
+#warn-msg-container {
+  background-color: #FFBE85;
+  border: 2px solid #FF7700;
+}
+
+#warn-msg-container > #warn-msg {
+    height: inherit;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#warn-msg-container  #warn-msg-text {
+    color: #FF4D00;
+    margin-left: 5px;
+}
+
+#warn-msg-container  #warn-msg-symbol {
+    font-family: "Lucida Console", "Courier New", monospace;
+    text-align: center;
+    margin-left: 0px;
+    color: #FF4D00;
+}
+
+#warn-msg-container  #warn-msg-symbol > div {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 50px;
+    border: 2px solid #FF7700;
+    font-size: 1.5em;
+}
+
+#addon-logo {
     width: 200px;
 }
 
-#plugin-icon > img {
-    width: 100px;
-    margin-top: 5px;
-    margin-left: 25%;
+#addon-logo > img {
+    display: block;
+    width: 70%;
+    height: 70%;
+    
+    padding-top: 30%;
+    margin-left: auto;
+    margin-right: auto;
     opacity: 0.75;
 }
 
-#plugin-icon > div {
+#addon-logo > #version-tag {
     width: 100%;
     text-align: center;
     margin-top: 5px;
     font-family: Verdana, sans-serif;
     font-weight: bold;
     color: #333333;
-    font-size: 2em;
+    font-size: 0.8em;
 }

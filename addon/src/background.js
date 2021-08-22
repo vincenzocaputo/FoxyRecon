@@ -46,7 +46,7 @@ function updateToolsMenu(toolsList, selectedText, tag) {
                 visible: true,
                 onclick: function(){
                     // Replace the placeholder with the selected text
-                    let url = cookURL(tool["url"],selectedText); 
+                    let url = cookURL(tool["url"][tag],selectedText); 
                     browser.tabs.create({
                         url: url,
                     });
