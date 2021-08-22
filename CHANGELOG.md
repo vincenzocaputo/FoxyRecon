@@ -17,7 +17,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fixed domain indicator detection when it contains underscores
 
-### Added
 ## [0.3.0] - 2021-08-14
 ### Added
 - Support for email addresses, with five web tools:
