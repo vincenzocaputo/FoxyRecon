@@ -1,0 +1,45 @@
+{
+	"manifest_version": 2,
+	"name": "FoxyRecon",
+	"version": "0.3.1",
+
+	"description": "An add-on for OSINT investigations",
+
+	"icons": {
+		"16": "data/icons/foxyrecon-icon-16.png",
+		"48": "data/icons/foxyrecon-icon-48.png"
+	},
+
+    "web_accessible_resources": [
+        "data/icons/foxyrecon-icon-32.png",
+        "src/json/regex.json",
+        "src/json/tools.json"
+    ],
+    
+    "content_security_policy": "default-src 'self'",
+
+    "background": {
+        "scripts": ["src/utils/jquery-3.5.1.min.js", "src/utils/utils.js","src/background.js"]
+    },
+
+    "content_scripts": [{
+            "matches": ["*://*/*"],
+            "js": ["src/utils/jquery-3.5.1.min.js", "src/utils/utils.js", "src/content_scripts/context_menu.js"]
+        },
+        {
+            "matches": ["https://dnsdumpster.com/", "https://haveibeenpwned.com/", "https://centralops.net/co/*", "https://www.urlvoid.com/*"],
+            "js": ["src/content_scripts/autofill.js"]
+        }
+    ],
+
+	"permissions": [
+		"contextMenus"
+	],
+
+	"browser_action": {
+			"default_icon": "data/icons/foxyrecon-icon-48.png",
+			"default_title": "FoxyRecon",
+			"default_popup": "src/popup/main_popup.html"
+	}
+
+}
