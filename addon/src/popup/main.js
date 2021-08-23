@@ -116,43 +116,42 @@ function createToolsList(toolsList){
 function showButtonsByTag(tag, inputString) {
     var visibility;
 
+    $("#addon-logo").css("display","block");
     // If the input is empty, hide buttons and show addon logo
     if(inputString === ""){
-        $("#addon-logo").css("display","block");
         $("#tools-list").css("display","none");
-        $("#error-msg-container").css("display","none");        
-        $("#warn-msg-container").css("display","none");
+        $("#error-popup-text").css("display","none");        
+        $("#warn-popup-text").css("display","none");
+        $("#search-box>input").css("border-color","#6E6C69");
         return;
     }
-
-    $("#addon-logo").css("display","none");
-
-    /*if($("#tools-list").css("display") == "none"){
-        $("#addon-logo").css("display","none");
-        $("#tools-list").css("display","block");
-    }*/
 
     nodes = $("#tools-list").children();
     let nodes_len = nodes.length;
     // If the input is not valid, show a error message
     if (tag === "invalid") {
-        $("#error-msg-container").css("display","block");        
-        $("#warn-msg-container").css("display","none");
+        $("#error-popup-text").css("display","block");        
+        $("#warn-popup-text").css("display","none");
         $("#tools-list").css("display","none");
+        $("#search-box>input").css("border-color","#FF0000");
         for (var i=0; i<nodes_len; i++) {
             $(nodes[i]).css("display","none");
         }
     } else if (tag === "internal") { // If the IP address is internal, show a warning message
-        $("#warn-msg-container").css("display","block");
-        $("#error-msg-container").css("display","none");       
+        $("#warn-popup-text").css("display","block");
+        $("#error-popup-text").css("display","none");       
         $("#tools-list").css("display","none");
+        $("#search-box>input").css("border-color","#FFDD00");
         for (var i=0; i<nodes_len; i++) {
             $(nodes[i]).css("display","none");
         }
     } else {
+        $("#search-box>input").css("border-color","#6E6C69");
         // Hide the error message
-        $("#error-msg-container").css("display","none");       
-        $("#warn-msg-container").css("display","none");       
+        $("#error-popup-text").css("display","none");       
+        $("#warn-popup-text").css("display","none");       
+        // Hide logo
+        $("#addon-logo").css("display","none");
         $("#tools-list").css("display","block");
         for (var i=0; i<nodes_len; i++) {
             if (tools[i]["tags"].includes(tag)) {            
