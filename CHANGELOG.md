@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.2] - 2021-08-25
+### Changed
+- UI appearance
+- Removed JQuery
+
+### Fixed
+- Old cache bug when add-on is updated
+
 ## [0.3.1] - 2021-08-22
 ### Added
 - URLvoid textfield autofill
@@ -19,16 +27,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.3.0] - 2021-08-14
 ### Added
-- Support for email addresses, with five web tools:
+- Support for email addresses, with five web services:
   - Dehashed
   - Have I Been Pwned
   - CentralOps (Email Dossier)
   - Hunter
   - Emailrep
-- New web tools 
+- New web services
   - dnsdumpster
   - CentralOps (Domain Dossier)
-- Support for web tools that requires some user interactions (such as submitting a query or solving CAPTCHA). Text fields on these web pages will be automatically filled with searched indicator.
+- Support for web services that requires some user interactions (such as submitting a query or solving CAPTCHA). Text fields on these web pages will be automatically filled with searched indicator.
 - Indicator searched through context menu will be saved as input in the text field of the popup.
 
 ## [0.2.4] - 2021-08-10

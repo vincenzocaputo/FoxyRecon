@@ -1,6 +1,6 @@
 // Get addon version from manifest
 var manifest = browser.runtime.getManifest();
-$("#version-tag").text("Version "+manifest.version);
+document.getElementById("version-tag").innerHTML = "Version "+manifest.version;
 
 var tools;
 loadToolsList(function(ts){
@@ -10,7 +10,7 @@ loadToolsList(function(ts){
 var regex=loadRegex();
 
 
-var inputField = $("#input-box")
+var inputField = document.getElementById("input-box")
 
 // Check if the input string is in local storage
 if(!localStorage.getItem("inputString")) {
@@ -18,15 +18,15 @@ if(!localStorage.getItem("inputString")) {
 } else {
     // If there is a saved state, restore it
     inputString = localStorage.getItem("inputString");
-    inputField.val(inputString);
+    inputField.value = inputString;
     // Restore the type of the string
     tag = localStorage.getItem("tag");
     showButtonsByTag(tag, inputString);
 }
 
 // For each charachter type, check if the string is a valid input
-inputField.on("keyup", (e) => {
-	var inputString = $("#input-box").val();
+inputField.addEventListener("keyup", (e) => {
+	var inputString = document.getElementById("input-box").value;
     if(inputString.match(regex["ip"])){
         tag = "ip";
         if(inputString.match(regex["internalip"])){
@@ -58,53 +58,55 @@ function createToolsList(toolsList){
 	var resultBox = document.getElementById("tools-list");
 	for (i=0;i<toolsList.length;i++) {
         let tool = toolsList[i];
-        let node = $("<div></div>");
-        node.addClass("tool-entry");
-        node.css("display","none");        
+        let node = document.createElement('div');
+        //let node = $("<div></div>");
+        node.classList.add("tool-entry");
+        node.style.display = "none";        
         
-        let nodeHyperlink = $("<a></a>")
-        nodeHyperlink.attr("target","_blank");
+        let nodeHyperlink = document.createElement('a');
+        nodeHyperlink.setAttribute("target","_blank");
         
-        let nodeImageContainer = $("<div></div>");
-        nodeImageContainer.addClass("tool-icon");
+        let nodeImageContainer = document.createElement("div");
+        nodeImageContainer.classList.add("tool-icon");
     
-        let nodeImage = $("<img>");
+        let nodeImage = document.createElement("img");
 
-        nodeImage.attr("src",tool["icon"]);
+        nodeImage.setAttribute("src",tool["icon"]);
 
-        let nodeText = $("<div></div>");
+        let nodeText = document.createElement("div");
 
-        nodeText.text(toolsList[i]["name"]);
+        nodeText.innerHTML = toolsList[i]["name"];
+
         if(toolsList[i]["name"].length > 15 && toolsList[i]["name"].length < 20) {
-            nodeText.css("font-size","6vw");
+            nodeText.style.fontSize = "6vw";
         } else if(toolsList[i]["name"].length > 19) {
-            nodeText.css("font-size","5vw");
+            nodeText.style.fontSize = "5vw";
         }
-        nodeText.addClass("tool-name");
+        nodeText.classList.add("tool-name");
 
         
         let color = toolsList[i]["color"];
         let borderColor = toolsList[i]["borderColor"];
         let fontColor = toolsList[i]["fontColor"];
         if (color != null) {
-            node.css("background-color",color);
-            nodeText.css("background-color",color);
+            node.style.backgroundColor = color;
+            nodeText.style.backgroundColor = color;
         }
         
         if (fontColor != null) {
-            nodeText.css("color",fontColor);
+            nodeText.style.color = "color";
         }
         if (borderColor != null) {
-            node.css("border-color",borderColor);
-            nodeImageContainer.css("border-color", borderColor);
+            node.style.borderColor = borderColor;
+            nodeImageContainer.styke.borderColor = borderColor;
         }
         
-        nodeImageContainer.append(nodeImage);
-        nodeHyperlink.append(nodeImageContainer);
-        nodeHyperlink.append(nodeText);
-        node.append(nodeHyperlink);
+        nodeImageContainer.appendChild(nodeImage);
+        nodeHyperlink.appendChild(nodeImageContainer);
+        nodeHyperlink.appendChild(nodeText);
+        node.appendChild(nodeHyperlink);
 
-        $("#tools-list").append(node);
+        document.getElementById("tools-list").appendChild(node);
     }
 }
 
@@ -114,58 +116,64 @@ function createToolsList(toolsList){
  * @param {inputString} indicator entered by the user
  */
 function showButtonsByTag(tag, inputString) {
-    var visibility;
+    let visibility;
+    
+    let toolsListNode = document.getElementById("tools-list");
+    let errorPopupNode = document.getElementById("error-popup-text");
+    let warnPopupNode = document.getElementById("warn-popup-text");
+    let inputFieldNode = document.querySelector("#search-box>input"); 
+    let addonLogoNode = document.getElementById("addon-logo");
 
+    addonLogoNode.style.display = "block";
     // If the input is empty, hide buttons and show addon logo
     if(inputString === ""){
-        $("#addon-logo").css("display","block");
-        $("#tools-list").css("display","none");
-        $("#error-msg-container").css("display","none");        
-        $("#warn-msg-container").css("display","none");
+        toolsListNode.style.display = "none";
+        errorPopupNode.style.display = "none";
+        warnPopupNode.style.display = "none";
+        inputFieldNode.style.borderColor = "#6E6C69";
         return;
     }
 
-    $("#addon-logo").css("display","none");
-
-    /*if($("#tools-list").css("display") == "none"){
-        $("#addon-logo").css("display","none");
-        $("#tools-list").css("display","block");
-    }*/
-
-    nodes = $("#tools-list").children();
-    let nodes_len = nodes.length;
+    resNodes = toolsListNode.children;
     // If the input is not valid, show a error message
     if (tag === "invalid") {
-        $("#error-msg-container").css("display","block");        
-        $("#warn-msg-container").css("display","none");
-        $("#tools-list").css("display","none");
-        for (var i=0; i<nodes_len; i++) {
-            $(nodes[i]).css("display","none");
+        errorPopupNode.style.display = "block";        
+        warnPopupNode.style.display = "none";
+        toolsListNode.style.display = "none";
+        inputFieldNode.style.borderColor = "#FF0000";
+        for (var i = 0; i < resNodes.length; i++) {
+            resNodes[i].style.display = "none";
         }
     } else if (tag === "internal") { // If the IP address is internal, show a warning message
-        $("#warn-msg-container").css("display","block");
-        $("#error-msg-container").css("display","none");       
-        $("#tools-list").css("display","none");
-        for (var i=0; i<nodes_len; i++) {
-            $(nodes[i]).css("display","none");
+        warnPopupNode.style.display = "block";
+        errorPopupNode.style.display = "none";       
+        toolsListNode.style.display = "none";
+        inputFieldNode.style.borderColor = "#FFDD00";
+        for (var i = 0; i < resNodes.length; i++) {
+            resNodes[i].style.display = "none";
         }
     } else {
+        inputFieldNode.style.borderColor = "#6E6C69";
         // Hide the error message
-        $("#error-msg-container").css("display","none");       
-        $("#warn-msg-container").css("display","none");       
-        $("#tools-list").css("display","block");
-        for (var i=0; i<nodes_len; i++) {
+        errorPopupNode.style.display = "none";       
+        warnPopupNode.style.display = "none";       
+        // Hide logo
+        addonLogoNode.style.display = "none";
+        toolsListNode.style.display = "block";
+        let handler = [];
+        for (var i = 0; i < resNodes.length; i++) {
             if (tools[i]["tags"].includes(tag)) {            
-                $(nodes[i]).css("display","block");
+                resNodes[i].style.display = "block";
                 // Set tool description as div title
-                $(nodes[i]).prop("title",tools[i]["desc"]);
+                resNodes[i].title = tools[i]["desc"];
+    
                 // Replace the placholder with the input string
                 let url = tools[i]["url"][tag];
                 url = cookURL(url, inputString);
                 // Remove revious click event listener
-                $(nodes[i]).off("click");
+                resNodes[i].removeEventListener("click", resNodes[i].fn);
                 // Add click event listener
-                $(nodes[i]).on("click", function() {
+                resNodes[i].addEventListener("click", resNodes[i].fn = function() {
                     browser.tabs.create({
                         url:url
                     });
@@ -173,8 +181,16 @@ function showButtonsByTag(tag, inputString) {
                     window.close();
                 });
             } else {
-                $(nodes[i]).css("display","none");
+                resNodes[i].style.display ="none";
             }
         }
     }
 }
+
+//document.getElementById("settings-button").addEventListener("click", function() {
+//    if(document.getElementById("settings-popup").style.display === "none"){
+//        document.getElementById("settings-popup").style.display ="block";
+//    } else {
+//        document.getElementById("settings-popup").style.display ="none";
+//    }
+//});
