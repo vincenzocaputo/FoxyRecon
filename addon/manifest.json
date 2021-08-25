@@ -11,18 +11,19 @@
 	},
 
     "web_accessible_resources": [
-        "data/icons/foxyrecon-icon-32.png"
+        "data/icons/foxyrecon-icon-32.png",
+        "data/icons/settings.png"
     ],
     
     "content_security_policy": "default-src 'self'",
 
     "background": {
-        "scripts": ["src/utils/jquery-3.5.1.min.js", "src/utils/utils.js","src/background.js"]
+        "scripts": ["src/utils/utils.js","src/background.js"]
     },
 
     "content_scripts": [{
             "matches": ["*://*/*"],
-            "js": ["src/utils/jquery-3.5.1.min.js", "src/utils/utils.js", "src/content_scripts/context_menu.js"]
+            "js": ["src/utils/utils.js", "src/content_scripts/context_menu.js"]
         },
         {
             "matches": ["https://dnsdumpster.com/", "https://haveibeenpwned.com/", "https://centralops.net/co/*", "https://www.urlvoid.com/*"],

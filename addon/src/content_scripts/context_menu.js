@@ -8,7 +8,6 @@ var lastType = "";
  */
 document.addEventListener("selectionchange", () => {
     selectedText = document.getSelection().toString().trim();
-     
     if(selectedText) {
         // Determine the type of the indicator selected
         if(selectedText.match(regex["ip"])){

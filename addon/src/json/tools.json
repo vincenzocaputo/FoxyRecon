@@ -120,7 +120,7 @@
             "tags": ["domain"]
         },
 		{
-			"name": "Domain Tools",
+			"name": "Domain tools",
 			"url": {
                 "domain": "https://whois.domaintools.com/%s",
                 "ip": "https://whois.domaintools.com/%s"
