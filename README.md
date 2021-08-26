@@ -71,11 +71,15 @@ The following web resources are included in FoxyRecon:
 |[ViewDNS DNS Lookup](https://viewdns.info/)|:heavy_check_mark:| - | - | - | - |
 |[ViewDNS HTTP Headers](https://viewdns.info/)|:heavy_check_mark:| - | - | - | - |
 |[Netcraft Site Report](https://sitereport.netcraft.com)|:heavy_check_mark:| - | :heavy_check_mark: | - | - |
-|[dnsdumpster](https://dnsdumpster.com) :red_circle: :new:|:heavy_check_mark:| - | - | - | - |
-|[Have I Been Pwned](https://haveibeenpwned.com/) :red_circle: :new:| - | - | - | - | :heavy_check_mark: |
-|[Hunter](https://hunter.io/) :new:| - | - | - | - | :heavy_check_mark: |
-|[CentralOps](https://centralops.net) :red_circle: :new:| :heavy_check_mark: | - | - | - | :heavy_check_mark: |
-|[Dehashed](https://dehashed.com/) :red_circle: :new:| - | - | - | - | :heavy_check_mark: |
-|[EmailRep](https://emailrep.io/) :new:| - | - | - | - | :heavy_check_mark: |
+|[dnsdumpster](https://dnsdumpster.com) :red_circle:|:heavy_check_mark:| - | - | - | - |
+|[Have I Been Pwned](https://haveibeenpwned.com/) :red_circle:| - | - | - | - | :heavy_check_mark: |
+|[Hunter](https://hunter.io/) | - | - | - | - | :heavy_check_mark: |
+|[CentralOps](https://centralops.net) :red_circle:| :heavy_check_mark: | - | - | - | :heavy_check_mark: |
+|[Dehashed](https://dehashed.com/) :red_circle:| - | - | - | - | :heavy_check_mark: |
+|[EmailRep](https://emailrep.io/) | - | - | - | - | :heavy_check_mark: |
+|[SecurityTrails](https://securitytrails.com/) :new:| :heavy_check_mark: | :heavy_check_mark: | - | - | - |
+|[Spamhaus](https://check.spamhaus.org/) :new:| :heavy_check_mark: | :heavy_check_mark: | - | - | - |
+|[JoeSandbox](https://www.joesandbox.com) :new:| - | - | - | :heavy_check_mark: | - |
+|[ZoomEye](https://www.zoomeye.org/) :new:| :heavy_check_mark: | :heavy_check_mark: | - | - | - |
 
 :red_circle: These web tools requires some user interactions, such as entering a query and clicking a button to submit it. To perform these actions faster, FoxyRecon will automatically fill input fields on this web pages, with the indicator you are looking for.
