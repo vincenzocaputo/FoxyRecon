@@ -55,7 +55,7 @@ The following web resources are included in FoxyRecon:
 |[HybridAnalysis](https://www.hybrid-analysis.com/)| - | - | - |:heavy_check_mark:| - |
 |[Kaspersky](https://opentip.kaspersky.com/)|:heavy_check_mark:|:heavy_check_mark:| - |:heavy_check_mark:| - |
 |[Pulsedive](https://pulsedive.com/)|:heavy_check_mark:|:heavy_check_mark:| - |:heavy_check_mark:| - |
-|[IntelligenceX](https://intelx.io/)|:heavy_check_mark:|:heavy_check_mark:| - | - | - |
+|[IntelligenceX](https://intelx.io/)|:heavy_check_mark:|:heavy_check_mark:| - | - | :heavy_check_mark: |
 |[Norton Safeweb](https://safeweb.norton.com/)|:heavy_check_mark:| - |:heavy_check_mark:| - | - |
 |[Alexa](https://www.alexa.com/)|:heavy_check_mark:| - | - | - | - |
 |[Spyse](https://spyse.com/)|:heavy_check_mark:|:heavy_check_mark:| - | - | - |
@@ -64,7 +64,7 @@ The following web resources are included in FoxyRecon:
 |[Host.io](https://host.io/)|:heavy_check_mark:| - | - | - | - |
 |[Shodan](https://www.shodan.io/)|:heavy_check_mark:|:heavy_check_mark:| - | - | - |
 |[Censys](https://censys.io/)|:heavy_check_mark:|:heavy_check_mark:| - | - | - |
-|[Threatcrowd](https://www.threatcrowd.org/)|:heavy_check_mark:|:heavy_check_mark:| - | - | - |
+|[Threatcrowd](https://www.threatcrowd.org/)|:heavy_check_mark:|:heavy_check_mark:| - | - | :heavy_check_mark: |
 |[Checkphish Lookup](https://checkphish.ai/)|:heavy_check_mark:|:heavy_check_mark:| - | - | - |
 |[Checkphish Scan](https://checkphish.ai/)|:heavy_check_mark:| - | :heavy_check_mark: | - | - |
 |[ViewDNS WHOIS](https://viewdns.info/)|:heavy_check_mark:| :heavy_check_mark: | - | - | - |
