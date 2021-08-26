@@ -213,6 +213,16 @@
             "tags": ["ip","domain","email"]
         },
         {
+            "name": "JoeSandbox",
+            "url": {
+                "hash": "https://www.joesandbox.com/search?q=%s"
+            },
+            "desc": "Joe Sandbox detects and analyzes potential malicious files and URLs",
+            "icon": "/data/tools-icons/joesandbox.png",
+            "color": "#2B2B2B",
+            "tags": ["hash"]
+        },
+        {
             "name": "Kaspersky",
             "url": {
                 "ip": "https://opentip.kaspersky.com/%s/",
@@ -227,7 +237,7 @@
         {
             "name": "MALWARE bazaar",
             "url": {
-                "hash": "https://bazaar.abuse.ch/browse/?search=md5%3A%s"
+                "hash": "https://bazaar.abuse.ch/browse/?search=sha256%3A%s"
             },
             "desc": "Malware samples sharing",
             "icon": "/data/tools-icons/abuse.png",
@@ -269,6 +279,17 @@
             "tags": ["ip","domain","hash"]
         },
         {
+            "name": "SecurityTrails",
+            "url": {
+                "domain": "https://securitytrails.com/domain/%s",
+                "ip": "https://securitytrails.com/list/ip/%s"
+            },
+            "desc": "SecurityTrails enables you to explore complete current and historical data for any internet assets.",
+            "icon": "/data/tools-icons/securitytrails.png",
+            "color": "#373A47",
+            "tags": ["domain","ip"]
+        },
+        {
             "name": "Shodan",
             "url": {
                 "domain": "https://www.shodan.io/search?query=%s",
@@ -277,6 +298,17 @@
             "desc": "Search Engine for the Internet of Everything",
             "icon": "/data/tools-icons/shodan.png",
             "color": "#151515",
+            "tags": ["domain","ip"]
+        },
+        {
+            "name": "Spamhaus",
+            "url": {
+                "domain": "https://check.spamhaus.org/listed/?searchterm=%s",
+                "ip": "https://check.spamhaus.org/listed/?searchterm=%s"
+            },
+            "desc": "IP and Domain reputation checker",
+            "icon": "/data/tools-icons/spamhaus.png",
+            "color": "#F8E331",
             "tags": ["domain","ip"]
         },
         {
@@ -411,6 +443,17 @@
 			"icon": "/data/tools-icons/virustotal.png",
 			"color": "#394EFF",
 			"tags": ["domain","ip","hash"]
+		},
+		{
+			"name": "ZoomEye",
+			"url": {
+                "domain": "https://www.zoomeye.org/searchResult?q=%s",
+                "ip": "https://www.zoomeye.org/searchResult?q=%s"
+            },
+            "desc": "ZoomEye is a Cyberspace Search Engine recording information of devices, websites, services and components etc.", 
+			"icon": "/data/tools-icons/zoomeye.png",
+			"color": "#0F1423",
+			"tags": ["domain","ip"]
 		}
     ]
 }

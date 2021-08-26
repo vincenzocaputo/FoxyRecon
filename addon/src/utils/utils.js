@@ -28,11 +28,14 @@ function loadToolsList(callbackFunc) {
     var tools;
     // Check if the addon cache is updated
     if(localStorage.getItem('version')) {
-        currentVersion = localStorage.getItem('version');
-        console.log("Current version: "+currentVersion);
+        installedVersion = localStorage.getItem('version');
+        console.log("Installed version: " + installedVersion);
+    } else {
+        // Assume that the version of the installed addon is older
+        installedVersion = 0;
     }
     // Check if the list is already in the local storage
-    if(!localStorage.getItem('tools') || currentVersion != newVersion) {
+    if(!localStorage.getItem('tools') || installedVersion != newVersion) {
         // Load the list from the JSON file
         readJSONFile("src/json/tools.json", function(text) {
             var data = JSON.parse(text);
@@ -63,11 +66,14 @@ function loadRegex(){
     var regexList;
     // Check if the addon cache is updated
     if(localStorage.getItem('version')) {
-        currentVersion = localStorage.getItem('version');
-        console.log("Current version: "+currentVersion);
+        installedVersion = localStorage.getItem('version');
+        console.log("Current version: " + installedVersion);
+    } else {
+        // Assume that the version of the installed addon is older
+        installedVersion = 0;
     }
     // Check if the list is already in the local storage
-    if(!localStorage.getItem('regex')){
+    if(!localStorage.getItem('regex') || installedVersion != newVersion){
         // Otherwise load it from the JSON file
         readJSONFile("src/json/regex.json", function(text) {
             var data = JSON.parse(text);
