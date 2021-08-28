@@ -54,41 +54,6 @@ function loadToolsList(callbackFunc) {
     }
 }
 
-/**
- * Load the regexes list from the JSON file or from the local storage
- * @return {regexList} regexes list loaded
- */
-function loadRegex(){
-    var manifest = browser.runtime.getManifest();
-    newVersion = manifest.version;
-    console.log("New version: "+newVersion);
-
-    var regexList;
-    // Check if the addon cache is updated
-    if(localStorage.getItem('version')) {
-        installedVersion = localStorage.getItem('version');
-        console.log("Current version: " + installedVersion);
-    } else {
-        // Assume that the version of the installed addon is older
-        installedVersion = 0;
-    }
-    // Check if the list is already in the local storage
-    if(!localStorage.getItem('regex') || installedVersion != newVersion){
-        // Otherwise load it from the JSON file
-        readJSONFile("src/json/regex.json", function(text) {
-            var data = JSON.parse(text);
-            regexList = data['regex'];
-            localStorage.setItem('regex', JSON.stringify(regexList));
-            console.log("Regex loaded from json file");
-        });
-        localStorage.setItem('version', newVersion);
-    } else {
-        // Load the list from the local storage
-        regexList = JSON.parse(localStorage.getItem('regex'));
-        console.log("Regex loaded from local storage");
-    }
-    return regexList;
-}
 
 /**
  * Replace the placeholders in the URL with the appropriate string
