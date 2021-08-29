@@ -224,6 +224,24 @@ document.getElementById("settings-button").addEventListener("click", function() 
     }
 });
 
+document.addEventListener("click", function(evt) {
+    settingsPopup = document.getElementById("settings-popup");
+    settingsButton = document.getElementById("settings-button");
+
+    if(settingsPopup.style.display == "block") {
+        buttonPos = settingsButton.getBoundingClientRect();
+        popupPos = settingsPopup.getBoundingClientRect();
+        // Check if the user has clicked outside the popup
+        if(((evt.pageX < popupPos.left || evt.pageX > popupPos.right) || 
+            (evt.pageY < popupPos.top || evt.pageY > popupPos.bottom)) &&
+            ((evt.pageX < buttonPos.left || evt.pageX > buttonPos.right) || 
+            (evt.pageY < buttonPos.top || evt.pageY > buttonPos.bottom))) {
+            // Fire settings button click event
+            document.getElementById("settings-button").click();
+        }
+    }
+});
+
 /**
  * Handle settings checkbox change event
  */
