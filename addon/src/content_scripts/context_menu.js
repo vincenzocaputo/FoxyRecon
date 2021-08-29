@@ -5,11 +5,12 @@ var lastType = "";
  * Selection change event
  */
 document.addEventListener("selectionchange", () => {
+    indicatorTypeDetector = new IndicatorTypeDetector();
     selectedText = document.getSelection().toString().trim();
     if(selectedText) {
         // Determine the type of the indicator selected
 
-        type = IndicatorTypeDetector.getIndicatorType(selectedText);
+        type = indicatorTypeDetector.getIndicatorType(selectedText);
         console.log("Type: "+type);
         if(type != "invalid"){
             // Send the selected text to background script along with its type

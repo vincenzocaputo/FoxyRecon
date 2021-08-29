@@ -10,6 +10,7 @@ loadToolsList(function(ts){
 
 var inputField = document.getElementById("input-box");
 
+indicatorTypeDetector = new IndicatorTypeDetector();
 
 // Check if the input string is in local storage
 if(!localStorage.getItem("indicator")) {
@@ -29,7 +30,7 @@ if(!localStorage.getItem("indicator")) {
 // For each charachter typed, check if the string is a valid input
 inputField.addEventListener("keyup", (e) => {
 	let inputString = document.getElementById("input-box").value;
-    let type = IndicatorTypeDetector.getIndicatorType(inputString);
+    let type = indicatorTypeDetector.getIndicatorType(inputString);
     // Show the appropriate tools for the input
     showButtonsByType(type, inputString);
     // Save the popup state (indicator + type)
@@ -57,10 +58,10 @@ function createToolsList(toolsList){
         // This node will contain the resource's icon
         let nodeImageContainer = document.createElement("div");
         nodeImageContainer.classList.add("tool-icon");
-    
+   
         let nodeImage = document.createElement("img");
 
-        nodeImage.setAttribute("src",tool["icon"]);
+        nodeImage.setAttribute("src", toolsList[i]["icon"]);
 
         // This node will contain the web resource's name
         let nodeText = document.createElement("div");
@@ -172,6 +173,8 @@ function showButtonsByType(type, indicator) {
         // Hide logo
         addonLogoNode.style.display = "none";
         toolsListNode.style.display = "block";
+
+
         let handler = [];
         for (var i = 0; i < resNodes.length; i++) {
             if (tools[i]["types"].includes(type)) {            
