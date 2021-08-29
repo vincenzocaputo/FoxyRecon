@@ -4,7 +4,6 @@ loadToolsList(function(ts) {
     createToolsMenu(tools);
 })
 
-var regex=loadRegex();
 
 /**
  * Create context menu containing the tools list
@@ -29,14 +28,14 @@ function createToolsMenu(toolsList) {
 /**
  * Updates context menu making visible only the tools which are compatible with the selected string
  * @param {toolsList} available tools list
- * @param {selectedText} indicator selected by the user
- * @param {tag} indicator type (domain, URL, ip, etc.)
+ * @param {indicator} indicator selected by the user
+ * @param {type} indicator type (domain, URL, ip, etc.)
  */
-function updateToolsMenu(toolsList, selectedText, tag) {
+function updateToolsMenu(toolsList, indicator, type) {
     for (i=0; i<toolsList.length; i++){
         let tool = toolsList[i];
         // If the tool is not compatible, hide the menu entry
-        if(!tool["tags"].includes(tag)){
+        if(!tool["types"].includes(type)){
             browser.contextMenus.update(i.toString(), {
                 visible: false
             });
@@ -46,7 +45,7 @@ function updateToolsMenu(toolsList, selectedText, tag) {
                 visible: true,
                 onclick: function(){
                     // Replace the placeholder with the selected text
-                    let url = cookURL(tool["url"][tag],selectedText); 
+                    let url = cookURL(tool["url"][type], indicator); 
                     browser.tabs.create({
                         url: url,
                     });
@@ -61,14 +60,15 @@ function updateToolsMenu(toolsList, selectedText, tag) {
  */
 browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if(request.id == 1) {
-        console.log(request);
-        sendResponse({msg: localStorage.getItem("inputString")});
+        console.log("Received message");
+        sendResponse({msg: localStorage.getItem("indicator")});
     } else {
-        if(request.tag != "none"){
+        console.log(request);
+        if(request.type != "invalid"){
             // update the local storage only if a valid indicator was selected
-            localStorage.setItem("tag", request.tag);
-            localStorage.setItem("inputString",request.selectedText);
+            localStorage.setItem("type", request.type);
+            localStorage.setItem("indicator",request.indicator);
         }
-        updateToolsMenu(tools, request.selectedText, request.tag);
+        updateToolsMenu(tools, request.indicator, request.type);
     }
 })

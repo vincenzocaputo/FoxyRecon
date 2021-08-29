@@ -5,7 +5,6 @@ browser.runtime.sendMessage({
     id: 1,
     msg: ""
 }).then((resp)=>{
-    console.log(indicator);
     indicator = resp.msg;
     // Get only text or email input nodes
     for(i=0; i<inputNodes.length; i++){

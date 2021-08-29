@@ -9,7 +9,7 @@
 			"desc": "IP address abuse reports",
             "icon": "/data/tools-icons/abuseipdb.png",
 			"color": "#4E7E14",
-			"tags": ["domain","ip"]
+			"types": ["domain","ip"]
 		},
         {
             "name": "Alexa",
@@ -19,7 +19,7 @@
             "desc": "Keyword Research, Competitive Analysis & Website",
             "icon": "/data/tools-icons/alexa.png",
             "color": "#F89A3A",
-            "tags": ["domain"]
+            "types": ["domain"]
         },
         {
             "name": "AlienVault",
@@ -31,7 +31,7 @@
             "desc": "Open Threat Exchange",
             "icon": "/data/tools-icons/alienvault.png",
             "color": "#000000",
-            "tags": ["ip","domain","hash"]
+            "types": ["ip","domain","hash"]
         },
 		{
 			"name": "BGP Hurricane",
@@ -42,7 +42,7 @@
             "desc": "Hurricane Electric BGP Toolkit",
 			"icon": "/data/tools-icons/bgphe.png",
 			"color": "#000065",
-			"tags": ["domain","ip"]
+			"types": ["domain","ip"]
 		},
         {
             "name": "Censys",
@@ -53,7 +53,7 @@
             "desc": "Hosts and networks search enginge",
             "icon": "/data/tools-icons/censys.png",
             "color": "#FF7A38",
-            "tags": ["domain","ip"]
+            "types": ["domain","ip"]
         },
         {
             "name": "CentralOps",
@@ -65,7 +65,7 @@
             "desc": "Email Dossier: investigate email addresses",
             "icon": "/data/tools-icons/centralops.png",
             "color": "#005D9B",
-            "tags": ["domain","ip","email"]
+            "types": ["domain","ip","email"]
         },
         {
             "name": "Checkphish Scan",
@@ -76,7 +76,7 @@
             "desc": "Free scanner to detect phishing & fraudulent sites in real-time.",
             "icon": "/data/tools-icons/checkphish.png",
             "color": "#4479F3",
-            "tags": ["domain","url"]
+            "types": ["domain","url"]
         },
         {
             "name": "Checkphish Lookup",
@@ -87,7 +87,7 @@
             "desc": "Free scanner to detect phishing & fraudulent sites in real-time.",
             "icon": "/data/tools-icons/checkphish.png",
             "color": "#4479F3",
-            "tags": ["domain","ip"]
+            "types": ["domain","ip"]
         },
         {
 			"name": "crt.sh",
@@ -97,7 +97,7 @@
             "desc": "Certificate search",
 			"icon": "/data/tools-icons/crtsh.png",
 			"color": "#00B373",
-			"tags": ["domain"]
+			"types": ["domain"]
 		},
         {
             "name": "Dehashed",
@@ -107,7 +107,7 @@
             "desc": "DeHashed provides free deep-web scans and protection against credential leaks.",
             "icon": "/data/tools-icons/dehashed.png",
             "color": "#151725",
-            "tags": ["email"]
+            "types": ["email"]
         },
         {
             "name": "dnsdumpster",
@@ -117,7 +117,7 @@
             "desc": "dns recon & research, find & lookup dns records",
             "icon": "/data/tools-icons/dnsdumpster.png",
             "color": "#323232",
-            "tags": ["domain"]
+            "types": ["domain"]
         },
 		{
 			"name": "Domain tools",
@@ -128,7 +128,7 @@
             "desc": "Whois Lookup, Domain Availability and IP Search",
 			"icon": "/data/tools-icons/domaintools.png",
 			"color": "#888888",
-			"tags": ["domain", "ip"]
+			"types": ["domain", "ip"]
 		},
         {
             "name": "Google Cache",
@@ -138,7 +138,7 @@
             "desc": "View web pages cached in Google Search Results",
             "icon": "/data/tools-icons/googlecache.png",
             "color": "#EA4335",
-            "tags": ["url"]
+            "types": ["url"]
         },
         {
             "name": "Emailrep",
@@ -148,7 +148,7 @@
             "desc": "Simple Email Reputation.",
             "icon": "/data/tools-icons/emailrep.png",
             "color": "#2FD3AA",
-            "tags": ["email"]
+            "types": ["email"]
         },
 		{
 			"name": "hashdd",
@@ -158,7 +158,7 @@
             "desc": "Known good cryptographic hashes",
 			"icon": "/data/tools-icons/hashdd.png",
 			"color": "#222222",
-			"tags": ["hash"]
+			"types": ["hash"]
 		},
         {
             "name": "HIBP",
@@ -168,7 +168,7 @@
             "desc": "Check if your email or phone is in a data breach",
             "icon": "/data/tools-icons/hibp.png",
             "color": "#2A698A",
-            "tags": ["email"]
+            "types": ["email"]
         },
         {
             "name": "Host.io",
@@ -178,7 +178,7 @@
             "desc": "Domain Name Data",
             "icon": "/data/tools-icons/hostio.png",
             "color": "#F35928",
-            "tags": ["domain"]
+            "types": ["domain"]
         },
         {
             "name": "hunter",
@@ -188,7 +188,7 @@
             "desc": "Verify the validity of any professional email address with the most complete email checker.",
             "icon": "/data/tools-icons/hunter.png",
             "color": "#FF5722",
-            "tags": ["email"]
+            "types": ["email"]
         },
         {
             "name": "HybridAnalysis",
@@ -198,7 +198,7 @@
             "desc": "Free Automated Malware Analysis Service",
             "icon": "/data/tools-icons/hybrid.png",
             "color": "#33A6C8",
-            "tags": ["hash"]
+            "types": ["hash"]
         },
         {
             "name": "IntelligenceX",
@@ -210,7 +210,7 @@
             "desc": "Search engine and data archive",
             "icon": "/data/tools-icons/intelx.png",
             "color": "#0E2C3E",
-            "tags": ["ip","domain","email"]
+            "types": ["ip","domain","email"]
         },
         {
             "name": "JoeSandbox",
@@ -220,7 +220,7 @@
             "desc": "Joe Sandbox detects and analyzes potential malicious files and URLs",
             "icon": "/data/tools-icons/joesandbox.png",
             "color": "#2B2B2B",
-            "tags": ["hash"]
+            "types": ["hash"]
         },
         {
             "name": "Kaspersky",
@@ -232,7 +232,7 @@
             "desc": "Kaspersky Threat Intelligence Portal",
             "icon": "/data/tools-icons/kaspersky.png",
             "color": "#00A88E",
-            "tags": ["ip","domain","hash"]
+            "types": ["ip","domain","hash"]
         },
         {
             "name": "MALWARE bazaar",
@@ -242,7 +242,7 @@
             "desc": "Malware samples sharing",
             "icon": "/data/tools-icons/abuse.png",
             "color": "#6C757D",
-            "tags": ["hash"]
+            "types": ["hash"]
         },
         {
             "name": "Netcraft",
@@ -253,7 +253,7 @@
             "desc": "Find out the infrastructure and technologies used by any site using results from Netcraft internet data mining",
             "icon": "/data/tools-icons/netcraft.png",
             "color": "#4FBDAC",
-            "tags": ["domain","url"]
+            "types": ["domain","url"]
         },
         {
             "name": "Norton Safeweb",
@@ -264,7 +264,7 @@
             "desc": "Lookup a site. Get Norton rating",
             "icon": "/data/tools-icons/norton.png",
             "color": "#FCBC34",
-            "tags": ["domain","url"]
+            "types": ["domain","url"]
         },
         {
             "name": "Pulsedive",
@@ -276,7 +276,7 @@
             "desc": "Free Threat Intelligence platform",
             "icon": "/data/tools-icons/pulsedive.png",
             "color": "#0E2C3E",
-            "tags": ["ip","domain","hash"]
+            "types": ["ip","domain","hash"]
         },
         {
             "name": "SecurityTrails",
@@ -287,7 +287,7 @@
             "desc": "SecurityTrails enables you to explore complete current and historical data for any internet assets.",
             "icon": "/data/tools-icons/securitytrails.png",
             "color": "#373A47",
-            "tags": ["domain","ip"]
+            "types": ["domain","ip"]
         },
         {
             "name": "Shodan",
@@ -298,7 +298,7 @@
             "desc": "Search Engine for the Internet of Everything",
             "icon": "/data/tools-icons/shodan.png",
             "color": "#151515",
-            "tags": ["domain","ip"]
+            "types": ["domain","ip"]
         },
         {
             "name": "Spamhaus",
@@ -309,7 +309,7 @@
             "desc": "IP and Domain reputation checker",
             "icon": "/data/tools-icons/spamhaus.png",
             "color": "#F8E331",
-            "tags": ["domain","ip"]
+            "types": ["domain","ip"]
         },
         {
             "name": "Spyse",
@@ -320,7 +320,7 @@
             "desc": "Internet Assets Search Engine",
             "icon": "/data/tools-icons/spyse.png",
             "color": "#0D3A86",
-            "tags": ["domain"]
+            "types": ["domain"]
         },
 		{
 			"name": "Talos Intelligence",
@@ -331,7 +331,7 @@
             "desc": "Cisco Talos Intelligence Group IP, domain reputation lookup",
 			"icon": "/data/tools-icons/talos.png",
 			"color": "#0077BE",
-			"tags": ["domain","ip"]
+			"types": ["domain","ip"]
 		},
         {
             "name": "THREATfox",
@@ -343,7 +343,7 @@
             "desc": "Indicators of Comprimes sharing",
             "icon": "/data/tools-icons/abuse.png",
             "color": "#000000",
-            "tags": ["hash","domain","ip"]
+            "types": ["hash","domain","ip"]
         },
         {
             "name": "WebArchive",
@@ -353,7 +353,7 @@
             "desc": "Internet Archive",
             "icon": "/data/tools-icons/webarchive.png",
             "color": "#222222",
-            "tags": ["url"]
+            "types": ["url"]
         },
         {
             "name": "Threat Crowd",
@@ -365,7 +365,7 @@
             "desc": "A Search Engine for Threats",
             "icon": "/data/tools-icons/threatcrowd.png",
             "color": "#00B3D9",
-            "tags": ["domain","ip","email"]
+            "types": ["domain","ip","email"]
         },
 		{
 			"name": "URLhaus",
@@ -377,7 +377,7 @@
             "desc": "Lookup malicious URLs that are being used for malware distribution",
 			"icon": "/data/tools-icons/abuse.png",
 			"color": "#A20300",
-			"tags": ["domain","url","ip"]
+			"types": ["domain","url","ip"]
 		},
 		{
 			"name": "urlscan",
@@ -389,7 +389,7 @@
             "desc": "A sandbox for the web",
 			"icon": "/data/tools-icons/urlscan.png",
             "color": "#E25A45",
-			"tags": ["domain","ip","url"]
+			"types": ["domain","ip","url"]
 		},
         {
 			"name": "URLVoid",
@@ -399,7 +399,7 @@
             "desc": "Website Reputation Checker",
 			"icon": "/data/tools-icons/urlvoid.png",
             "color": "#FFAC0D",
-			"tags": ["domain"]
+			"types": ["domain"]
 		},
         {
             "name": "ViewDNS DNS Lookup",
@@ -409,7 +409,7 @@
             "desc": "View all configured DNS records (A, MX, CNAME etc.) for a specified domain name.",
             "icon": "/data/tools-icons/viewdns.png",
             "color": "#00721E",
-            "tags": ["domain"]
+            "types": ["domain"]
         },
         {
             "name": "ViewDNS HTTP Headers",
@@ -419,7 +419,7 @@
             "desc": "Retrieves the HTTP headers of a remote domain. Useful in determining the web server (and version) in use and much more.",
             "icon": "/data/tools-icons/viewdns.png",
             "color": "#00721E",
-            "tags": ["domain"]
+            "types": ["domain"]
         },
         {
             "name": "ViewDNS WHOIS",
@@ -430,7 +430,7 @@
             "desc": "Displays owner/contact information for a domain name or IP address. Can also be used to determine if a domain name is registered or not.",
             "icon": "/data/tools-icons/viewdns.png",
             "color": "#00721E",
-            "tags": ["domain","ip"]
+            "types": ["domain","ip"]
         },
 		{
 			"name": "VirusTotal",
@@ -442,7 +442,7 @@
             "desc": "Analyze suspicious files and URLs to detect types of malware", 
 			"icon": "/data/tools-icons/virustotal.png",
 			"color": "#394EFF",
-			"tags": ["domain","ip","hash"]
+			"types": ["domain","ip","hash"]
 		},
 		{
 			"name": "ZoomEye",
@@ -453,7 +453,7 @@
             "desc": "ZoomEye is a Cyberspace Search Engine recording information of devices, websites, services and components etc.", 
 			"icon": "/data/tools-icons/zoomeye.png",
 			"color": "#0F1423",
-			"tags": ["domain","ip"]
+			"types": ["domain","ip"]
 		}
     ]
 }
