@@ -72,6 +72,7 @@ div.tool-icon {
     width: inherit;
     height: inherit;
 }
+
 div.tool-icon > img {
   max-height: 70%;
   max-width: 70%;

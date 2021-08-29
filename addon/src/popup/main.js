@@ -8,7 +8,7 @@ loadToolsList(function(ts){
     createToolsList(tools);
 });
 
-var inputField = document.getElementById("input-box")
+var inputField = document.getElementById("input-box");
 
 
 // Check if the input string is in local storage
@@ -87,6 +87,28 @@ function createToolsList(toolsList){
         nodeHyperlink.appendChild(nodeText);
         node.appendChild(nodeHyperlink);
 
+        // Set click event function
+        node.addEventListener("click", function() {
+            settingsPopup = document.getElementById("settings-popup");
+            // If settings popup is opened, don't allow clicking 
+            if(node.url && settingsPopup.style.display != "block") {
+                newtab = localStorage.getItem("settings.newtab");
+                
+                if(!newtab || newtab === "false") {
+                    // Open web resource in current tab
+                    browser.tabs.update({
+                        url: node.url
+                    });
+                } else {
+                    // Otherwise open in a new tab
+                    browser.tabs.create({
+                        url: node.url
+                    });
+                }
+                // close popup
+                window.close();
+            }
+        });
         document.getElementById("tools-list").appendChild(node);
     }
 }
@@ -159,28 +181,51 @@ function showButtonsByType(type, indicator) {
                 // Replace the placholder with the input string
                 let url = tools[i]["url"][type];
                 url = cookURL(url, indicator);
-                // Remove revious click event listener
-                resNodes[i].removeEventListener("click", resNodes[i].fn);
-                // Add click event listener
-                resNodes[i].addEventListener("click", resNodes[i].fn = function() {
-                    browser.tabs.create({
-                        url:url
-                    });
-                    // Close popup
-                    window.close();
-                });
+                resNodes[i].url = url;
             } else {
                 // If this tools does not support this indicator type, hide its button
-                resNodes[i].style.display ="none";
+                resNodes[i].style.display = "none";
             }
         }
     }
 }
 
-//document.getElementById("settings-button").addEventListener("click", function() {
-//    if(document.getElementById("settings-popup").style.display === "none"){
-//        document.getElementById("settings-popup").style.display ="block";
-//    } else {
-//        document.getElementById("settings-popup").style.display ="none";
-//    }
-//});
+/**
+ * Show or hide settings popup menu
+ */
+document.getElementById("settings-button").addEventListener("click", function() {
+    settingsPopup = document.getElementById("settings-popup");
+    if(!settingsPopup.style.display || settingsPopup.style.display == "none" ) {
+        // Don't show pointer cursor on buttons
+        document.querySelectorAll(".tool-entry").forEach(function(entry) {
+            entry.style.cursor = "default";
+        });
+
+        settingsPopup.style.display = "block";
+
+        newtabOption = localStorage.getItem("settings.newtab");
+        if(!newtabOption) {
+            // Default option: open always a new tab
+            newtabOption = "true";
+        }
+        // Set checkbox saved value
+        checkbox = document.querySelector("#settings-container input");
+        checkbox.checked = (newtabOption === "true");
+        localStorage.setItem("settings.newtab", newtabOption);
+    } else {
+        // Show pointer cursor on buttons
+        document.querySelectorAll(".tool-entry").forEach(function(entry) {
+            entry.style.cursor = "pointer";
+        });
+        settingsPopup.style.display = "none";
+    }
+});
+
+/**
+ * Handle settings checkbox change event
+ */
+document.querySelector("#settings-popup input").addEventListener("change", function(evt) {
+    let linksNodes = document.getElementById("tools-list").children;
+    newtabOption = evt.target.checked;
+    localStorage.setItem("settings.newtab", newtabOption);
+});
