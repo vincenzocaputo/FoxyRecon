@@ -1,4 +1,4 @@
-class IndicatorTypeDetector {
+class IndicatorParser {
     // Regexes
     constructor() {
         this.domain =new RegExp(/^((?!-)[_A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,6}$/);

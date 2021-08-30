@@ -108,19 +108,20 @@ div.tool-name {
   display: inline-block;
 }
 
-.popup .popup-text {
-  width: 200px;
-  color: #FFFFFF;
-  text-align: center;
-  border-radius: 6px;
-  padding: 8px 0;
-  position: absolute;
-  z-index: 100;
-  top: 20%;
-  left: 0%;
+.popup #popup-text {
+    display: none;
+    width: 200px;
+    color: #FFFFFF;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 100;
+    top: 20%;
+    left: 0%;
 }
 
-.popup .popup-text::after {
+.popup #popup-text::after {
   content: "";
   position: absolute;
   top: 0%;
@@ -131,21 +132,19 @@ div.tool-name {
   margin-top: -20px;
 }
 
-#error-popup-text {
-  display: none;
+.error-popup-text {
   background-color: #FC5A4E;
 }
 
-#error-popup-text::after {
+.error-popup-text::after {
   border-color: transparent transparent #FC5A4E transparent;
 }
 
-#warn-popup-text {
-  display: none;
+.warn-popup-text {
   background-color: #FFC94A;
 }
 
-#warn-popup-text::after {
+.warn-popup-text::after {
   border-color: transparent transparent #FFC94A transparent;
 }
 
