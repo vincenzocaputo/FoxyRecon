@@ -108,7 +108,8 @@ div.tool-name {
   display: inline-block;
 }
 
-.popup .popup-text {
+.popup #popup-text {
+  display: none;
   width: 200px;
   color: #FFFFFF;
   text-align: center;
@@ -120,7 +121,7 @@ div.tool-name {
   left: 0%;
 }
 
-.popup .popup-text::after {
+.popup #popup-text::after {
   content: "";
   position: absolute;
   top: 0%;
@@ -131,21 +132,21 @@ div.tool-name {
   margin-top: -20px;
 }
 
-#error-popup-text {
+.error-popup-text {
   display: none;
   background-color: #FC5A4E;
 }
 
-#error-popup-text::after {
+.error-popup-text::after {
   border-color: transparent transparent #FC5A4E transparent;
 }
 
-#warn-popup-text {
+.warn-popup-text {
   display: none;
   background-color: #FFC94A;
 }
 
-#warn-popup-text::after {
+.warn-popup-text::after {
   border-color: transparent transparent #FFC94A transparent;
 }
 

@@ -26,7 +26,7 @@
             "js": ["src/utils/indicatortypedetector.js", "src/utils/utils.js", "src/content_scripts/context_menu.js"]
         },
         {
-            "matches": ["https://dnsdumpster.com/", "https://haveibeenpwned.com/", "https://centralops.net/co/*", "https://www.urlvoid.com/*"],
+            "matches": ["https://dnsdumpster.com/", "https://haveibeenpwned.com/", "https://centralops.net/co/*", "https://www.urlvoid.com/*","https://www.dns.pt/en/tools/whois/", "https://www.dominios.es/"],
             "js": ["src/content_scripts/autofill.js"]
         }
     ],

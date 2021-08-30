@@ -1,6 +1,12 @@
 // Get addon version from manifest
 var manifest = browser.runtime.getManifest();
-document.getElementById("version-tag").innerHTML = "Version "+manifest.version;
+document.getElementById("version-tag").textContent = "Version "+manifest.version;
+
+const MessageType = {
+    INFO: 0,
+    WARNING: 1,
+    ERROR: 2
+}
 
 var tools;
 loadToolsList(function(ts){
@@ -10,7 +16,7 @@ loadToolsList(function(ts){
 
 var inputField = document.getElementById("input-box");
 
-indicatorTypeDetector = new IndicatorTypeDetector();
+indicatorParser = new IndicatorParser();
 
 // Check if the input string is in local storage
 if(!localStorage.getItem("indicator")) {
@@ -30,13 +36,94 @@ if(!localStorage.getItem("indicator")) {
 // For each charachter typed, check if the string is a valid input
 inputField.addEventListener("keyup", (e) => {
 	let inputString = document.getElementById("input-box").value;
-    let type = indicatorTypeDetector.getIndicatorType(inputString);
-    // Show the appropriate tools for the input
-    showButtonsByType(type, inputString);
-    // Save the popup state (indicator + type)
-    localStorage.setItem("indicator", inputString);
-    localStorage.setItem("type", type);
+    if(inputString === "") {
+        showAddonLogo();
+    }
+    let type = indicatorParser.getIndicatorType(inputString);
+    if(type === "invalid") {
+        showAddonLogo();
+        showMessagePopup("Please enter a valid indicator", MessageType.ERROR);
+    } else if(type === "internal") {
+        showAddonLogo();
+        showMessagePopup("The IP address is internal", MessageType.WARNING);
+    } else {
+        // Show the appropriate tools for the input
+        showButtonsByType(type, inputString);
+        // Save the popup state (indicator + type)
+        localStorage.setItem("indicator", inputString);
+        localStorage.setItem("type", type);
+    }
 });
+
+
+/**
+ * Show message in a popup
+ * @param{message} message to show
+ * @param{messageType} type of the message (error, warning, info)
+ */
+function showMessagePopup(message, messageType) {
+    popupText = document.getElementById("popup-text");
+    // Set message
+    popupText.textContent = message;
+    // Set color, according to the message type
+    if(messageType == MessageType.ERROR) {
+        popupText.classList.add("error-popup-text");
+        document.querySelector("#search-box>input").style.borderColor = "#FF0000";
+    } else if(messageType == MessageType.WARNING) {
+        popupText.classList.add("warning-popup-text");
+        document.querySelector("#search-box>input").style.borderColor = "#FFDD00";
+    }
+    popupText.style.display = "block";
+}
+
+/**
+ * Show add-on logo
+ */
+function showAddonLogo() {
+    document.getElementById("tools-list").style.display = "none";
+    document.getElementById("popup-text").style.display = "none";
+    // Restore text field border color
+    document.querySelector("#search-box>input").style.borderColor = "#6E6C69";
+    document.getElementById("addon-logo").style.display = "block";
+}
+
+
+
+/**
+ * Show only the tools that are appropriate for the indicator
+ * @param {type} indicator type (domain, ip, url, etc.)
+ * @param {indicator} indicator entered by the user
+ */
+function showButtonsByType(type, indicator) {
+    let visibility;
+    
+    document.getElementById("popup-text").style.display = "none";
+    document.querySelector("#search-box>input").style.borderColor = "#6E6C69";
+    document.getElementById("addon-logo").style.display = "none";
+    // This node contains the list of tools
+    let toolsListNodes = document.getElementById("tools-list");
+    toolsListNodes.style.display = "block";
+    let resNodes = toolsListNodes.children;
+
+    for (var i = 0; i < resNodes.length; i++) {
+        if (tools[i]["types"].includes(type) && (!tools[i]["subtypes"] || 
+            tools[i]["subtypes"].includes(indicatorParser.getTLD(indicator)))) {            
+            console.log(indicatorParser.getTLD(indicator));
+            resNodes[i].style.display = "block";
+            // Set tool description to div title
+            resNodes[i].title = tools[i]["desc"];
+            // Replace the placholder with the input string
+
+            let url = tools[i]["url"][type];
+            console.log(url);
+            url = cookURL(url, indicator);
+            resNodes[i].url = url;
+        } else {
+            // If this tools does not support this indicator type, hide its button
+            resNodes[i].style.display = "none";
+        }
+    }
+}
 
 /**
  * Create the tools list inside the popup
@@ -113,86 +200,6 @@ function createToolsList(toolsList){
         document.getElementById("tools-list").appendChild(node);
     }
 }
-
-/**
- * Show only the tools that are appropriate for the indicator
- * @param {type} indicator type (domain, ip, url, etc.)
- * @param {indicator} indicator entered by the user
- */
-function showButtonsByType(type, indicator) {
-    let visibility;
-    
-    // This node contains the list of tools
-    let toolsListNode = document.getElementById("tools-list");
-    // This node contains the error message for invalid input
-    let errorPopupNode = document.getElementById("error-popup-text");
-    // This node contains the warning message for internal IPs
-    let warnPopupNode = document.getElementById("warn-popup-text");
-    // This node contains the input text field
-    let inputFieldNode = document.querySelector("#search-box>input"); 
-    // This node contains the addon's logo
-    let addonLogoNode = document.getElementById("addon-logo");
-
-    addonLogoNode.style.display = "block";
-    // If the input is empty, hide buttons and show addon logo
-    if(indicator === ""){
-        toolsListNode.style.display = "none";
-        errorPopupNode.style.display = "none";
-        warnPopupNode.style.display = "none";
-        // Restore text field border color
-        inputFieldNode.style.borderColor = "#6E6C69";
-        return;
-    }
-
-    resNodes = toolsListNode.children;
-    // If the input is not valid, show an error message
-    if (type === "invalid") {
-        errorPopupNode.style.display = "block";        
-        warnPopupNode.style.display = "none";
-        toolsListNode.style.display = "none";
-        // Set the text field border color to red
-        inputFieldNode.style.borderColor = "#FF0000";
-        for (var i = 0; i < resNodes.length; i++) {
-            resNodes[i].style.display = "none";
-        }
-    } else if (type === "internal") { 
-        // If the IP address is internal, show a warning message
-        warnPopupNode.style.display = "block";
-        errorPopupNode.style.display = "none";       
-        toolsListNode.style.display = "none";
-        // Set the text field border color to orange
-        inputFieldNode.style.borderColor = "#FFDD00";
-        for (var i = 0; i < resNodes.length; i++) {
-            resNodes[i].style.display = "none";
-        }
-    } else {
-        inputFieldNode.style.borderColor = "#6E6C69";
-        // Hide the error message
-        errorPopupNode.style.display = "none";       
-        warnPopupNode.style.display = "none";       
-        // Hide logo
-        addonLogoNode.style.display = "none";
-        toolsListNode.style.display = "block";
-
-
-        let handler = [];
-        for (var i = 0; i < resNodes.length; i++) {
-            if (tools[i]["types"].includes(type)) {            
-                resNodes[i].style.display = "block";
-                // Set tool description to div title
-                resNodes[i].title = tools[i]["desc"];
-                // Replace the placholder with the input string
-                let url = tools[i]["url"][type];
-                url = cookURL(url, indicator);
-                resNodes[i].url = url;
-            } else {
-                // If this tools does not support this indicator type, hide its button
-                resNodes[i].style.display = "none";
-            }
-        }
-    }
-}
-
 /**
  * Show or hide settings popup menu
  */
@@ -224,6 +231,9 @@ document.getElementById("settings-button").addEventListener("click", function() 
     }
 });
 
+/**
+ * Close the settings popup if the user clicks outside it
+ */
 document.addEventListener("click", function(evt) {
     settingsPopup = document.getElementById("settings-popup");
     settingsButton = document.getElementById("settings-button");

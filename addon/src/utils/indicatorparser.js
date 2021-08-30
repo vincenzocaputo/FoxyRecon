@@ -1,7 +1,7 @@
-class IndicatorTypeDetector {
+class IndicatorParser {
     // Regexes
     constructor() {
-        this.domain =new RegExp(/^((?!-)[_A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,6}$/);
+        this.domain =new RegExp(/^((?!-)[_A-Za-z0-9-]{1,63}(?<!-)\.)+([A-Za-z]{2,6})$/);
         this.url=new RegExp(/^(?:http(?:s)?:\/\/)([\w.-]+(?:\.[\w\.-]+)+)[\w\-\._~:/?#[\]@!\$&'\(\)\*\+\,\;\=\.]+$/);
         this.ip = new RegExp(/^((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))*$/);
         this.hash = new RegExp(/(^[a-z0-9]{32}$)|(^[a-z0-9]{40}$)|(^[a-z0-9]{64}$)/); 
@@ -36,6 +36,8 @@ class IndicatorTypeDetector {
 
     /**
      * Extract domain from url
+     * @param{url} URL from which extract the domain
+     * @return domain
      */
     getDomainFromURL(url) {
         let groups = url.match(this.url);
@@ -43,4 +45,20 @@ class IndicatorTypeDetector {
             return groups[1];
         }
     }
+
+    /**
+     * Get domain TLD
+     * @param{domain} domain form which extract the TLD
+     * @return TLD
+     */
+    getTLD(domain) {
+        let groups = domain.match(this.domain);
+        if(groups) {
+            return groups[2];
+        } else {
+            return "none";
+        }
+
+    }
+    
 }

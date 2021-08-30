@@ -150,6 +150,39 @@
             "color": "#2FD3AA",
             "types": ["email"]
         },
+        {
+            "name": "Eurid",
+            "url": {
+                "domain": "https://whois.eurid.eu/it/search/?domain=%s"
+            },
+            "desc": ".eu domains whois lookup.",
+            "icon": "/data/tools-icons/eurid.png",
+            "color": "#20325F",
+            "types": ["domain"],
+            "subtypes": ["eu"]
+        },
+        {
+            "name": "Dominio.es",
+            "url": {
+                "domain": "https://www.dominios.es/"
+            },
+            "desc": ".es domains whois lookup.",
+            "icon": "/data/tools-icons/domaines.png",
+            "color": "#162D41",
+            "types": ["domain"],
+            "subtypes": ["es"]
+        },
+        {
+            "name": "dns.pt",
+            "url": {
+                "domain": "https://www.dns.pt/en/tools/whois/"
+            },
+            "desc": ".pt domains whois lookup.",
+            "icon": "/data/tools-icons/dnspt.png",
+            "color": "#70FF87",
+            "types": ["domain"],
+            "subtypes": ["pt"]
+        },
 		{
 			"name": "hashdd",
 			"url": {
@@ -277,6 +310,17 @@
             "icon": "/data/tools-icons/pulsedive.png",
             "color": "#0E2C3E",
             "types": ["ip","domain","hash"]
+        },
+        {
+            "name": "RU Center",
+            "url": {
+                "domain": "https://www.nic.ru/whois/?searchWord=%s"
+            },
+            "desc": ".ru domains whois lookup.",
+            "icon": "/data/tools-icons/nicru.png",
+            "color": "#14295E",
+            "types": ["domain"],
+            "subtypes": ["ru"]
         },
         {
             "name": "SecurityTrails",

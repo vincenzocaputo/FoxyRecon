@@ -8,7 +8,7 @@ browser.runtime.sendMessage({
     indicator = resp.msg;
     // Get only text or email input nodes
     for(i=0; i<inputNodes.length; i++){
-        if(inputNodes[i].type === "text" || inputNodes[i].type === "email"){
+        if(inputNodes[i].type === "text" || inputNodes[i].type === "email" || inputNodes[i].type === "search"){
             // Fill the input field
             inputNodes[i].value = indicator;
         }
