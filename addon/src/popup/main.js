@@ -95,14 +95,14 @@ function createToolsList(toolsList){
             if(node.url && settingsPopup.style.display != "block") {
                 newtab = localStorage.getItem("settings.newtab");
                 
-                if(!newtab || newtab === "false") {
-                    // Open web resource in current tab
-                    browser.tabs.update({
+                if(!newtab || newtab === "true") {
+                    // Open web resource in a new tab
+                    browser.tabs.create({
                         url: node.url
                     });
                 } else {
-                    // Otherwise open in a new tab
-                    browser.tabs.create({
+                    // Otherwise open in current tab
+                    browser.tabs.update({
                         url: node.url
                     });
                 }
