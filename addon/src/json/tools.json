@@ -34,7 +34,7 @@
             "types": ["ip","domain","hash"]
         },
 		{
-			"name": "BGP Hurricane",
+			"name": "Hurricane Electric",
 			"url": { 
                 "domain": "https://bgp.he.net/dns/%s",
                 "ip": "https://bgp.he.net/ip/%s"
@@ -114,6 +114,7 @@
             "url": {
                 "domain": "https://dnsdumpster.com/"
             },
+            "submitQuery": "button.btn",
             "desc": "dns recon & research, find & lookup dns records",
             "icon": "/data/tools-icons/dnsdumpster.png",
             "color": "#323232",
@@ -165,6 +166,7 @@
             "url": {
                 "email": "https://haveibeenpwned.com/"
             },
+            "submitQuery": "#searchPwnage", 
             "desc": "Check if your email or phone is in a data breach",
             "icon": "/data/tools-icons/hibp.png",
             "color": "#2A698A",
@@ -346,9 +348,9 @@
             "types": ["hash","domain","ip"]
         },
         {
-            "name": "WebArchive",
+            "name": "Wayback Machine",
             "url": {
-                "url": "https://web.archive.org/web/*/%s"
+                "url": "https://web.archive.org/web/*/%r"
             },
             "desc": "Internet Archive",
             "icon": "/data/tools-icons/webarchive.png",
@@ -396,6 +398,7 @@
 			"url": {
                 "domain": "https://urlvoid.com/scan/%s"
             },
+            "submitQuery": "button.btn",
             "desc": "Website Reputation Checker",
 			"icon": "/data/tools-icons/urlvoid.png",
             "color": "#FFAC0D",

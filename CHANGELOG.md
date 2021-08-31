@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2021-08-31
+### Added
+- Feature that allows to automatically submit indicators on web resources that requires UI actions (dnsdumpster, urlvoid, hibp)
+- Feature that allows to extract domain name from URL or email addresses
+
+### Changed
+- BPG Hurricane resource name to Hurricane Electric
+- Web Archive resource name to Wayback Machine
+
+### Fixed
+- Open in new tab default option
+- Query for Web Archive web resource
+
+
 ## [0.3.4] - 2021-08-29
 ### Added
 - Settings popup

@@ -7,7 +7,10 @@
 	</head>
 	<body>
         <div id="search-box">
-            <input type="text" id="input-box" placeholder="Domain | IP | URL | hash | Email"/>
+            <div id="text-field">
+                <img src="../../data/icons/tool.png"/>
+                <input type="text" id="input-box" placeholder="Enter your indicator"/>
+            </div>
             <div id="settings-button">
                 <img src="../../data/icons/settings.png"/>
             </div>
@@ -30,13 +33,7 @@
             </div>
         </div>
         <div class="popup">
-            <div id="error-popup-text" class="popup-text">
-                Please insert a valid input
-            </div>
-        </div>
-        <div class="popup">
-            <div id="warn-popup-text" class="popup-text">
-                The IP address is internal
+            <div id="popup-text">
             </div>
         </div>
         <div id="content">
@@ -49,7 +46,7 @@
 
             </div>
         </div>
-        <script type="text/javascript" src="../utils/indicatortypedetector.js"></script>
+        <script type="text/javascript" src="../utils/indicatorparser.js"></script>
         <script type="text/javascript" src="../utils/utils.js"></script>
 		<script src="main.js"></script>
 	</body>
