@@ -34,7 +34,7 @@
             "types": ["ip","domain","hash"]
         },
 		{
-			"name": "BGP Hurricane",
+			"name": "Hurricane Electric",
 			"url": { 
                 "domain": "https://bgp.he.net/dns/%s",
                 "ip": "https://bgp.he.net/ip/%s"
@@ -346,9 +346,9 @@
             "types": ["hash","domain","ip"]
         },
         {
-            "name": "WebArchive",
+            "name": "Wayback Machine",
             "url": {
-                "url": "https://web.archive.org/web/*/%s"
+                "url": "https://web.archive.org/web/*/%r"
             },
             "desc": "Internet Archive",
             "icon": "/data/tools-icons/webarchive.png",
