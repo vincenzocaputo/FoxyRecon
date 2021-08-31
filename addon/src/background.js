@@ -60,8 +60,12 @@ function updateToolsMenu(toolsList, indicator, type) {
  */
 browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if(request.id == 1) {
-        console.log("Received message");
-        sendResponse({msg: localStorage.getItem("indicator")});
+        // Send the query to find submit button
+        query = localStorage.getItem("submit-btn-query");
+        console.log(query);
+        sendResponse({msg: localStorage.getItem("indicator"), query: query});
+        // Consume the request (to avoid clicking the button more times for the same request)
+        localStorage.setItem("submit-btn-query","");
     } else {
         console.log(request);
         if(request.type != "invalid"){

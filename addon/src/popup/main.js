@@ -33,11 +33,27 @@ if(!localStorage.getItem("indicator")) {
 }
 
 
+var textfieldTool = document.querySelector("#text-field>img");
+textfieldTool.title = "Extract domain";
+textfieldTool.addEventListener("click", function() {
+    let inputString = document.getElementById("input-box").value;
+    let domain = indicatorParser.getDomain(inputString);
+    
+    document.getElementById("input-box").value = domain;
+
+    // Show the appropriate tools for the input provided
+    showButtonsByType("domain", domain);
+    // Save the current indicator along with its type
+    localStorage.setItem("indicator", domain);
+    localStorage.setItem("type", "domain");
+});
+
 // For each charachter typed, check if the string is a valid input
 inputField.addEventListener("keyup", (e) => {
     let inputString = document.getElementById("input-box").value;
+    console.log(inputString);
     // If no input was provided, show the add-on logo
-    if(inputString === "") {
+    if(inputString == "") {
         showAddonLogo();
     }
     // Get indicator type
@@ -74,10 +90,10 @@ function showMessagePopup(message, messageType) {
     // Set color, according to the message type
     if(messageType == MessageType.ERROR) {
         popupText.classList.add(classes[MessageType.ERROR]);
-        document.querySelector("#search-box>input").style.borderColor = "#FF0000";
+        document.getElementById("text-field").style.borderColor = "#FF0000";
     } else if(messageType == MessageType.WARNING) {
         popupText.classList.add(classes[MessageType.WARNING]);
-        document.querySelector("#search-box>input").style.borderColor = "#FFDD00";
+        document.getElementById("text-field").style.borderColor = "#FFDD00";
     }
     popupText.style.display = "block";
 }
@@ -90,7 +106,7 @@ function showAddonLogo() {
     document.getElementById("tools-list").style.display = "none";
     document.getElementById("popup-text").style.display = "none";
     // Restore text field border color
-    document.querySelector("#search-box>input").style.borderColor = "#6E6C69";
+    document.getElementById("text-field").style.borderColor = "#6E6C69";
     document.getElementById("addon-logo").style.display = "block";
 }
 
@@ -105,7 +121,7 @@ function showButtonsByType(type, indicator) {
     let visibility;
     
     document.getElementById("popup-text").style.display = "none";
-    document.querySelector("#search-box>input").style.borderColor = "#6E6C69";
+    document.getElementById("text-field").style.borderColor = "#6E6C69";
     document.getElementById("addon-logo").style.display = "none";
     // This node contains the list of tools
     let toolsListNodes = document.getElementById("tools-list");
@@ -121,10 +137,20 @@ function showButtonsByType(type, indicator) {
             let url = tools[i]["url"][type];
             url = cookURL(url, indicator);
             resNodes[i].url = url;
+
+            resNodes[i].submitQuery = tools[i]["submitQuery"];
         } else {
             // If this tools does not support this indicator type, hide its button
             resNodes[i].style.display = "none";
         }
+    }
+
+    // If the indicator is an URL or email, show tool icon inside text field
+    textFieldIcon = document.querySelector("#text-field>img");
+    if(type === "url" || type === "email") {
+        textFieldIcon.style.display = "block";
+    } else {
+        textFieldIcon.style.display = "none";
     }
 }
 
@@ -185,6 +211,12 @@ function createToolsList(toolsList){
             if(node.url && settingsPopup.style.display != "block") {
                 newtab = localStorage.getItem("settings.newtab");
                 
+                if(node.submitQuery) {
+                    localStorage.setItem("submit-btn-query", node.submitQuery);
+                } else {
+                    localStorage.setItem("submit-btn-query", "");
+                }
+
                 if(!newtab || newtab === "true") {
                     // Open web resource in a new tab
                     browser.tabs.create({
