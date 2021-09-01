@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.4.1] - 2021-09-01
 ### Fixed
 - Hiding of web resources list when the text field is empty
+- Indicator type detection when selecting text
 
 ## [0.4.0] - 2021-08-31
 ### Added
