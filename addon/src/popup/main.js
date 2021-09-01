@@ -51,7 +51,6 @@ textfieldTool.addEventListener("click", function() {
 // For each charachter typed, check if the string is a valid input
 inputField.addEventListener("keyup", (e) => {
     let inputString = document.getElementById("input-box").value;
-    console.log(inputString);
     // If no input was provided, show the add-on logo
     if(inputString === "") {
         showAddonLogo();

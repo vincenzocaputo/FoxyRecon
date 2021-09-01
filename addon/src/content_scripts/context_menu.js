@@ -11,7 +11,6 @@ document.addEventListener("selectionchange", () => {
         // Determine the type of the indicator selected
 
         type = indicatorParser.getIndicatorType(selectedText);
-        console.log("Type: "+type);
         if(type != "invalid"){
             // Send the selected text to background script along with its type
             browser.runtime.sendMessage({
