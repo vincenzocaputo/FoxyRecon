@@ -53,23 +53,24 @@ inputField.addEventListener("keyup", (e) => {
     let inputString = document.getElementById("input-box").value;
     console.log(inputString);
     // If no input was provided, show the add-on logo
-    if(inputString == "") {
+    if(inputString === "") {
         showAddonLogo();
-    }
-    // Get indicator type
-    let type = indicatorParser.getIndicatorType(inputString);
-    if(type === "invalid") {
-        showAddonLogo();
-        showMessagePopup("Please enter a valid indicator", MessageType.ERROR);
-    } else if(type === "internal") {
-        showAddonLogo();
-        showMessagePopup("The IP address is internal", MessageType.WARNING);
     } else {
-        // Show the appropriate tools for the input provided
-        showButtonsByType(type, inputString);
-        // Save the current indicator along with its type
-        localStorage.setItem("indicator", inputString);
-        localStorage.setItem("type", type);
+        // Get indicator type
+        let type = indicatorParser.getIndicatorType(inputString);
+        if(type === "invalid") {
+            showAddonLogo();
+            showMessagePopup("Please enter a valid indicator", MessageType.ERROR);
+        } else if(type === "internal") {
+            showAddonLogo();
+            showMessagePopup("The IP address is internal", MessageType.WARNING);
+        } else {
+            // Show the appropriate tools for the input provided
+            showButtonsByType(type, inputString);
+            // Save the current indicator along with its type
+            localStorage.setItem("indicator", inputString);
+            localStorage.setItem("type", type);
+        }
     }
 });
 
