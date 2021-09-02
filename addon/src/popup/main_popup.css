@@ -76,6 +76,7 @@ div.tool-icon {
     margin-left: 5px;
     border: none;
     background: transparent;
+    outline: none;
 }
 
 
