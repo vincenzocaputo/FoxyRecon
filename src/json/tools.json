@@ -33,6 +33,16 @@
             "color": "#000000",
             "types": ["ip","domain","hash"]
         },
+        {
+            "name": "Intezer Analyze",
+            "url": {
+                "hash": "https://analyze.intezer.com/files/%s"
+            },
+            "desc": "All malware analysis tools under one platform",
+            "icon": "intezer.png",
+            "color": "#253162",
+            "types": ["hash"]
+        },
 		{
 			"name": "Hurricane Electric",
 			"url": { 
