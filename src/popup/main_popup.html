@@ -8,11 +8,11 @@
 	<body>
         <div id="search-box">
             <div id="text-field">
-                <img src="../../data/icons/tool.png"/>
+                <img src="../../assets/icons/tool.png"/>
                 <input type="text" id="input-box" placeholder="Enter your indicator"/>
             </div>
             <div id="settings-button">
-                <img src="../../data/icons/settings.png"/>
+                <img src="../../assets/icons/settings.png"/>
             </div>
         </div>
         <div class="popup">
@@ -38,7 +38,7 @@
         </div>
         <div id="content">
             <div id="addon-logo">
-                <img src="../../data/icons/logo.png"/>
+                <img src="../../assets/icons/logo.png"/>
                 <div id="version-tag"></div>
             </div>
 
@@ -46,10 +46,13 @@
 
             </div>
         </div>
-        <script type="text/javascript" src="./uiHandler.js"></script>
+        
+        <!-- SCRIPTS --!>
+        <script type="text/javascript" src="../lib/browser-polyfill.js"></script>
         <script type="text/javascript" src="../utils/toolsFileLoader.js"></script>
         <script type="text/javascript" src="../utils/utils.js"></script>
         <script type="text/javascript" src="../utils/indicatorparser.js"></script>
-		<script src="main.js"></script>
+        <script type="text/javascript" src="./uiHandler.js"></script>
+        <script type="text/javascript" src="./main.js"></script>
 	</body>
 </html>

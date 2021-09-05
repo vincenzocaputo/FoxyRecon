@@ -1,8 +1,18 @@
- const MessageType = {
+// Set tools icons folder base path
+const toolsIcoBasePath = "/assets/tools-icons/"
+
+// Set types for popup messages
+const MessageType = {
     INFO: 0,
     WARNING: 1,
     ERROR: 2
 }
+
+var tools;
+loadToolsList(function(ts){
+    tools = ts;
+    createToolsList(tools);
+});
 
 /**
  * Show message in a popup
@@ -47,8 +57,6 @@ function showAddonLogo() {
  * @param {indicator} indicator entered by the user
  */
 function showButtonsByType(type, indicator) {
-    let visibility;
-    
     document.getElementById("popup-text").style.display = "none";
     document.getElementById("text-field").style.borderColor = "#6E6C69";
     document.getElementById("addon-logo").style.display = "none";
@@ -107,7 +115,8 @@ function createToolsList(toolsList){
    
         let nodeImage = document.createElement("img");
 
-        nodeImage.setAttribute("src", toolsList[i]["icon"]);
+        nodeImage.setAttribute("src", toolsIcoBasePath + toolsList[i]["icon"]);
+        console.log(nodeImage);
 
         // This node will contain the web resource's name
         let nodeText = document.createElement("div");

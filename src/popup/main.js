@@ -1,12 +1,7 @@
 // Get addon version from manifest file
-var manifest = browser.runtime.getManifest();
+const manifest = browser.runtime.getManifest();
 document.getElementById("version-tag").textContent = "Version "+manifest.version;
 
-var tools;
-loadToolsList(function(ts){
-    tools = ts;
-    createToolsList(tools);
-});
 
 var inputField = document.getElementById("input-box");
 
@@ -57,6 +52,7 @@ textfieldTool.addEventListener("click", function() {
  */
 inputField.addEventListener("keyup", (e) => {
     let inputString = document.getElementById("input-box").value;
+    console.log("HELLO");
     // If no input was provided, show the add-on logo
     if(inputString === "") {
         showAddonLogo();

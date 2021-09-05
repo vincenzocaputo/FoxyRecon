@@ -13,15 +13,28 @@ function createToolsMenu(toolsList) {
     for (i=0; i<toolsList.length; i++){
         let tool = toolsList[i];
         // Create menu entry
-        browser.contextMenus.create({
-            id: i.toString(), // Incremental ID
-            title: tool["name"], // Tool name
-            contexts: ["selection"], // Show menu on selected text
-            icons: {
-                16: browser.runtime.getURL(tool["icon"]),
-            },
-            visible: true,
-       });
+        try {
+            browser.contextMenus.create({
+                id: i.toString(), // Incremental ID
+                title: tool["name"], // Tool name
+                contexts: ["selection"], // Show menu on selected text
+                icons: {
+                    16: browser.runtime.getURL(tool["icon"]),
+                },
+                visible: true,
+            });
+        } catch(exception) {
+            // Chrome does not support icons property
+            if(exception.name === "TypeError") {
+                browser.contextMenus.create({
+                    id: i.toString(), // Incremental ID
+                    title: tool["name"], // Tool name
+                    contexts: ["selection"], // Show menu on selected text
+                    visible: true,
+                });
+                
+            }
+        }
     }
 }
 
