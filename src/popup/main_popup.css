@@ -1,5 +1,5 @@
 body {
-    width: 220px;
+    width: 250px;
     background-color: #EEEEEE;
 }
 
@@ -50,7 +50,7 @@ div.tool-icon {
 #search-box > #text-field {
     display: flex;
     height: 25px;
-    width: 165px;
+    width: 200px;
     padding: 2px;
     padding-left: 5px;
     border-radius: 5px;
@@ -170,7 +170,7 @@ div.tool-name {
 
 .popup #settings-popup {
   display: none;
-  width: 220px;
+  width: 250px;
   background-color: #FFFFFF;
   color: #444444;
   text-align: center;
@@ -193,6 +193,7 @@ div.tool-name {
   margin-top: -20px;
   border-color: transparent transparent #FFFFFF transparent;
 }
+
 .switch {
   position: relative;
   display: inline-block;

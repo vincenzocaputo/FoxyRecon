@@ -52,7 +52,6 @@ textfieldTool.addEventListener("click", function() {
  */
 inputField.addEventListener("keyup", (e) => {
     let inputString = document.getElementById("input-box").value;
-    console.log("HELLO");
     // If no input was provided, show the add-on logo
     if(inputString === "") {
         showAddonLogo();
@@ -78,6 +77,16 @@ inputField.addEventListener("keyup", (e) => {
 
 /**----------------------------------OPTION SETTINGS POP-UP----------------------------------------------**/
 
+function setCheckboxStatus(checkboxNode, optionName) {
+    optionValue = localStorage.getItem(optionName);
+    if(!optionValue) {
+        // Default option: open always a new tab
+        optionValue = "true";
+    }
+    checkboxNode.checked = (optionValue === "true");
+    localStorage.setItem(optionName, optionValue);
+}
+
 /**
  * Show or hide settings popup menu
  */
@@ -90,16 +99,9 @@ document.getElementById("settings-button").addEventListener("click", function() 
         });
 
         settingsPopup.style.display = "block";
-
-        newtabOption = localStorage.getItem("settings.newtab");
-        if(!newtabOption) {
-            // Default option: open always a new tab
-            newtabOption = "true";
-        }
-        // Set checkbox saved value
-        checkbox = document.querySelector("#settings-container input");
-        checkbox.checked = (newtabOption === "true");
-        localStorage.setItem("settings.newtab", newtabOption);
+        
+        setCheckboxStatus(document.querySelector("#open-tab-opt input"), "settings.newtab");
+        setCheckboxStatus(document.querySelector("#auto-submit-opt input"), "settings.autosubmit");
     } else {
         // Show pointer cursor on buttons
         document.querySelectorAll(".tool-entry").forEach(function(entry) {
@@ -133,10 +135,19 @@ document.addEventListener("click", function(evt) {
 
 
 /**
- * Handle settings checkbox change event
+ * Handle open tab option checkbox change event
  */
-document.querySelector("#settings-popup input").addEventListener("change", function(evt) {
+document.querySelector("#open-tab-opt input").addEventListener("change", function(evt) {
     let linksNodes = document.getElementById("tools-list").children;
     newtabOption = evt.target.checked;
     localStorage.setItem("settings.newtab", newtabOption);
+});
+
+/**
+ * Handle auto-submit option checkbox change event
+ */
+document.querySelector("#auto-submit-opt input").addEventListener("change", function(evt) {
+    let linksNodes = document.getElementById("tools-list").children;
+    autosubmitOption = evt.target.checked;
+    localStorage.setItem("settings.autosubmit", autosubmitOption);
 });

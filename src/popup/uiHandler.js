@@ -116,7 +116,6 @@ function createToolsList(toolsList){
         let nodeImage = document.createElement("img");
 
         nodeImage.setAttribute("src", toolsIcoBasePath + toolsList[i]["icon"]);
-        console.log(nodeImage);
 
         // This node will contain the web resource's name
         let nodeText = document.createElement("div");
