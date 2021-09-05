@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added browser-polyfill.js library
 - Improved 
 
+## [0.4.1] - 2021-09-01
 ### Fixed
 - Hiding of web resources list when the text field is empty
 - Indicator type detection when selecting text
