@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="main_popup.css"/>
+	</head>
+	<body>
+        <div id="search-box">
+            <div id="text-field">
+                <img src="../../assets/icons/tool.png"/>
+                <input type="text" id="input-box" placeholder="Enter your indicator"/>
+            </div>
+            <div id="settings-button">
+                <img src="../../assets/icons/settings.png"/>
+            </div>
+        </div>
+        <div class="popup">
+            <div id="settings-popup">
+                <div id="settings-container">
+                    <div class="option">
+                        <div class="option-label">
+                            Always open in new tab
+                        </div>
+                        <div class="option-value" id="open-tab-opt">
+                            <label class="switch">
+                                <input type="checkbox"/>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="option">
+                        <div class="option-label">
+                            Auto-submit feature
+                        </div>
+                        <div class="option-value" id="auto-submit-opt">
+                            <label class="switch">
+                                <input type="checkbox"/>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="popup">
+            <div id="popup-text">
+            </div>
+        </div>
+        <div id="content">
+            <div id="addon-logo">
+                <img src="../../assets/icons/logo.png"/>
+                <div id="version-tag"></div>
+            </div>
+
+            <div id="tools-list">
+
+            </div>
+        </div>
+        
+        <!-- SCRIPTS --!>
+        <script type="text/javascript" src="../lib/browser-polyfill.js"></script>
+        <script type="text/javascript" src="../utils/toolsFileLoader.js"></script>
+        <script type="text/javascript" src="../utils/utils.js"></script>
+        <script type="text/javascript" src="../utils/indicatorparser.js"></script>
+        <script type="text/javascript" src="./uiHandler.js"></script>
+        <script type="text/javascript" src="./main.js"></script>
+	</body>
+</html>
