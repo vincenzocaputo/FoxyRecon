@@ -169,17 +169,18 @@ div.tool-name {
 }
 
 .popup #settings-popup {
-  display: none;
-  width: 250px;
-  background-color: #FFFFFF;
-  color: #444444;
-  text-align: center;
-  border-radius: 6px;
-  padding: 8px 0;
-  position: absolute;
-  z-index: 100;
-  top: 20%;
-  left: 0%;
+    display: none;
+    width: 250px;
+    background-color: #FFFFFF;
+    color: #444444;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 100;
+    top: 20%;
+    left: 0%;
+    //line-height: 30px;
 }
 
 .popup #settings-popup::after {
@@ -192,6 +193,10 @@ div.tool-name {
   border-style: solid;
   margin-top: -20px;
   border-color: transparent transparent #FFFFFF transparent;
+}
+
+.option {
+    height: 40px;
 }
 
 .switch {
