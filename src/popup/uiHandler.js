@@ -137,6 +137,26 @@ function createToolsList(toolsList){
             nodeText.style.backgroundColor = color;
         }
         
+        // If the web resource has tags, add more space for them
+        tags = toolsList[i]["tags"];
+        if(tags) {
+            nodeText.classList.add("tool-name-with-tags");
+            // Add container for tags
+            let nodeTagsContainer = document.createElement("div");
+            nodeTagsContainer.classList.add("tool-tags-container");
+            // Add a node for each tag
+            for(tagIdx=0; tagIdx<tags.length; tagIdx++) {
+                let nodeTag = document.createElement("div");
+                // Tag to upper case
+                nodeTag.textContent = tags[tagIdx].toUpperCase();
+                nodeTag.classList.add("tool-tag");
+                // Add transparency
+                nodeTag.style.backgroundColor = "rgba(256, 256, 256, 0.3)";
+                nodeTagsContainer.appendChild(nodeTag);
+                nodeText.insertAdjacentElement("beforeend", nodeTagsContainer);
+            }
+        }
+
         nodeImageContainer.appendChild(nodeImage);
         nodeHyperlink.appendChild(nodeImageContainer);
         nodeHyperlink.appendChild(nodeText);
