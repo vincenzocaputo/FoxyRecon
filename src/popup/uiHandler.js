@@ -14,6 +14,7 @@ loadToolsList(function(ts){
     createToolsList(tools);
 });
 
+
 /**
  * Show message in a popup
  * @param{message} message to show
@@ -57,6 +58,7 @@ function showAddonLogo() {
  * @param {indicator} indicator entered by the user
  */
 function showButtonsByType(type, indicator) {
+    document.getElementById("filter-container").style.display = "block";
     document.getElementById("popup-text").style.display = "none";
     document.getElementById("text-field").style.borderColor = "#6E6C69";
     document.getElementById("addon-logo").style.display = "none";
@@ -65,7 +67,9 @@ function showButtonsByType(type, indicator) {
     toolsListNodes.style.display = "block";
     let resNodes = toolsListNodes.children;
 
-    for (var i = 0; i < resNodes.length; i++) {
+    let tagsOptions = [];
+
+    for (i = 0; i < resNodes.length; i++) {
         if (tools[i]["types"].includes(type)) {            
             resNodes[i].style.display = "block";
             // Set tool description to div title
@@ -76,6 +80,15 @@ function showButtonsByType(type, indicator) {
             resNodes[i].url = url;
 
             resNodes[i].submitQuery = tools[i]["submitQuery"];
+            
+            let tagsList = tools[i]["tags"];
+            if (tagsList) {
+                for (j = 0; j < tagsList.length; j++) {
+                    if(!tagsOptions.includes(tagsList[j])) {
+                        tagsOptions.push(tagsList[j]);
+                    }
+                }
+            }
         } else {
             // If this tools does not support this indicator type, hide its button
             resNodes[i].style.display = "none";
@@ -89,6 +102,20 @@ function showButtonsByType(type, indicator) {
     } else {
         textFieldIcon.style.display = "none";
     }
+
+    // Create select menu options
+    createTagsOptionsList(tagsOptions);
+}
+
+function createTagsOptionsList(options) {
+    let tagsOptionsList = document.querySelector("#filter-container>select");
+    for (i = 0; i < options.length; i++) {
+        let option = document.createElement("optio");
+        option.text = options[i];
+        option.value = options[i];
+        tagsOptionsList.appendChild(option);
+    }
+    console.log(tagsOptionsList);
 }
 
 
@@ -97,7 +124,7 @@ function showButtonsByType(type, indicator) {
  * @param {toolsList} tools list
  */
 function createToolsList(toolsList){
-	var resultBox = document.getElementById("tools-list");
+    var resultBox = document.getElementById("tools-list");
 	for (i=0;i<toolsList.length;i++) {
         let tool = toolsList[i];
         let node = document.createElement('div');
