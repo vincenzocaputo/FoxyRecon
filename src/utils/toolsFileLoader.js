@@ -21,21 +21,9 @@ function readJSONFile(file, callback) {
  * @param {function} callbackFunc Callback function to call when the loading process completes
  */
 function loadToolsList(callbackFunc) {
-    var manifest = browser.runtime.getManifest();
-    newVersion = manifest.version;
-    console.log("New version: "+newVersion);
-
     var tools;
-    // Check if the addon cache is updated
-    if(localStorage.getItem('version')) {
-        installedVersion = localStorage.getItem('version');
-        console.log("Installed version: " + installedVersion);
-    } else {
-        // Assume that the version of the installed addon is older
-        installedVersion = 0;
-    }
     // Check if the list is already in the local storage
-    if(!localStorage.getItem('tools') || installedVersion != newVersion) {
+    if (!localStorage.getItem('tools')) {
         // Load the list from the JSON file
         readJSONFile("src/json/tools.json", function(text) {
             var data = JSON.parse(text);
@@ -44,8 +32,6 @@ function loadToolsList(callbackFunc) {
             console.log("tools loaded from json file");
             callbackFunc(tools);
         });
-        localStorage.setItem('version', newVersion);
-
     } else {
         // Load the tools list from the local storage
         tools = JSON.parse(localStorage.getItem('tools'));

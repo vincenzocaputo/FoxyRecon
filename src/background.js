@@ -1,3 +1,21 @@
+// Check if current version is installed
+let currentVersion = browser.runtime.getManifest().version;
+console.log("Current version: " + currentVersion);
+
+if (installedVersion = localStorage.getItem("version")) {
+    console.log("Installed version: " + installedVersion);
+} else {
+    // Assume that the installed version is obsolete
+    installedVersion = 0;
+}
+
+if (installedVersion != currentVersion) {
+    // If a new version was released, clean the local storage
+    localStorage.clear();
+    // Add current version to local storage
+    localStorage.setItem("version", currentVersion);
+}
+
 var tools;
 loadToolsList(function(ts) {
     tools=ts;

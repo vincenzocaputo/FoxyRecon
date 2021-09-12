@@ -49,45 +49,45 @@ function showAddonLogo() {
     // Restore text field border color
     document.getElementById("text-field").style.borderColor = "#6E6C69";
     document.getElementById("addon-logo").style.display = "block";
+    // Hide filter dropdown menu
+    document.getElementById("filter-container").style.display = "none";
 }
 
 
 /**
  * Show only the tools that are appropriate for the indicator
- * @param {type} indicator type (domain, ip, url, etc.)
  * @param {indicator} indicator entered by the user
+ * @param {type} indicator type (domain, ip, url, etc.)
+ * @param {tag} web resource tag (for filtering results)
  */
-function showButtonsByType(type, indicator) {
+function showButtonsByType(indicator, type, tag) {
     document.getElementById("filter-container").style.display = "block";
     document.getElementById("popup-text").style.display = "none";
     document.getElementById("text-field").style.borderColor = "#6E6C69";
     document.getElementById("addon-logo").style.display = "none";
     // This node contains the list of tools
-    let toolsListNodes = document.getElementById("tools-list");
+    const toolsListNodes = document.getElementById("tools-list");
     toolsListNodes.style.display = "block";
-    let resNodes = toolsListNodes.children;
+    const resNodes = toolsListNodes.children;
 
     let tagsOptions = [];
 
     for (i = 0; i < resNodes.length; i++) {
-        if (tools[i]["types"].includes(type)) {            
-            resNodes[i].style.display = "block";
-            // Set tool description to div title
-            resNodes[i].title = tools[i]["desc"];
-            // Replace the placholder with the input string
-            let url = tools[i]["url"][type];
-            url = cookURL(url, indicator);
-            resNodes[i].url = url;
-
-            resNodes[i].submitQuery = tools[i]["submitQuery"];
+        if (tools[i]["types"].includes(type)) { 
+            tagsOptions = tagsOptions.concat(tools[i]["tags"]);
             
-            let tagsList = tools[i]["tags"];
-            if (tagsList) {
-                for (j = 0; j < tagsList.length; j++) {
-                    if(!tagsOptions.includes(tagsList[j])) {
-                        tagsOptions.push(tagsList[j]);
-                    }
-                }
+            if (tag === "all" || (tools[i]["tags"] && tools[i]["tags"].includes(tag))) {
+                resNodes[i].style.display = "block";
+                // Set tool description to div title
+                resNodes[i].title = tools[i]["desc"];
+                // Replace the placholder with the input string
+                let url = tools[i]["url"][type];
+                url = cookURL(url, indicator);
+                resNodes[i].url = url;
+
+                resNodes[i].submitQuery = tools[i]["submitQuery"];
+            } else  {
+                resNodes[i].style.display = "none";
             }
         } else {
             // If this tools does not support this indicator type, hide its button
@@ -103,19 +103,41 @@ function showButtonsByType(type, indicator) {
         textFieldIcon.style.display = "none";
     }
 
-    // Create select menu options
-    createTagsOptionsList(tagsOptions);
+    createTagsOptionsList([...new Set(tagsOptions)]);
+
 }
 
-function createTagsOptionsList(options) {
-    let tagsOptionsList = document.querySelector("#filter-container>select");
-    for (i = 0; i < options.length; i++) {
-        let option = document.createElement("optio");
-        option.text = options[i];
-        option.value = options[i];
-        tagsOptionsList.appendChild(option);
+
+/**
+ * Create filter by tags dropdown menu options
+ * @param {tagsOptions} list of tags
+ */
+function createTagsOptionsList(tagsOptions) {
+    const tagsOptionsList = document.querySelectorAll("#filter-container>select option");
+    let options = [];
+    
+    for (i = 0; i < tagsOptionsList.length; i++) {
+        // Hide option if it is not in current options list
+        if (tagsOptionsList[i].value != "all" && !tagsOptions.includes(tagsOptionsList[i].value)) {
+            tagsOptionsList[i].style.display = "none";
+        }
     }
-    console.log(tagsOptionsList);
+
+    for (i = 0; i < tagsOptions.length; i++) {
+        // Check if option is already present
+        const opt = document.querySelector("#filter-container>select option[value="+tagsOptions[i]+"]");
+        if (opt) {
+            if (opt.style.display === "none") {
+                opt.style.display = "block";
+            }
+        } else if (tagsOptions[i]) {
+            // Create option
+            let option = document.createElement("option");
+            option.text = tagsOptions[i];
+            option.value = tagsOptions[i];
+            document.querySelector("#filter-container>select").appendChild(option);
+        }
+    }
 }
 
 
