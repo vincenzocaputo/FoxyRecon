@@ -40,10 +40,11 @@ textfieldTool.addEventListener("click", function() {
     document.getElementById("input-box").value = domain;
 
     // Show the appropriate tools for the input provided
-    showButtonsByType("domain", domain);
+    showButtonsByType(domain, "domain", "all");
     // Save the current indicator along with its type
     localStorage.setItem("indicator", domain);
     localStorage.setItem("type", "domain");
+    localStorage.setItem("tag", "all");
 });
 
 
