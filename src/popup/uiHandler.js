@@ -173,9 +173,9 @@ function createToolsList(toolsList){
         
         // If the name is too long, reduce the font size
         if(toolsList[i]["name"].length > 15 && toolsList[i]["name"].length < 20) {
-            nodeText.style.fontSize = "6vw";
+            nodeText.style.fontSize = "90%";
         } else if(toolsList[i]["name"].length > 19) {
-            nodeText.style.fontSize = "5vw";
+            nodeText.style.fontSize = "80%";
         }
         nodeText.classList.add("tool-name");
 

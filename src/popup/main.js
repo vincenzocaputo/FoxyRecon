@@ -98,11 +98,13 @@ document.querySelector("#filter-container>select").addEventListener("change", (e
 /**----------------------------------OPTION SETTINGS POP-UP----------------------------------------------**/
 
 function setCheckboxStatus(checkboxNode, optionName) {
-    const optionValue = localStorage.getItem(optionName);
+    let optionValue = localStorage.getItem(optionName);
     if(!optionValue) {
         // Default option: open always a new tab
+        // auto-submit enabled
         optionValue = "true";
     }
+    console.log((optionValue === "true"));
     checkboxNode.checked = (optionValue === "true");
     localStorage.setItem(optionName, optionValue);
 }
