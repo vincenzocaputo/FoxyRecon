@@ -58,6 +58,9 @@ inputField.addEventListener("keyup", (e) => {
     // If no input was provided, show the add-on logo
     if(inputString === "") {
         showAddonLogo();
+        localStorage.setItem("indicator", "");
+        localStorage.setItem("type", "");
+        localStorage.setItem("tag", "");
     } else {
         // Get indicator type
         const type = indicatorParser.getIndicatorType(inputString);
