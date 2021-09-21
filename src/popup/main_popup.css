@@ -14,7 +14,7 @@ body {
     height: 100%;
     overflow-y: scroll;
     scrollbar-color: #555555 #FF7700;
-    scrollbar-width: 20px;
+    scrollbar-width: thin;
 }
 
 
@@ -24,7 +24,7 @@ div.tool-entry {
     clear: left;
     border: 2px outset #596275;
     border-radius: 10px;
-    width: 280px;
+    width: -moz-available;
     height: 40px;
     margin-right: 5px;
     margin-bottom: 5px;
@@ -322,7 +322,9 @@ input:checked + .slider:before {
 
 
 #addon-logo {
-    width: 230px;
+    width: -moz-available;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 #addon-logo > img {
