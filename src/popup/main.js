@@ -12,13 +12,15 @@ if(!localStorage.getItem("indicator")) {
     inputField.focus();
 } else {
     // If there is a saved state, restore it
-    indicator = localStorage.getItem("indicator");
+    const indicator = localStorage.getItem("indicator");
     // Put the indicator in the text field
     inputField.value = indicator;
     // Restore the type of the string
-    type = localStorage.getItem("type");
+    const type = localStorage.getItem("type");
+    // Restore tag option
+    const optionValue = localStorage.getItem("tag");
     // Show the buttons related to the tools that support this indicator
-    showButtonsByType(type, indicator);
+    showButtonsByType(indicator, type, optionValue);
 }
 
 
@@ -32,16 +34,17 @@ if(!localStorage.getItem("indicator")) {
 var textfieldTool = document.querySelector("#text-field>img");
 textfieldTool.title = "Extract domain";
 textfieldTool.addEventListener("click", function() {
-    let inputString = document.getElementById("input-box").value;
-    let domain = indicatorParser.getDomain(inputString);
+    const inputString = document.getElementById("input-box").value;
+    const domain = indicatorParser.getDomain(inputString);
     
     document.getElementById("input-box").value = domain;
 
     // Show the appropriate tools for the input provided
-    showButtonsByType("domain", domain);
+    showButtonsByType(domain, "domain", "all");
     // Save the current indicator along with its type
     localStorage.setItem("indicator", domain);
     localStorage.setItem("type", "domain");
+    localStorage.setItem("tag", "all");
 });
 
 
@@ -51,13 +54,13 @@ textfieldTool.addEventListener("click", function() {
  *
  */
 inputField.addEventListener("keyup", (e) => {
-    let inputString = document.getElementById("input-box").value;
+    const inputString = document.getElementById("input-box").value;
     // If no input was provided, show the add-on logo
     if(inputString === "") {
         showAddonLogo();
     } else {
         // Get indicator type
-        let type = indicatorParser.getIndicatorType(inputString);
+        const type = indicatorParser.getIndicatorType(inputString);
         if(type === "invalid") {
             showAddonLogo();
             showMessagePopup("Please enter a valid indicator", MessageType.ERROR);
@@ -65,24 +68,43 @@ inputField.addEventListener("keyup", (e) => {
             showAddonLogo();
             showMessagePopup("The IP address is internal", MessageType.WARNING);
         } else {
+            // Get selected tag option
+            const selectNode = document.querySelector("#filter-container>select");
+            const optionValue = selectNode.options[selectNode.selectedIndex].value;
+
             // Show the appropriate tools for the input provided
-            showButtonsByType(type, inputString);
+            showButtonsByType(inputString, type, optionValue);
             // Save the current indicator along with its type
             localStorage.setItem("indicator", inputString);
             localStorage.setItem("type", type);
+            localStorage.setItem("tag", optionValue);
         }
     }
 });
 
 
+/**
+ *
+ * Handle tag selecting event
+ *
+ */
+document.querySelector("#filter-container>select").addEventListener("change", (e) => {
+    const inputString = document.getElementById("input-box").value;
+    const type = indicatorParser.getIndicatorType(inputString);
+    const optionValue = e.target.options[e.target.selectedIndex].value;
+    showButtonsByType(inputString, type, optionValue);
+});
+
 /**----------------------------------OPTION SETTINGS POP-UP----------------------------------------------**/
 
 function setCheckboxStatus(checkboxNode, optionName) {
-    optionValue = localStorage.getItem(optionName);
+    let optionValue = localStorage.getItem(optionName);
     if(!optionValue) {
         // Default option: open always a new tab
+        // auto-submit enabled
         optionValue = "true";
     }
+    console.log((optionValue === "true"));
     checkboxNode.checked = (optionValue === "true");
     localStorage.setItem(optionName, optionValue);
 }
@@ -91,7 +113,7 @@ function setCheckboxStatus(checkboxNode, optionName) {
  * Show or hide settings popup menu
  */
 document.getElementById("settings-button").addEventListener("click", function() {
-    settingsPopup = document.getElementById("settings-popup");
+    const settingsPopup = document.getElementById("settings-popup");
     if(!settingsPopup.style.display || settingsPopup.style.display == "none" ) {
         // Don't show pointer cursor on buttons
         document.querySelectorAll(".tool-entry").forEach(function(entry) {
@@ -116,12 +138,12 @@ document.getElementById("settings-button").addEventListener("click", function() 
  * Handle the clicking outside the settings popup area
  */
 document.addEventListener("click", function(evt) {
-    settingsPopup = document.getElementById("settings-popup");
-    settingsButton = document.getElementById("settings-button");
+    const settingsPopup = document.getElementById("settings-popup");
+    const settingsButton = document.getElementById("settings-button");
 
     if(settingsPopup.style.display == "block") {
-        buttonPos = settingsButton.getBoundingClientRect();
-        popupPos = settingsPopup.getBoundingClientRect();
+        const buttonPos = settingsButton.getBoundingClientRect();
+        const popupPos = settingsPopup.getBoundingClientRect();
         // Check if the user has clicked outside the popup
         if(((evt.pageX < popupPos.left || evt.pageX > popupPos.right) || 
             (evt.pageY < popupPos.top || evt.pageY > popupPos.bottom)) &&
@@ -138,7 +160,7 @@ document.addEventListener("click", function(evt) {
  * Handle open tab option checkbox change event
  */
 document.querySelector("#open-tab-opt input").addEventListener("change", function(evt) {
-    let linksNodes = document.getElementById("tools-list").children;
+    //let linksNodes = document.getElementById("tools-list").children;
     newtabOption = evt.target.checked;
     localStorage.setItem("settings.newtab", newtabOption);
 });
@@ -147,7 +169,7 @@ document.querySelector("#open-tab-opt input").addEventListener("change", functio
  * Handle auto-submit option checkbox change event
  */
 document.querySelector("#auto-submit-opt input").addEventListener("change", function(evt) {
-    let linksNodes = document.getElementById("tools-list").children;
+    //let linksNodes = document.getElementById("tools-list").children;
     autosubmitOption = evt.target.checked;
     localStorage.setItem("settings.autosubmit", autosubmitOption);
 });

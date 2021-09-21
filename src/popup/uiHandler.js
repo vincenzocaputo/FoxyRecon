@@ -14,6 +14,7 @@ loadToolsList(function(ts){
     createToolsList(tools);
 });
 
+
 /**
  * Show message in a popup
  * @param{message} message to show
@@ -48,34 +49,46 @@ function showAddonLogo() {
     // Restore text field border color
     document.getElementById("text-field").style.borderColor = "#6E6C69";
     document.getElementById("addon-logo").style.display = "block";
+    // Hide filter dropdown menu
+    document.getElementById("filter-container").style.display = "none";
 }
 
 
 /**
  * Show only the tools that are appropriate for the indicator
- * @param {type} indicator type (domain, ip, url, etc.)
  * @param {indicator} indicator entered by the user
+ * @param {type} indicator type (domain, ip, url, etc.)
+ * @param {tag} web resource tag (for filtering results)
  */
-function showButtonsByType(type, indicator) {
+function showButtonsByType(indicator, type, tag) {
+    document.getElementById("filter-container").style.display = "block";
     document.getElementById("popup-text").style.display = "none";
     document.getElementById("text-field").style.borderColor = "#6E6C69";
     document.getElementById("addon-logo").style.display = "none";
     // This node contains the list of tools
-    let toolsListNodes = document.getElementById("tools-list");
+    const toolsListNodes = document.getElementById("tools-list");
     toolsListNodes.style.display = "block";
-    let resNodes = toolsListNodes.children;
+    const resNodes = toolsListNodes.children;
 
-    for (var i = 0; i < resNodes.length; i++) {
-        if (tools[i]["types"].includes(type)) {            
-            resNodes[i].style.display = "block";
-            // Set tool description to div title
-            resNodes[i].title = tools[i]["desc"];
-            // Replace the placholder with the input string
-            let url = tools[i]["url"][type];
-            url = cookURL(url, indicator);
-            resNodes[i].url = url;
+    let tagsOptions = [];
 
-            resNodes[i].submitQuery = tools[i]["submitQuery"];
+    for (i = 0; i < resNodes.length; i++) {
+        if (tools[i]["types"].includes(type)) { 
+            tagsOptions = tagsOptions.concat(tools[i]["tags"]);
+            
+            if (tag === "all" || (tools[i]["tags"] && tools[i]["tags"].includes(tag))) {
+                resNodes[i].style.display = "block";
+                // Set tool description to div title
+                resNodes[i].title = tools[i]["desc"];
+                // Replace the placholder with the input string
+                let url = tools[i]["url"][type];
+                url = cookURL(url, indicator);
+                resNodes[i].url = url;
+
+                resNodes[i].submitQuery = tools[i]["submitQuery"];
+            } else  {
+                resNodes[i].style.display = "none";
+            }
         } else {
             // If this tools does not support this indicator type, hide its button
             resNodes[i].style.display = "none";
@@ -89,6 +102,42 @@ function showButtonsByType(type, indicator) {
     } else {
         textFieldIcon.style.display = "none";
     }
+
+    createTagsOptionsList([...new Set(tagsOptions)]);
+
+}
+
+
+/**
+ * Create filter by tags dropdown menu options
+ * @param {tagsOptions} list of tags
+ */
+function createTagsOptionsList(tagsOptions) {
+    const tagsOptionsList = document.querySelectorAll("#filter-container>select option");
+    let options = [];
+    
+    for (i = 0; i < tagsOptionsList.length; i++) {
+        // Hide option if it is not in current options list
+        if (tagsOptionsList[i].value != "all" && !tagsOptions.includes(tagsOptionsList[i].value)) {
+            tagsOptionsList[i].style.display = "none";
+        }
+    }
+
+    for (i = 0; i < tagsOptions.length; i++) {
+        // Check if option is already present
+        const opt = document.querySelector("#filter-container>select option[value="+tagsOptions[i]+"]");
+        if (opt) {
+            if (opt.style.display === "none") {
+                opt.style.display = "block";
+            }
+        } else if (tagsOptions[i]) {
+            // Create option
+            let option = document.createElement("option");
+            option.text = tagsOptions[i];
+            option.value = tagsOptions[i];
+            document.querySelector("#filter-container>select").appendChild(option);
+        }
+    }
 }
 
 
@@ -97,7 +146,7 @@ function showButtonsByType(type, indicator) {
  * @param {toolsList} tools list
  */
 function createToolsList(toolsList){
-	var resultBox = document.getElementById("tools-list");
+    var resultBox = document.getElementById("tools-list");
 	for (i=0;i<toolsList.length;i++) {
         let tool = toolsList[i];
         let node = document.createElement('div');
@@ -124,9 +173,9 @@ function createToolsList(toolsList){
         
         // If the name is too long, reduce the font size
         if(toolsList[i]["name"].length > 15 && toolsList[i]["name"].length < 20) {
-            nodeText.style.fontSize = "6vw";
+            nodeText.style.fontSize = "90%";
         } else if(toolsList[i]["name"].length > 19) {
-            nodeText.style.fontSize = "5vw";
+            nodeText.style.fontSize = "80%";
         }
         nodeText.classList.add("tool-name");
 
@@ -137,6 +186,26 @@ function createToolsList(toolsList){
             nodeText.style.backgroundColor = color;
         }
         
+        // If the web resource has tags, add more space for them
+        tags = toolsList[i]["tags"];
+        if(tags) {
+            nodeText.classList.add("tool-name-with-tags");
+            // Add container for tags
+            let nodeTagsContainer = document.createElement("div");
+            nodeTagsContainer.classList.add("tool-tags-container");
+            // Add a node for each tag
+            for(tagIdx=0; tagIdx<tags.length; tagIdx++) {
+                let nodeTag = document.createElement("div");
+                // Tag to upper case
+                nodeTag.textContent = tags[tagIdx].toUpperCase();
+                nodeTag.classList.add("tool-tag");
+                // Add transparency
+                nodeTag.style.backgroundColor = "rgba(256, 256, 256, 0.3)";
+                nodeTagsContainer.appendChild(nodeTag);
+                nodeText.insertAdjacentElement("beforeend", nodeTagsContainer);
+            }
+        }
+
         nodeImageContainer.appendChild(nodeImage);
         nodeHyperlink.appendChild(nodeImageContainer);
         nodeHyperlink.appendChild(nodeText);
