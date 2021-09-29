@@ -83,4 +83,4 @@ The following web resources are included in FoxyRecon:
 |[ZoomEye](https://www.zoomeye.org/) | :heavy_check_mark: | :heavy_check_mark: | - | - | - |
 |[Intezer Analyze](https://analyze.intezer.com) :new:| - | - | - | :heavy_check_mark: | - |
 
-:red_circle: These web tools requires some user interactions, such as entering a query and clicking a button to submit it. To perform these actions faster, FoxyRecon will automatically fill input fields on this web pages, with the indicator you are looking for.
+:red_circle: These web tools require some user interactions, such as entering a query and clicking a button to submit it. To perform these actions faster, FoxyRecon will automatically fill input fields on this web pages, with the indicator you are looking for.
