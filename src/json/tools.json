@@ -361,8 +361,8 @@
 		{
 			"name": "Talos Intelligence",
 			"url": {
-                "domain": "https://talosintelligence.com/rep_center/lookup?search=%s",
-                "ip": "https://talosintelligence.com/rep_center/lookup?search=%s"
+                "domain": "https://talosintelligence.com/reputation_center/lookup?search=%s",
+                "ip": "https://talosintelligence.com/reputation_center/lookup?search=%s"
             },
             "desc": "Cisco Talos Intelligence Group IP, domain rep lookup",
 			"icon": "talos.png",
