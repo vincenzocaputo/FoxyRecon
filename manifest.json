@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "FoxyRecon",
-	"version": "0.5.0",
+	"version": "0.5.1",
 
 	"description": "A Firefox add-on for OSINT investigations",
 
@@ -40,7 +40,9 @@
                 "https://dnsdumpster.com/", 
                 "https://haveibeenpwned.com/", 
                 "https://centralops.net/co/*", 
-                "https://www.urlvoid.com/*"
+                "https://www.urlvoid.com/*",
+                "https://urlscan.io/",
+                "https://www.virustotal.com/gui/home/url/"
             ],
             "js": ["src/content_scripts/autofill.js"]
         }

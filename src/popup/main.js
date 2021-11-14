@@ -58,6 +58,9 @@ inputField.addEventListener("keyup", (e) => {
     // If no input was provided, show the add-on logo
     if(inputString === "") {
         showAddonLogo();
+        localStorage.setItem("indicator", "");
+        localStorage.setItem("type", "");
+        localStorage.setItem("tag", "");
     } else {
         // Get indicator type
         const type = indicatorParser.getIndicatorType(inputString);
@@ -99,10 +102,15 @@ document.querySelector("#filter-container>select").addEventListener("change", (e
 
 function setCheckboxStatus(checkboxNode, optionName) {
     let optionValue = localStorage.getItem(optionName);
+    console.log(optionName);
     if(!optionValue) {
         // Default option: open always a new tab
-        // auto-submit enabled
-        optionValue = "true";
+        if(optionName === "settings.newtab") {
+            optionValue = "true";
+        } else if(optionName === "settings.autosubmit") {
+            // auto-submit disabled
+            optionValue = "false";
+        }
     }
     console.log((optionValue === "true"));
     checkboxNode.checked = (optionValue === "true");

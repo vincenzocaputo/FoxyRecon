@@ -361,8 +361,8 @@
 		{
 			"name": "Talos Intelligence",
 			"url": {
-                "domain": "https://talosintelligence.com/rep_center/lookup?search=%s",
-                "ip": "https://talosintelligence.com/rep_center/lookup?search=%s"
+                "domain": "https://talosintelligence.com/reputation_center/lookup?search=%s",
+                "ip": "https://talosintelligence.com/reputation_center/lookup?search=%s"
             },
             "desc": "Cisco Talos Intelligence Group IP, domain rep lookup",
 			"icon": "talos.png",
@@ -429,6 +429,42 @@
 			"types": ["domain","ip","url"],
             "tags": ["sandbox", "screenshot"]
 		},
+		{
+			"name": "urlscan Public Scan",
+			"url": {
+                "url": "https://urlscan.io/"
+            },
+            "submitQuery": "vispublic$#submitbtn",
+            "desc": "A sandbox for the web",
+			"icon": "urlscan.png",
+            "color": "#18BC9C",
+			"types": ["url"],
+            "tags": ["sandbox"]
+		},
+		{
+			"name": "urlscan Unlisted Scan",
+			"url": {
+                "url": "https://urlscan.io/"
+            },
+            "submitQuery": "visunlisted$#submitbtn",
+            "desc": "A sandbox for the web",
+			"icon": "urlscan.png",
+            "color": "#3498DB",
+			"types": ["url"],
+            "tags": ["sandbox"]
+		},
+		{
+			"name": "urlscan Private Scan",
+			"url": {
+                "url": "https://urlscan.io/"
+            },
+            "submitQuery": "visprivate$#submitbtn",
+            "desc": "A sandbox for the web",
+			"icon": "urlscan.png",
+            "color": "#F39C12",
+			"types": ["url"],
+            "tags": ["sandbox"]
+		},
         {
 			"name": "URLVoid",
 			"url": {
@@ -488,7 +524,19 @@
 			"types": ["domain","ip","hash"],
             "tags": ["sandbox", "rep"]
 		},
-		{
+        {
+            "name": "VirusTotal URL scan",
+            "url": {
+                "url": "https://www.virustotal.com/gui/home/url/"
+            },
+            "desc": "Analyze suspicious URLs to detect types of malware",
+            "icon": "virustotal.png",
+            "color": "#394EFF",
+            "submitQuery": "VT",
+            "types": ["url"],
+            "tags": ["sandbox", "rep"]
+        },
+        {
 			"name": "ZoomEye",
 			"url": {
                 "domain": "https://www.zoomeye.org/searchResult?q=%s",
