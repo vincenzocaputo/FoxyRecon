@@ -40,7 +40,9 @@
                 "https://dnsdumpster.com/", 
                 "https://haveibeenpwned.com/", 
                 "https://centralops.net/co/*", 
-                "https://www.urlvoid.com/*"
+                "https://www.urlvoid.com/*",
+                "https://urlscan.io/",
+                "https://www.virustotal.com/gui/home/url/"
             ],
             "js": ["src/content_scripts/autofill.js"]
         }
