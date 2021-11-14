@@ -39,7 +39,7 @@ The following web resources are included in FoxyRecon:
 |Tool|Domain|IP|URL|Hash|Email|
 |----|:-:|:-:|:-:|:-:|:-:|
 |[URLVoid](https://urlvoid.com/)|:heavy_check_mark:| - | - | - | - |
-|[Urlscan](https://urlscan.io/)|:heavy_check_mark:| :heavy_check_mark: | - | - | - |
+|[Urlscan](https://urlscan.io/)|:heavy_check_mark:| :heavy_check_mark: | :heavy_check_mark: | - | - |
 |[Urlscan Liveshot](https://urlscan.io/)| - | :heavy_check_mark: | :heavy_check_mark: | - | - |
 |[Hurricane Electric BGP Toolkit](https://bgp.he.net/)|:heavy_check_mark:|:heavy_check_mark:| - | - | - |
 |[Domain Tools](https://whois.domaintools.com/)|:heavy_check_mark:| - | - | - | - |
@@ -47,7 +47,7 @@ The following web resources are included in FoxyRecon:
 |[AbuseIPDB](https://www.abuseipdb.com/)|:heavy_check_mark:|:heavy_check_mark:| - | - | - |
 |[Talos Intelligence](https://talosintelligence.com/)|:heavy_check_mark:|:heavy_check_mark:| - | - | - |
 |[crt.sh](https://crt.sh/)|:heavy_check_mark:| - | - | - | - |
-|[VirusTotal](https://virustotal.com/)|:heavy_check_mark:|:heavy_check_mark:| - |:heavy_check_mark:| - |
+|[VirusTotal](https://virustotal.com/)|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark: :red_circle:|:heavy_check_mark:| - |
 |[hashdd](https://www.hashdd.com/)| - | - | - |:heavy_check_mark:| - |
 |[MALWARE bazaar](https://bazaar.abuse.ch/)| - | - | - |:heavy_check_mark:| - |
 |[THREATfox](https://threatfox.abuse.ch/)|:heavy_check_mark:|:heavy_check_mark:| - |:heavy_check_mark:| - |
@@ -81,6 +81,12 @@ The following web resources are included in FoxyRecon:
 |[Spamhaus](https://check.spamhaus.org/) | :heavy_check_mark: | :heavy_check_mark: | - | - | - |
 |[JoeSandbox](https://www.joesandbox.com) | - | - | - | :heavy_check_mark: | - |
 |[ZoomEye](https://www.zoomeye.org/) | :heavy_check_mark: | :heavy_check_mark: | - | - | - |
-|[Intezer Analyze](https://analyze.intezer.com) :new:| - | - | - | :heavy_check_mark: | - |
+|[Intezer Analyze](https://analyze.intezer.com)| - | - | - | :heavy_check_mark: | - |
+|[Urlscan Public Scan](https://urlscan.io) :red_circle: :new:| - | - | :heavy_check_mark: | - | - |
+|[Urlscan Unlisted Scan](https://urlscan.io) :red_circle: :new:| - | - | :heavy_check_mark: | - | - |
+|[Urlscan Private Scan](https://urlscan.io) :red_circle: :new:| - | - | :heavy_check_mark: | - | - |
 
 :red_circle: These web tools require some user interactions, such as entering a query and clicking a button to submit it. To perform these actions faster, FoxyRecon will automatically fill input fields on this web pages, with the indicator you are looking for.
+
+## Disclaimer
+Data submitted using this add-on will be sent to external web resources that are not under control of FoxyRecon. For this reason the data submitted will be treated in accordance with the terms of service of the several web resources chosen for analysis. Please, be aware of the tools and resources you are using and do not submit any personal information.
