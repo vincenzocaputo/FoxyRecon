@@ -76,6 +76,7 @@
                 "ip": "https://centralops.net/co/domaindossier.aspx",
                 "email": "https://centralops.net/co/emaildossier.aspx"
             },
+            "submitQuery": "#go",
             "desc": "Email Dossier: investigate email addresses",
             "icon": "centralops.png",
             "color": "#005D9B",
@@ -434,7 +435,7 @@
 			"url": {
                 "url": "https://urlscan.io/"
             },
-            "submitQuery": "vispublic$#submitbtn",
+            "submitQuery": "vispublic",
             "desc": "A sandbox for the web",
 			"icon": "urlscan.png",
             "color": "#18BC9C",
@@ -446,7 +447,7 @@
 			"url": {
                 "url": "https://urlscan.io/"
             },
-            "submitQuery": "visunlisted$#submitbtn",
+            "submitQuery": "visunlisted",
             "desc": "A sandbox for the web",
 			"icon": "urlscan.png",
             "color": "#3498DB",
@@ -458,7 +459,7 @@
 			"url": {
                 "url": "https://urlscan.io/"
             },
-            "submitQuery": "visprivate$#submitbtn",
+            "submitQuery": "visprivate",
             "desc": "A sandbox for the web",
 			"icon": "urlscan.png",
             "color": "#F39C12",

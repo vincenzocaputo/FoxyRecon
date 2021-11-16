@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.2] - 2021-11-16
+### Added
+- Auto-submit feature for CentralOps resource (domain whois, network whois, dns)
+
+### Changed
+- Removed auto-submit feature for active URL scan with urlscan.io (scans fails because of CAPTCHA errors)
+
+### Fixed
+- Urlscan visibility settings even without auto-submit feature enabled
+
 ## [0.5.1] - 2021-11-14
 ### Added
 - Urlscan active URL scan with auto-submit feature. Three options are available, one for each level of scan visibility provided for by urlscan.io (public, unlisted and private)
