@@ -82,9 +82,9 @@ The following web resources are included in FoxyRecon:
 |[JoeSandbox](https://www.joesandbox.com) | - | - | - | :heavy_check_mark: | - |
 |[ZoomEye](https://www.zoomeye.org/) | :heavy_check_mark: | :heavy_check_mark: | - | - | - |
 |[Intezer Analyze](https://analyze.intezer.com)| - | - | - | :heavy_check_mark: | - |
-|[Urlscan Public Scan](https://urlscan.io) :red_circle: :new:| - | - | :heavy_check_mark: | - | - |
-|[Urlscan Unlisted Scan](https://urlscan.io) :red_circle: :new:| - | - | :heavy_check_mark: | - | - |
-|[Urlscan Private Scan](https://urlscan.io) :red_circle: :new:| - | - | :heavy_check_mark: | - | - |
+|[Urlscan Public Scan](https://urlscan.io) :new:| - | - | :heavy_check_mark: | - | - |
+|[Urlscan Unlisted Scan](https://urlscan.io) :new:| - | - | :heavy_check_mark: | - | - |
+|[Urlscan Private Scan](https://urlscan.io) :new:| - | - | :heavy_check_mark: | - | - |
 
 :red_circle: These web tools require some user interactions, such as entering a query and clicking a button to submit it. To perform these actions faster, FoxyRecon will automatically fill input fields on this web pages, with the indicator you are looking for.
 
