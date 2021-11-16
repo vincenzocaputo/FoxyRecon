@@ -10,37 +10,46 @@ browser.runtime.sendMessage({
     // Get the query to find submit button
     query = resp.query;
 
+    // Check if auto-submit is enabled
+    submit = resp.submit;
+
     let current_url = window.location.href;
     if(current_url.includes("urlscan")) {
         // Get input field
         inputNode = document.getElementById("url");
         inputNode.value = indicator;
-        if(query) {
-            //Select scan type
-            document.getElementById(query.split('$')[0]).click()
-
-            //Click submit button
-            console.log(query.split('$')[1]);
-            document.querySelector(query.split('$')[1]).click()
-        }
+        document.getElementById(query).click()
     } else if(current_url.includes("virustotal")) {
         window.addEventListener('load', function () {
             // Get input field
             inputNode = document.querySelector('home-view').shadowRoot.querySelector('vt-ui-text-input').shadowRoot.querySelector("#input");
+            // "touch" the input field
+            inputNode.dispatchEvent(new Event('input', {
+                bubbles: true,
+                cancelable: true,
+            }));
             // Fill
             inputNode.value = indicator;
-            if(query && query === "VT") {
-                // "touch" the input field
-                inputNode.dispatchEvent(new Event('input', {
-                    bubbles: true,
-                    cancelable: true,
-                }));
+            if(submit === "true" && query === "VT") {
                 // after 100ms press "enter"
                 setTimeout(() => {
                     document.querySelector('home-view').shadowRoot.querySelector("vt-ui-text-input").dispatchEvent(new Event("enter-pressed"));
                 }, 100);
             }
         })
+    } else if(current_url.includes("centralops")) {
+        // Fill the input field
+        document.getElementById("addr").value = indicator;
+
+        // Select checkboxes
+        document.getElementById("dom_whois").checked = true;
+        document.getElementById("net_whois").checked = true;
+        document.getElementById("dom_dns").checked = true;
+
+        if(submit === "true") {
+            document.querySelector(query).click();
+        }
+
     } else {
         // Get only text or email input nodes
         for(i=0; i<inputNodes.length; i++){
@@ -49,7 +58,7 @@ browser.runtime.sendMessage({
                 inputNodes[i].value = indicator;
             }
         }
-        if(query) {
+        if(submit === "true") {
             document.querySelector(query).click();
         }
     }

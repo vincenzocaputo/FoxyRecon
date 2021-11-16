@@ -78,14 +78,15 @@ function updateToolsMenu(toolsList, indicator, type) {
  */
 browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if(request.id == 1) {
+        query = localStorage.getItem("submit-btn-query");
         // Send the query only if auto-submit option is enabled
         if(localStorage.getItem("settings.autosubmit") === "true") {
             // Send the query to find submit button
-            query = localStorage.getItem("submit-btn-query");
+            submit = "true";
         } else {
-            query = ""
+            submit = "false";
         }
-        sendResponse({msg: localStorage.getItem("indicator"), query: query});
+        sendResponse({msg: localStorage.getItem("indicator"), query: query, submit: submit});
         // Consume the request (to avoid clicking the button more times for the same request)
         localStorage.setItem("submit-btn-query","");
     } else {
