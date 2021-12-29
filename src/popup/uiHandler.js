@@ -95,13 +95,6 @@ function showButtonsByType(indicator, type, tag) {
         }
     }
 
-    // If the indicator is an URL or email, show tool icon inside text field
-    textFieldIcon = document.querySelector("#text-field>img");
-    if(type === "url" || type === "email") {
-        textFieldIcon.style.display = "block";
-    } else {
-        textFieldIcon.style.display = "none";
-    }
 
     createTagsOptionsList([...new Set(tagsOptions)]);
 

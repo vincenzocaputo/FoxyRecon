@@ -55,20 +55,25 @@ textfieldTool.addEventListener("click", function() {
  */
 inputField.addEventListener("keyup", (e) => {
     const inputString = document.getElementById("input-box").value;
+    const textFieldIcon = document.querySelector("#text-field>img");
     // If no input was provided, show the add-on logo
     if(inputString === "") {
         showAddonLogo();
         localStorage.setItem("indicator", "");
         localStorage.setItem("type", "");
         localStorage.setItem("tag", "");
+
+        textFieldIcon.style.display = "none";
     } else {
         // Get indicator type
         const type = indicatorParser.getIndicatorType(inputString);
         if(type === "invalid") {
             showAddonLogo();
+            textFieldIcon.style.display = "none";
             showMessagePopup("Please enter a valid indicator", MessageType.ERROR);
         } else if(type === "internal") {
             showAddonLogo();
+            textFieldIcon.style.display = "none";
             showMessagePopup("The IP address is internal", MessageType.WARNING);
         } else {
             // Get selected tag option
@@ -81,6 +86,13 @@ inputField.addEventListener("keyup", (e) => {
             localStorage.setItem("indicator", inputString);
             localStorage.setItem("type", type);
             localStorage.setItem("tag", optionValue);
+
+            // If the indicator is an URL or email, show tool icon inside text field
+            if(type === "url" || type === "email") {
+                textFieldIcon.style.display = "block";
+            } else {
+                textFieldIcon.style.display = "none";
+            }
         }
     }
 });
