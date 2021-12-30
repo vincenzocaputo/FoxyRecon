@@ -62,8 +62,13 @@ function updateToolsMenu(toolsList, indicator, type) {
             browser.contextMenus.update(i.toString(),{
                 visible: true,
                 onclick: function(){
+                    
                     // Replace the placeholder with the selected text
                     let url = cookURL(tool["url"][type], indicator); 
+                    // Save the indicator in the local storage
+                    localStorage.setItem("type", type);
+                    localStorage.setItem("indicator", indicator);
+                    // Create the new tab
                     browser.tabs.create({
                         url: url,
                     });
@@ -90,11 +95,6 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         // Consume the request (to avoid clicking the button more times for the same request)
         localStorage.setItem("submit-btn-query","");
     } else {
-        if(request.type != "invalid"){
-            // update the local storage only if a valid indicator was selected
-            localStorage.setItem("type", request.type);
-            localStorage.setItem("indicator",request.indicator);
-        }
         updateToolsMenu(tools, request.indicator, request.type);
     }
 })

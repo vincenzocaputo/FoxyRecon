@@ -35,6 +35,9 @@ function showMessagePopup(message, messageType) {
     } else if(messageType == MessageType.WARNING) {
         popupText.classList.add(classes[MessageType.WARNING]);
         document.getElementById("text-field").style.borderColor = "#FFDD00";
+    } else if(messageType == MessageType.INFO) {
+        popupText.classList.add(classes[MessageType.INFO]);
+        document.getElementById("text-field").style.borderColor = "#42ADF5";
     }
     popupText.style.display = "block";
 }
@@ -48,9 +51,14 @@ function showAddonLogo() {
     document.getElementById("popup-text").style.display = "none";
     // Restore text field border color
     document.getElementById("text-field").style.borderColor = "#6E6C69";
+    // Restore placeholder text of the input field
+    document.getElementById("input-box").placeholder = "Enter your indicator";
     document.getElementById("addon-logo").style.display = "block";
     // Hide filter dropdown menu
     document.getElementById("filter-container").style.display = "none";
+    
+    document.getElementById("hunt-res-list").style.display = "none";
+    document.querySelectorAll(".hunt-res-entry").forEach(e => e.remove());
 }
 
 
@@ -65,17 +73,22 @@ function showButtonsByType(indicator, type, tag) {
     document.getElementById("popup-text").style.display = "none";
     document.getElementById("text-field").style.borderColor = "#6E6C69";
     document.getElementById("addon-logo").style.display = "none";
+    document.getElementById("hunt-res-list").style.display = "none";
+    document.querySelectorAll(".hunt-res-entry").forEach(e => e.remove());
+    
     // This node contains the list of tools
     const toolsListNodes = document.getElementById("tools-list");
     toolsListNodes.style.display = "block";
     const resNodes = toolsListNodes.children;
 
+    if(!tag) {
+        // If no tag has been provided, by default set it to "all"
+        tag = "all";
+    }
     let tagsOptions = [];
-
     for (i = 0; i < resNodes.length; i++) {
         if (tools[i]["types"].includes(type)) { 
             tagsOptions = tagsOptions.concat(tools[i]["tags"]);
-            
             if (tag === "all" || (tools[i]["tags"] && tools[i]["tags"].includes(tag))) {
                 resNodes[i].style.display = "block";
                 // Set tool description to div title
@@ -234,4 +247,102 @@ function createToolsList(toolsList){
         });
         document.getElementById("tools-list").appendChild(node);
     }
+}
+
+/**
+ * Create the indicator list inside the popup
+ * @param {indicatorsList} indicator list
+ */
+function createIndicatorsList(indicatorsList){
+    document.getElementById("filter-container").style.display = "none";
+    document.getElementById("popup-text").style.display = "none";
+    document.getElementById("text-field").style.borderColor = "#6E6C69";
+    document.getElementById("addon-logo").style.display = "none";
+    document.getElementById("hunt-icon").style.display = "none";
+
+    let indicatorsListNode = document.getElementById("hunt-res-list");
+    for (i=0; i<indicatorsList.length; i++) {
+        let node = document.createElement('div');
+        
+        node.classList.add("hunt-res-entry");
+        
+        // This node will contain the resource's icon
+        let nodeImageContainer = document.createElement("div");
+        nodeImageContainer.classList.add("tool-icon");
+   
+        let nodeImage = document.createElement("img");
+
+
+        // This node will contain the web resource's name
+        let nodeText = document.createElement("div");
+
+        nodeText.textContent = indicatorsList[i]['value'];
+        // If the name is too long, reduce the font size
+        if(indicatorsList[i]['value'].length > 15 && indicatorsList[i]['value'].length < 20) {
+            nodeText.style.fontSize = "90%";
+        } else if (indicatorsList[i]['value'].length > 19) {
+            text = indicatorsList[i]['value'].substring(0, 19);
+            nodeText.textContent = text + "...";
+        } else if(indicatorsList[i]['value'].length > 19) {
+            nodeText.style.fontSize = "80%";
+        }
+        nodeText.classList.add("tool-name");
+
+        // Set button colors
+        let color;
+        const type = indicatorsList[i]['type'];
+        if(type === 'domain') {
+            nodeImage.setAttribute("src", toolsIcoBasePath + "domain_icon.png");
+            color = "#BB0000";
+        } else if(type === 'ip') {
+            nodeImage.setAttribute("src", toolsIcoBasePath + "ip_icon.png");
+            color = "#00BB00";
+        } else if (type === 'url') {
+            nodeImage.setAttribute("src", toolsIcoBasePath + "url_icon.png");
+            color = "#FF4D00";
+        } else if (type === 'hash') {
+            nodeImage.setAttribute("src", toolsIcoBasePath + "hash_icon.png");
+            color = "#00FFCC";
+        } else if (type === 'email') {
+            nodeImage.setAttribute("src", toolsIcoBasePath + "email_icon.png");
+            color = "#001EFF";
+        }
+        node.style.backgroundColor = nodeText.style.backgroundColor = color;
+        // If the web resource has tags, add more space for them
+        nodeText.classList.add("tool-name-with-tags");
+        // Add container for tags
+        let nodeTagsContainer = document.createElement("div");
+        nodeTagsContainer.classList.add("tool-tags-container");
+        // Add a node for each tag
+        let nodeTag = document.createElement("div");
+        // Tag to upper case
+        nodeTag.textContent = type.toUpperCase();
+        nodeTag.classList.add("tool-tag");
+        // Add transparency
+        nodeTag.style.backgroundColor = "rgba(256, 256, 256, 0.3)";
+        nodeTagsContainer.appendChild(nodeTag);
+        nodeText.insertAdjacentElement("beforeend", nodeTagsContainer);
+
+        node.indicator = indicatorsList[i]['value'];
+        node.type = indicatorsList[i]['type'];
+
+        nodeImageContainer.appendChild(nodeImage);
+        node.appendChild(nodeImageContainer);
+        node.appendChild(nodeText);
+
+        indicatorsListNode.appendChild(node);
+        indicatorsListNode.style.display = "block";
+        node.addEventListener("mouseover", function() {
+            browser.tabs.query({active:true}).then(tabs => {
+                let activeTab = tabs[0].id;
+                browser.tabs.sendMessage(activeTab, {'cmd':'find',indicator:node.indicator});
+            })
+        });
+        // Set click event function
+        node.addEventListener("click", function() {
+            document.getElementById("input-box").value = node.indicator;
+            showButtonsByType(node.indicator, node.type); 
+        });
+    }
+
 }

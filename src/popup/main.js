@@ -7,18 +7,22 @@ var inputField = document.getElementById("input-box");
 
 indicatorParser = new IndicatorParser();
 
+// Remove badge number
+browser.browserAction.setBadgeText({text: ""});
+
 // Check if the input string is in local storage
-if(!localStorage.getItem("indicator")) {
+const indicator = localStorage.getItem("indicator");
+if(!indicator || indicator === "undefined") {
     inputField.focus();
 } else {
-    // If there is a saved state, restore it
-    const indicator = localStorage.getItem("indicator");
     // Put the indicator in the text field
     inputField.value = indicator;
     // Restore the type of the string
     const type = localStorage.getItem("type");
     // Restore tag option
     const optionValue = localStorage.getItem("tag");
+    // Hide Hunt! icon
+    document.getElementById("hunt-icon").style.display = "none";
     // Show the buttons related to the tools that support this indicator
     showButtonsByType(indicator, type, optionValue);
 }
@@ -27,11 +31,47 @@ if(!localStorage.getItem("indicator")) {
 /**--------------------------------------INPUT TEXT FIELD--------------------------------------**/
 
 /**
+ * Handle the clicking on Hunt! icon inside the text field
+ *
+ */
+var textfieldHunt = document.querySelector("#hunt-icon");
+textfieldHunt.title = "Hunt!";
+textfieldHunt.addEventListener("click", function() {
+    // Get the id of the current active tab
+    browser.tabs.query({active:true}).then(tabs => {
+        let activeTab = tabs[0].id;
+        // Send a message to the content script
+        browser.tabs.sendMessage(activeTab, "hunt");
+        let token = 1;
+        browser.runtime.onMessage.addListener(function(message) {
+            if(token) {
+                // No indicators found. Show a message
+                if(message['indicators'] == "[]") {
+                    showMessagePopup("No indicators found in this page", MessageType.INFO);
+                } else {
+                    // Show a different placeholder text in the text input field
+                    document.getElementById("input-box").placeholder = "Select your indicator";
+                    const indicatorsList = JSON.parse(message['indicators']);
+                    createIndicatorsList(indicatorsList);
+                    browser.browserAction.setBadgeText({text: indicatorsList.length.toString()});
+                }
+            }
+            // Consume token
+            token = 0;
+        })
+    }, 
+    error => {
+        console.error("Error: "+error)
+    });
+});
+
+
+/**
  * 
  * Handle the clicking on tool icon inside the text field
  *
  */
-var textfieldTool = document.querySelector("#text-field>img");
+var textfieldTool = document.querySelector("#domextr-icon");
 textfieldTool.title = "Extract domain";
 textfieldTool.addEventListener("click", function() {
     const inputString = document.getElementById("input-box").value;
@@ -45,6 +85,9 @@ textfieldTool.addEventListener("click", function() {
     localStorage.setItem("indicator", domain);
     localStorage.setItem("type", "domain");
     localStorage.setItem("tag", "all");
+
+    // Hide the icon
+    textfieldTool.style.display = "none";
 });
 
 
@@ -55,7 +98,6 @@ textfieldTool.addEventListener("click", function() {
  */
 inputField.addEventListener("keyup", (e) => {
     const inputString = document.getElementById("input-box").value;
-    const textFieldIcon = document.querySelector("#text-field>img");
     // If no input was provided, show the add-on logo
     if(inputString === "") {
         showAddonLogo();
@@ -63,17 +105,19 @@ inputField.addEventListener("keyup", (e) => {
         localStorage.setItem("type", "");
         localStorage.setItem("tag", "");
 
-        textFieldIcon.style.display = "none";
+        textfieldHunt.style.display = "block";        
+        textfieldTool.style.display = "none";
     } else {
+        textfieldHunt.style.display = "none";
         // Get indicator type
         const type = indicatorParser.getIndicatorType(inputString);
         if(type === "invalid") {
             showAddonLogo();
-            textFieldIcon.style.display = "none";
+            textfieldTool.style.display = "none";
             showMessagePopup("Please enter a valid indicator", MessageType.ERROR);
         } else if(type === "internal") {
             showAddonLogo();
-            textFieldIcon.style.display = "none";
+            textfieldTool.style.display = "none";
             showMessagePopup("The IP address is internal", MessageType.WARNING);
         } else {
             // Get selected tag option
@@ -89,9 +133,9 @@ inputField.addEventListener("keyup", (e) => {
 
             // If the indicator is an URL or email, show tool icon inside text field
             if(type === "url" || type === "email") {
-                textFieldIcon.style.display = "block";
+                textfieldTool.style.display = "block";
             } else {
-                textFieldIcon.style.display = "none";
+                textfieldTool.style.display = "none";
             }
         }
     }
