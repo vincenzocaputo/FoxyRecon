@@ -378,7 +378,7 @@
                 "domain": "https://threatfox.abuse.ch/browse.php?search=ioc%3A%s",
                 "ip": "https://threatfox.abuse.ch/browse.php?search=ioc%3A%s"
             },
-            "desc": "Indicators of Comprimes sharing",
+            "desc": "Indicators of Compromises sharing",
             "icon": "abuse.png",
             "color": "#000000",
             "types": ["hash","domain","ip"]

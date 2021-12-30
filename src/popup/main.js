@@ -7,18 +7,24 @@ var inputField = document.getElementById("input-box");
 
 indicatorParser = new IndicatorParser();
 
+// Remove badge number
+browser.browserAction.setBadgeText({text: ""});
+
 // Check if the input string is in local storage
-if(!localStorage.getItem("indicator")) {
+const indicator = localStorage.getItem("indicator");
+if(!indicator || indicator === "undefined") {
     inputField.focus();
 } else {
-    // If there is a saved state, restore it
-    const indicator = localStorage.getItem("indicator");
     // Put the indicator in the text field
     inputField.value = indicator;
     // Restore the type of the string
     const type = localStorage.getItem("type");
     // Restore tag option
     const optionValue = localStorage.getItem("tag");
+    // Hide Hunt! icon
+    document.getElementById("hunt-icon").style.display = "none";
+    // Show the bin icon
+    document.getElementById("bin-icon").style.display = "block";
     // Show the buttons related to the tools that support this indicator
     showButtonsByType(indicator, type, optionValue);
 }
@@ -27,17 +33,68 @@ if(!localStorage.getItem("indicator")) {
 /**--------------------------------------INPUT TEXT FIELD--------------------------------------**/
 
 /**
+ *
+ * Handle the clicking on bin icon inside the text field
+ *
+ */
+const textfieldBin = document.getElementById("bin-icon");
+textfieldBin.addEventListener("click", function() {
+    // Clear the text input field
+    inputField.value = "";
+    textfieldHunt.style.display = "block";        
+    textfieldTool.style.display = "none";
+    showAddonLogo();
+});
+
+
+/**
+ * Handle the clicking on Hunt! icon inside the text field
+ *
+ */
+var textfieldHunt = document.querySelector("#hunt-icon");
+textfieldHunt.title = "Hunt!";
+textfieldHunt.addEventListener("click", function() {
+    // Get the id of the current active tab
+    browser.tabs.query({active:true}).then(tabs => {
+        let activeTab = tabs[0].id;
+        // Send a message to the content script
+        browser.tabs.sendMessage(activeTab, "hunt");
+        let token = 1;
+        browser.runtime.onMessage.addListener(function(message) {
+            if(token) {
+                // No indicators found. Show a message
+                if(message['indicators'] == "[]") {
+                    showMessagePopup("No indicators found in this page", MessageType.INFO);
+                } else {
+                    // Show a different placeholder text in the text input field
+                    inputField.placeholder = "Select your indicator";
+                    const indicatorsList = JSON.parse(message['indicators']);
+                    createIndicatorsList(indicatorsList);
+                    browser.browserAction.setBadgeText({text: indicatorsList.length.toString()});
+                }
+            }
+            // Consume token
+            token = 0;
+        })
+    }, 
+    error => {
+        console.error("Error: "+error)
+    });
+});
+
+
+/**
  * 
  * Handle the clicking on tool icon inside the text field
  *
  */
-var textfieldTool = document.querySelector("#text-field>img");
+var textfieldTool = document.getElementById("domextr-icon");
 textfieldTool.title = "Extract domain";
 textfieldTool.addEventListener("click", function() {
-    const inputString = document.getElementById("input-box").value;
+    const inputString = inputField.value;
     const domain = indicatorParser.getDomain(inputString);
     
-    document.getElementById("input-box").value = domain;
+    inputField.value = domain;
 
     // Show the appropriate tools for the input provided
     showButtonsByType(domain, "domain", "all");
@@ -45,7 +102,37 @@ textfieldTool.addEventListener("click", function() {
     localStorage.setItem("indicator", domain);
     localStorage.setItem("type", "domain");
     localStorage.setItem("tag", "all");
+
+    // Hide the icon
+    textfieldTool.style.display = "none";
 });
+
+/**
+ * Submit an indicator as input 
+ * @param{indicator}: string representing the indicator to submit
+ * @param{type}: indicator type
+ * @param{tag}: possible tag to filter resources
+ */
+function submitIndicator(indicator, type, tag) {
+    // Show the appropriate tools for the input provided
+    showButtonsByType(indicator, type, tag);
+    // Save the current indicator along with its type
+    localStorage.setItem("indicator", indicator);
+    localStorage.setItem("type", type);
+    if(!tag) {
+        tag = "all";
+    }
+    localStorage.setItem("tag", tag);
+
+    // If the indicator is an URL or email, show tool icon inside text field
+    if(type === "url" || type === "email") {
+        textfieldTool.style.display = "block";
+    } else {
+        textfieldTool.style.display = "none";
+    }
+    textfieldBin.style.display = "block";
+
+}
 
 
 /**
@@ -54,33 +141,36 @@ textfieldTool.addEventListener("click", function() {
  *
  */
 inputField.addEventListener("keyup", (e) => {
-    const inputString = document.getElementById("input-box").value;
+    const inputString = inputField.value;
     // If no input was provided, show the add-on logo
     if(inputString === "") {
         showAddonLogo();
         localStorage.setItem("indicator", "");
         localStorage.setItem("type", "");
         localStorage.setItem("tag", "");
+
+        textfieldHunt.style.display = "block";        
+        textfieldTool.style.display = "none";
     } else {
+        // Show the bin icon
+        document.getElementById("bin-icon").style.display = "block";
+        textfieldHunt.style.display = "none";
         // Get indicator type
         const type = indicatorParser.getIndicatorType(inputString);
         if(type === "invalid") {
             showAddonLogo();
+            textfieldTool.style.display = "none";
             showMessagePopup("Please enter a valid indicator", MessageType.ERROR);
         } else if(type === "internal") {
             showAddonLogo();
+            textfieldTool.style.display = "none";
             showMessagePopup("The IP address is internal", MessageType.WARNING);
         } else {
             // Get selected tag option
             const selectNode = document.querySelector("#filter-container>select");
             const optionValue = selectNode.options[selectNode.selectedIndex].value;
 
-            // Show the appropriate tools for the input provided
-            showButtonsByType(inputString, type, optionValue);
-            // Save the current indicator along with its type
-            localStorage.setItem("indicator", inputString);
-            localStorage.setItem("type", type);
-            localStorage.setItem("tag", optionValue);
+            submitIndicator(inputString, type, optionValue);
         }
     }
 });
@@ -92,7 +182,7 @@ inputField.addEventListener("keyup", (e) => {
  *
  */
 document.querySelector("#filter-container>select").addEventListener("change", (e) => {
-    const inputString = document.getElementById("input-box").value;
+    const inputString = inputField.value;
     const type = indicatorParser.getIndicatorType(inputString);
     const optionValue = e.target.options[e.target.selectedIndex].value;
     showButtonsByType(inputString, type, optionValue);
@@ -102,7 +192,6 @@ document.querySelector("#filter-container>select").addEventListener("change", (e
 
 function setCheckboxStatus(checkboxNode, optionName) {
     let optionValue = localStorage.getItem(optionName);
-    console.log(optionName);
     if(!optionValue) {
         // Default option: open always a new tab
         if(optionName === "settings.newtab") {
@@ -171,6 +260,21 @@ document.querySelector("#open-tab-opt input").addEventListener("change", functio
     //let linksNodes = document.getElementById("tools-list").children;
     newtabOption = evt.target.checked;
     localStorage.setItem("settings.newtab", newtabOption);
+    // Update the open icon option inside the tools buttons
+    openOptionIcons = document.querySelectorAll(".tool-open-icon>img");
+    for(icon of openOptionIcons) {
+        if(!newtabOption) {
+            // By default the addon opens resources in the current tab
+            // let the user open in a new tab by clicking on this icon
+            icon.src = "../../assets/icons/outside.png";
+            icon.title = "Open in a new tab";
+            icon.id = "open-icon-out";
+        } else {
+            icon.src = "../../assets/icons/inside.png";
+            icon.title = "Open in current tab";
+            icon.id = "open-icon-in";
+        }
+    }
 });
 
 /**
