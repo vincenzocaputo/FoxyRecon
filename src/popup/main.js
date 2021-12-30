@@ -23,12 +23,29 @@ if(!indicator || indicator === "undefined") {
     const optionValue = localStorage.getItem("tag");
     // Hide Hunt! icon
     document.getElementById("hunt-icon").style.display = "none";
+    // Show the bin icon
+    document.getElementById("bin-icon").style.display = "block";
     // Show the buttons related to the tools that support this indicator
     showButtonsByType(indicator, type, optionValue);
 }
 
 
 /**--------------------------------------INPUT TEXT FIELD--------------------------------------**/
+
+/**
+ *
+ * Handle the clicking on bin icon inside the text field
+ *
+ */
+const textfieldBin = document.getElementById("bin-icon");
+textfieldBin.addEventListener("click", function() {
+    // Clear the text input field
+    inputField.value = "";
+    textfieldHunt.style.display = "block";        
+    textfieldTool.style.display = "none";
+    showAddonLogo();
+});
+
 
 /**
  * Handle the clicking on Hunt! icon inside the text field
@@ -50,7 +67,7 @@ textfieldHunt.addEventListener("click", function() {
                     showMessagePopup("No indicators found in this page", MessageType.INFO);
                 } else {
                     // Show a different placeholder text in the text input field
-                    document.getElementById("input-box").placeholder = "Select your indicator";
+                    inputField.placeholder = "Select your indicator";
                     const indicatorsList = JSON.parse(message['indicators']);
                     createIndicatorsList(indicatorsList);
                     browser.browserAction.setBadgeText({text: indicatorsList.length.toString()});
@@ -71,13 +88,13 @@ textfieldHunt.addEventListener("click", function() {
  * Handle the clicking on tool icon inside the text field
  *
  */
-var textfieldTool = document.querySelector("#domextr-icon");
+var textfieldTool = document.getElementById("domextr-icon");
 textfieldTool.title = "Extract domain";
 textfieldTool.addEventListener("click", function() {
-    const inputString = document.getElementById("input-box").value;
+    const inputString = inputField.value;
     const domain = indicatorParser.getDomain(inputString);
     
-    document.getElementById("input-box").value = domain;
+    inputField.value = domain;
 
     // Show the appropriate tools for the input provided
     showButtonsByType(domain, "domain", "all");
@@ -90,6 +107,9 @@ textfieldTool.addEventListener("click", function() {
     textfieldTool.style.display = "none";
 });
 
+/**
+ * 
+ */
 
 /**
  * 
@@ -97,7 +117,7 @@ textfieldTool.addEventListener("click", function() {
  *
  */
 inputField.addEventListener("keyup", (e) => {
-    const inputString = document.getElementById("input-box").value;
+    const inputString = inputField.value;
     // If no input was provided, show the add-on logo
     if(inputString === "") {
         showAddonLogo();
@@ -108,6 +128,8 @@ inputField.addEventListener("keyup", (e) => {
         textfieldHunt.style.display = "block";        
         textfieldTool.style.display = "none";
     } else {
+        // Show the bin icon
+        document.getElementById("bin-icon").style.display = "block";
         textfieldHunt.style.display = "none";
         // Get indicator type
         const type = indicatorParser.getIndicatorType(inputString);
@@ -148,7 +170,7 @@ inputField.addEventListener("keyup", (e) => {
  *
  */
 document.querySelector("#filter-container>select").addEventListener("change", (e) => {
-    const inputString = document.getElementById("input-box").value;
+    const inputString = inputField.value;
     const type = indicatorParser.getIndicatorType(inputString);
     const optionValue = e.target.options[e.target.selectedIndex].value;
     showButtonsByType(inputString, type, optionValue);

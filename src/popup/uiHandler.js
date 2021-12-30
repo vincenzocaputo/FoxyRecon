@@ -56,9 +56,11 @@ function showAddonLogo() {
     document.getElementById("addon-logo").style.display = "block";
     // Hide filter dropdown menu
     document.getElementById("filter-container").style.display = "none";
-    
+    // Clear the list of indicators gathered through Hunt! 
     document.getElementById("hunt-res-list").style.display = "none";
     document.querySelectorAll(".hunt-res-entry").forEach(e => e.remove());
+    // Hide the bin icon
+    document.getElementById("bin-icon").style.display = "none";
 }
 
 
@@ -325,6 +327,7 @@ function createIndicatorsList(indicatorsList){
 
         node.indicator = indicatorsList[i]['value'];
         node.type = indicatorsList[i]['type'];
+        node.title = node.indicator;
 
         nodeImageContainer.appendChild(nodeImage);
         node.appendChild(nodeImageContainer);
@@ -342,6 +345,13 @@ function createIndicatorsList(indicatorsList){
         node.addEventListener("click", function() {
             document.getElementById("input-box").value = node.indicator;
             showButtonsByType(node.indicator, node.type); 
+            // If the indicator is an URL or email, show tool icon inside text field
+            if(type === "url" || type === "email") {
+                textfieldTool.style.display = "block";
+            } else {
+                textfieldTool.style.display = "none";
+            }
+            textfieldBin.style.display = "block";
         });
     }
 

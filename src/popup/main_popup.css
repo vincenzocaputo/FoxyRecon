@@ -127,7 +127,7 @@ div.tool-tag {
     align-items: center;
 }
 
-#text-field img {
+#text-field #domextr-icon, #hunt-icon {
     cursor: pointer;
     width: 24px;
     height: 24px;
@@ -140,6 +140,13 @@ div.tool-tag {
 
 #hunt-icon {
     display: block;
+}
+
+#bin-icon {
+    cursor: pointer;
+    margin: right;
+    width: 16px;
+    height: 16px;
 }
 
 #text-field > input {
