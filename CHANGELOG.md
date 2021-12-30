@@ -8,10 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Hunt! feature that let you search search all potential indicators present in the web page visible in the current active tab of the browser.
 - Trash bin button to clear the input text field.
+- Open in new/current tab button
 
 ### Changed
 - Behaviour of indicators text selection. Now only submitted indicator will be saved inside the input text field of the popup.
 - Buttons icons inside the input text field.
+- Settings popup appearance
 
 ### Fixed
 - Behaviour of the domain extraction feature icon in the textfield

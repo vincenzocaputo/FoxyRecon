@@ -101,6 +101,8 @@ function showButtonsByType(indicator, type, tag) {
                 resNodes[i].url = url;
 
                 resNodes[i].submitQuery = tools[i]["submitQuery"];
+
+
             } else  {
                 resNodes[i].style.display = "none";
             }
@@ -213,14 +215,33 @@ function createToolsList(toolsList){
                 nodeText.insertAdjacentElement("beforeend", nodeTagsContainer);
             }
         }
-
+        // Add an icon that allow to open the resource in a new or in the current tab
+        // (it depends on settings chosen by the user)
+        openIconContainer = document.createElement("div");
+        openIconContainer.classList.add("tool-open-icon");
+        openIconNode = document.createElement("img");
+        // Get the current option
+        const newTabOption = localStorage.getItem("settings.newtab");
+        if(newTabOption && newTabOption === "false") {
+            // By default the addon opens resources in the current tab
+            // let the user open in a new tab by clicking on this icon
+            openIconNode.src = "../../assets/icons/outside.png";
+            openIconNode.title = "Open in a new tab";
+            openIconNode.id = "open-icon-out";
+        } else {
+            openIconNode.src = "../../assets/icons/inside.png";
+            openIconNode.title = "Open in current tab";
+            openIconNode.id = "open-icon-in";
+        }
+        openIconContainer.appendChild(openIconNode); 
         nodeImageContainer.appendChild(nodeImage);
         nodeHyperlink.appendChild(nodeImageContainer);
         nodeHyperlink.appendChild(nodeText);
         node.appendChild(nodeHyperlink);
 
+        node.appendChild(openIconContainer);
         // Set click event function
-        node.addEventListener("click", function() {
+        node.addEventListener("click", function(e) {
             settingsPopup = document.getElementById("settings-popup");
             // If settings popup is opened, don't allow clicking 
             if(node.url && settingsPopup.style.display != "block") {
@@ -232,7 +253,8 @@ function createToolsList(toolsList){
                     localStorage.setItem("submit-btn-query", "");
                 }
 
-                if(!newtab || newtab === "true") {
+                const targetId = e.target.id;
+                if(targetId === "open-icon-out" || (targetId != "open-icon-in" && (!newtab || newtab === "true"))) {
                     // Open web resource in a new tab
                     browser.tabs.create({
                         url: node.url
@@ -344,14 +366,7 @@ function createIndicatorsList(indicatorsList){
         // Set click event function
         node.addEventListener("click", function() {
             document.getElementById("input-box").value = node.indicator;
-            showButtonsByType(node.indicator, node.type); 
-            // If the indicator is an URL or email, show tool icon inside text field
-            if(type === "url" || type === "email") {
-                textfieldTool.style.display = "block";
-            } else {
-                textfieldTool.style.display = "none";
-            }
-            textfieldBin.style.display = "block";
+            submitIndicator(node.indicator, node.type);
         });
     }
 

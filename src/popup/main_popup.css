@@ -107,6 +107,21 @@ div.tool-tag {
     width: max-content;
 }
 
+.tool-open-icon {
+    float: right;
+    clear: right;
+    height: 100%;
+    width: 20px;
+    position: relative;
+    margin-right: 5px;
+}
+
+.tool-open-icon > img {
+    height: 20px;
+    width: 20px;
+    vertical-align: middle;
+}
+
 
 #search-box {
     display: flex;
@@ -143,6 +158,7 @@ div.tool-tag {
 }
 
 #bin-icon {
+    display: none;
     cursor: pointer;
     margin: right;
     width: 16px;
@@ -251,10 +267,15 @@ div.tool-tag {
     padding: 8px 0;
     position: absolute;
     z-index: 100;
-    top: -5px;
+    top: 0;
     left: 0;
+    border: 1px solid #000000;
 }
 
+.popup #settings-title {
+    font-weight: bold;
+}
+/*
 .popup #settings-popup::after {
     content: "";
     position: absolute;
@@ -265,7 +286,7 @@ div.tool-tag {
     border-style: solid;
     margin-top: -20px;
     border-color: transparent transparent #FFFFFF transparent;
-}
+}*/
 
 .option {
     height: 40px;

@@ -108,8 +108,32 @@ textfieldTool.addEventListener("click", function() {
 });
 
 /**
- * 
+ * Submit an indicator as input 
+ * @param{indicator}: string representing the indicator to submit
+ * @param{type}: indicator type
+ * @param{tag}: possible tag to filter resources
  */
+function submitIndicator(indicator, type, tag) {
+    // Show the appropriate tools for the input provided
+    showButtonsByType(indicator, type, tag);
+    // Save the current indicator along with its type
+    localStorage.setItem("indicator", indicator);
+    localStorage.setItem("type", type);
+    if(!tag) {
+        tag = "all";
+    }
+    localStorage.setItem("tag", tag);
+
+    // If the indicator is an URL or email, show tool icon inside text field
+    if(type === "url" || type === "email") {
+        textfieldTool.style.display = "block";
+    } else {
+        textfieldTool.style.display = "none";
+    }
+    textfieldBin.style.display = "block";
+
+}
+
 
 /**
  * 
@@ -146,19 +170,7 @@ inputField.addEventListener("keyup", (e) => {
             const selectNode = document.querySelector("#filter-container>select");
             const optionValue = selectNode.options[selectNode.selectedIndex].value;
 
-            // Show the appropriate tools for the input provided
-            showButtonsByType(inputString, type, optionValue);
-            // Save the current indicator along with its type
-            localStorage.setItem("indicator", inputString);
-            localStorage.setItem("type", type);
-            localStorage.setItem("tag", optionValue);
-
-            // If the indicator is an URL or email, show tool icon inside text field
-            if(type === "url" || type === "email") {
-                textfieldTool.style.display = "block";
-            } else {
-                textfieldTool.style.display = "none";
-            }
+            submitIndicator(inputString, type, optionValue);
         }
     }
 });
@@ -180,7 +192,6 @@ document.querySelector("#filter-container>select").addEventListener("change", (e
 
 function setCheckboxStatus(checkboxNode, optionName) {
     let optionValue = localStorage.getItem(optionName);
-    console.log(optionName);
     if(!optionValue) {
         // Default option: open always a new tab
         if(optionName === "settings.newtab") {
@@ -249,6 +260,21 @@ document.querySelector("#open-tab-opt input").addEventListener("change", functio
     //let linksNodes = document.getElementById("tools-list").children;
     newtabOption = evt.target.checked;
     localStorage.setItem("settings.newtab", newtabOption);
+    // Update the open icon option inside the tools buttons
+    openOptionIcons = document.querySelectorAll(".tool-open-icon>img");
+    for(icon of openOptionIcons) {
+        if(!newtabOption) {
+            // By default the addon opens resources in the current tab
+            // let the user open in a new tab by clicking on this icon
+            icon.src = "../../assets/icons/outside.png";
+            icon.title = "Open in a new tab";
+            icon.id = "open-icon-out";
+        } else {
+            icon.src = "../../assets/icons/inside.png";
+            icon.title = "Open in current tab";
+            icon.id = "open-icon-in";
+        }
+    }
 });
 
 /**
