@@ -113,7 +113,7 @@ div.tool-tag {
     height: 100%;
     width: 20px;
     position: relative;
-    margin-right: 5px;
+    margin-right: 1px;
 }
 
 .tool-open-icon > img {
