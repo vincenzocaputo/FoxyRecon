@@ -58,6 +58,17 @@
             "tags": ["dns"]
 		},
         {
+            "name": "BuiltWith",
+            "url": {
+                "domain": "https://builtwith.com/%s",
+                "url": "https://builtwith.com/%s"
+            },
+            "desc": "Find out what websites are Built With",
+            "color": "#094303",
+            "icon": "builtwith.png",
+            "types": ["domain"]
+        },
+        {
             "name": "Censys",
             "url": {
                 "domain": "https://censys.io/domain/%s", 
