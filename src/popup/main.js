@@ -21,6 +21,12 @@ if(!indicator || indicator === "undefined") {
     const type = localStorage.getItem("type");
     // Restore tag option
     const optionValue = localStorage.getItem("tag");
+    // If indicator is an URL or an email show domain extraction icon
+    if(type === "url" || type === "email") {
+        document.getElementById("domextr-icon").style.display = "block";
+    } else {
+        document.getElementById("domextr-icon").style.display = "none";
+    }
     // Hide Hunt! icon
     document.getElementById("hunt-icon").style.display = "none";
     // Show the bin icon
