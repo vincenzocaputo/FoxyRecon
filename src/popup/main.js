@@ -98,7 +98,7 @@ var textfieldTool = document.getElementById("domextr-icon");
 textfieldTool.title = "Extract domain";
 textfieldTool.addEventListener("click", function() {
     const inputString = inputField.value;
-    const domain = indicatorParser.getDomain(inputString);
+    const domain = indicatorParser.getDomain(indicatorParser.refangIndicator(inputString));
     
     inputField.value = domain;
 
@@ -147,7 +147,7 @@ function submitIndicator(indicator, type, tag) {
  *
  */
 inputField.addEventListener("keyup", (e) => {
-    const inputString = inputField.value;
+    let inputString = inputField.value;
     // If no input was provided, show the add-on logo
     if(inputString === "") {
         showAddonLogo();
@@ -162,7 +162,13 @@ inputField.addEventListener("keyup", (e) => {
         document.getElementById("bin-icon").style.display = "block";
         textfieldHunt.style.display = "none";
         // Get indicator type
-        const type = indicatorParser.getIndicatorType(inputString);
+        let type = indicatorParser.getIndicatorType(inputString);
+        if(type === "defanged") {
+            // If the input string is defanged, refang it
+            inputString = indicatorParser.refangIndicator(inputString);
+            // Get the real type of the indicator
+            type = indicatorParser.getIndicatorType(inputString);
+        }
         if(type === "invalid") {
             showAddonLogo();
             textfieldTool.style.display = "none";
@@ -188,8 +194,14 @@ inputField.addEventListener("keyup", (e) => {
  *
  */
 document.querySelector("#filter-container>select").addEventListener("change", (e) => {
-    const inputString = inputField.value;
-    const type = indicatorParser.getIndicatorType(inputString);
+    let inputString = inputField.value;
+    let type = indicatorParser.getIndicatorType(inputString);
+    if(type === "defanged") {
+        // If the input string is defanged, refang it
+        inputString = indicatorParser.refangIndicator(inputString);
+        // Get the real type of the indicator
+        type = indicatorParser.getIndicatorType(inputString);
+    }
     const optionValue = e.target.options[e.target.selectedIndex].value;
     showButtonsByType(inputString, type, optionValue);
 });

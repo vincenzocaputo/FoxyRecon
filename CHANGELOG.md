@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.4] - 2022-02-13
+### Added
+- Autofill feature for context menu.
+- Support for defanged indicators
+
+### Fixed
+- Input validation for domains with TLD with more than 6 characters.
+
 ## [0.6.3] - 2022-01-19
 ### Changed
 - On the web pages that require human interactions to submit a query, the input text field will be automatically filled only once

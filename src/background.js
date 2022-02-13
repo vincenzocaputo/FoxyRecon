@@ -68,6 +68,12 @@ function updateToolsMenu(toolsList, indicator, type) {
                     // Save the indicator in the local storage
                     localStorage.setItem("type", type);
                     localStorage.setItem("indicator", indicator);
+                    // Add the query for autofill to localstorage
+                    if(tool["submitQuery"]) {
+                        localStorage.setItem("submit-btn-query", tool["submitQuery"]);
+                    } else {
+                        localStorage.setItem("submit-btn-query", "");
+                    }
                     // Create the new tab
                     browser.tabs.create({
                         url: url,

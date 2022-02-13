@@ -6,12 +6,17 @@ var lastType = "";
  */
 document.addEventListener("selectionchange", () => {
     indicatorParser = new IndicatorParser();
-    selectedText = document.getSelection().toString().trim();
+    let selectedText = document.getSelection().toString().trim();
     if(selectedText) {
         // Determine the type of the indicator selected
 
         type = indicatorParser.getIndicatorType(selectedText);
         if(type != "invalid"){
+            if(type === "defanged") {
+                // If the input string is defanged, refang it
+                selectedText = indicatorParser.refangIndicator(selectedText);
+                type = indicatorParser.getIndicatorType(selectedText);
+            }
             // Send the selected text to background script along with its type
             browser.runtime.sendMessage({
                 id: 0,
