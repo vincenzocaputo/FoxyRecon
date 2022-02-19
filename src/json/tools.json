@@ -71,8 +71,8 @@
         {
             "name": "Censys",
             "url": {
-                "domain": "https://censys.io/domain/%s", 
-                "ip": "https://censys.io/ipv4/%s"
+                "domain": "https://search.censys.io/search?resource=hosts&q=%s", 
+                "ip": "https://search.censys.io/search?resource=hosts&q=%s"
             },
             "desc": "Hosts and networks search enginge",
             "icon": "censys.png",
