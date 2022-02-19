@@ -89,7 +89,11 @@ The following web resources are included in FoxyRecon:
 |[Urlscan Public Scan](https://urlscan.io) | - | - | :heavy_check_mark: | - | - |
 |[Urlscan Unlisted Scan](https://urlscan.io)| - | - | :heavy_check_mark: | - | - |
 |[Urlscan Private Scan](https://urlscan.io)| - | - | :heavy_check_mark: | - | - |
-|[BuiltWith](https://builtwith.com) :new:| :heavy_check_mark: | - | - | - | - |
+|[BuiltWith](https://builtwith.com) | :heavy_check_mark: | - | - | - | - |
+|[URLVoid](https://urlvoid.com/whois) :new: |:heavy_check_mark:| - | - | - | - |
+|[Whois](https://whois.com/whois) :new: |:heavy_check_mark:| :heavy_check_mark: | - | - | - |
+|[EuroDNS](https://www.eurodns.com) :new: |:heavy_check_mark:| - | - | - | - |
+|[IANA](https://www.iana.org/whois) :new: |:heavy_check_mark:| :heavy_check_mark: | - | - | - |
 
 :red_circle: These web tools require some user interactions, such as entering a query and clicking a button to submit it. To perform these actions faster, FoxyRecon will automatically fill input fields on this web pages, with the indicator you are looking for.
 

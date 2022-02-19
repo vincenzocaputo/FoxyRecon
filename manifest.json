@@ -42,6 +42,8 @@
                 "https://centralops.net/co/*", 
                 "https://www.urlvoid.com/*",
                 "https://urlscan.io/",
+                "https://urlscan.io/whois/",
+                "https://www.eurodns.com/whois-search",
                 "https://www.virustotal.com/gui/home/url/"
             ],
             "js": ["src/content_scripts/autofill.js"]
