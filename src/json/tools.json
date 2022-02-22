@@ -343,6 +343,40 @@
             "types": ["hash"]
         },
         {
+            "name": "MX Blacklist Lookup",
+            "url": {
+                "domain": "https://mxtoolbox.com/SuperTool.aspx?action=blacklist%3a%s&run=toolpage",
+                "ip": "https://mxtoolbox.com/SuperTool.aspx?action=blacklist%3a%s&run=toolpage"
+            },
+            "desc": "The blacklist check will test a mail server IP address against over 100 DNS based email blacklists.",
+            "icon": "mxtoolbox.png",
+            "color": "#E29439",
+            "types": ["domain","ip"],
+            "tags": ["rep"]
+        },
+        {
+            "name": "MX DNS Lookup",
+            "url": {
+                "domain": "https://mxtoolbox.com/SuperTool.aspx?action=a%3a%s&run=toolpage"
+            },
+            "desc": "DNS records Lookup",
+            "icon": "mxtoolbox.png",
+            "color": "#E29439",
+            "types": ["domain"],
+            "tags": ["dns"]
+        },
+        {
+            "name": "MX WHOIS Lookup",
+            "url": {
+                "domain": "https://mxtoolbox.com/SuperTool.aspx?action=whois%3a%s&run=toolpage"
+            },
+            "desc": "DNS records Lookup",
+            "icon": "mxtoolbox.png",
+            "color": "#E29439",
+            "types": ["domain"],
+            "tags": ["whois"]
+        },
+        {
             "name": "Netcraft",
             "url": {
                 "domain": "https://sitereport.netcraft.com/?url=%s",
