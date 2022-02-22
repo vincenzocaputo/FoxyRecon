@@ -35,29 +35,6 @@
             "types": ["ip","domain","hash"]
         },
         {
-            "name": "Intezer Analyze",
-            "url": {
-                "hash": "https://analyze.intezer.com/files/%s"
-            },
-            "desc": "All malware analysis tools under one platform",
-            "icon": "intezer.png",
-            "color": "#253162",
-            "types": ["hash"],
-            "tags": ["sandbox"]
-        },
-		{
-			"name": "Hurricane Electric",
-			"url": { 
-                "domain": "https://bgp.he.net/dns/%s",
-                "ip": "https://bgp.he.net/ip/%s"
-            },
-            "desc": "Hurricane Electric BGP Toolkit",
-			"icon": "bgphe.png",
-			"color": "#000065",
-			"types": ["domain","ip"],
-            "tags": ["dns"]
-		},
-        {
             "name": "BuiltWith",
             "url": {
                 "domain": "https://builtwith.com/%s",
@@ -130,6 +107,16 @@
             "tags": ["tls"]
 		},
         {
+            "name": "CVE MITRE",
+            "url": {
+                "cve": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=%s"
+            },
+            "desc": "The mission of the CVE® Program is to identify, define, and catalog publicly disclosed cybersecurity vulnerabilities.",
+            "icon": "cve.png",
+            "color": "#FDB416",
+            "types": ["cve"]
+        },
+        {
             "name": "Dehashed",
             "url": {
                 "email": "https://dehashed.com/search?query=%s"
@@ -165,16 +152,6 @@
             "tags": ["whois"]
 		},
         {
-            "name": "Google Cache",
-            "url": {
-                "url": "https://webcache.googleusercontent.com/search?q=cache:%s"
-            },
-            "desc": "View web pages cached in Google Search Results",
-            "icon": "googlecache.png",
-            "color": "#EA4335",
-            "types": ["url"]
-        },
-        {
             "name": "Emailrep",
             "url": {
                 "email": "https://emailrep.io/%r"
@@ -184,6 +161,50 @@
             "color": "#2FD3AA",
             "types": ["email"],
             "tags": ["rep"]
+        },
+        {
+            "name": "EuroDNS",
+            "url": {
+                "domain": "https://www.eurodns.com/whois-search"
+            },
+            "submitQuery": "#submitBasic",
+            "desc": "Domain Name registration information",
+            "icon": "eurodns.png",
+            "color": "#3ABEE4",
+            "types": ["domain"],
+            "tags": ["whois"]
+        },
+        {
+            "name": "FortiGuard",
+            "url": {
+                "domain": "https://www.fortiguard.com/webfilter?q=%s&version=9",
+                "cve": "https://www.fortiguard.com/search?q=%s"
+            },
+            "desc": "Search threat advisories",
+            "icon": "fortiguard.png",
+            "color": "#DA291C",
+            "types": ["domain", "cve"],
+            "tags": ["rep"]
+        },
+        {
+            "name": "GitHub",
+            "url": {
+                "cve": "https://github.com/search?q=%s"
+            },
+            "desc": "Search for technical reports, PoC and exploits",
+            "icon": "github.com",
+            "color": "#24292F",
+            "types": ["cve"]
+        },
+        {
+            "name": "Google Cache",
+            "url": {
+                "url": "https://webcache.googleusercontent.com/search?q=cache:%s"
+            },
+            "desc": "View web pages cached in Google Search Results",
+            "icon": "googlecache.png",
+            "color": "#EA4335",
+            "types": ["url"]
         },
 		{
 			"name": "hashdd",
@@ -228,6 +249,18 @@
             "color": "#FF5722",
             "types": ["email"]
         },
+		{
+			"name": "Hurricane Electric",
+			"url": { 
+                "domain": "https://bgp.he.net/dns/%s",
+                "ip": "https://bgp.he.net/ip/%s"
+            },
+            "desc": "Hurricane Electric BGP Toolkit",
+			"icon": "bgphe.png",
+			"color": "#000065",
+			"types": ["domain","ip"],
+            "tags": ["dns"]
+		},
         {
             "name": "HybridAnalysis",
             "url": {
@@ -238,6 +271,17 @@
             "color": "#33A6C8",
             "types": ["hash"],
             "tags": ["sandbox"]
+        },
+        {
+            "name": "IANA Whois",
+            "url": {
+                "domain": "https://www.iana.org/whois?q=%s"
+            },
+            "desc": "IANA WHOIS Service",
+            "icon": "iana.png",
+            "color": "#0673BA",
+            "types": ["domain","ip"],
+            "tags": ["whois"]
         },
         {
             "name": "IntelligenceX",
@@ -251,6 +295,17 @@
             "color": "#0E2C3E",
             "types": ["ip","domain","email"],
             "tags": ["leaks"]
+        },
+        {
+            "name": "Intezer Analyze",
+            "url": {
+                "hash": "https://analyze.intezer.com/files/%s"
+            },
+            "desc": "All malware analysis tools under one platform",
+            "icon": "intezer.png",
+            "color": "#253162",
+            "types": ["hash"],
+            "tags": ["sandbox"]
         },
         {
             "name": "JoeSandbox",
@@ -268,12 +323,13 @@
             "url": {
                 "ip": "https://opentip.kaspersky.com/%s/",
                 "domain": "https://opentip.kaspersky.com/%s/",
-                "hash": "https://opentip.kaspersky.com/%s/"
+                "hash": "https://opentip.kaspersky.com/%s/",
+                "cve": "https://threats.kaspersky.com/en/?s=%s"
             },
             "desc": "Kaspersky Threat Intelligence Portal",
             "icon": "kaspersky.png",
             "color": "#00A88E",
-            "types": ["ip","domain","hash"],
+            "types": ["ip","domain","hash","cve"],
             "tags": ["sandbox", "rep"]
         },
         {
@@ -287,6 +343,40 @@
             "types": ["hash"]
         },
         {
+            "name": "MX Blacklist Lookup",
+            "url": {
+                "domain": "https://mxtoolbox.com/SuperTool.aspx?action=blacklist%3a%s&run=toolpage",
+                "ip": "https://mxtoolbox.com/SuperTool.aspx?action=blacklist%3a%s&run=toolpage"
+            },
+            "desc": "The blacklist check will test a mail server IP address against over 100 DNS based email blacklists.",
+            "icon": "mxtoolbox.png",
+            "color": "#E29439",
+            "types": ["domain","ip"],
+            "tags": ["rep"]
+        },
+        {
+            "name": "MX DNS Lookup",
+            "url": {
+                "domain": "https://mxtoolbox.com/SuperTool.aspx?action=a%3a%s&run=toolpage"
+            },
+            "desc": "DNS records Lookup",
+            "icon": "mxtoolbox.png",
+            "color": "#E29439",
+            "types": ["domain"],
+            "tags": ["dns"]
+        },
+        {
+            "name": "MX WHOIS Lookup",
+            "url": {
+                "domain": "https://mxtoolbox.com/SuperTool.aspx?action=whois%3a%s&run=toolpage"
+            },
+            "desc": "DNS records Lookup",
+            "icon": "mxtoolbox.png",
+            "color": "#E29439",
+            "types": ["domain"],
+            "tags": ["whois"]
+        },
+        {
             "name": "Netcraft",
             "url": {
                 "domain": "https://sitereport.netcraft.com/?url=%s",
@@ -296,6 +386,16 @@
             "icon": "netcraft.png",
             "color": "#4FBDAC",
             "types": ["domain","url"]
+        },
+        {
+            "name": "NIST",
+            "url": {
+                "cve": "https://nvd.nist.gov/vuln/detail/%s"
+            },
+            "desc": "National Vulnerability Database",
+            "icon": "nist.png",
+            "color": "#000000",
+            "types": ["cve"]
         },
         {
             "name": "Norton Safeweb",
@@ -482,13 +582,25 @@
 			"url": {
                 "domain": "https://urlvoid.com/scan/%s"
             },
-            "submitQuery": "button.btn",
+            "submitQuery": "button.btn-warning",
             "desc": "Website rep Checker",
 			"icon": "urlvoid.png",
             "color": "#FFAC0D",
 			"types": ["domain"],
             "tags": ["rep"]
 		},
+        {
+            "name": "URLVoid Whois",
+            "url": {
+                "domain": "https://www.urlvoid.com/whois-lookup/"
+            },
+            "submitQuery": "button.btn-primary",
+            "desc": "Free online whois lookup tool to get domain details.",
+            "icon": "urlvoid.png",
+            "color": "#FFAC0D",
+            "types": ["domain"],
+            "tags": ["whois"]
+        },
         {
             "name": "ViewDNS DNS Lookup",
             "url": {
@@ -547,6 +659,28 @@
             "submitQuery": "VT",
             "types": ["url"],
             "tags": ["sandbox", "rep"]
+        },
+        {
+            "name": "Vulmon",
+            "url": {
+                "cve": "https://vulmon.com/vulnerabilitydetails?qid=%s"
+            },
+            "desc": "Search anything related to vulnerabilities on Vulmon",
+            "icon": "vulmon.png",
+            "color": "#00CED1",
+            "types": ["cve"]
+        },
+        {
+            "name": "Whois",
+            "url": {
+                "domain": "https://www.whois.com/whois/%s",
+                "ip": "https://www.whois.com/whois/%s"
+            },
+            "desc": "Whois search for Domain and IP",
+            "icon": "whois.png",
+            "color": "#FCCA54",
+            "types": ["domain", "ip"],
+            "tags": ["whois"]
         },
         {
 			"name": "ZoomEye",

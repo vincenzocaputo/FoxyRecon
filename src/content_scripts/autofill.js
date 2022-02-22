@@ -1,5 +1,4 @@
 
-var inputNodes = document.getElementsByTagName("input");
 let indicator = "";
 // Send a message to background script in order to retrieve the indicator saved in the local storage
 browser.runtime.sendMessage({
@@ -53,7 +52,16 @@ browser.runtime.sendMessage({
                 document.querySelector(query).click();
             }
 
+        } else if(current_url.includes("eurodns")) {
+            alert("OK");
+            let inputNode = document.getElementsByTagName("textarea")[0];
+
+            inputNode.value = indicator;
+            if(submit === "true") {
+                document.querySelector(query).click();
+            }
         } else {
+            var inputNodes = document.getElementsByTagName("input");
             // Get only text or email input nodes
             for(i=0; i<inputNodes.length; i++){
                 if(inputNodes[i].type === "text" || inputNodes[i].type === "email" || inputNodes[i].type === "url"){
