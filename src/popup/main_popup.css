@@ -375,7 +375,7 @@ input:checked + .slider:before {
     width: 70%;
     height: 70%;
     
-    padding-top: 30%;
+    padding-top: 25%;
     margin-left: auto;
     margin-right: auto;
     opacity: 0.75;
@@ -389,4 +389,11 @@ input:checked + .slider:before {
     font-weight: bold;
     color: #333333;
     font-size: 0.8em;
+}
+
+#disclaimer {
+    font-family: Verdana, sans-serif;
+    font-size: 0.5em;
+    text-align: center;
+    margin-top: 15%;
 }
