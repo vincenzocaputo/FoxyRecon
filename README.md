@@ -37,6 +37,7 @@ Currently, FoxyRecon supports the following indicator types:
 - URLs
 - File Hashes
 - Email addresses
+- CVEs :new:
 
 
 The following web resources are included in FoxyRecon:
@@ -94,6 +95,9 @@ The following web resources are included in FoxyRecon:
 |[Whois](https://whois.com/whois) :new: |:heavy_check_mark:| :heavy_check_mark: | - | - | - |
 |[EuroDNS](https://www.eurodns.com) :new: |:heavy_check_mark:| - | - | - | - |
 |[IANA](https://www.iana.org/whois) :new: |:heavy_check_mark:| :heavy_check_mark: | - | - | - |
+|[MX ToolBox Blacklist](https://mxtoolbox.com) :new: |:heavy_check_mark:| :heavy_check_mark: | - | - | - |
+|[MX ToolBox DNS Lookup](https://mxtoolbox.com) :new: |:heavy_check_mark:| - | - | - | - |
+|[MX ToolBox WHOIS](https://mxtoolbox.com) :new: |:heavy_check_mark:| - | - | - | - |
 
 :red_circle: These web tools require some user interactions, such as entering a query and clicking a button to submit it. To perform these actions faster, FoxyRecon will automatically fill input fields on this web pages, with the indicator you are looking for.
 
