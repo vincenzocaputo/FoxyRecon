@@ -53,7 +53,6 @@ browser.runtime.sendMessage({
             }
 
         } else if(current_url.includes("eurodns")) {
-            alert("OK");
             let inputNode = document.getElementsByTagName("textarea")[0];
 
             inputNode.value = indicator;
