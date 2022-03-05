@@ -330,6 +330,9 @@ function createIndicatorsList(indicatorsList){
         } else if (type === 'email') {
             nodeImage.setAttribute("src", toolsIcoBasePath + "email_icon.png");
             color = "#001EFF";
+        } else if (type === 'cve') {
+            nodeImage.setAttribute("src", toolsIcoBasePath + "cve_icon.png");
+            color = "#FFE136";
         }
         node.style.backgroundColor = nodeText.style.backgroundColor = color;
         // If the web resource has tags, add more space for them

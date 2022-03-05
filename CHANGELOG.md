@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.2] - 2022-03-05
+### Added
+- CVE web resources (AttackerKB, Tenable, CVE report, Vulners)
+- Greynoise resource for IP address
+- Google search engine
+- Hunt feature for CVEs
+
+### Changed
+- Added "tls" and "whois" tag to Spyse resource
+
+### Fixed
+- Popup crash
+
 ## [0.7.1] - 2022-02-26
 ### Added
 - Disclaimer

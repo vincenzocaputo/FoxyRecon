@@ -35,6 +35,27 @@
             "types": ["ip","domain","hash"]
         },
         {
+            "name": "AttackerKB",
+            "url": {
+                "cve": "https://attackerkb.com/search?q=%s"
+            },
+            "desc": "Search for vulnerabilities and CVEs",
+            "icon": "attackerkb.png",
+            "color": "#1A171C",
+            "types": ["cve"]
+        },
+        {
+            "name": "Browserling",
+            "url": {
+                "url": "https://www.browserling.com/browse/win/7/chrome/92/%s"
+            },
+            "desc": "Online cross-browser testing",
+            "color": "#5581B5",
+            "icon": "browserling.png",
+            "types": ["url"],
+            "tags": ["sandbox"]
+        },
+        {
             "name": "BuiltWith",
             "url": {
                 "domain": "https://builtwith.com/%s",
@@ -114,6 +135,16 @@
             "desc": "The mission of the CVE® Program is to identify, define, and catalog publicly disclosed cybersecurity vulnerabilities.",
             "icon": "cve.png",
             "color": "#FDB416",
+            "types": ["cve"]
+        },
+        {
+            "name": "CVE report",
+            "url": {
+                "cve": "https://cve.report/%s"
+            },
+            "desc": "An up-to-date database of common vulnerabilities and exposures.",
+            "icon": "cvereport.png",
+            "color": "#FD8F8F",
             "types": ["cve"]
         },
         {
@@ -197,14 +228,38 @@
             "types": ["cve"]
         },
         {
+            "name": "Google",
+            "url": {
+                "domain": "https://www.google.com/search?q=\"%s\"+-site%3A\"%s\"",
+                "ip": "https://www.google.com/search?q=\"%s\"",
+                "email": "https://www.google.com/search?q=\"%s\"",
+                "hash": "https://www.google.com/search?q=\"%s\"",
+                "cve": "https://www.google.com/search?q=\"%s\""
+            },
+            "desc": "Search on Google",
+            "icon": "google.png",
+            "color": "#EA4335",
+            "types": ["domain","ip","email","hash","cve"]
+        },
+        {
             "name": "Google Cache",
             "url": {
                 "url": "https://webcache.googleusercontent.com/search?q=cache:%s"
             },
             "desc": "View web pages cached in Google Search Results",
-            "icon": "googlecache.png",
+            "icon": "google.png",
             "color": "#EA4335",
             "types": ["url"]
+        },
+        {
+            "name": "Greynoise",
+            "url": {
+                "ip": "https://www.greynoise.io/viz/ip/%s"
+            },
+            "desc": "GreyNoise is the source for understanding internet noise.",
+            "icon": "greynoise.png",
+            "color": "#171616",
+            "types": ["ip"]
         },
 		{
 			"name": "hashdd",
@@ -469,7 +524,7 @@
             "icon": "spyse.png",
             "color": "#0D3A86",
             "types": ["domain"],
-            "tags": ["dns"]
+            "tags": ["dns","whois","tls"]
         },
 		{
 			"name": "Talos Intelligence",
@@ -482,6 +537,16 @@
 			"color": "#0077BE",
 			"types": ["domain","ip"],
             "tags": ["rep"]
+		},
+		{
+			"name": "Tenable",
+			"url": {
+                "cve": "https://www.tenable.com/cve/%s"
+            },
+            "desc": "Tenable maintains a list of Common Vulnerabilities and Exposures (CVEs) and their affected products.",
+			"icon": "tenable.png",
+			"color": "#0F2344",
+			"types": ["cve"]
 		},
         {
             "name": "THREATfox",
@@ -660,6 +725,16 @@
             "submitQuery": "VT",
             "types": ["url"],
             "tags": ["sandbox", "rep"]
+        },
+        {
+            "name": "Vulners",
+            "url": {
+                "cve": "https://vulners.com/cve/%s"
+            },
+            "desc": "Largest correlated database of vulnerabilities and exploits",
+            "icon": "vulners.png",
+            "color": "#38383A",
+            "types": ["cve"]
         },
         {
             "name": "Vulmon",
