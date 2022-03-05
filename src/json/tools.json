@@ -275,7 +275,8 @@
         {
             "name": "IANA Whois",
             "url": {
-                "domain": "https://www.iana.org/whois?q=%s"
+                "domain": "https://www.iana.org/whois?q=%s",
+                "ip": "https://www.iana.org/whois?q=%s"
             },
             "desc": "IANA WHOIS Service",
             "icon": "iana.png",
