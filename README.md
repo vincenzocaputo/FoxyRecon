@@ -42,7 +42,7 @@ Currently, FoxyRecon supports the following indicator types:
 
 The following web resources are included in FoxyRecon:
 |Tool|Domain|IP|URL|Hash|Email|CVE|
-|----|:-:|:-:|:-:|:-:|:-:|
+|----|:-:|:-:|:-:|:-:|:-:|:-:|
 |[URLVoid](https://urlvoid.com/)|:heavy_check_mark:| - | - | - | - | - |
 |[Urlscan](https://urlscan.io/)|:heavy_check_mark:| :heavy_check_mark: | :heavy_check_mark: | - | - | - |
 |[Urlscan Liveshot](https://urlscan.io/)| - | :heavy_check_mark: | :heavy_check_mark: | - | - | - |
@@ -58,7 +58,7 @@ The following web resources are included in FoxyRecon:
 |[THREATfox](https://threatfox.abuse.ch/)|:heavy_check_mark:|:heavy_check_mark:| - |:heavy_check_mark:| - | - |
 |[AlienVault](https://otx.alienvault.com/)|:heavy_check_mark:|:heavy_check_mark:| - |:heavy_check_mark:| - | - |
 |[HybridAnalysis](https://www.hybrid-analysis.com/)| - | - | - |:heavy_check_mark:| - | - |
-|[Kaspersky](https://opentip.kaspersky.com/)|:heavy_check_mark:|:heavy_check_mark:| - |:heavy_check_mark:| - | :heavy_check_mark: | - |
+|[Kaspersky](https://opentip.kaspersky.com/)|:heavy_check_mark:|:heavy_check_mark:| - |:heavy_check_mark:| - | :heavy_check_mark: |
 |[Pulsedive](https://pulsedive.com/)|:heavy_check_mark:|:heavy_check_mark:| - |:heavy_check_mark:| - | - |
 |[IntelligenceX](https://intelx.io/)|:heavy_check_mark:|:heavy_check_mark:| - | - | :heavy_check_mark: | - |
 |[Norton Safeweb](https://safeweb.norton.com/)|:heavy_check_mark:| - |:heavy_check_mark:| - | - | - |
@@ -103,7 +103,7 @@ The following web resources are included in FoxyRecon:
 |[GitHub](https://github.com) | - | - | - | - | - | :heavy_check_mark: |
 |[NIST](https://nvd.nist.gov) | - | - | - | - | - | :heavy_check_mark: |
 |[Vulmon](https://vulmon.com) | - | - | - | - | - | :heavy_check_mark: |
-|[Greynoise](https://greynoise.io) :new: | - | :heavy_check_mark: | - | - | - |
+|[Greynoise](https://greynoise.io) :new: | - | :heavy_check_mark: | - | - | - | - |
 |[AttackerKB](https://attackerkb.com) :new: | - | - | - | - | - | :heavy_check_mark: |
 |[CVE report](https://cve.report) :new: | - | - | - | - | - | :heavy_check_mark: |
 |[Tenable](https://tenable.com)  :new: | - | - | - | - | - | :heavy_check_mark: |
