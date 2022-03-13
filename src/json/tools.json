@@ -389,6 +389,28 @@
             "tags": ["sandbox", "rep"]
         },
         {
+            "name": "LeakIX Leak Scope",
+            "url": {
+                "ip": "https://leakix.net/search?scope=leak&q=%s",
+                "domain": "https://leakix.net/search?scope=leak&q=%s"
+            },
+            "desc": "LeakIX is a platform combining a search engine indexing public information AND an open reporting platform linked to the results.",
+            "icon": "leakix.png",
+            "color": "#222222",
+            "types": ["ip","domain"]
+        },
+        {
+            "name": "LeakIX Service Scope",
+            "url": {
+                "ip": "https://leakix.net/search?scope=service&q=%s",
+                "domain": "https://leakix.net/search?scope=service&q=%s"
+            },
+            "desc": "LeakIX is a platform combining a search engine indexing public information AND an open reporting platform linked to the results.",
+            "icon": "leakix.png",
+            "color": "#222222",
+            "types": ["ip","domain"]
+        },
+        {
             "name": "MALWARE bazaar",
             "url": {
                 "hash": "https://bazaar.abuse.ch/browse/?search=sha256%3A%s"

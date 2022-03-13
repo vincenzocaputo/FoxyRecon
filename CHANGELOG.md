@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.8]
 ### Added
 - Filtering by type for indicators collected through hunt feature.
+- LeakIX web resources for IPs and domains (Leak and Services lookup)
 
 ### Fixed
 - Deletion of indicator from local storage when trash bin icon is clicked.
