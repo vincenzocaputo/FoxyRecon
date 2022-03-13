@@ -175,17 +175,17 @@ div.tool-tag {
 }
 
 
-#filter-container {
+#filter-container-tags, #filter-container-types {
     margin-top: 5px;
     display: none;
 }
 
-#filter-container > label {
+#filter-container > label, #filter-container-types > label {
     font-family: Verdana;
     font-size: 5vw;
 }
 
-#filter-container > select {
+#filter-container > select, #filter-container-types > select {
     height: 30px;
 }
 

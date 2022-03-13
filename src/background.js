@@ -44,6 +44,13 @@ function createToolsMenu(toolsList) {
 }
 
 /**
+ * When tab changes, remove the badge text
+ */
+browser.tabs.onActivated.addListener((e) => {
+    browser.browserAction.setBadgeText({text: ''});
+});
+
+/**
  * Updates context menu making visible only the tools which are compatible with the selected string
  * @param {toolsList} available tools list
  * @param {indicator} indicator selected by the user
