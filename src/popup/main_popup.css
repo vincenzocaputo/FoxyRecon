@@ -107,21 +107,48 @@ div.tool-tag {
     width: max-content;
 }
 
-.tool-open-icon {
+.tool-options-container {
     float: right;
     clear: right;
     height: 100%;
     width: 20px;
     position: relative;
+    //background-color: yellow;
     margin-right: 1px;
 }
 
+.tool-open-icon {
+    //display: inline-block;
+    //float: right;
+    //clear: right;
+    height: 15px;
+    width: 15px;
+    top: 0px;
+    position: relative;
+    margin-right: 1px;
+    margin-bottom: 3px;
+}
+
 .tool-open-icon > img {
-    height: 20px;
-    width: 20px;
+    height: 15px;
+    width: 15px;
     vertical-align: middle;
 }
 
+.tool-fav-icon {
+    //display: inline-block;
+    //float: right;
+    height: 15px;
+    width: 15px;
+    position: relative;
+    //margin-right: 25px;
+}
+
+.tool-fav-icon > img {
+    height: 15px;
+    width: 15px;
+    vertical-align: middle;
+}
 
 #search-box {
     display: flex;

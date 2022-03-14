@@ -101,7 +101,7 @@ function showButtonsByType(indicator, type, tag) {
                 let url = tools[i]["url"][type];
                 url = cookURL(url, indicator);
                 resNodes[i].url = url;
-
+                resNodes[i].name = tools[i]["name"];
                 resNodes[i].submitQuery = tools[i]["submitQuery"];
 
 
@@ -188,6 +188,8 @@ function createTypesOptionsList(typesOptions) {
  * @param {toolsList} tools list
  */
 function createToolsList(toolsList){
+    // Retrieve favorites list
+    const favTools = JSON.parse(localStorage.getItem("fav"));
     var resultBox = document.getElementById("tools-list");
 	for (i=0;i<toolsList.length;i++) {
         let tool = toolsList[i];
@@ -247,6 +249,9 @@ function createToolsList(toolsList){
                 nodeText.insertAdjacentElement("beforeend", nodeTagsContainer);
             }
         }
+        optionsContainer = document.createElement("div");
+        optionsContainer.classList.add("tool-options-container");
+
         // Add an icon that allow to open the resource in a new or in the current tab
         // (it depends on settings chosen by the user)
         openIconContainer = document.createElement("div");
@@ -266,12 +271,32 @@ function createToolsList(toolsList){
             openIconNode.id = "open-icon-in";
         }
         openIconContainer.appendChild(openIconNode); 
+
+        // Add an icon that allow to add the tool to favourite list
+        favIconContainer = document.createElement("div");
+        favIconContainer.classList.add("tool-fav-icon");
+        favIconNode = document.createElement("img");
+        // Get wheter the tool is in favourite list or not
+        if(favTools && favTools.includes(toolsList[i]["name"])) {
+            favIconNode.src = "../../assets/icons/favourite.png";
+            favIconNode.title = "Remove from favorites";
+            favIconNode.id = "rem-fav";
+        } else {
+            favIconNode.src = "../../assets/icons/no_favourite.png";
+            favIconNode.title = "Add to favorites";
+            favIconNode.id = "add-fav";
+        }
+        favIconContainer.appendChild(favIconNode);
+
         nodeImageContainer.appendChild(nodeImage);
         nodeHyperlink.appendChild(nodeImageContainer);
         nodeHyperlink.appendChild(nodeText);
         node.appendChild(nodeHyperlink);
 
-        node.appendChild(openIconContainer);
+        optionsContainer.appendChild(openIconContainer);
+        optionsContainer.appendChild(favIconContainer);
+        node.appendChild(optionsContainer);
+        
         // Set click event function
         node.addEventListener("click", function(e) {
             settingsPopup = document.getElementById("settings-popup");
@@ -286,19 +311,41 @@ function createToolsList(toolsList){
                 }
 
                 const targetId = e.target.id;
-                if(targetId === "open-icon-out" || (targetId != "open-icon-in" && (!newtab || newtab === "true"))) {
+                if(targetId === "add-fav") { 
+                    let favTools = JSON.parse(localStorage.getItem("fav"));
+                    if(favTools) {
+                        favTools.push(node.name);
+                    } else {
+                        favTools = [node.name];
+                    }
+                    localStorage.setItem("fav", JSON.stringify(favTools));
+                    e.target.title = "Remove from favorites";
+                    e.target.id = "rem-fav";
+                    e.target.src = "../../assets/icons/favourite.png";
+                } else if(targetId === "rem-fav") {
+                    let favTools = JSON.parse(localStorage.getItem("fav"));
+                    if(favTools) {
+                        favTools = favTools.filter(item => item != node.name);
+                    }                
+                    localStorage.setItem("fav", JSON.stringify(favTools));
+                    e.target.title = "Add to favorites";
+                    e.target.id = "add-fav";
+                    e.target.src = "../../assets/icons/no_favourite.png";
+                }else if(targetId === "open-icon-out" || (targetId != "open-icon-in" && (!newtab || newtab === "true"))) {
                     // Open web resource in a new tab
                     browser.tabs.create({
                         url: node.url
                     });
-                } else {
+                    // close popup
+                    window.close();
+                }  else {
                     // Otherwise open in current tab
                     browser.tabs.update({
                         url: node.url
                     });
+                    // close popup
+                    window.close();
                 }
-                // close popup
-                window.close();
             }
         });
         document.getElementById("tools-list").appendChild(node);
