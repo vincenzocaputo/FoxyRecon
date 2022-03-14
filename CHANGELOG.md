@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.8]
 ### Added
+- Favorites handling
 - Filtering by type for indicators collected through hunt feature.
 - LeakIX web resources for IPs and domains (Leak and Services lookup)
 
