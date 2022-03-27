@@ -49,6 +49,10 @@ textfieldBin.addEventListener("click", function() {
     inputField.value = "";
     textfieldHunt.style.display = "block";        
     textfieldTool.style.display = "none";
+    // Clean the local storage
+    localStorage.setItem("indicator", "");
+    localStorage.setItem("type", "");
+    localStorage.setItem("tag", "all");
     showAddonLogo();
 });
 
@@ -75,7 +79,7 @@ textfieldHunt.addEventListener("click", function() {
                     // Show a different placeholder text in the text input field
                     inputField.placeholder = "Select your indicator";
                     const indicatorsList = JSON.parse(message['indicators']);
-                    createIndicatorsList(indicatorsList);
+                    createIndicatorsList(indicatorsList, 'all');
                     browser.browserAction.setBadgeText({text: indicatorsList.length.toString()});
                 }
             }
@@ -179,7 +183,7 @@ inputField.addEventListener("keyup", (e) => {
             showMessagePopup("The IP address is internal", MessageType.WARNING);
         } else {
             // Get selected tag option
-            const selectNode = document.querySelector("#filter-container>select");
+            const selectNode = document.querySelector("#filter-container-tags>select");
             const optionValue = selectNode.options[selectNode.selectedIndex].value;
 
             submitIndicator(inputString, type, optionValue);
@@ -193,7 +197,7 @@ inputField.addEventListener("keyup", (e) => {
  * Handle tag selecting event
  *
  */
-document.querySelector("#filter-container>select").addEventListener("change", (e) => {
+document.querySelector("#filter-container-tags>select").addEventListener("change", (e) => {
     let inputString = inputField.value;
     let type = indicatorParser.getIndicatorType(inputString);
     if(type === "defanged") {
@@ -203,9 +207,45 @@ document.querySelector("#filter-container>select").addEventListener("change", (e
         type = indicatorParser.getIndicatorType(inputString);
     }
     const optionValue = e.target.options[e.target.selectedIndex].value;
-    showButtonsByType(inputString, type, optionValue);
+    const showOnlyFavBtn = document.querySelector("#show-only-fav>button").value;
+    if (showOnlyFavBtn == "off") {
+        showButtonsByType(inputString, type, optionValue, false);
+    } else {
+        // If show only fav option is enabled, show only favourites tools
+        showButtonsByType(inputString, type, optionValue, true);
+    }
 });
 
+/**
+ *
+ * Handle type selecting event
+ *
+ */
+document.querySelector("#filter-container-types>select").addEventListener("change", (e) => {
+    const optionValue = e.target.options[e.target.selectedIndex].value;
+    showIndicatorsByType(optionValue);
+});
+
+/**
+ *
+ * Handle star clicking event
+ *
+ */
+document.querySelector("#show-only-fav>button").addEventListener("click", (e) => {
+    const inputString = inputField.value;
+    const type = indicatorParser.getIndicatorType(inputString);
+    const selectedTag = document.querySelector("#filter-container-tags>select").value
+    const optionValue = document.querySelector("#show-only-fav button").value;
+    if (optionValue == "off" || optionValue == undefined) {
+        showButtonsByType(inputString, type, selectedTag, true);
+        document.querySelector("#show-only-fav button").value = "on";
+        document.querySelector("#show-only-fav img").src = "../../assets/icons/favourite_opt_on.png";
+    } else {
+        showButtonsByType(inputString, type, selectedTag, false);
+        document.querySelector("#show-only-fav button").value = "off";
+        document.querySelector("#show-only-fav img").src = "../../assets/icons/favourite_opt.png";
+    }
+});
 /**----------------------------------OPTION SETTINGS POP-UP----------------------------------------------**/
 
 function setCheckboxStatus(checkboxNode, optionName) {

@@ -54,13 +54,17 @@ function showAddonLogo() {
     // Restore placeholder text of the input field
     document.getElementById("input-box").placeholder = "Enter your indicator";
     document.getElementById("addon-logo").style.display = "block";
-    // Hide filter dropdown menu
-    document.getElementById("filter-container").style.display = "none";
+    // Hide filter dropdown menus
+    document.getElementById("filter-container-types").style.display = "none";
+    document.getElementById("filter-container-tags").style.display = "none";
     // Clear the list of indicators gathered through Hunt! 
     document.getElementById("hunt-res-list").style.display = "none";
     document.querySelectorAll(".hunt-res-entry").forEach(e => e.remove());
     // Hide the bin icon
     document.getElementById("bin-icon").style.display = "none";
+    // Hide show fav button
+    document.getElementById("show-only-fav").style.display = "none";
+    document.getElementById("no-tools").style.display = "none";
 }
 
 
@@ -69,41 +73,54 @@ function showAddonLogo() {
  * @param {indicator} indicator entered by the user
  * @param {type} indicator type (domain, ip, url, etc.)
  * @param {tag} web resource tag (for filtering results)
+ * @param {showOnlyFav} if true, show only favourites resources
  */
-function showButtonsByType(indicator, type, tag) {
-    document.getElementById("filter-container").style.display = "block";
+function showButtonsByType(indicator, type, tag, showOnlyFav) {
+    document.getElementById("filter-container-tags").style.display = "block";
+    document.getElementById("filter-container-types").style.display = "none";
     document.getElementById("popup-text").style.display = "none";
     document.getElementById("text-field").style.borderColor = "#6E6C69";
     document.getElementById("addon-logo").style.display = "none";
     document.getElementById("hunt-res-list").style.display = "none";
     document.querySelectorAll(".hunt-res-entry").forEach(e => e.remove());
-    
+    document.getElementById("show-only-fav").style.display = "block";
+    document.getElementById("no-tools").style.display = "none";
     // This node contains the list of tools
     const toolsListNodes = document.getElementById("tools-list");
     toolsListNodes.style.display = "block";
     const resNodes = toolsListNodes.children;
+
+    // Retrieve favourites tools from local storage
+    const favTools = JSON.parse(localStorage.getItem("fav"));
 
     if(!tag) {
         // If no tag has been provided, by default set it to "all"
         tag = "all";
     }
     let tagsOptions = [];
+    let noTools = true;
     for (i = 0; i < resNodes.length; i++) {
-        if (tools[i]["types"].includes(type)) { 
-            tagsOptions = tagsOptions.concat(tools[i]["tags"]);
-            if (tag === "all" || (tools[i]["tags"] && tools[i]["tags"].includes(tag))) {
-                resNodes[i].style.display = "block";
-                // Set tool description to div title
-                resNodes[i].title = tools[i]["desc"];
-                // Replace the placholder with the input string
-                let url = tools[i]["url"][type];
-                url = cookURL(url, indicator);
-                resNodes[i].url = url;
+        if (!showOnlyFav || favTools && favTools.includes(tools[i]["name"])) {
+            if (tools[i]["types"].includes(type)) { 
+                tagsOptions = tagsOptions.concat(tools[i]["tags"]);
+                if (tag === "all" || (tools[i]["tags"] && tools[i]["tags"].includes(tag))) {
+                    noTools = false;
+                    resNodes[i].style.display = "block";
+                    // Set tool description to div title
+                    resNodes[i].title = tools[i]["desc"];
+                    // Replace the placholder with the input string
+                    let url = tools[i]["url"][type];
+                    url = cookURL(url, indicator);
+                    resNodes[i].url = url;
+                    resNodes[i].name = tools[i]["name"];
+                    resNodes[i].submitQuery = tools[i]["submitQuery"];
 
-                resNodes[i].submitQuery = tools[i]["submitQuery"];
 
-
-            } else  {
+                } else  {
+                    resNodes[i].style.display = "none";
+                }
+            } else {
+                // If this tools does not support this indicator type, hide its button
                 resNodes[i].style.display = "none";
             }
         } else {
@@ -112,7 +129,9 @@ function showButtonsByType(indicator, type, tag) {
         }
     }
 
-
+    if (noTools) {
+        document.getElementById("no-tools").style.display = "block";
+    }
     createTagsOptionsList([...new Set(tagsOptions)]);
 
 }
@@ -123,7 +142,7 @@ function showButtonsByType(indicator, type, tag) {
  * @param {tagsOptions} list of tags
  */
 function createTagsOptionsList(tagsOptions) {
-    const tagsOptionsList = document.querySelectorAll("#filter-container>select option");
+    const tagsOptionsList = document.querySelectorAll("#filter-container-tags>select option");
     let options = [];
     
     for (i = 0; i < tagsOptionsList.length; i++) {
@@ -135,7 +154,7 @@ function createTagsOptionsList(tagsOptions) {
 
     for (i = 0; i < tagsOptions.length; i++) {
         // Check if option is already present
-        const opt = document.querySelector("#filter-container>select option[value="+tagsOptions[i]+"]");
+        const opt = document.querySelector("#filter-container-tags>select option[value="+tagsOptions[i]+"]");
         if (opt) {
             if (opt.style.display === "none") {
                 opt.style.display = "block";
@@ -145,17 +164,49 @@ function createTagsOptionsList(tagsOptions) {
             let option = document.createElement("option");
             option.text = tagsOptions[i];
             option.value = tagsOptions[i];
-            document.querySelector("#filter-container>select").appendChild(option);
+            document.querySelector("#filter-container-tags>select").appendChild(option);
         }
     }
 }
 
+/**
+ * Create filter by types dropdown menu options
+ * @param {typesOptions} list of types
+ */
+function createTypesOptionsList(typesOptions) {
+    const typesOptionsList = document.querySelectorAll("#filter-container-types>select option");
+    let options = [];
+    for (i = 0; i < typesOptionsList.length; i++) {
+        // Hide option if it is not in current options list
+        if (typesOptionsList[i].value != "all" && !typesOptions.includes(typesOptionsList[i].value)) {
+            typesOptionsList[i].style.display = "none";
+        }
+    }
+
+    for (i = 0; i < typesOptions.length; i++) {
+        // Check if option is already present
+        const opt = document.querySelector("#filter-container-types>select option[value="+typesOptions[i]+"]");
+        if (opt) {
+            if (opt.style.display === "none") {
+                opt.style.display = "block";
+            }
+        } else if (typesOptions[i]) {
+            // Create option
+            let option = document.createElement("option");
+            option.text = typesOptions[i];
+            option.value = typesOptions[i];
+            document.querySelector("#filter-container-types>select").appendChild(option);
+        }
+    }
+}
 
 /**
  * Create the tools list inside the popup
  * @param {toolsList} tools list
  */
 function createToolsList(toolsList){
+    // Retrieve favorites list
+    const favTools = JSON.parse(localStorage.getItem("fav"));
     var resultBox = document.getElementById("tools-list");
 	for (i=0;i<toolsList.length;i++) {
         let tool = toolsList[i];
@@ -215,6 +266,9 @@ function createToolsList(toolsList){
                 nodeText.insertAdjacentElement("beforeend", nodeTagsContainer);
             }
         }
+        optionsContainer = document.createElement("div");
+        optionsContainer.classList.add("tool-options-container");
+
         // Add an icon that allow to open the resource in a new or in the current tab
         // (it depends on settings chosen by the user)
         openIconContainer = document.createElement("div");
@@ -234,12 +288,32 @@ function createToolsList(toolsList){
             openIconNode.id = "open-icon-in";
         }
         openIconContainer.appendChild(openIconNode); 
+
+        // Add an icon that allow to add the tool to favourite list
+        favIconContainer = document.createElement("div");
+        favIconContainer.classList.add("tool-fav-icon");
+        favIconNode = document.createElement("img");
+        // Get wheter the tool is in favourite list or not
+        if(favTools && favTools.includes(toolsList[i]["name"])) {
+            favIconNode.src = "../../assets/icons/favourite.png";
+            favIconNode.title = "Remove from favorites";
+            favIconNode.id = "rem-fav";
+        } else {
+            favIconNode.src = "../../assets/icons/no_favourite.png";
+            favIconNode.title = "Add to favorites";
+            favIconNode.id = "add-fav";
+        }
+        favIconContainer.appendChild(favIconNode);
+
         nodeImageContainer.appendChild(nodeImage);
         nodeHyperlink.appendChild(nodeImageContainer);
         nodeHyperlink.appendChild(nodeText);
         node.appendChild(nodeHyperlink);
 
-        node.appendChild(openIconContainer);
+        optionsContainer.appendChild(openIconContainer);
+        optionsContainer.appendChild(favIconContainer);
+        node.appendChild(optionsContainer);
+        
         // Set click event function
         node.addEventListener("click", function(e) {
             settingsPopup = document.getElementById("settings-popup");
@@ -254,19 +328,41 @@ function createToolsList(toolsList){
                 }
 
                 const targetId = e.target.id;
-                if(targetId === "open-icon-out" || (targetId != "open-icon-in" && (!newtab || newtab === "true"))) {
+                if(targetId === "add-fav") { 
+                    let favTools = JSON.parse(localStorage.getItem("fav"));
+                    if(favTools) {
+                        favTools.push(node.name);
+                    } else {
+                        favTools = [node.name];
+                    }
+                    localStorage.setItem("fav", JSON.stringify(favTools));
+                    e.target.title = "Remove from favorites";
+                    e.target.id = "rem-fav";
+                    e.target.src = "../../assets/icons/favourite.png";
+                } else if(targetId === "rem-fav") {
+                    let favTools = JSON.parse(localStorage.getItem("fav"));
+                    if(favTools) {
+                        favTools = favTools.filter(item => item != node.name);
+                    }                
+                    localStorage.setItem("fav", JSON.stringify(favTools));
+                    e.target.title = "Add to favorites";
+                    e.target.id = "add-fav";
+                    e.target.src = "../../assets/icons/no_favourite.png";
+                }else if(targetId === "open-icon-out" || (targetId != "open-icon-in" && (!newtab || newtab === "true"))) {
                     // Open web resource in a new tab
                     browser.tabs.create({
                         url: node.url
                     });
-                } else {
+                    // close popup
+                    window.close();
+                }  else {
                     // Otherwise open in current tab
                     browser.tabs.update({
                         url: node.url
                     });
+                    // close popup
+                    window.close();
                 }
-                // close popup
-                window.close();
             }
         });
         document.getElementById("tools-list").appendChild(node);
@@ -278,14 +374,18 @@ function createToolsList(toolsList){
  * @param {indicatorsList} indicator list
  */
 function createIndicatorsList(indicatorsList){
-    document.getElementById("filter-container").style.display = "none";
+    document.getElementById("filter-container-tags").style.display = "none";
+    document.getElementById("filter-container-types").style.display = "block";
     document.getElementById("popup-text").style.display = "none";
     document.getElementById("text-field").style.borderColor = "#6E6C69";
     document.getElementById("addon-logo").style.display = "none";
     document.getElementById("hunt-icon").style.display = "none";
 
     let indicatorsListNode = document.getElementById("hunt-res-list");
+
+    let typesList = [];
     for (i=0; i<indicatorsList.length; i++) {
+        const type = indicatorsList[i]['type'];
         let node = document.createElement('div');
         
         node.classList.add("hunt-res-entry");
@@ -314,7 +414,8 @@ function createIndicatorsList(indicatorsList){
 
         // Set button colors
         let color;
-        const type = indicatorsList[i]['type'];
+        // Add type to array
+        typesList = typesList.concat(type);
         if(type === 'domain') {
             nodeImage.setAttribute("src", toolsIcoBasePath + "domain_icon.png");
             color = "#BB0000";
@@ -372,5 +473,24 @@ function createIndicatorsList(indicatorsList){
             submitIndicator(node.indicator, node.type);
         });
     }
+    createTypesOptionsList([...new Set(typesList)]);
 
+}
+
+/*
+ * Show Indicators by type
+ * @param {indicatorType} type of indicators to show
+ */
+function showIndicatorsByType(indicatorType) {
+    // retrieve the list of indicators
+    document.querySelectorAll(".hunt-res-entry").forEach((node)=>{
+        console.log(indicatorType);
+        if(indicatorType != "all" && node.type != indicatorType) {
+            console.log(node.type);
+            // hide the entry
+            node.style.display = "none";
+        } else {
+            node.style.display = "block";
+        }
+    });
 }
