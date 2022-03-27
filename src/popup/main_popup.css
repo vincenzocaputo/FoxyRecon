@@ -8,6 +8,15 @@ body {
     height: 350px;
 }
 
+#no-tools {
+    font-family: Verdana, sans-serif;
+    color: #878787;
+    text-align: center;
+    font-size: 0.7em;
+    width: 100%;
+    display: none;
+}
+
 #tools-list, #hunt-res-list {
     display: none;
     width: 100%;
@@ -15,6 +24,14 @@ body {
     overflow-y: scroll;
     scrollbar-color: #555555 #FF7700;
     scrollbar-width: thin;
+}
+
+#tools-list > div {
+    display: none;
+    font-family: Verdana, sans-serif;
+    font-size: 0.8em;
+    color: #878787;
+    text-align: center;
 }
 
 
@@ -201,19 +218,38 @@ div.tool-tag {
     outline: none;
 }
 
+#option-box {
+    display: flex;
+}
 
 #filter-container-tags, #filter-container-types {
+    margin-left: 5px;
     margin-top: 5px;
+    margin-bottom: 5px;
     display: none;
 }
 
-#filter-container > label, #filter-container-types > label {
+#filter-container-tags > label, #filter-container-types > label {
     font-family: Verdana;
     font-size: 5vw;
 }
 
-#filter-container > select, #filter-container-types > select {
-    height: 30px;
+#filter-container-tags > select, #filter-container-types > select {
+    width: 100px;
+}
+
+#show-only-fav {
+    margin-top: 5px;
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    display: none;
+}
+
+#show-only-fav  img {
+    width: 20px;
+    height: 20px;
 }
 
 
@@ -315,6 +351,8 @@ div.tool-tag {
     border-color: transparent transparent #FFFFFF transparent;
 }*/
 
+
+
 .option {
     height: 40px;
 }
@@ -342,6 +380,7 @@ div.tool-tag {
     border-radius: 34px;
     background-color: #ccc;
     transition: .4s;
+    font-size: 0.8em;
 }
 
 .slider:before {

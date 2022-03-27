@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Deletion of indicator from local storage when trash bin icon is clicked.
 - Removing of badge text on active tab change
+- Browserling icon
 
 ## [0.7.2] - 2022-03-05
 ### Added

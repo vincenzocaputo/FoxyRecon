@@ -207,7 +207,13 @@ document.querySelector("#filter-container-tags>select").addEventListener("change
         type = indicatorParser.getIndicatorType(inputString);
     }
     const optionValue = e.target.options[e.target.selectedIndex].value;
-    showButtonsByType(inputString, type, optionValue);
+    const showOnlyFavBtn = document.querySelector("#show-only-fav>button").value;
+    if (showOnlyFavBtn == "off") {
+        showButtonsByType(inputString, type, optionValue, false);
+    } else {
+        // If show only fav option is enabled, show only favourites tools
+        showButtonsByType(inputString, type, optionValue, true);
+    }
 });
 
 /**
@@ -220,7 +226,26 @@ document.querySelector("#filter-container-types>select").addEventListener("chang
     showIndicatorsByType(optionValue);
 });
 
-
+/**
+ *
+ * Handle star clicking event
+ *
+ */
+document.querySelector("#show-only-fav>button").addEventListener("click", (e) => {
+    const inputString = inputField.value;
+    const type = indicatorParser.getIndicatorType(inputString);
+    const selectedTag = document.querySelector("#filter-container-tags>select").value
+    const optionValue = document.querySelector("#show-only-fav button").value;
+    if (optionValue == "off" || optionValue == undefined) {
+        showButtonsByType(inputString, type, selectedTag, true);
+        document.querySelector("#show-only-fav button").value = "on";
+        document.querySelector("#show-only-fav img").src = "../../assets/icons/favourite_opt_on.png";
+    } else {
+        showButtonsByType(inputString, type, selectedTag, false);
+        document.querySelector("#show-only-fav button").value = "off";
+        document.querySelector("#show-only-fav img").src = "../../assets/icons/favourite_opt.png";
+    }
+});
 /**----------------------------------OPTION SETTINGS POP-UP----------------------------------------------**/
 
 function setCheckboxStatus(checkboxNode, optionName) {

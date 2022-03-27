@@ -62,6 +62,9 @@ function showAddonLogo() {
     document.querySelectorAll(".hunt-res-entry").forEach(e => e.remove());
     // Hide the bin icon
     document.getElementById("bin-icon").style.display = "none";
+    // Hide show fav button
+    document.getElementById("show-only-fav").style.display = "none";
+    document.getElementById("no-tools").style.display = "none";
 }
 
 
@@ -70,8 +73,9 @@ function showAddonLogo() {
  * @param {indicator} indicator entered by the user
  * @param {type} indicator type (domain, ip, url, etc.)
  * @param {tag} web resource tag (for filtering results)
+ * @param {showOnlyFav} if true, show only favourites resources
  */
-function showButtonsByType(indicator, type, tag) {
+function showButtonsByType(indicator, type, tag, showOnlyFav) {
     document.getElementById("filter-container-tags").style.display = "block";
     document.getElementById("filter-container-types").style.display = "none";
     document.getElementById("popup-text").style.display = "none";
@@ -79,33 +83,44 @@ function showButtonsByType(indicator, type, tag) {
     document.getElementById("addon-logo").style.display = "none";
     document.getElementById("hunt-res-list").style.display = "none";
     document.querySelectorAll(".hunt-res-entry").forEach(e => e.remove());
-    
+    document.getElementById("show-only-fav").style.display = "block";
+    document.getElementById("no-tools").style.display = "none";
     // This node contains the list of tools
     const toolsListNodes = document.getElementById("tools-list");
     toolsListNodes.style.display = "block";
     const resNodes = toolsListNodes.children;
+
+    // Retrieve favourites tools from local storage
+    const favTools = JSON.parse(localStorage.getItem("fav"));
 
     if(!tag) {
         // If no tag has been provided, by default set it to "all"
         tag = "all";
     }
     let tagsOptions = [];
+    let noTools = true;
     for (i = 0; i < resNodes.length; i++) {
-        if (tools[i]["types"].includes(type)) { 
-            tagsOptions = tagsOptions.concat(tools[i]["tags"]);
-            if (tag === "all" || (tools[i]["tags"] && tools[i]["tags"].includes(tag))) {
-                resNodes[i].style.display = "block";
-                // Set tool description to div title
-                resNodes[i].title = tools[i]["desc"];
-                // Replace the placholder with the input string
-                let url = tools[i]["url"][type];
-                url = cookURL(url, indicator);
-                resNodes[i].url = url;
-                resNodes[i].name = tools[i]["name"];
-                resNodes[i].submitQuery = tools[i]["submitQuery"];
+        if (!showOnlyFav || favTools && favTools.includes(tools[i]["name"])) {
+            if (tools[i]["types"].includes(type)) { 
+                tagsOptions = tagsOptions.concat(tools[i]["tags"]);
+                if (tag === "all" || (tools[i]["tags"] && tools[i]["tags"].includes(tag))) {
+                    noTools = false;
+                    resNodes[i].style.display = "block";
+                    // Set tool description to div title
+                    resNodes[i].title = tools[i]["desc"];
+                    // Replace the placholder with the input string
+                    let url = tools[i]["url"][type];
+                    url = cookURL(url, indicator);
+                    resNodes[i].url = url;
+                    resNodes[i].name = tools[i]["name"];
+                    resNodes[i].submitQuery = tools[i]["submitQuery"];
 
 
-            } else  {
+                } else  {
+                    resNodes[i].style.display = "none";
+                }
+            } else {
+                // If this tools does not support this indicator type, hide its button
                 resNodes[i].style.display = "none";
             }
         } else {
@@ -114,7 +129,9 @@ function showButtonsByType(indicator, type, tag) {
         }
     }
 
-
+    if (noTools) {
+        document.getElementById("no-tools").style.display = "block";
+    }
     createTagsOptionsList([...new Set(tagsOptions)]);
 
 }
@@ -365,6 +382,7 @@ function createIndicatorsList(indicatorsList){
     document.getElementById("hunt-icon").style.display = "none";
 
     let indicatorsListNode = document.getElementById("hunt-res-list");
+
     let typesList = [];
     for (i=0; i<indicatorsList.length; i++) {
         const type = indicatorsList[i]['type'];

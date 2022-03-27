@@ -17,19 +17,26 @@
                 <img src="../../assets/icons/settings.png"/>
             </div>
         </div>
-        <div id="filter-container-tags">
-            <label for="tags">Filter by Tag:</label>
-            <select name="tags" style="margin-top: 50px">
-                <option value="all">All</option>
-            </select>
+        <div id="option-box">
+            <div id="filter-container-tags">
+                <label for="tags">Filter by Tag:</label>
+                <select name="tags" style="margin-top: 50px; width: 50px">
+                    <option value="all">All</option>
+                </select>
+            </div>
+            <div id="filter-container-types">
+                <label for="types">Filter by Type</label>
+                <select name="types" style="margin-top: 50px">
+                    <option value="all">All</option>
+                </select>
+            </div>
+            <div id="show-only-fav">
+                <button value="off">
+                    <img src="../../assets/icons/favourite_opt.png" title="Show only favourites"/>
+                </button>
+            </div>
         </div>
-        <div id="filter-container-types">
-            <label for="types">Filter by Type</label>
-            <select name="types" style="margin-top: 50px">
-                <option value="all">All</option>
-            </select>
-        </div>
-        <div class="popup">
+         <div class="popup">
             <div id="settings-popup">
                 <span id="settings-title">Settings</span>
                 <hr>
@@ -71,7 +78,9 @@
                     Data submitted with this add-on will be sent to external web resources that are not under control of FoxyRecon. For this reason the data submitted will be treated in accordance with the terms of service of the several web resources chosen for analysis. Please, be aware of the tools and resources you are using and do not submit any personal information.
                 </div>
             </div>
-
+            <div id="no-tools">
+                No tools found
+            </div>
             <div id="tools-list">
 
             </div>
