@@ -122,10 +122,11 @@ textfieldTool.addEventListener("click", function() {
  * @param{indicator}: string representing the indicator to submit
  * @param{type}: indicator type
  * @param{tag}: possible tag to filter resources
+ * @param{tool}: possible tool name
  */
-function submitIndicator(indicator, type, tag) {
+function submitIndicator(indicator, type, tag, toolName) {
     // Show the appropriate tools for the input provided
-    showButtonsByType(indicator, type, tag);
+    showButtonsByType(indicator, type, tag, false, toolName);
     // Save the current indicator along with its type
     localStorage.setItem("indicator", indicator);
     localStorage.setItem("type", type);
@@ -165,14 +166,39 @@ inputField.addEventListener("keyup", (e) => {
         // Show the bin icon
         document.getElementById("bin-icon").style.display = "block";
         textfieldHunt.style.display = "none";
-        // Get indicator type
-        let type = indicatorParser.getIndicatorType(inputString);
+        
+        let type = "";
+        let inputIndicator = "";
+        let fToolName = "";
+        // Get indicator + possible search filters
+        let inputs = inputString.split(" ");
+        if(inputs.length > 1) {
+            // There is a search filter
+            inputIndicator = inputs[0];
+            let filterP = inputs[1].split(":");
+
+            if(filterP[0] === "tool") {
+                // Get tool name
+                fToolName = filterP[1];
+            } else {
+                type === "invalid";
+            }
+        } else {
+            inputIndicator = inputString;
+        }
+
+        if(type!="invalid") {
+            // Get indicator type
+            type = indicatorParser.getIndicatorType(inputIndicator);
+        }
+
         if(type === "defanged") {
             // If the input string is defanged, refang it
-            inputString = indicatorParser.refangIndicator(inputString);
+            inputString = indicatorParser.refangIndicator(inputIndicator);
             // Get the real type of the indicator
-            type = indicatorParser.getIndicatorType(inputString);
-        }
+            type = indicatorParser.getIndicatorType(inputIndicator);
+        } 
+
         if(type === "invalid") {
             showAddonLogo();
             textfieldTool.style.display = "none";
@@ -186,8 +212,14 @@ inputField.addEventListener("keyup", (e) => {
             const selectNode = document.querySelector("#filter-container-tags>select");
             const optionValue = selectNode.options[selectNode.selectedIndex].value;
 
-            submitIndicator(inputString, type, optionValue);
+            submitIndicator(inputIndicator, type, optionValue, fToolName);
         }
+        if(fToolName) {
+            console.log("Indicator: "+inputIndicator+" Tool: "+fToolName); 
+        } else {
+            console.log("Indicator: "+inputIndicator); 
+        }
+
     }
 });
 
