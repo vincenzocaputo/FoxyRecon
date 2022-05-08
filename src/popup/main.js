@@ -175,13 +175,11 @@ inputField.addEventListener("keyup", (e) => {
         if(inputs.length > 1) {
             // There is a search filter
             inputIndicator = inputs[0];
-            let filterP = inputs[1].split(":");
-
-            if(filterP[0] === "tool") {
-                // Get tool name
-                fToolName = filterP[1];
+            
+            if(inputs[1].includes("+")) {
+                fToolName = inputs[1].split("+")[1];
             } else {
-                type === "invalid";
+                type = "invalid";
             }
         } else {
             inputIndicator = inputString;
