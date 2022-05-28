@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Filtering by type for indicators collected through hunt feature.
 - LeakIX web resources for IPs and domains (Leak and Services lookup)
 
+### Changed
+- Removed Alexa (End of service on May 1st 2022)
+
 ### Fixed
 - Deletion of indicator from local storage when trash bin icon is clicked.
 - Removing of badge text on active tab change
