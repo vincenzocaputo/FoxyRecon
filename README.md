@@ -30,6 +30,9 @@ You can perform researches through FoxyRecon in two ways:
   
   
 ## Features
+### Hunting 
+FoxyRecon let you pull out indicators from a web page, making them ready for investigations and analysis. FoxyRecon allows you also to download them in CSV file for future analysis.
+
 ### Investigation
 Currently, FoxyRecon supports the following indicator types:
 - Domains
@@ -39,7 +42,20 @@ Currently, FoxyRecon supports the following indicator types:
 - Email addresses
 - CVEs 
 
+#### Search filters
+FoxyRecon provides some feature that can make analysis activities more efficient and comfortable:
+- Search web resources by tool and information type provided:
+    - Reputation Lookup [rep]
+    - Whois information Lookup
+    - DNS information Lookup
+    - SSL/TLS certificate Lookup
+    - Sandbox utility
+    - Data Leak lookup
+    - Screenshot taker
+- Filter web resources by name using the special character "+" in the search bar (e.g.: "example.com +abuse)
+- Choose your favourite tools and display only those by using the "star" button
 
+## Web Resources
 The following web resources are included in FoxyRecon:
 |Tool|Domain|IP|URL|Hash|Email|CVE|
 |----|:-:|:-:|:-:|:-:|:-:|:-:|
@@ -62,7 +78,6 @@ The following web resources are included in FoxyRecon:
 |[Pulsedive](https://pulsedive.com/)|:heavy_check_mark:|:heavy_check_mark:| - |:heavy_check_mark:| - | - |
 |[IntelligenceX](https://intelx.io/)|:heavy_check_mark:|:heavy_check_mark:| - | - | :heavy_check_mark: | - |
 |[Norton Safeweb](https://safeweb.norton.com/)|:heavy_check_mark:| - |:heavy_check_mark:| - | - | - |
-|[Alexa](https://www.alexa.com/)|:heavy_check_mark:| - | - | - | - | - |
 |[Spyse](https://spyse.com/)|:heavy_check_mark:|:heavy_check_mark:| - | - | - | - |
 |[WebArchive](https://web.archive.org)| - | - |:heavy_check_mark:| - | - | - |
 |[Google Cache](https://webcache.googleusercontent.com)| - | - |:heavy_check_mark:| - | - | - |
@@ -113,8 +128,6 @@ The following web resources are included in FoxyRecon:
 
 :red_circle: These web tools require some user interactions, such as entering a query and clicking a button to submit it. To perform these actions faster, FoxyRecon will automatically fill input fields on this web pages, with the indicator you are looking for.
 
-### Hunting 
-FoxyRecon let you pull out indicators from a web page, making them ready for investigations and analysis.
 
 ## Disclaimer
 Data submitted using this add-on will be sent to external web resources that are not under control of FoxyRecon. For this reason the data submitted will be treated in accordance with the terms of service of the several web resources chosen for analysis. Please, be aware of the tools and resources you are using and do not submit any personal information.

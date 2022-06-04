@@ -122,10 +122,11 @@ textfieldTool.addEventListener("click", function() {
  * @param{indicator}: string representing the indicator to submit
  * @param{type}: indicator type
  * @param{tag}: possible tag to filter resources
+ * @param{tool}: possible tool name
  */
-function submitIndicator(indicator, type, tag) {
+function submitIndicator(indicator, type, tag, toolName) {
     // Show the appropriate tools for the input provided
-    showButtonsByType(indicator, type, tag);
+    showButtonsByType(indicator, type, tag, false, toolName);
     // Save the current indicator along with its type
     localStorage.setItem("indicator", indicator);
     localStorage.setItem("type", type);
@@ -165,14 +166,37 @@ inputField.addEventListener("keyup", (e) => {
         // Show the bin icon
         document.getElementById("bin-icon").style.display = "block";
         textfieldHunt.style.display = "none";
-        // Get indicator type
-        let type = indicatorParser.getIndicatorType(inputString);
+        
+        let type = "";
+        let inputIndicator = "";
+        let fToolName = "";
+        // Get indicator + possible search filters
+        let inputs = inputString.split(" ");
+        if(inputs.length > 1) {
+            // There is a search filter
+            inputIndicator = inputs[0];
+            
+            if(inputs[1].includes("+")) {
+                fToolName = inputs[1].split("+")[1];
+            } else {
+                type = "invalid";
+            }
+        } else {
+            inputIndicator = inputString;
+        }
+
+        if(type!="invalid") {
+            // Get indicator type
+            type = indicatorParser.getIndicatorType(inputIndicator);
+        }
+
         if(type === "defanged") {
             // If the input string is defanged, refang it
-            inputString = indicatorParser.refangIndicator(inputString);
+            inputIndicator = indicatorParser.refangIndicator(inputIndicator);
             // Get the real type of the indicator
-            type = indicatorParser.getIndicatorType(inputString);
-        }
+            type = indicatorParser.getIndicatorType(inputIndicator);
+        } 
+
         if(type === "invalid") {
             showAddonLogo();
             textfieldTool.style.display = "none";
@@ -185,9 +209,11 @@ inputField.addEventListener("keyup", (e) => {
             // Get selected tag option
             const selectNode = document.querySelector("#filter-container-tags>select");
             const optionValue = selectNode.options[selectNode.selectedIndex].value;
-
-            submitIndicator(inputString, type, optionValue);
+            
+            console.log(inputIndicator, type);
+            submitIndicator(inputIndicator, type, optionValue, fToolName);
         }
+
     }
 });
 
@@ -342,4 +368,22 @@ document.querySelector("#auto-submit-opt input").addEventListener("change", func
     //let linksNodes = document.getElementById("tools-list").children;
     autosubmitOption = evt.target.checked;
     localStorage.setItem("settings.autosubmit", autosubmitOption);
+});
+
+/**----------------------------------DOWNLOAD BUTTON----------------------------------------------**/
+
+document.getElementById("download-button").addEventListener("click", (e)=> {
+    let csvData = [];
+    document.querySelectorAll(".hunt-res-entry").forEach((node) => {
+        if(node.style.display === "" || node.style.display === "block") {
+            csvData.push([node.title, node.type]);
+        }
+    });
+    let csv = "indicator,type\n";
+    csvData.forEach(function(row) {  
+        csv += row.join(',');  
+        csv += "\n";  
+    });  
+    window.location.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+
 });

@@ -2,9 +2,9 @@ class IndicatorParser {
     // Regexes
     constructor() {
         this.domain = new RegExp(/^((?!-)[_A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,63}$/);
-        this.def_domain = new RegExp(/^((?!-)[_A-Za-z0-9-]{1,63}(?<!-)(?:\[\.\]))+[A-Za-z]{2,63}$/);
+        this.def_domain = new RegExp(/^((?!-)[_A-Za-z0-9-]{1,63}(?<!-)(?:(\[\.\]|\.)))+[A-Za-z]{2,63}$/);
         this.url = new RegExp(/^(?:http[s]?):\/\/((?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,63})\b(?:[-a-zA-Z0-9@:%_\+.~#?&//=]*)$/);
-        this.def_url = new RegExp(/^(?:hxxp[s]?):\/\/(?:www(?:\[\.\]))?(?:[-a-zA-Z0-9@:%_\+~#=]+\[\.\])+(?:[a-z]{2,63})\b(?:[-a-zA-Z0-9@:%_\+.~#?&//=]*)$/)
+        this.def_url = new RegExp(/^(?:h(xx|XX)p[s]?):\/\/(?:www(?:(\[\.\]|\.)))?(?:[-a-zA-Z0-9@:%_\+~#=]+(\[\.\]|\.))+(?:[a-z]{2,63})\b(?:[-a-zA-Z0-9@:%_\+.~#?&//=]*)$/)
         this.ip = new RegExp(/^((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))*$/);
         this.def_ip = new RegExp(/^((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\[\.\])){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))*$/);
         this.hash = new RegExp(/(^[a-z0-9]{32}$)|(^[a-z0-9]{40}$)|(^[a-z0-9]{64}$)/); 
@@ -21,10 +21,6 @@ class IndicatorParser {
      * @return Type of the indicator detected, if it is valid
      */
     getIndicatorType(indicator) {
-        if(indicator.match(this.def_domain) || indicator.match(this.def_ip) || 
-            indicator.match(this.def_url) || indicator.match(this.def_email)) {
-            return "defanged";
-        }
 
         if(indicator.match(this.domain)) {
             return "domain";
@@ -41,7 +37,10 @@ class IndicatorParser {
             return "email";
         } else if(indicator.match(this.cve)) {
             return "cve";
-        }  else {
+        }  else if(indicator.match(this.def_domain) || indicator.match(this.def_ip) || 
+            indicator.match(this.def_url) || indicator.match(this.def_email)) {
+            return "defanged";
+        } else {
             return "invalid";
         }
     }

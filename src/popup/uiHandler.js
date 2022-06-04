@@ -65,6 +65,8 @@ function showAddonLogo() {
     // Hide show fav button
     document.getElementById("show-only-fav").style.display = "none";
     document.getElementById("no-tools").style.display = "none";
+    // Hide download icon
+    document.getElementById("download").style.display = "none";
 }
 
 
@@ -74,10 +76,12 @@ function showAddonLogo() {
  * @param {type} indicator type (domain, ip, url, etc.)
  * @param {tag} web resource tag (for filtering results)
  * @param {showOnlyFav} if true, show only favourites resources
+ * @param {toolName} possible tool name to show
  */
-function showButtonsByType(indicator, type, tag, showOnlyFav) {
+function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
     document.getElementById("filter-container-tags").style.display = "block";
     document.getElementById("filter-container-types").style.display = "none";
+    document.getElementById("download").style.display = "none";
     document.getElementById("popup-text").style.display = "none";
     document.getElementById("text-field").style.borderColor = "#6E6C69";
     document.getElementById("addon-logo").style.display = "none";
@@ -101,26 +105,30 @@ function showButtonsByType(indicator, type, tag, showOnlyFav) {
     let noTools = true;
     for (i = 0; i < resNodes.length; i++) {
         if (!showOnlyFav || favTools && favTools.includes(tools[i]["name"])) {
-            if (tools[i]["types"].includes(type)) { 
-                tagsOptions = tagsOptions.concat(tools[i]["tags"]);
-                if (tag === "all" || (tools[i]["tags"] && tools[i]["tags"].includes(tag))) {
-                    noTools = false;
-                    resNodes[i].style.display = "block";
-                    // Set tool description to div title
-                    resNodes[i].title = tools[i]["desc"];
-                    // Replace the placholder with the input string
-                    let url = tools[i]["url"][type];
-                    url = cookURL(url, indicator);
-                    resNodes[i].url = url;
-                    resNodes[i].name = tools[i]["name"];
-                    resNodes[i].submitQuery = tools[i]["submitQuery"];
+            if (!toolName || tools[i]["name"].toLowerCase().includes(toolName)) {
+                if (tools[i]["types"].includes(type)) { 
+                    tagsOptions = tagsOptions.concat(tools[i]["tags"]);
+                    if (tag === "all" || (tools[i]["tags"] && tools[i]["tags"].includes(tag))) {
+                        noTools = false;
+                        resNodes[i].style.display = "block";
+                        // Set tool description to div title
+                        resNodes[i].title = tools[i]["desc"];
+                        // Replace the placholder with the input string
+                        let url = tools[i]["url"][type];
+                        url = cookURL(url, indicator);
+                        resNodes[i].url = url;
+                        resNodes[i].name = tools[i]["name"];
+                        resNodes[i].submitQuery = tools[i]["submitQuery"];
 
 
-                } else  {
+                    } else  {
+                        resNodes[i].style.display = "none";
+                    }
+                } else {
+                    // If this tools does not support this indicator type, hide its button
                     resNodes[i].style.display = "none";
                 }
             } else {
-                // If this tools does not support this indicator type, hide its button
                 resNodes[i].style.display = "none";
             }
         } else {
@@ -376,6 +384,7 @@ function createToolsList(toolsList){
 function createIndicatorsList(indicatorsList){
     document.getElementById("filter-container-tags").style.display = "none";
     document.getElementById("filter-container-types").style.display = "block";
+    document.getElementById("download").style.display = "block";
     document.getElementById("popup-text").style.display = "none";
     document.getElementById("text-field").style.borderColor = "#6E6C69";
     document.getElementById("addon-logo").style.display = "none";
@@ -484,9 +493,7 @@ function createIndicatorsList(indicatorsList){
 function showIndicatorsByType(indicatorType) {
     // retrieve the list of indicators
     document.querySelectorAll(".hunt-res-entry").forEach((node)=>{
-        console.log(indicatorType);
         if(indicatorType != "all" && node.type != indicatorType) {
-            console.log(node.type);
             // hide the entry
             node.style.display = "none";
         } else {

@@ -13,16 +13,6 @@
             "tags": ["rep"]
 		},
         {
-            "name": "Alexa",
-            "url": {
-                "domain": "https://www.alexa.com/siteinfo/%s"
-            },
-            "desc": "Keyword Research, Competitive Analysis & Website",
-            "icon": "alexa.png",
-            "color": "#F89A3A",
-            "types": ["domain"]
-        },
-        {
             "name": "AlienVault",
             "url": {
                 "ip": "https://otx.alienvault.com/indicator/ip/%s",
