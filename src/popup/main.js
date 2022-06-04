@@ -209,7 +209,8 @@ inputField.addEventListener("keyup", (e) => {
             // Get selected tag option
             const selectNode = document.querySelector("#filter-container-tags>select");
             const optionValue = selectNode.options[selectNode.selectedIndex].value;
-
+            
+            console.log(inputIndicator, type);
             submitIndicator(inputIndicator, type, optionValue, fToolName);
         }
 
@@ -367,4 +368,22 @@ document.querySelector("#auto-submit-opt input").addEventListener("change", func
     //let linksNodes = document.getElementById("tools-list").children;
     autosubmitOption = evt.target.checked;
     localStorage.setItem("settings.autosubmit", autosubmitOption);
+});
+
+/**----------------------------------DOWNLOAD BUTTON----------------------------------------------**/
+
+document.getElementById("download-button").addEventListener("click", (e)=> {
+    let csvData = [];
+    document.querySelectorAll(".hunt-res-entry").forEach((node) => {
+        if(node.style.display === "" || node.style.display === "block") {
+            csvData.push([node.title, node.type]);
+        }
+    });
+    let csv = "indicator,type\n";
+    csvData.forEach(function(row) {  
+        csv += row.join(',');  
+        csv += "\n";  
+    });  
+    window.location.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+
 });

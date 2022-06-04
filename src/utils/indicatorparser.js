@@ -21,10 +21,6 @@ class IndicatorParser {
      * @return Type of the indicator detected, if it is valid
      */
     getIndicatorType(indicator) {
-        if(indicator.match(this.def_domain) || indicator.match(this.def_ip) || 
-            indicator.match(this.def_url) || indicator.match(this.def_email)) {
-            return "defanged";
-        }
 
         if(indicator.match(this.domain)) {
             return "domain";
@@ -41,7 +37,10 @@ class IndicatorParser {
             return "email";
         } else if(indicator.match(this.cve)) {
             return "cve";
-        }  else {
+        }  else if(indicator.match(this.def_domain) || indicator.match(this.def_ip) || 
+            indicator.match(this.def_url) || indicator.match(this.def_email)) {
+            return "defanged";
+        } else {
             return "invalid";
         }
     }

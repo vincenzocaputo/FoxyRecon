@@ -65,6 +65,8 @@ function showAddonLogo() {
     // Hide show fav button
     document.getElementById("show-only-fav").style.display = "none";
     document.getElementById("no-tools").style.display = "none";
+    // Hide download icon
+    document.getElementById("download").style.display = "none";
 }
 
 
@@ -79,6 +81,7 @@ function showAddonLogo() {
 function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
     document.getElementById("filter-container-tags").style.display = "block";
     document.getElementById("filter-container-types").style.display = "none";
+    document.getElementById("download").style.display = "none";
     document.getElementById("popup-text").style.display = "none";
     document.getElementById("text-field").style.borderColor = "#6E6C69";
     document.getElementById("addon-logo").style.display = "none";
@@ -381,6 +384,7 @@ function createToolsList(toolsList){
 function createIndicatorsList(indicatorsList){
     document.getElementById("filter-container-tags").style.display = "none";
     document.getElementById("filter-container-types").style.display = "block";
+    document.getElementById("download").style.display = "block";
     document.getElementById("popup-text").style.display = "none";
     document.getElementById("text-field").style.borderColor = "#6E6C69";
     document.getElementById("addon-logo").style.display = "none";
@@ -489,9 +493,7 @@ function createIndicatorsList(indicatorsList){
 function showIndicatorsByType(indicatorType) {
     // retrieve the list of indicators
     document.querySelectorAll(".hunt-res-entry").forEach((node)=>{
-        console.log(indicatorType);
         if(indicatorType != "all" && node.type != indicatorType) {
-            console.log(node.type);
             // hide the entry
             node.style.display = "none";
         } else {
