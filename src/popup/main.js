@@ -192,7 +192,7 @@ inputField.addEventListener("keyup", (e) => {
 
         if(type === "defanged") {
             // If the input string is defanged, refang it
-            inputString = indicatorParser.refangIndicator(inputIndicator);
+            inputIndicator = indicatorParser.refangIndicator(inputIndicator);
             // Get the real type of the indicator
             type = indicatorParser.getIndicatorType(inputIndicator);
         } 
@@ -211,11 +211,6 @@ inputField.addEventListener("keyup", (e) => {
             const optionValue = selectNode.options[selectNode.selectedIndex].value;
 
             submitIndicator(inputIndicator, type, optionValue, fToolName);
-        }
-        if(fToolName) {
-            console.log("Indicator: "+inputIndicator+" Tool: "+fToolName); 
-        } else {
-            console.log("Indicator: "+inputIndicator); 
         }
 
     }
