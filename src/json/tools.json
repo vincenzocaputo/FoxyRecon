@@ -445,6 +445,30 @@
             "tags": ["whois"]
         },
         {
+            "name": "multiRBL Lookup",
+            "url": {
+                "ip": "https://multirbl.valli.org/lookup/%s.html",
+                "domain": "https://multirbl.valli.org/lookup/%s.html"
+            },
+            "desc": "Free multiple DNSBL lookup and FCrDNS check tool",
+            "icon": "multirbl.png",
+            "color": "#FF0000",
+            "types": ["domain","ip"],
+            "tags": ["rep"]
+        },
+        {
+            "name": "multiRBL WHOIS",
+            "url": {
+                "ip": "https://multirbl.valli.org/whois-lookup/%s.html",
+                "domain": "https://multirbl.valli.org/whois-lookup/%s.html"
+            },
+            "desc": "Free WHOIS lookup tool",
+            "icon": "multirbl.png",
+            "color": "#FF0000",
+            "types": ["domain"],
+            "tags": ["whois"]
+        },
+        {
             "name": "Netcraft",
             "url": {
                 "domain": "https://sitereport.netcraft.com/?url=%s",
