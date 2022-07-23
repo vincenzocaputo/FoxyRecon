@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.9.1] - 2022-07-18
 ### Added
 - MultiRBL.valli.org lookup tool (WHOIS & DNSBL)
+- bgp.tools lookup tool for IP address (WHOIS & DNS)
 
 ## [0.9] - 2022-06-04
 ### Added

@@ -1,17 +1,17 @@
 {
 	"tools": [
-		{
-			"name": "AbuseIPDB",
-			"url":  {
-                "domain": "https://www.abuseipdb.com/check/%s",
-                "ip": "https://www.abuseipdb.com/check/%s"
-            },
-			"desc": "IP address abuse reports",
-            "icon": "abuseipdb.png",
-			"color": "#4E7E14",
-			"types": ["domain","ip"],
-            "tags": ["rep"]
+	{
+		"name": "AbuseIPDB",
+		"url":  {
+			"domain": "https://www.abuseipdb.com/check/%s",
+			"ip": "https://www.abuseipdb.com/check/%s"
 		},
+		"desc": "IP address abuse reports",
+		"icon": "abuseipdb.png",
+		"color": "#4E7E14",
+		"types": ["domain","ip"],
+		"tags": ["rep"]
+	},
         {
             "name": "AlienVault",
             "url": {
@@ -33,6 +33,17 @@
             "icon": "attackerkb.png",
             "color": "#1A171C",
             "types": ["cve"]
+        },
+        {
+            "name": "bgp.tools",
+            "url": {
+                "ip": "https://bgp.tools/prefix/%s"
+            },
+            "desc": "Browse the internet ecosystem",
+            "color": "#000000",
+            "icon": "bgptools.png",
+            "types": ["ip"],
+            "tags": ["whois","dns"]
         },
         {
             "name": "Browserling",
