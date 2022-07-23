@@ -67,17 +67,27 @@
             "icon": "builtwith.png",
             "types": ["domain"]
         },
-        {
-            "name": "Censys",
+	{
+            "name": "Censys Certificates",
             "url": {
-                "domain": "https://search.censys.io/search?resource=hosts&q=%s", 
-                "ip": "https://search.censys.io/search?resource=hosts&q=%s"
+                "domain": "https://search.censys.io/certificates?q=%s"
             },
-            "desc": "Hosts and networks search enginge",
+            "desc": "Hosts and networks search engine",
             "icon": "censys.png",
             "color": "#FF7A38",
-            "types": ["domain","ip"],
-            "tags": ["portscan", "tls"]
+            "types": ["domain"],
+            "tags": ["tls"]
+        },
+        {
+            "name": "Censys Hosts",
+            "url": {
+                "ip": "https://search.censys.io/hosts/%s"
+            },
+            "desc": "Hosts and networks search engine",
+            "icon": "censys.png",
+            "color": "#FF7A38",
+            "types": ["ip"],
+            "tags": ["portscan"]
         },
         {
             "name": "CentralOps",
