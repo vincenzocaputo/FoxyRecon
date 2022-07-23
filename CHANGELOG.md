@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.1] - 2022-07-23
+### Added
+- MultiRBL.valli.org lookup tool (WHOIS & DNSBL)
+- bgp.tools lookup tool for IP address (WHOIS & DNS)
+
+### Fixed
+- Censys certificates and hosts lookup
+
 ## [0.9] - 2022-06-04
 ### Added
 - Filtering by tool name, using special character '+' in the search bar
@@ -12,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Removed Alexa (End of service on May 1st 2022)
 
-### Fix
+### Fixed
 - Defanged domain and URL regex
 
 ## [0.8] - 2022-03-27

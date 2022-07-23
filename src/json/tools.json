@@ -1,17 +1,17 @@
 {
 	"tools": [
-		{
-			"name": "AbuseIPDB",
-			"url":  {
-                "domain": "https://www.abuseipdb.com/check/%s",
-                "ip": "https://www.abuseipdb.com/check/%s"
-            },
-			"desc": "IP address abuse reports",
-            "icon": "abuseipdb.png",
-			"color": "#4E7E14",
-			"types": ["domain","ip"],
-            "tags": ["rep"]
+	{
+		"name": "AbuseIPDB",
+		"url":  {
+			"domain": "https://www.abuseipdb.com/check/%s",
+			"ip": "https://www.abuseipdb.com/check/%s"
 		},
+		"desc": "IP address abuse reports",
+		"icon": "abuseipdb.png",
+		"color": "#4E7E14",
+		"types": ["domain","ip"],
+		"tags": ["rep"]
+	},
         {
             "name": "AlienVault",
             "url": {
@@ -35,6 +35,17 @@
             "types": ["cve"]
         },
         {
+            "name": "bgp.tools",
+            "url": {
+                "ip": "https://bgp.tools/prefix/%s"
+            },
+            "desc": "Browse the internet ecosystem",
+            "color": "#000000",
+            "icon": "bgptools.png",
+            "types": ["ip"],
+            "tags": ["whois","dns"]
+        },
+        {
             "name": "Browserling",
             "url": {
                 "url": "https://www.browserling.com/browse/win/7/chrome/92/%s"
@@ -56,17 +67,27 @@
             "icon": "builtwith.png",
             "types": ["domain"]
         },
-        {
-            "name": "Censys",
+	{
+            "name": "Censys Certificates",
             "url": {
-                "domain": "https://search.censys.io/search?resource=hosts&q=%s", 
-                "ip": "https://search.censys.io/search?resource=hosts&q=%s"
+                "domain": "https://search.censys.io/certificates?q=%s"
             },
-            "desc": "Hosts and networks search enginge",
+            "desc": "Hosts and networks search engine",
             "icon": "censys.png",
             "color": "#FF7A38",
-            "types": ["domain","ip"],
-            "tags": ["portscan", "tls"]
+            "types": ["domain"],
+            "tags": ["tls"]
+        },
+        {
+            "name": "Censys Hosts",
+            "url": {
+                "ip": "https://search.censys.io/hosts/%s"
+            },
+            "desc": "Hosts and networks search engine",
+            "icon": "censys.png",
+            "color": "#FF7A38",
+            "types": ["ip"],
+            "tags": ["portscan"]
         },
         {
             "name": "CentralOps",
@@ -441,6 +462,30 @@
             "desc": "DNS records Lookup",
             "icon": "mxtoolbox.png",
             "color": "#E29439",
+            "types": ["domain"],
+            "tags": ["whois"]
+        },
+        {
+            "name": "multiRBL Lookup",
+            "url": {
+                "ip": "https://multirbl.valli.org/lookup/%s.html",
+                "domain": "https://multirbl.valli.org/lookup/%s.html"
+            },
+            "desc": "Free multiple DNSBL lookup and FCrDNS check tool",
+            "icon": "multirbl.png",
+            "color": "#FF0000",
+            "types": ["domain","ip"],
+            "tags": ["rep"]
+        },
+        {
+            "name": "multiRBL WHOIS",
+            "url": {
+                "ip": "https://multirbl.valli.org/whois-lookup/%s.html",
+                "domain": "https://multirbl.valli.org/whois-lookup/%s.html"
+            },
+            "desc": "Free WHOIS lookup tool",
+            "icon": "multirbl.png",
+            "color": "#FF0000",
             "types": ["domain"],
             "tags": ["whois"]
         },
