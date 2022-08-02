@@ -233,7 +233,13 @@ function createToolsList(toolsList){
    
         let nodeImage = document.createElement("img");
 
-        nodeImage.setAttribute("src", toolsIcoBasePath + toolsList[i]["icon"]);
+        let imageSrc = toolsList[i]["icon"];
+        if(imageSrc.indexOf("data:image") == 0) {
+            console.log(imageSrc);
+            nodeImage.setAttribute("src", imageSrc);
+        } else {
+            nodeImage.setAttribute("src", toolsIcoBasePath + imageSrc);
+        }
 
         // This node will contain the web resource's name
         let nodeText = document.createElement("div");
