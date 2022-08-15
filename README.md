@@ -55,6 +55,9 @@ FoxyRecon provides some feature that can make analysis activities more efficient
 - Filter web resources by name using the special character "+" in the search bar (e.g.: "example.com +abuse)
 - Choose your favourite tools and display only those by using the "star" button
 
+#### Custom Web Resources
+You can add your custom tools to FoxyRecon using the dedicated page reachable from settings.
+
 ## Web Resources
 The following web resources are included in FoxyRecon:
 |Tool|Domain|IP|URL|Hash|Email|CVE|
@@ -125,8 +128,9 @@ The following web resources are included in FoxyRecon:
 |[Vulners](https://vulners.com)  | - | - | - | - | - | :heavy_check_mark: |
 |[Google](https://google.com)  | :heavy_check_mark: | :heavy_check_mark: | - | - | :heavy_check_mark: | :heavy_check_mark: |
 |[LeakIX](https://leakix.net) | :heavy_check_mark: | :heavy_check_mark: | - | - | - | - |
-|[multiRBL](https://multirbl.valli.org) :new: | :heavy_check_mark: | :heavy_check_mark: | - | - | - | - |
-|[bgp.tools](https://bgp.tools) :new: | - | :heavy_check_mark: | - | - | - | - |
+|[multiRBL](https://multirbl.valli.org) | :heavy_check_mark: | :heavy_check_mark: | - | - | - | - |
+|[bgp.tools](https://bgp.tools) | - | :heavy_check_mark: | - | - | - | - |
+|[W3Techs](https://w3techs.com) :new: | :heavt_check_mark: | - | - | - | - | - |
 
 :red_circle: These web tools require some user interactions, such as entering a query and clicking a button to submit it. To perform these actions faster, FoxyRecon will automatically fill input fields on this web pages, with the indicator you are looking for.
 
