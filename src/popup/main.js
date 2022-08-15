@@ -375,7 +375,7 @@ document.querySelector("#auto-submit-opt input").addEventListener("change", func
  */
 document.querySelector("#open-settings").addEventListener("click", function(evt) {
     browser.tabs.create({
-        url: '/src/settings/settings.html'
+        url: '/src/customtools/customtools.html'
     });
 });
 

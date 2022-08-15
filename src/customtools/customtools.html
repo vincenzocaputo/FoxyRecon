@@ -1,14 +1,17 @@
 <html>
 	<head>
-        <title>FoxyRecon Settings</title>
-        <link rel="stylesheet" href="settings.css">
-        <script src="settings.js"></script>
+        <title>FoxyRecon customtools</title>
+        <link rel="stylesheet" href="customtools.css">
+        <script src="customtools.js"></script>
 	</head>
     <body>
         <div id="header-pane">
+            <img src="../../assets/icons/foxyrecon-icon-48.png"/>
+            <div>Custom Web Resources</div>
         </div>
         <div id="left-pane">
-        aaaa
+            <div id="tools-list">
+            </div>
         </div>
         <div id="right-pane">
             <div id="add-tool-pane">
@@ -36,23 +39,47 @@
                     </div>
                     <div class="form-row">
                         <label for="tool_dom_url">URL for Domain</label>
-                        <input type="text" id="tool_dom_url"><br>
+                        <input type="text" id="tool_dom_url"> <input type="checkbox" id="tool_dom_post"><label for="tool_dom_post">POST</label> <br>
+                    </div>
+                    <div class="form-row" id="dom_post_row">
+                        <label for="tool_dom_csssel" id="tool_dom_csssel_label">Input field CSS selector</label>
+                        <input type="text" id="tool_dom_csssel"> <br>
                     </div>
                     <div class="form-row">
                         <label for="tool_ip_url">URL for IP</label>
-                        <input type="text" id="tool_ip_url"><br>
+
+                        <input type="text" id="tool_ip_url"><input type="checkbox" id="tool_ip_post"><label for="tool_ip_post">POST</label> <br>
+                    </div>
+                    <div class="form-row" id="ip_post_row">
+                        <label for="tool_ip_csssel" id="tool_ip_csssel_label">Input field CSS selector</label>
+                        <input type="text" id="tool_ip_csssel"> <br>
                     </div>
                     <div class="form-row">
                         <label for="tool_url_url">URL for URLs</label>
-                        <input type="text" id="tool_url_url"><br>
+
+                        <input type="text" id="tool_url_url"><input type="checkbox" id="tool_url_post"><label for="tool_url_post">POST</label> <br>
+                    </div>
+                    <div class="form-row" id="url_post_row">
+                        <label for="tool_url_csssel" id="tool_url_csssel_label">Input field CSS selector</label>
+                        <input type="text" id="tool_url_csssel"> <br>
                     </div>
                     <div class="form-row">
                         <label for="tool_email_url">URL for Emails</label>
-                        <input type="text" id="tool_email_url"><br>
+
+                        <input type="text" id="tool_email_url"><input type="checkbox" id="tool_email_post"><label for="tool_email_post">POST</label> <br>
+                    </div>
+                    <div class="form-row" id="email_post_row">
+                        <label for="tool_email_csssel" id="tool_email_csssel_label">Input field CSS selector</label>
+                        <input type="text" id="tool_email_csssel"> <br>
                     </div>
                     <div class="form-row">
                         <label for="tool_cve_url">URL for CVEs</label>
-                        <input type="text" id="tool_cve_url"><br>
+
+                        <input type="text" id="tool_cve_url"><input type="checkbox" id="tool_cve_post"><label for="tool_cve_post">POST</label> <br>
+                    </div>
+                    <div class="form-row" id="cve_post_row">
+                        <label for="tool_cve_csssel" id="tool_cve_csssel_label">Input field CSS selector</label>
+                        <input type="text" id="tool_cve_csssel"> <br>
                     </div>
                     <div id="tags-select">
                         <div class="form-row">
@@ -110,6 +137,7 @@
                     </div>
                     <div class="form-row">
                         <button id="submit-btn">Add tool</button>
+                        <button id="reset-btn">Reset</button>
                     </div>
                 </div>
             </div>

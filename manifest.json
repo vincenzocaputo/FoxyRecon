@@ -61,7 +61,7 @@
 	},
 
     "options_ui": {
-        "page": "src/settings/settings.html",
+        "page": "src/customtools/customtools.html",
         "open_in_tab": true
     }
 }
