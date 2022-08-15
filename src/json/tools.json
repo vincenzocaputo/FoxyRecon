@@ -804,6 +804,17 @@
             "types": ["cve"]
         },
         {
+            "name": "W3Techs",
+            "url": {
+                "domain": "https://w3techs.com/sites/info/%s"
+            },
+            "desc": "W3Techs provides information about the usage of various types of technologies on the web.",
+            "icon": "w3techs.png",
+            "color": "#c80000",
+            "types": ["domain"],
+            "tags": []
+        },
+        {
             "name": "Whois",
             "url": {
                 "domain": "https://www.whois.com/whois/%s",

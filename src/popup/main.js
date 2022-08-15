@@ -370,6 +370,15 @@ document.querySelector("#auto-submit-opt input").addEventListener("change", func
     localStorage.setItem("settings.autosubmit", autosubmitOption);
 });
 
+/**
+ * Handle open settings page button click event
+ */
+document.querySelector("#open-settings").addEventListener("click", function(evt) {
+    browser.tabs.create({
+        url: '/src/customtools/customtools.html'
+    });
+});
+
 /**----------------------------------DOWNLOAD BUTTON----------------------------------------------**/
 
 document.getElementById("download-button").addEventListener("click", (e)=> {
