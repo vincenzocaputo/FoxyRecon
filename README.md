@@ -54,6 +54,7 @@ FoxyRecon includes a plenty of OSINT web resources. You can find the full list h
 You can also add your custom web resource sing the dedicated page reachable from settings.
 
 ## Disclaimer
-Data submitted using this add-on will be sent to external web resources that are not under control of FoxyRecon. For this reason the data submitted will be treated in accordance with the terms of service of the several web resources chosen for analysis. Please, be aware of the tools and resources you are using and do not submit any personal information.
+FoxyRecon does not retain any user data. Data submitted using this add-on will be sent to external web resources that are not under control of FoxyRecon. For this reason the data submitted will be treated in accordance with the terms of service of the several web resources chosen for analysis. Please, be aware of the tools and resources you are using and do not submit any personal information.
+
 
 This addon is *experimental* and it may contain some bugs. Feel free to open issues if you have questions, insights or bugs to report. 
