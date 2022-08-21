@@ -7,9 +7,6 @@
   </a>
 </p>
 
-
-
-
 <p align="center">
   <img src="images/foxyrecon.png" width="200" height="200" />
 </p>
@@ -17,23 +14,19 @@
 # FoxyRecon
 FoxyRecon is a Firefox add-on that helps you to carry out searching and investigation activities by using free Open Source Intelligence Source (OSINT) web resources.
 
-## Usage
-
 You can perform researches through FoxyRecon in two ways:
 - Via popup\
   You can enter the indicator you want to analyze in the textbox located in the popup. FoxyRecon will suggest you the most suitable tools for your indicator.\
   ![Popup](images/popup.gif)
+  
+  The popup also let you pull out indicators from a web page, making them ready for investigations and analysis. FoxyRecon allows you also to download them in CSV file for future analysis.
+
 - Via context menu\
   On whatever website you are visiting, you can highlight the indicator you want to analyze and, by right clicking on it, you can choose one of the suggested tools in the FoxyRecon context menu.
   The indicator submitted will be saved as input in the text field of the popup in order to let you performing further investigations on it. \
   ![Context Menu](images/contextmenu.gif)
   
-  
-## Features
-### Hunting 
-FoxyRecon let you pull out indicators from a web page, making them ready for investigations and analysis. FoxyRecon allows you also to download them in CSV file for future analysis.
-
-### Investigation
+## Supported Indicators
 Currently, FoxyRecon supports the following indicator types:
 - Domains
 - IPv4 addresses
@@ -42,7 +35,7 @@ Currently, FoxyRecon supports the following indicator types:
 - Email addresses
 - CVEs 
 
-#### Search filters
+## Search filters
 FoxyRecon provides some feature that can make analysis activities more efficient and comfortable:
 - Search web resources by tool and information type provided:
     - Reputation Lookup [rep]
@@ -56,7 +49,15 @@ FoxyRecon provides some feature that can make analysis activities more efficient
 - Choose your favourite tools and display only those by using the "star" button
 
 ## Web Resources
-The following web resources are included in FoxyRecon:
+FoxyRecon includes a plenty of OSINT web resources. You can find the full list here.
+
+You can also add your custom web resource sing the dedicated page reachable from settings.
+
+## Disclaimer
+Data submitted using this add-on will be sent to external web resources that are not under control of FoxyRecon. For this reason the data submitted will be treated in accordance with the terms of service of the several web resources chosen for analysis. Please, be aware of the tools and resources you are using and do not submit any personal information.
+
+This addon is *experimental* and it may contain some bugs. Feel free to open issues if you have questions, insights or bugs to report. 
+
 |Tool|Domain|IP|URL|Hash|Email|CVE|
 |----|:-:|:-:|:-:|:-:|:-:|:-:|
 |[URLVoid](https://urlvoid.com/)|:heavy_check_mark:| - | - | - | - | - |
@@ -132,5 +133,4 @@ The following web resources are included in FoxyRecon:
 :red_circle: These web tools require some user interactions, such as entering a query and clicking a button to submit it. To perform these actions faster, FoxyRecon will automatically fill input fields on this web pages, with the indicator you are looking for.
 
 
-## Disclaimer
-Data submitted using this add-on will be sent to external web resources that are not under control of FoxyRecon. For this reason the data submitted will be treated in accordance with the terms of service of the several web resources chosen for analysis. Please, be aware of the tools and resources you are using and do not submit any personal information.
+
