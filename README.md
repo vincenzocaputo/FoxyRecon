@@ -127,6 +127,7 @@ The following web resources are included in FoxyRecon:
 |[LeakIX](https://leakix.net) | :heavy_check_mark: | :heavy_check_mark: | - | - | - | - |
 |[multiRBL](https://multirbl.valli.org) :new: | :heavy_check_mark: | :heavy_check_mark: | - | - | - | - |
 |[bgp.tools](https://bgp.tools) :new: | - | :heavy_check_mark: | - | - | - | - |
+|[cve.org](https://cve.org) :new: | - | - | - | - | - | :heavy_check_mark: |
 
 :red_circle: These web tools require some user interactions, such as entering a query and clicking a button to submit it. To perform these actions faster, FoxyRecon will automatically fill input fields on this web pages, with the indicator you are looking for.
 

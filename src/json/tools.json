@@ -138,6 +138,16 @@
 			"types": ["domain"],
             "tags": ["tls"]
 		},
+	{
+		"name":"CVE",
+		"url": {
+			"cve":"https://www.cve.org/CVERecord?id=%s"
+		},
+		"desc":"Identify, define, and catalog publicly disclosed cybersecurity vulnerabilities. ",
+		"icon":"cver.png",
+		"color":"#fa9441",
+		"types":["cve"]
+	},
         {
             "name": "CVE MITRE",
             "url": {
