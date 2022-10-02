@@ -138,6 +138,16 @@
 			"types": ["domain"],
             "tags": ["tls"]
 		},
+	{
+		"name":"CVE",
+		"url": {
+			"cve":"https://www.cve.org/CVERecord?id=%s"
+		},
+		"desc":"Identify, define, and catalog publicly disclosed cybersecurity vulnerabilities. ",
+		"icon":"cver.png",
+		"color":"#fa9441",
+		"types":["cve"]
+	},
         {
             "name": "CVE MITRE",
             "url": {
@@ -534,6 +544,16 @@
             "color": "#0E2C3E",
             "types": ["ip","domain","hash"],
             "tags": ["dns"]
+        },
+        {
+            "name": "SecurityHeaders",
+            "url": {
+                "url": "https://securityheaders.com/?q=%s&&hide=on&followRedirects=on"
+            },
+            "desc": "This service will analyse the HTTP response headers of other sites with a rating system to the results.",
+            "icon": "securityheaders.png",
+            "color": "#3A71D8",
+            "types": ["url"]
         },
         {
             "name": "SecurityTrails",
