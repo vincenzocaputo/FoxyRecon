@@ -546,6 +546,16 @@
             "tags": ["dns"]
         },
         {
+            "name": "SecurityHeaders",
+            "url": {
+                "url": "https://securityheaders.com/?q=%s&&hide=on&followRedirects=on"
+            },
+            "desc": "This service will analyse the HTTP response headers of other sites with a rating system to the results.",
+            "icon": "securityheaders.png",
+            "color": "#3A71D8",
+            "types": ["url"]
+        },
+        {
             "name": "SecurityTrails",
             "url": {
                 "domain": "https://securitytrails.com/domain/%s",
