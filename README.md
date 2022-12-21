@@ -48,6 +48,9 @@ FoxyRecon provides some feature that can make analysis activities more efficient
 - Filter web resources by name using the special character "+" in the search bar (e.g.: "example.com +abuse)
 - Choose your favourite tools and display only those by using the "star" button
 
+#### Custom Web Resources
+You can add your custom tools to FoxyRecon using the dedicated page reachable from settings.
+
 ## Web Resources
 FoxyRecon includes a plenty of OSINT web resources. You can find the full list here.
 
