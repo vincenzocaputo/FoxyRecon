@@ -25,7 +25,7 @@ browser.runtime.sendMessage({
         } else if(current_url.includes("virustotal")) {
             window.addEventListener('load', function () {
                     // Get input field
-                    inputNode = document.querySelector('home-view').shadowRoot.querySelector('vt-ui-text-input').shadowRoot.querySelector("#input");
+                    inputNode = document.querySelector('home-view').shadowRoot.querySelector('#urlSearchInput');
                     inputNode.value = indicator;
                 setTimeout(() => {
                     // "touch" the input field
@@ -35,7 +35,7 @@ browser.runtime.sendMessage({
                     // Fill
                     if(submit === "true" && query === "VT") {
                         // after 100ms press "enter"
-                        document.querySelector('home-view').shadowRoot.querySelector("vt-ui-text-input").dispatchEvent(new Event("enter-pressed"));
+                        document.querySelector('home-view').shadowRoot.querySelector('#searchUrlForm').dispatchEvent(new Event("submit"));
                     }
                 }, 100);
             })
