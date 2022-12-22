@@ -379,11 +379,14 @@ function createToolsList(toolsList){
 
                     // Add indicator to history
                     const indicator = localStorage.getItem("indicator");
-                    if(historySet.length >= 20) {
-                        historySet.pop();
+                    // If the indicator is the same as the last saved, ignore it
+                    if(indicator != historySet[0]) {
+                        if(historySet.length >= 50) {
+                            historySet.pop();
+                        }
+                        historySet.unshift(indicator);
+                        localStorage.setItem("history", JSON.stringify(historySet));
                     }
-                    historySet.unshift(indicator);
-                    localStorage.setItem("history", JSON.stringify(historySet));
 
                     // Open web resource in a new tab
                     browser.tabs.create({

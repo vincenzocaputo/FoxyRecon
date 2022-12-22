@@ -115,7 +115,7 @@ document.querySelectorAll("#history>.hist-entry").forEach((entry)=>{
         inputField.value = history_indicator;
         const type = indicatorParser.getIndicatorType(history_indicator);
         document.getElementById("history").style.display = "none";
-        submitIndicator(indicator, type, "", "");
+        submitIndicator(history_indicator, type, "", "");
     });
 });
 
@@ -152,6 +152,7 @@ textfieldTool.addEventListener("click", function() {
  */
 function submitIndicator(indicator, type, tag, toolName) {
     // Show the appropriate tools for the input provided
+    console.log(indicator);
     showButtonsByType(indicator, type, tag, false, toolName);
     // Save the current indicator along with its type
     localStorage.setItem("indicator", indicator);
@@ -161,12 +162,13 @@ function submitIndicator(indicator, type, tag, toolName) {
     }
     localStorage.setItem("tag", tag);
     // Add the entry to the history list
+    /*
     historypanel = document.getElementById("history");
     historyentry = document.createElement("div");
     historyentry.textcontent = indicator;
     historyentry.classList.add("hist-entry");
     historypanel.appendChild(historyentry);
-     
+    */ 
     
     // If the indicator is an URL or email, show tool icon inside text field
     if(type === "url" || type === "email") {
