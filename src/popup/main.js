@@ -101,7 +101,12 @@ textfieldHunt.addEventListener("click", function() {
 var historyIcon = document.getElementById("hist-icon");
 historyIcon.title = "History";
 historyIcon.addEventListener("click", function() {
-    document.getElementById("history").style.display = "block";
+    let divDisplay = document.getElementById("history").style.display;
+    if(divDisplay == "block") {
+        document.getElementById("history").style.display = "none";
+    } else {
+        document.getElementById("history").style.display = "block";
+    }
 });
 
 document.querySelectorAll("#history>.hist-entry").forEach((entry)=>{
