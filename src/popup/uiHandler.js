@@ -396,9 +396,15 @@ function createToolsList(toolsList){
                     window.close();
                 }  else {
                     // Add indicator to history
-                    const indicator = localStorage.get("indicator");
-                    historySet.add(indicator);
-                    localStorage.setItem("history", JSON.stringify(historySet));
+                    const indicator = localStorage.getItem("indicator");
+                    // If the indicator is the same as the last saved, ignore it
+                    if(indicator != historySet[0]) {
+                        if(historySet.length >= 50) {
+                            historySet.pop();
+                        }
+                        historySet.unshift(indicator);
+                        localStorage.setItem("history", JSON.stringify(historySet));
+                    }
 
                     // Otherwise open in current tab
                     browser.tabs.update({

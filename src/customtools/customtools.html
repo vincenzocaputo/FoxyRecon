@@ -73,6 +73,15 @@
                         <input type="text" id="tool_email_csssel"> <br>
                     </div>
                     <div class="form-row">
+                        <label for="tool_cve_url">URL for Hashes</label>
+
+                        <input type="text" id="tool_hash_url"><input type="checkbox" id="tool_hash_post"><label for="tool_hash_post">POST</label> <br>
+                    </div>
+                    <div class="form-row" id="hash_post_row">
+                        <label for="tool_hash_csssel" id="tool_hash_csssel_label">Input field CSS selector</label>
+                        <input type="text" id="tool_hash_csssel"> <br>
+                    </div>
+                    <div class="form-row">
                         <label for="tool_cve_url">URL for CVEs</label>
 
                         <input type="text" id="tool_cve_url"><input type="checkbox" id="tool_cve_post"><label for="tool_cve_post">POST</label> <br>
@@ -86,31 +95,31 @@
                             <b>Tags</b>
                         </div>
                         <div class="form-row">
-                            <input type="checkbox" id="tool-rep-tag" value="rep">
+                            <input type="checkbox" id="tool-rep-tag" value="rep" class="type_select">
                             <label for="tool-rep-tag">Rep (reputation)</label>
                         </div>
                         <div class="form-row">
-                            <input type="checkbox" id="tool-whois-tag" value="whois">
+                            <input type="checkbox" id="tool-whois-tag" value="whois" class="type_select">
                             <label for="tool-whois-tag">WHOIS</label>
                         </div>
                         <div class="form-row">
-                            <input type="checkbox" id="tool-dns-tag" value="dns">
+                            <input type="checkbox" id="tool-dns-tag" value="dns" class="type_select">
                             <label for="tool-dns-tag">DNS</label>
                         </div>
                         <div class="form-row">
-                            <input type="checkbox" id="tool-tls-tag" value="tls">
+                            <input type="checkbox" id="tool-tls-tag" value="tls" class="type_select">
                             <label for="tool-tls-tag">SSL/TLS</label>
                         </div>
                         <div class="form-row">
-                            <input type="checkbox" id="tool-sandbox-tag" value="sandbox">
+                            <input type="checkbox" id="tool-sandbox-tag" value="sandbox" class="type_select">
                             <label for="tool-sandbox-tag">Sandbox</label>
                         </div>
                         <div class="form-row">
-                            <input type="checkbox" id="tool-dataleak-tag" value="leak">
+                            <input type="checkbox" id="tool-dataleak-tag" value="leak" class="type_select">
                             <label for="tool-dataleak-tag">Data Leak</label>
                         </div>
                         <div class="form-row">
-                            <input type="checkbox" id="tool-screenshot-tag" value="screenshot">
+                            <input type="checkbox" id="tool-screenshot-tag" value="screenshot" class="type_select">
                             <label for="tool-screenshot-tag">Screenshot</label>
                         </div>
                     </div>
