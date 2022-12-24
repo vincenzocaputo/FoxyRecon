@@ -14,6 +14,15 @@ loadToolsList(function(ts){
     createToolsList(tools);
 });
 
+historySet = JSON.parse(localStorage.getItem("history")) || Array();
+historyPanel = document.getElementById("history");
+historySet.forEach(function(h) {
+    historyEntry = document.createElement("div");
+    historyEntry.textContent = h;
+    historyEntry.classList.add("hist-entry");
+    historyPanel.appendChild(historyEntry);
+});
+
 
 /**
  * Show message in a popup
@@ -67,6 +76,8 @@ function showAddonLogo() {
     document.getElementById("no-tools").style.display = "none";
     // Hide download icon
     document.getElementById("download").style.display = "none";
+    // Show history icon
+    document.getElementById("hist-icon").style.display = "block";
 }
 
 
@@ -89,6 +100,8 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
     document.querySelectorAll(".hunt-res-entry").forEach(e => e.remove());
     document.getElementById("show-only-fav").style.display = "block";
     document.getElementById("no-tools").style.display = "none";
+    document.getElementById("hist-icon").style.display = "none";
+
     // This node contains the list of tools
     const toolsListNodes = document.getElementById("tools-list");
     toolsListNodes.style.display = "block";
@@ -363,6 +376,18 @@ function createToolsList(toolsList){
                     e.target.id = "add-fav";
                     e.target.src = "../../assets/icons/no_favourite.png";
                 }else if(targetId === "open-icon-out" || (targetId != "open-icon-in" && (!newtab || newtab === "true"))) {
+
+                    // Add indicator to history
+                    const indicator = localStorage.getItem("indicator");
+                    // If the indicator is the same as the last saved, ignore it
+                    if(indicator != historySet[0]) {
+                        if(historySet.length >= 50) {
+                            historySet.pop();
+                        }
+                        historySet.unshift(indicator);
+                        localStorage.setItem("history", JSON.stringify(historySet));
+                    }
+
                     // Open web resource in a new tab
                     browser.tabs.create({
                         url: node.url
@@ -370,6 +395,17 @@ function createToolsList(toolsList){
                     // close popup
                     window.close();
                 }  else {
+                    // Add indicator to history
+                    const indicator = localStorage.getItem("indicator");
+                    // If the indicator is the same as the last saved, ignore it
+                    if(indicator != historySet[0]) {
+                        if(historySet.length >= 50) {
+                            historySet.pop();
+                        }
+                        historySet.unshift(indicator);
+                        localStorage.setItem("history", JSON.stringify(historySet));
+                    }
+
                     // Otherwise open in current tab
                     browser.tabs.update({
                         url: node.url

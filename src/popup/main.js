@@ -10,6 +10,7 @@ indicatorParser = new IndicatorParser();
 // Remove badge number
 browser.browserAction.setBadgeText({text: ""});
 
+
 // Check if the input string is in local storage
 const indicator = localStorage.getItem("indicator");
 if(!indicator || indicator === "undefined") {
@@ -94,6 +95,31 @@ textfieldHunt.addEventListener("click", function() {
 
 
 /**
+ * Handle the clicking on History icon inside the text field
+ *
+ */
+var historyIcon = document.getElementById("hist-icon");
+historyIcon.title = "History";
+historyIcon.addEventListener("click", function() {
+    let divDisplay = document.getElementById("history").style.display;
+    if(divDisplay == "block") {
+        document.getElementById("history").style.display = "none";
+    } else {
+        document.getElementById("history").style.display = "block";
+    }
+});
+
+document.querySelectorAll("#history>.hist-entry").forEach((entry)=>{
+    entry.addEventListener("click", function(e) {
+        history_indicator = e.target.textContent;
+        inputField.value = history_indicator;
+        const type = indicatorParser.getIndicatorType(history_indicator);
+        document.getElementById("history").style.display = "none";
+        submitIndicator(history_indicator, type, "", "");
+    });
+});
+
+/**
  * 
  * Handle the clicking on tool icon inside the text field
  *
@@ -126,6 +152,7 @@ textfieldTool.addEventListener("click", function() {
  */
 function submitIndicator(indicator, type, tag, toolName) {
     // Show the appropriate tools for the input provided
+    console.log(indicator);
     showButtonsByType(indicator, type, tag, false, toolName);
     // Save the current indicator along with its type
     localStorage.setItem("indicator", indicator);
@@ -134,7 +161,15 @@ function submitIndicator(indicator, type, tag, toolName) {
         tag = "all";
     }
     localStorage.setItem("tag", tag);
-
+    // Add the entry to the history list
+    /*
+    historypanel = document.getElementById("history");
+    historyentry = document.createElement("div");
+    historyentry.textcontent = indicator;
+    historyentry.classList.add("hist-entry");
+    historypanel.appendChild(historyentry);
+    */ 
+    
     // If the indicator is an URL or email, show tool icon inside text field
     if(type === "url" || type === "email") {
         textfieldTool.style.display = "block";
@@ -146,6 +181,10 @@ function submitIndicator(indicator, type, tag, toolName) {
 }
 
 
+inputField.addEventListener("focus", (e) => {
+    document.getElementById("history").style.display = "none";
+});
+
 /**
  * 
  * For each charachter typed, check if the string is a valid input
@@ -153,7 +192,8 @@ function submitIndicator(indicator, type, tag, toolName) {
  */
 inputField.addEventListener("keyup", (e) => {
     let inputString = inputField.value;
-    // If no input was provided, show the add-on logo
+
+    // If no input was provided, show the add-on logo and the history icon
     if(inputString === "") {
         showAddonLogo();
         localStorage.setItem("indicator", "");
@@ -162,9 +202,11 @@ inputField.addEventListener("keyup", (e) => {
 
         textfieldHunt.style.display = "block";        
         textfieldTool.style.display = "none";
+
     } else {
         // Show the bin icon
         document.getElementById("bin-icon").style.display = "block";
+        // Hide the hunt icon
         textfieldHunt.style.display = "none";
         
         let type = "";

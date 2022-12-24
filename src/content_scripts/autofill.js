@@ -8,7 +8,6 @@ browser.runtime.sendMessage({
     indicator = resp.msg;
     // Get the query to find submit button
     query = resp.query;
-
     if(query) {
         // Check if auto-submit is enabled
         submit = resp.submit;
@@ -25,7 +24,7 @@ browser.runtime.sendMessage({
         } else if(current_url.includes("virustotal")) {
             window.addEventListener('load', function () {
                     // Get input field
-                    inputNode = document.querySelector('home-view').shadowRoot.querySelector('vt-ui-text-input').shadowRoot.querySelector("#input");
+                    inputNode = document.querySelector('home-view').shadowRoot.querySelector('#urlSearchInput');
                     inputNode.value = indicator;
                 setTimeout(() => {
                     // "touch" the input field
@@ -35,7 +34,7 @@ browser.runtime.sendMessage({
                     // Fill
                     if(submit === "true" && query === "VT") {
                         // after 100ms press "enter"
-                        document.querySelector('home-view').shadowRoot.querySelector("vt-ui-text-input").dispatchEvent(new Event("enter-pressed"));
+                        document.querySelector('home-view').shadowRoot.querySelector('#searchUrlForm').dispatchEvent(new Event("submit"));
                     }
                 }, 100);
             })
@@ -59,8 +58,14 @@ browser.runtime.sendMessage({
             if(submit === "true") {
                 document.querySelector(query).click();
             }
+
+        } else if(current_url.includes("any.run")) {
+            document.querySelector("#history-filterBtn").click();
+            document.querySelector("#hashSearch").value = indicator;
+            document.querySelector(query).click();
         } else {
             var inputNodes = document.getElementsByTagName("input");
+            console.log(inputNodes);
             // Get only text or email input nodes
             for(i=0; i<inputNodes.length; i++){
                 if(inputNodes[i].type === "text" || inputNodes[i].type === "email" || inputNodes[i].type === "url"){

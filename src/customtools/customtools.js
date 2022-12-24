@@ -122,6 +122,14 @@ function showCustomToolsList() {
                     document.getElementById("tool_email_post").dispatchEvent(new Event("change"));
                 }
             }
+            if(tool["url"]["hash"]) {
+                document.getElementById("tool_hash_url").value = tool["url"]["hash"];
+                if(tool["submitQuery"]) {
+                    document.getElementById("tool_hash_csssel").value = tool["submitQuery"] || "";
+                    document.getElementById("tool_hash_post").checked = true;
+                    document.getElementById("tool_hash_post").dispatchEvent(new Event("change"));
+                }
+            }
             if(tool["url"]["cve"]) {
                 document.getElementById("tool_cve_url").value = tool["url"]["cve"];
                 if(tool["submitQuery"]) {
@@ -172,6 +180,7 @@ window.onload = function() {
     let ip_post_row = document.querySelector("#ip_post_row");
     let url_post_row = document.querySelector("#url_post_row");
     let email_post_row = document.querySelector("#email_post_row");
+    let hash_post_row = document.querySelector("#hash_post_row");
     let cve_post_row = document.querySelector("#cve_post_row");
 
     // Hide css selector input field, as the post checkbox are disabled by default
@@ -179,6 +188,7 @@ window.onload = function() {
     ip_post_row.style.display="none";
     url_post_row.style.display="none";
     email_post_row.style.display="none";
+    hash_post_row.style.display="none";
     cve_post_row.style.display="none";
 
     // Post checkbox change events. If checked, show the related input field
@@ -208,6 +218,13 @@ window.onload = function() {
             email_post_row.style.display = "block";
         } else {
             email_post_row.style.display="none";
+        }
+    });
+    document.querySelector("#tool_hash_post").addEventListener("change", function(evt) {
+        if(evt.target.checked == true) {
+            hash_post_row.style.display = "block";
+        } else {
+            hash_post_row.style.display="none";
         }
     });
     document.querySelector("#tool_cve_post").addEventListener("change", function(evt) {
@@ -248,6 +265,7 @@ window.onload = function() {
         const ipURL = document.getElementById("tool_ip_url").value;
         const urlURL = document.getElementById("tool_url_url").value;
         const emailURL = document.getElementById("tool_email_url").value;
+        const hashURL = document.getElementById("tool_hash_url").value;
         const cveURL = document.getElementById("tool_cve_url").value;
        
         let isUrl = false; // Check if the user provided at least one URL
@@ -317,6 +335,22 @@ window.onload = function() {
                 }
             }
         }
+        if(hashURL != "") {
+            if(!hashURL.match(urlRegex)) {
+                showMessageError("Invalid URL");
+                return
+            }
+            jsonCode["url"]["hash"] = hashURL;
+            jsonCode["types"].push("hash");
+            isUrl = true;
+            if(document.getElementById("tool_hash_post").checked == true) {
+                jsonCode["submitQuery"] = document.getElementById("tool_hash_csssel").value;
+                if(jsonCode["submitQuery"] === "") {
+                    showMessageError("Invalid CSS selector");
+                    return;
+                }
+            }
+        }
         if(cveURL != "") {
             if(!cveURL.match(urlRegex)) {
                 showMessageError("Invalid URL");
@@ -341,7 +375,7 @@ window.onload = function() {
 
         let selectedTags = [];
 
-        document.querySelectorAll("input[type=checkbox]").forEach((e)=>{
+        document.querySelectorAll("input[type=checkbox].type_select").forEach((e)=>{
             if(e.checked) {
                 jsonCode["tags"].push(e.value);
             }

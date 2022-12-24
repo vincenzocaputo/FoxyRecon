@@ -1,17 +1,34 @@
 {
 	"tools": [
-	{
-		"name": "AbuseIPDB",
-		"url":  {
-			"domain": "https://www.abuseipdb.com/check/%s",
-			"ip": "https://www.abuseipdb.com/check/%s"
-		},
-		"desc": "IP address abuse reports",
-		"icon": "abuseipdb.png",
-		"color": "#4E7E14",
-		"types": ["domain","ip"],
-		"tags": ["rep"]
-	},
+        {
+            "name": "AbuseIPDB",
+            "url":  {
+                "domain": "https://www.abuseipdb.com/check/%s",
+                "ip": "https://www.abuseipdb.com/check/%s"
+            },
+            "desc": "IP address abuse reports",
+            "icon": "abuseipdb.png",
+            "color": "#4E7E14",
+            "types": ["domain","ip"],
+            "tags": ["rep"]
+        },
+        
+        {
+            "name": "Any.run",
+            "url": {
+                "hash": "https://app.any.run/submissions"
+            },
+            "desc": "Malware hunting with live access to the heart of an attack",
+            "icon": "anyrun.png",
+            "color": "#3584e4",
+            "types": [
+                "hash"
+            ],
+            "tags": [
+                "sandbox"
+            ],
+            "submitQuery": "#historySearchBtn"
+        },
         {
             "name": "AlienVault",
             "url": {
