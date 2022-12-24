@@ -52,7 +52,7 @@ FoxyRecon provides some feature that can make analysis activities more efficient
 You can add your custom tools to FoxyRecon using the dedicated page reachable from settings.
 
 ## Web Resources
-FoxyRecon includes a plenty of OSINT web resources. You can find the full list here.
+FoxyRecon includes a plenty of OSINT web resources. You can find the full list [here](https://github.com/vincenzocaputo/FoxyRecon/wiki/3.-Web-Resources).
 
 You can also add your custom web resource sing the dedicated page reachable from settings.
 
