@@ -290,6 +290,16 @@
             "types": ["url"]
         },
         {
+            "name": "Google Safe Browsing",
+            "url": {
+                "url": "https://transparencyreport.google.com/safe-browsing/search?url=%s&hl=en"
+            },
+            "desc": "Google’s Safe Browsing technology examines billions of URLs per day looking for unsafe websites.",
+            "icon": "google.png",
+            "color": "#EA4335",
+            "types": ["url"]
+        },
+        {
             "name": "Greynoise",
             "url": {
                 "ip": "https://www.greynoise.io/viz/ip/%s"
@@ -425,6 +435,18 @@
             "color": "#00A88E",
             "types": ["ip","domain","hash","cve"],
             "tags": ["sandbox", "rep"]
+        },
+        {
+            "name": "LeakCheck",
+            "url": {
+                "email": "https://leakcheck.io"
+            },
+            "desc": "Make sure your credentials haven't been compromised",
+            "icon": "leakcheck.png",
+            "color": "#FF5100",
+            "submitQuery": "#button-search",
+            "tags": ["leaks"],
+            "types": ["email"]
         },
         {
             "name": "LeakIX Leak Scope",
@@ -607,18 +629,6 @@
             "color": "#F8E331",
             "types": ["domain","ip"],
             "tags": ["rep"]
-        },
-        {
-            "name": "Spyse",
-            "url": {
-                "domain": "https://spyse.com/target/domain/%s",
-                "ip": "https://spyse.com/target/ip/%s"
-            },
-            "desc": "Internet Assets Search Engine",
-            "icon": "spyse.png",
-            "color": "#0D3A86",
-            "types": ["domain"],
-            "tags": ["dns","whois","tls"]
         },
 		{
 			"name": "Talos Intelligence",
