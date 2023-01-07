@@ -12,7 +12,7 @@ body {
     font-family: Verdana, sans-serif;
     color: #878787;
     text-align: center;
-    font-size: 0.7em;
+    font-size: 11px;
     width: 100%;
     display: none;
 }
@@ -29,7 +29,7 @@ body {
 #tools-list > div {
     display: none;
     font-family: Verdana, sans-serif;
-    font-size: 0.8em;
+    font-size: 14px;
     color: #878787;
     text-align: center;
 }
@@ -41,7 +41,8 @@ div.tool-entry, div.hunt-res-entry {
     clear: left;
     border: 2px outset #596275;
     border-radius: 10px;
-    width: -moz-available;
+    width: -moz-available;  /* For Firefox */
+    width: -webkit-fill-available;  /* For Chrome */
     height: 40px;
     margin-right: 5px;
     margin-bottom: 5px;
@@ -263,7 +264,7 @@ div.tool-tag {
 
 #filter-container-tags > label, #filter-container-types > label {
     font-family: Verdana;
-    font-size: 5vw;
+    font-size: 14px;
 }
 
 #filter-container-tags > select, #filter-container-types > select {
@@ -425,7 +426,7 @@ div.tool-tag {
     border-radius: 34px;
     background-color: #ccc;
     transition: .4s;
-    font-size: 0.8em;
+    font-size: 12px;
 }
 
 .slider:before {
@@ -469,14 +470,15 @@ input:checked + .slider:before {
 
 #settings-container .option-label {
     font-family: Sans-Serif;
-    font-size: 0.9em;
+    font-size: 14px;
     text-align: left;
     padding-left: 5px;
 }
 
 
 #addon-logo {
-    width: -moz-available;
+    width: -moz-available;  /* For Firefox */
+    width: -webkit-fill-available;  /* For Chrome */
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -499,12 +501,12 @@ input:checked + .slider:before {
     font-family: Verdana, sans-serif;
     font-weight: bold;
     color: #333333;
-    font-size: 0.8em;
+    font-size: 14px;
 }
 
 #disclaimer {
     font-family: Verdana, sans-serif;
-    font-size: 0.5em;
+    font-size: 8px;
     text-align: center;
     margin-top: 15%;
 }
