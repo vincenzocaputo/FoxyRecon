@@ -25,7 +25,8 @@ You can perform researches through FoxyRecon in two ways:
   On whatever website you are visiting, you can highlight the indicator you want to analyze and, by right clicking on it, you can choose one of the suggested tools in the FoxyRecon context menu.
   The indicator submitted will be saved as input in the text field of the popup in order to let you performing further investigations on it. \
   ![Context Menu](images/contextmenu.gif)
-  
+ 
+ FoxyRecon also provides an utility that is able to harvest and collect all the indicators that are present on a web page you are visiting. You can find more information in the wiki page (https://github.com/vincenzocaputo/FoxyRecon/wiki/3.-Harvesting).
   
 ## Supported Indicators
 Currently, FoxyRecon supports the following indicator types:
