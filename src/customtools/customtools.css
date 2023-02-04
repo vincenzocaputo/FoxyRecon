@@ -197,7 +197,7 @@ div.tool-tags-container {
 
 div.tool-tag {
     float: left;
-    opacity 0.8;
+    opacity: 0.8;
     padding-right: 5px;
     padding-left: 5px;
     padding-top: 1px;
