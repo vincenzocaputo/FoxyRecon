@@ -39,7 +39,8 @@
             "desc": "Open Threat Exchange",
             "icon": "alienvault.png",
             "color": "#000000",
-            "types": ["ip","domain","hash"]
+            "types": ["ip","domain","hash"],
+            "tags": ["ioc","dns","whois"]
         },
         {
             "name": "AttackerKB",
@@ -82,9 +83,10 @@
             "desc": "Find out what websites are Built With",
             "color": "#094303",
             "icon": "builtwith.png",
-            "types": ["domain"]
+            "types": ["domain"],
+            "tags": ["tech"]
         },
-	{
+        {
             "name": "Censys Certificates",
             "url": {
                 "domain": "https://search.censys.io/certificates?q=%s"
@@ -104,7 +106,7 @@
             "icon": "censys.png",
             "color": "#FF7A38",
             "types": ["ip"],
-            "tags": ["portscan"]
+            "tags": ["open-ports"]
         },
         {
             "name": "CentralOps",
@@ -145,6 +147,19 @@
             "tags": ["screenshot", "rep"]
         },
         {
+			"name": "CriminalIP",
+			"url": {
+                "domain": "https://www.criminalip.io/asset/search?query=domain%3A%s",
+                "ip": "https://www.criminalip.io/asset/search?query=ip%3A%s",
+                "cve": "https://www.criminalip.io/asset/search?query=cve_id%3A%s"
+            },
+            "desc": "Criminal IP is a specialized Cyber Threat Intelligence (CTI) search engine that allows users to search for various security-related information such as malicious IP addresses, domains, banners, etc.",
+			"icon": "criminalip.png",
+			"color": "#2451A3",
+			"types": ["domain","ip","cve"],
+            "tags": ["open-ports","rep"]
+		},
+        {
 			"name": "crt.sh",
 			"url": {
                 "domain": "https://crt.sh/?q=%s"
@@ -155,16 +170,16 @@
 			"types": ["domain"],
             "tags": ["tls"]
 		},
-	{
-		"name":"CVE",
-		"url": {
-			"cve":"https://www.cve.org/CVERecord?id=%s"
-		},
-		"desc":"Identify, define, and catalog publicly disclosed cybersecurity vulnerabilities. ",
-		"icon":"cver.png",
-		"color":"#fa9441",
-		"types":["cve"]
-	},
+        {
+            "name":"CVE",
+            "url": {
+                "cve":"https://www.cve.org/CVERecord?id=%s"
+            },
+            "desc":"Identify, define, and catalog publicly disclosed cybersecurity vulnerabilities. ",
+            "icon":"cver.png",
+            "color":"#fa9441",
+            "types":["cve"]
+        },
         {
             "name": "CVE MITRE",
             "url": {
@@ -206,7 +221,7 @@
             "icon": "dnsdumpster.png",
             "color": "#323232",
             "types": ["domain"],
-            "tags": ["dns", "portscan"]
+            "tags": ["dns", "open-ports"]
         },
 		{
 			"name": "Domain tools",
@@ -287,7 +302,8 @@
             "desc": "View web pages cached in Google Search Results",
             "icon": "google.png",
             "color": "#EA4335",
-            "types": ["url"]
+            "types": ["url"],
+            "tags": ["history"]
         },
         {
             "name": "Google Safe Browsing",
@@ -297,7 +313,8 @@
             "desc": "Google’s Safe Browsing technology examines billions of URLs per day looking for unsafe websites.",
             "icon": "google.png",
             "color": "#EA4335",
-            "types": ["url"]
+            "types": ["url"],
+            "tags": ["rep"]
         },
         {
             "name": "Greynoise",
@@ -307,7 +324,8 @@
             "desc": "GreyNoise is the source for understanding internet noise.",
             "icon": "greynoise.png",
             "color": "#171616",
-            "types": ["ip"]
+            "types": ["ip"],
+            "tags": ["net-activity", "rep"]
         },
 		{
 			"name": "hashdd",
@@ -350,7 +368,8 @@
             "desc": "Verify the validity of any professional email address with the most complete email checker.",
             "icon": "hunter.png",
             "color": "#FF5722",
-            "types": ["email"]
+            "types": ["email"],
+            "tags": ["rep"]
         },
 		{
 			"name": "Hurricane Electric",
@@ -386,6 +405,19 @@
             "color": "#0673BA",
             "types": ["domain","ip"],
             "tags": ["whois"]
+        },
+        {
+            "name": "InQuest IOCDB",
+            "url": {
+                "ip": "https://labs.inquest.net/iocdb/search/%s",
+                "domain": "https://labs.inquest.net/iocdb/search/%s",
+                "url": "https://labs.inquest.net/iocdb/search/%s"
+            },
+            "desc": "The IOCDB is an index across the plethora of open source intelligence (OSINT) published by individuals and teams through mediums such as Twitter, Github, and blogs.",
+            "icon": "inquest.png",
+            "color": "#191D20",
+            "types": ["ip","domain","url"],
+            "tags": ["ioc"]
         },
         {
             "name": "IntelligenceX",
@@ -457,7 +489,8 @@
             "desc": "LeakIX is a platform combining a search engine indexing public information AND an open reporting platform linked to the results.",
             "icon": "leakix.png",
             "color": "#222222",
-            "types": ["ip","domain"]
+            "types": ["ip","domain"],
+            "tags": ["leaks"]
         },
         {
             "name": "LeakIX Service Scope",
@@ -468,7 +501,8 @@
             "desc": "LeakIX is a platform combining a search engine indexing public information AND an open reporting platform linked to the results.",
             "icon": "leakix.png",
             "color": "#222222",
-            "types": ["ip","domain"]
+            "types": ["ip","domain"],
+            "tags": ["open-ports"]
         },
         {
             "name": "MALWARE bazaar",
@@ -478,7 +512,8 @@
             "desc": "Malware samples sharing",
             "icon": "abuse.png",
             "color": "#6C757D",
-            "types": ["hash"]
+            "types": ["hash"],
+            "tags": ["ioc"]
         },
         {
             "name": "MX Blacklist Lookup",
@@ -547,7 +582,8 @@
             "desc": "Find out the infrastructure and technologies used by any site using results from Netcraft internet data mining",
             "icon": "netcraft.png",
             "color": "#4FBDAC",
-            "types": ["domain","url"]
+            "types": ["domain","url"],
+            "tags": ["rep"]
         },
         {
             "name": "NIST",
@@ -572,6 +608,19 @@
             "tags": ["rep"]
         },
         {
+            "name": "PacketTotal",
+            "url": {
+                "ip": "https://packettotal.com/app/search?q=%s",
+                "domain": "https://packettotal.com/app/search?q=%s",
+                "hash": "https://packettotal.com/app/search?q=%s"
+            },
+            "desc": "Simple, free, high-quality PCAP analysis",
+            "icon": "packettotal.png",
+            "color": "#286496",
+            "types": ["ip","domain","hash"],
+            "tags": ["ioc"]
+        },
+        {
             "name": "Pulsedive",
             "url": {
                 "ip": "https://pulsedive.com/indicator/%s",
@@ -592,7 +641,8 @@
             "desc": "This service will analyse the HTTP response headers of other sites with a rating system to the results.",
             "icon": "securityheaders.png",
             "color": "#3A71D8",
-            "types": ["url"]
+            "types": ["url"],
+            "tags": ["http-headers"]
         },
         {
             "name": "SecurityTrails",
@@ -604,7 +654,7 @@
             "icon": "securitytrails.png",
             "color": "#373A47",
             "types": ["domain","ip"],
-            "tags": ["dns"]
+            "tags": ["dns", "history"]
         },
         {
             "name": "Shodan",
@@ -616,7 +666,7 @@
             "icon": "shodan.png",
             "color": "#151515",
             "types": ["domain","ip"],
-            "tags": ["portscan"]
+            "tags": ["open-ports"]
         },
         {
             "name": "Spamhaus",
@@ -662,7 +712,8 @@
             "desc": "Indicators of Compromises sharing",
             "icon": "abuse.png",
             "color": "#000000",
-            "types": ["hash","domain","ip"]
+            "types": ["hash","domain","ip"],
+            "tags": ["ioc"]
         },
         {
             "name": "Wayback Machine",
@@ -672,19 +723,21 @@
             "desc": "Internet Archive",
             "icon": "webarchive.png",
             "color": "#222222",
-            "types": ["url"]
+            "types": ["url"],
+            "tags": ["history"]
         },
         {
             "name": "Threat Crowd",
             "url": {
-                "domain": "https://www.threatcrowd.org/domain.php?domain=%s",
-                "ip": "https://www.threatcrowd.org/ip.php?ip=%s",
-                "email": "https://www.threatcrowd.org/email.php?email=%s" 
+                "domain": "http://34.209.115.93/domain.php?domain=%s",
+                "ip": "http://34.209.115.93/ip.php?ip=%s",
+                "email": "http://34.209.115.93/email.php?email=%s" 
             },
             "desc": "A Search Engine for Threats",
             "icon": "threatcrowd.png",
             "color": "#00B3D9",
-            "types": ["domain","ip","email"]
+            "types": ["domain","ip","email"],
+            "tag": ["rep"]
         },
 		{
 			"name": "URLhaus",
@@ -696,7 +749,8 @@
             "desc": "Lookup malicious URLs that are being used for malware distribution",
 			"icon": "abuse.png",
 			"color": "#A20300",
-			"types": ["domain","url","ip"]
+			"types": ["domain","url","ip"],
+            "tags": ["ioc", "rep"]
 		},
 		{
 			"name": "urlscan",
@@ -709,7 +763,7 @@
 			"icon": "urlscan.png",
             "color": "#E25A45",
 			"types": ["domain","ip","url"],
-            "tags": ["sandbox", "screenshot"]
+            "tags": ["whois", "dns", "screenshot"]
 		},
 		{
 			"name": "urlscan Public Scan",
@@ -791,7 +845,7 @@
             "icon": "viewdns.png",
             "color": "#00721E",
             "types": ["domain"],
-            "tags": ["portscan"]
+            "tags": ["http-headers"]
         },
         {
             "name": "ViewDNS WHOIS",
@@ -816,7 +870,7 @@
 			"icon": "virustotal.png",
 			"color": "#394EFF",
 			"types": ["domain","ip","hash"],
-            "tags": ["sandbox", "rep"]
+            "tags": ["rep","whois","dns","tls"]
 		},
         {
             "name": "VirusTotal URL scan",
@@ -859,7 +913,18 @@
             "icon": "w3techs.png",
             "color": "#c80000",
             "types": ["domain"],
-            "tags": []
+            "tags": ["techs"]
+        },
+        {
+            "name": "WhatCMS",
+            "url": {
+                "domain": "https://whatcms.org/?s=%s"
+            },
+            "desc": "What CMS Is This Site Using?",
+            "icon": "whatcms.png",
+            "color": "#008CBA",
+            "types": ["domain"],
+            "tags": ["techs"]
         },
         {
             "name": "Whois",
@@ -883,7 +948,7 @@
 			"icon": "zoomeye.png",
 			"color": "#0F1423",
 			"types": ["domain","ip"],
-            "tags": ["portscan"]
+            "tags": ["open-ports"]
 		}
     ]
 }

@@ -95,6 +95,7 @@ function updateToolsMenu(toolsList, indicator, type) {
  * Waiting for  messages from content_script
  */
 browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    console.log("Waiting for messages");
     if(request.id == 1) {
         query = localStorage.getItem("submit-btn-query");
         // Send the query only if auto-submit option is enabled
