@@ -505,6 +505,17 @@
             "tags": ["open-ports"]
         },
         {
+            "name": "Lupovis",
+            "url": {
+                "ip": "https://prowl.lupovis.io/?ip=%s"
+            },
+            "desc": "We identify, collect, analyze, and classify adversaries for you! With Prowl, you spend less time on what doesn't matter more time concentrating on what does.",
+            "icon": "lupovis.png",
+            "color": "#1C1934",
+            "types": ["ip"],
+            "tags": ["rep"]
+        },
+        {
             "name": "MALWARE bazaar",
             "url": {
                 "hash": "https://bazaar.abuse.ch/browse/?search=sha256%3A%s"
