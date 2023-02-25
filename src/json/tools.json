@@ -224,6 +224,17 @@
             "tags": ["dns", "open-ports"]
         },
 		{
+			"name": "DOCGuard",
+			"url": {
+                "hash": "https://app.docguard.io/%s/results/dashboard"
+            },
+            "desc": "Analyze files in seconds",
+			"icon": "docguard.png",
+			"color": "#ED7043",
+			"types": ["hash"],
+            "tags": ["sandbox"]
+		},
+		{
 			"name": "Domain tools",
 			"url": {
                 "domain": "https://whois.domaintools.com/%s",

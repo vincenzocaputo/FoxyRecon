@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.13] - 2023-02-25
 ### Added
 - Lupovis web resource for IP reputation
+- DOCGuard web resource for malware hash lookup
 
 ### Changed
 - Hunt feature icon and name to "Catch" 
