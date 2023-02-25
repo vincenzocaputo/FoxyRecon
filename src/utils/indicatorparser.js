@@ -34,7 +34,7 @@ class IndicatorParser {
             if(isCountry) {
                 return ["domain", tld];
             } else {
-                return ["domain", "gen"];
+                return ["domain", ""];
             }
         } else if(indicator.match(this.ip)) {
             if(indicator.match(this.internalip)){

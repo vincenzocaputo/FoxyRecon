@@ -22,6 +22,7 @@ if(!indicator || indicator === "undefined") {
     const type = localStorage.getItem("type");
     // Restore the domain tld if present
     const tld = localStorage.getItem("tld");
+    showCountryFlag(tld);
     // Restore tag option
     const optionValue = localStorage.getItem("tag");
     // If indicator is an URL or an email show domain extraction icon
@@ -32,13 +33,10 @@ if(!indicator || indicator === "undefined") {
     }
     // Hide Catch! icon
     document.getElementById("catch-icon").style.display = "none";
-    // Hide flagg
-    document.getElementById("flag").style.display = "none";
     // Show the bin icon
     document.getElementById("bin-icon").style.display = "block";
     // Show the buttons related to the tools that support this indicator
     showButtonsByType(indicator, type, optionValue);
-    showCountryFlag(tld);
 }
 
 
