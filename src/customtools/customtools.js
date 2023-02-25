@@ -256,7 +256,7 @@ window.onload = function() {
 
         jsonCode["desc"] = document.getElementById("tool_desc").value;
 
-        if(!jsonCode["desc"].match(/[A-z0-9-. ]{2,256}/g)) {
+        if(!jsonCode["desc"].match(/[A-z0-9-. ]{0,256}/g)) {
             showMessageError("Invalid description");
             return;
         }
@@ -381,7 +381,13 @@ window.onload = function() {
             }
         });
 
-        jsonCode["icon"] = "data:image/png;base64," + document.getElementById("tool_icon").value;
+        let tool_icon = document.getElementById("tool_icon").value;
+        if(tool_icon) {
+            jsonCode["icon"] = "data:image/png;base64," + tool_icon;
+        } else {
+            showMessageError("You must provide an icon");
+            return;
+        }
         
         if(!jsonCode["icon"].match(/(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?/g)) {
             showMessageError("Invalid Base 64");

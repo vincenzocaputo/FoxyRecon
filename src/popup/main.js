@@ -28,8 +28,8 @@ if(!indicator || indicator === "undefined") {
     } else {
         document.getElementById("domextr-icon").style.display = "none";
     }
-    // Hide Hunt! icon
-    document.getElementById("hunt-icon").style.display = "none";
+    // Hide Catch! icon
+    document.getElementById("catch-icon").style.display = "none";
     // Show the bin icon
     document.getElementById("bin-icon").style.display = "block";
     // Show the buttons related to the tools that support this indicator
@@ -48,7 +48,7 @@ const textfieldBin = document.getElementById("bin-icon");
 textfieldBin.addEventListener("click", function() {
     // Clear the text input field
     inputField.value = "";
-    textfieldHunt.style.display = "block";        
+    textfieldCatch.style.display = "block";        
     textfieldTool.style.display = "none";
     // Clean the local storage
     localStorage.setItem("indicator", "");
@@ -59,17 +59,17 @@ textfieldBin.addEventListener("click", function() {
 
 
 /**
- * Handle the clicking on Hunt! icon inside the text field
+ * Handle the clicking on IoC Catch icon inside the text field
  *
  */
-var textfieldHunt = document.querySelector("#hunt-icon");
-textfieldHunt.title = "Hunt!";
-textfieldHunt.addEventListener("click", function() {
+var textfieldCatch = document.querySelector("#catch-icon");
+textfieldCatch.title = "Catch";
+textfieldCatch.addEventListener("click", function() {
     // Get the id of the current active tab
     browser.tabs.query({active:true}).then(tabs => {
         let activeTab = tabs[0].id;
         // Send a message to the content script
-        browser.tabs.sendMessage(activeTab, "hunt");
+        browser.tabs.sendMessage(activeTab, "catch");
         let token = 1;
         browser.runtime.onMessage.addListener(function(message) {
             if(token) {
@@ -114,6 +114,7 @@ document.querySelectorAll("#history>.hist-entry").forEach((entry)=>{
         history_indicator = e.target.textContent;
         inputField.value = history_indicator;
         const type = indicatorParser.getIndicatorType(history_indicator);
+        document.querySelector("#catch-icon").style.display = "none";
         document.getElementById("history").style.display = "none";
         submitIndicator(history_indicator, type, "", "");
     });
@@ -200,14 +201,14 @@ inputField.addEventListener("keyup", (e) => {
         localStorage.setItem("type", "");
         localStorage.setItem("tag", "");
 
-        textfieldHunt.style.display = "block";        
+        textfieldCatch.style.display = "block";        
         textfieldTool.style.display = "none";
 
     } else {
         // Show the bin icon
         document.getElementById("bin-icon").style.display = "block";
-        // Hide the hunt icon
-        textfieldHunt.style.display = "none";
+        // Hide the catch icon
+        textfieldCatch.style.display = "none";
         
         let type = "";
         let inputIndicator = "";
@@ -425,7 +426,7 @@ document.querySelector("#open-settings").addEventListener("click", function(evt)
 
 document.getElementById("download-button").addEventListener("click", (e)=> {
     let csvData = [];
-    document.querySelectorAll(".hunt-res-entry").forEach((node) => {
+    document.querySelectorAll(".catch-res-entry").forEach((node) => {
         if(node.style.display === "" || node.style.display === "block") {
             csvData.push([node.title, node.type]);
         }

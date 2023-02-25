@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "FoxyRecon",
-	"version": "0.11.1",
+	"version": "0.12.1",
 	"description": "A Firefox add-on for OSINT investigations",
 
 	"icons": {
@@ -32,7 +32,7 @@
                 "src/utils/indicatorparser.js", 
                 "src/utils/utils.js", 
                 "src/content_scripts/context_menu.js",
-                "src/content_scripts/hunt.js"
+                "src/content_scripts/catch.js"
             ]
         },
         {
