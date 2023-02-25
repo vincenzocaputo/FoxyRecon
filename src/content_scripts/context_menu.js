@@ -10,12 +10,12 @@ document.addEventListener("selectionchange", () => {
     if(selectedText) {
         // Determine the type of the indicator selected
 
-        type = indicatorParser.getIndicatorType(selectedText);
+        [type, tld] = indicatorParser.getIndicatorType(selectedText);
         if(type != "invalid"){
             if(type === "defanged") {
                 // If the input string is defanged, refang it
                 selectedText = indicatorParser.refangIndicator(selectedText);
-                type = indicatorParser.getIndicatorType(selectedText);
+                [type, tld] = indicatorParser.getIndicatorType(selectedText);
             }
             // Send the selected text to background script along with its type
             browser.runtime.sendMessage({

@@ -113,7 +113,7 @@ document.querySelectorAll("#history>.hist-entry").forEach((entry)=>{
     entry.addEventListener("click", function(e) {
         history_indicator = e.target.textContent;
         inputField.value = history_indicator;
-        const type = indicatorParser.getIndicatorType(history_indicator);
+        const [type, tld] = indicatorParser.getIndicatorType(history_indicator);
         document.querySelector("#catch-icon").style.display = "none";
         document.getElementById("history").style.display = "none";
         submitIndicator(history_indicator, type, "", "");
@@ -230,14 +230,14 @@ inputField.addEventListener("keyup", (e) => {
 
         if(type!="invalid") {
             // Get indicator type
-            type = indicatorParser.getIndicatorType(inputIndicator);
+            [type, tld] = indicatorParser.getIndicatorType(inputIndicator);
         }
 
         if(type === "defanged") {
             // If the input string is defanged, refang it
             inputIndicator = indicatorParser.refangIndicator(inputIndicator);
             // Get the real type of the indicator
-            type = indicatorParser.getIndicatorType(inputIndicator);
+            [type, tld] = indicatorParser.getIndicatorType(inputIndicator);
         } 
 
         if(type === "invalid") {
@@ -268,12 +268,12 @@ inputField.addEventListener("keyup", (e) => {
  */
 document.querySelector("#filter-container-tags>select").addEventListener("change", (e) => {
     let inputString = inputField.value;
-    let type = indicatorParser.getIndicatorType(inputString);
+    let [type, tld] = indicatorParser.getIndicatorType(inputString);
     if(type === "defanged") {
         // If the input string is defanged, refang it
         inputString = indicatorParser.refangIndicator(inputString);
         // Get the real type of the indicator
-        type = indicatorParser.getIndicatorType(inputString);
+        [type, tld] = indicatorParser.getIndicatorType(inputString);
     }
     const optionValue = e.target.options[e.target.selectedIndex].value;
     const showOnlyFavBtn = document.querySelector("#show-only-fav>button").value;
@@ -302,7 +302,7 @@ document.querySelector("#filter-container-types>select").addEventListener("chang
  */
 document.querySelector("#show-only-fav>button").addEventListener("click", (e) => {
     const inputString = inputField.value;
-    const type = indicatorParser.getIndicatorType(inputString);
+    const [type, tld] = indicatorParser.getIndicatorType(inputString);
     const selectedTag = document.querySelector("#filter-container-tags>select").value
     const optionValue = document.querySelector("#show-only-fav button").value;
     if (optionValue == "off" || optionValue == undefined) {
