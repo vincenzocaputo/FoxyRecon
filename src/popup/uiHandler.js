@@ -51,6 +51,22 @@ function showMessagePopup(message, messageType) {
     popupText.style.display = "block";
 }
 
+/**                                               
+ * Show country flag according to tld. If no tld is provided, remove flag    
+ * @param{tld} domain tld                       
+ */
+function showCountryFlag(tld) {
+    let flag = document.getElementById("flag");
+    if(tld != "") {
+      flag.src = "/assets/country-flags/"+tld+".png";
+      flag.style.display = "block";
+      flag.alt = tld;
+    } else {
+        flag.src = "";
+        flag.style.display = "none";
+        flag.alt = "";
+    }
+}
 
 /**
  * Show add-on logo
@@ -431,6 +447,7 @@ function createIndicatorsList(indicatorsList){
     document.getElementById("text-field").style.borderColor = "#6E6C69";
     document.getElementById("addon-logo").style.display = "none";
     document.getElementById("catch-icon").style.display = "none";
+    document.getElementById("flag").style.display = "none";
 
     let indicatorsListNode = document.getElementById("catch-res-list");
 

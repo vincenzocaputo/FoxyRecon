@@ -187,11 +187,16 @@ div.tool-tag {
     align-items: center;
 }
 
-#text-field #domextr-icon, #catch-icon, #hist-icon {
+#text-field #domextr-icon, #catch-icon, #hist-icon, #flag {
     cursor: pointer;
     width: 24px;
     height: 24px;
     margin: left;
+}
+
+#flag {
+    height: 20px;
+    border: 1px solid #000000;
 }
 
 #domextr-icon  {
@@ -200,6 +205,10 @@ div.tool-tag {
 
 #catch-icon, #hist-icon {
     display: block;
+}
+
+#flag {
+    display: none;
 }
 
 #hist-icon { 

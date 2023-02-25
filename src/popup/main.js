@@ -20,6 +20,8 @@ if(!indicator || indicator === "undefined") {
     inputField.value = indicator;
     // Restore the type of the string
     const type = localStorage.getItem("type");
+    // Restore the domain tld if present
+    const tld = localStorage.getItem("tld");
     // Restore tag option
     const optionValue = localStorage.getItem("tag");
     // If indicator is an URL or an email show domain extraction icon
@@ -30,10 +32,13 @@ if(!indicator || indicator === "undefined") {
     }
     // Hide Catch! icon
     document.getElementById("catch-icon").style.display = "none";
+    // Hide flagg
+    document.getElementById("flag").style.display = "none";
     // Show the bin icon
     document.getElementById("bin-icon").style.display = "block";
     // Show the buttons related to the tools that support this indicator
     showButtonsByType(indicator, type, optionValue);
+    showCountryFlag(tld);
 }
 
 
@@ -54,6 +59,7 @@ textfieldBin.addEventListener("click", function() {
     localStorage.setItem("indicator", "");
     localStorage.setItem("type", "");
     localStorage.setItem("tag", "all");
+    localStorage.setItem("tld", "");
     showAddonLogo();
 });
 
@@ -115,8 +121,9 @@ document.querySelectorAll("#history>.hist-entry").forEach((entry)=>{
         inputField.value = history_indicator;
         const [type, tld] = indicatorParser.getIndicatorType(history_indicator);
         document.querySelector("#catch-icon").style.display = "none";
+        document.querySelector("#flag").style.display = "none";
         document.getElementById("history").style.display = "none";
-        submitIndicator(history_indicator, type, "", "");
+        submitIndicator(history_indicator, type, tld, "", "");
     });
 });
 
@@ -144,32 +151,29 @@ textfieldTool.addEventListener("click", function() {
     textfieldTool.style.display = "none";
 });
 
+
 /**
  * Submit an indicator as input 
  * @param{indicator}: string representing the indicator to submit
  * @param{type}: indicator type
+ * @param{tld}: domain tld, if present
  * @param{tag}: possible tag to filter resources
  * @param{tool}: possible tool name
  */
-function submitIndicator(indicator, type, tag, toolName) {
+function submitIndicator(indicator, type, tld, tag, toolName) {
     // Show the appropriate tools for the input provided
     console.log(indicator);
+
+    showCountryFlag(tld);
     showButtonsByType(indicator, type, tag, false, toolName);
     // Save the current indicator along with its type
     localStorage.setItem("indicator", indicator);
     localStorage.setItem("type", type);
+    localStorage.setItem("tld", tld);
     if(!tag) {
         tag = "all";
     }
     localStorage.setItem("tag", tag);
-    // Add the entry to the history list
-    /*
-    historypanel = document.getElementById("history");
-    historyentry = document.createElement("div");
-    historyentry.textcontent = indicator;
-    historyentry.classList.add("hist-entry");
-    historypanel.appendChild(historyentry);
-    */ 
     
     // If the indicator is an URL or email, show tool icon inside text field
     if(type === "url" || type === "email") {
@@ -254,7 +258,7 @@ inputField.addEventListener("keyup", (e) => {
             const optionValue = selectNode.options[selectNode.selectedIndex].value;
             
             console.log(inputIndicator, type);
-            submitIndicator(inputIndicator, type, optionValue, fToolName);
+            submitIndicator(inputIndicator, type, tld, optionValue, fToolName);
         }
 
     }
