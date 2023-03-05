@@ -47,7 +47,30 @@ function createToolsMenu(toolsList) {
  * When tab changes, remove the badge text
  */
 browser.tabs.onActivated.addListener((e) => {
-    browser.browserAction.setBadgeText({text: ''});
+    //browser.browserAction.setBadgeText({text: ''});
+    browser.tabs.query({active:true, currentWindow:true}).then(tabs => {    
+        let activeTab = tabs[0].id;    
+        // Send a message to the content script    
+        browser.tabs.sendMessage(activeTab, "catch");    
+        let token = 1;    
+        browser.runtime.onMessage.addListener(function(message) {    
+            if(token) {              
+                // No indicators found. Show a message    
+                if(message['indicators'] == "[]") {    
+                    browser.browserAction.setBadgeText({text: "0"});
+                } else {                        
+                    const indicatorsList = JSON.parse(message['indicators']);    
+                    browser.browserAction.setBadgeText({text: indicatorsList.length.toString()});    
+                }    
+            }    
+            // Consume token    
+            token = 0;    
+        })    
+    },     
+    error => {    
+        browser.browserAction.setBadgeText({text: "0"});
+        console.error("Error: "+error)
+    });
 });
 
 /**

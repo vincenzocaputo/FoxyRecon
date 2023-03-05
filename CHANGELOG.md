@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.13.0] - 2023-03-05
 ### Added
+- Badge text that automatically reports the number of indicators found on the web page opened in the current tab
 - Lupovis web resource for IP reputation
 - DOCGuard web resource for malware hash lookup
 - Hash search for InQuest resource
@@ -22,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Presence of badge text when an input is entered after launching indicators Catch
 - Minor fixes in the Custom Tool page
 
-## [0.12] - 2023-02-04
+## [0.12.0] - 2023-02-04
 ### Added
 - New web resources
     - PacketTotal

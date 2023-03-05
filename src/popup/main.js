@@ -7,10 +7,6 @@ var inputField = document.getElementById("input-box");
 
 indicatorParser = new IndicatorParser();
 
-// Remove badge number
-browser.browserAction.setBadgeText({text: ""});
-
-
 // Check if the input string is in local storage
 const indicator = localStorage.getItem("indicator");
 if(!indicator || indicator === "undefined") {
