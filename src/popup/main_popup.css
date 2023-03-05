@@ -17,7 +17,7 @@ body {
     display: none;
 }
 
-#tools-list, #hunt-res-list {
+#tools-list, #catch-res-list {
     display: none;
     width: 100%;
     height: 100%;
@@ -35,7 +35,7 @@ body {
 }
 
 
-div.tool-entry, div.hunt-res-entry {
+div.tool-entry, div.catch-res-entry {
     background-color: #FFFFFF;
     float: left;
     clear: left;
@@ -187,19 +187,28 @@ div.tool-tag {
     align-items: center;
 }
 
-#text-field #domextr-icon, #hunt-icon, #hist-icon {
+#text-field #domextr-icon, #catch-icon, #hist-icon, #flag {
     cursor: pointer;
     width: 24px;
     height: 24px;
     margin: left;
 }
 
+#flag {
+    height: 20px;
+    border: 1px solid #000000;
+}
+
 #domextr-icon  {
     display: none;
 }
 
-#hunt-icon, #hist-icon {
+#catch-icon, #hist-icon {
     display: block;
+}
+
+#flag {
+    display: none;
 }
 
 #hist-icon { 
@@ -485,8 +494,8 @@ input:checked + .slider:before {
 
 #addon-logo > img {
     display: block;
-    width: 70%;
-    height: 70%;
+    width: 50%;
+    height: 50%;
     
     padding-top: 25%;
     margin-left: auto;

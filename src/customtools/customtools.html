@@ -32,8 +32,8 @@
                         <img class="info-img" src="../../assets/icons/info_icon.png">
                         <div class="hide-msg">Enter the URL(s) of the tool specifying how the indicator will be passed to the tool as parameter. 
                             <ul>
-                                <li> If the tool accepts GET requests, specify the placeholder <b>%s</b> that will be replaced with the indicator value (Example: <i>http://example.local/parma=%s</i>) </li>
-                                <li> If the tool accepts only POST requests, tick the checkbox "POST" and enter the CSS selector of the tool input field . This information will be used by the Auto-Completion feature in order to automatically submit the indicator to the web tool. </li>
+                                <li> If the tool accepts GET requests, specify the placeholder <b>%s</b> that will be replaced with the indicator value (Example: <i>http://example.local/param=%s</i>) </li>
+                                <li> If the tool accepts only POST requests, tick the checkbox "POST" and enter the CSS selector of the submit button. This information will be used by the Auto-Completion feature in order to automatically submit the indicator to the web tool. </li>
                             </ul>
                         </div>
                     </div>
@@ -140,7 +140,7 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <label for="tool_icon">Icon (Base 64)</label>
+                        <label for="tool_icon">Icon (Base 64) *</label>
                         <textarea type="text" id="tool_icon"></textarea>
                     </div>
                     <div class="form-row">

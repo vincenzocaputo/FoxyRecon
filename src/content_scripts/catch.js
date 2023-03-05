@@ -8,7 +8,7 @@ const regexes = {
 }
 
 browser.runtime.onMessage.addListener(function(message) {
-    if (message === "hunt") {
+    if (message === "catch") {
         let indParser = new IndicatorParser();
         const bodyContent = document.body.innerText;
         

@@ -224,6 +224,17 @@
             "tags": ["dns", "open-ports"]
         },
 		{
+			"name": "DOCGuard",
+			"url": {
+                "hash": "https://app.docguard.io/%s/results/dashboard"
+            },
+            "desc": "Analyze files in seconds",
+			"icon": "docguard.png",
+			"color": "#ED7043",
+			"types": ["hash"],
+            "tags": ["sandbox"]
+		},
+		{
 			"name": "Domain tools",
 			"url": {
                 "domain": "https://whois.domaintools.com/%s",
@@ -411,12 +422,13 @@
             "url": {
                 "ip": "https://labs.inquest.net/iocdb/search/%s",
                 "domain": "https://labs.inquest.net/iocdb/search/%s",
-                "url": "https://labs.inquest.net/iocdb/search/%s"
+                "url": "https://labs.inquest.net/iocdb/search/%s",
+                "hash": "https://labs.inquest.net/iocdb/search/%s"
             },
             "desc": "The IOCDB is an index across the plethora of open source intelligence (OSINT) published by individuals and teams through mediums such as Twitter, Github, and blogs.",
             "icon": "inquest.png",
             "color": "#191D20",
-            "types": ["ip","domain","url"],
+            "types": ["ip","domain","url","hash"],
             "tags": ["ioc"]
         },
         {

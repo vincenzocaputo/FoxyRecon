@@ -51,6 +51,22 @@ function showMessagePopup(message, messageType) {
     popupText.style.display = "block";
 }
 
+/**                                               
+ * Show country flag according to tld. If no tld is provided, remove flag    
+ * @param{tld} domain tld                       
+ */
+function showCountryFlag(tld) {
+    let flag = document.getElementById("flag");
+    if(tld != "") {
+      flag.src = "/assets/country-flags/"+tld+".png";
+      flag.style.display = "block";
+      flag.alt = tld;
+    } else {
+        flag.src = "";
+        flag.style.display = "none";
+        flag.alt = "";
+    }
+}
 
 /**
  * Show add-on logo
@@ -66,9 +82,9 @@ function showAddonLogo() {
     // Hide filter dropdown menus
     document.getElementById("filter-container-types").style.display = "none";
     document.getElementById("filter-container-tags").style.display = "none";
-    // Clear the list of indicators gathered through Hunt! 
-    document.getElementById("hunt-res-list").style.display = "none";
-    document.querySelectorAll(".hunt-res-entry").forEach(e => e.remove());
+    // Clear the list of indicators gathered through IoC Catch 
+    document.getElementById("catch-res-list").style.display = "none";
+    document.querySelectorAll(".catch-res-entry").forEach(e => e.remove());
     // Hide the bin icon
     document.getElementById("bin-icon").style.display = "none";
     // Hide show fav button
@@ -96,8 +112,8 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
     document.getElementById("popup-text").style.display = "none";
     document.getElementById("text-field").style.borderColor = "#6E6C69";
     document.getElementById("addon-logo").style.display = "none";
-    document.getElementById("hunt-res-list").style.display = "none";
-    document.querySelectorAll(".hunt-res-entry").forEach(e => e.remove());
+    document.getElementById("catch-res-list").style.display = "none";
+    document.querySelectorAll(".catch-res-entry").forEach(e => e.remove());
     document.getElementById("show-only-fav").style.display = "block";
     document.getElementById("no-tools").style.display = "none";
     document.getElementById("hist-icon").style.display = "none";
@@ -430,16 +446,17 @@ function createIndicatorsList(indicatorsList){
     document.getElementById("popup-text").style.display = "none";
     document.getElementById("text-field").style.borderColor = "#6E6C69";
     document.getElementById("addon-logo").style.display = "none";
-    document.getElementById("hunt-icon").style.display = "none";
+    document.getElementById("catch-icon").style.display = "none";
+    document.getElementById("flag").style.display = "none";
 
-    let indicatorsListNode = document.getElementById("hunt-res-list");
+    let indicatorsListNode = document.getElementById("catch-res-list");
 
     let typesList = [];
     for (i=0; i<indicatorsList.length; i++) {
         const type = indicatorsList[i]['type'];
         let node = document.createElement('div');
         
-        node.classList.add("hunt-res-entry");
+        node.classList.add("catch-res-entry");
         
         // This node will contain the resource's icon
         let nodeImageContainer = document.createElement("div");
@@ -534,7 +551,7 @@ function createIndicatorsList(indicatorsList){
  */
 function showIndicatorsByType(indicatorType) {
     // retrieve the list of indicators
-    document.querySelectorAll(".hunt-res-entry").forEach((node)=>{
+    document.querySelectorAll(".catch-res-entry").forEach((node)=>{
         if(indicatorType != "all" && node.type != indicatorType) {
             // hide the entry
             node.style.display = "none";

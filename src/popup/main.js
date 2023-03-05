@@ -1,15 +1,11 @@
 // Get addon version from manifest file
 const manifest = browser.runtime.getManifest();
-document.getElementById("version-tag").textContent = "Version "+manifest.version;
+document.getElementById("version-tag").textContent = "VERSION "+manifest.version+" (BETA)";
 
 
 var inputField = document.getElementById("input-box");
 
 indicatorParser = new IndicatorParser();
-
-// Remove badge number
-browser.browserAction.setBadgeText({text: ""});
-
 
 // Check if the input string is in local storage
 const indicator = localStorage.getItem("indicator");
@@ -20,6 +16,9 @@ if(!indicator || indicator === "undefined") {
     inputField.value = indicator;
     // Restore the type of the string
     const type = localStorage.getItem("type");
+    // Restore the domain tld if present
+    const tld = localStorage.getItem("tld");
+    showCountryFlag(tld);
     // Restore tag option
     const optionValue = localStorage.getItem("tag");
     // If indicator is an URL or an email show domain extraction icon
@@ -28,8 +27,8 @@ if(!indicator || indicator === "undefined") {
     } else {
         document.getElementById("domextr-icon").style.display = "none";
     }
-    // Hide Hunt! icon
-    document.getElementById("hunt-icon").style.display = "none";
+    // Hide Catch! icon
+    document.getElementById("catch-icon").style.display = "none";
     // Show the bin icon
     document.getElementById("bin-icon").style.display = "block";
     // Show the buttons related to the tools that support this indicator
@@ -48,28 +47,29 @@ const textfieldBin = document.getElementById("bin-icon");
 textfieldBin.addEventListener("click", function() {
     // Clear the text input field
     inputField.value = "";
-    textfieldHunt.style.display = "block";        
+    textfieldCatch.style.display = "block";        
     textfieldTool.style.display = "none";
     // Clean the local storage
     localStorage.setItem("indicator", "");
     localStorage.setItem("type", "");
     localStorage.setItem("tag", "all");
+    localStorage.setItem("tld", "");
     showAddonLogo();
 });
 
 
 /**
- * Handle the clicking on Hunt! icon inside the text field
+ * Handle the clicking on IoC Catch icon inside the text field
  *
  */
-var textfieldHunt = document.querySelector("#hunt-icon");
-textfieldHunt.title = "Hunt!";
-textfieldHunt.addEventListener("click", function() {
-    // Get the id of the current active tab
-    browser.tabs.query({active:true}).then(tabs => {
+var textfieldCatch = document.querySelector("#catch-icon");
+textfieldCatch.title = "Catch";
+textfieldCatch.addEventListener("click", function() {
+    // Get the id of the current active tab in the current window
+    browser.tabs.query({active:true, currentWindow:true}).then(tabs => {
         let activeTab = tabs[0].id;
         // Send a message to the content script
-        browser.tabs.sendMessage(activeTab, "hunt");
+        browser.tabs.sendMessage(activeTab, "catch");
         let token = 1;
         browser.runtime.onMessage.addListener(function(message) {
             if(token) {
@@ -113,9 +113,11 @@ document.querySelectorAll("#history>.hist-entry").forEach((entry)=>{
     entry.addEventListener("click", function(e) {
         history_indicator = e.target.textContent;
         inputField.value = history_indicator;
-        const type = indicatorParser.getIndicatorType(history_indicator);
+        const [type, tld] = indicatorParser.getIndicatorType(history_indicator);
+        document.querySelector("#catch-icon").style.display = "none";
+        document.querySelector("#flag").style.display = "none";
         document.getElementById("history").style.display = "none";
-        submitIndicator(history_indicator, type, "", "");
+        submitIndicator(history_indicator, type, tld, "", "");
     });
 });
 
@@ -143,32 +145,29 @@ textfieldTool.addEventListener("click", function() {
     textfieldTool.style.display = "none";
 });
 
+
 /**
  * Submit an indicator as input 
  * @param{indicator}: string representing the indicator to submit
  * @param{type}: indicator type
+ * @param{tld}: domain tld, if present
  * @param{tag}: possible tag to filter resources
  * @param{tool}: possible tool name
  */
-function submitIndicator(indicator, type, tag, toolName) {
+function submitIndicator(indicator, type, tld, tag, toolName) {
     // Show the appropriate tools for the input provided
     console.log(indicator);
+
+    showCountryFlag(tld);
     showButtonsByType(indicator, type, tag, false, toolName);
     // Save the current indicator along with its type
     localStorage.setItem("indicator", indicator);
     localStorage.setItem("type", type);
+    localStorage.setItem("tld", tld);
     if(!tag) {
         tag = "all";
     }
     localStorage.setItem("tag", tag);
-    // Add the entry to the history list
-    /*
-    historypanel = document.getElementById("history");
-    historyentry = document.createElement("div");
-    historyentry.textcontent = indicator;
-    historyentry.classList.add("hist-entry");
-    historypanel.appendChild(historyentry);
-    */ 
     
     // If the indicator is an URL or email, show tool icon inside text field
     if(type === "url" || type === "email") {
@@ -192,7 +191,8 @@ inputField.addEventListener("focus", (e) => {
  */
 inputField.addEventListener("keyup", (e) => {
     let inputString = inputField.value;
-
+    // Remove badge text
+    browser.browserAction.setBadgeText({text: ''});
     // If no input was provided, show the add-on logo and the history icon
     if(inputString === "") {
         showAddonLogo();
@@ -200,14 +200,14 @@ inputField.addEventListener("keyup", (e) => {
         localStorage.setItem("type", "");
         localStorage.setItem("tag", "");
 
-        textfieldHunt.style.display = "block";        
+        textfieldCatch.style.display = "block";        
         textfieldTool.style.display = "none";
 
     } else {
         // Show the bin icon
         document.getElementById("bin-icon").style.display = "block";
-        // Hide the hunt icon
-        textfieldHunt.style.display = "none";
+        // Hide the catch icon
+        textfieldCatch.style.display = "none";
         
         let type = "";
         let inputIndicator = "";
@@ -229,18 +229,19 @@ inputField.addEventListener("keyup", (e) => {
 
         if(type!="invalid") {
             // Get indicator type
-            type = indicatorParser.getIndicatorType(inputIndicator);
+            [type, tld] = indicatorParser.getIndicatorType(inputIndicator);
         }
 
         if(type === "defanged") {
             // If the input string is defanged, refang it
             inputIndicator = indicatorParser.refangIndicator(inputIndicator);
             // Get the real type of the indicator
-            type = indicatorParser.getIndicatorType(inputIndicator);
+            [type, tld] = indicatorParser.getIndicatorType(inputIndicator);
         } 
 
         if(type === "invalid") {
             showAddonLogo();
+            showCountryFlag("");
             textfieldTool.style.display = "none";
             showMessagePopup("Please enter a valid indicator", MessageType.ERROR);
         } else if(type === "internal") {
@@ -253,7 +254,7 @@ inputField.addEventListener("keyup", (e) => {
             const optionValue = selectNode.options[selectNode.selectedIndex].value;
             
             console.log(inputIndicator, type);
-            submitIndicator(inputIndicator, type, optionValue, fToolName);
+            submitIndicator(inputIndicator, type, tld, optionValue, fToolName);
         }
 
     }
@@ -267,12 +268,12 @@ inputField.addEventListener("keyup", (e) => {
  */
 document.querySelector("#filter-container-tags>select").addEventListener("change", (e) => {
     let inputString = inputField.value;
-    let type = indicatorParser.getIndicatorType(inputString);
+    let [type, tld] = indicatorParser.getIndicatorType(inputString);
     if(type === "defanged") {
         // If the input string is defanged, refang it
         inputString = indicatorParser.refangIndicator(inputString);
         // Get the real type of the indicator
-        type = indicatorParser.getIndicatorType(inputString);
+        [type, tld] = indicatorParser.getIndicatorType(inputString);
     }
     const optionValue = e.target.options[e.target.selectedIndex].value;
     const showOnlyFavBtn = document.querySelector("#show-only-fav>button").value;
@@ -301,7 +302,7 @@ document.querySelector("#filter-container-types>select").addEventListener("chang
  */
 document.querySelector("#show-only-fav>button").addEventListener("click", (e) => {
     const inputString = inputField.value;
-    const type = indicatorParser.getIndicatorType(inputString);
+    const [type, tld] = indicatorParser.getIndicatorType(inputString);
     const selectedTag = document.querySelector("#filter-container-tags>select").value
     const optionValue = document.querySelector("#show-only-fav button").value;
     if (optionValue == "off" || optionValue == undefined) {
@@ -425,7 +426,7 @@ document.querySelector("#open-settings").addEventListener("click", function(evt)
 
 document.getElementById("download-button").addEventListener("click", (e)=> {
     let csvData = [];
-    document.querySelectorAll(".hunt-res-entry").forEach((node) => {
+    document.querySelectorAll(".catch-res-entry").forEach((node) => {
         if(node.style.display === "" || node.style.display === "block") {
             csvData.push([node.title, node.type]);
         }
