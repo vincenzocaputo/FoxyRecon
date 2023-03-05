@@ -12,7 +12,7 @@
 </p>
 
 # FoxyRecon
-FoxyRecon is a Firefox add-on that helps you to carry out searching and investigation activities by using free Open Source Intelligence Source (OSINT) web resources.
+FoxyRecon is a Firefox add-on that helps you to carry out searching and investigation activities by using over 70 free Open Source Intelligence Source (OSINT) web resources.
 
 You can perform researches through FoxyRecon in two ways:
 - Via popup\
@@ -25,6 +25,8 @@ You can perform researches through FoxyRecon in two ways:
   On whatever website you are visiting, you can highlight the indicator you want to analyze and, by right clicking on it, you can choose one of the suggested tools in the FoxyRecon context menu.
   The indicator submitted will be saved as input in the text field of the popup in order to let you performing further investigations on it. \
   ![Context Menu](images/contextmenu.gif)
+ 
+ FoxyRecon also provides an utility that is able to harvest and collect all the indicators that are present on a web page you are visiting. You can find more information in the wiki page (https://github.com/vincenzocaputo/FoxyRecon/wiki/3.-Harvesting).
   
 ## Supported Indicators
 Currently, FoxyRecon supports the following indicator types:
@@ -45,6 +47,11 @@ FoxyRecon provides some feature that can make analysis activities more efficient
     - Sandbox utility
     - Data Leak lookup
     - Screenshot taker
+    - IoCs sharing platform
+    - Historical information
+    - Open ports passive scanning utility
+    - HTTP Headers checker utility
+    - Network activities information
 - Filter web resources by name using the special character "+" in the search bar (e.g.: "example.com +abuse)
 - Choose your favourite tools and display only those by using the "star" button
 
@@ -52,7 +59,7 @@ FoxyRecon provides some feature that can make analysis activities more efficient
 You can add your custom tools to FoxyRecon using the dedicated page reachable from settings.
 
 ## Web Resources
-FoxyRecon includes a plenty of OSINT web resources. You can find the full list here.
+FoxyRecon includes a plenty of OSINT web resources. You can find the full list [here](https://github.com/vincenzocaputo/FoxyRecon/wiki/3.-Web-Resources).
 
 You can also add your custom web resource sing the dedicated page reachable from settings.
 
