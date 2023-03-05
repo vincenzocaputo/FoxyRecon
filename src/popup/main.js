@@ -195,7 +195,8 @@ inputField.addEventListener("focus", (e) => {
  */
 inputField.addEventListener("keyup", (e) => {
     let inputString = inputField.value;
-
+    // Remove badge text
+    browser.browserAction.setBadgeText({text: ''});
     // If no input was provided, show the add-on logo and the history icon
     if(inputString === "") {
         showAddonLogo();

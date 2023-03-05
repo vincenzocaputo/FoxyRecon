@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Visibility of the Catch button when an input entry is selected from the history
 - BuiltWith tool entry's "techs" tag
 - Current tab bug in Catch feature when more windows are open
+- Presence of badge text when an input is entered after launching indicators Catch
 - Minor fixes in the Custom Tool page
 
 ## [0.12] - 2023-02-04
