@@ -4,18 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.13] - 2023-02-25
+## [0.13.0] - 2023-03-05
 ### Added
 - Lupovis web resource for IP reputation
 - DOCGuard web resource for malware hash lookup
 - Hash search for InQuest resource
+- "Beta" notation to the version that appears in the popuo
 
 ### Changed
 - Hunt feature icon and name to "Catch" 
+- Removed addon name from popup splash screen
 
 ### Fixed
-- Visibility of the Hunt button when an input entry is selected from the history
+- Visibility of the Catch button when an input entry is selected from the history
 - BuiltWith tool entry's "techs" tag
+- Current tab bug in Catch feature when more windows are open
 - Minor fixes in the Custom Tool page
 
 ## [0.12] - 2023-02-04

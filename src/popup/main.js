@@ -1,6 +1,6 @@
 // Get addon version from manifest file
 const manifest = browser.runtime.getManifest();
-document.getElementById("version-tag").textContent = "Version "+manifest.version;
+document.getElementById("version-tag").textContent = "VERSION "+manifest.version+" (BETA)";
 
 
 var inputField = document.getElementById("input-box");
@@ -69,8 +69,8 @@ textfieldBin.addEventListener("click", function() {
 var textfieldCatch = document.querySelector("#catch-icon");
 textfieldCatch.title = "Catch";
 textfieldCatch.addEventListener("click", function() {
-    // Get the id of the current active tab
-    browser.tabs.query({active:true}).then(tabs => {
+    // Get the id of the current active tab in the current window
+    browser.tabs.query({active:true, currentWindow:true}).then(tabs => {
         let activeTab = tabs[0].id;
         // Send a message to the content script
         browser.tabs.sendMessage(activeTab, "catch");
@@ -244,6 +244,7 @@ inputField.addEventListener("keyup", (e) => {
 
         if(type === "invalid") {
             showAddonLogo();
+            showCountryFlag("");
             textfieldTool.style.display = "none";
             showMessagePopup("Please enter a valid indicator", MessageType.ERROR);
         } else if(type === "internal") {

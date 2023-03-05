@@ -494,8 +494,8 @@ input:checked + .slider:before {
 
 #addon-logo > img {
     display: block;
-    width: 70%;
-    height: 70%;
+    width: 50%;
+    height: 50%;
     
     padding-top: 25%;
     margin-left: auto;
