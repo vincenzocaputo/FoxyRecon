@@ -538,7 +538,7 @@ function createIndicatorsList(indicatorsList){
         // Set click event function
         node.addEventListener("click", function() {
             document.getElementById("input-box").value = node.indicator;
-            submitIndicator(node.indicator, node.type);
+            submitIndicator(node.indicator, node.type, "");
         });
     }
     createTypesOptionsList([...new Set(typesList)]);

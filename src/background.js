@@ -43,12 +43,8 @@ function createToolsMenu(toolsList) {
     }
 }
 
-/**
- * When tab changes, remove the badge text
- */
-browser.tabs.onActivated.addListener((e) => {
-    //browser.browserAction.setBadgeText({text: ''});
-    browser.tabs.query({active:true, currentWindow:true}).then(tabs => {    
+function catchIndicators(e) {
+    browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
         let activeTab = tabs[0].id;    
         // Send a message to the content script    
         browser.tabs.sendMessage(activeTab, "catch");    
@@ -71,7 +67,14 @@ browser.tabs.onActivated.addListener((e) => {
         browser.browserAction.setBadgeText({text: "0"});
         console.error("Error: "+error)
     });
-});
+}
+/**
+ * When tab changes, remove the badge text
+ */
+browser.tabs.onActivated.addListener(catchIndicators);
+browser.tabs.onUpdated.addListener(catchIndicators);
+browser.tabs.onCreated.addListener(catchIndicators);
+document.addEventListener("readystatechange", catchIndicators);
 
 /**
  * Updates context menu making visible only the tools which are compatible with the selected string

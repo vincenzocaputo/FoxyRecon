@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.13.1] - 2023-03-06
+### Fixed
+- Bug: the number in the badge text is not being updated when a new page is loaded
+- Bug: undefined country flag when a domain is selected from the list of indicators collected with catch
+
 ## [0.13.0] - 2023-03-05
 ### Added
 - Badge text that automatically reports the number of indicators found on the web page opened in the current tab
