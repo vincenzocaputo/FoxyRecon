@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.13.1] - 2023-03-06
 ### Fixed
 - Bug: the number in the badge text is not being updated when a new page is loaded
+- Bug: undefined country flag when a domain is selected from the list of indicators collected with catch
 
 ## [0.13.0] - 2023-03-05
 ### Added
