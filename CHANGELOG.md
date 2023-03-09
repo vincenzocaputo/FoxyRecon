@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New popup splash screen reporting the number of indicators for each type found in the current visiting webpage
 - Defanged indicators detection and collection from the current visiting webpage
 
+### Changed
+- Improved support for defanged indicators
+
 ### Fixed
 - Tools list loading at startup
 
