@@ -28,18 +28,20 @@ loadToolsList(function(ts) {
  * @param {toolsList} list of available tools
  */
 function createToolsMenu(toolsList) {
-    for (i=0; i<toolsList.length; i++){
-        let tool = toolsList[i];
-        // Create menu entry
-        browser.contextMenus.create({
-            id: i.toString(), // Incremental ID
-            title: tool["name"], // Tool name
-            contexts: ["selection"], // Show menu on selected text
-            /*icons: {
-                16: browser.runtime.getURL(tool["icon"]),
-            },*/
-            visible: true,
-        });
+    if(toolsList) {
+        for (i=0; i<toolsList.length; i++){
+            let tool = toolsList[i];
+            // Create menu entry
+            browser.contextMenus.create({
+                id: i.toString(), // Incremental ID
+                title: tool["name"], // Tool name
+                contexts: ["selection"], // Show menu on selected text
+                /*icons: {
+                    16: browser.runtime.getURL(tool["icon"]),
+                },*/
+                visible: true,
+            });
+        }
     }
 }
 
