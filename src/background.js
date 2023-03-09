@@ -43,9 +43,12 @@ function createToolsMenu(toolsList) {
     }
 }
 
+/**
+ * Harvest and collect the indicators present in the current webpage. Save the list in the local storage.
+ */
 function catchIndicators(e) {
     browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
-        let activeTab = tabs[0].id;    
+        let activeTab = tabs[0].id;
         // Send a message to the content script    
         browser.tabs.sendMessage(activeTab, "catch");    
         let token = 1;    
@@ -54,8 +57,11 @@ function catchIndicators(e) {
                 // No indicators found. Show a message    
                 if(message['indicators'] == "[]") {    
                     browser.browserAction.setBadgeText({text: "0"});
-                } else {                        
-                    const indicatorsList = JSON.parse(message['indicators']);    
+                } else {
+                    const indicatorsListJson = message['indicators'];
+                    // Save the indicators list in the local storage
+                    localStorage.setItem("catched_indicators", indicatorsListJson);
+                    const indicatorsList = JSON.parse(indicatorsListJson);    
                     browser.browserAction.setBadgeText({text: indicatorsList.length.toString()});    
                 }    
             }    

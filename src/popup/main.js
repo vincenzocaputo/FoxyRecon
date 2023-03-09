@@ -1,11 +1,25 @@
 // Get addon version from manifest file
 const manifest = browser.runtime.getManifest();
-document.getElementById("version-tag").textContent = "VERSION "+manifest.version+" (BETA)";
+document.getElementById("addon-version").textContent = "VERSION "+manifest.version+" (BETA)";
 
 
 var inputField = document.getElementById("input-box");
 
 indicatorParser = new IndicatorParser();
+
+// Check if there are some indicators found in the current webpage
+const collectedIndicatorsListJson = localStorage.getItem("catched_indicators");
+if(collectedIndicatorsListJson) {
+    const collectedIndicatorsList = JSON.parse(collectedIndicatorsListJson);
+    var count = {"ip": 0, "domain": 0, "url": 0, "email": 0, "hash": 0, "cve": 0};
+    collectedIndicatorsList.forEach(function(indicator) {
+        console.log(indicator);
+        count[indicator["type"]]++;
+    });
+    for(let key in count) {
+        document.getElementById(key+"_occ").textContent = count[key];
+    }
+}
 
 // Check if the input string is in local storage
 const indicator = localStorage.getItem("indicator");
@@ -54,7 +68,7 @@ textfieldBin.addEventListener("click", function() {
     localStorage.setItem("type", "");
     localStorage.setItem("tag", "all");
     localStorage.setItem("tld", "");
-    showAddonLogo();
+    showAddonMain();
 });
 
 
@@ -195,7 +209,7 @@ inputField.addEventListener("keyup", (e) => {
     browser.browserAction.setBadgeText({text: ''});
     // If no input was provided, show the add-on logo and the history icon
     if(inputString === "") {
-        showAddonLogo();
+        showAddonMain();
         localStorage.setItem("indicator", "");
         localStorage.setItem("type", "");
         localStorage.setItem("tag", "");
@@ -240,12 +254,12 @@ inputField.addEventListener("keyup", (e) => {
         } 
 
         if(type === "invalid") {
-            showAddonLogo();
+            showAddonMain();
             showCountryFlag("");
             textfieldTool.style.display = "none";
             showMessagePopup("Please enter a valid indicator", MessageType.ERROR);
         } else if(type === "internal") {
-            showAddonLogo();
+            showAddonMain();
             textfieldTool.style.display = "none";
             showMessagePopup("The IP address is internal", MessageType.WARNING);
         } else {

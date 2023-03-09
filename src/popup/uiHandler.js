@@ -69,16 +69,16 @@ function showCountryFlag(tld) {
 }
 
 /**
- * Show add-on logo
+ * Show add-on main screen
  */
-function showAddonLogo() {
+function showAddonMain() {
     document.getElementById("tools-list").style.display = "none";
     document.getElementById("popup-text").style.display = "none";
     // Restore text field border color
     document.getElementById("text-field").style.borderColor = "#6E6C69";
     // Restore placeholder text of the input field
     document.getElementById("input-box").placeholder = "Enter your indicator";
-    document.getElementById("addon-logo").style.display = "block";
+    document.getElementById("main").style.display = "block";
     // Hide filter dropdown menus
     document.getElementById("filter-container-types").style.display = "none";
     document.getElementById("filter-container-tags").style.display = "none";
@@ -111,7 +111,7 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
     document.getElementById("download").style.display = "none";
     document.getElementById("popup-text").style.display = "none";
     document.getElementById("text-field").style.borderColor = "#6E6C69";
-    document.getElementById("addon-logo").style.display = "none";
+    document.getElementById("main").style.display = "none";
     document.getElementById("catch-res-list").style.display = "none";
     document.querySelectorAll(".catch-res-entry").forEach(e => e.remove());
     document.getElementById("show-only-fav").style.display = "block";
@@ -445,7 +445,7 @@ function createIndicatorsList(indicatorsList){
     document.getElementById("download").style.display = "block";
     document.getElementById("popup-text").style.display = "none";
     document.getElementById("text-field").style.borderColor = "#6E6C69";
-    document.getElementById("addon-logo").style.display = "none";
+    document.getElementById("main").style.display = "none";
     document.getElementById("catch-icon").style.display = "none";
     document.getElementById("flag").style.display = "none";
 
