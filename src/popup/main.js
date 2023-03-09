@@ -8,7 +8,7 @@ var inputField = document.getElementById("input-box");
 indicatorParser = new IndicatorParser();
 
 // Check if there are some indicators found in the current webpage
-const collectedIndicatorsListJson = localStorage.getItem("catched_indicators");
+var collectedIndicatorsListJson = localStorage.getItem("catched_indicators");
 if(collectedIndicatorsListJson) {
     const collectedIndicatorsList = JSON.parse(collectedIndicatorsListJson);
     var count = {"ip": 0, "domain": 0, "url": 0, "email": 0, "hash": 0, "cve": 0};
@@ -329,6 +329,44 @@ document.querySelector("#show-only-fav>button").addEventListener("click", (e) =>
         document.querySelector("#show-only-fav img").src = "../../assets/icons/favourite_opt.png";
     }
 });
+
+/**
+ * Handle catch container clicking event
+ *
+ */
+document.querySelectorAll(".catch-container").forEach((v) => { 
+    v.addEventListener("click", (e) => {
+        createIndicatorsList(JSON.parse(collectedIndicatorsListJson), 'all'); 
+        switch (v.id) {
+            case "catch-ip":
+                document.querySelector("#filter-container-types > select").value = "ip";
+                showIndicatorsByType("ip");
+                break;
+            case "catch-domain":
+                document.querySelector("#filter-container-types > select").value = "domain";
+                showIndicatorsByType("domain");
+                break;
+            case "catch-url":
+                document.querySelector("#filter-container-types > select").value = "url";
+                showIndicatorsByType("url");
+                break;
+            case "catch-hash":
+                document.querySelector("#filter-container-types > select").value = "hash";
+                showIndicatorsByType("hash");
+                break;
+            case "catch-email":
+                document.querySelector("#filter-container-types > select").value = "email";
+                showIndicatorsByType("email");
+                break;
+            case "catch-cve":
+                document.querySelector("#filter-container-types > select").value = "cve";
+                showIndicatorsByType("cve");
+                break;
+        }
+    });
+});
+
+
 /**----------------------------------OPTION SETTINGS POP-UP----------------------------------------------**/
 
 function setCheckboxStatus(checkboxNode, optionName) {

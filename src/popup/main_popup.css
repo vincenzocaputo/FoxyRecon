@@ -525,6 +525,7 @@ input:checked + .slider:before {
     border: 1px solid black;
     border-radius: 10px;
     height: 100px;
+    cursor: pointer;
 }
 
 .catch-container .catch-image {
