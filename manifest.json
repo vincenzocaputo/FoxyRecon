@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "FoxyRecon",
-	"version": "0.13.1",
+	"version": "0.14.0",
 	"description": "A Firefox add-on for OSINT investigations",
 
 	"icons": {
@@ -46,7 +46,9 @@
                 "https://www.eurodns.com/whois-search",
                 "https://www.virustotal.com/gui/home/url/",
                 "https://app.any.run/submissions/",
-                "https://leakcheck.io/"
+                "https://leakcheck.io/",
+                "https://leakpeek.com/",
+                "https://breachdirectory.org/"
             ],
             "js": ["src/content_scripts/autofill.js"]
         }

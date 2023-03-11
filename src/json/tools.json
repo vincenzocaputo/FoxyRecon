@@ -75,6 +75,18 @@
             "tags": ["sandbox"]
         },
         {
+            "name": "BreachDirectory",
+            "url": {
+                "email": "https://breachdirectory.org/"
+            },
+            "submitQuery": "button.btn-primary",
+            "desc": "Check if your information was exposed in a data breach",
+            "color": "#5150E1",
+            "icon": "breachdirectory.png",
+            "types": ["email"],
+            "tags": ["leak"]
+        },
+        {
             "name": "BuiltWith",
             "url": {
                 "domain": "https://builtwith.com/%s",
@@ -245,6 +257,17 @@
 			"color": "#888888",
 			"types": ["domain", "ip"],
             "tags": ["whois"]
+		},
+		{
+			"name": "DNS History",
+			"url": {
+                "domain": "http://dnshistory.org/dns-records/%s"
+            },
+            "desc": "Here at DNS History we have been crawling DNS records since 2009, our database currently contains over 1 billion domains and over 12 billion DNS records. ",
+			"icon": "dnshistory.png",
+			"color": "#7EB10C",
+			"types": ["domain"],
+            "tags": ["dns", "history"]
 		},
         {
             "name": "Emailrep",
@@ -517,6 +540,18 @@
             "tags": ["open-ports"]
         },
         {
+            "name": "LeakPeek",
+            "url": {
+                "email": "https://leakpeek.com/"
+            },
+            "submitQuery": "button.btn-success",
+            "desc": "Is your data safe?",
+            "icon": "leakpeek.png",
+            "color": "#8b00ff",
+            "types": ["email"],
+            "tags": ["leak"]
+        },
+        {
             "name": "Lupovis",
             "url": {
                 "ip": "https://prowl.lupovis.io/?ip=%s"
@@ -702,6 +737,16 @@
             "color": "#F8E331",
             "types": ["domain","ip"],
             "tags": ["rep"]
+        },
+        {
+            "name": "Sploitus",
+            "url": {
+                "cve": "https://sploitus.com/?query=%s"
+            },
+            "desc": "Sploitus is a convenient central place for identifying the newest exploits and finding attacks that exploit known vulnerabilities. ",
+            "icon": "sploitus.png",
+            "color": "#5754DE",
+            "types": ["cve"]
         },
 		{
 			"name": "Talos Intelligence",
