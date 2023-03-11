@@ -9,11 +9,6 @@
 		"48": "assets/icons/foxyrecon-icon-48.png"
 	},
 
-    "web_accessible_resources": [
-        "assets/icons/foxyrecon-icon-32.png",
-        "assets/icons/settings.png"
-    ],
-    
     "content_security_policy": "default-src 'self'; img-src 'self' data:",
 
     "background": {
