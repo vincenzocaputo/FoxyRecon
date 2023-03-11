@@ -794,19 +794,6 @@
             "types": ["url"],
             "tags": ["history"]
         },
-        {
-            "name": "Threat Crowd",
-            "url": {
-                "domain": "http://34.209.115.93/domain.php?domain=%s",
-                "ip": "http://34.209.115.93/ip.php?ip=%s",
-                "email": "http://34.209.115.93/email.php?email=%s" 
-            },
-            "desc": "A Search Engine for Threats",
-            "icon": "threatcrowd.png",
-            "color": "#00B3D9",
-            "types": ["domain","ip","email"],
-            "tag": ["rep"]
-        },
 		{
 			"name": "URLhaus",
 			"url": {
