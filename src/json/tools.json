@@ -159,6 +159,19 @@
             "tags": ["screenshot", "rep"]
         },
         {
+            "name": "CleanTalk",
+            "url": {
+                "domain": "https://cleantalk.org/blacklists/%s",
+                "ip": "https://cleantalk.org/blacklists/%s",
+                "email": "https://cleantalk.org/blacklists/%s"
+            },
+            "desc": "Check IP Addresses, Email, Subnet, Domain for Spam in Blacklists Database.",
+            "icon": "cleantalk.png",
+            "color": "#3090C7",
+            "types": ["domain","ip","email"],
+            "tags": ["rep"]
+        },
+        {
 			"name": "CriminalIP",
 			"url": {
                 "domain": "https://www.criminalip.io/asset/search?query=domain%3A%s",
