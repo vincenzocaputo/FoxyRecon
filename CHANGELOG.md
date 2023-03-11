@@ -13,10 +13,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Improved support for defanged indicators
+- Removed badge text when the indicators count is 0
 - Removed ThreatCrowd (service no more available)
 
 ### Fixed
 - Tools list loading at startup
+- Indicators counting when a page is first loaded in a new tab
 
 ## [0.13.1] - 2023-03-06
 ### Fixed

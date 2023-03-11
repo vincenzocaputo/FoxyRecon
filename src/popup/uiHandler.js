@@ -90,6 +90,7 @@ function showAddonMain() {
     // Hide show fav button
     document.getElementById("show-only-fav").style.display = "none";
     document.getElementById("no-tools").style.display = "none";
+    document.getElementById("no-indicators").style.display = "none";
     // Hide download icon
     document.getElementById("download").style.display = "none";
     // Show history icon
@@ -116,6 +117,7 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
     document.querySelectorAll(".catch-res-entry").forEach(e => e.remove());
     document.getElementById("show-only-fav").style.display = "block";
     document.getElementById("no-tools").style.display = "none";
+    document.getElementById("no-indicators").style.display = "none";
     document.getElementById("hist-icon").style.display = "none";
 
     // This node contains the list of tools
@@ -550,13 +552,20 @@ function createIndicatorsList(indicatorsList){
  * @param {indicatorType} type of indicators to show
  */
 function showIndicatorsByType(indicatorType) {
+    // Keep track of whether there are any indicators to display
+    var noIndicators = true;
     // retrieve the list of indicators
     document.querySelectorAll(".catch-res-entry").forEach((node)=>{
         if(indicatorType != "all" && node.type != indicatorType) {
             // hide the entry
             node.style.display = "none";
         } else {
+            noIndicators = false;
             node.style.display = "block";
         }
     });
+
+    if(noIndicators) {
+        document.getElementById("no-indicators").style.display="block";
+    }
 }

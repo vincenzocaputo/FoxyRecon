@@ -8,7 +8,7 @@ body {
     height: 350px;
 }
 
-#no-tools {
+#no-tools, #no-indicators {
     font-family: Verdana, sans-serif;
     color: #878787;
     text-align: center;

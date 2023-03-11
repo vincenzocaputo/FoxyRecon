@@ -7,29 +7,32 @@ const regexes = {
     'cve': new RegExp(/CVE-\d{4}-\d{4,7}/,'g')
 }
 
+function catchIndicators() {
+    let indParser = new IndicatorParser();
+    const bodyContent = document.body.innerText;
+    
+    let indicators = [];
+    for(indicatorType of ['domain', 'ip', 'url', 'hash', 'email', 'cve']) {
+        let matches = bodyContent.matchAll(regexes[indicatorType]);
+        let match = matches.next();
+        while(!match.done) {
+            let value = match.value[0];
+            if(value) {
+                indicators.push({'type': indicatorType, 'value': match.value[0]});
+            }
+            match = matches.next();
+        }
+    }
+    if(indicators) {
+        browser.runtime.sendMessage({
+         "indicators": JSON.stringify(indicators)
+        }).then(message=>{console.log(message)},error=>{console.error(error)});
+    }
+}
+
 browser.runtime.onMessage.addListener(function(message) {
     if (message === "catch") {
-        let indParser = new IndicatorParser();
-        const bodyContent = document.body.innerText;
-        
-        let indicators = [];
-        for(indicatorType of ['domain', 'ip', 'url', 'hash', 'email', 'cve']) {
-            let matches = bodyContent.matchAll(regexes[indicatorType]);
-            let match = matches.next();
-            while(!match.done) {
-                let value = match.value[0];
-                if(value) {
-                    indicators.push({'type': indicatorType, 'value': match.value[0]});
-                }
-                match = matches.next();
-            }
-        }
-        if(indicators) {
-            browser.runtime.sendMessage({
-             "indicators": JSON.stringify(indicators)
-            }).then(message=>{console.log(message)},error=>{console.error(error)});
-        }
-
+        catchIndicators();
     } else if (message['cmd'] === 'find') {
         if(!window.find(message['indicator'])) {
             window.find(message['indicator'], false, true, false, false, false, false);
@@ -37,3 +40,4 @@ browser.runtime.onMessage.addListener(function(message) {
     }
 });
 
+window.addEventListener("load", catchIndicators);
