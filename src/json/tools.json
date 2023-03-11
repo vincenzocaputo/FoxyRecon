@@ -679,6 +679,17 @@
             "tags": ["ioc"]
         },
         {
+            "name": "Phishunt",
+            "url": {
+                "ip": "https://phishunt.io/ip/%s"
+            },
+            "desc": "Feed of active phishing cases",
+            "icon": "phishunt.png",
+            "color": "#343A40",
+            "types": ["ip"],
+            "tags": ["rep", "screenshot"]
+        },
+        {
             "name": "Pulsedive",
             "url": {
                 "ip": "https://pulsedive.com/indicator/%s",
@@ -781,6 +792,20 @@
             "icon": "abuse.png",
             "color": "#000000",
             "types": ["hash","domain","ip"],
+            "tags": ["ioc"]
+        },
+        {
+            "name": "Twitter",
+            "url": {
+                "hash": "https://twitter.com/search?q=%s&src=typed_query",
+                "domain": "https://twitter.com/search?q=%22%s%22&src=typed_query",
+                "ip": "https://twitter.com/search?q=%s&src=typed_query",
+                "cve": "https://twitter.com/search?q=%s&src=typed_query"
+            },
+            "desc": "Search IoCs on Twitter",
+            "icon": "twitter.png",
+            "color": "#1D9BF0",
+            "types": ["hash","domain","ip","cve"],
             "tags": ["ioc"]
         },
         {

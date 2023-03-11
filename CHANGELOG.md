@@ -9,10 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New popup main page reporting the number of indicators for each type found in the current visiting webpage
 - Each button on the popup main page can be clicked to display indicators of the corresponding type
 - Defanged indicators detection and collection from the current visiting webpage
-- Twitter, Leakpeek, DNS History, BreachDirectory resources
+- Twitter, Leakpeek, DNS History, BreachDirectory, Phishunt resources
 
 ### Changed
 - Improved support for defanged indicators
+- Removed ThreatCrowd (service no more available)
 
 ### Fixed
 - Tools list loading at startup
