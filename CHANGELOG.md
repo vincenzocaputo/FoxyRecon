@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Tools list loading at startup
 - Indicators counting when a page is first loaded in a new tab
+- Acceptance of IP addresses with a 0 at the beginning of one or more octects
 
 ## [0.13.1] - 2023-03-06
 ### Fixed
