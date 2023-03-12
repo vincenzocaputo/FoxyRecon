@@ -13,7 +13,6 @@ if(collectedIndicatorsListJson) {
     const collectedIndicatorsList = JSON.parse(collectedIndicatorsListJson);
     var count = {"ip": 0, "domain": 0, "url": 0, "email": 0, "hash": 0, "cve": 0};
     collectedIndicatorsList.forEach(function(indicator) {
-        console.log(indicator);
         count[indicator["type"]]++;
     });
     for(let key in count) {

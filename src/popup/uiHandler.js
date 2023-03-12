@@ -539,8 +539,14 @@ function createIndicatorsList(indicatorsList){
         });
         // Set click event function
         node.addEventListener("click", function() {
-            document.getElementById("input-box").value = node.indicator;
-            submitIndicator(node.indicator, node.type, "");
+            let [type, tld] = indicatorParser.getIndicatorType(node.indicator);
+            let value = node.indicator;
+            if(type="defanged") {
+                value = indicatorParser.refangIndicator(node.indicator); 
+                [type, tld] = indicatorParser.getIndicatorType(value);
+            }
+            document.getElementById("input-box").value = value;
+            submitIndicator(value, type, tld);
         });
     }
     createTypesOptionsList([...new Set(typesList)]);

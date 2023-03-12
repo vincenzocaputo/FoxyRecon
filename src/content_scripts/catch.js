@@ -18,7 +18,12 @@ function catchIndicators() {
         while(!match.done) {
             let value = match.value[0];
             if(value) {
-                indicators.push({'type': indicatorType, 'value': match.value[0]});
+                let [type, tld] = indParser.getIndicatorType(value);
+                if(type == "defanged") {
+                    refangedValue = indParser.refangIndicator(value);
+                    [type, tld] = indParser.getIndicatorType(refangedValue);
+                }
+                indicators.push({'type': type, 'value': value});
             }
             match = matches.next();
         }
