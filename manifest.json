@@ -9,7 +9,7 @@
 		"48": "assets/icons/foxyrecon-icon-48.png"
 	},
 
-    "content_security_policy": "default-src 'self'; img-src 'self' data:",
+    "content_security_policy": "default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'",
 
     "background": {
         "scripts": [
