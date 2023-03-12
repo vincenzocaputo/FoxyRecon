@@ -69,16 +69,16 @@ function showCountryFlag(tld) {
 }
 
 /**
- * Show add-on logo
+ * Show add-on main screen
  */
-function showAddonLogo() {
+function showAddonMain() {
     document.getElementById("tools-list").style.display = "none";
     document.getElementById("popup-text").style.display = "none";
     // Restore text field border color
     document.getElementById("text-field").style.borderColor = "#6E6C69";
     // Restore placeholder text of the input field
     document.getElementById("input-box").placeholder = "Enter your indicator";
-    document.getElementById("addon-logo").style.display = "block";
+    document.getElementById("main").style.display = "block";
     // Hide filter dropdown menus
     document.getElementById("filter-container-types").style.display = "none";
     document.getElementById("filter-container-tags").style.display = "none";
@@ -90,6 +90,7 @@ function showAddonLogo() {
     // Hide show fav button
     document.getElementById("show-only-fav").style.display = "none";
     document.getElementById("no-tools").style.display = "none";
+    document.getElementById("no-indicators").style.display = "none";
     // Hide download icon
     document.getElementById("download").style.display = "none";
     // Show history icon
@@ -111,11 +112,12 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
     document.getElementById("download").style.display = "none";
     document.getElementById("popup-text").style.display = "none";
     document.getElementById("text-field").style.borderColor = "#6E6C69";
-    document.getElementById("addon-logo").style.display = "none";
+    document.getElementById("main").style.display = "none";
     document.getElementById("catch-res-list").style.display = "none";
     document.querySelectorAll(".catch-res-entry").forEach(e => e.remove());
     document.getElementById("show-only-fav").style.display = "block";
     document.getElementById("no-tools").style.display = "none";
+    document.getElementById("no-indicators").style.display = "none";
     document.getElementById("hist-icon").style.display = "none";
 
     // This node contains the list of tools
@@ -445,7 +447,7 @@ function createIndicatorsList(indicatorsList){
     document.getElementById("download").style.display = "block";
     document.getElementById("popup-text").style.display = "none";
     document.getElementById("text-field").style.borderColor = "#6E6C69";
-    document.getElementById("addon-logo").style.display = "none";
+    document.getElementById("main").style.display = "none";
     document.getElementById("catch-icon").style.display = "none";
     document.getElementById("flag").style.display = "none";
 
@@ -537,8 +539,14 @@ function createIndicatorsList(indicatorsList){
         });
         // Set click event function
         node.addEventListener("click", function() {
-            document.getElementById("input-box").value = node.indicator;
-            submitIndicator(node.indicator, node.type, "");
+            let [type, tld] = indicatorParser.getIndicatorType(node.indicator);
+            let value = node.indicator;
+            if(type="defanged") {
+                value = indicatorParser.refangIndicator(node.indicator); 
+                [type, tld] = indicatorParser.getIndicatorType(value);
+            }
+            document.getElementById("input-box").value = value;
+            submitIndicator(value, type, tld);
         });
     }
     createTypesOptionsList([...new Set(typesList)]);
@@ -550,13 +558,20 @@ function createIndicatorsList(indicatorsList){
  * @param {indicatorType} type of indicators to show
  */
 function showIndicatorsByType(indicatorType) {
+    // Keep track of whether there are any indicators to display
+    var noIndicators = true;
     // retrieve the list of indicators
     document.querySelectorAll(".catch-res-entry").forEach((node)=>{
         if(indicatorType != "all" && node.type != indicatorType) {
             // hide the entry
             node.style.display = "none";
         } else {
+            noIndicators = false;
             node.style.display = "block";
         }
     });
+
+    if(noIndicators) {
+        document.getElementById("no-indicators").style.display="block";
+    }
 }

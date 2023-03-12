@@ -75,6 +75,18 @@
             "tags": ["sandbox"]
         },
         {
+            "name": "BreachDirectory",
+            "url": {
+                "email": "https://breachdirectory.org/"
+            },
+            "submitQuery": "button.btn-primary",
+            "desc": "Check if your information was exposed in a data breach",
+            "color": "#5150E1",
+            "icon": "breachdirectory.png",
+            "types": ["email"],
+            "tags": ["leak"]
+        },
+        {
             "name": "BuiltWith",
             "url": {
                 "domain": "https://builtwith.com/%s",
@@ -145,6 +157,19 @@
             "color": "#4479F3",
             "types": ["domain","ip"],
             "tags": ["screenshot", "rep"]
+        },
+        {
+            "name": "CleanTalk",
+            "url": {
+                "domain": "https://cleantalk.org/blacklists/%s",
+                "ip": "https://cleantalk.org/blacklists/%s",
+                "email": "https://cleantalk.org/blacklists/%s"
+            },
+            "desc": "Check IP Addresses, Email, Subnet, Domain for Spam in Blacklists Database.",
+            "icon": "cleantalk.png",
+            "color": "#3090C7",
+            "types": ["domain","ip","email"],
+            "tags": ["rep"]
         },
         {
 			"name": "CriminalIP",
@@ -245,6 +270,17 @@
 			"color": "#888888",
 			"types": ["domain", "ip"],
             "tags": ["whois"]
+		},
+		{
+			"name": "DNS History",
+			"url": {
+                "domain": "http://dnshistory.org/dns-records/%s"
+            },
+            "desc": "Here at DNS History we have been crawling DNS records since 2009, our database currently contains over 1 billion domains and over 12 billion DNS records. ",
+			"icon": "dnshistory.png",
+			"color": "#7EB10C",
+			"types": ["domain"],
+            "tags": ["dns", "history"]
 		},
         {
             "name": "Emailrep",
@@ -517,6 +553,18 @@
             "tags": ["open-ports"]
         },
         {
+            "name": "LeakPeek",
+            "url": {
+                "email": "https://leakpeek.com/"
+            },
+            "submitQuery": "button.btn-success",
+            "desc": "Is your data safe?",
+            "icon": "leakpeek.png",
+            "color": "#8b00ff",
+            "types": ["email"],
+            "tags": ["leak"]
+        },
+        {
             "name": "Lupovis",
             "url": {
                 "ip": "https://prowl.lupovis.io/?ip=%s"
@@ -644,6 +692,17 @@
             "tags": ["ioc"]
         },
         {
+            "name": "Phishunt",
+            "url": {
+                "ip": "https://phishunt.io/ip/%s"
+            },
+            "desc": "Feed of active phishing cases",
+            "icon": "phishunt.png",
+            "color": "#343A40",
+            "types": ["ip"],
+            "tags": ["rep", "screenshot"]
+        },
+        {
             "name": "Pulsedive",
             "url": {
                 "ip": "https://pulsedive.com/indicator/%s",
@@ -703,6 +762,16 @@
             "types": ["domain","ip"],
             "tags": ["rep"]
         },
+        {
+            "name": "Sploitus",
+            "url": {
+                "cve": "https://sploitus.com/?query=%s"
+            },
+            "desc": "Sploitus is a convenient central place for identifying the newest exploits and finding attacks that exploit known vulnerabilities. ",
+            "icon": "sploitus.png",
+            "color": "#5754DE",
+            "types": ["cve"]
+        },
 		{
 			"name": "Talos Intelligence",
 			"url": {
@@ -739,6 +808,20 @@
             "tags": ["ioc"]
         },
         {
+            "name": "Twitter",
+            "url": {
+                "hash": "https://twitter.com/search?q=%s&src=typed_query",
+                "domain": "https://twitter.com/search?q=%22%s%22&src=typed_query",
+                "ip": "https://twitter.com/search?q=%s&src=typed_query",
+                "cve": "https://twitter.com/search?q=%s&src=typed_query"
+            },
+            "desc": "Search IoCs on Twitter",
+            "icon": "twitter.png",
+            "color": "#1D9BF0",
+            "types": ["hash","domain","ip","cve"],
+            "tags": ["ioc"]
+        },
+        {
             "name": "Wayback Machine",
             "url": {
                 "url": "https://web.archive.org/web/*/%r"
@@ -748,19 +831,6 @@
             "color": "#222222",
             "types": ["url"],
             "tags": ["history"]
-        },
-        {
-            "name": "Threat Crowd",
-            "url": {
-                "domain": "http://34.209.115.93/domain.php?domain=%s",
-                "ip": "http://34.209.115.93/ip.php?ip=%s",
-                "email": "http://34.209.115.93/email.php?email=%s" 
-            },
-            "desc": "A Search Engine for Threats",
-            "icon": "threatcrowd.png",
-            "color": "#00B3D9",
-            "types": ["domain","ip","email"],
-            "tag": ["rep"]
         },
 		{
 			"name": "URLhaus",

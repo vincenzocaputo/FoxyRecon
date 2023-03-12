@@ -28,44 +28,61 @@ loadToolsList(function(ts) {
  * @param {toolsList} list of available tools
  */
 function createToolsMenu(toolsList) {
-    for (i=0; i<toolsList.length; i++){
-        let tool = toolsList[i];
-        // Create menu entry
-        browser.contextMenus.create({
-            id: i.toString(), // Incremental ID
-            title: tool["name"], // Tool name
-            contexts: ["selection"], // Show menu on selected text
-            /*icons: {
-                16: browser.runtime.getURL(tool["icon"]),
-            },*/
-            visible: true,
-        });
+    if(toolsList) {
+        for (i=0; i<toolsList.length; i++){
+            let tool = toolsList[i];
+            // Create menu entry
+            browser.contextMenus.create({
+                id: i.toString(), // Incremental ID
+                title: tool["name"], // Tool name
+                contexts: ["selection"], // Show menu on selected text
+                /*icons: {
+                    16: browser.runtime.getURL(tool["icon"]),
+                },*/
+                visible: true,
+            });
+        }
     }
 }
 
+/**
+ * Harvest and collect the indicators present in the current webpage. Save the list in the local storage.
+ */
 function catchIndicators(e) {
     browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
-        let activeTab = tabs[0].id;    
-        // Send a message to the content script    
-        browser.tabs.sendMessage(activeTab, "catch");    
-        let token = 1;    
-        browser.runtime.onMessage.addListener(function(message) {    
-            if(token) {              
-                // No indicators found. Show a message    
-                if(message['indicators'] == "[]") {    
-                    browser.browserAction.setBadgeText({text: "0"});
-                } else {                        
-                    const indicatorsList = JSON.parse(message['indicators']);    
-                    browser.browserAction.setBadgeText({text: indicatorsList.length.toString()});    
-                }    
-            }    
-            // Consume token    
-            token = 0;    
-        })    
-    },     
-    error => {    
-        browser.browserAction.setBadgeText({text: "0"});
-        console.error("Error: "+error)
+        let activeTab = tabs[0].id;
+        console.log(activeTab);
+        // Send a message to the content script
+        browser.tabs.sendMessage(activeTab, "catch")
+                    .then((response) => {
+                        console.log(response);
+                    })
+                    .catch((error) => {
+                        browser.browserAction.setBadgeText({text: ""});
+                        localStorage.setItem("catched_indicators", "[]");
+                    });
+        let token = 1;
+        browser.runtime.onMessage.addListener(function(message) {
+            if(token) {
+                const indicatorsListJson = message['indicators'];
+                // Save the indicators list in the local storage
+                localStorage.setItem("catched_indicators", indicatorsListJson);
+                // No indicators found. Show a message
+                if(indicatorsListJson == "[]") {
+                    browser.browserAction.setBadgeText({text: ""});
+                } else {
+                    const indicatorsList = JSON.parse(indicatorsListJson);
+                    browser.browserAction.setBadgeText({text: indicatorsList.length.toString()});
+                }
+            } 
+            // Consume token
+            token = 0;
+        })
+    },
+    error => {
+        browser.browserAction.setBadgeText({text: ""});
+        localStorage.setItem("catched_indicators", "[]");
+        console.error("Error: "+error);
     });
 }
 /**
@@ -74,7 +91,6 @@ function catchIndicators(e) {
 browser.tabs.onActivated.addListener(catchIndicators);
 browser.tabs.onUpdated.addListener(catchIndicators);
 browser.tabs.onCreated.addListener(catchIndicators);
-document.addEventListener("readystatechange", catchIndicators);
 
 /**
  * Updates context menu making visible only the tools which are compatible with the selected string

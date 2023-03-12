@@ -8,7 +8,7 @@ body {
     height: 350px;
 }
 
-#no-tools {
+#no-tools, #no-indicators {
     font-family: Verdana, sans-serif;
     color: #878787;
     text-align: center;
@@ -484,22 +484,30 @@ input:checked + .slider:before {
     padding-left: 5px;
 }
 
+#content > table {
+    margin-top: 2px;
+}
 
-#addon-logo {
-    width: -moz-available;  /* For Firefox */
-    width: -webkit-fill-available;  /* For Chrome */
-    margin-left: 10px;
-    margin-right: 10px;
+#content > table td {
+    width: 20%;
+}
+
+#content #addon-name {
+    font-family: Fantasy;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#content #addon-version {
+    font-family: sans-serif;
+    font-size: 11px;
 }
 
 #addon-logo > img {
     display: block;
     width: 50%;
     height: 50%;
-    
-    padding-top: 25%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
     opacity: 0.75;
 }
 
@@ -513,9 +521,81 @@ input:checked + .slider:before {
     font-size: 14px;
 }
 
+.catch-container {
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 100px;
+    cursor: pointer;
+}
+
+.catch-container .catch-image {
+    background-color: #FFFFFF;
+    padding: 2px;
+    border: 1px solid black;
+    border-radius: 100px;
+    display: block;
+    width: 50%;
+    height: 50%;
+    margin: 0 auto;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+.catch-image img {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+}
+
+.catch-container .occurrences {
+    font-weight: bold;
+    font-family: Verdana sans-serif;
+    font-size: 18px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 5px;
+    text-align: center;
+}
+
+#catch-ip {
+    background-color: #00BB00;
+}
+
+#catch-ip > .occurrences {
+    color: #FFFFFF;
+}
+
+#catch-domain {
+    background-color: #BB0000;
+}
+
+#catch-domain > .occurrences {
+    color: #FFFFFF;
+}
+
+#catch-url {
+    background-color: #FF4D00;
+}
+
+#catch-hash {
+    background-color: #00FFCC;
+}
+
+#catch-email {
+    background-color: #001EFF;
+}
+
+#catch-email > .occurrences {
+    color: #FFFFFF;
+}
+
+#catch-cve {
+    background-color: #FFE136;
+}
+
 #disclaimer {
     font-family: Verdana, sans-serif;
     font-size: 8px;
     text-align: center;
-    margin-top: 15%;
 }
