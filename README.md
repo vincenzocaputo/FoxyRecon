@@ -12,21 +12,20 @@
 </p>
 
 # FoxyRecon
-FoxyRecon is a Firefox add-on that helps you to carry out searching and investigation activities by using over 70 free Open Source Intelligence Source (OSINT) web resources.
+FoxyRecon is a Firefox add-on that helps you to carry out searching and investigation activities by using over 70 Open Source Intelligence Source (OSINT) web resources.
 
-You can perform researches through FoxyRecon in two ways:
-- Via popup\
-  You can enter the indicator you want to analyze in the textbox located in the popup. FoxyRecon will suggest you the most suitable tools for your indicator.\
+## Main Features
+- You can enter the indicator you want to analyze in the textbox located in the popup. FoxyRecon will suggest you the most suitable tools for your indicator.\
   ![Popup](images/popup.gif)
   
   The popup also let you pull out indicators from a web page, making them ready for investigations and analysis. FoxyRecon allows you also to download them in CSV file for future analysis.
 
-- Via context menu\
-  On whatever website you are visiting, you can highlight the indicator you want to analyze and, by right clicking on it, you can choose one of the suggested tools in the FoxyRecon context menu.
+- On whatever website you are visiting, you can highlight the indicator you want to analyze and, by right clicking on it, you can choose one of the suggested tools in the FoxyRecon context menu.
   The indicator submitted will be saved as input in the text field of the popup in order to let you performing further investigations on it. \
   ![Context Menu](images/contextmenu.gif)
  
- FoxyRecon also provides an utility that is able to harvest and collect all the indicators that are present on a web page you are visiting. You can find more information in the wiki page (https://github.com/vincenzocaputo/FoxyRecon/wiki/3.-Harvesting).
+ 
+- You can harvest and collect all the indicators that are present on a web page you are visiting. You can find more information in the wiki page (https://github.com/vincenzocaputo/FoxyRecon/wiki/5.-Collecting-Indicators).
   
 ## Supported Indicators
 Currently, FoxyRecon supports the following indicator types:
