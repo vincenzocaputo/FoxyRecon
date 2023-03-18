@@ -3,7 +3,7 @@ const regexes = {
     'ip': new RegExp(/(?!0)((2[0-4][0-9]|25[0-5]|1[0-9][0-9]|[1-9][0-9]|\d)(?:(\[\.\]|\.))){3}(2[0-4][0-9]|25[0-5]|1[0-9][0-9]|[1-9][0-9]|\d)/,'g'),
     'url': new RegExp(/(?:h(xx|XX|tt)p[s]?):\/\/((?:www(?:(\[\.\]|\.)))?[-a-zA-Z0-9@:%._\+~#=]{2,256}(?:(\[\.\]|\.))[a-z]{2,6})\b(?:[-a-zA-Z0-9@:%_\+.~#?&//=]*)/,'g'),
     'hash': new RegExp(/([a-z0-9]{64})|([a-z0-9]{40})|([a-z0-9]{32})/,'g'), 
-    'email': new RegExp(/[a-zA-Z0-9]((?:\[\.\]|\.)?[_a-zA-Z0-9_%+-]+)*(\[at\]|@)([a-zA-Z0-9-]+((?:(\[\.\]|\.))[a-zA-Z0-9-]+)*((?:(\[\.\]|\.))[a-zA-Z]{2,15}))/,'g'),
+    'email': new RegExp(/[a-zA-Z0-9]+((?:\[\.\]|\.)[_a-zA-Z0-9_%+-]+)*(\[at\]|@)([a-zA-Z0-9-]+((?:(\[\.\]|\.))[a-zA-Z0-9-]+)*((?:(\[\.\]|\.))[a-zA-Z]{2,15}))/,'g'),
     'cve': new RegExp(/CVE-\d{4}-\d{4,7}/,'g')
 }
 
@@ -14,6 +14,7 @@ function catchIndicators() {
     let indicators = [];
     for(indicatorType of ['domain', 'ip', 'url', 'hash', 'email', 'cve']) {
         let matches = bodyContent.matchAll(regexes[indicatorType]);
+        console.log(matches);
         let match = matches.next();
         while(!match.done) {
             let value = match.value[0];
