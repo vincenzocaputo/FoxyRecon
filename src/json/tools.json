@@ -703,6 +703,17 @@
             "tags": ["rep", "screenshot"]
         },
         {
+            "name": "Polyswarm",
+            "url": {
+                "hash": "https://polyswarm.network/search/hash?limit=25&page=0&term=%s"
+            },
+            "desc": "Scan Files or URLs for threats",
+            "icon": "polyswarm.png",
+            "color": "#6D3AEC",
+            "types": ["hash"],
+            "tags": ["sandbox"]
+        },
+        {
             "name": "Pulsedive",
             "url": {
                 "ip": "https://pulsedive.com/indicator/%s",
