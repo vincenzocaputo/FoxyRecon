@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - PolySwarm sandbox web resource
 
+### Fixed
+- Email regex does not accept upper case and special characters (%+-)
+
 ## [0.14.0] - 2023-03-12
 ### Added
 - New popup main page reporting the number of indicators for each type found in the current visiting webpage
