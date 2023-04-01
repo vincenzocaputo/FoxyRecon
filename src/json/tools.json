@@ -306,6 +306,18 @@
             "tags": ["whois"]
         },
         {
+            "name": "FOFA",
+            "url": {
+                "domain": "https://en.fofa.info/result?qbase64=%b",
+                "ip": "https://en.fofa.info/result?qbase64=%b"
+            },
+            "desc": "Search engine for Cyberspace mapping",
+            "icon": "fofa.png",
+            "color": "#040C1F",
+            "types": ["domain", "ip"],
+            "tags": ["open-ports"]
+        },
+        {
             "name": "FortiGuard",
             "url": {
                 "domain": "https://www.fortiguard.com/webfilter?q=%s&version=9",
