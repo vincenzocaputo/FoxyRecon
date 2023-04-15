@@ -335,7 +335,7 @@
                 "cve": "https://github.com/search?q=%s"
             },
             "desc": "Search for technical reports, PoC and exploits",
-            "icon": "github.com",
+            "icon": "github.png",
             "color": "#24292F",
             "types": ["cve"]
         },
