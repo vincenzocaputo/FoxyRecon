@@ -50,12 +50,9 @@ function createToolsMenu(toolsList) {
  */
 function catchIndicators(e) {
     let autocatch_option = localStorage.getItem("settings.autocatch");
-    console.log(autocatch_option);
     if (autocatch_option && autocatch_option === "true") {
-        console.log(autocatch_option);
         browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
             let activeTab = tabs[0].id;
-            console.log(activeTab);
             // Send a message to the content script
             browser.tabs.sendMessage(activeTab, "catch")
                         .then((response) => {
