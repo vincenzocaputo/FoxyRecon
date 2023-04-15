@@ -377,12 +377,15 @@ function setCheckboxStatus(checkboxNode, optionName) {
         } else if(optionName === "settings.autosubmit") {
             // auto-submit disabled
             optionValue = "false";
+        } else if(optionName === "settings.autocatch") {
+            // auto-catch enabled
+            optionValue = "true";
         }
     }
-    console.log((optionValue === "true"));
     checkboxNode.checked = (optionValue === "true");
     localStorage.setItem(optionName, optionValue);
 }
+
 
 /**
  * Show or hide settings popup menu
@@ -399,6 +402,7 @@ document.getElementById("settings-button").addEventListener("click", function() 
         
         setCheckboxStatus(document.querySelector("#open-tab-opt input"), "settings.newtab");
         setCheckboxStatus(document.querySelector("#auto-submit-opt input"), "settings.autosubmit");
+        setCheckboxStatus(document.querySelector("#auto-catch-opt input"), "settings.autocatch");
     } else {
         // Show pointer cursor on buttons
         document.querySelectorAll(".tool-entry").forEach(function(entry) {
@@ -462,6 +466,20 @@ document.querySelector("#auto-submit-opt input").addEventListener("change", func
     //let linksNodes = document.getElementById("tools-list").children;
     autosubmitOption = evt.target.checked;
     localStorage.setItem("settings.autosubmit", autosubmitOption);
+});
+
+/**
+ * Handle auto-submit option checkbox change event
+ */
+document.querySelector("#auto-catch-opt input").addEventListener("change", function(evt) {
+    autocatchOption = evt.target.checked;
+    localStorage.setItem("settings.autocatch", autocatchOption);
+    if (!autocatchOption) {
+        // Wipe indicators list
+        localStorage.setItem("catched_indicators", "[]");
+        // Set 0 counter as badge
+        browser.browserAction.setBadgeText({text: ""});
+    }
 });
 
 /**
