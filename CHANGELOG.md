@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.16.0] - 2023-05-31
+### Add
+- Bin icon to clean indicators list and show the popup main screen
+- SSLShopper tool for TLS certificate lookup
+- Digicert TLS certificate validator
+
+### Change
+- The catch option in the search bar will no longer show the list of the indicators found but only their occurrences
+
 ## [0.15.1] - 2023-04-15
 ### Add
 - Settings option to disable indicators auto catching feature

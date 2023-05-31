@@ -237,6 +237,18 @@
             "tags": ["leaks"]
         },
         {
+            "name": "Digicert",
+            "url": {
+                "domain": "https://www.digicert.com/help/"
+            },
+            "desc": "Verify SSL certificate",
+            "icon": "digicert.png",
+            "color": "#0D7EB8",
+            "types": ["domain"],
+            "tags": ["tls"],
+            "submitQuery": "#check-server-button"
+        },
+        {
             "name": "dnsdumpster",
             "url": {
                 "domain": "https://dnsdumpster.com/"
@@ -794,6 +806,17 @@
             "icon": "sploitus.png",
             "color": "#5754DE",
             "types": ["cve"]
+        },
+        {
+            "name": "SSLShopper",
+            "url": {
+                "domain": "https://www.sslshopper.com/ssl-checker.html#hostname=%s"
+            },
+            "desc": "Verify the SSL certificate of a domain and check if it is valid and trusted.",
+            "icon": "sslshopper.png",
+            "color": "#609CEC",
+            "types": ["domain"],
+            "tags": ["tls"]
         },
 		{
 			"name": "Talos Intelligence",
