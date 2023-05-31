@@ -237,6 +237,18 @@
             "tags": ["leaks"]
         },
         {
+            "name": "Digicert",
+            "url": {
+                "domain": "https://www.digicert.com/help/"
+            },
+            "desc": "Verify SSL certificate",
+            "icon": "digicert.png",
+            "color": "#0D7EB8",
+            "types": ["domain"],
+            "tags": ["tls"],
+            "submitQuery": "#check-server-button"
+        },
+        {
             "name": "dnsdumpster",
             "url": {
                 "domain": "https://dnsdumpster.com/"

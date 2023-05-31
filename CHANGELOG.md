@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Add
 - Bin icon to clean indicators list and show the popup main screen
 - SSLShopper tool for TLS certificate lookup
+- Digicert TLS certificate validator
 
 ### Change
 - The catch option in the search bar will no longer show the list of the indicators found but only their occurrences
