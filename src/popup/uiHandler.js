@@ -448,6 +448,8 @@ function createIndicatorsList(indicatorsList){
     document.getElementById("popup-text").style.display = "none";
     document.getElementById("text-field").style.borderColor = "#6E6C69";
     document.getElementById("main").style.display = "none";
+    document.getElementById("bin-icon").style.display = "block";
+    document.getElementById("hist-icon").style.display = "none";
     document.getElementById("catch-icon").style.display = "none";
     document.getElementById("flag").style.display = "none";
 
