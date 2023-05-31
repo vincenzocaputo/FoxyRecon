@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Add
 - Bin icon to clean indicators list and show the popup main screen
 
+### Change
+- The catch option in the search bar will no longer show the list of the indicators found but only their occurrences
+
 ## [0.15.1] - 2023-04-15
 ### Add
 - Settings option to disable indicators auto catching feature

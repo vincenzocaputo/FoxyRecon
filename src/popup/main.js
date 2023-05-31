@@ -7,6 +7,7 @@ var inputField = document.getElementById("input-box");
 
 indicatorParser = new IndicatorParser();
 
+
 // Check if there are some indicators found in the current webpage
 var collectedIndicatorsListJson = localStorage.getItem("catched_indicators");
 if(collectedIndicatorsListJson) {
@@ -90,11 +91,16 @@ textfieldCatch.addEventListener("click", function() {
                 if(message['indicators'] == "[]") {
                     showMessagePopup("No indicators found in this page", MessageType.INFO);
                 } else {
-                    // Show a different placeholder text in the text input field
-                    inputField.placeholder = "Select your indicator";
+                    //countFoundIndicators();
                     const indicatorsList = JSON.parse(message['indicators']);
-                    createIndicatorsList(indicatorsList, 'all');
-                    browser.browserAction.setBadgeText({text: indicatorsList.length.toString()});
+                    var count = {"ip": 0, "domain": 0, "url": 0, "email": 0, "hash": 0, "cve": 0};
+                    indicatorsList.forEach(function(indicator) {
+                        count[indicator["type"]]++;
+                    });
+                    for(let key in count) {
+                        document.getElementById(key+"_occ").textContent = count[key];
+                    }
+                    collectedIndicatorsListJson = message['indicators'];
                 }
             }
             // Consume token
