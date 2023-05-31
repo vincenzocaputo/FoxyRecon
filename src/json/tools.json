@@ -795,6 +795,17 @@
             "color": "#5754DE",
             "types": ["cve"]
         },
+        {
+            "name": "SSLShopper",
+            "url": {
+                "domain": "https://www.sslshopper.com/ssl-checker.html#hostname=%s"
+            },
+            "desc": "Verify the SSL certificate of a domain and check if it is valid and trusted.",
+            "icon": "sslshopper.png",
+            "color": "#609CEC",
+            "types": ["domain"],
+            "tags": ["tls"]
+        },
 		{
 			"name": "Talos Intelligence",
 			"url": {

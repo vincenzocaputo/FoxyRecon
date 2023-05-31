@@ -4,9 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.15.2] - 2023-05-31
+## [0.16.0] - 2023-05-31
 ### Add
 - Bin icon to clean indicators list and show the popup main screen
+- SSLShopper tool for TLS certificate lookup
 
 ### Change
 - The catch option in the search bar will no longer show the list of the indicators found but only their occurrences
