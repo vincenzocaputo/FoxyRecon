@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Web Check resource for domains and urls
 - Hunter.how resource for domains and ip addresses
 
+### Fix
+- Field auto-fill for web resources that support only post requests
+
 ## [0.16.0] - 2023-05-31
 ### Add
 - Bin icon to clean indicators list and show the popup main screen

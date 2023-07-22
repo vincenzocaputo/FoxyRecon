@@ -149,6 +149,8 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         } else {
             submit = "false";
         }
+        console.log(query);
+        
         sendResponse({msg: localStorage.getItem("indicator"), query: query, submit: submit});
         // Consume the request (to avoid clicking the button more times for the same request)
         localStorage.setItem("submit-btn-query","");

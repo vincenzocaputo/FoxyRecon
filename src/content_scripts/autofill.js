@@ -1,7 +1,7 @@
 
 let indicator = "";
 // Send a message to background script in order to retrieve the indicator saved in the local storage
-window.addEventListener("load", function() {
+function sendMessageAndFill() {
     browser.runtime.sendMessage({
         id: 1,
         msg: ""
@@ -83,4 +83,7 @@ window.addEventListener("load", function() {
     },(error)=>{
         console.error(error);
     });   
-});
+}
+
+
+setTimeout(sendMessageAndFill(), 500);
