@@ -442,6 +442,18 @@
             "types": ["email"],
             "tags": ["rep"]
         },
+        {
+            "name": "Hunter.how",
+            "url": {
+                "domain": "https://hunter.how/list?searchValue=domain%253D%22%s%22",
+                "ip": "https://hunter.how/list?searchValue=ip%253D%22%s%22"
+            },
+            "desc": "Free internet search engine for internet researchers",
+            "icon": "hunterhow.png",
+            "color": "#FD5F00",
+            "types": ["domain", "ip"],
+            "tags": ["open-ports", "http-headers"]
+        },
 		{
 			"name": "Hurricane Electric",
 			"url": { 
@@ -1053,6 +1065,18 @@
             "color": "#c80000",
             "types": ["domain"],
             "tags": ["techs"]
+        },
+        {
+            "name": "Web Check",
+            "url": {
+                "url": "https://web-check.as93.net/results/%s",
+                "domain": "https://web-check.as93.net/results/%s"
+            },
+            "desc": "Get an insight into the inner-workings of a given website: uncover potential attack vectors, analyse server architecture, view security configurations, and learn what technologies a site is using.",
+            "icon": "webcheck.png",
+            "color": "#141e2c",
+            "types": ["domain", "url"],
+            "tags": ["whois","dns","tls","open-ports"]
         },
         {
             "name": "WhatCMS",
