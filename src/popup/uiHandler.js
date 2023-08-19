@@ -93,6 +93,8 @@ function showAddonMain() {
     document.getElementById("no-indicators").style.display = "none";
     // Hide download icon
     document.getElementById("download").style.display = "none";
+    // Hide add node icon
+    document.getElementById("add-node").style.display = "none";
     // Show history icon
     document.getElementById("hist-icon").style.display = "block";
 }
@@ -116,6 +118,7 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
     document.getElementById("catch-res-list").style.display = "none";
     document.querySelectorAll(".catch-res-entry").forEach(e => e.remove());
     document.getElementById("show-only-fav").style.display = "block";
+    document.getElementById("add-node").style.display = "block";
     document.getElementById("no-tools").style.display = "none";
     document.getElementById("no-indicators").style.display = "none";
     document.getElementById("hist-icon").style.display = "none";

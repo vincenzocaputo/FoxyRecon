@@ -336,6 +336,32 @@ document.querySelector("#show-only-fav>button").addEventListener("click", (e) =>
 });
 
 /**
+ *
+ * Handle plus icon clicking event
+ *
+ */
+document.querySelector("#add-node-button").addEventListener("click", (e) => {
+    const addNodePopup = document.getElementById("add-node-popup");
+    if(!addNodePopup.style.display || addNodePopup.style.display == "none" ) {
+        // Don't show pointer cursor on buttons
+        document.querySelectorAll(".tool-entry").forEach(function(entry) {
+            entry.style.cursor = "default";
+        });
+
+        addNodePopup.style.display = "block";
+        
+        setCheckboxStatus(document.querySelector("#open-tab-opt input"), "settings.newtab");
+        setCheckboxStatus(document.querySelector("#auto-submit-opt input"), "settings.autosubmit");
+        setCheckboxStatus(document.querySelector("#auto-catch-opt input"), "settings.autocatch");
+    } else {
+        // Show pointer cursor on buttons
+        document.querySelectorAll(".tool-entry").forEach(function(entry) {
+            entry.style.cursor = "pointer";
+        });
+        addNodePopup.style.display = "none";
+    }
+});
+/**
  * Handle catch container clicking event
  *
  */

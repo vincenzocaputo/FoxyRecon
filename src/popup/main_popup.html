@@ -45,12 +45,17 @@
                     <img src="../../assets/icons/download.png" title="Download indicators"/>
                 </button>
             </div>
+            <div id="add-node">
+                <div id="add-node-button">
+                    <img src="../../assets/icons/plus.png" title="Add node to a graph">
+                </div>
+            </div>
         </div>
          <div class="popup">
-            <div id="settings-popup">
-                <span id="settings-title">Settings</span>
+            <div id="settings-popup" class="popup-container">
+                <span class="settings-title">Settings</span>
                 <hr>
-                <div id="settings-container">
+                <div class="popup-container-body">
                     <div class="option">
                         <div class="option-label">
                             Always open in new tab
@@ -86,6 +91,43 @@
                     </div>
                     <div class="option">
                         <button id="open-settings">Open Custom Tools Page</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div class="popup">
+            <div id="add-node-popup" class="popup-container">
+                <span class="popup-title">Add node</span>
+                <hr>
+                <div class="popup-container-body">
+                    <!--
+                    <div class="option">
+                        <div class="option-label">
+                            Graph Name
+                        </div>
+                        <div class="option-value" id="open-tab-opt">
+                        </div>
+                    </div>
+                    --!>
+                    <div class="option">
+                        <div class="option-label">
+                            Relationship Name
+                        </div>
+                        <div class="option-value">
+                            <input type="text" name="" id="rel-node-name" value="">
+                        </div>
+                    </div>
+                    <div class="option">
+                        <div class="option-label">
+                            Connect to node
+                        </div>
+                        <div class="option-value">
+                            <input type="text" name="" id="conn-node-name" value="">
+                        </div>
+                    </div>
+                    <div class="option">
+                        <button id="open-settings">Add node</button>
+                        <button id="open-settings">View graph</button>
                     </div>
                 </div>
             </div>

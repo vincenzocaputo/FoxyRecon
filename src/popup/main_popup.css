@@ -308,6 +308,38 @@ div.tool-tag {
     height: 15px;
 }
 
+#add-node {
+    margin-top: 5px;
+    margin-left: 15px;
+    cursor: pointer;
+    display: none;
+}
+
+#add-node-button {
+    background-color: #04D43C;
+    border: 2px solid #07A631; 
+    color: white; /* White text */
+    width: 20px;
+    height: 20px;
+    font-size: 16px; 
+    cursor: pointer; 
+    border-radius: 5px;
+    position: relative;
+}
+
+#add-node-button:hover {
+    background-color: #026E0F;
+}
+
+#add-node-button  img {
+    position:absolute;
+    width: 18px;
+    height: 18px;
+    left: 1px;
+    top: 1px;
+    margin: 0 auto;
+}
+
 #settings-button {
     width: 25px;
     height: 25px;
@@ -375,7 +407,7 @@ div.tool-tag {
     border-color: transparent transparent #42ADF5 transparent;
 }
 
-.popup #settings-popup {
+.popup .popup-container {
     display: none;
     width: 300px;
     background-color: #FFFFFF;
@@ -390,11 +422,11 @@ div.tool-tag {
     border: 1px solid #000000;
 }
 
-.popup #settings-title {
+.popup .popup-title {
     font-weight: bold;
 }
 /*
-.popup #settings-popup::after {
+.popup .popup-container::after {
     content: "";
     position: absolute;
     top: 0%;
@@ -462,26 +494,30 @@ input:checked + .slider:before {
     transform: translateX(14px);
 }
 
-#settings-container {
+.popup-container-body {
     display: table;
     width: inherit;
 }
 
-#settings-container > .option {
+.popup-container-body > .option {
     display: table-row;
 }
 
-#settings-container > .option > div {
+.popup-container-body > .option > div {
     display: table-cell;
     vertical-align: middle;
     padding-right: 5px;
 }
 
-#settings-container .option-label {
+.popup-container-body .option-label {
     font-family: Sans-Serif;
     font-size: 14px;
     text-align: left;
     padding-left: 5px;
+}
+
+.popup-container-body input {
+    width: 100px;
 }
 
 #content > table {
