@@ -350,9 +350,6 @@ document.querySelector("#add-node-button").addEventListener("click", (e) => {
 
         addNodePopup.style.display = "block";
         
-        setCheckboxStatus(document.querySelector("#open-tab-opt input"), "settings.newtab");
-        setCheckboxStatus(document.querySelector("#auto-submit-opt input"), "settings.autosubmit");
-        setCheckboxStatus(document.querySelector("#auto-catch-opt input"), "settings.autocatch");
     } else {
         // Show pointer cursor on buttons
         document.querySelectorAll(".tool-entry").forEach(function(entry) {
@@ -361,6 +358,77 @@ document.querySelector("#add-node-button").addEventListener("click", (e) => {
         addNodePopup.style.display = "none";
     }
 });
+
+/**
+ * Handle add node button event
+ *
+ */
+document.querySelector("#add-node-rel-button").addEventListener("click", (e) => {
+    const relLabel = document.querySelector("#rel-node-name").value;
+    const toNodeId = document.querySelector("#to-node-name").value;
+    const fromNodeId = localStorage.getItem("indicator");
+    const fromNodeType = localStorage.getItem("type");
+
+    let graph = localStorage.getItem("graph");
+    if(!graph) {
+        // Create new graph
+        graph = {
+            'nodes': [],
+            'links': []
+        }
+    } else {
+        console.log(graph);
+        graph = JSON.parse(graph);
+    }
+
+    let newFromNode = true;
+    let newToNode = true;
+    for (let node in graph["nodes"]) {
+        const nodeId = graph["nodes"][node].id;
+        if (fromNodeId == nodeId) {
+            newFromNode = false;
+        }
+        if (toNodeId == nodeId) {
+            newToNode = false;
+        }
+    }
+    
+    if (newFromNode) {
+        graph["nodes"].push({
+            id: fromNodeId,
+            type: fromNodeType
+        });
+    }
+
+    if (newToNode) {
+        const [toNodeType, tld] = indicatorParser.getIndicatorType(toNodeId);
+        graph["nodes"].push({
+            id: toNodeId,
+            type: toNodeType
+        });
+    }
+
+    graph["links"].push({
+        source: fromNodeId,
+        target: toNodeId,
+        label: relLabel
+    });
+
+    localStorage.setItem("graph", JSON.stringify(graph));
+
+});
+
+
+/**
+ * Handle open graph page button click event
+ */
+document.querySelector("#open-graph").addEventListener("click", function(evt) {
+    browser.tabs.create({
+        url: '/src/graph/graph.html'
+    });
+});
+
+
 /**
  * Handle catch container clicking event
  *
