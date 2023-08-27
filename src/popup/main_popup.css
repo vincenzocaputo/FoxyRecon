@@ -429,8 +429,8 @@ div.tool-tag {
     padding: 8px 0;
     position: absolute;
     z-index: 100;
-    top: 0;
-    left: 0;
+    top: 100px;
+    left: 5px;
     border: 1px solid #000000;
 }
 
