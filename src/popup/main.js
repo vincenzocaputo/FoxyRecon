@@ -393,7 +393,7 @@ document.querySelector("#add-node-button").addEventListener("click", (e) => {
 
 /**
  *
- * Handle delete icon clicking event
+ * Handle node delete icon clicking event
  *
  */
 document.querySelector("#del-node-button").addEventListener("click", (e) => {
@@ -402,12 +402,23 @@ document.querySelector("#del-node-button").addEventListener("click", (e) => {
     let graph = localStorage.getItem("graph");
     graph = JSON.parse(graph);
 
+    let resultNodes = [];
     for (let node in graph['nodes']) {
-        if (graph['nodes'][node].id == nodeId) {
-            graph['nodes'] = graph['nodes'].splice(node, node);
-            break;
+        if (graph['nodes'][node].id != nodeId) {
+            resultNodes.push(graph['nodes'][node]);
         }
     }
+    graph['nodes'] = resultNodes;
+
+    let resultLinks = [];
+    // Delete all the links from and to the delete node
+    for (let link in graph['links']) {
+        if (graph['links'][link].source != nodeId && graph['links'][link].target != nodeId) {
+            resultLinks.push(graph['links']);
+        }
+    }
+    
+    graph['links'] = resultLinks;
     
     document.querySelector("#add-node").style.display = "block";
     document.querySelector("#add-rel").style.display = "none";
