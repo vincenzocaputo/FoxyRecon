@@ -1,0 +1,55 @@
+.node {
+    stroke-width: 2px;
+    stroke: #111111;
+}
+
+.domain {
+    fill: #BB0000;
+}
+
+.ip {
+    fill: #00BB00;
+}
+
+.url {
+    fill: #FF4D00;
+}
+
+.hash {
+    fill: #00FFCC;
+}
+
+.email {
+    fill: #001EFF;
+}
+
+.cve {
+    fill: #FFE136;
+}
+
+.invalid {
+    fill: #999999;
+}
+
+.node-label {
+    font-size: 10px;
+}
+
+.link {
+    stroke: #000000;
+    stroke-width: 1px;
+}
+
+.link-label {
+  font-size: 12px; /* Adjust the font size */
+  fill: #333; /* Adjust the label color */
+  text-anchor: middle; /* Center-align the text */
+}
+
+.arrowhead {
+    fill: #000000;
+}
+
+#graph {
+    background-color: #FFFFFF;
+}

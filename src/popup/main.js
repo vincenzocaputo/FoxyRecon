@@ -335,39 +335,36 @@ document.querySelector("#show-only-fav>button").addEventListener("click", (e) =>
     }
 });
 
+/*-------------------------------GRAPH------------------------------------*/
+
+/**
+ * Check if an indicator node is in the graph
+ */
+function nodeInGraph(checkNodeId) {
+    let graph = localStorage.getItem("graph");
+    if (!graph) {
+        return false;
+    }
+    graph = JSON.parse(graph);
+    for (let node in graph["nodes"]) {
+        const exNodeId = graph["nodes"][node].id;
+        if (checkNodeId == exNodeId) {
+            console.log("NODE PRESENT");
+            return true;
+        }
+    }
+    return false;
+}
+
+
 /**
  *
  * Handle plus icon clicking event
  *
  */
 document.querySelector("#add-node-button").addEventListener("click", (e) => {
-    const addNodePopup = document.getElementById("add-node-popup");
-    if(!addNodePopup.style.display || addNodePopup.style.display == "none" ) {
-        // Don't show pointer cursor on buttons
-        document.querySelectorAll(".tool-entry").forEach(function(entry) {
-            entry.style.cursor = "default";
-        });
-
-        addNodePopup.style.display = "block";
-        
-    } else {
-        // Show pointer cursor on buttons
-        document.querySelectorAll(".tool-entry").forEach(function(entry) {
-            entry.style.cursor = "pointer";
-        });
-        addNodePopup.style.display = "none";
-    }
-});
-
-/**
- * Handle add node button event
- *
- */
-document.querySelector("#add-node-rel-button").addEventListener("click", (e) => {
-    const relLabel = document.querySelector("#rel-node-name").value;
-    const toNodeId = document.querySelector("#to-node-name").value;
-    const fromNodeId = localStorage.getItem("indicator");
-    const fromNodeType = localStorage.getItem("type");
+    const nodeId = localStorage.getItem("indicator");
+    const nodeType = localStorage.getItem("type");
 
     let graph = localStorage.getItem("graph");
     if(!graph) {
@@ -377,47 +374,132 @@ document.querySelector("#add-node-rel-button").addEventListener("click", (e) => 
             'links': []
         }
     } else {
-        console.log(graph);
         graph = JSON.parse(graph);
     }
 
-    let newFromNode = true;
-    let newToNode = true;
-    for (let node in graph["nodes"]) {
-        const nodeId = graph["nodes"][node].id;
-        if (fromNodeId == nodeId) {
-            newFromNode = false;
-        }
-        if (toNodeId == nodeId) {
-            newToNode = false;
+    
+    if (!nodeInGraph(nodeId)) {
+        graph["nodes"].push({
+            id: nodeId,
+            type: nodeType
+        });
+        document.querySelector("#add-node").style.display = "none";
+        document.querySelector("#del-node").style.display = "block";
+        document.querySelector("#add-rel").style.display = "block";
+        localStorage.setItem("graph", JSON.stringify(graph));
+    }
+    
+});
+
+/**
+ *
+ * Handle delete icon clicking event
+ *
+ */
+document.querySelector("#del-node-button").addEventListener("click", (e) => {
+    const nodeId = localStorage.getItem("indicator");
+
+    let graph = localStorage.getItem("graph");
+    graph = JSON.parse(graph);
+
+    for (let node in graph['nodes']) {
+        if (graph['nodes'][node].id == nodeId) {
+            graph['nodes'] = graph['nodes'].splice(node, node);
+            break;
         }
     }
     
-    if (newFromNode) {
-        graph["nodes"].push({
-            id: fromNodeId,
-            type: fromNodeType
-        });
-    }
+    document.querySelector("#add-node").style.display = "block";
+    document.querySelector("#add-rel").style.display = "none";
+    document.querySelector("#del-node").style.display = "none";
+    localStorage.setItem("graph", JSON.stringify(graph));
+});
+    
 
-    if (newToNode) {
+/**
+ * Handle add relationship button event to display popup
+ *
+ */
+document.querySelector("#add-rel-button").addEventListener("click", (e) => {
+    const addRelPopup = document.getElementById("add-relationship-popup");
+
+    if(!addRelPopup.style.display || addRelPopup.style.display == "none" ) {
+        // Don't show pointer cursor on buttons
+        document.querySelectorAll(".tool-entry").forEach(function(entry) {
+            entry.style.cursor = "default";
+        });
+
+        addRelPopup.style.display = "block";
+        addRelPopup.classList.add("open-popup");
+        
+    } else {
+        // Show pointer cursor on buttons
+        document.querySelectorAll(".tool-entry").forEach(function(entry) {
+            entry.style.cursor = "pointer";
+        });
+
+        addRelPopup.style.display = "none";
+        addRelPopup.classList.remove("open-popup");
+    }
+});
+
+
+/**
+ * Handle add node relationship button event
+ *
+ */
+document.querySelector("#add-node-rel-button").addEventListener("click", (e) => {
+    const relLabel = document.querySelector("#rel-node-name").value;
+    const toNodeId = document.querySelector("#to-node-name").value;
+    const isOutbound = document.querySelector("#outbound-link input[type='checkbox']").checked
+    const isInbound = document.querySelector("#inbound-link input[type='checkbox']").checked
+    const fromNodeId = localStorage.getItem("indicator");
+    const fromNodeType = localStorage.getItem("type");
+
+    let graph = localStorage.getItem("graph");
+    graph = JSON.parse(graph);
+
+    
+
+    if (!nodeInGraph(toNodeId)) {
         const [toNodeType, tld] = indicatorParser.getIndicatorType(toNodeId);
+        console.log(toNodeId);
         graph["nodes"].push({
             id: toNodeId,
             type: toNodeType
         });
     }
 
-    graph["links"].push({
-        source: fromNodeId,
-        target: toNodeId,
-        label: relLabel
-    });
+    if (isOutbound) {
+        graph["links"].push({
+            source: fromNodeId,
+            target: toNodeId,
+            label: relLabel
+        });
+    }
 
+    if (isInbound) {
+        graph["links"].push({
+            source: toNodeId,
+            target: fromNodeId,
+            label: relLabel
+        });
+    }
+
+    console.log(graph);
     localStorage.setItem("graph", JSON.stringify(graph));
 
 });
 
+/**
+ * Handle cancel button
+ *
+ */
+document.querySelector("#add-node-rel-close-button").addEventListener("click", function(evt) {
+    const relPopup = document.getElementById("add-relationship-popup");
+    relPopup.style.display = "none";
+    relPopup.classList.remove("open-popup");
+});
 
 /**
  * Handle open graph page button click event
@@ -428,6 +510,8 @@ document.querySelector("#open-graph").addEventListener("click", function(evt) {
     });
 });
 
+
+/**-------------------------------------CATCH-----------------------------------------------------**/
 
 /**
  * Handle catch container clicking event
@@ -466,7 +550,7 @@ document.querySelectorAll(".catch-container").forEach((v) => {
 });
 
 
-/**----------------------------------OPTION SETTINGS POP-UP----------------------------------------------**/
+/**----------------------------------OPTION SETTINGS POPUP----------------------------------------------**/
 
 function setCheckboxStatus(checkboxNode, optionName) {
     let optionValue = localStorage.getItem(optionName);
@@ -499,6 +583,7 @@ document.getElementById("settings-button").addEventListener("click", function() 
         });
 
         settingsPopup.style.display = "block";
+        settingsPopup.classList.add("open-popup");
         
         setCheckboxStatus(document.querySelector("#open-tab-opt input"), "settings.newtab");
         setCheckboxStatus(document.querySelector("#auto-submit-opt input"), "settings.autosubmit");
@@ -509,12 +594,13 @@ document.getElementById("settings-button").addEventListener("click", function() 
             entry.style.cursor = "pointer";
         });
         settingsPopup.style.display = "none";
+        settingsPopup.classList.remove("open-popup");
     }
 });
 
 
 /**
- * Handle the clicking outside the settings popup area
+ * Handle the clicking outside the popup area
  */
 document.addEventListener("click", function(evt) {
     const settingsPopup = document.getElementById("settings-popup");
@@ -532,6 +618,25 @@ document.addEventListener("click", function(evt) {
             document.getElementById("settings-button").click();
         }
     }
+
+    const addRelPopup = document.getElementById("add-relationship-popup");
+    const addRelButton = document.getElementById("add-rel-button");
+    const addRelCancelButton = document.getElementById("add-node-rel-close-button");
+
+    if(addRelPopup.style.display === "block") {
+        const buttonPos = addRelButton.getBoundingClientRect();
+        const popupPos = addRelPopup.getBoundingClientRect();
+        // Check if the user has clicked outside the popup
+        if(((evt.pageX < popupPos.left || evt.pageX > popupPos.right) || 
+            (evt.pageY < popupPos.top || evt.pageY > popupPos.bottom)) &&
+            ((evt.pageX < buttonPos.left || evt.pageX > buttonPos.right) || 
+            (evt.pageY < buttonPos.top || evt.pageY > buttonPos.bottom))) {
+            // Fire settings button click event to close the settings popup
+            addRelCancelButton.click();
+        }
+    }
+    event.stopPropagation();
+
 });
 
 

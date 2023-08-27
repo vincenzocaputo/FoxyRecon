@@ -93,8 +93,9 @@ function showAddonMain() {
     document.getElementById("no-indicators").style.display = "none";
     // Hide download icon
     document.getElementById("download").style.display = "none";
-    // Hide add node icon
+    // Hide graph editor buttons
     document.getElementById("add-node").style.display = "none";
+    document.getElementById("add-rel").style.display = "none";
     // Show history icon
     document.getElementById("hist-icon").style.display = "block";
 }
@@ -118,11 +119,19 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
     document.getElementById("catch-res-list").style.display = "none";
     document.querySelectorAll(".catch-res-entry").forEach(e => e.remove());
     document.getElementById("show-only-fav").style.display = "block";
-    document.getElementById("add-node").style.display = "block";
     document.getElementById("no-tools").style.display = "none";
     document.getElementById("no-indicators").style.display = "none";
     document.getElementById("hist-icon").style.display = "none";
 
+    if (nodeInGraph(indicator)) { 
+        document.getElementById("add-node").style.display = "none";
+        document.getElementById("add-rel").style.display = "block";
+        document.getElementById("del-node").style.display = "block";
+    } else {
+        document.getElementById("add-node").style.display = "block";
+        document.getElementById("add-rel").style.display = "none";
+        document.getElementById("del-node").style.display = "none";
+    }
     // This node contains the list of tools
     const toolsListNodes = document.getElementById("tools-list");
     toolsListNodes.style.display = "block";
@@ -364,9 +373,9 @@ function createToolsList(toolsList){
         
         // Set click event function
         node.addEventListener("click", function(e) {
-            settingsPopup = document.getElementById("settings-popup");
+            const openPopups = document.querySelectorAll(".open-popup");
             // If settings popup is opened, don't allow clicking 
-            if(node.url && settingsPopup.style.display != "block") {
+            if(node.url && openPopus.length == 0) {
                 newtab = localStorage.getItem("settings.newtab");
                 
                 if(node.submitQuery) {
