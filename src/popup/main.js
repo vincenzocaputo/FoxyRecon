@@ -387,6 +387,7 @@ document.querySelector("#add-node-button").addEventListener("click", (e) => {
         document.querySelector("#del-node").style.display = "block";
         document.querySelector("#add-rel").style.display = "block";
         localStorage.setItem("graph", JSON.stringify(graph));
+        showMessagePopup("Node added to graph", MessageType.INFO);
     }
     
 });

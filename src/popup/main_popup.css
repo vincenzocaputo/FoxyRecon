@@ -250,6 +250,8 @@ div.tool-tag {
 }
 
 #option-box {
+    margin-top: 2px;
+    margin-bottom: 2px;
     display: flex;
 }
 
@@ -368,10 +370,6 @@ div.tool-tag {
 }
 
 
-.popup {
-    position: relative;
-    display: inline-block;
-}
 
 .popup #popup-text {
     display: none;
@@ -382,8 +380,8 @@ div.tool-tag {
     padding: 8px 0;
     position: absolute;
     z-index: 100;
-    top: 20%;
-    left: 0%;
+    top: 50px;
+    left: 5%;
 }
 
 .popup #popup-text::after {
