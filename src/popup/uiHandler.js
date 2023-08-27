@@ -380,7 +380,7 @@ function createToolsList(toolsList){
         node.addEventListener("click", function(e) {
             const openPopups = document.querySelectorAll(".open-popup");
             // If settings popup is opened, don't allow clicking 
-            if(node.url && openPopus.length == 0) {
+            if(node.url && openPopups.length == 0) {
                 newtab = localStorage.getItem("settings.newtab");
                 
                 if(node.submitQuery) {
