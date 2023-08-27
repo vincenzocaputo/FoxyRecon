@@ -100,6 +100,7 @@ function showAddonMain() {
     // Hide graph editor buttons
     document.getElementById("add-node").style.display = "none";
     document.getElementById("add-rel").style.display = "none";
+    document.getElementById("del-node").style.display = "none";
     // Show history icon
     document.getElementById("hist-icon").style.display = "block";
 }
