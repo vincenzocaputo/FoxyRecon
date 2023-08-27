@@ -49,6 +49,18 @@ function showMessagePopup(message, messageType) {
         document.getElementById("text-field").style.borderColor = "#42ADF5";
     }
     popupText.style.display = "block";
+    popupText.style.opacity = "1";
+    setTimeout(() => {
+        let intervalId = window.setInterval(() => {
+            popupText.style.opacity = popupText.style.opacity - 0.1;
+            if (popupText.style.opacity == 0) {
+                popupText.style.display = "none";
+                clearInterval(intervalId);
+            }
+
+        }, 50);
+    }, 2000);
+
 }
 
 /**                                               
