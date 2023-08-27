@@ -455,6 +455,26 @@ document.querySelector("#add-rel-button").addEventListener("click", (e) => {
     }
 });
 
+/**
+ * Handle link direction checkboxes
+ *
+ **/
+document.querySelector("#outbound-link input").addEventListener("change", (e) => {
+    let inboundCheckbox = document.querySelector("#inbound-link input");
+
+    if (!e.target.checked) {
+        inboundCheckbox.checked = true;
+    }
+});
+
+document.querySelector("#inbound-link input").addEventListener("change", (e) => {
+    let outboundCheckbox = document.querySelector("#outbound-link input");
+
+    if (!e.target.checked) {
+        outboundCheckbox.checked = true;
+    }
+});
+
 
 /**
  * Handle add node relationship button event
