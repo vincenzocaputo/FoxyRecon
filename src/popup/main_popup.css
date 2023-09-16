@@ -369,6 +369,56 @@ div.tool-tag {
     height: inherit;
 }
 
+/* CSS */
+.button {
+  appearance: none;
+  background-color: #fa6400;
+  border: 1px solid rgba(27, 31, 35, .15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 6px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.button:focus:not(:focus-visible):not(.focus-visible) {
+  box-shadow: none;
+  outline: none;
+}
+
+.button:hover {
+  background-color: #fb8332;
+}
+
+.button:focus {
+  box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
+  outline: none;
+}
+
+.button:disabled {
+  border-color: rgba(27, 31, 35, .1);
+  color: rgba(255, 255, 255, .8);
+  cursor: default;
+}
+
+.button:active {
+  background-color: #c85000;
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+}
 
 
 .popup #popup-text {
@@ -437,23 +487,15 @@ div.tool-tag {
 .popup .popup-title {
     font-weight: bold;
 }
-/*
-.popup .popup-container::after {
-    content: "";
-    position: absolute;
-    top: 0%;
-    left: 90%;
-    margin-right: -5px;
-    border-width: 10px;
-    border-style: solid;
-    margin-top: -20px;
-    border-color: transparent transparent #FFFFFF transparent;
-}*/
-
 
 
 .option {
     height: 40px;
+}
+
+#to-node-name {
+    text-overflow: ellipsis;
+    width: 100px;
 }
 
 .switch {
@@ -518,7 +560,6 @@ input:checked + .slider:before {
 .popup-container-body > .option > div {
     display: table-cell;
     vertical-align: middle;
-    padding-right: 5px;
     text-align: left;
 }
 

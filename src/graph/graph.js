@@ -1,4 +1,18 @@
+
 const graph = JSON.parse(localStorage.getItem("graph"));
+
+document.getElementById("delete-button").addEventListener("click", (e) => {
+    const res = confirm("Are you sure you want to delete this graph? This operation cannot be undone")
+    if (res == true) {
+        const newEmptyGraph = {
+            'nodes': [],
+            'links': []
+        }
+        localStorage.setItem("graph", JSON.stringify(newEmptyGraph));
+        d3.select("#graph").remove();
+    }
+});
+
 
 const nodes = graph["nodes"];
 const links = graph["links"];
@@ -24,8 +38,8 @@ const dragended = (event, d) => {
 
 const svg = d3.select("#graph");
 
-const width = +svg.attr("width");
-const height = +svg.attr("height");
+const width = document.getElementById("graph").getBoundingClientRect().width;
+const height = document.getElementById("graph").getBoundingClientRect().height;
 
 const simulation = d3.forceSimulation()
   .force("link", d3.forceLink().id(d => d.id).distance(200))
