@@ -558,6 +558,37 @@ input:checked + .slider:before {
     width: 100px;
 }
 
+
+.form-error-popup {
+    display: none;
+    width: 200px;
+    color: #FFFFFF;
+    background-color: #FC5A4E;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 100;
+    left: 30%;
+    font-size: 11px;
+    margin-top: 10px;
+}
+
+.form-error-popup::after {
+    content: "";
+    position: absolute;
+    color: #FF0000;
+    top: 0%;
+    left: 80%;
+    margin-right: -5px;
+    border-width: 10px;
+    border-style: solid;
+    margin-top: -20px;
+    border-color: transparent transparent #FC5A4E transparent;
+}
+
+
+
 #content > table {
     margin-top: 2px;
 }

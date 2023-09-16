@@ -175,7 +175,6 @@ textfieldTool.addEventListener("click", function() {
  */
 function submitIndicator(indicator, type, tld, tag, toolName) {
     // Show the appropriate tools for the input provided
-    console.log(indicator);
 
     showCountryFlag(tld);
     showButtonsByType(indicator, type, tag, false, toolName);
@@ -272,7 +271,6 @@ inputField.addEventListener("keyup", (e) => {
             const selectNode = document.querySelector("#filter-container-tags>select");
             const optionValue = selectNode.options[selectNode.selectedIndex].value;
             
-            console.log(inputIndicator, type);
             submitIndicator(inputIndicator, type, tld, optionValue, fToolName);
         }
 
@@ -349,7 +347,6 @@ function nodeInGraph(checkNodeId) {
     for (let node in graph["nodes"]) {
         const exNodeId = graph["nodes"][node].id;
         if (checkNodeId == exNodeId) {
-            console.log("NODE PRESENT");
             return true;
         }
     }
@@ -433,25 +430,50 @@ document.querySelector("#del-node-button").addEventListener("click", (e) => {
  *
  */
 document.querySelector("#add-rel-button").addEventListener("click", (e) => {
-    const addRelPopup = document.getElementById("add-relationship-popup");
+    let graph = localStorage.getItem("graph");
+    graph = JSON.parse(graph);
 
-    if(!addRelPopup.style.display || addRelPopup.style.display == "none" ) {
-        // Don't show pointer cursor on buttons
-        document.querySelectorAll(".tool-entry").forEach(function(entry) {
-            entry.style.cursor = "default";
-        });
 
-        addRelPopup.style.display = "block";
-        addRelPopup.classList.add("open-popup");
-        
+    let nodes = [];
+    for (let node in graph['nodes']) {
+        if (graph['nodes'][node].id != inputField.value) { 
+            nodes.push(graph['nodes'][node].id);
+        }
+    }
+
+    if (nodes.length == 0) {
+        showMessagePopup("You need at least one other node to create a relationship", MessageType.WARNING);
     } else {
-        // Show pointer cursor on buttons
-        document.querySelectorAll(".tool-entry").forEach(function(entry) {
-            entry.style.cursor = "pointer";
-        });
+        // Create options list of nodes you can connect to
+        const selectInput = document.getElementById("to-node-name");
 
-        addRelPopup.style.display = "none";
-        addRelPopup.classList.remove("open-popup");
+        for (let node in nodes) {
+            const newOptionElement = document.createElement("option");
+            newOptionElement.value = nodes[node];
+            newOptionElement.appendChild(document.createTextNode(nodes[node]));
+            selectInput.appendChild(newOptionElement);
+        }
+
+        const addRelPopup = document.getElementById("add-relationship-popup");
+
+        if(!addRelPopup.style.display || addRelPopup.style.display == "none" ) {
+            // Don't show pointer cursor on buttons
+            document.querySelectorAll(".tool-entry").forEach(function(entry) {
+                entry.style.cursor = "default";
+            });
+
+            addRelPopup.style.display = "block";
+            addRelPopup.classList.add("open-popup");
+            
+        } else {
+            // Show pointer cursor on buttons
+            document.querySelectorAll(".tool-entry").forEach(function(entry) {
+                entry.style.cursor = "pointer";
+            });
+
+            addRelPopup.style.display = "none";
+            addRelPopup.classList.remove("open-popup");
+        }
     }
 });
 
@@ -475,6 +497,29 @@ document.querySelector("#inbound-link input").addEventListener("change", (e) => 
     }
 });
 
+/**
+ * Check the relationship node validity
+ *
+ */
+document.querySelector("#relationship-name-field>input").addEventListener("keyup", (e) => {
+    let relNameField = e.target;
+    let popupError = document.querySelector("#relationship-name-field>.form-error-popup");
+    let submitBtn = document.querySelector("#add-node-rel-button");
+
+    const relName = e.target.value;
+    const validRelName = new RegExp('^[A-Za-z-_]*$');
+    if (!validRelName.test(relName)) {
+        popupError.style.display = "block";
+        relNameField.style.borderColor = "#FF0000";
+        submitBtn.disabled = true;
+    } else {
+        popupError.style.display = "none";
+        relNameField.style.borderColor = "#6E6C69";
+        submitBtn.disabled = false;
+        
+    }
+});
+
 
 /**
  * Handle add node relationship button event
@@ -491,11 +536,8 @@ document.querySelector("#add-node-rel-button").addEventListener("click", (e) => 
     let graph = localStorage.getItem("graph");
     graph = JSON.parse(graph);
 
-    
-
     if (!nodeInGraph(toNodeId)) {
         const [toNodeType, tld] = indicatorParser.getIndicatorType(toNodeId);
-        console.log(toNodeId);
         graph["nodes"].push({
             id: toNodeId,
             type: toNodeType
@@ -518,8 +560,9 @@ document.querySelector("#add-node-rel-button").addEventListener("click", (e) => 
         });
     }
 
-    console.log(graph);
     localStorage.setItem("graph", JSON.stringify(graph));
+    document.getElementById("add-relationship-popup").style.display = "none";
+    showMessagePopup("Relationship added to graph", MessageType.INFO);
 
 });
 
@@ -662,7 +705,8 @@ document.addEventListener("click", function(evt) {
         if(((evt.pageX < popupPos.left || evt.pageX > popupPos.right) || 
             (evt.pageY < popupPos.top || evt.pageY > popupPos.bottom)) &&
             ((evt.pageX < buttonPos.left || evt.pageX > buttonPos.right) || 
-            (evt.pageY < buttonPos.top || evt.pageY > buttonPos.bottom))) {
+            (evt.pageY < buttonPos.top || evt.pageY > buttonPos.bottom)) &&
+            evt.target.id !== "to-node-name" && evt.target.tagName !== "OPTION") {
             // Fire settings button click event to close the settings popup
             addRelCancelButton.click();
         }

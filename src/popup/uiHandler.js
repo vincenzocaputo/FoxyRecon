@@ -51,6 +51,7 @@ function showMessagePopup(message, messageType) {
     popupText.style.opacity = "1";
     setTimeout(() => {
         popupText.style.display = "none";
+        document.getElementById("text-field").style.borderColor = "#6E6C69";
     }, 2000);
 
 }
