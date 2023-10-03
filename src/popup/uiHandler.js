@@ -152,7 +152,7 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
     }
     let tagsOptions = [];
     let noTools = true;
-    for (i = 0; i < resNodes.length; i++) {
+    for (i = 0; i < tools.length; i++) {
         if (!showOnlyFav || favTools && favTools.includes(tools[i]["name"])) {
             if (!toolName || tools[i]["name"].toLowerCase().includes(toolName)) {
                 if (tools[i]["types"].includes(type)) { 
