@@ -30,13 +30,13 @@ function loadToolsList(callbackFunc) {
             tools = data['tools'];
             localStorage.setItem('tools', JSON.stringify(tools));
             console.log("tools loaded from json file");
-            //callbackFunc(tools);
+            callbackFunc(tools);
         });
     } else {
         // Load the tools list from the local storage
         tools = JSON.parse(localStorage.getItem('tools'));
         console.log("tools loaded from local storage");
-       //callbackFunc(tools);
+        callbackFunc(tools);
     }
 
     if(localStorage.getItem('tools-ext')) {

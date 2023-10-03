@@ -60,10 +60,8 @@ div.tool-icon {
     border-radius: 10px;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
-    //border-radius: 36px;
     position: relative;
     margin-right: 5px;
-    //margin-left: 2px;
 }
 
 
@@ -118,7 +116,7 @@ div.tool-tag {
     padding-top: 1px;
     padding-bottom: 1px;
     margin-right: 2px;
-    font-color: #FFFFFF;
+    color: #FFFFFF;
     border-radius: 10px;
     height: 15px;
     font-size: 10px;
@@ -131,14 +129,10 @@ div.tool-tag {
     height: 100%;
     width: 20px;
     position: relative;
-    //background-color: yellow;
     margin-right: 1px;
 }
 
 .tool-open-icon {
-    //display: inline-block;
-    //float: right;
-    //clear: right;
     height: 15px;
     width: 15px;
     top: 0px;
@@ -154,12 +148,9 @@ div.tool-tag {
 }
 
 .tool-fav-icon {
-    //display: inline-block;
-    //float: right;
     height: 15px;
     width: 15px;
     position: relative;
-    //margin-right: 25px;
 }
 
 .tool-fav-icon > img {
@@ -191,7 +182,6 @@ div.tool-tag {
     cursor: pointer;
     width: 24px;
     height: 24px;
-    margin: left;
 }
 
 #flag {
@@ -219,7 +209,6 @@ div.tool-tag {
 #bin-icon {
     display: none;
     cursor: pointer;
-    margin: right;
     width: 16px;
     height: 16px;
 }
@@ -261,6 +250,8 @@ div.tool-tag {
 }
 
 #option-box {
+    margin-top: 2px;
+    margin-bottom: 2px;
     display: flex;
 }
 
@@ -283,6 +274,7 @@ div.tool-tag {
 #show-only-fav {
     margin-top: 5px;
     margin-left: 10px;
+    margin-right: 15px;
     width: 15px;
     height: 15px;
     cursor: pointer;
@@ -308,6 +300,62 @@ div.tool-tag {
     height: 15px;
 }
 
+#add-node, #add-rel, #del-node {
+    margin-top: 5px;
+    margin-left: 1px;
+    cursor: pointer;
+    display: none;
+}
+
+#add-node-button, #add-rel-button, #del-node-button {
+    background-color: #04D43C;
+    border: 2px solid #07A631; 
+    color: white; /* White text */
+    width: 20px;
+    height: 20px;
+    font-size: 16px; 
+    cursor: pointer; 
+    border-radius: 5px;
+    position: relative;
+}
+
+#add-rel-button {
+    border: 2px solid #6413AB;
+}
+
+#del-node-button {
+    border: 2px solid #8A2424;
+}
+
+#add-node-button:hover {
+    background-color: #026E0F;
+}
+
+#add-node-button  img, #add-rel-button img, #del-node-button img {
+    position:absolute;
+    width: 18px;
+    height: 18px;
+    left: 1px;
+    top: 1px;
+    margin: 0 auto;
+}
+
+#add-rel-button {
+    background-color: #D900FF;
+}
+
+#add-rel-button:hover {
+    background-color: #8D00A6;
+}
+
+#del-node-button {
+    background-color: #FF2A00;
+}
+
+#del-node-button:hover {
+    background-color: #B00505;
+}
+
 #settings-button {
     width: 25px;
     height: 25px;
@@ -321,11 +369,57 @@ div.tool-tag {
     height: inherit;
 }
 
-
-.popup {
-    position: relative;
-    display: inline-block;
+/* CSS */
+.button {
+  appearance: none;
+  background-color: #fa6400;
+  border: 1px solid rgba(27, 31, 35, .15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 6px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
 }
+
+.button:focus:not(:focus-visible):not(.focus-visible) {
+  box-shadow: none;
+  outline: none;
+}
+
+.button:hover {
+  background-color: #fb8332;
+}
+
+.button:focus {
+  box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
+  outline: none;
+}
+
+.button:disabled {
+  border-color: rgba(27, 31, 35, .1);
+  color: rgba(255, 255, 255, .8);
+  cursor: default;
+}
+
+.button:active {
+  background-color: #c85000;
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+}
+
 
 .popup #popup-text {
     display: none;
@@ -336,8 +430,8 @@ div.tool-tag {
     padding: 8px 0;
     position: absolute;
     z-index: 100;
-    top: 20%;
-    left: 0%;
+    top: 50px;
+    left: 5%;
 }
 
 .popup #popup-text::after {
@@ -375,7 +469,7 @@ div.tool-tag {
     border-color: transparent transparent #42ADF5 transparent;
 }
 
-.popup #settings-popup {
+.popup .popup-container {
     display: none;
     width: 300px;
     background-color: #FFFFFF;
@@ -385,31 +479,23 @@ div.tool-tag {
     padding: 8px 0;
     position: absolute;
     z-index: 100;
-    top: 0;
-    left: 0;
+    top: 100px;
+    left: 5px;
     border: 1px solid #000000;
 }
 
-.popup #settings-title {
+.popup .popup-title {
     font-weight: bold;
 }
-/*
-.popup #settings-popup::after {
-    content: "";
-    position: absolute;
-    top: 0%;
-    left: 90%;
-    margin-right: -5px;
-    border-width: 10px;
-    border-style: solid;
-    margin-top: -20px;
-    border-color: transparent transparent #FFFFFF transparent;
-}*/
-
 
 
 .option {
     height: 40px;
+}
+
+#to-node-name {
+    text-overflow: ellipsis;
+    width: 100px;
 }
 
 .switch {
@@ -462,27 +548,87 @@ input:checked + .slider:before {
     transform: translateX(14px);
 }
 
-#settings-container {
+.popup-container-body {
     display: table;
     width: inherit;
 }
 
-#settings-container > .option {
+.popup-container-body > .option {
     display: table-row;
 }
 
-#settings-container > .option > div {
+.popup-container-body > .option > div {
     display: table-cell;
     vertical-align: middle;
-    padding-right: 5px;
+    text-align: left;
 }
 
-#settings-container .option-label {
+.popup-container-body .option-label {
     font-family: Sans-Serif;
     font-size: 14px;
     text-align: left;
     padding-left: 5px;
 }
+
+.checkbox-options-container {
+  display: table;
+  text-align: left;
+  width: 100%;
+}
+
+.checkbox-option {
+  display: table-row;
+}
+
+.checkbox-cell {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.checkbox-cell input[type="checkbox"] {
+  display: block;
+  vertical-align: middle;
+  float:left;
+}
+
+.checkbox-cell label {
+    margin-right: 0px;
+}
+
+.popup-container-body input {
+    width: 100px;
+}
+
+
+.form-error-popup {
+    display: none;
+    width: 200px;
+    color: #FFFFFF;
+    background-color: #FC5A4E;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 100;
+    left: 30%;
+    font-size: 11px;
+    margin-top: 10px;
+}
+
+.form-error-popup::after {
+    content: "";
+    position: absolute;
+    color: #FF0000;
+    top: 0%;
+    left: 80%;
+    margin-right: -5px;
+    border-width: 10px;
+    border-style: solid;
+    margin-top: -20px;
+    border-color: transparent transparent #FC5A4E transparent;
+}
+
+
 
 #content > table {
     margin-top: 2px;

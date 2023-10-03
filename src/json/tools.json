@@ -101,7 +101,7 @@
         {
             "name": "Censys Certificates",
             "url": {
-                "domain": "https://search.censys.io/certificates?q=%s"
+                "domain": "https://search.censys.io/search?resource=certificates&sort=RELEVANCE&per_page=25&virtual_hosts=EXCLUDE&q=%s"
             },
             "desc": "Hosts and networks search engine",
             "icon": "censys.png",
@@ -112,12 +112,13 @@
         {
             "name": "Censys Hosts",
             "url": {
-                "ip": "https://search.censys.io/hosts/%s"
+                "ip": "https://search.censys.io/search?resource=hosts&sort=RELEVANCE&per_page=25&virtual_hosts=EXCLUDE&q=%s",
+                "domain": "https://search.censys.io/search?resource=hosts&sort=RELEVANCE&per_page=25&virtual_hosts=EXCLUDE&q=%s"
             },
             "desc": "Hosts and networks search engine",
             "icon": "censys.png",
             "color": "#FF7A38",
-            "types": ["ip"],
+            "types": ["ip", "domain"],
             "tags": ["open-ports"]
         },
         {
