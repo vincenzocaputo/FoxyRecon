@@ -46,9 +46,14 @@ function showMessagePopup(message, messageType) {
         document.getElementById("text-field").style.borderColor = "#FFDD00";
     } else if(messageType == MessageType.INFO) {
         popupText.classList.add(classes[MessageType.INFO]);
-        document.getElementById("text-field").style.borderColor = "#42ADF5";
     }
     popupText.style.display = "block";
+    popupText.style.opacity = "1";
+    setTimeout(() => {
+        popupText.style.display = "none";
+        document.getElementById("text-field").style.borderColor = "#6E6C69";
+    }, 2000);
+
 }
 
 /**                                               
@@ -93,6 +98,10 @@ function showAddonMain() {
     document.getElementById("no-indicators").style.display = "none";
     // Hide download icon
     document.getElementById("download").style.display = "none";
+    // Hide graph editor buttons
+    document.getElementById("add-node").style.display = "none";
+    document.getElementById("add-rel").style.display = "none";
+    document.getElementById("del-node").style.display = "none";
     // Show history icon
     document.getElementById("hist-icon").style.display = "block";
 }
@@ -120,6 +129,15 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
     document.getElementById("no-indicators").style.display = "none";
     document.getElementById("hist-icon").style.display = "none";
 
+    if (nodeInGraph(indicator)) { 
+        document.getElementById("add-node").style.display = "none";
+        document.getElementById("add-rel").style.display = "block";
+        document.getElementById("del-node").style.display = "block";
+    } else {
+        document.getElementById("add-node").style.display = "block";
+        document.getElementById("add-rel").style.display = "none";
+        document.getElementById("del-node").style.display = "none";
+    }
     // This node contains the list of tools
     const toolsListNodes = document.getElementById("tools-list");
     toolsListNodes.style.display = "block";
@@ -361,9 +379,9 @@ function createToolsList(toolsList){
         
         // Set click event function
         node.addEventListener("click", function(e) {
-            settingsPopup = document.getElementById("settings-popup");
+            const openPopups = document.querySelectorAll(".open-popup");
             // If settings popup is opened, don't allow clicking 
-            if(node.url && settingsPopup.style.display != "block") {
+            if(node.url && openPopups.length == 0) {
                 newtab = localStorage.getItem("settings.newtab");
                 
                 if(node.submitQuery) {

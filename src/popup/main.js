@@ -175,7 +175,6 @@ textfieldTool.addEventListener("click", function() {
  */
 function submitIndicator(indicator, type, tld, tag, toolName) {
     // Show the appropriate tools for the input provided
-    console.log(indicator);
 
     showCountryFlag(tld);
     showButtonsByType(indicator, type, tag, false, toolName);
@@ -272,7 +271,6 @@ inputField.addEventListener("keyup", (e) => {
             const selectNode = document.querySelector("#filter-container-tags>select");
             const optionValue = selectNode.options[selectNode.selectedIndex].value;
             
-            console.log(inputIndicator, type);
             submitIndicator(inputIndicator, type, tld, optionValue, fToolName);
         }
 
@@ -335,6 +333,261 @@ document.querySelector("#show-only-fav>button").addEventListener("click", (e) =>
     }
 });
 
+/*-------------------------------GRAPH------------------------------------*/
+
+/**
+ * Check if an indicator node is in the graph
+ */
+function nodeInGraph(checkNodeId) {
+    let graph = localStorage.getItem("graph");
+    if (!graph) {
+        return false;
+    }
+    graph = JSON.parse(graph);
+    for (let node in graph["nodes"]) {
+        const exNodeId = graph["nodes"][node].id;
+        if (checkNodeId == exNodeId) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+/**
+ *
+ * Handle plus icon clicking event
+ *
+ */
+document.querySelector("#add-node-button").addEventListener("click", (e) => {
+    const nodeId = localStorage.getItem("indicator");
+    const nodeType = localStorage.getItem("type");
+
+    let graph = localStorage.getItem("graph");
+    if(!graph) {
+        // Create new graph
+        graph = {
+            'nodes': [],
+            'links': []
+        }
+    } else {
+        graph = JSON.parse(graph);
+    }
+
+    
+    if (!nodeInGraph(nodeId)) {
+        graph["nodes"].push({
+            id: nodeId,
+            type: nodeType
+        });
+        document.querySelector("#add-node").style.display = "none";
+        document.querySelector("#del-node").style.display = "block";
+        document.querySelector("#add-rel").style.display = "block";
+        localStorage.setItem("graph", JSON.stringify(graph));
+        showMessagePopup("Node added to graph", MessageType.INFO);
+    }
+    
+});
+
+/**
+ *
+ * Handle node delete icon clicking event
+ *
+ */
+document.querySelector("#del-node-button").addEventListener("click", (e) => {
+    const nodeId = localStorage.getItem("indicator");
+
+    let graph = localStorage.getItem("graph");
+    graph = JSON.parse(graph);
+
+    let resultNodes = [];
+    for (let node in graph['nodes']) {
+        if (graph['nodes'][node].id != nodeId) {
+            resultNodes.push(graph['nodes'][node]);
+        }
+    }
+    graph['nodes'] = resultNodes;
+
+    let resultLinks = [];
+    // Delete all the links from and to the delete node
+    for (let link in graph['links']) {
+        if (graph['links'][link].source != nodeId && graph['links'][link].target != nodeId) {
+            resultLinks.push(graph['links']);
+        }
+    }
+    
+    graph['links'] = resultLinks;
+    
+    document.querySelector("#add-node").style.display = "block";
+    document.querySelector("#add-rel").style.display = "none";
+    document.querySelector("#del-node").style.display = "none";
+    localStorage.setItem("graph", JSON.stringify(graph));
+});
+    
+
+/**
+ * Handle add relationship button event to display popup
+ *
+ */
+document.querySelector("#add-rel-button").addEventListener("click", (e) => {
+    let graph = localStorage.getItem("graph");
+    graph = JSON.parse(graph);
+
+
+    let nodes = [];
+    for (let node in graph['nodes']) {
+        if (graph['nodes'][node].id != inputField.value) { 
+            nodes.push(graph['nodes'][node].id);
+        }
+    }
+
+    if (nodes.length == 0) {
+        showMessagePopup("You need at least one other node to create a relationship", MessageType.WARNING);
+    } else {
+        // Create options list of nodes you can connect to
+        const selectInput = document.getElementById("to-node-name");
+
+        for (let node in nodes) {
+            const newOptionElement = document.createElement("option");
+            newOptionElement.value = nodes[node];
+            newOptionElement.appendChild(document.createTextNode(nodes[node]));
+            selectInput.appendChild(newOptionElement);
+        }
+
+        const addRelPopup = document.getElementById("add-relationship-popup");
+
+        if(!addRelPopup.style.display || addRelPopup.style.display == "none" ) {
+            // Don't show pointer cursor on buttons
+            document.querySelectorAll(".tool-entry").forEach(function(entry) {
+                entry.style.cursor = "default";
+            });
+
+            addRelPopup.style.display = "block";
+            addRelPopup.classList.add("open-popup");
+            
+        } else {
+            // Show pointer cursor on buttons
+            document.querySelectorAll(".tool-entry").forEach(function(entry) {
+                entry.style.cursor = "pointer";
+            });
+
+            addRelPopup.style.display = "none";
+            addRelPopup.classList.remove("open-popup");
+        }
+    }
+});
+
+/**
+ * Handle link direction checkboxes
+ *
+ **/
+document.querySelector("#outbound-link input").addEventListener("change", (e) => {
+    let inboundCheckbox = document.querySelector("#inbound-link input");
+
+    if (!e.target.checked) {
+        inboundCheckbox.checked = true;
+    }
+});
+
+document.querySelector("#inbound-link input").addEventListener("change", (e) => {
+    let outboundCheckbox = document.querySelector("#outbound-link input");
+
+    if (!e.target.checked) {
+        outboundCheckbox.checked = true;
+    }
+});
+
+/**
+ * Check the relationship node validity
+ *
+ */
+document.querySelector("#relationship-name-field>input").addEventListener("keyup", (e) => {
+    let relNameField = e.target;
+    let popupError = document.querySelector("#relationship-name-field>.form-error-popup");
+    let submitBtn = document.querySelector("#add-node-rel-button");
+
+    const relName = e.target.value;
+    const validRelName = new RegExp('^[A-Za-z-_]*$');
+    if (!validRelName.test(relName)) {
+        popupError.style.display = "block";
+        relNameField.style.borderColor = "#FF0000";
+        submitBtn.disabled = true;
+    } else {
+        popupError.style.display = "none";
+        relNameField.style.borderColor = "#6E6C69";
+        submitBtn.disabled = false;
+        
+    }
+});
+
+
+/**
+ * Handle add node relationship button event
+ *
+ */
+document.querySelector("#add-node-rel-button").addEventListener("click", (e) => {
+    const relLabel = document.querySelector("#rel-node-name").value;
+    const toNodeId = document.querySelector("#to-node-name").value;
+    const isOutbound = document.querySelector("#outbound-link input[type='checkbox']").checked
+    const isInbound = document.querySelector("#inbound-link input[type='checkbox']").checked
+    const fromNodeId = localStorage.getItem("indicator");
+    const fromNodeType = localStorage.getItem("type");
+
+    let graph = localStorage.getItem("graph");
+    graph = JSON.parse(graph);
+
+    if (!nodeInGraph(toNodeId)) {
+        const [toNodeType, tld] = indicatorParser.getIndicatorType(toNodeId);
+        graph["nodes"].push({
+            id: toNodeId,
+            type: toNodeType
+        });
+    }
+
+    if (isOutbound) {
+        graph["links"].push({
+            source: fromNodeId,
+            target: toNodeId,
+            label: relLabel
+        });
+    }
+
+    if (isInbound) {
+        graph["links"].push({
+            source: toNodeId,
+            target: fromNodeId,
+            label: relLabel
+        });
+    }
+
+    localStorage.setItem("graph", JSON.stringify(graph));
+    document.getElementById("add-relationship-popup").style.display = "none";
+    showMessagePopup("Relationship added to graph", MessageType.INFO);
+
+});
+
+/**
+ * Handle cancel button
+ *
+ */
+document.querySelector("#add-node-rel-close-button").addEventListener("click", function(evt) {
+    const relPopup = document.getElementById("add-relationship-popup");
+    relPopup.style.display = "none";
+    relPopup.classList.remove("open-popup");
+});
+
+/**
+ * Handle open graph page button click event
+ */
+document.querySelector("#open-graph").addEventListener("click", function(evt) {
+    browser.tabs.create({
+        url: '/src/graph/graph.html'
+    });
+});
+
+
+/**-------------------------------------CATCH-----------------------------------------------------**/
+
 /**
  * Handle catch container clicking event
  *
@@ -372,7 +625,7 @@ document.querySelectorAll(".catch-container").forEach((v) => {
 });
 
 
-/**----------------------------------OPTION SETTINGS POP-UP----------------------------------------------**/
+/**----------------------------------OPTION SETTINGS POPUP----------------------------------------------**/
 
 function setCheckboxStatus(checkboxNode, optionName) {
     let optionValue = localStorage.getItem(optionName);
@@ -405,6 +658,7 @@ document.getElementById("settings-button").addEventListener("click", function() 
         });
 
         settingsPopup.style.display = "block";
+        settingsPopup.classList.add("open-popup");
         
         setCheckboxStatus(document.querySelector("#open-tab-opt input"), "settings.newtab");
         setCheckboxStatus(document.querySelector("#auto-submit-opt input"), "settings.autosubmit");
@@ -415,12 +669,13 @@ document.getElementById("settings-button").addEventListener("click", function() 
             entry.style.cursor = "pointer";
         });
         settingsPopup.style.display = "none";
+        settingsPopup.classList.remove("open-popup");
     }
 });
 
 
 /**
- * Handle the clicking outside the settings popup area
+ * Handle the clicking outside the popup area
  */
 document.addEventListener("click", function(evt) {
     const settingsPopup = document.getElementById("settings-popup");
@@ -438,6 +693,26 @@ document.addEventListener("click", function(evt) {
             document.getElementById("settings-button").click();
         }
     }
+
+    const addRelPopup = document.getElementById("add-relationship-popup");
+    const addRelButton = document.getElementById("add-rel-button");
+    const addRelCancelButton = document.getElementById("add-node-rel-close-button");
+
+    if(addRelPopup.style.display === "block") {
+        const buttonPos = addRelButton.getBoundingClientRect();
+        const popupPos = addRelPopup.getBoundingClientRect();
+        // Check if the user has clicked outside the popup
+        if(((evt.pageX < popupPos.left || evt.pageX > popupPos.right) || 
+            (evt.pageY < popupPos.top || evt.pageY > popupPos.bottom)) &&
+            ((evt.pageX < buttonPos.left || evt.pageX > buttonPos.right) || 
+            (evt.pageY < buttonPos.top || evt.pageY > buttonPos.bottom)) &&
+            evt.target.id !== "to-node-name" && evt.target.tagName !== "OPTION") {
+            // Fire settings button click event to close the settings popup
+            addRelCancelButton.click();
+        }
+    }
+    event.stopPropagation();
+
 });
 
 
