@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Change
 - Removed Checkphish Lookup resource (no more available)
+- Update d3 library to version 7.8.5
 
 ### Fix
 - Checkphish scan
