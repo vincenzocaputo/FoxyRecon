@@ -148,18 +148,6 @@
             "tags": ["sandbox"]
         },
         {
-            "name": "Checkphish Lookup",
-            "url": {
-                "domain": "https://checkphish.ai/domain/%s",
-                "ip": "https://checkphish.ai/ip/%s"
-            },
-            "desc": "Free scanner to detect phishing & fraudulent sites in real-time.",
-            "icon": "checkphish.png",
-            "color": "#4479F3",
-            "types": ["domain","ip"],
-            "tags": ["screenshot", "rep"]
-        },
-        {
             "name": "CleanTalk",
             "url": {
                 "domain": "https://cleantalk.org/blacklists/%s",
