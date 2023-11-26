@@ -751,6 +751,17 @@
             "tags": ["sandbox"]
         },
         {
+            "name": "Project Honeypot",
+            "url": {
+                "ip": "https://www.projecthoneypot.org/ip_%s"
+            },
+            "desc": "Search in a list of IP addresses observed by honey pots",
+            "icon": "projecthoneypot.png",
+            "color": "#ACACAC",
+            "types": ["ip"],
+            "tags": ["rep"]
+        },
+        {
             "name": "Pulsedive",
             "url": {
                 "ip": "https://pulsedive.com/indicator/%s",

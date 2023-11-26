@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.18.1] - 2023-11-26
 ### Add
 - Spam Database Lookup resource
+- Project Honeypot resource
 
 ### Change
 - Removed Checkphish Lookup resource (no more available)
