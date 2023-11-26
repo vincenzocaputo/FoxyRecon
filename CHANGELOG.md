@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fix
 - Checkphish scan
+- FortiGuard web filter lookup
 - Popup loading bug whem auto catching is enabled
 
 ## [0.18.0] - 2023-10-03

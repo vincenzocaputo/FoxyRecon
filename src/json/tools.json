@@ -321,13 +321,25 @@
         {
             "name": "FortiGuard",
             "url": {
-                "domain": "https://www.fortiguard.com/webfilter?q=%s&version=9",
                 "cve": "https://www.fortiguard.com/search?q=%s"
             },
             "desc": "Search threat advisories",
             "icon": "fortiguard.png",
             "color": "#DA291C",
-            "types": ["domain", "cve"],
+            "types": ["cve"],
+            "tags": ["rep"]
+        },
+        {
+            "name": "FortiGuard",
+            "url": {
+                "domain": "https://www.fortiguard.com/webfilter",
+                "url": "https://www.fortiguard.com/webfilter"
+            },
+            "submitQuery": "#webfilter_search_form_submit",
+            "desc": "Web Filter Lookup",
+            "icon": "fortiguard.png",
+            "color": "#DA291C",
+            "types": ["domain", "url"],
             "tags": ["rep"]
         },
         {
