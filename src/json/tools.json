@@ -138,26 +138,14 @@
         {
             "name": "Checkphish Scan",
             "url": {
-                "domain": "https://checkphish.ai/scan?data={\"searchText\":\"%s\",\"privateScan\":true,\"customUserAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36\"}",
-                "url": "https://checkphish.ai/scan?data={\"searchText\":\"%s\",\"privateScan\":true,\"customUserAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36\"}"
+                "domain": "https://app.checkphish.ai/live-scan?url=%s&agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36",
+                "url": "https://app.checkphish.ai/live-scan?url=%s&agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
             },
             "desc": "Free scanner to detect phishing & fraudulent sites in real-time.",
             "icon": "checkphish.png",
             "color": "#4479F3",
             "types": ["domain","url"],
             "tags": ["sandbox"]
-        },
-        {
-            "name": "Checkphish Lookup",
-            "url": {
-                "domain": "https://checkphish.ai/domain/%s",
-                "ip": "https://checkphish.ai/ip/%s"
-            },
-            "desc": "Free scanner to detect phishing & fraudulent sites in real-time.",
-            "icon": "checkphish.png",
-            "color": "#4479F3",
-            "types": ["domain","ip"],
-            "tags": ["screenshot", "rep"]
         },
         {
             "name": "CleanTalk",
@@ -333,13 +321,25 @@
         {
             "name": "FortiGuard",
             "url": {
-                "domain": "https://www.fortiguard.com/webfilter?q=%s&version=9",
                 "cve": "https://www.fortiguard.com/search?q=%s"
             },
             "desc": "Search threat advisories",
             "icon": "fortiguard.png",
             "color": "#DA291C",
-            "types": ["domain", "cve"],
+            "types": ["cve"],
+            "tags": ["rep"]
+        },
+        {
+            "name": "FortiGuard",
+            "url": {
+                "domain": "https://www.fortiguard.com/webfilter",
+                "url": "https://www.fortiguard.com/webfilter"
+            },
+            "submitQuery": "#webfilter_search_form_submit",
+            "desc": "Web Filter Lookup",
+            "icon": "fortiguard.png",
+            "color": "#DA291C",
+            "types": ["domain", "url"],
             "tags": ["rep"]
         },
         {
@@ -751,6 +751,17 @@
             "tags": ["sandbox"]
         },
         {
+            "name": "Project Honeypot",
+            "url": {
+                "ip": "https://www.projecthoneypot.org/ip_%s"
+            },
+            "desc": "Search in a list of IP addresses observed by honey pots",
+            "icon": "projecthoneypot.png",
+            "color": "#ACACAC",
+            "types": ["ip"],
+            "tags": ["rep"]
+        },
+        {
             "name": "Pulsedive",
             "url": {
                 "ip": "https://pulsedive.com/indicator/%s",
@@ -797,6 +808,19 @@
             "color": "#151515",
             "types": ["domain","ip"],
             "tags": ["open-ports"]
+        },
+        {
+            "name": "Spam Database Lookup",
+            "url": {
+                "domain": "https://spamdb.org/db/%s",
+                "ip": "https://spamdb.org/blacklists?q=%s",
+                "email": "https://spamdb.org/?s=%s"
+            },
+            "desc": "Spam database lookup",
+            "icon": "spamdb.gif",
+            "color": "#F5EFE0",
+            "types": ["domain","ip","email"],
+            "tags": ["rep"]
         },
         {
             "name": "Spamhaus",

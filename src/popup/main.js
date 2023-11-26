@@ -10,14 +10,17 @@ indicatorParser = new IndicatorParser();
 
 // Check if there are some indicators found in the current webpage
 var collectedIndicatorsListJson = localStorage.getItem("catched_indicators");
-if(collectedIndicatorsListJson) {
+if(collectedIndicatorsListJson && collectedIndicatorsListJson !== undefined && collectedIndicatorsListJson !== "undefined") {
+    console.log(collectedIndicatorsListJson);
     const collectedIndicatorsList = JSON.parse(collectedIndicatorsListJson);
     var count = {"ip": 0, "domain": 0, "url": 0, "email": 0, "hash": 0, "cve": 0};
     collectedIndicatorsList.forEach(function(indicator) {
         count[indicator["type"]]++;
     });
     for(let key in count) {
-        document.getElementById(key+"_occ").textContent = count[key];
+        if(indCountContainer=document.getElementById(key+"_occ")) {
+            indCountContainer.textContent = count[key];
+        }
     }
 }
 
