@@ -1,0 +1,52 @@
+{
+    "graph-nodes": [
+        {
+            "source": "https://centralops.net/co/",
+            "query": ".ipaddr",
+            "relationName": "resolves-to",
+            "relationType": "outbound",
+            "nodeType": "ip",
+        },
+        {
+            "source": "https://www.abuseipdb.com/check/",
+            "query": ".text-primary",
+            "relationName": "resolves-to",
+            "relationType": "outbound",
+            "nodeType": "ip"
+        },
+        {
+            "source": "https://otx.alienvault.com/indicator/domain/",
+            "query": "#whois-related-header table",
+            "relationName": "related-to",
+            "nodeType": "domain"
+        },
+        {
+            "source": "https://otx.alienvault.com/indicator/domain/",
+            "query": "#files table",
+            "relationName": "associated-to",
+            "relationType": "outbound",
+            "nodeType": "hash"
+        },
+        {
+            "source": "https://www.digicert.com/",
+            "query": "#CertDetails",
+            "relationName": "related-to",
+            "relationType": "outbound",
+            "nodeType": "domain"
+        },
+        {
+            "source": "https://host.io/",
+            "query": "#backlinks-tab ul",
+            "relationName": "backlinks-to",
+            "relationType": "inbound",
+            "nodeType": "domain"
+        },
+        {
+            "source": "https://talosintelligence.com/reputation_center/lookup",
+            "query": "#mail-data-wrapper",
+            "relationName": "directs-email-to",
+            "relationType": "outbound",
+            "nodeType": "domain"
+        }
+
+}
