@@ -138,8 +138,8 @@
         {
             "name": "Checkphish Scan",
             "url": {
-                "domain": "https://checkphish.ai/scan?data={\"searchText\":\"%s\",\"privateScan\":true,\"customUserAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36\"}",
-                "url": "https://checkphish.ai/scan?data={\"searchText\":\"%s\",\"privateScan\":true,\"customUserAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36\"}"
+                "domain": "https://app.checkphish.ai/live-scan?url=%s&agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36",
+                "url": "https://app.checkphish.ai/live-scan?url=%s&agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
             },
             "desc": "Free scanner to detect phishing & fraudulent sites in real-time.",
             "icon": "checkphish.png",

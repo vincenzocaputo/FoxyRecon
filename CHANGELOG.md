@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.18.1] - 2023-11-26
 ### Fix
+- Checkphish scan
 - Popup loading bug whem auto catching is enabled
 
 ## [0.18.0] - 2023-10-03
