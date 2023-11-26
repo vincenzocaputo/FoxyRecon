@@ -799,6 +799,19 @@
             "tags": ["open-ports"]
         },
         {
+            "name": "Spam Database Lookup",
+            "url": {
+                "domain": "https://spamdb.org/db/%s",
+                "ip": "https://spamdb.org/blacklists?q=%s",
+                "email": "https://spamdb.org/?s=%s"
+            },
+            "desc": "Spam database lookup",
+            "icon": "spamdb.gif",
+            "color": "#F5EFE0",
+            "types": ["domain","ip","email"],
+            "tags": ["rep"]
+        },
+        {
             "name": "Spamhaus",
             "url": {
                 "domain": "https://check.spamhaus.org/listed/?searchterm=%s",
