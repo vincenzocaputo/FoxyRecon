@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.18.1] - 2023-11-26
+### Add
+- Spam Database Lookup resource
+- Project Honeypot resource
+
+### Change
+- Removed Checkphish Lookup resource (no more available)
+- Update d3 library to version 7.8.5
+
+### Fix
+- Checkphish scan
+- FortiGuard web filter lookup
+- Popup loading bug whem auto catching is enabled
+
 ## [0.18.0] - 2023-10-03
 ### Add
 - Graph
