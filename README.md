@@ -3,12 +3,12 @@
 ![Mozilla Add-on](https://img.shields.io/amo/users/foxyrecon?style=plastic)
 <p align="left">
   <a href="https://addons.mozilla.org/en-US/firefox/addon/foxyrecon/">
-  <img src="images/get-the-addon-129x45px.8041c789.png"/>
+  <img src="._media/get-the-addon-129x45px.8041c789.png"/>
   </a>
 </p>
 
 <p align="center">
-  <img src="images/foxyrecon.png" width="200" height="200" />
+  <img src="._media/foxyrecon.png" width="200" height="200" />
 </p>
 
 # FoxyRecon
@@ -16,13 +16,13 @@ FoxyRecon is a Firefox add-on that helps you to carry out searching and investig
 
 ## Main Features
 - You can enter the indicator you want to analyze in the textbox located in the popup. FoxyRecon will suggest you the most suitable tools for your indicator.\
-  ![Popup](images/popup.gif)
+  ![Popup](._media/popup.gif)
   
   The popup also let you pull out indicators from a web page, making them ready for investigations and analysis. FoxyRecon allows you also to download them in CSV file for future analysis.
 
 - On whatever website you are visiting, you can highlight the indicator you want to analyze and, by right clicking on it, you can choose one of the suggested tools in the FoxyRecon context menu.
   The indicator submitted will be saved as input in the text field of the popup in order to let you performing further investigations on it. \
-  ![Context Menu](images/contextmenu.gif)
+  ![Context Menu](._media/contextmenu.gif)
  
  
 - You can harvest and collect all the indicators that are present on a web page you are visiting. You can find more information in the wiki page (https://github.com/vincenzocaputo/FoxyRecon/wiki/5.-Collecting-Indicators).
