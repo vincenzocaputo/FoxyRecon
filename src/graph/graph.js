@@ -1,21 +1,17 @@
 
-const graph = JSON.parse(localStorage.getItem("graph"));
+const graph = new Graph();
 
 document.getElementById("delete-button").addEventListener("click", (e) => {
     const res = confirm("Are you sure you want to delete this graph? This operation cannot be undone")
     if (res == true) {
-        const newEmptyGraph = {
-            'nodes': [],
-            'links': []
-        }
-        localStorage.setItem("graph", JSON.stringify(newEmptyGraph));
+        graph.deleteGraph();
         d3.select("#graph").remove();
     }
 });
 
 
-const nodes = graph["nodes"];
-const links = graph["links"];
+const nodes = graph.getNodes();
+const links = graph.getRelationships();
 
 
 const dragstarted = (event, d) => {

@@ -3,6 +3,7 @@
         {
             "source": "https://centralops.net/co/",
             "query": ".ipaddr",
+            "type": "domain",
             "relationName": "resolves-to",
             "relationType": "outbound",
             "nodeType": "ip",
@@ -10,6 +11,7 @@
         {
             "source": "https://www.abuseipdb.com/check/",
             "query": ".text-primary",
+            "type": "domain",
             "relationName": "resolves-to",
             "relationType": "outbound",
             "nodeType": "ip"
@@ -17,12 +19,14 @@
         {
             "source": "https://otx.alienvault.com/indicator/domain/",
             "query": "#whois-related-header table",
+            "type": "domain",
             "relationName": "related-to",
             "nodeType": "domain"
         },
         {
             "source": "https://otx.alienvault.com/indicator/domain/",
             "query": "#files table",
+            "type": "domain",
             "relationName": "associated-to",
             "relationType": "outbound",
             "nodeType": "hash"
@@ -30,6 +34,7 @@
         {
             "source": "https://www.digicert.com/",
             "query": "#CertDetails",
+            "type": "domain",
             "relationName": "related-to",
             "relationType": "outbound",
             "nodeType": "domain"
@@ -37,6 +42,7 @@
         {
             "source": "https://host.io/",
             "query": "#backlinks-tab ul",
+            "type": "domain",
             "relationName": "backlinks-to",
             "relationType": "inbound",
             "nodeType": "domain"
@@ -44,7 +50,32 @@
         {
             "source": "https://talosintelligence.com/reputation_center/lookup",
             "query": "#mail-data-wrapper",
+            "type": "domain",
             "relationName": "directs-email-to",
+            "relationType": "outbound",
+            "nodeType": "domain"
+        },
+        {
+            "source": "https://sitereport.netcraft.com/",
+            "query": "#ip_address",
+            "type": "domain",
+            "relationName": "resolves-to",
+            "relationType": "outbound",
+            "nodeType": "ip"
+        },
+        {
+            "source": "https://urlscan.io/domain.github.com",
+            "query": ".simpletag a",
+            "type": "domain",
+            "relationName": "subdomain-of",
+            "relationType": "inbound",
+            "nodeType": "domain"
+        },
+        {
+            "source": "https://urlscan.io/domain.github.com",
+            "query": ".simpletag a",
+            "type": "ip",
+            "relationName": "hosts",
             "relationType": "outbound",
             "nodeType": "domain"
         }
