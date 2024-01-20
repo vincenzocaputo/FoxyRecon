@@ -15,6 +15,7 @@
         "scripts": [
             "src/lib/browser-polyfill.js",
             "src/utils/toolsFileLoader.js", 
+            "src/utils/graphNodesFileLoader.js", 
             "src/utils/utils.js",
             "src/utils/graph.js",
             "src/background.js"
@@ -27,6 +28,8 @@
                 "src/lib/browser-polyfill.js",
                 "src/utils/indicatorparser.js", 
                 "src/utils/utils.js", 
+                "src/utils/graph.js",
+                "src/content_scripts/graph.js",
                 "src/content_scripts/context_menu.js",
                 "src/content_scripts/catch.js"
             ]

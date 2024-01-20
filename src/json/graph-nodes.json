@@ -6,7 +6,7 @@
             "type": "domain",
             "relationName": "resolves-to",
             "relationType": "outbound",
-            "nodeType": "ip",
+            "nodeType": "ip"
         },
         {
             "source": "https://www.abuseipdb.com/check/",
@@ -18,30 +18,47 @@
         },
         {
             "source": "https://otx.alienvault.com/indicator/domain/",
-            "query": "#whois-related-header table",
+            "query": "#relatedWhois #whois-related-header td a",
             "type": "domain",
             "relationName": "related-to",
+            "relationType": "outbound",
             "nodeType": "domain"
         },
         {
             "source": "https://otx.alienvault.com/indicator/domain/",
-            "query": "#files table",
+            "query": "otx-ioc-expandable-line span",
+            "type": "domain",
+            "relationName": "resolved-to",
+            "relationType": "outbound",
+            "nodeType": "ip"
+        },
+        {
+            "source": "https://otx.alienvault.com/indicator/domain/",
+            "query": "#relatedWhois #whois-related-header td a",
+            "type": "domain",
+            "relationName": "related-to",
+            "relationType": "inbound",
+            "nodeType": "domain"
+        },
+        {
+            "source": "https://otx.alienvault.com/indicator/domain/",
+            "query": "#files table a",
             "type": "domain",
             "relationName": "associated-to",
             "relationType": "outbound",
             "nodeType": "hash"
         },
         {
-            "source": "https://www.digicert.com/",
-            "query": "#CertDetails",
-            "type": "domain",
-            "relationName": "related-to",
-            "relationType": "outbound",
+            "source": "https://otx.alienvault.com/indicator/ip/",
+            "query": "#passive td a",
+            "type": "ip",
+            "relationName": "resolves-to",
+            "relationType": "inbound",
             "nodeType": "domain"
         },
         {
             "source": "https://host.io/",
-            "query": "#backlinks-tab ul",
+            "query": "#backlinks-tab ul a",
             "type": "domain",
             "relationName": "backlinks-to",
             "relationType": "inbound",
@@ -49,7 +66,7 @@
         },
         {
             "source": "https://talosintelligence.com/reputation_center/lookup",
-            "query": "#mail-data-wrapper",
+            "query": "#mail-data-wrapper a",
             "type": "domain",
             "relationName": "directs-email-to",
             "relationType": "outbound",
@@ -64,7 +81,7 @@
             "nodeType": "ip"
         },
         {
-            "source": "https://urlscan.io/domain.github.com",
+            "source": "https://urlscan.io/domain",
             "query": ".simpletag a",
             "type": "domain",
             "relationName": "subdomain-of",
@@ -72,12 +89,12 @@
             "nodeType": "domain"
         },
         {
-            "source": "https://urlscan.io/domain.github.com",
+            "source": "https://urlscan.io/domain",
             "query": ".simpletag a",
             "type": "ip",
             "relationName": "hosts",
             "relationType": "outbound",
             "nodeType": "domain"
         }
-
+    ]
 }

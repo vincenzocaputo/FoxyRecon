@@ -34,11 +34,27 @@ class Graph {
 
     /**
      * Check if an indicator node is in the graph
+     * @param{checkNodeId}: node to check
      */
     nodeInGraph(checkNodeId) {
         for (let node in this.graph["nodes"]) {
             const exNodeId = this.graph["nodes"][node].id;
             if (checkNodeId == exNodeId) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Check if a relationship is in the graph
+     * @param{sourceNodeId}: id of the source node
+     * @param{targetNodeId}: id of the target node
+     * @param{label}: relationship node
+     */
+    relationshipInGraph(sourceNodeId, targetNodeId, label) {
+        for (let relationship in this.graph["links"]) {
+            if (relationship["source"] === sourceNodeId && relationship["target"] === targetNodeId && relationship["label"] === label) {
                 return true;
             }
         }
@@ -94,12 +110,17 @@ class Graph {
      * @param{label}: relationship label
      */
     addRelationship(sourceNode, targetNode, label) {
-        this.graph['links'].push({
-            source: sourceNode,
-            target: targetNode,
-            label: label
-        });
-        this.saveGraph();
+        if (!this.relationshipInGraph(sourceNode, targetNode, label)) {
+            this.graph['links'].push({
+                source: sourceNode,
+                target: targetNode,
+                label: label
+            });
+            this.saveGraph();
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

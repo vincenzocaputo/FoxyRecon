@@ -185,6 +185,7 @@ function submitIndicator(indicator, type, tld, tag, toolName) {
     localStorage.setItem("indicator", indicator);
     localStorage.setItem("type", type);
     localStorage.setItem("tld", tld);
+    localStorage.setItem("graph.autocreate", "true");
     if(!tag) {
         tag = "all";
     }
