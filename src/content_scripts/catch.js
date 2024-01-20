@@ -14,7 +14,6 @@ function catchIndicators() {
     let indicators = [];
     for(indicatorType of ['domain', 'ip', 'url', 'hash', 'email', 'cve']) {
         let matches = bodyContent.matchAll(regexes[indicatorType]);
-        console.log(matches);
         let match = matches.next();
         while(!match.done) {
             let value = match.value[0];

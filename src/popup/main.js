@@ -185,6 +185,7 @@ function submitIndicator(indicator, type, tld, tag, toolName) {
     localStorage.setItem("indicator", indicator);
     localStorage.setItem("type", type);
     localStorage.setItem("tld", tld);
+    //localStorage.setItem("graph.autocreate", "true");
     if(!tag) {
         tag = "all";
     }
@@ -339,25 +340,6 @@ document.querySelector("#show-only-fav>button").addEventListener("click", (e) =>
 /*-------------------------------GRAPH------------------------------------*/
 
 /**
- * Check if an indicator node is in the graph
- */
-function nodeInGraph(checkNodeId) {
-    let graph = localStorage.getItem("graph");
-    if (!graph) {
-        return false;
-    }
-    graph = JSON.parse(graph);
-    for (let node in graph["nodes"]) {
-        const exNodeId = graph["nodes"][node].id;
-        if (checkNodeId == exNodeId) {
-            return true;
-        }
-    }
-    return false;
-}
-
-
-/**
  *
  * Handle plus icon clicking event
  *
@@ -366,27 +348,12 @@ document.querySelector("#add-node-button").addEventListener("click", (e) => {
     const nodeId = localStorage.getItem("indicator");
     const nodeType = localStorage.getItem("type");
 
-    let graph = localStorage.getItem("graph");
-    if(!graph) {
-        // Create new graph
-        graph = {
-            'nodes': [],
-            'links': []
-        }
-    } else {
-        graph = JSON.parse(graph);
-    }
-
+    let graph = new Graph();
     
-    if (!nodeInGraph(nodeId)) {
-        graph["nodes"].push({
-            id: nodeId,
-            type: nodeType
-        });
+    if (graph.addNode(nodeId, nodeType)) {
         document.querySelector("#add-node").style.display = "none";
         document.querySelector("#del-node").style.display = "block";
         document.querySelector("#add-rel").style.display = "block";
-        localStorage.setItem("graph", JSON.stringify(graph));
         showMessagePopup("Node added to graph", MessageType.INFO);
     }
     
@@ -400,31 +367,11 @@ document.querySelector("#add-node-button").addEventListener("click", (e) => {
 document.querySelector("#del-node-button").addEventListener("click", (e) => {
     const nodeId = localStorage.getItem("indicator");
 
-    let graph = localStorage.getItem("graph");
-    graph = JSON.parse(graph);
-
-    let resultNodes = [];
-    for (let node in graph['nodes']) {
-        if (graph['nodes'][node].id != nodeId) {
-            resultNodes.push(graph['nodes'][node]);
-        }
-    }
-    graph['nodes'] = resultNodes;
-
-    let resultLinks = [];
-    // Delete all the links from and to the delete node
-    for (let link in graph['links']) {
-        if (graph['links'][link].source != nodeId && graph['links'][link].target != nodeId) {
-            resultLinks.push(graph['links']);
-        }
-    }
-    
-    graph['links'] = resultLinks;
-    
+    let graph = new Graph();
+    graph.deleteNode(nodeId);
     document.querySelector("#add-node").style.display = "block";
     document.querySelector("#add-rel").style.display = "none";
     document.querySelector("#del-node").style.display = "none";
-    localStorage.setItem("graph", JSON.stringify(graph));
 });
     
 
@@ -433,14 +380,11 @@ document.querySelector("#del-node-button").addEventListener("click", (e) => {
  *
  */
 document.querySelector("#add-rel-button").addEventListener("click", (e) => {
-    let graph = localStorage.getItem("graph");
-    graph = JSON.parse(graph);
-
-
     let nodes = [];
-    for (let node in graph['nodes']) {
-        if (graph['nodes'][node].id != inputField.value) { 
-            nodes.push(graph['nodes'][node].id);
+    let graphNodes = new Graph().getNodes();
+    for (let node in graphNodes) {
+        if (graphNodes[node].id != inputField.value) { 
+            nodes.push(graphNodes[node].id);
         }
     }
 
@@ -536,34 +480,20 @@ document.querySelector("#add-node-rel-button").addEventListener("click", (e) => 
     const fromNodeId = localStorage.getItem("indicator");
     const fromNodeType = localStorage.getItem("type");
 
-    let graph = localStorage.getItem("graph");
-    graph = JSON.parse(graph);
 
-    if (!nodeInGraph(toNodeId)) {
-        const [toNodeType, tld] = indicatorParser.getIndicatorType(toNodeId);
-        graph["nodes"].push({
-            id: toNodeId,
-            type: toNodeType
-        });
-    }
+    let graph = new Graph();
+    
+    const [toNodeType, tld] = indicatorParser.getIndicatorType(toNodeId);
+    graph.addNode(toNodeId, toNodeType);
 
     if (isOutbound) {
-        graph["links"].push({
-            source: fromNodeId,
-            target: toNodeId,
-            label: relLabel
-        });
+        graph.addRelationship(fromNodeId, toNodeId, relLabel);
     }
 
     if (isInbound) {
-        graph["links"].push({
-            source: toNodeId,
-            target: fromNodeId,
-            label: relLabel
-        });
+        graph.addRelationship(toNodeId, fromNodeId, relLabel);
     }
 
-    localStorage.setItem("graph", JSON.stringify(graph));
     document.getElementById("add-relationship-popup").style.display = "none";
     showMessagePopup("Relationship added to graph", MessageType.INFO);
 
@@ -642,6 +572,8 @@ function setCheckboxStatus(checkboxNode, optionName) {
         } else if(optionName === "settings.autocatch") {
             // auto-catch enabled
             optionValue = "true";
+        } else if(optionName === "settings.autograph") {
+            optionValue = "true";
         }
     }
     checkboxNode.checked = (optionValue === "true");
@@ -666,6 +598,7 @@ document.getElementById("settings-button").addEventListener("click", function() 
         setCheckboxStatus(document.querySelector("#open-tab-opt input"), "settings.newtab");
         setCheckboxStatus(document.querySelector("#auto-submit-opt input"), "settings.autosubmit");
         setCheckboxStatus(document.querySelector("#auto-catch-opt input"), "settings.autocatch");
+        setCheckboxStatus(document.querySelector("#auto-graph-opt input"), "settings.autograph");
     } else {
         // Show pointer cursor on buttons
         document.querySelectorAll(".tool-entry").forEach(function(entry) {
@@ -764,6 +697,14 @@ document.querySelector("#auto-catch-opt input").addEventListener("change", funct
         // Set 0 counter as badge
         browser.browserAction.setBadgeText({text: ""});
     }
+});
+
+/**
+ * Handle auto-graph option checkbox change event
+ */
+document.querySelector("#auto-graph-opt input").addEventListener("change", function(evt) {
+    autographOption = evt.target.checked;
+    localStorage.setItem("settings.autograph", autographOption);
 });
 
 /**

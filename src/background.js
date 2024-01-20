@@ -16,10 +16,29 @@ if (installedVersion != currentVersion) {
     localStorage.setItem("version", currentVersion);
 }
 
+// Setup default settings
+if (!localStorage.getItem("settings.newtab")) {
+    localStorage.setItem("settings.newtab", "true");
+}
+if (!localStorage.getItem("settings.autosubmit")) {
+    localStorage.setItem("settings.autosubmit", "false");
+}
+if (!localStorage.getItem("settings.autocatch")) {
+    localStorage.setItem("settings.autocatch", "false");
+}
+if (!localStorage.getItem("settings.autograph")) {
+    localStorage.setItem("settings.autograph", "false");
+}
+
 var tools;
 loadToolsList(function(ts) {
     tools=ts;
     createToolsMenu(tools);
+})
+
+var graphMapping;
+loadGraphMapping(function(mp) {
+    graphMapping=mp;
 })
 
 
@@ -56,7 +75,6 @@ function catchIndicators(e) {
             // Send a message to the content script
             browser.tabs.sendMessage(activeTab, "catch")
                         .then((response) => {
-                            console.log(response);
                         })
                         .catch((error) => {
                             browser.browserAction.setBadgeText({text: ""});
@@ -119,6 +137,7 @@ function updateToolsMenu(toolsList, indicator, type) {
                     // Save the indicator in the local storage
                     localStorage.setItem("type", type);
                     localStorage.setItem("indicator", indicator);
+                    //localStorage.setItem("graph.autocreate", "true"); 
                     // Add the query for autofill to localstorage
                     if(tool["submitQuery"]) {
                         localStorage.setItem("submit-btn-query", tool["submitQuery"]);
@@ -139,8 +158,8 @@ function updateToolsMenu(toolsList, indicator, type) {
  * Waiting for  messages from content_script
  */
 browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    console.log("Waiting for messages");
     if(request.id == 1) {
+        // Autofill feature
         query = localStorage.getItem("submit-btn-query");
         // Send the query only if auto-submit option is enabled
         if(localStorage.getItem("settings.autosubmit") === "true") {
@@ -149,11 +168,28 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         } else {
             submit = "false";
         }
-        console.log(query);
-        
         sendResponse({msg: localStorage.getItem("indicator"), query: query, submit: submit});
         // Consume the request (to avoid clicking the button more times for the same request)
         localStorage.setItem("submit-btn-query","");
+    } else if (request.id == 2) {
+        // Auto graph generation
+        if (localStorage.getItem("settings.autograph") === "true" && request.msg) {
+            const resource = request.msg;
+            let mappings = Array();
+            for (i=0; i<graphMapping.length; i++) {
+                if (resource.startsWith(graphMapping[i]['source'])) {
+                    mappings.push(graphMapping[i]);
+                }
+            }
+            sendResponse({msg: localStorage.getItem("indicator"), map: JSON.stringify(mappings) }) 
+        }
+    } else if (request.id == 3) {
+        const graph = new Graph();
+        const rel = JSON.parse(request.msg);
+        graph.addNode(rel['source']['id'], rel['source']['type']);
+        graph.addNode(rel['target']['id'], rel['target']['type']);
+        graph.addRelationship(rel['source']['id'], rel['target']['id'], rel['label']);
+        sendResponse({msg: 1});
     } else {
         updateToolsMenu(tools, request.indicator, request.type);
     }
