@@ -80,7 +80,7 @@ textfieldBin.addEventListener("click", function() {
  *
  */
 var textfieldCatch = document.querySelector("#catch-icon");
-textfieldCatch.title = "Catch";
+textfieldCatch.title = "Collect indicators on this page";
 textfieldCatch.addEventListener("click", function() {
     // Get the id of the current active tab in the current window
     browser.tabs.query({active:true, currentWindow:true}).then(tabs => {
