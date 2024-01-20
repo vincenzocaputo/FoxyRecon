@@ -1,3 +1,4 @@
+html, body {margin: 0; height: 100%; overflow: hidden}
 #header-pane {
     display: block;
     padding: 10px;
@@ -31,9 +32,116 @@
     padding: 5px;
 }
 
+#option-palette>#settings-button {
+    width: 35px;
+    height: 35px;
+}
+
+#settings-button>img {
+    width: 35px;
+    height: 35px;
+}
+
+#settings-button:hover {
+    cursor: pointer;
+}
+
+#pane-container {
+    margin: 0;
+    display: table;
+    width: 100%;
+}
+
+#graph-pane {
+    display: table-cell;
+    background-color: #FCD9C7;
+    height: 100vh;
+}
+
+#settings-pane {
+    display: none;
+    background-color: #FFFFFF;
+    border: 2px solid black;
+    width: auto;
+    margin: 2px;
+    padding: 0;
+    position: fixed;
+    overflow: auto;
+}
+
+#settings-pane>div {
+    display: table;
+    padding: 5px;
+    border-spacing: 10px;
+}
+
+#settings-pane>div>div {
+    display: table-row;
+}
+
+#settings-pane>div>div>* {
+    display: table-cell;
+}
+
+#node-detail {
+    visibility: hidden;
+}
+
+input[type="range"] {
+  accent-color: coral;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 65px;
+    height: 30px;
+}
+
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 34px;
+    background-color: #ccc;
+    transition: .4s;
+    font-size: 12px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 28px;
+    width: 28px;
+    left: 2px;
+    bottom: 1px;
+    border-radius: 50%;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #FF7700;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(34px);
+}
 
 
-/* CSS */
 .button {
   appearance: none;
   background-color: #fa6400;
@@ -92,43 +200,48 @@
 #graph-pane {
     float: left;
     clear: right;
-    margin-top: 10px;
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
 }
 
 
 .node {
     stroke-width: 2px;
-    stroke: #111111;
 }
 
 .domain {
     fill: #BB0000;
+    stroke: #990000;
 }
 
 .ip {
     fill: #00BB00;
+    stroke: #009900;
 }
 
 .url {
     fill: #FF4D00;
+    stroke: #DD2B00;
 }
 
 .hash {
     fill: #00FFCC;
+    stroke: #00DDAA;
 }
 
 .email {
     fill: #001EFF;
+    stroke: #000CDD;
 }
 
 .cve {
     fill: #FFE136;
+    stroke: #DDC014;
 }
 
 .invalid {
     fill: #999999;
+    stroke: #777777;
 }
 
 .node-label {
