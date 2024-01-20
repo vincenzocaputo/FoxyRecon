@@ -27,7 +27,7 @@ if (!localStorage.getItem("settings.autocatch")) {
     localStorage.setItem("settings.autocatch", "false");
 }
 if (!localStorage.getItem("settings.autograph")) {
-    localStorage.setItem("settings.autograph", "true");
+    localStorage.setItem("settings.autograph", "false");
 }
 
 var tools;
@@ -137,7 +137,7 @@ function updateToolsMenu(toolsList, indicator, type) {
                     // Save the indicator in the local storage
                     localStorage.setItem("type", type);
                     localStorage.setItem("indicator", indicator);
-                    localStorage.setItem("graph.autocreate", "true"); 
+                    //localStorage.setItem("graph.autocreate", "true"); 
                     // Add the query for autofill to localstorage
                     if(tool["submitQuery"]) {
                         localStorage.setItem("submit-btn-query", tool["submitQuery"]);
@@ -173,8 +173,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         localStorage.setItem("submit-btn-query","");
     } else if (request.id == 2) {
         // Auto graph generation
-        if (localStorage.getItem("settings.autograph") === "true" && localStorage.getItem("graph.autocreate") === "true" && request.msg) {
-            localStorage.getItem("graph.autocreate", "false");
+        if (localStorage.getItem("settings.autograph") === "true" && request.msg) {
             const resource = request.msg;
             let mappings = Array();
             for (i=0; i<graphMapping.length; i++) {

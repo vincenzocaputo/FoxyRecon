@@ -185,7 +185,7 @@ function submitIndicator(indicator, type, tld, tag, toolName) {
     localStorage.setItem("indicator", indicator);
     localStorage.setItem("type", type);
     localStorage.setItem("tld", tld);
-    localStorage.setItem("graph.autocreate", "true");
+    //localStorage.setItem("graph.autocreate", "true");
     if(!tag) {
         tag = "all";
     }
@@ -572,6 +572,8 @@ function setCheckboxStatus(checkboxNode, optionName) {
         } else if(optionName === "settings.autocatch") {
             // auto-catch enabled
             optionValue = "true";
+        } else if(optionName === "settings.autograph") {
+            optionValue = "true";
         }
     }
     checkboxNode.checked = (optionValue === "true");
@@ -596,6 +598,7 @@ document.getElementById("settings-button").addEventListener("click", function() 
         setCheckboxStatus(document.querySelector("#open-tab-opt input"), "settings.newtab");
         setCheckboxStatus(document.querySelector("#auto-submit-opt input"), "settings.autosubmit");
         setCheckboxStatus(document.querySelector("#auto-catch-opt input"), "settings.autocatch");
+        setCheckboxStatus(document.querySelector("#auto-graph-opt input"), "settings.autograph");
     } else {
         // Show pointer cursor on buttons
         document.querySelectorAll(".tool-entry").forEach(function(entry) {
@@ -694,6 +697,14 @@ document.querySelector("#auto-catch-opt input").addEventListener("change", funct
         // Set 0 counter as badge
         browser.browserAction.setBadgeText({text: ""});
     }
+});
+
+/**
+ * Handle auto-graph option checkbox change event
+ */
+document.querySelector("#auto-graph-opt input").addEventListener("change", function(evt) {
+    autographOption = evt.target.checked;
+    localStorage.setItem("settings.autograph", autographOption);
 });
 
 /**
