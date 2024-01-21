@@ -221,7 +221,7 @@
             },
             "desc": "Check hashes against Cymru malware data",
             "icon": "cymru.png",
-            "color": "#FD8F8F",
+            "color": "#000000",
             "submitQuery": "#mhr-form-submit",
             "types": ["hash"]
         },
