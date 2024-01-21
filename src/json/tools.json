@@ -215,6 +215,17 @@
             "types": ["cve"]
         },
         {
+            "name": "Cymru",
+            "url": {
+                "hash": "https://hash.cymru.com/"
+            },
+            "desc": "Check hashes against Cymru malware data",
+            "icon": "cymru.png",
+            "color": "#FD8F8F",
+            "submitQuery": "#mhr-form-submit",
+            "types": ["hash"]
+        },
+        {
             "name": "Dehashed",
             "url": {
                 "email": "https://dehashed.com/search?query=%s"

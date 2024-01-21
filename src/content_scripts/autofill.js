@@ -64,7 +64,12 @@ function sendMessageAndFill() {
                 document.querySelector("#history-filterBtn").click();
                 document.querySelector("#hashSearch").value = indicator;
                 document.querySelector(query).click();
-            } else {
+            } else if(current_url.includes("cymru")) {
+                document.querySelector("#hashes").value = indicator;
+                if (submit === "true") {
+                    document.querySelector(query).click();
+                }
+            }else {
                 var inputNodes = document.getElementsByTagName("input");
                 // Get only text or email input nodes
                 for(i=0; i<inputNodes.length; i++){
