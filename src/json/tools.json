@@ -878,6 +878,18 @@
 			"types": ["cve"]
 		},
         {
+            "name": "Threatbook",
+            "url": {
+                "domain": "https://threatbook.io/domain/%s",
+                "ip": "https://threatbook.io/ip/%s"
+            },
+            "desc": "ThreatBook CTI provides high-fidelity intelligence collected from alerts from real customer cases.",
+            "icon": "threatbook.png",
+            "color": "#ED4734",
+            "types": ["domain","ip"],
+            "tags": ["ioc"]
+        },
+        {
             "name": "THREATfox",
             "url": {
                 "hash": "https://threatfox.abuse.ch/browse.php?search=ioc%3A%s",

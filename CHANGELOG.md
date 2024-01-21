@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.19.0] - 2024-01
 ### Add
 - Automatic graph generation
+- Threatbook CTI resource for domains and IP addresses
 
 ### Change
 - Graph UI
