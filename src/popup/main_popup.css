@@ -488,6 +488,27 @@ div.tool-tag {
     font-weight: bold;
 }
 
+.popup .popup-container-body .info-img {
+    width: 18px;
+    height: 18px;
+    margin-left: 2px;
+}
+
+.hide-msg {
+    position: absolute;
+    z-index: 200;
+    background-color: #FFD0B6;
+    border: 1px solid black;
+    display: none;
+    padding: 5px;
+    width: 250px;
+    font-size: 0.7em;
+}
+
+.info-img:hover + .hide-msg {
+    display: block;
+}
+
 
 .option {
     height: 40px;

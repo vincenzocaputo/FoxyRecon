@@ -1,0 +1,92 @@
+{
+    "graph-nodes": [
+        {
+            "source": "https://www.abuseipdb.com/check/",
+            "query": ".text-primary",
+            "type": "domain",
+            "relationName": "resolves-to",
+            "relationType": "outbound",
+            "nodeType": "ip"
+        },
+        {
+            "source": "https://otx.alienvault.com/indicator/domain/",
+            "query": "#relatedWhois #whois-related-header td a",
+            "type": "domain",
+            "relationName": "related-to",
+            "relationType": "outbound",
+            "nodeType": "domain"
+        },
+        {
+            "source": "https://otx.alienvault.com/indicator/domain/",
+            "query": "otx-ioc-expandable-line span",
+            "type": "domain",
+            "relationName": "resolved-to",
+            "relationType": "outbound",
+            "nodeType": "ip"
+        },
+        {
+            "source": "https://otx.alienvault.com/indicator/domain/",
+            "query": "#relatedWhois #whois-related-header td a",
+            "type": "domain",
+            "relationName": "related-to",
+            "relationType": "inbound",
+            "nodeType": "domain"
+        },
+        {
+            "source": "https://otx.alienvault.com/indicator/domain/",
+            "query": "#files table a",
+            "type": "domain",
+            "relationName": "associated-to",
+            "relationType": "outbound",
+            "nodeType": "hash"
+        },
+        {
+            "source": "https://otx.alienvault.com/indicator/ip/",
+            "query": "#passive td a",
+            "type": "ip",
+            "relationName": "resolves-to",
+            "relationType": "inbound",
+            "nodeType": "domain"
+        },
+        {
+            "source": "https://host.io/",
+            "query": "#backlinks-tab ul a",
+            "type": "domain",
+            "relationName": "backlinks-to",
+            "relationType": "inbound",
+            "nodeType": "domain"
+        },
+        {
+            "source": "https://talosintelligence.com/reputation_center/lookup",
+            "query": "#mail-data-wrapper a",
+            "type": "domain",
+            "relationName": "directs-email-to",
+            "relationType": "outbound",
+            "nodeType": "domain"
+        },
+        {
+            "source": "https://sitereport.netcraft.com/",
+            "query": "#ip_address",
+            "type": "domain",
+            "relationName": "resolves-to",
+            "relationType": "outbound",
+            "nodeType": "ip"
+        },
+        {
+            "source": "https://urlscan.io/domain",
+            "query": ".simpletag a",
+            "type": "domain",
+            "relationName": "subdomain-of",
+            "relationType": "inbound",
+            "nodeType": "domain"
+        },
+        {
+            "source": "https://urlscan.io/domain",
+            "query": ".simpletag a",
+            "type": "ip",
+            "relationName": "hosts",
+            "relationType": "outbound",
+            "nodeType": "domain"
+        }
+    ]
+}

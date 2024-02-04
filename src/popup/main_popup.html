@@ -83,8 +83,11 @@
                     </div>
                     <div class="option">
                         <div class="option-label">
-                            Auto-submit feature
+                            Auto submit
+                            <img class="info-img" src="../../assets/icons/info_icon.png">
+                            <div class="hide-msg">Automatically populate input fields on websites that do not accept indicators in the URL</div>
                         </div>
+                        
                         <div class="option-value" id="auto-submit-opt">
                             <label class="switch">
                                 <input type="checkbox"/>
@@ -95,8 +98,23 @@
                     <div class="option">
                         <div class="option-label">
                             Auto indicators catching
+                            <img class="info-img" src="../../assets/icons/info_icon.png">
+                            <div class="hide-msg">Collect all the indicators on the web pages you visit.</div>
                         </div>
                         <div class="option-value" id="auto-catch-opt">
+                            <label class="switch">
+                                <input type="checkbox"/>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="option">
+                        <div class="option-label">
+                            Auto graph generation 
+                            <img class="info-img" src="../../assets/icons/info_icon.png">
+                            <div class="hide-msg">Automatically generate the graph from information in the websites you visit. This feature supports only a limited number of resouces provided in FoxyRecon</div>
+                        </div>
+                        <div class="option-value" id="auto-graph-opt">
                             <label class="switch">
                                 <input type="checkbox"/>
                                 <span class="slider"></span>
@@ -158,7 +176,7 @@
                         </div>
                     </div>
                     <div class="option">
-                        <button class="button" id="add-node-rel-button">Add node</button>
+                        <button class="button" id="add-node-rel-button">Add Relationship</button>
                         <button class="button" id="add-node-rel-close-button" class="close-popup-button">Cancel</button>
                     </div>
                 </div>
@@ -280,6 +298,7 @@
         <script type="text/javascript" src="../lib/browser-polyfill.js"></script>
         <script type="text/javascript" src="../utils/toolsFileLoader.js"></script>
         <script type="text/javascript" src="../utils/utils.js"></script>
+        <script type="text/javascript" src="../utils/graph.js"></script>
         <script type="text/javascript" src="../utils/indicatorparser.js"></script>
         <script type="text/javascript" src="./uiHandler.js"></script>
         <script type="text/javascript" src="./main.js"></script>

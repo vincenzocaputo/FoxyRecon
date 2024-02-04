@@ -1,4 +1,4 @@
-// Set tools icons folder base path
+// Set tools icons folder base patgraph.h
 const toolsIcoBasePath = "/assets/tools-icons/"
 
 // Set types for popup messages
@@ -129,7 +129,8 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
     document.getElementById("no-indicators").style.display = "none";
     document.getElementById("hist-icon").style.display = "none";
 
-    if (nodeInGraph(indicator)) { 
+    let graph = new Graph();
+    if (graph.nodeInGraph(indicator)) { 
         document.getElementById("add-node").style.display = "none";
         document.getElementById("add-rel").style.display = "block";
         document.getElementById("del-node").style.display = "block";

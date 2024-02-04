@@ -1,5 +1,5 @@
 
-let indicator = "";
+var indicator = "";
 // Send a message to background script in order to retrieve the indicator saved in the local storage
 function sendMessageAndFill() {
     browser.runtime.sendMessage({
@@ -64,9 +64,13 @@ function sendMessageAndFill() {
                 document.querySelector("#history-filterBtn").click();
                 document.querySelector("#hashSearch").value = indicator;
                 document.querySelector(query).click();
-            } else {
+            } else if(current_url.includes("cymru")) {
+                document.querySelector("#hashes").value = indicator;
+                if (submit === "true") {
+                    document.querySelector(query).click();
+                }
+            }else {
                 var inputNodes = document.getElementsByTagName("input");
-                console.log(inputNodes);
                 // Get only text or email input nodes
                 for(i=0; i<inputNodes.length; i++){
                     if(inputNodes[i].type === "text" || inputNodes[i].type === "email" || inputNodes[i].type === "url"){

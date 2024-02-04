@@ -215,6 +215,17 @@
             "types": ["cve"]
         },
         {
+            "name": "Cymru",
+            "url": {
+                "hash": "https://hash.cymru.com/"
+            },
+            "desc": "Check hashes against Cymru malware data",
+            "icon": "cymru.png",
+            "color": "#000000",
+            "submitQuery": "#mhr-form-submit",
+            "types": ["hash"]
+        },
+        {
             "name": "Dehashed",
             "url": {
                 "email": "https://dehashed.com/search?query=%s"
@@ -877,6 +888,18 @@
 			"color": "#0F2344",
 			"types": ["cve"]
 		},
+        {
+            "name": "Threatbook",
+            "url": {
+                "domain": "https://threatbook.io/domain/%s",
+                "ip": "https://threatbook.io/ip/%s"
+            },
+            "desc": "ThreatBook CTI provides high-fidelity intelligence collected from alerts from real customer cases.",
+            "icon": "threatbook.png",
+            "color": "#ED4734",
+            "types": ["domain","ip"],
+            "tags": ["ioc"]
+        },
         {
             "name": "THREATfox",
             "url": {
