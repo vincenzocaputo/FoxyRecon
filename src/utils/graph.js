@@ -100,7 +100,7 @@ class Graph {
 
         this.graph['links'] = preservedLinks;
 
-        saveGraph();
+        this.saveGraph();
     }
 
     /**
