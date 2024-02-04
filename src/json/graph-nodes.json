@@ -1,14 +1,6 @@
 {
     "graph-nodes": [
         {
-            "source": "https://centralops.net/co/",
-            "query": ".ipaddr",
-            "type": "domain",
-            "relationName": "resolves-to",
-            "relationType": "outbound",
-            "nodeType": "ip"
-        },
-        {
             "source": "https://www.abuseipdb.com/check/",
             "query": ".text-primary",
             "type": "domain",
