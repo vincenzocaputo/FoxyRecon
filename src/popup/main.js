@@ -11,7 +11,6 @@ indicatorParser = new IndicatorParser();
 // Check if there are some indicators found in the current webpage
 var collectedIndicatorsListJson = localStorage.getItem("catched_indicators");
 if(collectedIndicatorsListJson && collectedIndicatorsListJson !== undefined && collectedIndicatorsListJson !== "undefined") {
-    console.log(collectedIndicatorsListJson);
     const collectedIndicatorsList = JSON.parse(collectedIndicatorsListJson);
     var count = {"ip": 0, "domain": 0, "url": 0, "email": 0, "hash": 0, "cve": 0};
     collectedIndicatorsList.forEach(function(indicator) {
