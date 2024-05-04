@@ -5,70 +5,293 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="graph.css">
         <title>FoxyRecon Graph</title>
-        <script src="../lib/d3.v7.min.js"></script>
+        <script
+          type="text/javascript"
+          src="../lib/vis-network.min.js"
+        ></script>
     </head>
     <body>
-        <div id="header-pane">
-            <img src="../../assets/icons/foxyrecon-icon-48.png"/>
-            <div>Graph</div>
-        </div>
-        <div id="option-palette">
-            <div id="settings-button">
-                <img src="../../assets/icons/settings.png" title="Settings"/>
+        <div id="page-container">
+            <div id="toolbar">
+                <div id="option-palette">
+                    <img id="foxyrecon-icon" src="../../assets/icons/foxyrecon-icon-48.png"/>
+                    <div>
+                        <button id="add-sdo-button" class="btn add-node-btn">
+                            <img src="../../assets/icons/plus.png"/>
+                            <div class="button-label">
+                                Add Domain
+                            </div>
+                        </button>
+                        <div id="add-sdo-options" class="options">
+                            <div class="attack-pattern" data-value="attack-pattern">
+                                <img src="img/attack-pattern-nb.png"/>
+                                <div class="options-value">
+                                    Attack Pattern
+                                </div>
+                            </div>
+                            <div class="campaign" data-value="campaign">
+                                <img src="img/campaign-nb.png"/>
+                                <div class="options-value">
+                                    Campaign
+                                </div>
+                            </div>
+                            <div class="course-of-action" data-value="course-of-action">
+                                <img src="img/course-of-action-nb.png"/>
+                                <div class="options-value">
+                                    Course of Action
+                                </div>
+                            </div>
+                            <div class="identity" data-value="identity">
+                                <img src="img/identity-nb.png"/>
+                                <div class="options-value">
+                                    Identity
+                                </div>
+                            </div>
+                            <div class="infrastructure" data-value="infrastructure">
+                                <img src="img/infrastructure-nb.png"/>
+                                <div class="options-value">
+                                    Infrastructure
+                                </div>
+                            </div>
+                            <div class="intrusion-set" data-value="intrusion-set">
+                                <img src="img/intrusion-set-nb.png"/>
+                                <div class="options-value">
+                                    Intrusion Set
+                                </div>
+                            </div>
+                            <div class="location" data-value="location">
+                                <img src="img/location-nb.png"/>
+                                <div class="options-value">
+                                    Location
+                                </div>
+                            </div>
+                            <div class="malware" data-value="malware">
+                                <img src="img/malware-nb.png"/>
+                                <div class="options-value">
+                                    Malware
+                                </div>
+                            </div>
+                            <div class="malware-analysis" data-value="malware-analysis">
+                                <img src="img/malware-analysis-nb.png"/>
+                                <div class="options-value">
+                                    Malware Analysis
+                                </div>
+                            </div>
+                            <div class="note" data-value="note">
+                                <img src="img/note-nb.png"/>
+                                <div class="options-value">
+                                    Note
+                                </div>
+                            </div>
+                            <div class="report" data-value="report">
+                                <img src="img/report-nb.png"/>
+                                <div class="options-value">
+                                    Report
+                                </div>
+                            </div>
+                            <div class="threat-actor" data-value="threat-actor">
+                                <img src="img/threat-actor-nb.png"/>
+                                <div class="options-value">
+                                    Threat Actor
+                                </div>
+                            </div>
+                            <div class="tool" data-value="tool">
+                                <img src="img/tool-nb.png"/>
+                                <div class="options-value">
+                                    Tool
+                                </div>
+                            </div>
+                            <div class="vulnerability" data-value="vulnerability">
+                                <img src="img/vulnerability-nb.png"/>
+                                <div class="options-value">
+                                    Vulnerability
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button id="add-sco-button" class="btn add-node-btn">
+                            <img src="../../assets/icons/plus.png"/>
+                            <div class="button-label">
+                                Add Observable
+                            </div>
+                        </button>
+                        <div id="add-sco-options" class="options">
+                            <div class="autonomous-system" data-value="autonomous-system">
+                                <img src="img/autonomous-system-nb.png"/>
+                                <div class="options-value">
+                                    Autonomous System
+                                </div>
+                            </div>
+                            <div class="domain-name" data-value="domain-name">
+                                <img src="img/domain-name-nb.png"/>
+                                <div class="options-value">
+                                    Domain Name
+                                </div>
+                            </div>
+                            <div class="email-address" data-value="email-address">
+                                <img src="img/email-address-nb.png"/>
+                                <div class="options-value">
+                                    Email Address
+                                </div>
+                            </div>
+                            <div class="file" data-value="file">
+                                <img src="img/file-nb.png"/>
+                                <div class="options-value">
+                                    File
+                                </div>
+                            </div>
+                            <div class="ipv4-addr" data-value="ipv4-addr">
+                                <img src="img/ipv4-addr-nb.png"/>
+                                <div class="options-value">
+                                    IPv4 Address
+                                </div>
+                            </div>
+                            <div class="ipv6-addr" data-value="ipv6-addr">
+                                <img src="img/ipv6-addr-nb.png"/>
+                                <div class="options-value">
+                                    IPv6 Address
+                                </div>
+                            </div>
+                            <div class="mac-addr" data-value="mac-addr">
+                                <img src="img/mac-addr-nb.png"/>
+                                <div class="options-value">
+                                    MAC Address
+                                </div>
+                            </div>
+                            <div class="network-traffic" data-value="network-traffic">
+                                <img src="img/network-traffic-nb.png"/>
+                                <div class="options-value">
+                                    Network Traffic
+                                </div>
+                            </div>
+                            <div class="software" data-value="software">
+                                <img src="img/software-nb.png"/>
+                                <div class="options-value">
+                                    Software
+                                </div>
+                            </div>
+                            <div class="url" data-value="url">
+                                <img src="img/url-nb.png"/>
+                                <div class="options-value">
+                                    URL
+                                </div>
+                            </div>
+                            <div class="user-account" data-value="user-account">
+                                <img src="img/user-account-nb.png"/>
+                                <div class="options-value">
+                                    User Account
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="edit-node-button" class="btn edit-node-btn">
+                        <img src="../../assets/icons/edit_w.png"/>
+                        <div class="button-label">
+                            Edit Node
+                        </div>
+                    </button>
+                    <button id="delete-node-button" class="btn del-node-btn">
+                        <img src="../../assets/icons/del.png"/>
+                        <div class="button-label">
+                            Delete Node
+                        </div>
+                    </button>
+                    <button id="add-link-button" class="btn add-link-btn">
+                        <img src="../../assets/icons/link.png"/>
+                        <div class="button-label">
+                            Add Link
+                        </div>
+                    </button>
+                    <button id="delete-graph-button" class="btn del-graph-btn">
+                        <img src="../../assets/icons/trash-2.png"/>
+                        <div class="button-label">
+                            Delete Graph
+                        </div>
+                    </button>
+                </div>
+                <div id="filter-bar">
+                    <div>
+                        <input id="filter-input-field" placeholder="Filter nodes by label" type="text"/>
+                        <div>
+                            <input id="include-incoming-filter-checkbox" type="checkbox"/>
+                            <label>Include incoming nodes</label>
+                        </div>
+                    </div>
+                    <button id="filter-button" class="btn">Filter</button>
+                </div>
             </div>
-        </div>
-        <div id="pane-container">
             <div id="settings-pane">
-                <div id="options-container">
+                <div id="graph-options-container">
                     <div>
-                        <span>Charge</span>
-                        <input id="charge-slider" type="range" min="0" max="100" value="0">
+                        <span>Repulsion</span>
+                        <input id="charge-slider" type="range" min="10" max="100" value="50" step="10">
                     </div>
                     <div>
-                        <span>Distance</span>
-                        <input id="distance-slider" type="range" min="0" max="100" value="50">
+                        <span>Edge Length</span>
+                        <input id="spring-length-slider" type="range" min="10" max="200" value="50" step="10">
                     </div>
                     <div>
-                        <span>Show Node Labels</span>
-                        <div>
-                            <label class="switch">
-                                <input type="checkbox" id="show-node-labels-checkbox"/>
-                                <span class="slider"></span>
-                            </label>
-                        </div>
+                        <span>Node Size</span>
+                        <input id="node-size-slider" type="range" min="10" max="40" value="15" step="5">
                     </div>
                     <div>
-                        <span>Show Edge Labels</span>
-                        <div>
-                            <label class="switch">
-                                <input type="checkbox" id="show-link-labels-checkbox"/>
-                                <span class="slider"></span>
-                            </label>
-                        </div>
+                        <span>Edge Size</span>
+                        <input id="edge-size-slider" type="range" min="1" max="8" value="1" step="0.5">
                     </div>
                     <div>
-                        <button class="button" id="delete-button">Delete Graph</button>
+                        <span>Edge Color</span>
+                        <input id="edge-color-select" type="color" value="#444444">
                     </div>
                 </div>
-                <div id="node-detail">
-                    <div>
-                        <span>Indicator</span>
-                        <input id="node-id" disabled>
-                    </div>
-                    <div>
-                        <span>Type</span>
-                        <input id="node-type" disabled>
-                    </div>
-                    <div>
-                        <button class="button" id="analyze-button">Analyze</button>
-                    </div>
+            </div>
+            <div id="node-content-pane">
+                <div class="box-title">Selected Node Content</div>
+                <div>
+                    <pre></pre>
+                </div>
+            </div>
+            <div id="graph-container">
+                <div id="graph-pane">
+                </div>
+            </div>
 
-                </div>
-            </div>
-            <div id="graph-pane">
-            </div>
         </div>
+
         <script src="../utils/graph.js"></script>
+        <script src="countries.js"></script>
+        <script src="stix-vocabs.js"></script>
+        <script src="form-handler.js"></script>
+        <script src="multiple_input.js"></script>
+        <script src="stix/relationship.js"></script>
+        <script src="stix/kill-chain-phases.js"></script>
+        <script src="stix/external-references.js"></script>
+        <script src="stix/sdo/attack-pattern.js"></script>
+        <script src="stix/sdo/campaign.js"></script>
+        <script src="stix/sdo/course-of-action.js"></script>
+        <script src="stix/sdo/identity.js"></script>
+        <script src="stix/sdo/infrastructure.js"></script>
+        <script src="stix/sdo/intrusion-set.js"></script>
+        <script src="stix/sdo/tool.js"></script>
+        <script src="stix/sdo/location.js"></script>
+        <script src="stix/sdo/malware.js"></script>
+        <script src="stix/sdo/malware-analysis.js"></script>
+        <script src="stix/sdo/note.js"></script>
+        <script src="stix/sdo/report.js"></script>
+        <script src="stix/sdo/threat-actor.js"></script>
+        <script src="stix/sdo/vulnerability.js"></script>
+        <script src="stix/sco/autonomous-system.js"></script>
+        <script src="stix/sco/domain-name.js"></script>
+        <script src="stix/sco/email-address.js"></script>
+        <script src="stix/sco/file.js"></script>
+        <script src="stix/sco/ipv4-addr.js"></script>
+        <script src="stix/sco/ipv6-addr.js"></script>
+        <script src="stix/sco/mac-addr.js"></script>
+        <script src="stix/sco/network-traffic.js"></script>
+        <script src="stix/sco/software.js"></script>
+        <script src="stix/sco/url.js"></script>
+        <script src="stix/sco/user-account.js"></script>
         <script src="graph.js"></script>
+        <script src="graph-ui.js"></script>
     </body>
 </html>

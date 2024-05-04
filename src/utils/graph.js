@@ -13,7 +13,28 @@ class Graph {
             this.graph = JSON.parse(graph);
         }
     }
-
+    
+    /**
+     * Get a dictonary of hashes
+     * @param{hash}: hash to add to the dictionary
+     * @return hash dictionary
+     */
+    #getHashDictionary(hash) {
+        switch (hash.length) {
+            case 32:
+                return {
+                    'MD5': hash
+                };
+            case 40:
+                return {
+                    'SHA-1': hash
+                };
+            case 64:
+                return {
+                    'SHA-256': hash
+                };
+        }
+    }
     /**
      * Save the graph in the local storage
      */
@@ -54,7 +75,7 @@ class Graph {
      */
     relationshipInGraph(sourceNodeId, targetNodeId, label) {
         for (let relationship in this.graph["links"]) {
-            if (relationship["source"] === sourceNodeId && relationship["target"] === targetNodeId && relationship["label"] === label) {
+            if (relationship["from"] === sourceNodeId && relationship["to"] === targetNodeId && relationship["label"] === label) {
                 return true;
             }
         }
@@ -62,20 +83,135 @@ class Graph {
     }
 
     /**
+     * Add a STIX Object to the graph
+     * @param{id}: Node identifier
+     * @param{label}: Node label (visible in the graph)
+     * @param{stix}: STIX content
+     */
+    addSTIXNode(id, label, type, stix) {
+        if(!this.nodeInGraph(id)) {
+            this.graph["nodes"].push({
+                id: id,
+                label: label,
+                type: type,
+                stix: stix
+            });
+            this.saveGraph();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Add new node to graph
-     * @param{nodeId}: node value
+     * @param{nodeValue}: node value
      * @param{nodeType}: type of the indicator saved in the node
      */
-    addNode(nodeId, nodeType) {
-        if (!this.nodeInGraph(nodeId)) {
-            this.graph["nodes"].push({
-                id: nodeId,
-                type: nodeType
-            });
+    addNode(nodeValue, nodeType) {
+        if (!this.nodeInGraph(nodeValue)) {
+            const uuid = crypto.randomUUID();
+            switch (nodeType) {
+                case 'domain':
+                    this.graph["nodes"].push({
+                        id: nodeValue,
+                        label: nodeValue,
+                        type: nodeType,
+                        stix: {
+                            id: 'domain-name--'+uuid,
+                            type: 'domain-name',
+                            value: nodeValue
+                        }
+                    });
+                    break;
+                case 'ip':
+                    this.graph["nodes"].push({
+                        id: nodeValue,
+                        label: nodeValue,
+                        type: nodeType,
+                        stix: {
+                            id: 'ipv4-addr--'+uuid,
+                            type: 'ipv4-addr',
+                            value: nodeValue
+                        }
+                    });
+                    break;
+                case 'hash':
+                    this.graph["nodes"].push({
+                        id: nodeValue,
+                        label: "file",
+                        type: nodeType,
+                        stix: {
+                            id: 'file--'+uuid,
+                            type: 'file',
+                            name: "",
+                            hashes: this.getHashDictionary(nodeValue)
+                        }
+                    });
+                    break;
+                case 'url':
+                    this.graph["nodes"].push({
+                        id: nodeValue,
+                        label: nodeValue,
+                        type: nodeType,
+                        stix: {
+                            id: 'url--'+uuid,
+                            type: 'url',
+                            value: nodeValue
+                        }
+                    });
+                    break;
+                case 'email':
+                    this.graph["nodes"].push({
+                        id: nodeValue,
+                        label: nodeValue,
+                        type: nodeType,
+                        stix: {
+                            id: 'email-addr--'+uuid,
+                            type: 'email-addr',
+                            value: nodeValue
+                        }
+                    });
+                    break;
+                case 'cve':
+                    this.graph["nodes"].push({
+                        id: nodeValue,
+                        label: nodeValue,
+                        type: nodeType,
+                        stix: {
+                            id: 'vulnerability--'+uuid,
+                            type: 'vulnerability',
+                            name: nodeValue
+                        }
+                    });
+                    break;
+
+            }
             this.saveGraph();
             return true;
         }
         return false;
+    }
+
+    /**
+     * Edit a STIX Object
+     * @param{id}: Node identifier
+     * @param{label}: Node label (visible in the graph)
+     * @param{stix}: STIX content
+     */
+    editSTIXNode(id, label, type, stix) {
+        if(this.nodeInGraph(id)) {
+            for (let node in this.graph["nodes"]) {
+                if (this.graph["nodes"][node].id === id) {
+                    this.graph["nodes"][node].label = label;
+                    this.graph["nodes"][node].stix = stix;
+                }
+            }
+            this.saveGraph();
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -93,8 +229,8 @@ class Graph {
 
         let preservedLinks = [];
         for (let link in this.graph['links']) {
-            if (this.graph['links'][link].source != nodeId && this.graph['links'][link].target != nodeId) {
-                preservedLinks.push(this.graph['links']);
+            if (this.graph['links'][link].from != nodeId && this.graph['links'][link].to != nodeId) {
+                preservedLinks.push(this.graph['links'][link]);
             }
         }
 
@@ -112,8 +248,8 @@ class Graph {
     addRelationship(sourceNode, targetNode, label) {
         if (!this.relationshipInGraph(sourceNode, targetNode, label)) {
             this.graph['links'].push({
-                source: sourceNode,
-                target: targetNode,
+                from: sourceNode,
+                to: targetNode,
                 label: label
             });
             this.saveGraph();
@@ -131,10 +267,56 @@ class Graph {
     }
 
     /**
+     * Get nodes by label
+     * @param{label} Label to search
+     * @return node ids with the provided label
+     */
+    getNodesByLabel(label) {
+        let filteredNodes = Array();
+        for (let node of this.graph['nodes']) {
+            if (node['label'] === label) {
+                filteredNodes.push(node['id']);
+            }
+        }
+        return filteredNodes
+    }
+
+
+    /**
      * Get graph relationships
      */
     getRelationships() {
         return this.graph['links'];
+    }
+
+    /**
+     * Get the nodes linked to the node provided
+     * @param{node}: id of the node to scan
+     * @return list of node ids
+     */
+    getIncomingNodes(node) {
+        let incomingNodes = Array();
+        for (let link of this.graph['links']) {
+            if (link['to'] === node) {
+                incomingNodes.push(link['from']);
+            }
+        }
+        return incomingNodes
+    }
+    
+    /**
+     * Get the nodes to which to the provided is linked
+     * @param{node}: id of the node to scan
+     * @return list of node ids
+     */
+    getOutgoingNodes(node) {
+        let incomingNodes = Array();
+        for (let link of this.graph['links']) {
+            if (link['from'] === node) {
+                incomingNodes.push(link['to']);
+            }
+        }
+        return incomingNodes
     }
 }
 
