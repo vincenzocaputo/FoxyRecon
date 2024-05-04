@@ -7,11 +7,6 @@ const filterInputField = document.getElementById("filter-input-field");
 const filterButton = document.getElementById("filter-button");
 const editButton = document.getElementById("edit-node-button");
 
-const repulsionSlider = document.getElementById("charge-slider");
-const springLengthSlider = document.getElementById("spring-length-slider");
-const nodeSizeSlider = document.getElementById("node-size-slider");
-const edgeSizeSlider = document.getElementById("edge-size-slider");
-const edgeColorSelect = document.getElementById("edge-color-select");
 
 repulsionSlider.addEventListener("change", (evt) => {
     options.physics.barnesHut.gravitationalConstant = -parseInt(repulsionSlider.value)*1000;

@@ -1,3 +1,9 @@
+const repulsionSlider = document.getElementById("charge-slider");
+const springLengthSlider = document.getElementById("spring-length-slider");
+const nodeSizeSlider = document.getElementById("node-size-slider");
+const edgeSizeSlider = document.getElementById("edge-size-slider");
+const edgeColorSelect = document.getElementById("edge-color-select");
+
 const graph = new Graph();
 
 var options = {
@@ -13,20 +19,20 @@ var options = {
             to: -10
         },
         color: {
-            color: '#444444'
+            color: edgeColorSelect.value
         },
-        width: 1
+        width: parseInt(edgeSizeSlider.value)
     },
     nodes: {
-        size: 15
+        size: parseInt(nodeSizeSlider.value)
     },
     physics:{
         enabled: true,
         barnesHut: {
             theta: 1.0,
-            gravitationalConstant: -10000,
+            gravitationalConstant: -parseInt(repulsionSlider.value)*1000,
             centralGravity: 1,
-            springLength: 150,
+            springLength: parseInt(springLengthSlider.value),
             springConstant: 0.04,
             damping: 0.09,
             avoidOverlap: 0
