@@ -35,7 +35,7 @@ const relationshipTypes = [
     "variant-of"
 ]
 
-function createRelationshipForm(fromNode, toNode) {
+function createRelationshipForm(data, callback) {
     const formHandler = new FormHandler("Add Relationship", "img/relationship-nb.png");
     submitEvent = evt => {
         var stix = {}
@@ -48,10 +48,11 @@ function createRelationshipForm(fromNode, toNode) {
             fields["source_ref"].value,
             fields["target_ref"].value,
             fields["relationship_type"].value);
+        callback(data);
     }
     formHandler.setSubmitEventListener(submitEvent);
-    formHandler.addFormField("hidden", "source_ref", "source_ref", fromNode, true);
-    formHandler.addFormField("hidden", "target_ref", "target_ref", toNode, true);
+    formHandler.addFormField("hidden", "source_ref", "source_ref", data.from, true);
+    formHandler.addFormField("hidden", "target_ref", "target_ref", data.to, true);
     formHandler.addFormField("select", "Relationship Type", "relationship_type", "", true, relationshipTypes);
 }
 

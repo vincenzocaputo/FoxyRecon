@@ -238,17 +238,17 @@ input:checked + .slider:before {
     touch-action: manipulation;
     vertical-align: middle;
     white-space: nowrap;
+    box-shadow: 2px 2px 2px #000000;
 
 }
 
 .btn:focus:not(:focus-visible):not(.focus-visible) {
-  box-shadow: none;
-  outline: none;
+    box-shadow: 2px 2px 2px #000000;
+    outline: none;
 }
 
 .btn:focus {
-  box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
-  outline: none;
+    box-shadow: 2px 2px 2px #000000;
 }
 
 .btn:disabled {
@@ -279,6 +279,10 @@ input:checked + .slider:before {
     background-color: #DB1604;
 }
 
+.addlink-cancel-btn {
+    background-color: #B907F5;
+}
+
 .cancel-btn {
     background-color: #AAAAAA;
 }
@@ -305,6 +309,10 @@ input:checked + .slider:before {
 }
 
 #delete-node-button {
+    display: none;
+}
+
+#addlink-cancel-button {
     display: none;
 }
 
@@ -546,9 +554,20 @@ div.multiple-input:has(input[disabled]),input[disabled] {
 
 #add-link-message {
     background-color: #F50;
-    padding: 1em;
     border: 2px outset #F20;
     margin: 0.5em;
     box-shadow: 5px 5px #000;
     border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    visibility: hidden;
 }
+
+#add-link-message .message {
+    width: 98%;
+    height: 3em;
+    margin: 0 auto auto 1em;
+    line-height: 3em;
+    font-size: 1.05em;
+}
+

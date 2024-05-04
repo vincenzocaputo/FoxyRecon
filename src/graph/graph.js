@@ -38,6 +38,19 @@ var options = {
             avoidOverlap: 0
         },
         solver: 'barnesHut'
+    },
+    manipulation: {
+        addEdge: function (data, callback) {
+            if (data.from == data.to) {
+                var r = confirm("Do you want to connect the node to itself?");
+                if (r === true) {
+                    createRelationshipForm(data, callback);
+                }
+            }
+            else {
+                createRelationshipForm(data, callback);
+            }
+        },
     }
 }
 
@@ -113,7 +126,6 @@ selectNodeEvent = evt => {
         
     document.getElementById("delete-node-button").style.display = "none";
     document.getElementById("edit-node-button").style.display = "none";
-    document.getElementById("add-link-button").style.display = "none";
 
     const mouseMessage = document.getElementById("mouse-message");
     if (mouseMessage) {
@@ -129,15 +141,20 @@ selectNodeEvent = evt => {
             if (node.id == selectedNode) {
                 nodeContentDiv.textContent = JSON.stringify(JSON.parse(node.stix), null, 2);
 
-                if (mouseMessage) {
-                    createRelationshipForm(lastSelectedNode.id, node.id);
-                    
-                } else {
-                    document.getElementById("add-link-button").style.display = "block";
-                    document.getElementById("delete-node-button").style.display = "block";
-                    document.getElementById("edit-node-button").style.display = "block";
+                if (addingLinkSwitch) {
+                    //network.addEdgeMode();
+                    console.log("Select another node");
+
                 }
-                lastSelectedNode = node;
+                //if (mouseMessage) {
+                //    createRelationshipForm(lastSelectedNode.id, node.id);
+                //    
+                //} else {
+                //    document.getElementById("add-link-button").style.display = "block";
+                //    document.getElementById("delete-node-button").style.display = "block";
+                //    document.getElementById("edit-node-button").style.display = "block";
+                //}
+                //lastSelectedNode = node;
             }
         }
     } 

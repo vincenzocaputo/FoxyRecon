@@ -3,6 +3,7 @@ const addSDOOptions = document.getElementById("add-sdo-options");
 const addLinkButton = document.getElementById("add-link-button");
 const deleteGraphButton = document.getElementById("delete-graph-button");
 const deleteNodeButton = document.getElementById("delete-node-button");
+const addLinkCancelButton = document.getElementById("addlink-cancel-button");
 const filterInputField = document.getElementById("filter-input-field");
 const filterButton = document.getElementById("filter-button");
 const editButton = document.getElementById("edit-node-button");
@@ -69,23 +70,36 @@ var addingLinkSwitch = false;
 
 addLinkButton.addEventListener("click", evt => {
     addingLinkSwitch = true;
-    const mouseMessage = document.createElement("div");
-    mouseMessage.textContent = "Select a node";
-    mouseMessage.id = "mouse-message";
-    document.body.appendChild(mouseMessage);
-    document.getElementById("delete-node-button").style.display = "none";
-    document.getElementById("edit-node-button").style.display = "none";
-    document.getElementById("add-link-button").style.display = "none";
+    document.getElementById("add-link-message").style.visibility = "visible";
+    addLinkCancelButton.style.display = "block";
+    addSDOButton.style.display = "none";
+    addSCOButton.style.display = "none";
+    addLinkButton.style.display = "none";
+    deleteGraphButton.style.display = "none";
+    network.addEdgeMode();
+    //document.getElementById("delete-node-button").style.display = "none";
+    //document.getElementById("edit-node-button").style.display = "none";
+    //document.getElementById("add-link-button").style.display = "none";
 });
 
-document.addEventListener("mousemove", e => {
-    if (addingLinkSwitch) {
-        document.body.style.cursor = "pointer";
-        const mouseMessage = document.getElementById("mouse-message");
-        mouseMessage.style.top = e.pageY +10+"px";
-        mouseMessage.style.left = e.pageX + 10+"px";
-    }
+addLinkCancelButton.addEventListener("click", evt => {
+    addingLinkSwitch = false;
+    document.getElementById("add-link-message").style.visibility = "hidden";
+    addLinkCancelButton.style.display = "none";
+    addSDOButton.style.display = "block";
+    addSCOButton.style.display = "block";
+    addLinkButton.style.display = "block";
+    deleteGraphButton.style.display = "block";
+    network.disableEditMode();
 });
+//document.addEventListener("mousemove", e => {
+//    if (addingLinkSwitch) {
+//        document.body.style.cursor = "pointer";
+//        const mouseMessage = document.getElementById("mouse-message");
+//        mouseMessage.style.top = e.pageY +10+"px";
+//        mouseMessage.style.left = e.pageX + 10+"px";
+//    }
+//});
 
 
 deleteGraphButton.addEventListener("click", evt => {
