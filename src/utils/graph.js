@@ -36,11 +36,11 @@ class Graph {
         "resolves-to",
         "source-of",
         "static-analysis-of",
-        "subdomain-of"
+        "subdomain-of",
         "targets",
         "used-by",
         "uses",
-        "variant-of",
+        "variant-of"
     ]
 
     constructor() {
