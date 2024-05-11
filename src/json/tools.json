@@ -542,7 +542,7 @@
         {
             "name": "JoeSandbox",
             "url": {
-                "hash": "https://www.joesandbox.com/search?q=%s"
+                "hash": "https://www.joesandbox.com/analysis/search?q=%s"
             },
             "desc": "Joe Sandbox detects and analyzes potential malicious files and URLs",
             "icon": "joesandbox.png",
