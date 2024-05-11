@@ -1,40 +1,3 @@
-const relationshipTypes = [
-    "attributed-to",
-    "authored-by",
-    "av-analysis-of",
-    "based-on",
-    "beacons-to",
-    "characterizes",
-    "communicates-with",
-    "compromises",
-    "consists-of",
-    "controls",
-    "delivers",
-    "derived-from",
-    "downloads",
-    "drops",
-    "duplicate-of",
-    "dynamic-analysis-of",
-    "exfiltrates-to",
-    "exploits",
-    "has",
-    "hosts",
-    "impersonates",
-    "indicates",
-    "investigates",
-    "located-at",
-    "mitigates",
-    "originates-from",
-    "owns",
-    "related-to",
-    "remediates",
-    "static-analysis-of",
-    "targets",
-    "used-by",
-    "uses",
-    "variant-of"
-]
-
 function createRelationshipForm(data, callback) {
     const formHandler = new FormHandler("Add Relationship", "img/relationship-nb.png");
     submitEvent = evt => {
@@ -44,15 +7,52 @@ function createRelationshipForm(data, callback) {
         for (const [id, field] of Object.entries(fields)) {
             stix[id] = field.value;
         }
-        graph.addRelationship(
-            fields["source_ref"].value,
-            fields["target_ref"].value,
-            fields["relationship_type"].value);
+
+        const label = fields["relationship_type"].value;
+        const nodeFrom = fields["source_ref"].value;
+        const nodeTo = fields["target_ref"].value;
+        graph.addLink(nodeFrom, nodeTo, label);
+
+        const isNoteRef = nodeFrom.startsWith("note--") && label === "refers-to";
+        const isReportRef = nodeFrom.startsWith("report--") && label === "refers-to";
+        const isNetworkTrafficRef = nodeTo.startsWith("network-traffic--") && 
+                                    (nodeFrom.startsWith("ipv4-addr--") ||
+                                    nodeFrom.startsWith("ipv6-addr--") ||
+                                    nodeFrom.startsWith("mac-addr--") ||
+                                    nodeFrom.startsWith("domain-name--")) &&
+                                    (label === "source-of" || label === "destination-of");
+        if (isNoteRef || isNetworkTrafficRef || isReportRef) {
+            if (isNoteRef || isReportRef) {
+                const node = graph.getNode(nodeFrom);
+                if (!Object.keys(node['stix']).includes('object_refs')) {
+                    node['stix']['object_refs'] = Array();
+                }
+                node['stix']['object_refs'].push(nodeTo);
+            } else if (isNetworkTrafficRef && label === "source-of") {
+                const node = graph.getNode(nodeTo);
+                if (!Object.keys(node['stix']).includes('src_ref')) {
+                    node['stix']['src_ref'] = Array();
+                }
+                node['stix']['src_ref'].push(nodeFrom);
+            } else if (isNetworkTrafficRef && label === "destination-of") {
+                const node = graph.getNode(nodeTo);
+                if (!Object.keys(node['stix']).includes('dst_ref')) {
+                    node['stix']['dst_ref'] = Array();
+                }
+                node['stix']['dst_ref'].push(nodeFrom);
+            }
+            graph.editSTIXNode(
+                node['id'],
+                node['label'],
+                node['type'],
+                node['stix']);
+        }
+
         callback(data);
     }
     formHandler.setSubmitEventListener(submitEvent);
     formHandler.addFormField("hidden", "source_ref", "source_ref", data.from, true);
     formHandler.addFormField("hidden", "target_ref", "target_ref", data.to, true);
-    formHandler.addFormField("select", "Relationship Type", "relationship_type", "", true, relationshipTypes);
+    formHandler.addFormField("select", "Relationship Type", "relationship_type", "", true, Graph.relationshipTypes);
 }
 

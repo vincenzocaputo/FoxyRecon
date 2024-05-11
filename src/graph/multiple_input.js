@@ -6,7 +6,8 @@ class MultipleInput {
 
         
         this.value = Array();
-        if (this.options == null) {
+        console.log(this.options);
+        if (this.options == null || !this.options || this.options.length === 0) {
             inputField.addEventListener("keyup", (evt) => {
                 //evt.preventDefault();
                 if (evt.keyCode === 13) {
@@ -22,6 +23,14 @@ class MultipleInput {
         } else {
             inputField.addEventListener("input", this.showInputOptions);
             inputField.addEventListener("click", this.showInputOptions);
+            inputField.addEventListener("mouseenter", evt => {
+                if (document.activeElement === inputField) {
+                    this.showInputOptions(evt);
+                }
+            });
+            this.inputElement.closest(".multiple-input").addEventListener("mouseleave", evt => {
+                this.inputElement.querySelector(".multiple-options").style.display = "none";
+            });
         }
 
 
@@ -35,21 +44,29 @@ class MultipleInput {
         
         autocompleteOptions.textContent = "";
         autocompleteOptions.style.display = "none";
-        this.options.forEach(option => {
-            if ((option.toLowerCase().startsWith(input.toLowerCase()) || input === "") && !this.value.includes(option)) {
-                autocompleteOptions.style.display = "block";
-                const listItem = document.createElement("div");
-                listItem.textContent = option;
-                autocompleteOptions.appendChild(listItem);
-                
-                listItem.addEventListener("click", (evt) => {
-                    this.addTag(option);
-                    inputField.value = "";
-                    autocompleteOptions.textContent = "";
-                    autocompleteOptions.style.display = "none";
-                });
-            }
-        });
+        if (this.options) {
+            this.options.forEach(option => {
+                if ((option.toLowerCase().startsWith(input.toLowerCase()) || input === "") && !this.value.includes(option)) {
+                    autocompleteOptions.style.display = "block";
+                    const listItem = document.createElement("div");
+                    listItem.textContent = option;
+                    autocompleteOptions.appendChild(listItem);
+                    
+                    listItem.addEventListener("click", (evt) => {
+                        this.addTag(option);
+                        inputField.value = "";
+                        autocompleteOptions.textContent = "";
+                        autocompleteOptions.style.display = "none";
+                    });
+                    listItem.addEventListener("mouseenter", (evt) => {
+                        evt.target.style.backgroundColor = "#CCCCCC";
+                    });
+                    listItem.addEventListener("mouseleave", (evt) => {
+                        evt.target.style.backgroundColor = "#FFFFFF";
+                    });
+                }
+            });
+        }
     }
 
     addTag = text => {

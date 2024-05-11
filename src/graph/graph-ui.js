@@ -3,6 +3,7 @@ const addSDOOptions = document.getElementById("add-sdo-options");
 const addLinkButton = document.getElementById("add-link-button");
 const deleteGraphButton = document.getElementById("delete-graph-button");
 const deleteNodeButton = document.getElementById("delete-node-button");
+const deleteEdgeButton = document.getElementById("delete-link-button");
 const addLinkCancelButton = document.getElementById("addlink-cancel-button");
 const filterInputField = document.getElementById("filter-input-field");
 const filterButton = document.getElementById("filter-button");
@@ -111,8 +112,65 @@ deleteGraphButton.addEventListener("click", evt => {
 
 deleteNodeButton.addEventListener("click", evt => {
     if (confirm("Are you sure to delete this node?") == true) {
-        console.log(lastSelectedNode);
         graph.deleteNode(lastSelectedNode.id);
+        location.reload();
+    }
+});
+
+deleteEdgeButton.addEventListener("click", evt => {
+    if (confirm("Are you sure to delete this edge?") == true) {
+        const selectedEdgeId = network.getSelectedEdges()[0];
+        const edge = edges.get(selectedEdgeId);
+        graph.deleteLink(edge.from, edge.to, edge.label);
+
+        if ((edge.from.startsWith("note--") || edge.from.startsWith("report--")) 
+            && edge.label === "refers-to") {
+            const node = graph.getNode(edge.from);
+            const index = node['stix']['object_refs'].indexOf(edge.to);
+            if (index > -1) {
+                node['stix']['object_refs'].splice(index, 1);
+            }
+            graph.editSTIXNode(
+                node['id'],
+                node['label'],
+                node['type'],
+                node['stix']);
+
+        } else if (edge.to.startsWith("network-traffic--") && 
+                    (edge.from.startsWith("ipv4-addr--") ||
+                    edge.from.startsWith("ipv6-addr--") ||
+                    edge.from.startsWith("mac-addr--") ||
+                    edge.from.startsWith("domain-name--")) &&
+                    edge.label === "source-of") {
+            const node = graph.getNode(edge.to);
+            const index = node['stix']['src_ref'].indexOf(edge.from);
+            if (index > -1) {
+                node['stix']['src_ref'].splice(index, 1);
+            }
+            graph.editSTIXNode(
+                node['id'],
+                node['label'],
+                node['type'],
+                node['stix']);
+        } else if (edge.to.startsWith("network-traffic--") && 
+                    (edge.from.startsWith("ipv4-addr--") ||
+                    edge.from.startsWith("ipv6-addr--") ||
+                    edge.from.startsWith("mac-addr--") ||
+                    edge.from.startsWith("domain-name--")) &&
+                    edge.label === "destination-of") {
+            const node = graph.getNode(edge.to);
+            const index = node['stix']['dst_ref'].indexOf(edge.from);
+            if (index > -1) {
+                node['stix']['dst_ref'].splice(index, 1);
+            }
+            graph.editSTIXNode(
+                node['id'],
+                node['label'],
+                node['type'],
+                node['stix']);
+        }
+                           
+                    
         location.reload();
     }
 });
@@ -168,6 +226,9 @@ editButton.addEventListener("click", evt => {
             break;
         } case "tool": {
             createToolForm(evt, "Edit Tool", selectedNodeSTIX);
+            break;
+        } case "report": {
+            createReportForm(evt, "Edit Report", selectedNodeSTIX);
             break;
         } case "vulnerability": {
             createVulnerabilityForm(evt, "Edit Vulnerability", selectedNodeSTIX);
@@ -248,6 +309,9 @@ document.querySelectorAll(".options div").forEach( (element) => {
                 break;
             } case "note": {
                 createNoteForm(evt, "Add Note");
+                break;
+            } case "report": {
+                createReportForm(evt, "Add Report");
                 break;
             } case "threat-actor": {
                 createThreatActorForm(evt, "Add Threat Actor");

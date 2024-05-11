@@ -316,6 +316,10 @@ input:checked + .slider:before {
     display: none;
 }
 
+#delete-link-button {
+    display: none;
+}
+
 .options {
     display: none;
     position: absolute;
@@ -502,11 +506,12 @@ input:checked + .slider:before {
     flex-direction: row;
     padding: 2px;
     flex-wrap: wrap;
+    min-height: 1.5em;
 }
 
 .tag-input-wrapper input {
     border: none;
-    width: 50%;
+    flex: 1;
 }
 
 .tag-input-wrapper input:focus {

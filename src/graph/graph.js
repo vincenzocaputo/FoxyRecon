@@ -16,11 +16,12 @@ var options = {
         },
         endPointOffset: {
             from: 0,
-            to: -10
+            to: 0
         },
         color: {
             color: edgeColorSelect.value
         },
+        arrowStrikethrough: false,
         width: parseInt(edgeSizeSlider.value)
     },
     nodes: {
@@ -34,10 +35,14 @@ var options = {
             centralGravity: 1,
             springLength: parseInt(springLengthSlider.value),
             springConstant: 0.04,
-            damping: 0.09,
+            damping: 1,
             avoidOverlap: 0
         },
-        solver: 'barnesHut'
+        solver: 'barnesHut',
+        stabilization: {
+            enabled: true,
+            iterations: 100
+        }
     },
     manipulation: {
         addEdge: function (data, callback) {
@@ -66,7 +71,7 @@ for (node of graph.getNodes()) {
     });
 }
 var nodes = new vis.DataSet(graphNodes);
-var edges = new vis.DataSet(graph.getRelationships());
+var edges = new vis.DataSet(graph.getLinks());
 
 
 var nodeFilterValue = "";
@@ -126,43 +131,33 @@ selectNodeEvent = evt => {
         
     document.getElementById("delete-node-button").style.display = "none";
     document.getElementById("edit-node-button").style.display = "none";
+    document.getElementById("add-sco-button").style.display = "block";
+    document.getElementById("add-sdo-button").style.display = "block";
+    document.getElementById("add-link-button").style.display = "block";
+    document.getElementById("delete-link-button").style.display = "none";
 
-    const mouseMessage = document.getElementById("mouse-message");
-    if (mouseMessage) {
-        mouseMessage.remove();
-        document.body.style.cursor = "auto";
-        addingLinkSwitch = false;
-
-    }
 
     if (network.getSelectedNodes().length > 0) {
+        document.getElementById("edit-node-button").style.display = "block";
+        document.getElementById("delete-node-button").style.display = "block";
+        document.getElementById("add-sco-button").style.display = "none";
+        document.getElementById("add-sdo-button").style.display = "none";
+
         const selectedNode = network.getSelectedNodes()[0];
         for (node of graphNodes) {
             if (node.id == selectedNode) {
                 nodeContentDiv.textContent = JSON.stringify(JSON.parse(node.stix), null, 2);
 
-                if (addingLinkSwitch) {
-                    //network.addEdgeMode();
-                    console.log("Select another node");
-
-                }
-                //if (mouseMessage) {
-                //    createRelationshipForm(lastSelectedNode.id, node.id);
-                //    
-                //} else {
-                //    document.getElementById("add-link-button").style.display = "block";
-                //    document.getElementById("delete-node-button").style.display = "block";
-                //    document.getElementById("edit-node-button").style.display = "block";
-                //}
-                //lastSelectedNode = node;
+                lastSelectedNode = node;
             }
         }
-    } 
+    } else if (network.getSelectedEdges().length > 0) {
+        document.getElementById("delete-link-button").style.display = "block";
+        document.getElementById("add-sco-button").style.display = "none";
+        document.getElementById("add-sdo-button").style.display = "none";
+        document.getElementById("add-link-button").style.display = "none";
+
+    }
 }
 network.on('click', selectNodeEvent);
 network.on('dragging', selectNodeEvent);
-
-
-
-
-

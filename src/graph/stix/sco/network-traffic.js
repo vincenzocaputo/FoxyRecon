@@ -11,10 +11,11 @@ function createNetworkTrafficForm(evt, title, stix={}) {
         if (node.stix["type"] === "ipv4-addr" ||
             node.stix["type"] === "ipv6-addr" ||
             node.stix["type"] === "mac-addr" ||
-            node.stix["domain"] === "domain-name") {
+            node.stix["type"] === "domain-name") {
             targetNodes[node.label] = node.stix["id"];
         }
     }
+    const oldstix = stix;
     const formHandler = new FormHandler(title, "img/network-traffic-nb.png");
     submitEvent = evt => {
         var stix = {}
@@ -23,6 +24,11 @@ function createNetworkTrafficForm(evt, title, stix={}) {
         for (const [id, field] of Object.entries(fields)) {
             if (field.value === undefined || field.value === "" || field.value.length === 0) {
                 continue;
+            } else if (id === "src_ref" || id === "dst_ref") {
+                stix[id] = Array();
+                for (const ref of field.value) {
+                    stix[id].push(targetNodes[ref]);
+                }
             } else {
                 // Handle checkbox
                 if (id === "is_active") {
@@ -36,17 +42,23 @@ function createNetworkTrafficForm(evt, title, stix={}) {
                 }
             }
 
-            // Add relationship
-            if (id === "src_ref") {
-                for (entry of field.value) {
-                    graph.addRelationship(targetNodes[entry], fields["id"].value, "source-of");
-                }
+        }
+        // Add relationship
+        for (entry of oldstix["src_ref"] || []) {
+            if (!(stix["src_ref"] || []).includes(entry)) {
+                graph.deleteLink(entry, fields["id"].value, "source-of");
             }
-            if (id === "dst_ref") {
-                for (entry of field.value) {
-                    graph.addRelationship(fields["id"].value, targetNodes[entry], "destination-of");
-                }
+        }
+        for (entry of fields["src_ref"].value) {
+            graph.addLink(targetNodes[entry], fields["id"].value, "source-of");
+        }
+        for (entry of oldstix["dst_ref"] || []) {
+            if (!(stix["dst_ref"] || []).includes(entry)) {
+                graph.deleteLink(entry, fields["id"].value, "destination-of");
             }
+        }
+        for (entry of fields["dst_ref"].value) {
+            graph.addLink(targetNodes[entry], fields["id"].value, "destination-of");
         }
         if (action === "add") {
             graph.addSTIXNode(
@@ -70,9 +82,19 @@ function createNetworkTrafficForm(evt, title, stix={}) {
     formHandler.addFormField("datetime-local", "Start", "start", stix["start"]);
     formHandler.addFormField("datetime-local", "End", "end", stix["end"]);
     formHandler.addFormField("select", "Is Active", "is_active", stix["is_active"] ? "Yes": "No", false, ["Yes", "No"]);
-    formHandler.addMultipleInputField("Source", "src_ref", Object.keys(targetNodes), false, stix["src_ref"]);
 
-    formHandler.addMultipleInputField("Destination", "dst_ref", Object.keys(targetNodes), false, stix["dst_ref"]);
+    let srcRefLabels = Array();
+    for (const ref of stix["src_ref"] || []) {
+        srcRefLabels.push(graph.getNode(ref).label);
+    }
+
+    formHandler.addMultipleInputField("Source", "src_ref", Object.keys(targetNodes), false, srcRefLabels);
+
+    let dstRefLabels = Array();
+    for (const ref of stix["dst_ref"] || []) {
+        dstRefLabels.push(graph.getNode(ref).label);
+    }
+    formHandler.addMultipleInputField("Destination", "dst_ref", Object.keys(targetNodes), false, dstRefLabels);
     
     if (Object.keys(targetNodes).length === 0) {
         document.querySelectorAll("form #src_ref input, #dst_ref input").forEach( inpt => {

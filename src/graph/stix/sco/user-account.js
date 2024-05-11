@@ -4,17 +4,6 @@ function createUserAccountForm(evt, title, stix={}) {
     const type = "user-account";
     const objectId = stix["id"] === undefined ? type+"--"+crypto.randomUUID() : stix["id"];
 
-    // Necessary nodes for 'ref' properties
-    const nodes = graph.graph.nodes;
-    var targetNodes = {};
-    for (node of nodes) {
-        if (node.stix["type"] === "ipv4-addr" ||
-            node.stix["type"] === "ipv6-addr" ||
-            node.stix["type"] === "mac-addr" ||
-            node.stix["domain"] === "domain-name") {
-            targetNodes[node.label] = node.stix["id"];
-        }
-    }
     const formHandler = new FormHandler(title, "img/user-account-nb.png");
     submitEvent = evt => {
         var stix = {}
@@ -37,18 +26,6 @@ function createUserAccountForm(evt, title, stix={}) {
                     }
                 } else {
                     stix[id] = field.value;
-                }
-            }
-
-            // Add relationship
-            if (id === "src_ref") {
-                for (entry of field.value) {
-                    graph.addRelationship(targetNodes[entry], fields["id"].value, "source-of");
-                }
-            }
-            if (id === "dst_ref") {
-                for (entry of field.value) {
-                    graph.addRelationship(fields["id"].value, targetNodes[entry], "destination-of");
                 }
             }
         }

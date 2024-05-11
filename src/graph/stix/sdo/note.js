@@ -10,6 +10,8 @@ function createNoteForm(evt, title, stix={}) {
         targetNodes[node.label] = node.stix["id"];
     }
 
+    const oldstix = stix;
+
     const formHandler = new FormHandler(title, "img/note-nb.png");
     submitEvent = evt => {
         var stix = {}
@@ -18,17 +20,23 @@ function createNoteForm(evt, title, stix={}) {
         for (const [id, field] of Object.entries(fields)) {
             if (field.value === undefined || field.value === "" || field.value.length === 0) {
                 continue;
+            } else if (id === "object_refs") {
+                stix[id] = Array();
+                for (const ref of field.value) {
+                    stix[id].push(targetNodes[ref]);
+                }
             } else {
                 stix[id] = field.value;
             }
-
-            // Add relationship
-            if (id === "object_refs") {
-                for (entry of field.value) {
-                    graph.addRelationship(targetNodes[entry], fields["id"].value, "refers-to");
-                }
+        }
+        // Add relationship
+        for (entry of oldstix["object_refs"] || []) {
+            if (!(stix["object_refs"] || []).includes(entry)) {
+                graph.deleteLink(fields["id"].value, entry, "refers-to");
             }
-
+        }
+        for (entry of fields["object_refs"].value) {
+            graph.addLink(fields["id"].value, targetNodes[entry], "refers-to");
         }
         
         if (action === "add") {
@@ -52,7 +60,12 @@ function createNoteForm(evt, title, stix={}) {
     formHandler.addFormField("textarea", "Content", "content", stix["content"], true);
     formHandler.addMultipleInputField("Authors", "authors", [], false, stix["authors"]);
     formHandler.addFormField("datetime-local", "Publish Date", "published", stix["published"]);
-    formHandler.addMultipleInputField("Objects", "object_refs", Object.keys(targetNodes), false, stix["object_refs"]);
+    
+    let objectRefLabels = Array();
+    for (const ref of stix["object_refs"] || []) {
+        objectRefLabels.push(graph.getNode(ref).label);
+    }
+    formHandler.addMultipleInputField("Objects", "object_refs", Object.keys(targetNodes), false, objectRefLabels);
     if (Object.keys(targetNodes).length === 0) {
         document.querySelector("form #objects input").setAttribute("disabled", true);
         document.querySelector("form #objects input").setAttribute("title", "There are no objects in the graph.");

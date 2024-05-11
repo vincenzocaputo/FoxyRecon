@@ -44,6 +44,7 @@ class FormHandler {
         this.buttonsContainer.appendChild(cancelButton);
         this.buttonsContainer.appendChild(okButton);
         this.form = document.createElement("form");
+        this.form.setAttribute("method", "post");
 
         popupContainer.classList.add("popup-container");
         formContainer.classList.add("form-container");
