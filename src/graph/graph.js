@@ -131,10 +131,12 @@ selectNodeEvent = evt => {
         
     document.getElementById("delete-node-button").style.display = "none";
     document.getElementById("edit-node-button").style.display = "none";
-    document.getElementById("add-sco-button").style.display = "block";
-    document.getElementById("add-sdo-button").style.display = "block";
-    document.getElementById("add-link-button").style.display = "block";
     document.getElementById("delete-link-button").style.display = "none";
+    if (!addingLinkSwitch) {
+        document.getElementById("add-sco-button").style.display = "block";
+        document.getElementById("add-sdo-button").style.display = "block";
+        document.getElementById("add-link-button").style.display = "block";
+    }
 
 
     if (network.getSelectedNodes().length > 0) {
