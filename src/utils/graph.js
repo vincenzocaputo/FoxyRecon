@@ -158,79 +158,55 @@ class Graph {
     addNode(nodeValue, nodeType) {
         if (!this.nodeInGraph(nodeValue)) {
             const uuid = crypto.randomUUID();
+            let stix = {};
             switch (nodeType) {
                 case 'domain':
-                    this.graph["nodes"].push({
-                        id: nodeValue,
-                        label: nodeValue,
-                        type: nodeType,
-                        stix: {
-                            id: 'domain-name--'+uuid,
-                            type: 'domain-name',
-                            value: nodeValue
-                        }
-                    });
+                    stix = { 
+                        id: 'domain-name--'+uuid,
+                        type: 'domain-name',
+                        value: nodeValue
+                    }
+                    this.addSTIXNode(nodeValue, nodeValue, 'domain-name', stix);
                     break;
                 case 'ip':
-                    this.graph["nodes"].push({
-                        id: nodeValue,
-                        label: nodeValue,
-                        type: nodeType,
-                        stix: {
-                            id: 'ipv4-addr--'+uuid,
-                            type: 'ipv4-addr',
-                            value: nodeValue
-                        }
-                    });
+                    stix = { 
+                        id: 'ipv4-addr--'+uuid,
+                        type: 'ipv4-addr',
+                        value: nodeValue
+                    }
+                    this.addSTIXNode(nodeValue, nodeValue, 'ipv4-addr', stix);
                     break;
                 case 'hash':
-                    this.graph["nodes"].push({
-                        id: nodeValue,
-                        label: "file",
-                        type: nodeType,
-                        stix: {
-                            id: 'file--'+uuid,
-                            type: 'file',
-                            name: "",
-                            hashes: this.getHashDictionary(nodeValue)
-                        }
-                    });
+                    stix = { 
+                        id: 'ipv4-addr--'+uuid,
+                        type: 'file',
+                        value: nodeValue
+                    }
+                    this.addSTIXNode(nodeValue, nodeValue, 'file', stix);
                     break;
                 case 'url':
-                    this.graph["nodes"].push({
-                        id: nodeValue,
-                        label: nodeValue,
-                        type: nodeType,
-                        stix: {
-                            id: 'url--'+uuid,
-                            type: 'url',
-                            value: nodeValue
-                        }
-                    });
+                    stix = { 
+                        id: 'url--'+uuid,
+                        type: 'url',
+                        value: nodeValue
+                    }
+                    this.addSTIXNode(nodeValue, nodeValue, 'url', stix);
                     break;
                 case 'email':
-                    this.graph["nodes"].push({
-                        id: nodeValue,
-                        label: nodeValue,
-                        type: nodeType,
-                        stix: {
-                            id: 'email-addr--'+uuid,
-                            type: 'email-addr',
-                            value: nodeValue
-                        }
-                    });
+                    stix = { 
+                        id: 'email-addr--'+uuid,
+                        type: 'email-addr',
+                        value: nodeValue
+                    }
+                    this.addSTIXNode(nodeValue, nodeValue, 'email-addr', stix);
                     break;
                 case 'cve':
-                    this.graph["nodes"].push({
-                        id: nodeValue,
-                        label: nodeValue,
-                        type: nodeType,
-                        stix: {
-                            id: 'vulnerability--'+uuid,
-                            type: 'vulnerability',
-                            name: nodeValue
-                        }
-                    });
+                    stix = { 
+                        id: 'vulnerability--'+uuid,
+                        type: 'vulnerability',
+                        name: nodeValue
+                    }
+                    this.addSTIXNode(nodeValue, nodeValue, 'vulnerability', stix);
                     break;
 
             }
