@@ -188,7 +188,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         const rel = JSON.parse(request.msg);
         graph.addNode(rel['source']['id'], rel['source']['type']);
         graph.addNode(rel['target']['id'], rel['target']['type']);
-        graph.addRelationship(rel['source']['id'], rel['target']['id'], rel['label']);
+        graph.addLink(rel['source']['id'], rel['target']['id'], rel['label']);
         sendResponse({msg: 1});
     } else {
         updateToolsMenu(tools, request.indicator, request.type);

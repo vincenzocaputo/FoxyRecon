@@ -3,6 +3,7 @@ class Graph {
         "attributed-to",
         "authored-by",
         "av-analysis-of",
+        "backlinks-to",
         "based-on",
         "beacons-to",
         "characterizes",
@@ -12,6 +13,8 @@ class Graph {
         "controls",
         "delivers",
         "derived-from",
+        "destination-of",
+        "directs-email-to",
         "downloads",
         "drops",
         "duplicate-of",
@@ -27,16 +30,17 @@ class Graph {
         "mitigates",
         "originates-from",
         "owns",
+        "refers-to",
         "related-to",
         "remediates",
+        "resolves-to",
+        "source-of",
         "static-analysis-of",
+        "subdomain-of"
         "targets",
         "used-by",
         "uses",
         "variant-of",
-        "refers-to",
-        "source-of",
-        "destination-of"
     ]
 
     constructor() {
