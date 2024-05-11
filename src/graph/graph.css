@@ -566,6 +566,9 @@ div.multiple-input:has(input[disabled]),input[disabled] {
     display: flex;
     flex-direction: row;
     visibility: hidden;
+    position: absolute;
+    width: fit-content;
+    padding-right: 0.8em;
 }
 
 #add-link-message .message {
