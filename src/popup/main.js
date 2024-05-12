@@ -383,7 +383,7 @@ document.querySelector("#add-rel-button").addEventListener("click", (e) => {
     let graphNodes = new Graph().getNodes();
     for (let node in graphNodes) {
         if (graphNodes[node].id != inputField.value) { 
-            nodes.push(graphNodes[node].id);
+            nodes.push(graphNodes[node]);
         }
     }
 
@@ -392,11 +392,11 @@ document.querySelector("#add-rel-button").addEventListener("click", (e) => {
     } else {
         // Create options list of nodes you can connect to
         const selectInput = document.getElementById("to-node-name");
-
+        selectInput.textContent = "";
         for (let node in nodes) {
             const newOptionElement = document.createElement("option");
-            newOptionElement.value = nodes[node];
-            newOptionElement.appendChild(document.createTextNode(nodes[node]));
+            newOptionElement.value = nodes[node].id;
+            newOptionElement.textContent = nodes[node].label;
             selectInput.appendChild(newOptionElement);
         }
 
@@ -410,6 +410,15 @@ document.querySelector("#add-rel-button").addEventListener("click", (e) => {
 
             addRelPopup.style.display = "block";
             addRelPopup.classList.add("open-popup");
+            const selectRelName = document.getElementById("rel-node-name");
+            selectRelName.textContent = "";
+            Graph.relationshipTypes.forEach( rtype => {
+                const optionValue = document.createElement("option");
+                optionValue.value = rtype;
+                optionValue.textContent = rtype;
+                selectRelName.appendChild(optionValue);
+            });
+
             
         } else {
             // Show pointer cursor on buttons
@@ -447,24 +456,24 @@ document.querySelector("#inbound-link input").addEventListener("change", (e) => 
  * Check the relationship node validity
  *
  */
-document.querySelector("#relationship-name-field>input").addEventListener("keyup", (e) => {
-    let relNameField = e.target;
-    let popupError = document.querySelector("#relationship-name-field>.form-error-popup");
-    let submitBtn = document.querySelector("#add-node-rel-button");
-
-    const relName = e.target.value;
-    const validRelName = new RegExp('^[A-Za-z-_]*$');
-    if (!validRelName.test(relName)) {
-        popupError.style.display = "block";
-        relNameField.style.borderColor = "#FF0000";
-        submitBtn.disabled = true;
-    } else {
-        popupError.style.display = "none";
-        relNameField.style.borderColor = "#6E6C69";
-        submitBtn.disabled = false;
-        
-    }
-});
+//document.querySelector("#relationship-name-field>input").addEventListener("keyup", (e) => {
+//    let relNameField = e.target;
+//    let popupError = document.querySelector("#relationship-name-field>.form-error-popup");
+//    let submitBtn = document.querySelector("#add-node-rel-button");
+//
+//    const relName = e.target.value;
+//    const validRelName = new RegExp('^[A-Za-z-_]*$');
+//    if (!validRelName.test(relName)) {
+//        popupError.style.display = "block";
+//        relNameField.style.borderColor = "#FF0000";
+//        submitBtn.disabled = true;
+//    } else {
+//        popupError.style.display = "none";
+//        relNameField.style.borderColor = "#6E6C69";
+//        submitBtn.disabled = false;
+//        
+//    }
+//});
 
 
 /**
@@ -476,22 +485,25 @@ document.querySelector("#add-node-rel-button").addEventListener("click", (e) => 
     const toNodeId = document.querySelector("#to-node-name").value;
     const isOutbound = document.querySelector("#outbound-link input[type='checkbox']").checked
     const isInbound = document.querySelector("#inbound-link input[type='checkbox']").checked
-    const fromNodeId = localStorage.getItem("indicator");
+    const fromNodeLabel = localStorage.getItem("indicator");
     const fromNodeType = localStorage.getItem("type");
 
 
     let graph = new Graph();
     
-    const [toNodeType, tld] = indicatorParser.getIndicatorType(toNodeId);
-    graph.addNode(toNodeId, toNodeType);
+    //const [toNodeType, tld] = indicatorParser.getIndicatorType(toNodeId);
+    //graph.addNode(toNodeId, toNodeType);
 
-    if (isOutbound) {
-        graph.addRelationship(fromNodeId, toNodeId, relLabel);
+    const fromNodeIds = graph.getNodesByLabel(fromNodeLabel);
+    for (const fromNodeId of fromNodeIds) {
+        if (isOutbound) {
+            graph.addLink(fromNodeId, toNodeId, relLabel);
+        }
+        if (isInbound) {
+            graph.addLink(toNodeId, fromNodeId, relLabel);
+        }
     }
 
-    if (isInbound) {
-        graph.addRelationship(toNodeId, fromNodeId, relLabel);
-    }
 
     document.getElementById("add-relationship-popup").style.display = "none";
     showMessagePopup("Relationship added to graph", MessageType.INFO);
@@ -584,7 +596,7 @@ function setCheckboxStatus(checkboxNode, optionName) {
  * Show or hide settings popup menu
  */
 document.getElementById("settings-button").addEventListener("click", function() {
-    const settingsPopup = document.getElementById("settings-popup");
+    const settingsPopup = document.getElementById("options-popup");
     if(!settingsPopup.style.display || settingsPopup.style.display == "none" ) {
         // Don't show pointer cursor on buttons
         document.querySelectorAll(".tool-entry").forEach(function(entry) {
@@ -613,7 +625,7 @@ document.getElementById("settings-button").addEventListener("click", function() 
  * Handle the clicking outside the popup area
  */
 document.addEventListener("click", function(evt) {
-    const settingsPopup = document.getElementById("settings-popup");
+    const settingsPopup = document.getElementById("options-popup");
     const settingsButton = document.getElementById("settings-button");
 
     if(settingsPopup.style.display == "block") {
@@ -641,7 +653,8 @@ document.addEventListener("click", function(evt) {
             (evt.pageY < popupPos.top || evt.pageY > popupPos.bottom)) &&
             ((evt.pageX < buttonPos.left || evt.pageX > buttonPos.right) || 
             (evt.pageY < buttonPos.top || evt.pageY > buttonPos.bottom)) &&
-            evt.target.id !== "to-node-name" && evt.target.tagName !== "OPTION") {
+            evt.target.id !== "to-node-name" && evt.target.id !== "rel-node-name" 
+            && evt.target.tagName !== "OPTION") {
             // Fire settings button click event to close the settings popup
             addRelCancelButton.click();
         }

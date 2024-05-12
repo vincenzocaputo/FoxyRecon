@@ -20,7 +20,7 @@
             "source": "https://otx.alienvault.com/indicator/domain/",
             "query": "otx-ioc-expandable-line span",
             "type": "domain",
-            "relationName": "resolved-to",
+            "relationName": "resolves-to",
             "relationType": "outbound",
             "nodeType": "ip"
         },
@@ -36,7 +36,7 @@
             "source": "https://otx.alienvault.com/indicator/domain/",
             "query": "#files table a",
             "type": "domain",
-            "relationName": "associated-to",
+            "relationName": "related-to",
             "relationType": "outbound",
             "nodeType": "hash"
         },

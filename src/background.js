@@ -186,9 +186,24 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     } else if (request.id == 3) {
         const graph = new Graph();
         const rel = JSON.parse(request.msg);
-        graph.addNode(rel['source']['id'], rel['source']['type']);
-        graph.addNode(rel['target']['id'], rel['target']['type']);
-        graph.addRelationship(rel['source']['id'], rel['target']['id'], rel['label']);
+
+        let nodeIds = graph.getNodesByLabel(rel['source']['id']);
+        let fromId;
+        if (nodeIds.length === 0) {
+            fromId = graph.addNode(rel['source']['id'], rel['source']['type']);
+        } else {
+            fromId = nodeIds[0];
+        }
+        nodeIds = graph.getNodesByLabel(rel['target']['id']);
+        let toId;
+        if (nodeIds.length === 0) {
+            toId = graph.addNode(rel['target']['id'], rel['target']['type']);
+        } else {
+            toId = nodeIds[0];
+        }
+        if (!graph.linkInGraph(fromId, toId, rel['label'])) {
+            graph.addLink(fromId, toId, rel['label']);
+        }
         sendResponse({msg: 1});
     } else {
         updateToolsMenu(tools, request.indicator, request.type);
