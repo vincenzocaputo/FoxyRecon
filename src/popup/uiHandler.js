@@ -130,7 +130,8 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
     document.getElementById("hist-icon").style.display = "none";
 
     let graph = new Graph();
-    if (graph.nodeInGraph(indicator)) { 
+    const nodeIds = graph.getNodesByLabel(indicator);
+    if (nodeIds.length > 0) { 
         document.getElementById("add-node").style.display = "none";
         document.getElementById("add-rel").style.display = "block";
         document.getElementById("del-node").style.display = "block";

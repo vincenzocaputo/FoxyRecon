@@ -287,6 +287,10 @@ input:checked + .slider:before {
     background-color: #AAAAAA;
 }
 
+.export-graph-btn {
+    background-color: #E8850C;
+}
+
 .btn img {
     width: 30px;
     height: 30px;

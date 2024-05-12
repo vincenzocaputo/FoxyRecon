@@ -166,7 +166,7 @@ class Graph {
                         type: 'domain-name',
                         value: nodeValue
                     }
-                    this.addSTIXNode(nodeValue, nodeValue, 'domain-name', stix);
+                    this.addSTIXNode(stix.id, nodeValue, 'domain-name', stix);
                     break;
                 case 'ip':
                     stix = { 
@@ -174,7 +174,7 @@ class Graph {
                         type: 'ipv4-addr',
                         value: nodeValue
                     }
-                    this.addSTIXNode(nodeValue, nodeValue, 'ipv4-addr', stix);
+                    this.addSTIXNode(stix.id, nodeValue, 'ipv4-addr', stix);
                     break;
                 case 'hash':
                     stix = { 
@@ -182,7 +182,7 @@ class Graph {
                         type: 'file',
                         value: nodeValue
                     }
-                    this.addSTIXNode(nodeValue, nodeValue, 'file', stix);
+                    this.addSTIXNode(stix.id, nodeValue, 'file', stix);
                     break;
                 case 'url':
                     stix = { 
@@ -190,7 +190,7 @@ class Graph {
                         type: 'url',
                         value: nodeValue
                     }
-                    this.addSTIXNode(nodeValue, nodeValue, 'url', stix);
+                    this.addSTIXNode(stix.id, nodeValue, 'url', stix);
                     break;
                 case 'email':
                     stix = { 
@@ -198,7 +198,7 @@ class Graph {
                         type: 'email-addr',
                         value: nodeValue
                     }
-                    this.addSTIXNode(nodeValue, nodeValue, 'email-addr', stix);
+                    this.addSTIXNode(stix.id, nodeValue, 'email-addr', stix);
                     break;
                 case 'cve':
                     stix = { 
@@ -206,12 +206,12 @@ class Graph {
                         type: 'vulnerability',
                         name: nodeValue
                     }
-                    this.addSTIXNode(nodeValue, nodeValue, 'vulnerability', stix);
+                    this.addSTIXNode(stix.id, nodeValue, 'vulnerability', stix);
                     break;
 
             }
             this.saveGraph();
-            return true;
+            return stix.id;
         }
         return false;
     }
@@ -295,6 +295,7 @@ class Graph {
     addLink(sourceNode, targetNode, label) {
         if (!this.linkInGraph(sourceNode, targetNode, label)) {
             this.graph['links'].push({
+                id: "relationship--"+crypto.randomUUID(),
                 from: sourceNode,
                 to: targetNode,
                 label: label
@@ -377,6 +378,29 @@ class Graph {
             }
         }
         return incomingNodes
+    }
+
+    getBundle() {
+        const uuid = crypto.randomUUID();
+        const stixObjects = Array();
+        for (const node of this.graph['nodes']) {
+            stixObjects.push(node.stix);
+        }
+        for (const rel of this.graph['links']) {
+            stixObjects.push({
+                "type": "relationship",
+                "id": rel.id,
+                "source_ref": rel.from,
+                "target_ref": rel.to,
+                "relationship_type": rel.label
+            });
+        }
+        const bundle = {
+            "type": "bundle",
+            "id": "bundle--"+uuid,
+            "objects": stixObjects 
+        }
+        return JSON.stringify(bundle);
     }
 }
 

@@ -8,6 +8,7 @@ const addLinkCancelButton = document.getElementById("addlink-cancel-button");
 const filterInputField = document.getElementById("filter-input-field");
 const filterButton = document.getElementById("filter-button");
 const editButton = document.getElementById("edit-node-button");
+const exportButton = document.getElementById("export-graph-button");
 
 
 repulsionSlider.addEventListener("change", (evt) => {
@@ -78,9 +79,6 @@ addLinkButton.addEventListener("click", evt => {
     addLinkButton.style.display = "none";
     deleteGraphButton.style.display = "none";
     network.addEdgeMode();
-    //document.getElementById("delete-node-button").style.display = "none";
-    //document.getElementById("edit-node-button").style.display = "none";
-    //document.getElementById("add-link-button").style.display = "none";
 });
 
 addLinkCancelButton.addEventListener("click", evt => {
@@ -93,14 +91,6 @@ addLinkCancelButton.addEventListener("click", evt => {
     deleteGraphButton.style.display = "block";
     network.disableEditMode();
 });
-//document.addEventListener("mousemove", e => {
-//    if (addingLinkSwitch) {
-//        document.body.style.cursor = "pointer";
-//        const mouseMessage = document.getElementById("mouse-message");
-//        mouseMessage.style.top = e.pageY +10+"px";
-//        mouseMessage.style.left = e.pageX + 10+"px";
-//    }
-//});
 
 
 deleteGraphButton.addEventListener("click", evt => {
@@ -173,6 +163,22 @@ deleteEdgeButton.addEventListener("click", evt => {
                     
         location.reload();
     }
+});
+
+exportButton.addEventListener("click", evt => {
+    const bundleJson = graph.getBundle();
+    const link = document.createElement('a');
+
+    const blob = new Blob([bundleJson], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    link.href = url;
+    link.download = "graph.json";
+
+    // Append the link to the body
+    document.body.appendChild(link);
+    link.click();
+    window.URL.revokeObjectURL(url);
+    link.remove();
 });
 
 filterButton.addEventListener("click", evt => {

@@ -485,22 +485,25 @@ document.querySelector("#add-node-rel-button").addEventListener("click", (e) => 
     const toNodeId = document.querySelector("#to-node-name").value;
     const isOutbound = document.querySelector("#outbound-link input[type='checkbox']").checked
     const isInbound = document.querySelector("#inbound-link input[type='checkbox']").checked
-    const fromNodeId = localStorage.getItem("indicator");
+    const fromNodeLabel = localStorage.getItem("indicator");
     const fromNodeType = localStorage.getItem("type");
 
 
     let graph = new Graph();
     
-    const [toNodeType, tld] = indicatorParser.getIndicatorType(toNodeId);
-    graph.addNode(toNodeId, toNodeType);
+    //const [toNodeType, tld] = indicatorParser.getIndicatorType(toNodeId);
+    //graph.addNode(toNodeId, toNodeType);
 
-    if (isOutbound) {
-        graph.addLink(fromNodeId, toNodeId, relLabel);
+    const fromNodeIds = graph.getNodesByLabel(fromNodeLabel);
+    for (const fromNodeId of fromNodeIds) {
+        if (isOutbound) {
+            graph.addLink(fromNodeId, toNodeId, relLabel);
+        }
+        if (isInbound) {
+            graph.addLink(toNodeId, fromNodeId, relLabel);
+        }
     }
 
-    if (isInbound) {
-        graph.addLink(toNodeId, fromNodeId, relLabel);
-    }
 
     document.getElementById("add-relationship-popup").style.display = "none";
     showMessagePopup("Relationship added to graph", MessageType.INFO);
