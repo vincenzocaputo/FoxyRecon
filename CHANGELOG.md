@@ -4,14 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.20.0] - 2024-05-11
+## [0.20.0] - 2024-05-12
 ### Add
 - STIX support in the graph tool
-- More options for graphs
+- More options and features for graphs
 
 ### Change
-- Graph engine (vis network)\
-- Graph page UI
+- New graph engine (Vis Network)
+- New graph page UI
 
 ### Fix
 - JoeSandbox URL
