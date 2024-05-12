@@ -14,7 +14,7 @@
 # FoxyRecon
 FoxyRecon is a Firefox add-on that helps you to carry out searching and investigation activities by using over 70 Open Source Intelligence Source (OSINT) web resources.
 
-![Popup](._media/popup.gif)  ![Context Menu](._media/contextmenu.gif) ![Graph](._media/graph_example.png)
+![Popup](._media/popup.gif) 
 
 ## Main Features
 
@@ -22,6 +22,7 @@ FoxyRecon is a Firefox add-on that helps you to carry out searching and investig
 - You can harvest and collect all the indicators that are present on the web page you are visiting. FoxyRecon allows you also to download them in CSV file for future analysis. See the wiki page for more information (https://github.com/vincenzocaputo/FoxyRecon/wiki/5.-Collecting-Indicators).
 - You can add custom resources to FoxyRecon, for example local tools (e.g.: MISP, OpenCTI and so on)
 - You can create a graph from the data collected during your investigation analysis. Graphs are based on STIX format to ensure compatibility with other tools. Moreover, FoxyRecon is able to automatically create graphs on the basis of searches you perform via FoxyRecon
+ ![Graph](._media/graph_example.png)
 
 ## Supported Indicators
 Currently, FoxyRecon supports the following indicator types:
