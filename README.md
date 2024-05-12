@@ -14,19 +14,15 @@
 # FoxyRecon
 FoxyRecon is a Firefox add-on that helps you to carry out searching and investigation activities by using over 70 Open Source Intelligence Source (OSINT) web resources.
 
-## Main Features
-- You can enter the indicator you want to analyze in the textbox located in the popup. FoxyRecon will suggest you the most suitable tools for your indicator.\
-  ![Popup](._media/popup.gif)
-  
-  The popup also let you pull out indicators from a web page, making them ready for investigations and analysis. FoxyRecon allows you also to download them in CSV file for future analysis.
+![Popup](._media/popup.gif)  ![Context Menu](._media/contextmenu.gif) ![Graph](._media/graph_example.png)
 
-- On whatever website you are visiting, you can highlight the indicator you want to analyze and, by right clicking on it, you can choose one of the suggested tools in the FoxyRecon context menu.
-  The indicator submitted will be saved as input in the text field of the popup in order to let you performing further investigations on it. \
-  ![Context Menu](._media/contextmenu.gif)
- 
- 
-- You can harvest and collect all the indicators that are present on a web page you are visiting. You can find more information in the wiki page (https://github.com/vincenzocaputo/FoxyRecon/wiki/5.-Collecting-Indicators).
-  
+## Main Features
+
+- You can research and analyse your indicators on more than 70 online OSINT resources, by using the popup or the context menu after selecting your indicator. FoxyRecon will detect the type of the indicator you submitted and suggest you the most suitable web resources.
+- You can harvest and collect all the indicators that are present on the web page you are visiting. FoxyRecon allows you also to download them in CSV file for future analysis. See the wiki page for more information (https://github.com/vincenzocaputo/FoxyRecon/wiki/5.-Collecting-Indicators).
+- You can add custom resources to FoxyRecon, for example local tools (e.g.: MISP, OpenCTI and so on)
+- You can create a graph from the data collected during your investigation analysis. Graphs are based on STIX format to ensure compatibility with other tools. Moreover, FoxyRecon is able to automatically create graphs on the basis of searches you perform via FoxyRecon
+
 ## Supported Indicators
 Currently, FoxyRecon supports the following indicator types:
 - Domains
