@@ -14,7 +14,7 @@
 # FoxyRecon
 FoxyRecon is a Firefox add-on that helps you to carry out searching and investigation activities by using over 70 Open Source Intelligence Source (OSINT) web resources.
 
-![Popup](._media/popup.gif)  ![Context Menu](._media/contextmenu.gif) ![Graph](._media/graph_example.png)
+![Popup](._media/popup.gif) ![Graph](._media/graph_example.png)
 
 ## Main Features
 
