@@ -391,12 +391,13 @@
                 "ip": "https://www.google.com/search?q=\"%s\"",
                 "email": "https://www.google.com/search?q=\"%s\"",
                 "hash": "https://www.google.com/search?q=\"%s\"",
-                "cve": "https://www.google.com/search?q=\"%s\""
+                "cve": "https://www.google.com/search?q=\"%s\"",
+                "phone": "https://www.google.com/search?q=\"%s\""
             },
             "desc": "Search on Google",
             "icon": "google.png",
             "color": "#EA4335",
-            "types": ["domain","ip","email","hash","cve"]
+            "types": ["domain","ip","email","hash","cve","phone"]
         },
         {
             "name": "Google Cache",
@@ -951,12 +952,13 @@
                 "hash": "https://twitter.com/search?q=%s&src=typed_query",
                 "domain": "https://twitter.com/search?q=%22%s%22&src=typed_query",
                 "ip": "https://twitter.com/search?q=%s&src=typed_query",
-                "cve": "https://twitter.com/search?q=%s&src=typed_query"
+                "cve": "https://twitter.com/search?q=%s&src=typed_query",
+                "phone": "https://twitter.com/search?q=%s&src=typed_query"
             },
             "desc": "Search IoCs on Twitter",
             "icon": "twitter.png",
             "color": "#1D9BF0",
-            "types": ["hash","domain","ip","cve"],
+            "types": ["hash","domain","ip","cve","phone"],
             "tags": ["ioc"]
         },
         {
