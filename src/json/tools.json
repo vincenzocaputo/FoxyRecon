@@ -238,12 +238,13 @@
         {
             "name": "Dehashed",
             "url": {
-                "email": "https://dehashed.com/search?query=%s"
+                "email": "https://dehashed.com/search?query=%s",
+                "phone": "https://dehashed.com/search?query=phone%3A%r"
             },
             "desc": "DeHashed provides free deep-web scans and protection against credential leaks.",
             "icon": "dehashed.png",
             "color": "#151725",
-            "types": ["email"],
+            "types": ["email", "phone"],
             "tags": ["leaks"]
         },
         {
@@ -443,13 +444,14 @@
         {
             "name": "HIBP",
             "url": {
-                "email": "https://haveibeenpwned.com/"
+                "email": "https://haveibeenpwned.com/",
+                "phone": "https://haveibeenpwned.com/"
             },
             "submitQuery": "#searchPwnage", 
             "desc": "Check if your email or phone is in a data breach",
             "icon": "hibp.png",
             "color": "#2A698A",
-            "types": ["email"],
+            "types": ["email", "phone"],
             "tags": ["leaks"]
         },
         {
@@ -558,6 +560,16 @@
             "color": "#253162",
             "types": ["hash"],
             "tags": ["sandbox"]
+        },
+        {
+            "name": "IPQualityScore",
+            "url": {
+                "phone": "https://www.ipqualityscore.com/free-phone-number-lookup/lookup/US/%r"
+            },
+            "desc": "Free phone number lookup",
+            "icon": "ipqs.png",
+            "color": "#F43A3A",
+            "types": ["phone"]
         },
         {
             "name": "JoeSandbox",
