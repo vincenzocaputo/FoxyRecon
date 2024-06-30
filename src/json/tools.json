@@ -195,6 +195,16 @@
             "types":["cve"]
         },
         {
+            "name":"CVE Details",
+            "url": {
+                "cve":"https://www.cvedetails.com/cve/%s/"
+            },
+            "desc":"Vulnerability intelligence solution providing CVE security vulnerability database.",
+            "icon":"cvedetails.png",
+            "color":"#6641F3",
+            "types":["cve"]
+        },
+        {
             "name": "CVE MITRE",
             "url": {
                 "cve": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=%s"
