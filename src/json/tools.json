@@ -316,6 +316,16 @@
             "tags": ["rep"]
         },
         {
+            "name": "Exploit Database",
+            "url": {
+                "cve": "https://www.exploit-db.com/search?cve=%s"
+            },
+            "desc": "Search Exploit Database for Exploits, Papers, and Shellcode. ",
+            "icon": "exploitdb.png",
+            "color": "#CA4F0C",
+            "types": ["cve"]
+        },
+        {
             "name": "EuroDNS",
             "url": {
                 "domain": "https://www.eurodns.com/whois-search"

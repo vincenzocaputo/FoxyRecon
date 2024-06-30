@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Add
 - CVE Details resource for CVEs
+- Exploit Database resource for CVEs
 
 
 ## [0.20.0] - 2024-05-12
