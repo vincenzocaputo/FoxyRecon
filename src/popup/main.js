@@ -239,8 +239,8 @@ inputField.addEventListener("keyup", (e) => {
             // There is a search filter
             inputIndicator = inputs[0];
             
-            if(inputs[1].includes("+")) {
-                fToolName = inputs[1].split("+")[1];
+            if(inputs[1].includes("!")) {
+                fToolName = inputs[1].split("!")[1];
             } else {
                 type = "invalid";
             }
