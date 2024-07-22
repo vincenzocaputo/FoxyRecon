@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Exploit Database resource for CVEs
 - IP Quality Score resource for phone number lookup
 
+### Change
+- Rename Twitter to X
+
 
 ## [0.20.0] - 2024-05-12
 ### Add
