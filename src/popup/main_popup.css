@@ -66,8 +66,8 @@ div.tool-icon {
 
 
 div.tool-icon > img {
-    max-height: 70%;
-    max-width: 70%;
+    max-height: 90%;
+    max-width: 90%;
     width: auto;
     height: auto;
     position: absolute;
@@ -77,7 +77,6 @@ div.tool-icon > img {
     right: 0;
     margin: auto;
     width: 25px;
-    border-radius: 20px;
 }
 
 div.tool-name {

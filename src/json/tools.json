@@ -947,7 +947,7 @@
             "tags": ["ioc"]
         },
         {
-            "name": "Twitter",
+            "name": "X (Twitter)",
             "url": {
                 "hash": "https://twitter.com/search?q=%s&src=typed_query",
                 "domain": "https://twitter.com/search?q=%22%s%22&src=typed_query",
@@ -955,9 +955,9 @@
                 "cve": "https://twitter.com/search?q=%s&src=typed_query",
                 "phone": "https://twitter.com/search?q=%s&src=typed_query"
             },
-            "desc": "Search IoCs on Twitter",
-            "icon": "twitter.png",
-            "color": "#1D9BF0",
+            "desc": "Search IoCs on X",
+            "icon": "x.png",
+            "color": "#000000",
             "types": ["hash","domain","ip","cve","phone"],
             "tags": ["ioc"]
         },

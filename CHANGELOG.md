@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Change
 - Rename Twitter to X
+- Improve resource icons
 
 
 ## [0.20.0] - 2024-05-12
