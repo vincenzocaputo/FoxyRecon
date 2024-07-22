@@ -400,6 +400,17 @@
             "types": ["domain","ip","email","hash","cve","phone"]
         },
         {
+            "name": "Google Trends",
+            "url": {
+                "domain": "https://trends.google.com/trends/explore?q=%s",
+                "cve": "https://trends.google.com/trends/explore?q=%s"
+            },
+            "desc": "See what's trending across Google Search, Google News and Youtube",
+            "icon": "google.png",
+            "color": "#EA4335",
+            "types": ["domain","cve"]
+        },
+        {
             "name": "Google Cache",
             "url": {
                 "url": "https://webcache.googleusercontent.com/search?q=cache:%s"

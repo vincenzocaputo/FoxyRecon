@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CVE Details resource for CVEs
 - Exploit Database resource for CVEs
 - IP Quality Score resource for phone number lookup
+- Google Trends resource
 
 ### Change
 - Rename Twitter to X
