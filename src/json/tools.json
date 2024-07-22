@@ -840,6 +840,16 @@
             "tags": ["dns"]
         },
         {
+            "name": "Rapid7",
+            "url": {
+                "cve": "https://www.rapid7.com/db/?q=%s"
+            },
+            "desc": "Vulnerability & Exploit Database",
+            "icon": "rapid7.png",
+            "color": "#E85E26",
+            "types": ["cve"]
+        },
+        {
             "name": "SecurityHeaders",
             "url": {
                 "url": "https://securityheaders.com/?q=%s&&hide=on&followRedirects=on"

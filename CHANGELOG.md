@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IP Quality Score resource for phone number lookup
 - Google Trends resource
 - Poc-In-Github resource for CVEs
+- Rapid7 Vulnerability & Exploit database resource
 
 ### Change
 - Rename Twitter to X
