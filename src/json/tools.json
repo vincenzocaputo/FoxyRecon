@@ -795,6 +795,16 @@
             "tags": ["rep", "screenshot"]
         },
         {
+            "name": "Poc-in-Github",
+            "url": {
+                "cve": "https://poc-in-github.motikan2010.net/api/v1/?cve_id=%s"
+            },
+            "desc": "PoC auto collect from GitHub",
+            "icon": "pocingithub.png",
+            "color": "#212529",
+            "types": ["cve"]
+        },
+        {
             "name": "Polyswarm",
             "url": {
                 "hash": "https://polyswarm.network/search/hash?limit=25&page=0&term=%s"
