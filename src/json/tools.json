@@ -477,6 +477,18 @@
             "tags": ["dns"]
 		},
 		{
+			"name": "Hacker Target (Whois Lookup)",
+			"url": {
+                "domain": "https://hackertarget.com/whois-lookup/"
+            },
+            "submitQuery": "#clickform", 
+            "desc": "Perform an Online Whois Lookup of a domain.",
+			"icon": "hackertarget.png",
+			"color": "#4ecda7",
+			"types": ["domain"],
+            "tags": ["whois"]
+		},
+		{
 			"name": "hashdd",
 			"url": {
                 "hash": "https://www.hashdd.com/search/%s"
