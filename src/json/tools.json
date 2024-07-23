@@ -907,6 +907,16 @@
             "tags": ["rep"]
         },
         {
+            "name": "OpenCVE",
+            "url": {
+                "cve": "https://www.opencve.io/cve/%s"
+            },
+            "desc": "OpenCVE is the easiest way to track CVE updates and be alerted about new vulnerabilities.",
+            "icon": "opencve.png",
+            "color": "#11324b",
+            "types": ["cve"]
+        },
+        {
             "name": "PacketTotal",
             "url": {
                 "ip": "https://packettotal.com/app/search?q=%s",
