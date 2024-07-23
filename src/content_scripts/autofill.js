@@ -70,7 +70,10 @@ function sendMessageAndFill() {
                 if (submit === "true") {
                     document.querySelector(query).click();
                 }
-            }else {
+            } else if(current_url.includes("emobiletracker")) {
+                var inputNode = document.querySelector("input[type='tel']");
+                inputNode.value = indicator;
+            } else {
 
                 var inputNodes = document.getElementsByTagName("input");
                 console.log(inputNodes);

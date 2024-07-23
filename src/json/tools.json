@@ -327,6 +327,17 @@
             "tags": ["rep"]
         },
         {
+            "name": "EmobileTracker",
+            "url": {
+                "phone": "https://www.emobiletracker.com"
+            },
+            "submitQuery": "button#btn-primary",
+            "desc": "EMOBILETRACKER is a service specifically designed to Track Mobile Number, Location on Google Map including information such as the owner's Name,Location,Country,Telecom provider.",
+            "icon": "emobiletracker.png",
+            "color": "#51B3EB",
+            "types": ["phone"]
+        },
+        {
             "name": "Exploit Database",
             "url": {
                 "cve": "https://www.exploit-db.com/search?cve=%s"
