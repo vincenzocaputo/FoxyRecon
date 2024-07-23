@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CISA KEV Catalog resource
 - Emobile Tracker resource
 - Sync.me and Truecaller resources
+- CIRCL.LU vulnerability lookup
 
 ### Change
 - Rename Twitter to X
