@@ -148,6 +148,16 @@
             "tags": ["sandbox"]
         },
         {
+            "name": "CISA KEV",
+            "url": {
+                "cve": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?search_api_fulltext=%s"
+            },
+            "desc": "Check if a vulnerability is in the Known Exploited Vulnerability (KEV) Catalog, maintained by CISA",
+            "icon": "cisa.png",
+            "color": "#005288",
+            "types": ["cve"]
+        },
+        {
             "name": "CleanTalk",
             "url": {
                 "domain": "https://cleantalk.org/blacklists/%s",

@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rapid7 Vulnerability & Exploit database resource
 - HudsonRock resource
 - HackerTarget DNS Lookup
+- CISA KEV Catalog resource
 
 ### Change
 - Rename Twitter to X
