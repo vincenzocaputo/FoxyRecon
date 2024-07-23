@@ -985,6 +985,16 @@
             "types": ["domain"],
             "tags": ["tls"]
         },
+        {
+            "name": "Sync.me",
+            "url": {
+                "phone": "https://sync.me/search/?number=%s"
+            },
+            "desc": "Find out who called",
+            "icon": "syncme.png",
+            "color": "#2592f8",
+            "types": ["phone"]
+        },
 		{
 			"name": "Talos Intelligence",
 			"url": {
@@ -1031,6 +1041,16 @@
             "color": "#000000",
             "types": ["hash","domain","ip"],
             "tags": ["ioc"]
+        },
+        {
+            "name": "Truecaller",
+            "url": {
+                "phone": "https://www.truecaller.com/en-us/search/us/%s"
+            },
+            "desc": "Caller ID and Spam Blocking App",
+            "icon": "truecaller.png",
+            "color": "#7FC3FF",
+            "types": ["phone"]
         },
         {
             "name": "X (Twitter)",

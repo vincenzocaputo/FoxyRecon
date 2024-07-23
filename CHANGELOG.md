@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - HackerTarget DNS Lookup
 - CISA KEV Catalog resource
 - Emobile Tracker resource
+- Sync.me and Truecaller resources
 
 ### Change
 - Rename Twitter to X
