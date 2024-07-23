@@ -1010,6 +1010,17 @@
             "types": ["cve"]
         },
         {
+            "name": "RIPE Database",
+            "url": {
+                "ip": "https://apps.db.ripe.net/db-web-ui/query?searchtext=%s",
+                "asn": "https://apps.db.ripe.net/db-web-ui/query?searchtext=%s"
+            },
+            "desc": "Query the RIPE Database",
+            "icon": "ripe.png",
+            "color": "#080037",
+            "types": ["ip","asn"]
+        },
+        {
             "name": "SecurityHeaders",
             "url": {
                 "url": "https://securityheaders.com/?q=%s&&hide=on&followRedirects=on"
