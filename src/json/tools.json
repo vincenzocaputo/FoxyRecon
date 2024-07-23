@@ -778,7 +778,7 @@
             },
             "desc": "Find out the infrastructure and technologies used by any site using results from Netcraft internet data mining",
             "icon": "netcraft.png",
-            "color": "#4FBDAC",
+            "color": "#003E51",
             "types": ["domain","url"],
             "tags": ["rep"]
         },
