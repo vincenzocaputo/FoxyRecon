@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Sync.me and Truecaller resources
 - CIRCL.LU vulnerability lookup
 - OpenCVE resource
+- BGPView resource
 
 ### Change
 - Rename Twitter to X

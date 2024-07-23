@@ -65,6 +65,17 @@
             "tags": ["whois","dns"]
         },
         {
+            "name": "BGPView",
+            "url": {
+                "ip": "https://bgpview.io/ip/%s",
+                "asn": "https://bgpview.io/asn/%n"
+            },
+            "desc": "AS analysis tool",
+            "color": "#2C94B3",
+            "icon": "bgpview.png",
+            "types": ["ip","asn"]
+        },
+        {
             "name": "Browserling",
             "url": {
                 "url": "https://www.browserling.com/browse/win/7/chrome/92/%s"
