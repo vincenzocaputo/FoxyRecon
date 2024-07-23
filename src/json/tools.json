@@ -55,12 +55,13 @@
         {
             "name": "bgp.tools",
             "url": {
-                "ip": "https://bgp.tools/prefix/%s"
+                "ip": "https://bgp.tools/prefix/%s",
+                "asn": "https://bgp.tools/as/%n"
             },
             "desc": "Browse the internet ecosystem",
             "color": "#000000",
             "icon": "bgptools.png",
-            "types": ["ip"],
+            "types": ["ip","asn"],
             "tags": ["whois","dns"]
         },
         {
@@ -423,12 +424,13 @@
                 "email": "https://www.google.com/search?q=\"%s\"",
                 "hash": "https://www.google.com/search?q=\"%s\"",
                 "cve": "https://www.google.com/search?q=\"%s\"",
-                "phone": "https://www.google.com/search?q=\"%s\""
+                "phone": "https://www.google.com/search?q=\"%s\"",
+                "asn": "https://www.google.com/search?q=\"%s\""
             },
             "desc": "Search on Google",
             "icon": "google.png",
             "color": "#EA4335",
-            "types": ["domain","ip","email","hash","cve","phone"]
+            "types": ["domain","ip","email","hash","cve","phone","asn"]
         },
         {
             "name": "Google Trends",
@@ -640,12 +642,13 @@
 			"name": "Hurricane Electric",
 			"url": { 
                 "domain": "https://bgp.he.net/dns/%s",
-                "ip": "https://bgp.he.net/ip/%s"
+                "ip": "https://bgp.he.net/ip/%s",
+                "asn": "https://bgp.he.net/%s"
             },
             "desc": "Hurricane Electric BGP Toolkit",
 			"icon": "bgphe.png",
 			"color": "#000065",
-			"types": ["domain","ip"],
+			"types": ["domain","ip","asn"],
             "tags": ["dns"]
 		},
         {
@@ -1090,12 +1093,13 @@
 			"name": "Talos Intelligence",
 			"url": {
                 "domain": "https://talosintelligence.com/reputation_center/lookup?search=%s",
-                "ip": "https://talosintelligence.com/reputation_center/lookup?search=%s"
+                "ip": "https://talosintelligence.com/reputation_center/lookup?search=%s",
+                "url": "https://talosintelligence.com/reputation_center/lookup?search=%s"
             },
             "desc": "Cisco Talos Intelligence Group IP, domain rep lookup",
 			"icon": "talos.png",
 			"color": "#0077BE",
-			"types": ["domain","ip"],
+			"types": ["domain","ip","url"],
             "tags": ["rep"]
 		},
 		{
@@ -1150,12 +1154,13 @@
                 "domain": "https://twitter.com/search?q=%22%s%22&src=typed_query",
                 "ip": "https://twitter.com/search?q=%s&src=typed_query",
                 "cve": "https://twitter.com/search?q=%s&src=typed_query",
-                "phone": "https://twitter.com/search?q=%s&src=typed_query"
+                "phone": "https://twitter.com/search?q=%s&src=typed_query",
+                "asn": "https://twitter.com/search?q=%s&src=typed_query"
             },
             "desc": "Search IoCs on X",
             "icon": "x.png",
             "color": "#000000",
-            "types": ["hash","domain","ip","cve","phone"],
+            "types": ["hash","domain","ip","cve","phone","asn"],
             "tags": ["ioc"]
         },
         {
@@ -1187,12 +1192,13 @@
 			"url": {
                 "domain": "https://urlscan.io/domain/%s",
                 "ip": "https://urlscan.io/domain/%s",
-                "url": "https://urlscan.io/liveshot/?url=%s"
+                "url": "https://urlscan.io/liveshot/?url=%s",
+                "asn": "https://urlscan.io/asn/%s"
             },
             "desc": "A sandbox for the web",
 			"icon": "urlscan.png",
             "color": "#E25A45",
-			"types": ["domain","ip","url"],
+			"types": ["domain","ip","url","asn"],
             "tags": ["whois", "dns", "screenshot"]
 		},
 		{

@@ -718,7 +718,7 @@ input:checked + .slider:before {
 .catch-container {
     border: 1px solid black;
     border-radius: 10px;
-    height: 100px;
+    height: 90px;
     cursor: pointer;
 }
 
@@ -728,8 +728,8 @@ input:checked + .slider:before {
     border: 1px solid black;
     border-radius: 100px;
     display: block;
-    width: 50%;
-    height: 50%;
+    width: 45%;
+    height: 45%;
     margin: 0 auto;
     padding: 5px;
     margin-top: 5px;
@@ -786,6 +786,14 @@ input:checked + .slider:before {
 
 #catch-cve {
     background-color: #FFE136;
+}
+
+#catch-phone {
+    background-color: #AE1AB8;
+}
+
+#catch-asn {
+    background-color: #FF44B2;
 }
 
 #disclaimer {
