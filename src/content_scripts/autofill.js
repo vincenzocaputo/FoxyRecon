@@ -73,6 +73,19 @@ function sendMessageAndFill() {
             } else if(current_url.includes("emobiletracker")) {
                 var inputNode = document.querySelector("input[type='tel']");
                 inputNode.value = indicator;
+            } else if(current_url.includes("hackertarget.com/whatweb-scan")) {
+                document.querySelector("textarea").value = indicator;
+                const tool = query.split(":")[0];
+                const q = query.split(":")[1];
+                if(tool === "whatweb") {
+                    document.querySelector("select").value = "whatweb";
+                } else {
+                    document.querySelector("select").value = "wapp";
+                }
+                if(submit === "true") {
+                    document.querySelector(q).click();
+                }
+
             } else {
 
                 var inputNodes = document.getElementsByTagName("input");

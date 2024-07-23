@@ -465,6 +465,18 @@
             "tags": ["net-activity", "rep"]
         },
 		{
+			"name": "Hacker Target (Banner Grabbing)",
+			"url": {
+                "ip": "https://hackertarget.com/banner-grabbing/"
+            },
+            "submitQuery": "#clickform", 
+            "desc": "Banner Grabbing is a reconnaissance technique to discover network services by simply querying the service port. Many services will respond with a simple text message (known as a service banner) indicating the technology in use.",
+			"icon": "hackertarget.png",
+			"color": "#4ecda7",
+			"types": ["ip"],
+            "tags": ["open-ports"]
+		},
+		{
 			"name": "Hacker Target (DNS Lookup)",
 			"url": {
                 "domain": "https://hackertarget.com/dns-lookup/"
@@ -475,6 +487,53 @@
 			"color": "#4ecda7",
 			"types": ["domain"],
             "tags": ["dns"]
+		},
+		{
+			"name": "Hacker Target (DNS Lookup)",
+			"url": {
+                "url": "https://hackertarget.com/extract-links/"
+            },
+            "submitQuery": "#clickform", 
+            "desc": "This tool will parse the html of a website and extract links from the page.",
+			"icon": "hackertarget.png",
+			"color": "#4ecda7",
+			"types": ["url"]
+		},
+		{
+			"name": "Hacker Target (HTTP Header Check)",
+			"url": {
+                "url": "https://hackertarget.com/http-header-check/"
+            },
+            "submitQuery": "#clickform", 
+            "desc": "Review the HTTP Headers from a web server with this quick check.",
+			"icon": "hackertarget.png",
+			"color": "#4ecda7",
+			"types": ["url"],
+            "tags": ["http-headers"]
+		},
+        {
+			"name": "Hacker Target (Wappalyzer)",
+			"url": {
+                "url": "https://hackertarget.com/whatweb-scan/"
+            },
+            "submitQuery": "wappalyzer:#clickform", 
+            "desc": "The tools examine the web server HTTP Headers and the HTML source of a web page to determine technologies in use.",
+			"icon": "hackertarget.png",
+			"color": "#4ecda7",
+			"types": ["url"],
+            "tags": ["techs"]
+		},
+		{
+			"name": "Hacker Target (WhatWeb)",
+			"url": {
+                "url": "https://hackertarget.com/whatweb-scan/"
+            },
+            "submitQuery": "whatweb:#clickform", 
+            "desc": "The tools examine the web server HTTP Headers and the HTML source of a web page to determine technologies in use.",
+			"icon": "hackertarget.png",
+			"color": "#4ecda7",
+			"types": ["url"],
+            "tags": ["techs"]
 		},
 		{
 			"name": "Hacker Target (Whois Lookup)",

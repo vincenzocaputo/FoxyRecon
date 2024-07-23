@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Poc-In-Github resource for CVEs
 - Rapid7 Vulnerability & Exploit database resource
 - HudsonRock resource
-- HackerTarget DNS Lookup
+- HackerTarget DNS Lookup, Whois Lookup, Banner Grabbing, Extract links, HTTP Header check and Wappalyzer/WhatWeb Scan
 - CISA KEV Catalog resource
 - Emobile Tracker resource
 - Sync.me and Truecaller resources
