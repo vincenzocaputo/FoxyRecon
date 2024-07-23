@@ -991,13 +991,15 @@
             "url": {
                 "ip": "https://pulsedive.com/indicator/%s",
                 "domain": "https://pulsedive.com/indicator/%s",
-                "hash": "https://pulsedive.com/indicator/%s"
+                "hash": "https://pulsedive.com/indicator/%s",
+                "phone": "https://pulsedive.com/explore/?q=whois.phone%3D%s",
+                "asn": "https://pulsedive.com/explore/?q=geo.asn%3D%s"
             },
             "desc": "Free Threat Intelligence platform",
             "icon": "pulsedive.png",
             "color": "#0E2C3E",
-            "types": ["ip","domain","hash"],
-            "tags": ["dns"]
+            "types": ["ip","domain","hash","phone","asn"],
+            "tags": ["dns","whois"]
         },
         {
             "name": "Rapid7",
