@@ -8,6 +8,7 @@ function sendMessageAndFill() {
     }).then((resp)=>{
         indicator = resp.msg;
         // Get the query to find submit button
+        console.log(indicator);
         query = resp.query;
         if(query) {
             // Check if auto-submit is enabled
@@ -70,7 +71,9 @@ function sendMessageAndFill() {
                     document.querySelector(query).click();
                 }
             }else {
+
                 var inputNodes = document.getElementsByTagName("input");
+                console.log(inputNodes);
                 // Get only text or email input nodes
                 for(i=0; i<inputNodes.length; i++){
                     if(inputNodes[i].type === "text" || inputNodes[i].type === "email" || inputNodes[i].type === "url"){

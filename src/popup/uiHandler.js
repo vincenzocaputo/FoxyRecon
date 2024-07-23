@@ -326,7 +326,7 @@ function createToolsList(toolsList){
                 nodeTag.textContent = tags[tagIdx].toUpperCase();
                 nodeTag.classList.add("tool-tag");
                 // Add transparency
-                nodeTag.style.backgroundColor = "rgba(256, 256, 256, 0.3)";
+                //nodeTag.style.backgroundColor = "rgba(256, 256, 256, 0.3)";
                 nodeTagsContainer.appendChild(nodeTag);
                 nodeText.insertAdjacentElement("beforeend", nodeTagsContainer);
             }

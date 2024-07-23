@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Change
 - Rename Twitter to X
 - Update Netcraft logo and color
+- Improve popup look (font and colors)
 - Improve resource icons
 
 
