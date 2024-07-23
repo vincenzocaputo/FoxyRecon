@@ -444,6 +444,18 @@
             "tags": ["net-activity", "rep"]
         },
 		{
+			"name": "Hacker Target (DNS Lookup)",
+			"url": {
+                "domain": "https://hackertarget.com/dns-lookup/"
+            },
+            "submitQuery": "#clickform", 
+            "desc": "Use this DNS lookup tool to easily view the standard DNS records for a domain.",
+			"icon": "hackertarget.png",
+			"color": "#4ecda7",
+			"types": ["domain"],
+            "tags": ["dns"]
+		},
+		{
 			"name": "hashdd",
 			"url": {
                 "hash": "https://www.hashdd.com/search/%s"
@@ -915,7 +927,7 @@
             },
             "desc": "Spam database lookup",
             "icon": "spamdb.gif",
-            "color": "#F5EFE0",
+            "color": "#F6C100",
             "types": ["domain","ip","email"],
             "tags": ["rep"]
         },
@@ -927,7 +939,7 @@
             },
             "desc": "IP and Domain rep checker",
             "icon": "spamhaus.png",
-            "color": "#F8E331",
+            "color": "#142741",
             "types": ["domain","ip"],
             "tags": ["rep"]
         },
