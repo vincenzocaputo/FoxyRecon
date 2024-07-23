@@ -478,6 +478,28 @@
             "tags": ["dns"]
         },
         {
+            "name": "HudsonRock",
+            "url": {
+                "email": "https://www.hudsonrock.com/email-search?email=%s"
+            },
+            "desc": "Search specific email addresses to find out if your employees, customers, users or partners have been compromised by info-stealing malware.",
+            "icon": "hudsonrock.png",
+            "color": "#FECD4E",
+            "types": ["email"],
+            "tags": ["leaks"]
+        },
+        {
+            "name": "HudsonRock",
+            "url": {
+                "domain": "https://www.hudsonrock.com/search?domain=%s"
+            },
+            "desc": "Discover whether your, or your vendor’s corporate infrastructure has been compromised by Infostealers.",
+            "icon": "hudsonrock.png",
+            "color": "#FECD4E",
+            "types": ["domain"],
+            "tags": ["leaks"]
+        },
+        {
             "name": "hunter",
             "url": {
                 "email": "https://hunter.io/verify/%s"

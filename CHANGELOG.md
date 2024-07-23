@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Google Trends resource
 - Poc-In-Github resource for CVEs
 - Rapid7 Vulnerability & Exploit database resource
+- HudsonRock resource
 
 ### Change
 - Rename Twitter to X
