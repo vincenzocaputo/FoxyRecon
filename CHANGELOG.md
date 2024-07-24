@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fix
 - Domain extraction from email address
+- Accept URLs containing IP address and port
 
 
 ## [0.20.0] - 2024-05-12
