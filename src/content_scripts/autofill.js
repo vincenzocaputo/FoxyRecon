@@ -8,7 +8,6 @@ function sendMessageAndFill() {
     }).then((resp)=>{
         indicator = resp.msg;
         // Get the query to find submit button
-        console.log(indicator);
         query = resp.query;
         if(query) {
             // Check if auto-submit is enabled
