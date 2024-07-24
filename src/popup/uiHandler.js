@@ -84,6 +84,7 @@ function showAddonMain() {
     // Restore placeholder text of the input field
     document.getElementById("input-box").placeholder = "Enter your indicator";
     document.getElementById("main").style.display = "block";
+    document.getElementById("disclaimer").style.display = "block";
     // Hide filter dropdown menus
     document.getElementById("filter-container-types").style.display = "none";
     document.getElementById("filter-container-tags").style.display = "none";
@@ -128,6 +129,7 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
     document.getElementById("no-tools").style.display = "none";
     document.getElementById("no-indicators").style.display = "none";
     document.getElementById("hist-icon").style.display = "none";
+    document.getElementById("disclaimer").style.display = "none";
 
     let graph = new Graph();
     const nodeIds = graph.getNodesByLabel(indicator);
@@ -473,10 +475,15 @@ function createIndicatorsList(indicatorsList){
     document.getElementById("hist-icon").style.display = "none";
     document.getElementById("catch-icon").style.display = "none";
     document.getElementById("flag").style.display = "none";
+    document.getElementById("disclaimer").style.display = "none";
 
     let indicatorsListNode = document.getElementById("catch-res-list");
 
     let typesList = [];
+    if(!indicatorsList || indicatorsList.length == 0) {
+        document.getElementById("no-indicators").style.display="block";
+        return;
+    }
     for (i=0; i<indicatorsList.length; i++) {
         const type = indicatorsList[i]['type'];
         let node = document.createElement('div');
