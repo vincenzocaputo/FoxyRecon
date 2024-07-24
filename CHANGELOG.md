@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fix
 - Domain extraction from email address
+- Button name in add relationship prompt in graph page
 - Accept URLs containing IP address and port
 
 
