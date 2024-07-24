@@ -208,6 +208,15 @@ class Graph {
                     }
                     this.addSTIXNode(stix.id, nodeValue, 'vulnerability', stix);
                     break;
+                case 'asn':
+                    const number = nodeValue.replace('AS', '');
+                    stix = { 
+                        id: 'autonomous-system--'+uuid,
+                        type: 'autonomous-system',
+                        number: number
+                    }
+                    this.addSTIXNode(stix.id, nodeValue, 'autonomous-system', stix);
+                    break;
 
             }
             this.saveGraph();

@@ -136,9 +136,11 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
         document.getElementById("add-rel").style.display = "block";
         document.getElementById("del-node").style.display = "block";
     } else {
-        document.getElementById("add-node").style.display = "block";
-        document.getElementById("add-rel").style.display = "none";
-        document.getElementById("del-node").style.display = "none";
+        if(type != "phone") {
+            document.getElementById("add-node").style.display = "block";
+            document.getElementById("add-rel").style.display = "none";
+            document.getElementById("del-node").style.display = "none";
+        }
     }
     // This node contains the list of tools
     const toolsListNodes = document.getElementById("tools-list");
