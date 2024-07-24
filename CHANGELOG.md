@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Phone number indicator
 - Autonomous System Number indicator
 - Phone number and ASN indicators detection and collection
+- Country flag based on phone number's dial code
 - CVE Details resource for CVEs
 - Exploit Database resource for CVEs
 - IP Quality Score resource for phone number lookup
@@ -25,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - OpenCVE resource
 - BGPView resource
 - RIPE Database resource
+- Show release notes on update
 
 ### Change
 - Rename Twitter to X
@@ -32,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improve popup look (font and colors)
 - Improve resource icons
 - Add lookup for ASN and Phone in Pulsedive
+- Addon update detection
 
 ### Fix
 - Domain extraction from email address

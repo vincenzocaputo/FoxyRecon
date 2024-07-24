@@ -1,20 +1,31 @@
-// Check if current version is installed
-let currentVersion = browser.runtime.getManifest().version;
-console.log("Current version: " + currentVersion);
 
-if (installedVersion = localStorage.getItem("version")) {
-    console.log("Installed version: " + installedVersion);
-} else {
-    // Assume that the installed version is obsolete
-    installedVersion = 0;
-}
-
-if (installedVersion != currentVersion) {
-    // If a new version was released, clean the local storage
-    localStorage.clear();
-    // Add current version to local storage
-    localStorage.setItem("version", currentVersion);
-}
+browser.runtime.onInstalled.addListener(function(details) {
+    let currentVersion = browser.runtime.getManifest().version;
+    if(details.reason === "install") {
+        console.log("Current version: " + currentVersion);
+        localStorage.setItem("version", currentVersion);
+    } else if(details.reason === "update") {
+        if (installedVersion = localStorage.getItem("version")) {
+            console.log("Installed version: " + installedVersion);
+        } else {
+            // Assume that the installed version is obsolete
+            installedVersion = 0;
+        }
+        
+        if (installedVersion !== currentVersion) {
+            // If a new version was released, clean the local storage
+            localStorage.clear();
+            // Add current version to local storage
+            localStorage.setItem("version", currentVersion);
+            browser.tabs.create({
+                discarded: true,
+                title: "FoxyRecon New Version",
+                url: 'https://github.com/vincenzocaputo/FoxyRecon/releases/tag/v'+currentVersion
+            });
+        }
+        
+    }
+});
 
 // Setup default settings
 if (!localStorage.getItem("settings.newtab")) {
