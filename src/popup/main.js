@@ -12,11 +12,12 @@ indicatorParser = new IndicatorParser();
 var collectedIndicatorsListJson = localStorage.getItem("catched_indicators");
 if(collectedIndicatorsListJson && collectedIndicatorsListJson !== undefined && collectedIndicatorsListJson !== "undefined") {
     const collectedIndicatorsList = JSON.parse(collectedIndicatorsListJson);
-    var count = {"ip": 0, "domain": 0, "url": 0, "email": 0, "hash": 0, "cve": 0};
+    var count = {"ip": 0, "domain": 0, "url": 0, "email": 0, "hash": 0, "cve": 0, "phone": 0, "asn": 0};
     collectedIndicatorsList.forEach(function(indicator) {
         count[indicator["type"]]++;
     });
     for(let key in count) {
+        console.log(key);
         if(indCountContainer=document.getElementById(key+"_occ")) {
             indCountContainer.textContent = count[key];
         }
@@ -95,7 +96,7 @@ textfieldCatch.addEventListener("click", function() {
                 } else {
                     //countFoundIndicators();
                     const indicatorsList = JSON.parse(message['indicators']);
-                    var count = {"ip": 0, "domain": 0, "url": 0, "email": 0, "hash": 0, "cve": 0};
+                    var count = {"ip": 0, "domain": 0, "url": 0, "email": 0, "hash": 0, "cve": 0, "phone": 0, "asn": 0};
                     indicatorsList.forEach(function(indicator) {
                         count[indicator["type"]]++;
                     });
@@ -563,6 +564,14 @@ document.querySelectorAll(".catch-container").forEach((v) => {
             case "catch-cve":
                 document.querySelector("#filter-container-types > select").value = "cve";
                 showIndicatorsByType("cve");
+                break;
+            case "catch-phone":
+                document.querySelector("#filter-container-types > select").value = "phone";
+                showIndicatorsByType("phone");
+                break;
+            case "catch-asn":
+                document.querySelector("#filter-container-types > select").value = "asn";
+                showIndicatorsByType("asn");
                 break;
         }
     });

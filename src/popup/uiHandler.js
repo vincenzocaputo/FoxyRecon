@@ -525,6 +525,12 @@ function createIndicatorsList(indicatorsList){
         } else if (type === 'cve') {
             nodeImage.setAttribute("src", toolsIcoBasePath + "cve_icon.png");
             color = "#FFE136";
+        } else if (type === 'phone') {
+            nodeImage.setAttribute("src", toolsIcoBasePath + "phone_icon.png");
+            color = "#AE1AB8";
+        } else if (type === 'asn') {
+            nodeImage.setAttribute("src", toolsIcoBasePath + "asn_icon.png");
+            color = "#FF44B2";
         }
         node.style.backgroundColor = nodeText.style.backgroundColor = color;
         // If the web resource has tags, add more space for them

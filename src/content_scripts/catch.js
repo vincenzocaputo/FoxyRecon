@@ -4,7 +4,9 @@ const regexes = {
     'url': new RegExp(/(?:h(xx|XX|tt)p[s]?):\/\/((?:www(?:(\[\.\]|\.)))?[-a-zA-Z0-9@:%._\+~#=]{2,256}(?:(\[\.\]|\.))[a-z]{2,6})\b(?:[-a-zA-Z0-9@:%_\+.~#?&//=]*)/,'g'),
     'hash': new RegExp(/([a-z0-9]{64})|([a-z0-9]{40})|([a-z0-9]{32})/,'g'), 
     'email': new RegExp(/[a-zA-Z0-9]+((?:\[\.\]|\.)[_a-zA-Z0-9_%+-]+)*(\[at\]|@)([a-zA-Z0-9-]+((?:(\[\.\]|\.))[a-zA-Z0-9-]+)*((?:(\[\.\]|\.))[a-zA-Z]{2,15}))/,'g'),
-    'cve': new RegExp(/CVE-\d{4}-\d{4,7}/,'g')
+    'cve': new RegExp(/CVE-\d{4}-\d{4,7}/,'g'),
+    'phone': new RegExp(/(?:\+?(\d{1,3}))?[-. (]*(?:\d{3})[-. )]*(?:\d{3})[-. ]*(?:\d{4})(?: *x(\d+))?/,'g'),
+    'asn': new RegExp(/AS[0-9]{1,6}/,'g')
 }
 
 function catchIndicators() {
@@ -12,12 +14,19 @@ function catchIndicators() {
     const bodyContent = document.body.innerText;
     
     let indicators = [];
-    for(indicatorType of ['domain', 'ip', 'url', 'hash', 'email', 'cve']) {
+    for(indicatorType of ['domain', 'ip', 'url', 'hash', 'email', 'cve', 'phone', 'asn']) {
         let matches = bodyContent.matchAll(regexes[indicatorType]);
         let match = matches.next();
         while(!match.done) {
             let value = match.value[0];
-            if(value) {
+            if(indicatorType == "phone") {
+                let type = "phone";
+                value = value.replaceAll(/[^+0-9]/g, '');
+                if(value[0] !== '+') {
+                    value = '+' + value;
+                }
+                indicators.push({'type': type, 'value': value});
+            } else if(value) {
                 let [type, tld] = indParser.getIndicatorType(value);
                 if(type == "defanged") {
                     refangedValue = indParser.refangIndicator(value);
