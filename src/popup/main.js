@@ -365,10 +365,10 @@ document.querySelector("#add-node-button").addEventListener("click", (e) => {
  *
  */
 document.querySelector("#del-node-button").addEventListener("click", (e) => {
-    const nodeId = localStorage.getItem("indicator");
+    const indicator = localStorage.getItem("indicator");
 
     let graph = new Graph();
-    graph.deleteNode(nodeId);
+    graph.getNodesByLabel(indicator).forEach( (nodeId) => graph.deleteNode(nodeId) );
     document.querySelector("#add-node").style.display = "block";
     document.querySelector("#add-rel").style.display = "none";
     document.querySelector("#del-node").style.display = "none";

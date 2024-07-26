@@ -35,11 +35,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improve resource icons
 - Add lookup for ASN and Phone in Pulsedive
 - Addon update detection
+- Autofill input field detection
 
 ### Fix
 - Domain extraction from email address
 - Button name in add relationship prompt in graph page
 - Accept URLs containing IP address and port
+- Custom tools loading
+- Delete node in graph from popup
 
 
 ## [0.20.0] - 2024-05-12
