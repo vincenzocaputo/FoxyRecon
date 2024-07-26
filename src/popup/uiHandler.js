@@ -174,6 +174,7 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
                         resNodes[i].url = url;
                         resNodes[i].name = tools[i]["name"];
                         resNodes[i].submitQuery = tools[i]["submitQuery"];
+                        resNodes[i].inputSelector = tools[i]["inputSelector"];
 
 
                     } else  {
@@ -271,6 +272,7 @@ function createToolsList(toolsList){
     // Retrieve favorites list
     const favTools = JSON.parse(localStorage.getItem("fav"));
     var resultBox = document.getElementById("tools-list");
+    console.log("Number of tools"+toolsList.length);
 	for (i=0;i<toolsList.length;i++) {
         let tool = toolsList[i];
         let node = document.createElement('div');
@@ -290,7 +292,6 @@ function createToolsList(toolsList){
 
         let imageSrc = toolsList[i]["icon"];
         if(imageSrc.indexOf("data:image") == 0) {
-            console.log(imageSrc);
             nodeImage.setAttribute("src", imageSrc);
         } else {
             nodeImage.setAttribute("src", toolsIcoBasePath + imageSrc);
@@ -389,10 +390,16 @@ function createToolsList(toolsList){
             if(node.url && openPopups.length == 0) {
                 newtab = localStorage.getItem("settings.newtab");
                 
-                if(node.submitQuery) {
-                    localStorage.setItem("submit-btn-query", node.submitQuery);
+                if(node.inputSelector) {
+                    localStorage.setItem("autofill.input-selector", node.inputSelector);
                 } else {
-                    localStorage.setItem("submit-btn-query", "");
+                    localStorage.setItem("autofill.input-selector", "");
+                }
+
+                if(node.submitQuery) {
+                    localStorage.setItem("autofill.submit-btn-query", node.submitQuery);
+                } else {
+                    localStorage.setItem("autofill.submit-btn-query", "");
                 }
 
                 const targetId = e.target.id;

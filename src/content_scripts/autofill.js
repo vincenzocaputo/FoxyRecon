@@ -9,24 +9,20 @@ function sendMessageAndFill() {
         indicator = resp.msg;
         // Get the query to find submit button
         query = resp.query;
-        if(query) {
-            // Check if auto-submit is enabled
-            submit = resp.submit;
 
-            let current_url = window.location.href;
-            if(current_url.includes("urlscan")) {
+        // Get the selector to find the input field
+        inputSelector = resp.inputSelector;
+        submit = resp.submit;
+        
+        if(inputSelector) {
+            const current_url = window.location.href;
+
+            let inputField;
+            if(current_url.includes("virustotal.com")) {
                 // Get input field
-                inputNode = document.getElementById("url");
-                document.getElementById(query).click();
-                inputNode.value = indicator;
-                    setTimeout(() => {
-                        document.getElementById("submitbtn_text").click();
-                    }, 1000);
-            } else if(current_url.includes("virustotal")) {
+                inputField = document.querySelector('home-view').shadowRoot.querySelector(inputSelector);
                 window.addEventListener('load', function () {
-                        // Get input field
-                        inputNode = document.querySelector('home-view').shadowRoot.querySelector('#urlSearchInput');
-                        inputNode.value = indicator;
+                        inputField.value = indicator;
                     setTimeout(() => {
                         // "touch" the input field
                         inputNode.dispatchEvent(new Event('input'));
@@ -38,68 +34,44 @@ function sendMessageAndFill() {
                             document.querySelector('home-view').shadowRoot.querySelector('#searchUrlForm').dispatchEvent(new Event("submit"));
                         }
                     }, 100);
-                })
-            } else if(current_url.includes("centralops")) {
-                // Fill the input field
-                document.getElementById("addr").value = indicator;
-
-                // Select checkboxes
-                document.getElementById("dom_whois").checked = true;
-                document.getElementById("net_whois").checked = true;
-                document.getElementById("dom_dns").checked = true;
-
-                if(submit === "true") {
-                    document.querySelector(query).click();
-                }
-
-            } else if(current_url.includes("eurodns")) {
-                let inputNode = document.getElementsByTagName("textarea")[0];
-
-                inputNode.value = indicator;
-                if(submit === "true") {
-                    document.querySelector(query).click();
-                }
-
-            } else if(current_url.includes("any.run")) {
-                document.querySelector("#history-filterBtn").click();
-                document.querySelector("#hashSearch").value = indicator;
-                document.querySelector(query).click();
-            } else if(current_url.includes("cymru")) {
-                document.querySelector("#hashes").value = indicator;
-                if (submit === "true") {
-                    document.querySelector(query).click();
-                }
-            } else if(current_url.includes("emobiletracker")) {
-                var inputNode = document.querySelector("input[type='tel']");
-                inputNode.value = indicator;
-            } else if(current_url.includes("hackertarget.com/whatweb-scan")) {
-                document.querySelector("textarea").value = indicator;
-                const tool = query.split(":")[0];
-                const q = query.split(":")[1];
-                if(tool === "whatweb") {
-                    document.querySelector("select").value = "whatweb";
-                } else {
-                    document.querySelector("select").value = "wapp";
-                }
-                if(submit === "true") {
-                    document.querySelector(q).click();
-                }
-
+                });
+                return;
             } else {
+                inputField = document.querySelector(inputSelector);
+            }
 
-                var inputNodes = document.getElementsByTagName("input");
-                console.log(inputNodes);
-                // Get only text or email input nodes
-                for(i=0; i<inputNodes.length; i++){
-                    if(inputNodes[i].type === "text" || inputNodes[i].type === "email" || inputNodes[i].type === "url"){
-                        // Fill the input field
-                        inputNodes[i].value = indicator;
+            if(inputField) {
+                inputField.value = indicator;
+
+                if(query && submit === "true") {
+                    if(current_url.includes("urlscan.io")) {
+                        // Get input field
+                        document.getElementById(query).click();
+                        setTimeout(() => {
+                            document.getElementById("submitbtn_text").click();
+                        }, 1000);
+
+                    } else if(current_url.includes("centralops")) {
+                        document.getElementById("dom_whois").checked = true;
+                        document.getElementById("net_whois").checked = true;
+                        document.getElementById("dom_dns").checked = true;
+                        document.querySelector(query).click();
+                    } else if(current_url.includes("hackertarget.com/whatweb-scan")) {
+                        const tool = query.split(":")[0];
+                        const q = query.split(":")[1];
+                        if(tool === "whatweb") {
+                            document.querySelector("select").value = "whatweb";
+                        } else {
+                            document.querySelector("select").value = "wapp";
+                        }
+                        document.querySelector(query).click();
+                        
+                    } else {
+                        document.querySelector(query).click();
                     }
                 }
-                if(submit === "true") {
-                    document.querySelector(query).click();
-                }
             }
+
         }
 
     },(error)=>{

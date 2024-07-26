@@ -21,13 +21,10 @@
             "desc": "Malware hunting with live access to the heart of an attack",
             "icon": "anyrun.png",
             "color": "#3584e4",
-            "types": [
-                "hash"
-            ],
-            "tags": [
-                "sandbox"
-            ],
-            "submitQuery": "#historySearchBtn"
+            "inputSelector": "#historySearch",
+            "submitQuery": "#historySearchBtn",
+            "types": ["hash"],
+            "tags": ["sandbox"]
         },
         {
             "name": "AlienVault",
@@ -59,8 +56,8 @@
                 "asn": "https://bgp.tools/as/%n"
             },
             "desc": "Browse the internet ecosystem",
-            "color": "#000000",
             "icon": "bgptools.png",
+            "color": "#000000",
             "types": ["ip","asn"],
             "tags": ["whois","dns"]
         },
@@ -71,8 +68,8 @@
                 "asn": "https://bgpview.io/asn/%n"
             },
             "desc": "AS analysis tool",
-            "color": "#2C94B3",
             "icon": "bgpview.png",
+            "color": "#2C94B3",
             "types": ["ip","asn"]
         },
         {
@@ -81,8 +78,8 @@
                 "url": "https://www.browserling.com/browse/win/7/chrome/92/%s"
             },
             "desc": "Online cross-browser testing",
-            "color": "#5581B5",
             "icon": "browserling.png",
+            "color": "#5581B5",
             "types": ["url"],
             "tags": ["sandbox"]
         },
@@ -91,10 +88,11 @@
             "url": {
                 "email": "https://breachdirectory.org/"
             },
-            "submitQuery": "button.btn-primary",
             "desc": "Check if your information was exposed in a data breach",
-            "color": "#5150E1",
             "icon": "breachdirectory.png",
+            "color": "#5150E1",
+            "inputSelector": "input.chakra-input",
+            "submitQuery": "button.btn-primary",
             "types": ["email"],
             "tags": ["leak"]
         },
@@ -140,10 +138,11 @@
                 "ip": "https://centralops.net/co/domaindossier.aspx",
                 "email": "https://centralops.net/co/emaildossier.aspx"
             },
-            "submitQuery": "#go",
             "desc": "Email Dossier: investigate email addresses",
             "icon": "centralops.png",
             "color": "#005D9B",
+            "inputSelector": "#addr",
+            "submitQuery": "#go",
             "types": ["domain","ip","email"],
             "tags": ["whois", "dns"]
         },
@@ -264,6 +263,7 @@
             "desc": "Check hashes against Cymru malware data",
             "icon": "cymru.png",
             "color": "#000000",
+            "inputSelector": "#hashes",
             "submitQuery": "#mhr-form-submit",
             "types": ["hash"]
         },
@@ -287,19 +287,21 @@
             "desc": "Verify SSL certificate",
             "icon": "digicert.png",
             "color": "#0D7EB8",
+            "inputSelector": "#host",
+            "submitQuery": "#check-server-button",
             "types": ["domain"],
-            "tags": ["tls"],
-            "submitQuery": "#check-server-button"
+            "tags": ["tls"]
         },
         {
             "name": "dnsdumpster",
             "url": {
                 "domain": "https://dnsdumpster.com/"
             },
-            "submitQuery": "button.btn",
             "desc": "dns recon & research, find & lookup dns records",
             "icon": "dnsdumpster.png",
             "color": "#323232",
+            "inputSelector": "#regularInput",
+            "submitQuery": "button.btn",
             "types": ["domain"],
             "tags": ["dns", "open-ports"]
         },
@@ -353,10 +355,11 @@
             "url": {
                 "phone": "https://www.emobiletracker.com"
             },
-            "submitQuery": "button#btn-primary",
             "desc": "EMOBILETRACKER is a service specifically designed to Track Mobile Number, Location on Google Map including information such as the owner's Name,Location,Country,Telecom provider.",
             "icon": "emobiletracker.png",
             "color": "#51B3EB",
+            "inputSelector": "input[type='tel']",
+            "submitQuery": "button#btn-primary",
             "types": ["phone"]
         },
         {
@@ -374,10 +377,11 @@
             "url": {
                 "domain": "https://www.eurodns.com/whois-search"
             },
-            "submitQuery": "#submitBasic",
             "desc": "Domain Name registration information",
             "icon": "eurodns.png",
             "color": "#3ABEE4",
+            "inputSelector": "textarea",
+            "submitQuery": "#submitBasic",
             "types": ["domain"],
             "tags": ["whois"]
         },
@@ -410,10 +414,11 @@
                 "domain": "https://www.fortiguard.com/webfilter",
                 "url": "https://www.fortiguard.com/webfilter"
             },
-            "submitQuery": "#webfilter_search_form_submit",
             "desc": "Web Filter Lookup",
             "icon": "fortiguard.png",
             "color": "#DA291C",
+            "inputSelector": "input[name='url']",
+            "submitQuery": "#webfilter_search_form_submit",
             "types": ["domain", "url"],
             "tags": ["rep"]
         },
@@ -492,10 +497,11 @@
 			"url": {
                 "ip": "https://hackertarget.com/banner-grabbing/"
             },
-            "submitQuery": "#clickform", 
             "desc": "Banner Grabbing is a reconnaissance technique to discover network services by simply querying the service port. Many services will respond with a simple text message (known as a service banner) indicating the technology in use.",
 			"icon": "hackertarget.png",
 			"color": "#4ecda7",
+            "inputSelector": "textarea",
+            "submitQuery": "#clickform", 
 			"types": ["ip"],
             "tags": ["open-ports"]
 		},
@@ -504,10 +510,11 @@
 			"url": {
                 "domain": "https://hackertarget.com/dns-lookup/"
             },
-            "submitQuery": "#clickform", 
             "desc": "Use this DNS lookup tool to easily view the standard DNS records for a domain.",
 			"icon": "hackertarget.png",
 			"color": "#4ecda7",
+            "inputSelector": "input[name='theinput']", 
+            "submitQuery": "#clickform", 
 			"types": ["domain"],
             "tags": ["dns"]
 		},
@@ -516,10 +523,11 @@
 			"url": {
                 "url": "https://hackertarget.com/extract-links/"
             },
-            "submitQuery": "#clickform", 
             "desc": "This tool will parse the html of a website and extract links from the page.",
 			"icon": "hackertarget.png",
 			"color": "#4ecda7",
+            "inputSelector": "input[name='theinput']", 
+            "submitQuery": "#clickform", 
 			"types": ["url"]
 		},
 		{
@@ -527,10 +535,11 @@
 			"url": {
                 "url": "https://hackertarget.com/http-header-check/"
             },
-            "submitQuery": "#clickform", 
             "desc": "Review the HTTP Headers from a web server with this quick check.",
 			"icon": "hackertarget.png",
 			"color": "#4ecda7",
+            "inputSelector": "input[name='theinput']", 
+            "submitQuery": "#clickform", 
 			"types": ["url"],
             "tags": ["http-headers"]
 		},
@@ -539,10 +548,11 @@
 			"url": {
                 "url": "https://hackertarget.com/whatweb-scan/"
             },
-            "submitQuery": "wappalyzer:#clickform", 
             "desc": "The tools examine the web server HTTP Headers and the HTML source of a web page to determine technologies in use.",
 			"icon": "hackertarget.png",
 			"color": "#4ecda7",
+            "inputSelector": "textarea", 
+            "submitQuery": "wappalyzer:#clickform", 
 			"types": ["url"],
             "tags": ["techs"]
 		},
@@ -551,10 +561,11 @@
 			"url": {
                 "url": "https://hackertarget.com/whatweb-scan/"
             },
-            "submitQuery": "whatweb:#clickform", 
             "desc": "The tools examine the web server HTTP Headers and the HTML source of a web page to determine technologies in use.",
 			"icon": "hackertarget.png",
 			"color": "#4ecda7",
+            "inputSelector": "textarea", 
+            "submitQuery": "whatweb:#clickform", 
 			"types": ["url"],
             "tags": ["techs"]
 		},
@@ -563,10 +574,11 @@
 			"url": {
                 "domain": "https://hackertarget.com/whois-lookup/"
             },
-            "submitQuery": "#clickform", 
             "desc": "Perform an Online Whois Lookup of a domain.",
 			"icon": "hackertarget.png",
 			"color": "#4ecda7",
+            "inputSelector": "input[name='theinput']", 
+            "submitQuery": "#clickform", 
 			"types": ["domain"],
             "tags": ["whois"]
 		},
@@ -586,10 +598,11 @@
                 "email": "https://haveibeenpwned.com/",
                 "phone": "https://haveibeenpwned.com/"
             },
-            "submitQuery": "#searchPwnage", 
             "desc": "Check if your email or phone is in a data breach",
             "icon": "hibp.png",
             "color": "#2A698A",
+            "inputSelector": "#Account",
+            "submitQuery": "#searchPwnage", 
             "types": ["email", "phone"],
             "tags": ["leaks"]
         },
@@ -766,6 +779,7 @@
             "desc": "Make sure your credentials haven't been compromised",
             "icon": "leakcheck.png",
             "color": "#FF5100",
+            "inputSelector": "input[name='data']",
             "submitQuery": "#button-search",
             "tags": ["leaks"],
             "types": ["email"]
@@ -799,10 +813,11 @@
             "url": {
                 "email": "https://leakpeek.com/"
             },
-            "submitQuery": "button.btn-success",
             "desc": "Is your data safe?",
             "icon": "leakpeek.png",
             "color": "#8b00ff",
+            "inputSelector": "#searcher",
+            "submitQuery": "button.btn-success",
             "types": ["email"],
             "tags": ["leak"]
         },
@@ -1230,10 +1245,11 @@
 			"url": {
                 "url": "https://urlscan.io/"
             },
-            "submitQuery": "vispublic",
             "desc": "A sandbox for the web",
 			"icon": "urlscan.png",
             "color": "#18BC9C",
+            "inputSelector": "#url",
+            "submitQuery": "vispublic",
 			"types": ["url"],
             "tags": ["sandbox"]
 		},
@@ -1242,10 +1258,11 @@
 			"url": {
                 "url": "https://urlscan.io/"
             },
-            "submitQuery": "visunlisted",
             "desc": "A sandbox for the web",
 			"icon": "urlscan.png",
             "color": "#3498DB",
+            "inputSelector": "#url",
+            "submitQuery": "visunlisted",
 			"types": ["url"],
             "tags": ["sandbox"]
 		},
@@ -1254,10 +1271,11 @@
 			"url": {
                 "url": "https://urlscan.io/"
             },
-            "submitQuery": "visprivate",
             "desc": "A sandbox for the web",
 			"icon": "urlscan.png",
             "color": "#F39C12",
+            "inputSelector": "#url",
+            "submitQuery": "visprivate",
 			"types": ["url"],
             "tags": ["sandbox"]
 		},
@@ -1266,10 +1284,11 @@
 			"url": {
                 "domain": "https://urlvoid.com/scan/%s"
             },
-            "submitQuery": "button.btn-warning",
             "desc": "Website rep Checker",
 			"icon": "urlvoid.png",
             "color": "#FFAC0D",
+            "inputSelector": "#hf-domain",
+            "submitQuery": "button.btn-warning",
 			"types": ["domain"],
             "tags": ["rep"]
 		},
@@ -1278,10 +1297,11 @@
             "url": {
                 "domain": "https://www.urlvoid.com/whois-lookup/"
             },
-            "submitQuery": "button.btn-primary",
             "desc": "Free online whois lookup tool to get domain details.",
             "icon": "urlvoid.png",
             "color": "#FFAC0D",
+            "inputSelector": "#DomainAddress",
+            "submitQuery": "button.btn-primary",
             "types": ["domain"],
             "tags": ["whois"]
         },
@@ -1340,6 +1360,7 @@
             "desc": "Analyze suspicious URLs to detect types of malware",
             "icon": "virustotal.png",
             "color": "#394EFF",
+            "inputSelector": "#urlSearchInput",
             "submitQuery": "VT",
             "types": ["url"],
             "tags": ["sandbox", "rep"]
