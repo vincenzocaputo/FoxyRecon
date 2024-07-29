@@ -43,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Accept URLs containing IP address and port
 - Custom tools loading
 - Delete node in graph from popup
+- Remove flag from the input field when the indicator is removed
 
 
 ## [0.20.0] - 2024-05-12

@@ -66,6 +66,8 @@ textfieldBin.addEventListener("click", function() {
     inputField.value = "";
     textfieldCatch.style.display = "block";        
     textfieldTool.style.display = "none";
+    // Hide flag
+    document.querySelector("#flag").style.display = "none";
     // Clean the local storage
     localStorage.setItem("indicator", "");
     localStorage.setItem("type", "");
