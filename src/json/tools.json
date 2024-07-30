@@ -1049,6 +1049,18 @@
             "types": ["ip","asn"]
         },
         {
+            "name": "SecureFeed",
+            "url": {
+                "ip": "https://securefeed.com/Content/WebLookup?host=%s",
+                "domain": "https://securefeed.com/Content/WebLookup?host=%s"
+            },
+            "desc": "Combining host data from 100+ sources",
+            "icon": "securefeed.png",
+            "color": "#374889",
+            "types": ["ip","domain"],
+            "tags": ["rep"]
+        },
+        {
             "name": "SecurityHeaders",
             "url": {
                 "url": "https://securityheaders.com/?q=%s&&hide=on&followRedirects=on"

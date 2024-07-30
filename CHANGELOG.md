@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - BGPView resource
 - RIPE Database resource
 - Greensnow resource for IP addresses
+- SecureFeed resource for IP and domains
 - Show release notes on update
 
 ### Change
