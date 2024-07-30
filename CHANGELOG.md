@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - OpenCVE resource
 - BGPView resource
 - RIPE Database resource
+- Greensnow resource for IP addresses
 - Show release notes on update
 
 ### Change

@@ -482,6 +482,17 @@
             "tags": ["rep"]
         },
         {
+            "name": "GreenSnow",
+            "url": {
+                "ip": "https://greensnow.co/view/%s"
+            },
+            "desc": "Blacklisted list of IPs for online servers.",
+            "icon": "greensnow.png",
+            "color": "#739342",
+            "types": ["ip"],
+            "tags": ["rep"]
+        },
+        {
             "name": "Greynoise",
             "url": {
                 "ip": "https://www.greynoise.io/viz/ip/%s"
