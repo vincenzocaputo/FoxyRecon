@@ -1,0 +1,16 @@
+{
+    "name": "OpenCTI",
+    "url": {
+        "domain": "https://%h/dashboard/search/knowledge/%s",
+        "ip": "https://%h/dashboard/search/knowledge/%s",
+        "url": "https://%h/dashboard/search/knowledge/%s",
+        "email": "https://%h/dashboard/search/knowledge/%s",
+        "hash": "https://%h/dashboard/search/knowledge/%s",
+        "cve": "https://%h/dashboard/search/knowledge/%s"
+    },
+    "description": "Open Source Security Incident Response Solutions designed for SOCs & CERTs to collaborate, elaborate, analyze and get their job done.",
+    "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAD0ElEQVR4AcXBS2hcVRzA4d85M5nU1MbiYCnt9Zn7j00LCqa6aRP7UnwgtFUouneZhVl24wQKuooURVwJ4lpcl0IpfVOrpVprOnc6mTtzJFRwtLT2TmYmc+QsDlyGJJ3JJt+n2F60rCPNOtOsM80603S5fuoZlqpCN2uE5VgjdNswqLBG6GaNsGMkR5qmS/jcAFpDciekmzVCWqMc4uwczeFtHtYkd0K6dYzgfPP5FtIyDE8VSPnsq384+vbjbN+a5fhUnhMn6zgzs3UK03kK03lmZus4J07WOXU24frNRZyn8hn+vjmCo4IIrx0LWsNPNxbZc7hGmmYZL79RJSq3yA1ApyZ4KohwrBG8K78keH/deAFHBRFepyZkMvBHqclr71bpplnB6GSFpGFRCh4UQzwVRDjWCGnWCI4KIrylqqAULNxts3NfzHI0qxgKS5w+/5CNQ4pWRfBUEOFYIzjWCI4KIrylqqA1lOMW28bnWUmG4akCq/j+h/t8/NETbB7WHJ96khMn6zgzs3UK03kK03kcFUR41ghKwVypyehkzGo0PQh2z1OqtMgNKP6LQjwVRDgqiPCsEZxzVxLG9sU8SobhqQI9+PLbfzk0McTIswN8+kmemS/qODOzdTxrBOfC1YTJ9w290PRh4oghaViUgkY5JM0awTlzMWHiqKFXmj4NhSV+LzYZzCka5RCnXRWcy9caHDxm6EeG4akCffr6u3sce28TW7dkKUzn0QpuFZuMv12lX5o12rk/Jm3XgZi10KxRuyo4DxOLszgfshaaNbBGyGi4VWyyUUqUKi1yA4pWJaRfmj5ZIziXrjXYdSDGkb0V/lxok80qHkQh/dD0wRrBOXMxYc/hGmnBq/OcPp+w8TFFpyb0StMjawTnwtWEg8cMnjWC9+aHhmbLohQslkN6oenBUlVwzl1JmDhq8KwRHGsEb/D5ErfLTXI5RaMc8iiaR1iqClrDXKnJ6x8YPGsERwURjjWCt2My5re5JoM5xVJVWI1mFZ2aoDWU4xZj+2I8awRHBRGOCiIcawTvpUMx9+530BqSUshKNCtox4JSsHC3zcieCp41gqOCiDQVRDjWCN7msTv8/GuDDRsUjXLIcjTL6Bghk4G5qMW28Xk8awRHBRHL0U9HONYI3u53atwqNhnMKVqVkG6aLtYICrh+c5Gx/RU8awRHBRHehR8DrBGyWYVjLaggwrFG8HYdiFm42yabVdy/HZKm6bJptMTZywmvvFWlmwoi0vYeMTjttiVNBRHNliVt2/g8Zy4lbHqxRJpie9GyjjTrTLPO/gd21n1PRtzIygAAAABJRU5ErkJggg==",
+    "color": "#001bda",
+    "types": ["domain","ip","url","email","hash","cve"]
+}
+

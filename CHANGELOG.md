@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Autonomous System Number indicator
 - Phone number and ASN indicators detection and collection
 - Country flag based on phone number's dial code
+- Templates to speed up custom resources creation
+- Custom resources export option
 - CVE Details resource for CVEs
 - Exploit Database resource for CVEs
 - IP Quality Score resource for phone number lookup
@@ -29,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Show release notes on update
 
 ### Change
+- Custom resources page UI
 - Rename Twitter to X
 - Update Netcraft logo and color
 - Improve popup look (font and colors)
@@ -44,6 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Custom tools loading
 - Delete node in graph from popup
 - Remove flag from the input field when the indicator is removed
+- Several fixes in custom resources page
 
 
 ## [0.20.0] - 2024-05-12

@@ -1,0 +1,18 @@
+{
+    "name": "MISP",
+    "url": {
+        "domain": "https://%h/attributes/search",
+        "ip": "https://%h/attributes/search",
+        "url": "https://%h/attributes/search",
+        "email": "https://%h/attributes/search",
+        "hash": "https://%h/attributes/search",
+        "cve": "https://%h/attributes/search"
+    },
+    "description": "Open Source Threat Intelligence and Sharing Platform",
+    "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAB9UlEQVR4AcXBvU4UYRiG4ft9mcQoihZGEqxkIRQ2AwdAYWFnbcVAYm9h4ynY2NjbLCQegJUmFtKjs/2yBQkEYsffJiT7PTLFkNlhZwT5mesynaJBTsOchjkNcxrmlIhM4MrEhUQMCZiceK3HdZBEmrQwnCrOECde63JdzIy4vUkd54Y5Rh2nYU7DnCqDMSRBMIYEgyBERJEPDEmgiMuIqCA/oZPMkXn7Y4f1nWMyAjrLs2TefN9mY69PZmDQSWbJvP+5y7etQy7CqeCMkfv0Yoqcuch9fvmUMxbIfVic5KKcCgEhApLAKAkgTgXOmAGBjJkxijgvooKZsdDuMjkxzu5Bn6L5do8nD+6xd3hMzoD5dpep++NsH/Upi1e7ZN4tPCZ5/oicU0Pm7B70KZPB3uExZTJn+6hPnY8bfyhybpmZUeQUiRvg1HFKTM61CQOkAYhKTpHB72Sa3JgCuSBDEpKQhCQkIQlJSEISkpCECR7evUO6PEu81qVKxAjp0gyZxS899k+EC9KVFsMC4NQLxKtd6kTUcUOIXystznPi1S6XJYmiiBrrr59RSYAcLHA5gSLnfxmkyTQZSUhCEpKQhCQggJycgtFJ5iiKuKJ0aYZ/ids9JNFZblEWcQvSpWm+bu4zinMbDF7NTDCK0zCnYU7DnIb9BYt91gJsJpq9AAAAAElFTkSuQmCC",
+    "color": "#0088cc",
+    "inputSelector": "#AttributeValue",
+    "submitQuery": "button[type='submit']",
+    "types": ["domain","ip","url","email","hash","cve"]
+}
+

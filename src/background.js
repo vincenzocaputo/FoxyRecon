@@ -206,7 +206,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         sendResponse({msg: localStorage.getItem("indicator"), query: query, inputSelector: inputSelector, submit: submit});
         // Consume the request (to avoid clicking the button more times for the same request)
         localStorage.setItem("autofill.submit-btn-query","");
-        //localStorage.setItem("autofill.input-selector","");
+        localStorage.setItem("autofill.input-selector","");
     } else if (request.id == 2) {
         // Auto graph generation
         if (localStorage.getItem("settings.autograph") === "true" && request.msg) {

@@ -1,11 +1,43 @@
 
 var indicator = "";
+
+function submitIndicator(query, submit, current_url) {
+    if(query && submit === "true") {
+        if(current_url.includes("urlscan.io")) {
+            // Get input field
+            document.getElementById(query).click();
+            setTimeout(() => {
+                document.getElementById("submitbtn_text").click();
+            }, 1000);
+
+        } else if(current_url.includes("centralops")) {
+            document.getElementById("dom_whois").checked = true;
+            document.getElementById("net_whois").checked = true;
+            document.getElementById("dom_dns").checked = true;
+            document.querySelector(query).click();
+        } else if(current_url.includes("hackertarget.com/whatweb-scan")) {
+            const tool = query.split(":")[0];
+            const q = query.split(":")[1];
+            if(tool === "whatweb") {
+                document.querySelector("select").value = "whatweb";
+            } else {
+                document.querySelector("select").value = "wapp";
+            }
+            document.querySelector(query).click();
+            
+        } else {
+            document.querySelector(query).click();
+        }
+    }
+}
+
 // Send a message to background script in order to retrieve the indicator saved in the local storage
 function sendMessageAndFill() {
     browser.runtime.sendMessage({
         id: 1,
         msg: ""
     }).then((resp)=>{
+        setTimeout(()=>{
         indicator = resp.msg;
         // Get the query to find submit button
         query = resp.query;
@@ -13,7 +45,7 @@ function sendMessageAndFill() {
         // Get the selector to find the input field
         inputSelector = resp.inputSelector;
         submit = resp.submit;
-        
+
         if(inputSelector) {
             const current_url = window.location.href;
 
@@ -41,38 +73,22 @@ function sendMessageAndFill() {
             }
 
             if(inputField) {
-                inputField.value = indicator;
-
-                if(query && submit === "true") {
-                    if(current_url.includes("urlscan.io")) {
-                        // Get input field
-                        document.getElementById(query).click();
-                        setTimeout(() => {
-                            document.getElementById("submitbtn_text").click();
-                        }, 1000);
-
-                    } else if(current_url.includes("centralops")) {
-                        document.getElementById("dom_whois").checked = true;
-                        document.getElementById("net_whois").checked = true;
-                        document.getElementById("dom_dns").checked = true;
-                        document.querySelector(query).click();
-                    } else if(current_url.includes("hackertarget.com/whatweb-scan")) {
-                        const tool = query.split(":")[0];
-                        const q = query.split(":")[1];
-                        if(tool === "whatweb") {
-                            document.querySelector("select").value = "whatweb";
-                        } else {
-                            document.querySelector("select").value = "wapp";
-                        }
-                        document.querySelector(query).click();
-                        
-                    } else {
-                        document.querySelector(query).click();
-                    }
-                }
+                inputField.value = "";
+                intv = setInterval(()=>{ 
+                    const letter = indicator[0]; 
+                    if(letter) { 
+                        indicator = indicator.slice(1); 
+                        inputField.value = inputField.value + letter 
+                    } else { 
+                        inputField.dispatchEvent(new Event("input"));
+                        clearInterval(intv);
+                        submitIndicator(query, submit, current_url);
+                    } 
+                }, 100);
             }
-
         }
+        }, 500);
+
 
     },(error)=>{
         console.error(error);
@@ -80,4 +96,4 @@ function sendMessageAndFill() {
 }
 
 
-setTimeout(sendMessageAndFill(), 500);
+    setTimeout(sendMessageAndFill(), 500);

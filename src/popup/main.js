@@ -735,7 +735,7 @@ document.querySelector("#auto-graph-opt input").addEventListener("change", funct
  */
 document.querySelector("#open-settings").addEventListener("click", function(evt) {
     browser.tabs.create({
-        url: '/src/customtools/customtools.html'
+        url: '/src/custom_resources/custom-resources.html'
     });
 });
 

@@ -1,0 +1,17 @@
+{
+    "name": "YETI",
+    "url": {
+        "domain": "https://%h/search",
+        "ip": "https://%h/search",
+        "url": "https://%h/search",
+        "email": "https://%h/search",
+        "hash": "https://%h/search"
+    },
+    "description": "",
+    "icon": "data:image/png;base64,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",
+    "color": "#111111",
+    "inputSelector": "#input-12",
+    "submitQuery": "button.bg-primary",
+    "types": ["domain","ip","url","email","hash"]
+}
+
