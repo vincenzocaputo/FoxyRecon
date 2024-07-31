@@ -30,19 +30,25 @@ function loadToolsList(callbackFunc) {
             tools = data['tools'];
             localStorage.setItem('tools', JSON.stringify(tools));
             console.log("tools loaded from json file");
+            if(localStorage.getItem('tools-ext')) {
+                // Load custom tools, if exist
+                toolsExt = JSON.parse(localStorage.getItem('tools-ext'));
+                console.log("custom tools loaded from local storage");
+                tools.push(...toolsExt);
+            }
         });
     } else {
         // Load the tools list from the local storage
         tools = JSON.parse(localStorage.getItem('tools'));
         console.log("tools loaded from local storage");
+        if(localStorage.getItem('tools-ext')) {
+            // Load custom tools, if exist
+            toolsExt = JSON.parse(localStorage.getItem('tools-ext'));
+            console.log("custom tools loaded from local storage");
+            tools.push(...toolsExt);
+        }
     }
 
-    if(localStorage.getItem('tools-ext')) {
-        // Load custom tools, if exist
-        toolsExt = JSON.parse(localStorage.getItem('tools-ext'));
-        console.log("custom tools loaded from local storage");
-        tools.push(...toolsExt);
-    }
 
     callbackFunc(tools);
 }

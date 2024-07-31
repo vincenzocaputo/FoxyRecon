@@ -37,15 +37,20 @@ browser.runtime.onInstalled.addListener(function(details) {
         }
         
         if (installedVersion !== currentVersion) {
+            browser.tabs.create({
+                discarded: true,
+                title: "FoxyRecon New Version",
+                url: 'https://github.com/vincenzocaputo/FoxyRecon/releases/tag/v'+currentVersion
+            });
             // If a new version was released, clean the local storage
-            localStorage.remove("tools");
-            localStorage.remove("type");
-            localStorage.remove("tag");
-            localStorage.remove("autograph-mapping");
-            localStorage.remove("submit-btn-query");
-            localStorage.remove("autofill.submit-btn-query");
-            localStorage.remove("autofill.input-selector");
-            localStorage.remove("indicator");
+            localStorage.removeItem("tools");
+            localStorage.removeItem("type");
+            localStorage.removeItem("tag");
+            localStorage.removeItem("autograph-mapping");
+            localStorage.removeItem("submit-btn-query");
+            localStorage.removeItem("autofill.submit-btn-query");
+            localStorage.removeItem("autofill.input-selector");
+            localStorage.removeItem("indicator");
             // Add current version to local storage
             localStorage.setItem("version", currentVersion);
 
@@ -59,11 +64,6 @@ browser.runtime.onInstalled.addListener(function(details) {
             loadGraphMapping(function(mp) {
                 graphMapping=mp;
             })
-            browser.tabs.create({
-                discarded: true,
-                title: "FoxyRecon New Version",
-                url: 'https://github.com/vincenzocaputo/FoxyRecon/releases/tag/v'+currentVersion
-            });
         }
         
     }
