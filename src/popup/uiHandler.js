@@ -272,7 +272,6 @@ function createToolsList(toolsList){
     // Retrieve favorites list
     const favTools = JSON.parse(localStorage.getItem("fav"));
     var resultBox = document.getElementById("tools-list");
-    console.log("Number of tools"+toolsList.length);
 	for (i=0;i<toolsList.length;i++) {
         let tool = toolsList[i];
         let node = document.createElement('div');

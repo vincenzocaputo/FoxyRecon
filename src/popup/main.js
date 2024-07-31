@@ -17,7 +17,6 @@ if(collectedIndicatorsListJson && collectedIndicatorsListJson !== undefined && c
         count[indicator["type"]]++;
     });
     for(let key in count) {
-        console.log(key);
         if(indCountContainer=document.getElementById(key+"_occ")) {
             indCountContainer.textContent = count[key];
         }

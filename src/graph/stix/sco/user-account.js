@@ -44,7 +44,6 @@ function createUserAccountForm(evt, title, stix={}) {
         }
 
     }
-    console.log(stix["is_privileged"]);
     formHandler.setSubmitEventListener(submitEvent);
     formHandler.addFormField("hidden", "Id", "id", objectId, true);
     formHandler.addFormField("hidden", "Type", "type", type, true);

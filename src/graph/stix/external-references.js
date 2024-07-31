@@ -11,7 +11,6 @@ function createReferenceEntry(form) {
     if (url || description || externalId) {
         const entry = {};
 
-        console.log(url);
         if (source_name !== "") {
             entry["source_name"] = source_name;
         }
