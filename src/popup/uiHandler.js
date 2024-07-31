@@ -105,6 +105,8 @@ function showAddonMain() {
     document.getElementById("del-node").style.display = "none";
     // Show history icon
     document.getElementById("hist-icon").style.display = "block";
+    // Hide flag
+    document.getElementById("flag").style.display = "none";
 }
 
 
