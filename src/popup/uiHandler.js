@@ -65,11 +65,11 @@ function showCountryFlag(tld) {
     if(tld != "") {
       flag.src = "/assets/country-flags/"+tld+".png";
       flag.style.display = "block";
-      flag.alt = tld;
+      flag.title = indicatorParser.getCountryName(tld);
     } else {
         flag.src = "";
         flag.style.display = "none";
-        flag.alt = "";
+        flag.title = "";
     }
 }
 

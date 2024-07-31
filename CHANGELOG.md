@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - RIPE Database resource
 - Greensnow resource for IP addresses
 - SecureFeed resource for IP and domains
+- Show country name on hovering flag
 - Show release notes on update
 
 ### Change

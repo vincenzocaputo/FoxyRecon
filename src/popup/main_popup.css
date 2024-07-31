@@ -184,7 +184,6 @@ div.tool-tag {
 }
 
 #text-field #domextr-icon, #catch-icon, #hist-icon, #flag {
-    cursor: pointer;
     width: 24px;
     height: 24px;
 }
