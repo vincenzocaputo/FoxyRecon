@@ -51,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Delete node in graph from popup
 - Remove flag from the input field when the indicator is removed
 - Several fixes in custom resources page
+- Tool search operator
 
 
 ## [0.20.0] - 2024-05-12
