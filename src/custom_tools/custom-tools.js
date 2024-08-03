@@ -203,7 +203,7 @@ function showCustomToolsList() {
             document.querySelector("#edit-res-button").style.display = "none";
             document.querySelector("#export-button").style.display = "none";
             document.querySelector("#export-all-button").style.display = "block";
-            document.querySelector("#submit-btn").value = "Edit Resource";
+            document.querySelector("#submit-btn").value = "Edit Tool";
 
         });
 
@@ -230,7 +230,7 @@ function resetPage() {
  * Reset the input form
  */
 function resetForm() {
-    document.querySelector("#submit-btn").value = "Add Resource";
+    document.querySelector("#submit-btn").value = "Add Tool";
     document.querySelectorAll("input[type=text],textarea,input[type=color]").forEach((e)=>e.value = "");
     document.querySelectorAll("input[type=checkbox]").forEach((e)=>{e.checked=false; e.dispatchEvent(new Event("change"))});
     document.querySelector("#submit-btn").textContent = "Add tool";
@@ -277,7 +277,7 @@ function createFormPopup(formIcon, formTitle, defaultName, addEvent) {
 
     const okButton = document.createElement("input");
     okButton.setAttribute("type", "submit");
-    okButton.setAttribute("value", "Add Resource");
+    okButton.setAttribute("value", "Add Tool");
     okButton.classList.add("btn");
     okButton.classList.add("add-btn");
 
@@ -299,7 +299,7 @@ function createFormPopup(formIcon, formTitle, defaultName, addEvent) {
 
     const nameLabelElement = document.createElement("label");
     nameLabelElement.setAttribute("for", "name");
-    nameLabelElement.textContent = "Resource Name";
+    nameLabelElement.textContent = "Tool Name";
 
     var nameInput = document.createElement("input");
     nameInput.setAttribute("type", "text");
@@ -727,7 +727,7 @@ window.onload = function() {
     });
 
     document.querySelector("#del-res-button").addEventListener("click", (evt) => {
-        if(confirm("Are you sure to delete this resource? The action cannot be undone") == true) {
+        if(confirm("Are you sure to delete this tool? The action cannot be undone") == true) {
             const toolsList = JSON.parse(localStorage.getItem("tools-ext"));
             toolsList.splice(selectedResource,1);
             localStorage.setItem("tools-ext", JSON.stringify(toolsList));

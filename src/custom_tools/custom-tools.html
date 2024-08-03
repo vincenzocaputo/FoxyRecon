@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="custom-resources.css">
-        <script src="custom-resources.js"></script>
-        <title>FoxyRecon Custom Resources</title>
+        <link rel="stylesheet" href="custom-tools.css">
+        <script src="custom-tools.js"></script>
+        <title>FoxyRecon Custom Tools</title>
     </head>
     <body>
         <div id="page-container">
@@ -13,24 +13,24 @@
                 <div id="option-palette">
                     <img id="foxyrecon-icon" src="../../assets/icons/foxyrecon-icon-48.png"/>
                     <div id="page-title">
-                        <span>Custom Resources</span>
+                        <span>Custom Tools</span>
                     </div>
                     <button id="add-res-button" class="btn add-btn">
                         <img src="../../assets/icons/plus.png"/>
                         <div class="button-label">
-                            Add Resource
+                            Add Tool
                         </div>
                     </button>
                     <button id="edit-res-button" class="btn edit-btn">
                         <img src="../../assets/icons/edit_w.png"/>
                         <div class="button-label">
-                            Edit Resource
+                            Edit Tool
                         </div>
                     </button>
                     <button id="del-res-button" class="btn del-btn">
                         <img src="../../assets/icons/trash-2.png"/>
                         <div class="button-label">
-                            Delete Resource
+                            Delete Tool
                         </div>
                     </button>
                     <button id="cancel-button" class="btn cancel-btn">
@@ -83,7 +83,7 @@
             </div>
             <div id="resources-list-pane">
                 <div id="no-tools">
-                    No custom resources found
+                    No custom tool found
                 </div>
                 <div id="tools-list">
                 </div>
@@ -91,21 +91,21 @@
             <div id="main-pane" class="body-pane">
                 <div class="title-container">
                     <div class="title">
-                        Custom Resources
+                        Custom Tools
                     </div>
                 </div>
                 <div class="body-text">
-                    On this page you can add custom web resources. You can add web resources that are not included in FoxyRecon or internal resources not exposed on the Internet. To add a new resource click on the “Add Resource” button. Fill out the form with the information about the resource to add. The following attributes describe a web resource:
+                    On this page you can add custom tools. You can add web resources that are not included in FoxyRecon or internal tools not exposed on the Internet. To add a new tool click on the “Add Tool” button. Fill out the form with the information about the resource to add. The following attributes describe a tool:
                     <ul>
-                        <li><b>Name</b>: The resource's name. This field is mandatory and cannot be changed once the resource is created.</li>
-                        <li><b>Description</b>: A short description of the resource.</li>
-                        <li><b>Icon</b>: The resource's icon. This field is mandatory. A png 32x32 icon is recommended.</li>
-                        <li><b>Color</b>: The color of the resource's button in the FoxyRecon popup.</li>
+                        <li><b>Name</b>: The tool's name. This field is mandatory and cannot be changed once the resource is created.</li>
+                        <li><b>Description</b>: A short description of the tool.</li>
+                        <li><b>Icon</b>: The tool's icon. This field is mandatory. A png 32x32 icon is recommended.</li>
+                        <li><b>Color</b>: The color to paint the tool's button in the FoxyRecon popup.</li>
                         <li><b>URL(s)</b>: URL(s) pointing to the resource (mandatory).</li>
-                        <li><b>Tag(s)</b>: Tag(s) describing the resource. They can be used for filtering.</li>
+                        <li><b>Tag(s)</b>: Tag(s) describing the tool. They can be used for filtering.</li>
                     </ul>
                     <h3>URLs</h3>
-                    Before adding the URLs, it is necessary to determine which types of indicators are accepted by the web resource that you are adding. If the resource you want to add accepts multiple indicator types, you need to provide an URL for each supported indicator type.
+                    Before adding the URLs, it is necessary to determine which types of indicators are accepted by the web resource that you are adding. If the tool you want to add accepts multiple indicator types, you need to provide an URL for each supported indicator type.
                     Note that there may be different URLs pointing to the same web resource, depending on the type of indicator to submit.
                     There are two cases depending on the HTTP method supported by the web resource.
                     <h4>GET</h4>
@@ -117,21 +117,21 @@
                         <li><b>Submit button CSS selector</b>: The CSS selector of the submit button located on the page of the web resource.</li>
                     </ul>
                     <h3>Templates</h3>
-                    FoxyRecon provides some templates to help speed up the addition of internal resources. Templates are meant so that you only have to provide the hostname of the platform to add to FoxyRecon. Currenly, FoxyRecon provides templates for the following open source platforms:
+                    FoxyRecon provides some templates to help speed up the addition of internal tool. Templates are meant so that you only have to provide the hostname of the platform to add to FoxyRecon. Currenly, FoxyRecon provides templates for the following open source platforms:
                     <ul>
                         <li><a href="https://www.misp-project.org/">MISP</a></li>
                         <li><a href="https://filigran.io/solutions/open-cti/">OpenCTI</a></li>
                         <li><a href="https://yeti-platform.io/">YETI</a></li>
                     </ul>
                     <hr>
-                    If you deem that a web resource is worth to be included in FoxyRecon, please open an issue on the <a href="https://github.com/vincenzocaputo/FoxyRecon/issues">GitHub repository</a>.
+                    If you deem that a tool is worth to be included in FoxyRecon, please open an issue on the <a href="https://github.com/vincenzocaputo/FoxyRecon/issues">GitHub repository</a>.
                 </div>
 
             </div>
             <div id="form-pane" class="body-pane">
                 <div class="title-container" id="add-tool-title-container">
                     <div class="title" id="add-tool-title">
-                        Add Resource
+                        Add Tool
                     </div>
                 </div>
                 <div id="form">
@@ -399,7 +399,7 @@
                     <input type="checkbox" id="tool-history-tag" value="history" class="type-select">
                     <label for="tool-screenshot-tag">Network Activity</label>
                     <input type="checkbox" id="tool-net-activity-tag" value="net-activity" class="type-select">
-                    <input type="submit" id="submit-btn" class="btn" value="Add Resource">
+                    <input type="submit" id="submit-btn" class="btn" value="Add Tool">
                     <button id="reset-btn" class="btn">Reset</button>
 
                 </form>
