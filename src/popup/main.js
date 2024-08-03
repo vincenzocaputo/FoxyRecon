@@ -243,6 +243,8 @@ inputField.addEventListener("keyup", (e) => {
             
             if(inputs[1][0] === "!") {
                 fToolName = inputs[1].split("!")[1];
+            } else if(inputs[1].startsWith("tool:")) {
+                fToolName = inputs[1].split("tool:")[1];
             } else {
                 type = "invalid";
             }

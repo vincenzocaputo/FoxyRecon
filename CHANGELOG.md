@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - RIPE Database resource
 - Greensnow resource for IP addresses
 - SecureFeed resource for IP and domains
+- Search operator "tool:" to filter by tool
 - Show country name on hovering flag
 - Show release notes on update
 
@@ -41,7 +42,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improve resource icons
 - Add lookup for ASN and Phone in Pulsedive
 - Addon update detection
-- Autofill input field detection
+- Autofill input field detection logic
+- Search operator for filtering by tool from "+" to "!"
 
 ### Fix
 - Domain extraction from email address
