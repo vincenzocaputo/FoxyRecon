@@ -54,5 +54,6 @@ function createRelationshipForm(data, callback) {
     formHandler.addFormField("hidden", "source_ref", "source_ref", data.from, true);
     formHandler.addFormField("hidden", "target_ref", "target_ref", data.to, true);
     formHandler.addFormField("select", "Relationship Type", "relationship_type", "", true, Graph.relationshipTypes);
+    document.querySelector("input.add-node-btn").value = "Add Relationship";
 }
 

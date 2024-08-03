@@ -4,6 +4,58 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.21.0] - 2024-08-03
+
+### Add
+- Phone number indicator
+- Autonomous System Number indicator
+- Phone number and ASN indicators detection and collection
+- Country flag based on phone number's dial code
+- Templates to speed up custom resources creation
+- Custom resources export option
+- CVE Details resource for CVEs
+- Exploit Database resource for CVEs
+- IP Quality Score resource for phone number lookup
+- Google Trends resource
+- Poc-In-Github resource for CVEs
+- Rapid7 Vulnerability & Exploit database resource
+- HudsonRock resource
+- HackerTarget DNS Lookup, Whois Lookup, Banner Grabbing, Extract links, HTTP Header check and Wappalyzer/WhatWeb Scan
+- CISA KEV Catalog resource
+- Emobile Tracker resource
+- Sync.me and Truecaller resources
+- CIRCL.LU vulnerability lookup
+- OpenCVE resource
+- BGPView resource
+- RIPE Database resource
+- Greensnow resource for IP addresses
+- SecureFeed resource for IP and domains
+- Search operator "tool:" to filter by tool
+- Show country name on hovering flag
+- Show release notes on update
+
+### Change
+- Custom resources page UI
+- Rename Twitter to X
+- Update Netcraft logo and color
+- Improve popup look (font and colors)
+- Improve resource icons
+- Add lookup for ASN and Phone in Pulsedive
+- Addon update detection
+- Autofill input field detection logic
+- Search operator for filtering by tool from "+" to "!"
+
+### Fix
+- Domain extraction from email address
+- Button name in add relationship prompt in graph page
+- Accept URLs containing IP address and port
+- Custom tools loading
+- Delete node in graph from popup
+- Remove flag from the input field when the indicator is removed
+- Several fixes in custom resources page
+- Tool search operator
+
+
 ## [0.20.0] - 2024-05-12
 ### Add
 - STIX support in the graph tool

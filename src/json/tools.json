@@ -21,13 +21,10 @@
             "desc": "Malware hunting with live access to the heart of an attack",
             "icon": "anyrun.png",
             "color": "#3584e4",
-            "types": [
-                "hash"
-            ],
-            "tags": [
-                "sandbox"
-            ],
-            "submitQuery": "#historySearchBtn"
+            "inputSelector": "#historySearch",
+            "submitQuery": "#historySearchBtn",
+            "types": ["hash"],
+            "tags": ["sandbox"]
         },
         {
             "name": "AlienVault",
@@ -55,13 +52,25 @@
         {
             "name": "bgp.tools",
             "url": {
-                "ip": "https://bgp.tools/prefix/%s"
+                "ip": "https://bgp.tools/prefix/%s",
+                "asn": "https://bgp.tools/as/%n"
             },
             "desc": "Browse the internet ecosystem",
-            "color": "#000000",
             "icon": "bgptools.png",
-            "types": ["ip"],
+            "color": "#000000",
+            "types": ["ip","asn"],
             "tags": ["whois","dns"]
+        },
+        {
+            "name": "BGPView",
+            "url": {
+                "ip": "https://bgpview.io/ip/%s",
+                "asn": "https://bgpview.io/asn/%n"
+            },
+            "desc": "AS analysis tool",
+            "icon": "bgpview.png",
+            "color": "#2C94B3",
+            "types": ["ip","asn"]
         },
         {
             "name": "Browserling",
@@ -69,8 +78,8 @@
                 "url": "https://www.browserling.com/browse/win/7/chrome/92/%s"
             },
             "desc": "Online cross-browser testing",
-            "color": "#5581B5",
             "icon": "browserling.png",
+            "color": "#5581B5",
             "types": ["url"],
             "tags": ["sandbox"]
         },
@@ -79,10 +88,11 @@
             "url": {
                 "email": "https://breachdirectory.org/"
             },
-            "submitQuery": "button.btn-primary",
             "desc": "Check if your information was exposed in a data breach",
-            "color": "#5150E1",
             "icon": "breachdirectory.png",
+            "color": "#5150E1",
+            "inputSelector": "input.chakra-input",
+            "submitQuery": "button.btn-primary",
             "types": ["email"],
             "tags": ["leak"]
         },
@@ -128,10 +138,11 @@
                 "ip": "https://centralops.net/co/domaindossier.aspx",
                 "email": "https://centralops.net/co/emaildossier.aspx"
             },
-            "submitQuery": "#go",
             "desc": "Email Dossier: investigate email addresses",
             "icon": "centralops.png",
             "color": "#005D9B",
+            "inputSelector": "#addr",
+            "submitQuery": "#go",
             "types": ["domain","ip","email"],
             "tags": ["whois", "dns"]
         },
@@ -146,6 +157,26 @@
             "color": "#4479F3",
             "types": ["domain","url"],
             "tags": ["sandbox"]
+        },
+        {
+            "name": "CIRCL.LU",
+            "url": {
+                "cve": "https://vulnerability.circl.lu/vuln/%s"
+            },
+            "desc": "Computer Incident Response Center Luxembourg (CIRCL) vulnerability lookup",
+            "icon": "circllu.png",
+            "color": "#E1414B",
+            "types": ["cve"]
+        },
+        {
+            "name": "CISA KEV",
+            "url": {
+                "cve": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?search_api_fulltext=%s"
+            },
+            "desc": "Check if a vulnerability is in the Known Exploited Vulnerability (KEV) Catalog, maintained by CISA",
+            "icon": "cisa.png",
+            "color": "#005288",
+            "types": ["cve"]
         },
         {
             "name": "CleanTalk",
@@ -195,6 +226,16 @@
             "types":["cve"]
         },
         {
+            "name":"CVE Details",
+            "url": {
+                "cve":"https://www.cvedetails.com/cve/%s/"
+            },
+            "desc":"Vulnerability intelligence solution providing CVE security vulnerability database.",
+            "icon":"cvedetails.png",
+            "color":"#6641F3",
+            "types":["cve"]
+        },
+        {
             "name": "CVE MITRE",
             "url": {
                 "cve": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=%s"
@@ -222,18 +263,20 @@
             "desc": "Check hashes against Cymru malware data",
             "icon": "cymru.png",
             "color": "#000000",
+            "inputSelector": "#hashes",
             "submitQuery": "#mhr-form-submit",
             "types": ["hash"]
         },
         {
             "name": "Dehashed",
             "url": {
-                "email": "https://dehashed.com/search?query=%s"
+                "email": "https://dehashed.com/search?query=%s",
+                "phone": "https://dehashed.com/search?query=phone%3A%r"
             },
             "desc": "DeHashed provides free deep-web scans and protection against credential leaks.",
             "icon": "dehashed.png",
             "color": "#151725",
-            "types": ["email"],
+            "types": ["email", "phone"],
             "tags": ["leaks"]
         },
         {
@@ -244,19 +287,21 @@
             "desc": "Verify SSL certificate",
             "icon": "digicert.png",
             "color": "#0D7EB8",
+            "inputSelector": "#host",
+            "submitQuery": "#check-server-button",
             "types": ["domain"],
-            "tags": ["tls"],
-            "submitQuery": "#check-server-button"
+            "tags": ["tls"]
         },
         {
             "name": "dnsdumpster",
             "url": {
                 "domain": "https://dnsdumpster.com/"
             },
-            "submitQuery": "button.btn",
             "desc": "dns recon & research, find & lookup dns records",
             "icon": "dnsdumpster.png",
             "color": "#323232",
+            "inputSelector": "#regularInput",
+            "submitQuery": "button.btn",
             "types": ["domain"],
             "tags": ["dns", "open-ports"]
         },
@@ -306,14 +351,37 @@
             "tags": ["rep"]
         },
         {
+            "name": "EmobileTracker",
+            "url": {
+                "phone": "https://www.emobiletracker.com"
+            },
+            "desc": "EMOBILETRACKER is a service specifically designed to Track Mobile Number, Location on Google Map including information such as the owner's Name,Location,Country,Telecom provider.",
+            "icon": "emobiletracker.png",
+            "color": "#51B3EB",
+            "inputSelector": "input[type='tel']",
+            "submitQuery": "button#btn-primary",
+            "types": ["phone"]
+        },
+        {
+            "name": "Exploit Database",
+            "url": {
+                "cve": "https://www.exploit-db.com/search?cve=%s"
+            },
+            "desc": "Search Exploit Database for Exploits, Papers, and Shellcode. ",
+            "icon": "exploitdb.png",
+            "color": "#CA4F0C",
+            "types": ["cve"]
+        },
+        {
             "name": "EuroDNS",
             "url": {
                 "domain": "https://www.eurodns.com/whois-search"
             },
-            "submitQuery": "#submitBasic",
             "desc": "Domain Name registration information",
             "icon": "eurodns.png",
             "color": "#3ABEE4",
+            "inputSelector": "textarea",
+            "submitQuery": "#submitBasic",
             "types": ["domain"],
             "tags": ["whois"]
         },
@@ -346,10 +414,11 @@
                 "domain": "https://www.fortiguard.com/webfilter",
                 "url": "https://www.fortiguard.com/webfilter"
             },
-            "submitQuery": "#webfilter_search_form_submit",
             "desc": "Web Filter Lookup",
             "icon": "fortiguard.png",
             "color": "#DA291C",
+            "inputSelector": "input[name='url']",
+            "submitQuery": "#webfilter_search_form_submit",
             "types": ["domain", "url"],
             "tags": ["rep"]
         },
@@ -370,12 +439,25 @@
                 "ip": "https://www.google.com/search?q=\"%s\"",
                 "email": "https://www.google.com/search?q=\"%s\"",
                 "hash": "https://www.google.com/search?q=\"%s\"",
-                "cve": "https://www.google.com/search?q=\"%s\""
+                "cve": "https://www.google.com/search?q=\"%s\"",
+                "phone": "https://www.google.com/search?q=\"%s\"",
+                "asn": "https://www.google.com/search?q=\"%s\""
             },
             "desc": "Search on Google",
             "icon": "google.png",
             "color": "#EA4335",
-            "types": ["domain","ip","email","hash","cve"]
+            "types": ["domain","ip","email","hash","cve","phone","asn"]
+        },
+        {
+            "name": "Google Trends",
+            "url": {
+                "domain": "https://trends.google.com/trends/explore?q=%s",
+                "cve": "https://trends.google.com/trends/explore?q=%s"
+            },
+            "desc": "See what's trending across Google Search, Google News and Youtube",
+            "icon": "google.png",
+            "color": "#EA4335",
+            "types": ["domain","cve"]
         },
         {
             "name": "Google Cache",
@@ -400,6 +482,17 @@
             "tags": ["rep"]
         },
         {
+            "name": "GreenSnow",
+            "url": {
+                "ip": "https://greensnow.co/view/%s"
+            },
+            "desc": "Blacklisted list of IPs for online servers.",
+            "icon": "greensnow.png",
+            "color": "#739342",
+            "types": ["ip"],
+            "tags": ["rep"]
+        },
+        {
             "name": "Greynoise",
             "url": {
                 "ip": "https://www.greynoise.io/viz/ip/%s"
@@ -410,6 +503,96 @@
             "types": ["ip"],
             "tags": ["net-activity", "rep"]
         },
+		{
+			"name": "Hacker Target (Banner Grabbing)",
+			"url": {
+                "ip": "https://hackertarget.com/banner-grabbing/"
+            },
+            "desc": "Banner Grabbing is a reconnaissance technique to discover network services by simply querying the service port. Many services will respond with a simple text message (known as a service banner) indicating the technology in use.",
+			"icon": "hackertarget.png",
+			"color": "#4ecda7",
+            "inputSelector": "textarea",
+            "submitQuery": "#clickform", 
+			"types": ["ip"],
+            "tags": ["open-ports"]
+		},
+		{
+			"name": "Hacker Target (DNS Lookup)",
+			"url": {
+                "domain": "https://hackertarget.com/dns-lookup/"
+            },
+            "desc": "Use this DNS lookup tool to easily view the standard DNS records for a domain.",
+			"icon": "hackertarget.png",
+			"color": "#4ecda7",
+            "inputSelector": "input[name='theinput']", 
+            "submitQuery": "#clickform", 
+			"types": ["domain"],
+            "tags": ["dns"]
+		},
+		{
+			"name": "Hacker Target (DNS Lookup)",
+			"url": {
+                "url": "https://hackertarget.com/extract-links/"
+            },
+            "desc": "This tool will parse the html of a website and extract links from the page.",
+			"icon": "hackertarget.png",
+			"color": "#4ecda7",
+            "inputSelector": "input[name='theinput']", 
+            "submitQuery": "#clickform", 
+			"types": ["url"]
+		},
+		{
+			"name": "Hacker Target (HTTP Header Check)",
+			"url": {
+                "url": "https://hackertarget.com/http-header-check/"
+            },
+            "desc": "Review the HTTP Headers from a web server with this quick check.",
+			"icon": "hackertarget.png",
+			"color": "#4ecda7",
+            "inputSelector": "input[name='theinput']", 
+            "submitQuery": "#clickform", 
+			"types": ["url"],
+            "tags": ["http-headers"]
+		},
+        {
+			"name": "Hacker Target (Wappalyzer)",
+			"url": {
+                "url": "https://hackertarget.com/whatweb-scan/"
+            },
+            "desc": "The tools examine the web server HTTP Headers and the HTML source of a web page to determine technologies in use.",
+			"icon": "hackertarget.png",
+			"color": "#4ecda7",
+            "inputSelector": "textarea", 
+            "submitQuery": "wappalyzer:#clickform", 
+			"types": ["url"],
+            "tags": ["techs"]
+		},
+		{
+			"name": "Hacker Target (WhatWeb)",
+			"url": {
+                "url": "https://hackertarget.com/whatweb-scan/"
+            },
+            "desc": "The tools examine the web server HTTP Headers and the HTML source of a web page to determine technologies in use.",
+			"icon": "hackertarget.png",
+			"color": "#4ecda7",
+            "inputSelector": "textarea", 
+            "submitQuery": "whatweb:#clickform", 
+			"types": ["url"],
+            "tags": ["techs"]
+		},
+		{
+			"name": "Hacker Target (Whois Lookup)",
+			"url": {
+                "domain": "https://hackertarget.com/whois-lookup/"
+            },
+            "desc": "Perform an Online Whois Lookup of a domain.",
+			"icon": "hackertarget.png",
+			"color": "#4ecda7",
+            "inputSelector": "input[name='theinput']", 
+            "submitQuery": "#clickform", 
+			"types": ["domain"],
+            "tags": ["whois"]
+		},
 		{
 			"name": "hashdd",
 			"url": {
@@ -423,13 +606,15 @@
         {
             "name": "HIBP",
             "url": {
-                "email": "https://haveibeenpwned.com/"
+                "email": "https://haveibeenpwned.com/",
+                "phone": "https://haveibeenpwned.com/"
             },
-            "submitQuery": "#searchPwnage", 
             "desc": "Check if your email or phone is in a data breach",
             "icon": "hibp.png",
             "color": "#2A698A",
-            "types": ["email"],
+            "inputSelector": "#Account",
+            "submitQuery": "#searchPwnage", 
+            "types": ["email", "phone"],
             "tags": ["leaks"]
         },
         {
@@ -442,6 +627,28 @@
             "color": "#F35928",
             "types": ["domain"],
             "tags": ["dns"]
+        },
+        {
+            "name": "HudsonRock",
+            "url": {
+                "email": "https://www.hudsonrock.com/email-search?email=%s"
+            },
+            "desc": "Search specific email addresses to find out if your employees, customers, users or partners have been compromised by info-stealing malware.",
+            "icon": "hudsonrock.png",
+            "color": "#FECD4E",
+            "types": ["email"],
+            "tags": ["leaks"]
+        },
+        {
+            "name": "HudsonRock",
+            "url": {
+                "domain": "https://www.hudsonrock.com/search?domain=%s"
+            },
+            "desc": "Discover whether your, or your vendor’s corporate infrastructure has been compromised by Infostealers.",
+            "icon": "hudsonrock.png",
+            "color": "#FECD4E",
+            "types": ["domain"],
+            "tags": ["leaks"]
         },
         {
             "name": "hunter",
@@ -470,12 +677,13 @@
 			"name": "Hurricane Electric",
 			"url": { 
                 "domain": "https://bgp.he.net/dns/%s",
-                "ip": "https://bgp.he.net/ip/%s"
+                "ip": "https://bgp.he.net/ip/%s",
+                "asn": "https://bgp.he.net/%s"
             },
             "desc": "Hurricane Electric BGP Toolkit",
 			"icon": "bgphe.png",
 			"color": "#000065",
-			"types": ["domain","ip"],
+			"types": ["domain","ip","asn"],
             "tags": ["dns"]
 		},
         {
@@ -540,6 +748,16 @@
             "tags": ["sandbox"]
         },
         {
+            "name": "IPQualityScore",
+            "url": {
+                "phone": "https://www.ipqualityscore.com/free-phone-number-lookup/lookup/US/%r"
+            },
+            "desc": "Free phone number lookup",
+            "icon": "ipqs.png",
+            "color": "#F43A3A",
+            "types": ["phone"]
+        },
+        {
             "name": "JoeSandbox",
             "url": {
                 "hash": "https://www.joesandbox.com/analysis/search?q=%s"
@@ -572,6 +790,7 @@
             "desc": "Make sure your credentials haven't been compromised",
             "icon": "leakcheck.png",
             "color": "#FF5100",
+            "inputSelector": "input[name='data']",
             "submitQuery": "#button-search",
             "tags": ["leaks"],
             "types": ["email"]
@@ -605,10 +824,11 @@
             "url": {
                 "email": "https://leakpeek.com/"
             },
-            "submitQuery": "button.btn-success",
             "desc": "Is your data safe?",
             "icon": "leakpeek.png",
             "color": "#8b00ff",
+            "inputSelector": "#searcher",
+            "submitQuery": "button.btn-success",
             "types": ["email"],
             "tags": ["leak"]
         },
@@ -700,7 +920,7 @@
             },
             "desc": "Find out the infrastructure and technologies used by any site using results from Netcraft internet data mining",
             "icon": "netcraft.png",
-            "color": "#4FBDAC",
+            "color": "#003E51",
             "types": ["domain","url"],
             "tags": ["rep"]
         },
@@ -727,6 +947,16 @@
             "tags": ["rep"]
         },
         {
+            "name": "OpenCVE",
+            "url": {
+                "cve": "https://www.opencve.io/cve/%s"
+            },
+            "desc": "OpenCVE is the easiest way to track CVE updates and be alerted about new vulnerabilities.",
+            "icon": "opencve.png",
+            "color": "#11324b",
+            "types": ["cve"]
+        },
+        {
             "name": "PacketTotal",
             "url": {
                 "ip": "https://packettotal.com/app/search?q=%s",
@@ -749,6 +979,16 @@
             "color": "#343A40",
             "types": ["ip"],
             "tags": ["rep", "screenshot"]
+        },
+        {
+            "name": "Poc-in-Github",
+            "url": {
+                "cve": "https://poc-in-github.motikan2010.net/api/v1/?cve_id=%s"
+            },
+            "desc": "PoC auto collect from GitHub",
+            "icon": "pocingithub.png",
+            "color": "#212529",
+            "types": ["cve"]
         },
         {
             "name": "Polyswarm",
@@ -777,13 +1017,48 @@
             "url": {
                 "ip": "https://pulsedive.com/indicator/%s",
                 "domain": "https://pulsedive.com/indicator/%s",
-                "hash": "https://pulsedive.com/indicator/%s"
+                "hash": "https://pulsedive.com/indicator/%s",
+                "phone": "https://pulsedive.com/explore/?q=whois.phone%3D%s",
+                "asn": "https://pulsedive.com/explore/?q=geo.asn%3D%s"
             },
             "desc": "Free Threat Intelligence platform",
             "icon": "pulsedive.png",
             "color": "#0E2C3E",
-            "types": ["ip","domain","hash"],
-            "tags": ["dns"]
+            "types": ["ip","domain","hash","phone","asn"],
+            "tags": ["dns","whois"]
+        },
+        {
+            "name": "Rapid7",
+            "url": {
+                "cve": "https://www.rapid7.com/db/?q=%s"
+            },
+            "desc": "Vulnerability & Exploit Database",
+            "icon": "rapid7.png",
+            "color": "#E85E26",
+            "types": ["cve"]
+        },
+        {
+            "name": "RIPE Database",
+            "url": {
+                "ip": "https://apps.db.ripe.net/db-web-ui/query?searchtext=%s",
+                "asn": "https://apps.db.ripe.net/db-web-ui/query?searchtext=%s"
+            },
+            "desc": "Query the RIPE Database",
+            "icon": "ripe.png",
+            "color": "#080037",
+            "types": ["ip","asn"]
+        },
+        {
+            "name": "SecureFeed",
+            "url": {
+                "ip": "https://securefeed.com/Content/WebLookup?host=%s",
+                "domain": "https://securefeed.com/Content/WebLookup?host=%s"
+            },
+            "desc": "Combining host data from 100+ sources",
+            "icon": "securefeed.png",
+            "color": "#374889",
+            "types": ["ip","domain"],
+            "tags": ["rep"]
         },
         {
             "name": "SecurityHeaders",
@@ -829,7 +1104,7 @@
             },
             "desc": "Spam database lookup",
             "icon": "spamdb.gif",
-            "color": "#F5EFE0",
+            "color": "#F6C100",
             "types": ["domain","ip","email"],
             "tags": ["rep"]
         },
@@ -841,7 +1116,7 @@
             },
             "desc": "IP and Domain rep checker",
             "icon": "spamhaus.png",
-            "color": "#F8E331",
+            "color": "#142741",
             "types": ["domain","ip"],
             "tags": ["rep"]
         },
@@ -866,16 +1141,27 @@
             "types": ["domain"],
             "tags": ["tls"]
         },
+        {
+            "name": "Sync.me",
+            "url": {
+                "phone": "https://sync.me/search/?number=%s"
+            },
+            "desc": "Find out who called",
+            "icon": "syncme.png",
+            "color": "#2592f8",
+            "types": ["phone"]
+        },
 		{
 			"name": "Talos Intelligence",
 			"url": {
                 "domain": "https://talosintelligence.com/reputation_center/lookup?search=%s",
-                "ip": "https://talosintelligence.com/reputation_center/lookup?search=%s"
+                "ip": "https://talosintelligence.com/reputation_center/lookup?search=%s",
+                "url": "https://talosintelligence.com/reputation_center/lookup?search=%s"
             },
             "desc": "Cisco Talos Intelligence Group IP, domain rep lookup",
 			"icon": "talos.png",
 			"color": "#0077BE",
-			"types": ["domain","ip"],
+			"types": ["domain","ip","url"],
             "tags": ["rep"]
 		},
 		{
@@ -914,17 +1200,29 @@
             "tags": ["ioc"]
         },
         {
-            "name": "Twitter",
+            "name": "Truecaller",
+            "url": {
+                "phone": "https://www.truecaller.com/en-us/search/us/%s"
+            },
+            "desc": "Caller ID and Spam Blocking App",
+            "icon": "truecaller.png",
+            "color": "#7FC3FF",
+            "types": ["phone"]
+        },
+        {
+            "name": "X (Twitter)",
             "url": {
                 "hash": "https://twitter.com/search?q=%s&src=typed_query",
                 "domain": "https://twitter.com/search?q=%22%s%22&src=typed_query",
                 "ip": "https://twitter.com/search?q=%s&src=typed_query",
-                "cve": "https://twitter.com/search?q=%s&src=typed_query"
+                "cve": "https://twitter.com/search?q=%s&src=typed_query",
+                "phone": "https://twitter.com/search?q=%s&src=typed_query",
+                "asn": "https://twitter.com/search?q=%s&src=typed_query"
             },
-            "desc": "Search IoCs on Twitter",
-            "icon": "twitter.png",
-            "color": "#1D9BF0",
-            "types": ["hash","domain","ip","cve"],
+            "desc": "Search IoCs on X",
+            "icon": "x.png",
+            "color": "#000000",
+            "types": ["hash","domain","ip","cve","phone","asn"],
             "tags": ["ioc"]
         },
         {
@@ -956,12 +1254,13 @@
 			"url": {
                 "domain": "https://urlscan.io/domain/%s",
                 "ip": "https://urlscan.io/domain/%s",
-                "url": "https://urlscan.io/liveshot/?url=%s"
+                "url": "https://urlscan.io/liveshot/?url=%s",
+                "asn": "https://urlscan.io/asn/%s"
             },
             "desc": "A sandbox for the web",
 			"icon": "urlscan.png",
             "color": "#E25A45",
-			"types": ["domain","ip","url"],
+			"types": ["domain","ip","url","asn"],
             "tags": ["whois", "dns", "screenshot"]
 		},
 		{
@@ -969,10 +1268,11 @@
 			"url": {
                 "url": "https://urlscan.io/"
             },
-            "submitQuery": "vispublic",
             "desc": "A sandbox for the web",
 			"icon": "urlscan.png",
             "color": "#18BC9C",
+            "inputSelector": "#url",
+            "submitQuery": "vispublic",
 			"types": ["url"],
             "tags": ["sandbox"]
 		},
@@ -981,10 +1281,11 @@
 			"url": {
                 "url": "https://urlscan.io/"
             },
-            "submitQuery": "visunlisted",
             "desc": "A sandbox for the web",
 			"icon": "urlscan.png",
             "color": "#3498DB",
+            "inputSelector": "#url",
+            "submitQuery": "visunlisted",
 			"types": ["url"],
             "tags": ["sandbox"]
 		},
@@ -993,10 +1294,11 @@
 			"url": {
                 "url": "https://urlscan.io/"
             },
-            "submitQuery": "visprivate",
             "desc": "A sandbox for the web",
 			"icon": "urlscan.png",
             "color": "#F39C12",
+            "inputSelector": "#url",
+            "submitQuery": "visprivate",
 			"types": ["url"],
             "tags": ["sandbox"]
 		},
@@ -1005,10 +1307,11 @@
 			"url": {
                 "domain": "https://urlvoid.com/scan/%s"
             },
-            "submitQuery": "button.btn-warning",
             "desc": "Website rep Checker",
 			"icon": "urlvoid.png",
             "color": "#FFAC0D",
+            "inputSelector": "#hf-domain",
+            "submitQuery": "button.btn-warning",
 			"types": ["domain"],
             "tags": ["rep"]
 		},
@@ -1017,10 +1320,11 @@
             "url": {
                 "domain": "https://www.urlvoid.com/whois-lookup/"
             },
-            "submitQuery": "button.btn-primary",
             "desc": "Free online whois lookup tool to get domain details.",
             "icon": "urlvoid.png",
             "color": "#FFAC0D",
+            "inputSelector": "#DomainAddress",
+            "submitQuery": "button.btn-primary",
             "types": ["domain"],
             "tags": ["whois"]
         },
@@ -1079,6 +1383,7 @@
             "desc": "Analyze suspicious URLs to detect types of malware",
             "icon": "virustotal.png",
             "color": "#394EFF",
+            "inputSelector": "#urlSearchInput",
             "submitQuery": "VT",
             "types": ["url"],
             "tags": ["sandbox", "rep"]

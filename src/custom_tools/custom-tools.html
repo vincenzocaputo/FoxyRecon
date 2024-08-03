@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="custom-tools.css">
+        <script src="custom-tools.js"></script>
+        <title>FoxyRecon Custom Tools</title>
+    </head>
+    <body>
+        <div id="page-container">
+            <div id="toolbar">
+                <div id="option-palette">
+                    <img id="foxyrecon-icon" src="../../assets/icons/foxyrecon-icon-48.png"/>
+                    <div id="page-title">
+                        <span>Custom Tools</span>
+                    </div>
+                    <button id="add-res-button" class="btn add-btn">
+                        <img src="../../assets/icons/plus.png"/>
+                        <div class="button-label">
+                            Add Tool
+                        </div>
+                    </button>
+                    <button id="edit-res-button" class="btn edit-btn">
+                        <img src="../../assets/icons/edit_w.png"/>
+                        <div class="button-label">
+                            Edit Tool
+                        </div>
+                    </button>
+                    <button id="del-res-button" class="btn del-btn">
+                        <img src="../../assets/icons/trash-2.png"/>
+                        <div class="button-label">
+                            Delete Tool
+                        </div>
+                    </button>
+                    <button id="cancel-button" class="btn cancel-btn">
+                        <img src="../../assets/icons/del.png"/>
+                        <div class="button-label">
+                            Cancel
+                        </div>
+                    </button>
+                    <button id="export-all-button" class="btn export-btn">
+                        <img src="../../assets/icons/export-2.png"/>
+                        <div class="button-label">
+                            Export All
+                        </div>
+                    </button>
+                    <button id="export-button" class="btn export-btn">
+                        <img src="../../assets/icons/export-2.png"/>
+                        <div class="button-label">
+                            Export 
+                        </div>
+                    </button>
+                    <div>
+                        <button id="import-template-button" class="btn add-btn">
+                            <img src="../../assets/icons/template.png"/>
+                            <div class="button-label">
+                                    Import from Template
+                            </div>
+                        </button>
+                        <div id="template-options" class="options">
+                            <div class="misp-template" id="misp-template">
+                                <img src="icons/misp.png"/>
+                                <div class="options-value">
+                                    MISP
+                                </div>
+                            </div>
+                            <div class="opencti-template" id="opencti-template">
+                                <img src="icons/opencti.png"/>
+                                <div class="options-value">
+                                    OpenCTI
+                                </div>
+                            </div>
+                            <div class="yeti-template" id="yeti-template">
+                                <img src="icons/yeti.png"/>
+                                <div class="options-value">
+                                    YETI
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="resources-list-pane">
+                <div id="no-tools">
+                    No custom tool found
+                </div>
+                <div id="tools-list">
+                </div>
+            </div>
+            <div id="main-pane" class="body-pane">
+                <div class="title-container">
+                    <div class="title">
+                        Custom Tools
+                    </div>
+                </div>
+                <div class="body-text">
+                    On this page you can add custom tools. You can add web resources that are not included in FoxyRecon or internal tools not exposed on the Internet. To add a new tool click on the “Add Tool” button. Fill out the form with the information about the resource to add. The following attributes describe a tool:
+                    <ul>
+                        <li><b>Name</b>: The tool's name. This field is mandatory and cannot be changed once the resource is created.</li>
+                        <li><b>Description</b>: A short description of the tool.</li>
+                        <li><b>Icon</b>: The tool's icon. This field is mandatory. A 32x32 png icon is recommended.</li>
+                        <li><b>Color</b>: The color to paint the tool's button in the FoxyRecon popup.</li>
+                        <li><b>URL(s)</b>: URL(s) pointing to the resource (mandatory).</li>
+                        <li><b>Tag(s)</b>: Tag(s) describing the tool. They can be used for filtering.</li>
+                    </ul>
+                    <h3>URLs</h3>
+                    Before adding the URLs, it is necessary to determine which types of indicators are accepted by the web resource that you are adding. If the tool you want to add accepts multiple indicator types, you need to provide a URL for each supported indicator type.
+                    Note that there may be different URLs pointing to the same web resource, depending on the type of indicator to submit.
+                    There are two cases depending on the HTTP method supported by the web resource.
+                    <h4>GET</h4>
+                    If the web resource accepts GET requests, the indicators can be submitted by URL (e.g.: <i>https://example.com/search?indicator=8.8.8.8</i>). To this end, FoxyRecon uses the placeholder <b>%s</b> that will be replaced with the indicator under analysis. Therefore, taking the previous example further, you need to provide the following URL: <i>https://example.com/search?indicator=%s</i>.
+                    <h4>POST</h4>
+                    If the web resource does not accept GET requests, the indicators cannot be submitted by URL, as the resource accepts only POST requests. For these cases, FoxyRecon provides the autofill feature that tries to enter the indicators in the input field on the web resource's page and click the button to submit the indicator. To this end, FoxyRecon needs the following information:
+                    <ul>
+                        <li><b>Input field CSS selector</b>: The CSS selector of the input field located on the page of the web resource (mandatory).</li>
+                        <li><b>Submit button CSS selector</b>: The CSS selector of the submit button located on the page of the web resource.</li>
+                    </ul>
+                    <h3>Templates</h3>
+                    FoxyRecon provides some templates to help speed up the addition of internal tools. Templates are meant so that you only have to provide the hostname of the platform to add to FoxyRecon. Currently, FoxyRecon provides templates for the following open source platforms:
+                    <ul>
+                        <li><a href="https://www.misp-project.org/">MISP</a></li>
+                        <li><a href="https://filigran.io/solutions/open-cti/">OpenCTI</a></li>
+                        <li><a href="https://yeti-platform.io/">YETI</a></li>
+                    </ul>
+                    <hr>
+                    If you deem that a tool is worth to be included in FoxyRecon, please open an issue on the <a href="https://github.com/vincenzocaputo/FoxyRecon/issues">GitHub repository</a>.
+                </div>
+
+            </div>
+            <div id="form-pane" class="body-pane">
+                <div class="title-container" id="add-tool-title-container">
+                    <div class="title" id="add-tool-title">
+                        Add Tool
+                    </div>
+                </div>
+                <div id="form">
+                    <label for="tool-name">Name *</label>
+                    <div class="field-container">
+                        <input type="text" id="tool-name" required>
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                    </div>
+                    <label for="tool-desc">Description</label>
+                    <input type="text" id="tool-desc"><br>
+                    <label for="tool-icon">Icon (Base 64) *</label>
+                    <div id="file-upload">
+                        <input type="hidden" id="tool-icon-b64">
+                        <input type="file" name="" id="tool-icon">
+                        <div class="warn-msg">
+                            <img src="../../assets/icons/warn-icon.png">If you upload a new image, the old image will be lost.
+                        </div>
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                    </div>
+                    <label for="tool-color">Color</label>
+                    <input type="color" id="tool-color"><br>
+                    <div class="form-subsection">
+                       <div class="subsection-title">
+                           <span id="url-title">
+                           URLs *
+                           </span>
+                           <div class="error-msg">
+                                <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                           </div>
+                           <img id="url-info-img" class="info-img" src="../../assets/icons/info_icon.png">
+                           <div class="hide-msg">Enter the URL(s) of the tool specifying how the indicator will be passed to the tool as parameter. 
+                            <ul>
+                                <li> If the tool accepts GET requests, specify the placeholder <b>%s</b> that will be replaced with the indicator value (Example: <i>http://example.local/param=%s</i>) </li>
+                                <li> If the tool accepts only POST requests, tick the checkbox "POST" and enter the CSS selector of the submit button. This information will be used by the Auto-Completion feature in order to automatically submit the indicator to the web tool. </li>
+                            </ul>
+                           </div>
+
+                       </div>
+                       <div class="hide-msg">Enter the URL(s) of the tool specifying how the indicator will be passed to the tool as parameter. 
+                           <ul>
+                               <li> If the tool accepts GET requests, specify the placeholder <b>%s</b> that will be replaced with the indicator value (Example: <i>http://example.local/param=%s</i>) </li>
+                                <li> If the tool accepts only POST requests, tick the checkbox "POST" and enter the CSS selector of the submit button. This information will be used by the Auto-Completion feature in order to automatically submit the indicator to the web tool. </li>
+                           </ul>
+                        </div>
+                    </div>
+                    <label for="tool-dom-url">URL for Domains</label>
+                    <div class="post-checkbox">
+                        <input type="text" id="tool-dom-url"> 
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                        <input type="checkbox" id="tool-dom-post">
+                        <label for="tool-dom-post" class="post-label">POST</label>
+                    </div>
+                    <label class="dom-csssel-label" for="tool-dom-input-csssel" id="tool-dom-input-csssel-label">Input field CSS selector</label>
+                    <div class="field-container">
+                        <input class="dom-csssel-input" type="text" id="tool-dom-input-csssel">
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                    </div>
+                    <label class="dom-csssel-label" for="tool-dom-submit-csssel" id="tool-dom-submit-csssel-label">Submit button CSS selector</label>
+                    <div class="field-container">
+                        <input class="dom-csssel-input" type="text" id="tool-dom-submit-csssel"> 
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                    </div>
+                    <div class='form-separator'></div>
+                    <label for="tool-ip-url">URL for IP Addresses</label>
+                    <div class="post-checkbox">
+                        <input type="text" id="tool-ip-url">
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                        <input type="checkbox" id="tool-ip-post">
+                        <label for="tool-ip-post">POST</label> 
+                    </div>
+                    <label class="ip-csssel-label" for="tool-ip-input-csssel" id="tool-ip-input-csssel-label">Input field CSS selector</label>
+                    <div class="field-container">
+                        <input class="ip-csssel-input" type="text" id="tool-ip-input-csssel"> 
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                    </div>
+                    <label class="ip-csssel-label" for="tool-ip-submit-csssel" id="tool-ip-submit-csssel-label">Submit button CSS selector</label>
+                    <div class="field-container">
+                        <input class="ip-csssel-input" type="text" id="tool-ip-submit-csssel"> 
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                    </div>
+                    <div class='form-separator'></div>
+                    <label for="tool-url-url">URL for URLs</label>
+                    <div class="post-checkbox">
+                        <input type="text" id="tool-url-url">
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                        <input type="checkbox" id="tool-url-post">
+                        <label for="tool-url-post">POST</label> 
+                     </div>
+                    <label class="url-csssel-label" for="tool-url-input-csssel" id="tool-url-input-csssel-label">Input field CSS selector</label>
+                    <div class="field-container">
+                        <input class="url-csssel-input" type="text" id="tool-url-input-csssel"> 
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                    </div>
+                    <label class="url-csssel-label" for="tool-url-submit-csssel" id="tool-url-submit-csssel-label">Submit button CSS selector</label>
+                    <div class="field-container">
+                        <input class="url-csssel-input" type="text" id="tool-url-submit-csssel"> 
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                    </div>
+                    <div class='form-separator'></div>
+                    <label for="tool-email-url">URL for Emails</label>
+                    <div class="post-checkbox">
+                        <input type="text" id="tool-email-url">
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                        <input type="checkbox" id="tool-email-post">
+                        <label for="tool-email-post">POST</label> 
+                    </div>
+                    <label class="email-csssel-label" for="tool-email-input-csssel" id="tool-email-input-csssel-label">Input field CSS selector</label>
+                    <div class="field-container">
+                        <input class="email-csssel-input" type="text" id="tool-email-input-csssel"> 
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                    </div>
+                    <label class="email-csssel-label" for="tool-email-submit-csssel" id="tool-email-submit-csssel-label">Submit button CSS selector</label>
+                    <div class="field-container">
+                        <input class="email-csssel-input" type="text" id="tool-email-submit-csssel"> 
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                    </div>
+                    <div class='form-separator'></div>
+                    <label for="tool-cve-url">URL for Hashes</label>
+                    <div class="post-checkbox">
+                        <input type="text" id="tool-hash-url">
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                        <input type="checkbox" id="tool-hash-post">
+                        <label for="tool-hash-post">POST</label> 
+                    </div>
+                    <label class="hash-csssel-label" for="tool-hash-input-csssel" id="tool-hash-input-csssel-label">Input field CSS selector</label>
+                    <div class="field-container">
+                        <input class="hash-csssel-input" type="text" id="tool-hash-input-csssel"> 
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                    </div>
+                    <label class="hash-csssel-label" for="tool-hash-submit-csssel" id="tool-hash-submit-csssel-label">Submit button CSS selector</label>
+                    <div class="field-container">
+                        <input class="hash-csssel-input" type="text" id="tool-hash-submit-csssel"> 
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                    </div>
+                    <div class='form-separator'></div>
+                    <label for="tool-cve-url">URL for CVEs</label>
+                    <div class="post-checkbox">
+                        <input type="text" id="tool-cve-url">
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                        <input type="checkbox" id="tool-cve-post">
+                        <label for="tool-cve-post">POST</label> 
+                    </div>
+                    <label class="cve-csssel-label" for="tool-cve-input-csssel" id="tool-cve-input-csssel-label">Input field CSS selector</label>
+                    <div class="field-container">
+                        <input class="cve-csssel-input" type="text" id="tool-cve-input-csssel"> 
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                    </div>
+                    <label class="cve-csssel-label" for="tool-cve-submit-csssel" id="tool-cve-submit-csssel-label">Submit button CSS selector</label>
+                    <div class="field-container">
+                        <input class="cve-csssel-input" type="text" id="tool-cve-submit-csssel"> 
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                    </div>
+                    <div class='form-separator'></div>
+                    <label for="tool-phone-url">URL for Phone Numbers</label>
+                    <div class="post-checkbox">
+                        <input type="text" id="tool-phone-url">
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                        <input type="checkbox" id="tool-phone-post">
+                        <label for="tool-phone-post">POST</label> 
+                    </div>
+                    <label class="phone-csssel-label" for="tool-phone-input-csssel" id="tool-phone-input-csssel-label">Input field CSS selector</label>
+                    <div class="field-container">
+                        <input class="phone-csssel-input" type="text" id="tool-phone-input-csssel"> 
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                    </div>
+                    <label class="phone-csssel-label" for="tool-phone-submit-csssel" id="tool-phone-submit-csssel-label">Submit button CSS selector</label>
+                    <div class="field-container">
+                        <input class="phone-csssel-input" type="text" id="tool-phone-submit-csssel"> 
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                    </div>
+                    <div class='form-separator'></div>
+                    <label for="tool-asn-url">URL for AS Numbers</label>
+                    <div class="post-checkbox">
+                        <input type="text" id="tool-asn-url">
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                        <input type="checkbox" id="tool-asn-post">
+                        <label for="tool-asn-post">POST</label> 
+                    </div>
+                    <label class="asn-csssel-label" for="tool-asn-input-csssel" id="tool-asn-input-csssel-label">Input field CSS selector</label>
+                    <div class="field-container">
+                        <input class="asn-csssel-input" type="text" id="tool-asn-input-csssel"> 
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                    </div>
+                    <label class="asn-csssel-label" for="tool-asn-submit-csssel" id="tool-asn-submit-csssel-label">Submit button CSS selector</label>
+                    <div class="field-container">
+                        <input class="asn-csssel-input" type="text" id="tool-asn-submit-csssel"> 
+                        <div class="error-msg">
+                            <img src="../../assets/icons/error-icon.png"><span class="error-msg-text"></span>
+                        </div>
+                    </div>
+                    <div class="form-subsection">
+                        <div class="subsection-title">
+                            Tags
+                        </div>
+                    </div>
+                    <label for="tool-rep-tag">Rep (reputation)</label>
+                    <input type="checkbox" id="tool-rep-tag" value="rep" class="type-select">
+                    <label for="tool-whois-tag">WHOIS</label>
+                    <input type="checkbox" id="tool-whois-tag" value="whois" class="type-select">
+                    <label for="tool-dns-tag">DNS</label>
+                    <input type="checkbox" id="tool-dns-tag" value="dns" class="type-select">
+                    <label for="tool-tls-tag">SSL/TLS</label>
+                    <input type="checkbox" id="tool-tls-tag" value="tls" class="type-select">
+                    <label for="tool-sandbox-tag">Sandbox</label>
+                    <input type="checkbox" id="tool-sandbox-tag" value="sandbox" class="type-select">
+                    <label for="tool-dataleak-tag">Leaks</label>
+                    <input type="checkbox" id="tool-dataleak-tag" value="leak" class="type-select">
+                    <label for="tool-screenshot-tag">Screenshot</label>
+                    <input type="checkbox" id="tool-screenshot-tag" value="screenshot" class="type-select">
+                    <label for="tool-screenshot-tag">Open Ports Scanning (Passive)</label>
+                    <input type="checkbox" id="tool-open-ports-tag" value="open-ports" class="type-select">
+                    <label for="tool-screenshot-tag">Indicators of Compromise (IoC)</label>
+                    <input type="checkbox" id="tool-ioc-tag" value="ioc" class="type-select">
+                    <label for="tool-screenshot-tag">Historical Data (history)</label>
+                    <input type="checkbox" id="tool-history-tag" value="history" class="type-select">
+                    <label for="tool-screenshot-tag">Network Activity</label>
+                    <input type="checkbox" id="tool-net-activity-tag" value="net-activity" class="type-select">
+                    <input type="submit" id="submit-btn" class="btn" value="Add Tool">
+                    <button id="reset-btn" class="btn">Reset</button>
+
+                </form>
+            </div>
+
+
+        </div>
+
+    </body>
+</html>

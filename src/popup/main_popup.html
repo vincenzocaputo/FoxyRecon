@@ -165,26 +165,22 @@
         <div id="content">
             <table id="main">
                 <tr>
-                    <td rowspan=2>
+                    <td rowspan=1>
                         <div id="addon-logo">
                             <img src="../../assets/icons/logo.png"/>
                         </div>
                     </td>
-                    <td colspan=2>
+                    <td colspan=3>
                         <div id="addon-name">
                             FoxyRecon
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan=2>
                         <div id="addon-version">
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan=3>
-                        Indicators found on this webpage 
+                    <td colspan=4 id="catch-caption">
+                        Indicators found on this webpage: 
                     </td>
                 </tr>
                 <tr>
@@ -214,6 +210,16 @@
                                 <img src="../../assets/tools-icons/url_icon.png"/>
                             </div>
                             <div id="url_occ" class="occurrences">
+                                0
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catch-container" id="catch-phone">
+                            <div class="catch-image">
+                                <img src="../../assets/tools-icons/phone_icon.png"/>
+                            </div>
+                            <div id="phone_occ" class="occurrences">
                                 0
                             </div>
                         </div>
@@ -250,16 +256,21 @@
                             </div>
                         </div>
                     </td>
-                </tr>
-                <tr>
-                    <td colspan=3>
-                        <div id="disclaimer">
-                            Data submitted with this add-on will be sent to external web resources that are not under control of FoxyRecon. For this reason the data submitted will be treated in accordance with the terms of service of the several web resources chosen for analysis. Please, be aware of the tools and resources you are using and do not submit any personal information.
+                    <td>
+                        <div class="catch-container" id="catch-asn">
+                            <div class="catch-image">
+                                <img src="../../assets/tools-icons/asn_icon.png"/>
+                            </div>
+                            <div id="asn_occ" class="occurrences">
+                                0
+                            </div>
                         </div>
                     </td>
                 </tr>
-
             </table>
+            <div id="disclaimer">
+                Data submitted with this add-on will be sent to external web resources that are not under control of FoxyRecon. For this reason the data submitted will be treated in accordance with the terms of service of the several web resources chosen for analysis. Please, be aware of the tools and resources you are using and do not submit any personal information.
+            </div>
             <div id="no-tools">
                 No tools found
             </div>

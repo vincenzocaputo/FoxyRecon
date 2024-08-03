@@ -12,7 +12,7 @@ indicatorParser = new IndicatorParser();
 var collectedIndicatorsListJson = localStorage.getItem("catched_indicators");
 if(collectedIndicatorsListJson && collectedIndicatorsListJson !== undefined && collectedIndicatorsListJson !== "undefined") {
     const collectedIndicatorsList = JSON.parse(collectedIndicatorsListJson);
-    var count = {"ip": 0, "domain": 0, "url": 0, "email": 0, "hash": 0, "cve": 0};
+    var count = {"ip": 0, "domain": 0, "url": 0, "email": 0, "hash": 0, "cve": 0, "phone": 0, "asn": 0};
     collectedIndicatorsList.forEach(function(indicator) {
         count[indicator["type"]]++;
     });
@@ -65,6 +65,8 @@ textfieldBin.addEventListener("click", function() {
     inputField.value = "";
     textfieldCatch.style.display = "block";        
     textfieldTool.style.display = "none";
+    // Hide flag
+    document.querySelector("#flag").style.display = "none";
     // Clean the local storage
     localStorage.setItem("indicator", "");
     localStorage.setItem("type", "");
@@ -95,7 +97,7 @@ textfieldCatch.addEventListener("click", function() {
                 } else {
                     //countFoundIndicators();
                     const indicatorsList = JSON.parse(message['indicators']);
-                    var count = {"ip": 0, "domain": 0, "url": 0, "email": 0, "hash": 0, "cve": 0};
+                    var count = {"ip": 0, "domain": 0, "url": 0, "email": 0, "hash": 0, "cve": 0, "phone": 0, "asn": 0};
                     indicatorsList.forEach(function(indicator) {
                         count[indicator["type"]]++;
                     });
@@ -239,8 +241,10 @@ inputField.addEventListener("keyup", (e) => {
             // There is a search filter
             inputIndicator = inputs[0];
             
-            if(inputs[1].includes("+")) {
-                fToolName = inputs[1].split("+")[1];
+            if(inputs[1][0] === "!") {
+                fToolName = inputs[1].split("!")[1];
+            } else if(inputs[1].startsWith("tool:")) {
+                fToolName = inputs[1].split("tool:")[1];
             } else {
                 type = "invalid";
             }
@@ -364,10 +368,10 @@ document.querySelector("#add-node-button").addEventListener("click", (e) => {
  *
  */
 document.querySelector("#del-node-button").addEventListener("click", (e) => {
-    const nodeId = localStorage.getItem("indicator");
+    const indicator = localStorage.getItem("indicator");
 
     let graph = new Graph();
-    graph.deleteNode(nodeId);
+    graph.getNodesByLabel(indicator).forEach( (nodeId) => graph.deleteNode(nodeId) );
     document.querySelector("#add-node").style.display = "block";
     document.querySelector("#add-rel").style.display = "none";
     document.querySelector("#del-node").style.display = "none";
@@ -564,6 +568,14 @@ document.querySelectorAll(".catch-container").forEach((v) => {
                 document.querySelector("#filter-container-types > select").value = "cve";
                 showIndicatorsByType("cve");
                 break;
+            case "catch-phone":
+                document.querySelector("#filter-container-types > select").value = "phone";
+                showIndicatorsByType("phone");
+                break;
+            case "catch-asn":
+                document.querySelector("#filter-container-types > select").value = "asn";
+                showIndicatorsByType("asn");
+                break;
         }
     });
 });
@@ -724,7 +736,7 @@ document.querySelector("#auto-graph-opt input").addEventListener("change", funct
  */
 document.querySelector("#open-settings").addEventListener("click", function(evt) {
     browser.tabs.create({
-        url: '/src/customtools/customtools.html'
+        url: '/src/custom_tools/custom-tools.html'
     });
 });
 

@@ -16,7 +16,10 @@ function cookURL(originalURL, paramString) {
     } else if(originalURL.includes('\%b')) {
         // Base64 encode the parameter
         finalURL = originalURL.replace('\%b', encodeURIComponent(btoa(paramString)));
+    } else if(originalURL.includes('\%n')) {
+        finalURL = originalURL.replace('\%n', paramString.replace('AS', ''));
     }
+                          
     return finalURL;
 }
 

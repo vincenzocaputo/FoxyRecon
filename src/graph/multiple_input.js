@@ -6,7 +6,6 @@ class MultipleInput {
 
         
         this.value = Array();
-        console.log(this.options);
         if (this.options == null || !this.options || this.options.length === 0) {
             inputField.addEventListener("keyup", (evt) => {
                 //evt.preventDefault();

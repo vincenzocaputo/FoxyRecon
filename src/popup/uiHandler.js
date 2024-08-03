@@ -65,11 +65,11 @@ function showCountryFlag(tld) {
     if(tld != "") {
       flag.src = "/assets/country-flags/"+tld+".png";
       flag.style.display = "block";
-      flag.alt = tld;
+      flag.title = indicatorParser.getCountryName(tld);
     } else {
         flag.src = "";
         flag.style.display = "none";
-        flag.alt = "";
+        flag.title = "";
     }
 }
 
@@ -84,6 +84,7 @@ function showAddonMain() {
     // Restore placeholder text of the input field
     document.getElementById("input-box").placeholder = "Enter your indicator";
     document.getElementById("main").style.display = "block";
+    document.getElementById("disclaimer").style.display = "block";
     // Hide filter dropdown menus
     document.getElementById("filter-container-types").style.display = "none";
     document.getElementById("filter-container-tags").style.display = "none";
@@ -104,6 +105,8 @@ function showAddonMain() {
     document.getElementById("del-node").style.display = "none";
     // Show history icon
     document.getElementById("hist-icon").style.display = "block";
+    // Hide flag
+    document.getElementById("flag").style.display = "none";
 }
 
 
@@ -128,6 +131,7 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
     document.getElementById("no-tools").style.display = "none";
     document.getElementById("no-indicators").style.display = "none";
     document.getElementById("hist-icon").style.display = "none";
+    document.getElementById("disclaimer").style.display = "none";
 
     let graph = new Graph();
     const nodeIds = graph.getNodesByLabel(indicator);
@@ -136,9 +140,11 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
         document.getElementById("add-rel").style.display = "block";
         document.getElementById("del-node").style.display = "block";
     } else {
-        document.getElementById("add-node").style.display = "block";
-        document.getElementById("add-rel").style.display = "none";
-        document.getElementById("del-node").style.display = "none";
+        if(type != "phone") {
+            document.getElementById("add-node").style.display = "block";
+            document.getElementById("add-rel").style.display = "none";
+            document.getElementById("del-node").style.display = "none";
+        }
     }
     // This node contains the list of tools
     const toolsListNodes = document.getElementById("tools-list");
@@ -170,6 +176,7 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
                         resNodes[i].url = url;
                         resNodes[i].name = tools[i]["name"];
                         resNodes[i].submitQuery = tools[i]["submitQuery"];
+                        resNodes[i].inputSelector = tools[i]["inputSelector"];
 
 
                     } else  {
@@ -286,7 +293,6 @@ function createToolsList(toolsList){
 
         let imageSrc = toolsList[i]["icon"];
         if(imageSrc.indexOf("data:image") == 0) {
-            console.log(imageSrc);
             nodeImage.setAttribute("src", imageSrc);
         } else {
             nodeImage.setAttribute("src", toolsIcoBasePath + imageSrc);
@@ -326,7 +332,6 @@ function createToolsList(toolsList){
                 nodeTag.textContent = tags[tagIdx].toUpperCase();
                 nodeTag.classList.add("tool-tag");
                 // Add transparency
-                nodeTag.style.backgroundColor = "rgba(256, 256, 256, 0.3)";
                 nodeTagsContainer.appendChild(nodeTag);
                 nodeText.insertAdjacentElement("beforeend", nodeTagsContainer);
             }
@@ -386,10 +391,16 @@ function createToolsList(toolsList){
             if(node.url && openPopups.length == 0) {
                 newtab = localStorage.getItem("settings.newtab");
                 
-                if(node.submitQuery) {
-                    localStorage.setItem("submit-btn-query", node.submitQuery);
+                if(node.inputSelector) {
+                    localStorage.setItem("autofill.input-selector", node.inputSelector);
                 } else {
-                    localStorage.setItem("submit-btn-query", "");
+                    localStorage.setItem("autofill.input-selector", "");
+                }
+
+                if(node.submitQuery) {
+                    localStorage.setItem("autofill.submit-btn-query", node.submitQuery);
+                } else {
+                    localStorage.setItem("autofill.submit-btn-query", "");
                 }
 
                 const targetId = e.target.id;
@@ -472,10 +483,15 @@ function createIndicatorsList(indicatorsList){
     document.getElementById("hist-icon").style.display = "none";
     document.getElementById("catch-icon").style.display = "none";
     document.getElementById("flag").style.display = "none";
+    document.getElementById("disclaimer").style.display = "none";
 
     let indicatorsListNode = document.getElementById("catch-res-list");
 
     let typesList = [];
+    if(!indicatorsList || indicatorsList.length == 0) {
+        document.getElementById("no-indicators").style.display="block";
+        return;
+    }
     for (i=0; i<indicatorsList.length; i++) {
         const type = indicatorsList[i]['type'];
         let node = document.createElement('div');
@@ -526,6 +542,12 @@ function createIndicatorsList(indicatorsList){
         } else if (type === 'cve') {
             nodeImage.setAttribute("src", toolsIcoBasePath + "cve_icon.png");
             color = "#FFE136";
+        } else if (type === 'phone') {
+            nodeImage.setAttribute("src", toolsIcoBasePath + "phone_icon.png");
+            color = "#AE1AB8";
+        } else if (type === 'asn') {
+            nodeImage.setAttribute("src", toolsIcoBasePath + "asn_icon.png");
+            color = "#FF44B2";
         }
         node.style.backgroundColor = nodeText.style.backgroundColor = color;
         // If the web resource has tags, add more space for them

@@ -1,4 +1,4 @@
- ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/vincenzocaputo/FoxyRecon?style=plastic)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/vincenzocaputo/FoxyRecon?style=plastic)
 ![Mozilla Add-on](https://img.shields.io/amo/v/foxyrecon?style=plastic)
 ![Mozilla Add-on](https://img.shields.io/amo/users/foxyrecon?style=plastic)
 <p align="left">
@@ -12,13 +12,13 @@
 </p>
 
 # FoxyRecon
-FoxyRecon is a Firefox add-on that helps you to carry out searching and investigation activities by using over 70 Open Source Intelligence Source (OSINT) web resources.
+FoxyRecon is a Firefox add-on that helps you to carry out searching and investigation activities by using over 90 Open Source Intelligence Source (OSINT) web resources.
 
 ![Popup](._media/popup.gif) ![Graph](._media/graph_example.png)
 
 ## Main Features
 
-- You can research and analyse your indicators on more than 70 online OSINT resources, by using the popup or the context menu after selecting your indicator. FoxyRecon will detect the type of the indicator you submitted and suggest you the most suitable web resources.
+- You can research and analyse your indicators on more than 90 online OSINT resources, by using the popup or the context menu after selecting your indicator. FoxyRecon will detect the type of the indicator you submitted and suggest you the most suitable web resources.
 - You can harvest and collect all the indicators that are present on the web page you are visiting. FoxyRecon allows you also to download them in CSV file for future analysis. See the wiki page for more information (https://github.com/vincenzocaputo/FoxyRecon/wiki/5.-Collecting-Indicators).
 - You can add custom resources to FoxyRecon, for example local tools (e.g.: MISP, OpenCTI and so on)
 - You can create a graph from the data collected during your investigation analysis. Graphs are based on STIX format to ensure compatibility with other tools. Moreover, FoxyRecon is able to automatically create graphs on the basis of searches you perform via FoxyRecon
@@ -30,7 +30,9 @@ Currently, FoxyRecon supports the following indicator types:
 - URLs
 - File Hashes
 - Email addresses
-- CVEs 
+- CVEs
+- Phone numbers
+- Autonomous System Numbers
 
 ## Search filters
 FoxyRecon provides some feature that can make analysis activities more efficient and comfortable:
@@ -47,7 +49,7 @@ FoxyRecon provides some feature that can make analysis activities more efficient
     - Open ports passive scanning utility
     - HTTP Headers checker utility
     - Network activities information
-- Filter web resources by name using the special character "+" in the search bar (e.g.: "example.com +abuse)
+- Filter web resources by name using the special character "!" in the search bar (e.g.: "example.com !abuse)
 - Choose your favourite tools and display only those by using the "star" button
 
 #### Custom Web Resources

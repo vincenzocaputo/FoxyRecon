@@ -1,21 +1,3 @@
-// Check if current version is installed
-let currentVersion = browser.runtime.getManifest().version;
-console.log("Current version: " + currentVersion);
-
-if (installedVersion = localStorage.getItem("version")) {
-    console.log("Installed version: " + installedVersion);
-} else {
-    // Assume that the installed version is obsolete
-    installedVersion = 0;
-}
-
-if (installedVersion != currentVersion) {
-    // If a new version was released, clean the local storage
-    localStorage.clear();
-    // Add current version to local storage
-    localStorage.setItem("version", currentVersion);
-}
-
 // Setup default settings
 if (!localStorage.getItem("settings.newtab")) {
     localStorage.setItem("settings.newtab", "true");
@@ -28,18 +10,65 @@ if (!localStorage.getItem("settings.autocatch")) {
 }
 if (!localStorage.getItem("settings.autograph")) {
     localStorage.setItem("settings.autograph", "false");
-}
 
+}
 var tools;
 loadToolsList(function(ts) {
     tools=ts;
     createToolsMenu(tools);
-})
+});
 
 var graphMapping;
 loadGraphMapping(function(mp) {
     graphMapping=mp;
-})
+});
+
+browser.runtime.onInstalled.addListener(function(details) {
+    let currentVersion = browser.runtime.getManifest().version;
+    if(details.reason === "install") {
+        console.log("Current version: " + currentVersion);
+        localStorage.setItem("version", currentVersion);
+    } else if(details.reason === "update") {
+        if (installedVersion = localStorage.getItem("version")) {
+            console.log("Installed version: " + installedVersion);
+        } else {
+            // Assume that the installed version is obsolete
+            installedVersion = 0;
+        }
+        
+        if (installedVersion !== currentVersion) {
+            browser.tabs.create({
+                discarded: true,
+                title: "FoxyRecon New Version",
+                url: 'https://github.com/vincenzocaputo/FoxyRecon/releases/tag/v'+currentVersion
+            });
+            // If a new version was released, clean the local storage
+            localStorage.removeItem("tools");
+            localStorage.removeItem("type");
+            localStorage.removeItem("tag");
+            localStorage.removeItem("autograph-mapping");
+            localStorage.removeItem("submit-btn-query");
+            localStorage.removeItem("autofill.submit-btn-query");
+            localStorage.removeItem("autofill.input-selector");
+            localStorage.removeItem("indicator");
+            // Add current version to local storage
+            localStorage.setItem("version", currentVersion);
+
+            var tools;
+            loadToolsList(function(ts) {
+                tools=ts;
+                createToolsMenu(tools);
+            })
+
+            var graphMapping;
+            loadGraphMapping(function(mp) {
+                graphMapping=mp;
+            })
+        }
+        
+    }
+});
+
 
 
 /**
@@ -140,9 +169,14 @@ function updateToolsMenu(toolsList, indicator, type) {
                     //localStorage.setItem("graph.autocreate", "true"); 
                     // Add the query for autofill to localstorage
                     if(tool["submitQuery"]) {
-                        localStorage.setItem("submit-btn-query", tool["submitQuery"]);
+                        localStorage.setItem("autofill.submit-btn-query", tool["submitQuery"]);
                     } else {
-                        localStorage.setItem("submit-btn-query", "");
+                        localStorage.setItem("autofill.submit-btn-query", "");
+                    }
+                    if(tool["inputSelector"]) {
+                        localStorage.setItem("autofill.input-selector", tool["inputSelector"]);
+                    } else {
+                        localStorage.setItem("autofill.input-selector", "");
                     }
                     // Create the new tab
                     browser.tabs.create({
@@ -160,7 +194,8 @@ function updateToolsMenu(toolsList, indicator, type) {
 browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if(request.id == 1) {
         // Autofill feature
-        query = localStorage.getItem("submit-btn-query");
+        query = localStorage.getItem("autofill.submit-btn-query");
+        inputSelector = localStorage.getItem("autofill.input-selector");
         // Send the query only if auto-submit option is enabled
         if(localStorage.getItem("settings.autosubmit") === "true") {
             // Send the query to find submit button
@@ -168,9 +203,10 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         } else {
             submit = "false";
         }
-        sendResponse({msg: localStorage.getItem("indicator"), query: query, submit: submit});
+        sendResponse({msg: localStorage.getItem("indicator"), query: query, inputSelector: inputSelector, submit: submit});
         // Consume the request (to avoid clicking the button more times for the same request)
-        localStorage.setItem("submit-btn-query","");
+        localStorage.setItem("autofill.submit-btn-query","");
+        localStorage.setItem("autofill.input-selector","");
     } else if (request.id == 2) {
         // Auto graph generation
         if (localStorage.getItem("settings.autograph") === "true" && request.msg) {
