@@ -49,19 +49,18 @@ FoxyRecon provides some feature that can make analysis activities more efficient
     - Open ports passive scanning utility
     - HTTP Headers checker utility
     - Network activities information
-- Filter web resources by name using the special character "!" in the search bar (e.g.: "example.com !abuse)
+- Filter web resources by name using the special character "!" in the search bar (e.g.: `example.com !abuse`)
 - Choose your favourite tools and display only those by using the "star" button
-
-#### Custom Web Resources
-You can add your custom tools to FoxyRecon using the dedicated page reachable from settings.
 
 ## Web Resources
 FoxyRecon includes a plenty of OSINT web resources. You can find the full list [here](https://github.com/vincenzocaputo/FoxyRecon/wiki/3.-Web-Resources).
 
-You can also add your custom web resource sing the dedicated page reachable from settings.
+### Custom Tools
+You can add your custom tools to FoxyRecon using the dedicated page reachable from settings. See the [Wiki Page](https://github.com/vincenzocaputo/FoxyRecon/wiki/7.-Add-custom-web-tools) for more information.
+
 
 ## Disclaimer
 FoxyRecon does not retain any user data. Data submitted using this add-on will be sent to external web resources that are not under control of FoxyRecon. For this reason the data submitted will be treated in accordance with the terms of service of the several web resources chosen for analysis. Please, be aware of the tools and resources you are using and do not submit any personal information.
 
 
-This addon is *experimental* and it may contain some bugs. Feel free to open issues if you have questions, insights or bugs to report. 
+This addon is *experimental* and it may contain some bugs. Feel free to open issues if you have questions, insights or bugs to report.
