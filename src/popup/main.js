@@ -99,9 +99,12 @@ textfieldCatch.addEventListener("click", function() {
                     const indicatorsList = JSON.parse(message['indicators']);
                     var count = {"ip": 0, "domain": 0, "url": 0, "email": 0, "hash": 0, "cve": 0, "phone": 0, "asn": 0};
                     indicatorsList.forEach(function(indicator) {
-                        count[indicator["type"]]++;
+                        if(indicator["type"] !== "internal") {
+                            count[indicator["type"]]++;
+                        }
                     });
                     for(let key in count) {
+                        console.log(key);
                         document.getElementById(key+"_occ").textContent = count[key];
                     }
                     collectedIndicatorsListJson = message['indicators'];
