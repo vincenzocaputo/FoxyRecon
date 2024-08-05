@@ -304,10 +304,13 @@ function createToolsList(toolsList){
         nodeText.textContent = toolsList[i]["name"];
         
         // If the name is too long, reduce the font size
+        console.log(nodeText.
         if(toolsList[i]["name"].length > 15 && toolsList[i]["name"].length < 20) {
             nodeText.style.fontSize = "0.9em";
-        } else if(toolsList[i]["name"].length > 19) {
+        } else if(toolsList[i]["name"].length > 19 && toolsList[i]["name"].length < 25) {
             nodeText.style.fontSize = "0.8em";
+        } else if(toolsList[i]["name"].length > 24) {
+            nodeText.style.fontSize = "0.7em";
         }
         nodeText.classList.add("tool-name");
 
