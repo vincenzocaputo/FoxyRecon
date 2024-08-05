@@ -89,7 +89,7 @@ div.tool-name {
     text-align: left;
     vertical-align: middle;
     line-height: 40px; 
-    font-size: 100%;
+    font-size: 1em;
     font-weight: bold;
     color: white;
     -webkit-font-smoothing: antialiased;
