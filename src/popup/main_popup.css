@@ -223,6 +223,7 @@ div.tool-tag {
 
 #catch-icon, #hist-icon {
     display: block;
+    cursor: pointer;
 }
 
 #flag {
