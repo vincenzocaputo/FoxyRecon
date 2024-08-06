@@ -288,7 +288,7 @@ function createToolsList(toolsList){
         // This node will contain the resource's icon
         let nodeImageContainer = document.createElement("div");
         nodeImageContainer.classList.add("tool-icon");
-   
+
         let nodeImage = document.createElement("img");
 
         let imageSrc = toolsList[i]["icon"];
@@ -300,18 +300,12 @@ function createToolsList(toolsList){
 
         // This node will contain the web resource's name
         let nodeText = document.createElement("div");
-
-        nodeText.textContent = toolsList[i]["name"];
         
-        // If the name is too long, reduce the font size
-        console.log(nodeText.
-        if(toolsList[i]["name"].length > 15 && toolsList[i]["name"].length < 20) {
-            nodeText.style.fontSize = "0.9em";
-        } else if(toolsList[i]["name"].length > 19 && toolsList[i]["name"].length < 25) {
-            nodeText.style.fontSize = "0.8em";
-        } else if(toolsList[i]["name"].length > 24) {
-            nodeText.style.fontSize = "0.7em";
-        }
+        text = document.createElement("div");
+        text.textContent = toolsList[i]["name"];
+        text.classList.add("text");
+        
+        nodeText.appendChild(text);
         nodeText.classList.add("tool-name");
 
         // Set button colors
@@ -386,6 +380,32 @@ function createToolsList(toolsList){
         optionsContainer.appendChild(openIconContainer);
         optionsContainer.appendChild(favIconContainer);
         node.appendChild(optionsContainer);
+
+        // Add animation to show the entire text
+        nodeText.addEventListener("mouseenter", (e) => {
+            const container = e.target;
+            const text = container.querySelector('.text');
+            const containerWidth = container.offsetWidth;
+            const textWidth = text.scrollWidth;
+
+            if (!text.classList.contains('animate')) {
+                if (textWidth > containerWidth) {
+                    text.classList.add('animate');
+                } else {
+                    text.classList.remove('animate');
+                }
+            }
+        });
+        // Remove the animation when the mouse leaves
+        nodeText.addEventListener("mouseleave", (e) => {
+            const container = e.target;
+            const text = container.querySelector('.text');
+
+            if (text.classList.contains('animate')) {
+                text.classList.remove('animate');
+            }
+        });
+
         
         // Set click event function
         node.addEventListener("click", function(e) {
@@ -468,6 +488,7 @@ function createToolsList(toolsList){
             }
         });
         document.getElementById("tools-list").appendChild(node);
+
     }
 }
 
@@ -511,18 +532,6 @@ function createIndicatorsList(indicatorsList){
         // This node will contain the web resource's name
         let nodeText = document.createElement("div");
 
-        nodeText.textContent = indicatorsList[i]['value'];
-        // If the name is too long, reduce the font size
-        if(indicatorsList[i]['value'].length > 15 && indicatorsList[i]['value'].length < 20) {
-            nodeText.style.fontSize = "90%";
-        } else if (indicatorsList[i]['value'].length > 19) {
-            text = indicatorsList[i]['value'].substring(0, 19);
-            nodeText.textContent = text + "...";
-        } else if(indicatorsList[i]['value'].length > 19) {
-            nodeText.style.fontSize = "80%";
-        }
-        nodeText.classList.add("tool-name");
-
         // Set button colors
         let color;
         // Add type to array
@@ -555,6 +564,14 @@ function createIndicatorsList(indicatorsList){
         node.style.backgroundColor = nodeText.style.backgroundColor = color;
         // If the web resource has tags, add more space for them
         nodeText.classList.add("tool-name-with-tags");
+
+        text = document.createElement("div");
+        text.textContent = indicatorsList[i]['value'];
+        text.classList.add("text");
+        
+        nodeText.appendChild(text);
+        nodeText.classList.add("tool-name");
+
         // Add container for tags
         let nodeTagsContainer = document.createElement("div");
         nodeTagsContainer.classList.add("tool-tags-container");
@@ -575,6 +592,31 @@ function createIndicatorsList(indicatorsList){
         nodeImageContainer.appendChild(nodeImage);
         node.appendChild(nodeImageContainer);
         node.appendChild(nodeText);
+
+        // Add animation to show the entire text
+        nodeText.addEventListener("mouseenter", (e) => {
+            const container = e.target;
+            const text = container.querySelector('.text');
+            const containerWidth = container.offsetWidth;
+            const textWidth = text.scrollWidth;
+
+            if (!text.classList.contains('animate')) {
+                if (textWidth > containerWidth) {
+                    text.classList.add('animate');
+                } else {
+                    text.classList.remove('animate');
+                }
+            }
+        });
+        // Remove the animation when the mouse leaves
+        nodeText.addEventListener("mouseleave", (e) => {
+            const container = e.target;
+            const text = container.querySelector('.text');
+
+            if (text.classList.contains('animate')) {
+                text.classList.remove('animate');
+            }
+        });
 
         indicatorsListNode.appendChild(node);
         indicatorsListNode.style.display = "block";

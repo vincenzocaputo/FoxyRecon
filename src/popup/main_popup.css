@@ -84,7 +84,6 @@ div.tool-name {
     float: left;
     margin-left: 3px;
     height: 40px;
-    background-color: #FFFFFF;
     width: 70%;
     text-align: left;
     vertical-align: middle;
@@ -96,6 +95,29 @@ div.tool-name {
     -moz-font-smoothing: antialiased;
     -o-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+div.tool-name>.text {
+    position: absolute;
+}
+
+div.tool-name>.text.animate {
+    animation: move 10s linear infinite;
+}
+
+@keyframes move {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
 }
 
 div.tool-name-with-tags {
@@ -111,6 +133,8 @@ div.tool-tags-container {
     line-height: 15px;
     color: white;
     font-size: 2.5vw;
+    position: absolute; 
+    top: 50%;
 }
 
 div.tool-tag {

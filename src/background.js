@@ -192,6 +192,7 @@ function updateToolsMenu(toolsList, indicator, type) {
  * Waiting for  messages from content_script
  */
 browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    alert(request);
     if(request.id == 1) {
         // Autofill feature
         query = localStorage.getItem("autofill.submit-btn-query");
