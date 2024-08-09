@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Change
 - Update browser-polyfill library
 - Speed up typing animation
+- Shrink the history drop-down menu
 
 ### Fix
 - Urlscan visibility scan selection
