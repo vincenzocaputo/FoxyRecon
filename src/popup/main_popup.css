@@ -1,6 +1,7 @@
 body {
     width: 300px;
     background-color: #EEEEEE;
+    font-family: Verdana, sans-serif;
 }
 
 
@@ -9,7 +10,6 @@ body {
 }
 
 #no-tools, #no-indicators {
-    font-family: Verdana, sans-serif;
     color: #878787;
     text-align: center;
     font-size: 11px;
@@ -28,7 +28,6 @@ body {
 
 #tools-list > div {
     display: none;
-    font-family: Verdana, sans-serif;
     font-size: 14px;
     color: #878787;
     text-align: center;
@@ -80,7 +79,6 @@ div.tool-icon > img {
 }
 
 div.tool-name {
-    font-family: Verdana, sans-serif;
     float: left;
     margin-left: 3px;
     height: 40px;
@@ -292,7 +290,6 @@ div.tool-tag {
 }
 
 #filter-container-tags > label, #filter-container-types > label {
-    font-family: Verdana;
     font-size: 14px;
 }
 
@@ -387,6 +384,10 @@ div.tool-tag {
 
 #del-node-button:hover {
     background-color: #B00505;
+}
+
+.settings-title {
+    font-weight: bold;
 }
 
 #settings-button {
@@ -711,13 +712,11 @@ input:checked + .slider:before {
 }
 
 #content #addon-name {
-    font-family: sans-serif;
     font-weight: bold;
     font-size: 20px;
 }
 
 #content #addon-version {
-    font-family: sans-serif;
     font-size: 11px;
 }
 
@@ -733,7 +732,6 @@ input:checked + .slider:before {
     width: 100%;
     text-align: center;
     margin-top: 5px;
-    font-family: Verdana, sans-serif;
     font-weight: bold;
     color: #333333;
     font-size: 14px;
@@ -768,7 +766,6 @@ input:checked + .slider:before {
 
 .catch-container .occurrences {
     font-weight: bold;
-    font-family: Verdana sans-serif;
     font-size: 18px;
     display: block;
     margin: 0 auto;
@@ -826,12 +823,10 @@ input:checked + .slider:before {
 
 
 #catch-caption {
-    font-family: sans-serif;
     padding-top: 10px;
 }
 
 #disclaimer {
-    font-family: Verdana, sans-serif;
     font-size: 9px;
     text-align: center;
     bottom: 0;
