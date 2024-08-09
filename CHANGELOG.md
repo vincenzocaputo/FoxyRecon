@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Text animation to display entire tool names when they are too long
 - Improve indicators detection
 
+### Change
+- Update browser-polyfill library
+
 ### Fix
 - Indicators collection on web pages containing private IP addresses
 
