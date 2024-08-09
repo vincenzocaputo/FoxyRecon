@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Add
 - Text animation to display entire tool names when they are too long
+- Option to disable the typing animation of indicators in text fields
 - Improve indicators detection
 
 ### Change

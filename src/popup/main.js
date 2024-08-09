@@ -622,6 +622,7 @@ document.getElementById("settings-button").addEventListener("click", function() 
         settingsPopup.classList.add("open-popup");
         
         setCheckboxStatus(document.querySelector("#open-tab-opt input"), "settings.newtab");
+        setCheckboxStatus(document.querySelector("#typ-anim-opt input"), "settings.typanim");
         setCheckboxStatus(document.querySelector("#auto-submit-opt input"), "settings.autosubmit");
         setCheckboxStatus(document.querySelector("#auto-catch-opt input"), "settings.autocatch");
         setCheckboxStatus(document.querySelector("#auto-graph-opt input"), "settings.autograph");
@@ -701,6 +702,15 @@ document.querySelector("#open-tab-opt input").addEventListener("change", functio
             icon.id = "open-icon-in";
         }
     }
+});
+
+/**
+ * Handle typing animation option checkbox change event
+ */
+document.querySelector("#typ-anim-opt input").addEventListener("change", function(evt) {
+    //let linksNodes = document.getElementById("tools-list").children;
+    typAnimOption = evt.target.checked;
+    localStorage.setItem("settings.typanim", typAnimOption);
 });
 
 /**

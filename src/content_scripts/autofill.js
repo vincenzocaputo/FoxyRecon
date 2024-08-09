@@ -43,6 +43,10 @@ function sendMessageAndFill() {
 
         // Get the selector to find the input field
         inputSelector = resp.inputSelector;
+
+        // Get typing animation option
+        typAnimOption = resp.typAnimOption;
+
         submit = resp.submit;
 
         if(inputSelector) {
@@ -78,17 +82,24 @@ function sendMessageAndFill() {
 
             if(inputField) {
                 inputField.value = "";
-                intv = setInterval(()=>{ 
-                    const letter = indicator[0]; 
-                    if(letter) { 
-                        indicator = indicator.slice(1); 
-                        inputField.value = inputField.value + letter 
-                    } else { 
-                        inputField.dispatchEvent(new Event("input"));
-                        clearInterval(intv);
+                if(typAnimOption === "true") {
+                    intv = setInterval(()=>{ 
+                        const letter = indicator[0]; 
+                        if(letter) { 
+                            indicator = indicator.slice(1); 
+                            inputField.value = inputField.value + letter 
+                        } else { 
+                            inputField.dispatchEvent(new Event("input"));
+                            clearInterval(intv);
+                            submitIndicator(query, submit, current_url);
+                        } 
+                    }, 50);
+                } else {
+                    setTimeout(() => {
+                        inputField.value = indicator;
                         submitIndicator(query, submit, current_url);
-                    } 
-                }, 50);
+                    }, 50);
+                }
             }
         }
         }, 500);

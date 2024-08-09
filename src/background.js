@@ -12,6 +12,10 @@ if (!localStorage.getItem("settings.autograph")) {
     localStorage.setItem("settings.autograph", "false");
 
 }
+if (!localStorage.getItem("settings.typanim")) {
+    localStorage.setItem("settings.typanim", "true");
+
+}
 var tools;
 loadToolsList(function(ts) {
     tools=ts;
@@ -196,14 +200,10 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         // Autofill feature
         query = localStorage.getItem("autofill.submit-btn-query");
         inputSelector = localStorage.getItem("autofill.input-selector");
-        // Send the query only if auto-submit option is enabled
-        if(localStorage.getItem("settings.autosubmit") === "true") {
-            // Send the query to find submit button
-            submit = "true";
-        } else {
-            submit = "false";
-        }
-        sendResponse({msg: localStorage.getItem("indicator"), query: query, inputSelector: inputSelector, submit: submit});
+        submit = localStorage.getItem("settings.autosubmit");
+        typAnimOption = localStorage.getItem("settings.typanim");
+
+        sendResponse({msg: localStorage.getItem("indicator"), query: query, inputSelector: inputSelector, submit: submit, typAnimOption: typAnimOption});
         // Consume the request (to avoid clicking the button more times for the same request)
         localStorage.setItem("autofill.submit-btn-query","");
         localStorage.setItem("autofill.input-selector","");
