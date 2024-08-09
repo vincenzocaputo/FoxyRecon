@@ -2,10 +2,9 @@
 var indicator = "";
 
 function submitIndicator(query, submit, current_url) {
+                   
     if(query && submit === "true") {
         if(current_url.includes("urlscan.io")) {
-            // Get input field
-            document.getElementById(query).click();
             setTimeout(() => {
                 document.getElementById("submitbtn_text").click();
             }, 1000);
@@ -72,6 +71,11 @@ function sendMessageAndFill() {
                 inputField = document.querySelector(inputSelector);
             }
 
+            if(current_url.includes("urlscan.io")) {
+                // Select the scan visibility
+                document.getElementById(query).click();
+            }
+
             if(inputField) {
                 inputField.value = "";
                 intv = setInterval(()=>{ 
@@ -84,7 +88,7 @@ function sendMessageAndFill() {
                         clearInterval(intv);
                         submitIndicator(query, submit, current_url);
                     } 
-                }, 100);
+                }, 50);
             }
         }
         }, 500);

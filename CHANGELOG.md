@@ -12,8 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Change
 - Update browser-polyfill library
+- Speed up typing animation
 
 ### Fix
+- Urlscan visibility scan selection
 - Indicators collection on web pages containing private IP addresses
 
 ## [0.21.0] - 2024-08-03
