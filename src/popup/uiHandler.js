@@ -627,13 +627,23 @@ function createIndicatorsList(indicatorsList){
             })
         });
         // Set click event function
-        node.addEventListener("click", function() {
-            let [type, tld] = indicatorParser.getIndicatorType(node.indicator);
+        node.addEventListener("click", function(evt) {
+            let type = evt.target.closest(".catch-res-entry").type;
+            let tld  = ""
             let value = node.indicator;
-            if(type="defanged") {
-                value = indicatorParser.refangIndicator(node.indicator); 
-                [type, tld] = indicatorParser.getIndicatorType(value);
+            if(type=="phone") {
+                value = value.replaceAll(/[^+0-9]/g, '');
+                if(value[0] !== '+') {
+                    value = '+' + value;
+                }
+            } else {
+                [type, tld] = indicatorParser.getIndicatorType(node.indicator);
+                if(type=="defanged") {
+                    value = indicatorParser.refangIndicator(node.indicator); 
+                    [type, tld] = indicatorParser.getIndicatorType(value);
+                }
             }
+
             document.getElementById("input-box").value = value;
             submitIndicator(value, type, tld);
         });

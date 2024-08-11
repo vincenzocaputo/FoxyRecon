@@ -21,10 +21,10 @@ function catchIndicators() {
             let value = match.value[0];
             if(indicatorType == "phone") {
                 let type = "phone";
-                value = value.replaceAll(/[^+0-9]/g, '');
-                if(value[0] !== '+') {
-                    value = '+' + value;
-                }
+                //value = value.replaceAll(/[^+0-9]/g, '');
+                //if(value[0] !== '+') {
+                //    value = '+' + value;
+                //}
                 indicators.push({'type': type, 'value': value});
             } else if(value) {
                 let [type, tld] = indParser.getIndicatorType(value);

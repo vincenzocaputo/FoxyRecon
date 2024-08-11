@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update browser-polyfill library
 - Speed up typing animation
 - Shrink the history drop-down menu
+- Remove phone numbers format conversion when collecting indicators. Make the conversion only when the user submits a collected phone number indicator for investigations.
 
 ### Fix
 - Urlscan visibility scan selection
