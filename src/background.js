@@ -79,22 +79,26 @@ browser.runtime.onInstalled.addListener(function(details) {
  * Create context menu containing the tools list
  * @param {toolsList} list of available tools
  */
+
 function createToolsMenu(toolsList) {
-    if(toolsList) {
-        for (i=0; i<toolsList.length; i++){
-            let tool = toolsList[i];
-            // Create menu entry
-            browser.contextMenus.create({
-                id: i.toString(), // Incremental ID
-                title: tool["name"], // Tool name
-                contexts: ["selection"], // Show menu on selected text
-                /*icons: {
-                    16: browser.runtime.getURL(tool["icon"]),
-                },*/
-                visible: true,
-            });
+    browser.contextMenus.create({
+        id: 'create-node',
+        title: "Add new graph node",
+        contexts: ["selection"],
+        visible: true,
+        onclick: function() {
         }
-    }
+    });
+    browser.contextMenus.create({
+        id: 'investigate',
+        title: "Investigate",
+        contexts: ["selection"],
+        visible: true,
+        onclick: function() {
+            browser.browserAction.openPopup();
+            
+        }
+    });
 }
 
 /**
@@ -144,6 +148,32 @@ function catchIndicators(e) {
 browser.tabs.onActivated.addListener(catchIndicators);
 browser.tabs.onUpdated.addListener(catchIndicators);
 browser.tabs.onCreated.addListener(catchIndicators);
+
+/**
+ * Open Context Menu. If the selected text is a valid indicator, show the option to send the indicator to the popup
+ * @param {selectedText} selected text
+ * @param {type} indicator type
+ * @param {tld} if the selected text is a domain, report the top level domain
+ */
+function showContextMenu(selectedText, type = "invalid", tld = "") {
+    if(type !== "invalid") {
+        browser.contextMenus.update('investigate', {
+            enabled: true,
+            visible: true,
+            onclick: function() {
+                localStorage.setItem("type", type);
+                localStorage.setItem("indicator", selectedText);
+                localStorage.setItem("tld", tld);
+                browser.browserAction.openPopup();
+            }
+        }).then( () => browser.contextMenus.refresh() );
+    } else {
+        browser.contextMenus.update('investigate', {
+            enabled: false
+        }).then( () => browser.contextMenus.refresh() );
+    }
+
+}
 
 /**
  * Updates context menu making visible only the tools which are compatible with the selected string
@@ -242,6 +272,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         }
         sendResponse({msg: 1});
     } else {
-        updateToolsMenu(tools, request.indicator, request.type);
+        // Context Menu
+        showContextMenu(request.indicator, request.type, request.tld);
     }
 })

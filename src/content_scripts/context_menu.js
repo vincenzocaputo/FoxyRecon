@@ -4,12 +4,12 @@ var lastType = "";
 /**
  * Selection change event
  */
-document.addEventListener("selectionchange", () => {
+document.addEventListener("contextmenu", (evt) => {
     indicatorParser = new IndicatorParser();
     let selectedText = document.getSelection().toString().trim();
+
     if(selectedText) {
         // Determine the type of the indicator selected
-
         [type, tld] = indicatorParser.getIndicatorType(selectedText);
         if(type != "invalid"){
             if(type === "defanged") {
@@ -21,20 +21,17 @@ document.addEventListener("selectionchange", () => {
             browser.runtime.sendMessage({
                 id: 0,
                 indicator: selectedText,
-                type: type
+                type: type,
+                tld: tld
             });
         } else {
-            if(lastType != type){
-                browser.runtime.sendMessage({
-                    id: 0,
-                    indicator: "", // I don"t care about the content of the selected text
-                    type: type
-                });
-            }
-            // Otherwise I don"t have to send an update to background script
+            browser.runtime.sendMessage({
+                id: 0,
+                indicator: selectedText,
+                type: type,
+                tld: ""
+            });
         }
-        // Update the type of the last selected text
-        lastType = type;
     }
 })
 

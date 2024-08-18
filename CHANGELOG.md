@@ -10,12 +10,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Text animation to display entire tool names when they are too long
 - Option to disable the typing animation of indicators in text fields
 - Improve indicators detection
+- Investigate option in context menu to send indicators to the popup
 
 ### Change
-- Update browser-polyfill library
+- Updated browser-polyfill library
 - Speed up typing animation
 - Shrink the history drop-down menu
-- Remove phone numbers format conversion when collecting indicators. Make the conversion only when the user submits a collected phone number indicator for investigations.
+- Removed tools from context menu 
+- Removed phone numbers format conversion when collecting indicators. Make the conversion only when the user submits a collected phone number indicator for investigations.
 
 ### Fix
 - Urlscan visibility scan selection
