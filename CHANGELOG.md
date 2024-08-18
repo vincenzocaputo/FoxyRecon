@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Shrink the history drop-down menu
 - Removed tools from context menu 
 - Removed phone numbers format conversion when collecting indicators. Make the conversion only when the user submits a collected phone number indicator for investigations.
+- UI improvements in graph page
 
 ### Fix
 - Urlscan visibility scan selection
