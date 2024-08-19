@@ -6,6 +6,7 @@
 		<link rel="stylesheet" href="main_popup.css"/>
 	</head>
 	<body>
+        <div id="background"></div>
         <div id="search-box">
             <div id="text-field">
                 <img id="domextr-icon" src="../../assets/icons/tool.png"/>
@@ -67,7 +68,12 @@
         </div>
          <div class="popup">
             <div id="options-popup" class="popup-container">
-                <span class="settings-title">Settings</span>
+                <div class="popup-title">
+                    <span class="settings-title">Settings</span>
+                    <div class="popup-close" id="settings-popup-close">
+                        <img src="../../assets/icons/del.png">
+                    </div>
+                </div>
                 <hr>
                 <div class="popup-container-body">
                     <div class="option-label">

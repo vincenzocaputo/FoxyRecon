@@ -409,33 +409,22 @@ document.querySelector("#add-rel-button").addEventListener("click", (e) => {
 
         const addRelPopup = document.getElementById("add-relationship-popup");
 
-        if(!addRelPopup.style.display || addRelPopup.style.display == "none" ) {
-            // Don't show pointer cursor on buttons
-            document.querySelectorAll(".tool-entry").forEach(function(entry) {
-                entry.style.cursor = "default";
-            });
+        // Don't show pointer cursor on buttons
+        document.querySelectorAll(".tool-entry").forEach(function(entry) {
+            entry.style.cursor = "default";
+        });
 
-            addRelPopup.style.display = "block";
-            addRelPopup.classList.add("open-popup");
-            const selectRelName = document.getElementById("rel-node-name");
-            selectRelName.textContent = "";
-            Graph.relationshipTypes.forEach( rtype => {
-                const optionValue = document.createElement("option");
-                optionValue.value = rtype;
-                optionValue.textContent = rtype;
-                selectRelName.appendChild(optionValue);
-            });
-
-            
-        } else {
-            // Show pointer cursor on buttons
-            document.querySelectorAll(".tool-entry").forEach(function(entry) {
-                entry.style.cursor = "pointer";
-            });
-
-            addRelPopup.style.display = "none";
-            addRelPopup.classList.remove("open-popup");
-        }
+        document.querySelector("#background").style.display = "block";
+        addRelPopup.style.display = "block";
+        addRelPopup.classList.add("open-popup");
+        const selectRelName = document.getElementById("rel-node-name");
+        selectRelName.textContent = "";
+        Graph.relationshipTypes.forEach( rtype => {
+            const optionValue = document.createElement("option");
+            optionValue.value = rtype;
+            optionValue.textContent = rtype;
+            selectRelName.appendChild(optionValue);
+        });
     }
 });
 
@@ -523,6 +512,7 @@ document.querySelector("#add-node-rel-button").addEventListener("click", (e) => 
  */
 document.querySelector("#add-node-rel-close-button").addEventListener("click", function(evt) {
     const relPopup = document.getElementById("add-relationship-popup");
+    document.querySelector("#background").style.display = "none";
     relPopup.style.display = "none";
     relPopup.classList.remove("open-popup");
 });
@@ -607,77 +597,81 @@ function setCheckboxStatus(checkboxNode, optionName) {
 }
 
 
+document.getElementById("settings-popup-close").addEventListener("click", function() {
+    const settingsPopup = document.getElementById("options-popup");
+    document.querySelector("#background").style.display = "none";
+    // Show pointer cursor on buttons
+    document.querySelectorAll(".tool-entry").forEach(function(entry) {
+        entry.style.cursor = "pointer";
+    });
+    settingsPopup.style.display = "none";
+    settingsPopup.classList.remove("open-popup");
+
+});
+
 /**
  * Show or hide settings popup menu
  */
 document.getElementById("settings-button").addEventListener("click", function() {
     const settingsPopup = document.getElementById("options-popup");
-    if(!settingsPopup.style.display || settingsPopup.style.display == "none" ) {
-        // Don't show pointer cursor on buttons
-        document.querySelectorAll(".tool-entry").forEach(function(entry) {
-            entry.style.cursor = "default";
-        });
+    // Don't show pointer cursor on buttons
+    document.querySelectorAll(".tool-entry").forEach(function(entry) {
+        entry.style.cursor = "default";
+    });
 
-        settingsPopup.style.display = "block";
-        settingsPopup.classList.add("open-popup");
-        
-        setCheckboxStatus(document.querySelector("#open-tab-opt input"), "settings.newtab");
-        setCheckboxStatus(document.querySelector("#typ-anim-opt input"), "settings.typanim");
-        setCheckboxStatus(document.querySelector("#auto-submit-opt input"), "settings.autosubmit");
-        setCheckboxStatus(document.querySelector("#auto-catch-opt input"), "settings.autocatch");
-        setCheckboxStatus(document.querySelector("#auto-graph-opt input"), "settings.autograph");
-    } else {
-        // Show pointer cursor on buttons
-        document.querySelectorAll(".tool-entry").forEach(function(entry) {
-            entry.style.cursor = "pointer";
-        });
-        settingsPopup.style.display = "none";
-        settingsPopup.classList.remove("open-popup");
-    }
+    document.querySelector("#background").style.display = "block";
+    settingsPopup.style.display = "block";
+    settingsPopup.classList.add("open-popup");
+    
+    setCheckboxStatus(document.querySelector("#open-tab-opt input"), "settings.newtab");
+    setCheckboxStatus(document.querySelector("#typ-anim-opt input"), "settings.typanim");
+    setCheckboxStatus(document.querySelector("#auto-submit-opt input"), "settings.autosubmit");
+    setCheckboxStatus(document.querySelector("#auto-catch-opt input"), "settings.autocatch");
+    setCheckboxStatus(document.querySelector("#auto-graph-opt input"), "settings.autograph");
 });
 
 
 /**
  * Handle the clicking outside the popup area
  */
-document.addEventListener("click", function(evt) {
-    const settingsPopup = document.getElementById("options-popup");
-    const settingsButton = document.getElementById("settings-button");
-
-    if(settingsPopup.style.display == "block") {
-        const buttonPos = settingsButton.getBoundingClientRect();
-        const popupPos = settingsPopup.getBoundingClientRect();
-        // Check if the user has clicked outside the popup
-        if(((evt.pageX < popupPos.left || evt.pageX > popupPos.right) || 
-            (evt.pageY < popupPos.top || evt.pageY > popupPos.bottom)) &&
-            ((evt.pageX < buttonPos.left || evt.pageX > buttonPos.right) || 
-            (evt.pageY < buttonPos.top || evt.pageY > buttonPos.bottom))) {
-            // Fire settings button click event to close the settings popup
-            document.getElementById("settings-button").click();
-        }
-    }
-
-    const addRelPopup = document.getElementById("add-relationship-popup");
-    const addRelButton = document.getElementById("add-rel-button");
-    const addRelCancelButton = document.getElementById("add-node-rel-close-button");
-
-    if(addRelPopup.style.display === "block") {
-        const buttonPos = addRelButton.getBoundingClientRect();
-        const popupPos = addRelPopup.getBoundingClientRect();
-        // Check if the user has clicked outside the popup
-        if(((evt.pageX < popupPos.left || evt.pageX > popupPos.right) || 
-            (evt.pageY < popupPos.top || evt.pageY > popupPos.bottom)) &&
-            ((evt.pageX < buttonPos.left || evt.pageX > buttonPos.right) || 
-            (evt.pageY < buttonPos.top || evt.pageY > buttonPos.bottom)) &&
-            evt.target.id !== "to-node-name" && evt.target.id !== "rel-node-name" 
-            && evt.target.tagName !== "OPTION") {
-            // Fire settings button click event to close the settings popup
-            addRelCancelButton.click();
-        }
-    }
-    event.stopPropagation();
-
-});
+//document.addEventListener("click", function(evt) {
+//    const settingsPopup = document.getElementById("options-popup");
+//    const settingsButton = document.getElementById("settings-button");
+//
+//    if(settingsPopup.style.display == "block") {
+//        const buttonPos = settingsButton.getBoundingClientRect();
+//        const popupPos = settingsPopup.getBoundingClientRect();
+//        // Check if the user has clicked outside the popup
+//        if(((evt.pageX < popupPos.left || evt.pageX > popupPos.right) || 
+//            (evt.pageY < popupPos.top || evt.pageY > popupPos.bottom)) &&
+//            ((evt.pageX < buttonPos.left || evt.pageX > buttonPos.right) || 
+//            (evt.pageY < buttonPos.top || evt.pageY > buttonPos.bottom))) {
+//            // Fire settings button click event to close the settings popup
+//            document.getElementById("settings-button").click();
+//        }
+//    }
+//
+//    const addRelPopup = document.getElementById("add-relationship-popup");
+//    const addRelButton = document.getElementById("add-rel-button");
+//    const addRelCancelButton = document.getElementById("add-node-rel-close-button");
+//
+//    if(addRelPopup.style.display === "block") {
+//        const buttonPos = addRelButton.getBoundingClientRect();
+//        const popupPos = addRelPopup.getBoundingClientRect();
+//        // Check if the user has clicked outside the popup
+//        if(((evt.pageX < popupPos.left || evt.pageX > popupPos.right) || 
+//            (evt.pageY < popupPos.top || evt.pageY > popupPos.bottom)) &&
+//            ((evt.pageX < buttonPos.left || evt.pageX > buttonPos.right) || 
+//            (evt.pageY < buttonPos.top || evt.pageY > buttonPos.bottom)) &&
+//            evt.target.id !== "to-node-name" && evt.target.id !== "rel-node-name" 
+//            && evt.target.tagName !== "OPTION") {
+//            // Fire settings button click event to close the settings popup
+//            addRelCancelButton.click();
+//        }
+//    }
+//    event.stopPropagation();
+//
+//});
 
 
 /**

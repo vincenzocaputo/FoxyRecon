@@ -19,10 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed tools from context menu 
 - Removed phone numbers format conversion when collecting indicators. Make the conversion only when the user submits a collected phone number indicator for investigations.
 - UI improvements in graph page
+- Popup UI improvements
 
 ### Fix
 - Urlscan visibility scan selection
 - Indicators collection on web pages containing private IP addresses
+- MAC Address form in graph page
 
 ## [0.21.0] - 2024-08-03
 

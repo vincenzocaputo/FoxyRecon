@@ -167,7 +167,7 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
                     tagsOptions = tagsOptions.concat(tools[i]["tags"]);
                     if (tag === "all" || (tools[i]["tags"] && tools[i]["tags"].includes(tag))) {
                         noTools = false;
-                        resNodes[i].style.display = "block";
+                        resNodes[i].style.display = "grid";
                         // Set tool description to div title
                         resNodes[i].title = tools[i]["desc"];
                         // Replace the placholder with the input string
@@ -279,7 +279,7 @@ function createToolsList(toolsList){
         let node = document.createElement('div');
         
         node.classList.add("tool-entry");
-        node.style.display = "none";        
+        node.style.display = "none";
         
         // Create node that will contain the link to the web resource
         let nodeHyperlink = document.createElement('a');
@@ -336,6 +336,15 @@ function createToolsList(toolsList){
         optionsContainer = document.createElement("div");
         optionsContainer.classList.add("tool-options-container");
 
+
+        graphIconContainer = document.createElement("div");
+        graphIconContainer.classList.add("tool-graph-icon");
+        graphIconNode = document.createElement("img");
+
+        graphIconNode.setAttribute("src", "../../assets/icons/graph.png");
+        graphIconNode.setAttribute("title", "Automatically adds nodes to the graph");
+        graphIconContainer.appendChild(graphIconNode);
+
         // Add an icon that allow to open the resource in a new or in the current tab
         // (it depends on settings chosen by the user)
         openIconContainer = document.createElement("div");
@@ -377,6 +386,7 @@ function createToolsList(toolsList){
         nodeHyperlink.appendChild(nodeText);
         node.appendChild(nodeHyperlink);
 
+        optionsContainer.appendChild(graphIconContainer);
         optionsContainer.appendChild(openIconContainer);
         optionsContainer.appendChild(favIconContainer);
         node.appendChild(optionsContainer);
@@ -666,11 +676,11 @@ function showIndicatorsByType(indicatorType) {
             node.style.display = "none";
         } else {
             noIndicators = false;
-            node.style.display = "block";
+            node.style.display = "grid";
         }
     });
 
     if(noIndicators) {
-        document.getElementById("no-indicators").style.display="block";
+        document.getElementById("no-indicators").style.display = "grid";
     }
 }
