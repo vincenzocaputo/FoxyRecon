@@ -297,11 +297,11 @@ div.tool-tag {
 }
 
 #filter-container-tags > label, #filter-container-types > label {
-    font-size: 14px;
+    font-size: 12px;
 }
 
 #filter-container-tags > select, #filter-container-types > select {
-    width: 100px;
+    font-size: 12px;
 }
 
 #rel-node-name {
@@ -319,6 +319,20 @@ div.tool-tag {
 }
 
 #show-only-fav  img {
+    width: 15px;
+    height: 15px;
+}
+
+#show-only-autograph {
+    margin-top: 5px;
+    margin-right: 15px;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    display: none;
+}
+
+#show-only-autograph  img {
     width: 15px;
     height: 15px;
 }

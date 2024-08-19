@@ -310,6 +310,9 @@ document.querySelector("#filter-container-tags>select").addEventListener("change
         // If show only fav option is enabled, show only favourites tools
         showButtonsByType(inputString, type, optionValue, true);
     }
+    if(optionValue === "all") {
+        document.querySelector("#filter-container-tags>select").value = "default";
+    }
 });
 
 /**

@@ -95,6 +95,7 @@ function showAddonMain() {
     document.getElementById("bin-icon").style.display = "none";
     // Hide show fav button
     document.getElementById("show-only-fav").style.display = "none";
+    document.getElementById("show-only-autograph").style.display = "none";
     document.getElementById("no-tools").style.display = "none";
     document.getElementById("no-indicators").style.display = "none";
     // Hide download icon
@@ -128,6 +129,7 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
     document.getElementById("catch-res-list").style.display = "none";
     document.querySelectorAll(".catch-res-entry").forEach(e => e.remove());
     document.getElementById("show-only-fav").style.display = "block";
+    document.getElementById("show-only-autograph").style.display = "block";
     document.getElementById("no-tools").style.display = "none";
     document.getElementById("no-indicators").style.display = "none";
     document.getElementById("hist-icon").style.display = "none";
