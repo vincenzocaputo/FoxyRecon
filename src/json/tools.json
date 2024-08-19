@@ -10,9 +10,9 @@
             "icon": "abuseipdb.png",
             "color": "#4E7E14",
             "types": ["domain","ip"],
-            "tags": ["rep"]
+            "tags": ["rep"],
+			"autoGraph": true
         },
-        
         {
             "name": "Any.run",
             "url": {
@@ -24,7 +24,8 @@
             "inputSelector": "#historySearch",
             "submitQuery": "#historySearchBtn",
             "types": ["hash"],
-            "tags": ["sandbox"]
+            "tags": ["sandbox"],
+			"autoGraph": false
         },
         {
             "name": "AlienVault",
@@ -37,7 +38,8 @@
             "icon": "alienvault.png",
             "color": "#000000",
             "types": ["ip","domain","hash"],
-            "tags": ["ioc","dns","whois"]
+            "tags": ["ioc","dns","whois"],
+			"autoGraph": true
         },
         {
             "name": "AttackerKB",
@@ -47,7 +49,8 @@
             "desc": "Search for vulnerabilities and CVEs",
             "icon": "attackerkb.png",
             "color": "#1A171C",
-            "types": ["cve"]
+            "types": ["cve"],
+			"autoGraph": false
         },
         {
             "name": "bgp.tools",
@@ -59,7 +62,8 @@
             "icon": "bgptools.png",
             "color": "#000000",
             "types": ["ip","asn"],
-            "tags": ["whois","dns"]
+            "tags": ["whois","dns"],
+			"autoGraph": false
         },
         {
             "name": "BGPView",
@@ -70,7 +74,8 @@
             "desc": "AS analysis tool",
             "icon": "bgpview.png",
             "color": "#2C94B3",
-            "types": ["ip","asn"]
+            "types": ["ip","asn"],
+			"autoGraph": false
         },
         {
             "name": "Browserling",
@@ -81,7 +86,8 @@
             "icon": "browserling.png",
             "color": "#5581B5",
             "types": ["url"],
-            "tags": ["sandbox"]
+            "tags": ["sandbox"],
+			"autoGraph": false
         },
         {
             "name": "BreachDirectory",
@@ -94,7 +100,8 @@
             "inputSelector": "input.chakra-input",
             "submitQuery": "button.btn-primary",
             "types": ["email"],
-            "tags": ["leak"]
+            "tags": ["leak"],
+			"autoGraph": false
         },
         {
             "name": "BuiltWith",
@@ -106,7 +113,8 @@
             "color": "#094303",
             "icon": "builtwith.png",
             "types": ["domain"],
-            "tags": ["techs"]
+            "tags": ["techs"],
+			"autoGraph": false
         },
         {
             "name": "Censys Certificates",
@@ -117,7 +125,8 @@
             "icon": "censys.png",
             "color": "#FF7A38",
             "types": ["domain"],
-            "tags": ["tls"]
+            "tags": ["tls"],
+			"autoGraph": false
         },
         {
             "name": "Censys Hosts",
@@ -129,7 +138,8 @@
             "icon": "censys.png",
             "color": "#FF7A38",
             "types": ["ip", "domain"],
-            "tags": ["open-ports"]
+            "tags": ["open-ports"],
+			"autoGraph": false
         },
         {
             "name": "CentralOps",
@@ -144,7 +154,8 @@
             "inputSelector": "#addr",
             "submitQuery": "#go",
             "types": ["domain","ip","email"],
-            "tags": ["whois", "dns"]
+            "tags": ["whois", "dns"],
+			"autoGraph": false
         },
         {
             "name": "Checkphish Scan",
@@ -156,7 +167,8 @@
             "icon": "checkphish.png",
             "color": "#4479F3",
             "types": ["domain","url"],
-            "tags": ["sandbox"]
+            "tags": ["sandbox"],
+			"autoGraph": false
         },
         {
             "name": "CIRCL.LU",
@@ -166,7 +178,8 @@
             "desc": "Computer Incident Response Center Luxembourg (CIRCL) vulnerability lookup",
             "icon": "circllu.png",
             "color": "#E1414B",
-            "types": ["cve"]
+            "types": ["cve"],
+			"autoGraph": false
         },
         {
             "name": "CISA KEV",
@@ -176,7 +189,8 @@
             "desc": "Check if a vulnerability is in the Known Exploited Vulnerability (KEV) Catalog, maintained by CISA",
             "icon": "cisa.png",
             "color": "#005288",
-            "types": ["cve"]
+            "types": ["cve"],
+			"autoGraph": false
         },
         {
             "name": "CleanTalk",
@@ -189,7 +203,8 @@
             "icon": "cleantalk.png",
             "color": "#3090C7",
             "types": ["domain","ip","email"],
-            "tags": ["rep"]
+            "tags": ["rep"],
+			"autoGraph": false
         },
         {
 			"name": "CriminalIP",
@@ -202,7 +217,8 @@
 			"icon": "criminalip.png",
 			"color": "#2451A3",
 			"types": ["domain","ip","cve"],
-            "tags": ["open-ports","rep"]
+            "tags": ["open-ports","rep"],
+			"autoGraph": false
 		},
         {
 			"name": "crt.sh",
@@ -213,7 +229,8 @@
 			"icon": "crtsh.png",
 			"color": "#00B373",
 			"types": ["domain"],
-            "tags": ["tls"]
+            "tags": ["tls"],
+			"autoGraph": false
 		},
         {
             "name":"CVE",
@@ -223,7 +240,8 @@
             "desc":"Identify, define, and catalog publicly disclosed cybersecurity vulnerabilities. ",
             "icon":"cver.png",
             "color":"#fa9441",
-            "types":["cve"]
+            "types":["cve"],
+			"autoGraph": false
         },
         {
             "name":"CVE Details",
@@ -233,7 +251,8 @@
             "desc":"Vulnerability intelligence solution providing CVE security vulnerability database.",
             "icon":"cvedetails.png",
             "color":"#6641F3",
-            "types":["cve"]
+            "types":["cve"],
+			"autoGraph": false
         },
         {
             "name": "CVE MITRE",
@@ -243,7 +262,8 @@
             "desc": "The mission of the CVE® Program is to identify, define, and catalog publicly disclosed cybersecurity vulnerabilities.",
             "icon": "cve.png",
             "color": "#FDB416",
-            "types": ["cve"]
+            "types": ["cve"],
+			"autoGraph": false
         },
         {
             "name": "CVE report",
@@ -253,7 +273,8 @@
             "desc": "An up-to-date database of common vulnerabilities and exposures.",
             "icon": "cvereport.png",
             "color": "#FD8F8F",
-            "types": ["cve"]
+            "types": ["cve"],
+			"autoGraph": false
         },
         {
             "name": "Cymru",
@@ -265,7 +286,8 @@
             "color": "#000000",
             "inputSelector": "#hashes",
             "submitQuery": "#mhr-form-submit",
-            "types": ["hash"]
+            "types": ["hash"],
+			"autoGraph": false
         },
         {
             "name": "Dehashed",
@@ -277,7 +299,8 @@
             "icon": "dehashed.png",
             "color": "#151725",
             "types": ["email", "phone"],
-            "tags": ["leaks"]
+            "tags": ["leaks"],
+			"autoGraph": false
         },
         {
             "name": "Digicert",
@@ -290,7 +313,8 @@
             "inputSelector": "#host",
             "submitQuery": "#check-server-button",
             "types": ["domain"],
-            "tags": ["tls"]
+            "tags": ["tls"],
+			"autoGraph": false
         },
         {
             "name": "dnsdumpster",
@@ -303,7 +327,8 @@
             "inputSelector": "#regularInput",
             "submitQuery": "button.btn",
             "types": ["domain"],
-            "tags": ["dns", "open-ports"]
+            "tags": ["dns", "open-ports"],
+			"autoGraph": false
         },
 		{
 			"name": "DOCGuard",
@@ -314,7 +339,8 @@
 			"icon": "docguard.png",
 			"color": "#ED7043",
 			"types": ["hash"],
-            "tags": ["sandbox"]
+            "tags": ["sandbox"],
+			"autoGraph": false
 		},
 		{
 			"name": "Domain tools",
@@ -326,7 +352,8 @@
 			"icon": "domaintools.png",
 			"color": "#888888",
 			"types": ["domain", "ip"],
-            "tags": ["whois"]
+            "tags": ["whois"],
+			"autoGraph": false
 		},
 		{
 			"name": "DNS History",
@@ -337,7 +364,8 @@
 			"icon": "dnshistory.png",
 			"color": "#7EB10C",
 			"types": ["domain"],
-            "tags": ["dns", "history"]
+            "tags": ["dns", "history"],
+			"autoGraph": false
 		},
         {
             "name": "Emailrep",
@@ -348,7 +376,8 @@
             "icon": "emailrep.png",
             "color": "#2FD3AA",
             "types": ["email"],
-            "tags": ["rep"]
+            "tags": ["rep"],
+			"autoGraph": false
         },
         {
             "name": "EmobileTracker",
@@ -360,7 +389,8 @@
             "color": "#51B3EB",
             "inputSelector": "input[type='tel']",
             "submitQuery": "button#btn-primary",
-            "types": ["phone"]
+            "types": ["phone"],
+			"autoGraph": false
         },
         {
             "name": "Exploit Database",
@@ -370,7 +400,8 @@
             "desc": "Search Exploit Database for Exploits, Papers, and Shellcode. ",
             "icon": "exploitdb.png",
             "color": "#CA4F0C",
-            "types": ["cve"]
+            "types": ["cve"],
+			"autoGraph": false
         },
         {
             "name": "EuroDNS",
@@ -383,7 +414,8 @@
             "inputSelector": "textarea",
             "submitQuery": "#submitBasic",
             "types": ["domain"],
-            "tags": ["whois"]
+            "tags": ["whois"],
+			"autoGraph": false
         },
         {
             "name": "FOFA",
@@ -395,7 +427,8 @@
             "icon": "fofa.png",
             "color": "#040C1F",
             "types": ["domain", "ip"],
-            "tags": ["open-ports"]
+            "tags": ["open-ports"],
+			"autoGraph": false
         },
         {
             "name": "FortiGuard",
@@ -406,7 +439,8 @@
             "icon": "fortiguard.png",
             "color": "#DA291C",
             "types": ["cve"],
-            "tags": ["rep"]
+            "tags": ["rep"],
+			"autoGraph": false
         },
         {
             "name": "FortiGuard",
@@ -420,7 +454,8 @@
             "inputSelector": "input[name='url']",
             "submitQuery": "#webfilter_search_form_submit",
             "types": ["domain", "url"],
-            "tags": ["rep"]
+            "tags": ["rep"],
+			"autoGraph": false
         },
         {
             "name": "GitHub",
@@ -430,7 +465,8 @@
             "desc": "Search for technical reports, PoC and exploits",
             "icon": "github.png",
             "color": "#24292F",
-            "types": ["cve"]
+            "types": ["cve"],
+			"autoGraph": false
         },
         {
             "name": "Google",
@@ -446,7 +482,8 @@
             "desc": "Search on Google",
             "icon": "google.png",
             "color": "#EA4335",
-            "types": ["domain","ip","email","hash","cve","phone","asn"]
+            "types": ["domain","ip","email","hash","cve","phone","asn"],
+			"autoGraph": false
         },
         {
             "name": "Google Trends",
@@ -457,7 +494,8 @@
             "desc": "See what's trending across Google Search, Google News and Youtube",
             "icon": "google.png",
             "color": "#EA4335",
-            "types": ["domain","cve"]
+            "types": ["domain","cve"],
+			"autoGraph": false
         },
         {
             "name": "Google Cache",
@@ -468,7 +506,8 @@
             "icon": "google.png",
             "color": "#EA4335",
             "types": ["url"],
-            "tags": ["history"]
+            "tags": ["history"],
+			"autoGraph": false
         },
         {
             "name": "Google Safe Browsing",
@@ -479,7 +518,8 @@
             "icon": "google.png",
             "color": "#EA4335",
             "types": ["url"],
-            "tags": ["rep"]
+            "tags": ["rep"],
+			"autoGraph": false
         },
         {
             "name": "GreenSnow",
@@ -490,7 +530,8 @@
             "icon": "greensnow.png",
             "color": "#739342",
             "types": ["ip"],
-            "tags": ["rep"]
+            "tags": ["rep"],
+			"autoGraph": false
         },
         {
             "name": "Greynoise",
@@ -501,7 +542,8 @@
             "icon": "greynoise.png",
             "color": "#171616",
             "types": ["ip"],
-            "tags": ["net-activity", "rep"]
+            "tags": ["net-activity", "rep"],
+			"autoGraph": false
         },
 		{
 			"name": "Hacker Target (Banner Grabbing)",
@@ -514,7 +556,8 @@
             "inputSelector": "textarea",
             "submitQuery": "#clickform", 
 			"types": ["ip"],
-            "tags": ["open-ports"]
+            "tags": ["open-ports"],
+			"autoGraph": false
 		},
 		{
 			"name": "Hacker Target (DNS Lookup)",
@@ -527,7 +570,8 @@
             "inputSelector": "input[name='theinput']", 
             "submitQuery": "#clickform", 
 			"types": ["domain"],
-            "tags": ["dns"]
+            "tags": ["dns"],
+			"autoGraph": false
 		},
 		{
 			"name": "Hacker Target (DNS Lookup)",
@@ -539,7 +583,8 @@
 			"color": "#4ecda7",
             "inputSelector": "input[name='theinput']", 
             "submitQuery": "#clickform", 
-			"types": ["url"]
+			"types": ["url"],
+			"autoGraph": false
 		},
 		{
 			"name": "Hacker Target (HTTP Header Check)",
@@ -552,7 +597,8 @@
             "inputSelector": "input[name='theinput']", 
             "submitQuery": "#clickform", 
 			"types": ["url"],
-            "tags": ["http-headers"]
+            "tags": ["http-headers"],
+			"autoGraph": false
 		},
         {
 			"name": "Hacker Target (Wappalyzer)",
@@ -565,7 +611,8 @@
             "inputSelector": "textarea", 
             "submitQuery": "wappalyzer:#clickform", 
 			"types": ["url"],
-            "tags": ["techs"]
+            "tags": ["techs"],
+			"autoGraph": false
 		},
 		{
 			"name": "Hacker Target (WhatWeb)",
@@ -578,7 +625,8 @@
             "inputSelector": "textarea", 
             "submitQuery": "whatweb:#clickform", 
 			"types": ["url"],
-            "tags": ["techs"]
+            "tags": ["techs"],
+			"autoGraph": false
 		},
 		{
 			"name": "Hacker Target (Whois Lookup)",
@@ -591,7 +639,8 @@
             "inputSelector": "input[name='theinput']", 
             "submitQuery": "#clickform", 
 			"types": ["domain"],
-            "tags": ["whois"]
+            "tags": ["whois"],
+			"autoGraph": false
 		},
 		{
 			"name": "hashdd",
@@ -601,7 +650,8 @@
             "desc": "Known good cryptographic hashes",
 			"icon": "hashdd.png",
 			"color": "#222222",
-			"types": ["hash"]
+			"types": ["hash"],
+			"autoGraph": false
 		},
         {
             "name": "HIBP",
@@ -615,7 +665,8 @@
             "inputSelector": "#Account",
             "submitQuery": "#searchPwnage", 
             "types": ["email", "phone"],
-            "tags": ["leaks"]
+            "tags": ["leaks"],
+			"autoGraph": false
         },
         {
             "name": "Host.io",
@@ -626,7 +677,8 @@
             "icon": "hostio.png",
             "color": "#F35928",
             "types": ["domain"],
-            "tags": ["dns"]
+            "tags": ["dns"],
+			"autoGraph": true
         },
         {
             "name": "HudsonRock",
@@ -637,7 +689,8 @@
             "icon": "hudsonrock.png",
             "color": "#FECD4E",
             "types": ["email"],
-            "tags": ["leaks"]
+            "tags": ["leaks"],
+			"autoGraph": false
         },
         {
             "name": "HudsonRock",
@@ -648,7 +701,8 @@
             "icon": "hudsonrock.png",
             "color": "#FECD4E",
             "types": ["domain"],
-            "tags": ["leaks"]
+            "tags": ["leaks"],
+			"autoGraph": false
         },
         {
             "name": "hunter",
@@ -659,7 +713,8 @@
             "icon": "hunter.png",
             "color": "#FF5722",
             "types": ["email"],
-            "tags": ["rep"]
+            "tags": ["rep"],
+			"autoGraph": false
         },
         {
             "name": "Hunter.how",
@@ -671,7 +726,8 @@
             "icon": "hunterhow.png",
             "color": "#FD5F00",
             "types": ["domain", "ip"],
-            "tags": ["open-ports", "http-headers"]
+            "tags": ["open-ports", "http-headers"],
+			"autoGraph": false
         },
 		{
 			"name": "Hurricane Electric",
@@ -684,7 +740,8 @@
 			"icon": "bgphe.png",
 			"color": "#000065",
 			"types": ["domain","ip","asn"],
-            "tags": ["dns"]
+            "tags": ["dns"],
+			"autoGraph": false
 		},
         {
             "name": "HybridAnalysis",
@@ -695,7 +752,8 @@
             "icon": "hybrid.png",
             "color": "#33A6C8",
             "types": ["hash"],
-            "tags": ["sandbox"]
+            "tags": ["sandbox"],
+			"autoGraph": false
         },
         {
             "name": "IANA Whois",
@@ -707,7 +765,8 @@
             "icon": "iana.png",
             "color": "#0673BA",
             "types": ["domain","ip"],
-            "tags": ["whois"]
+            "tags": ["whois"],
+			"autoGraph": false
         },
         {
             "name": "InQuest IOCDB",
@@ -721,7 +780,8 @@
             "icon": "inquest.png",
             "color": "#191D20",
             "types": ["ip","domain","url","hash"],
-            "tags": ["ioc"]
+            "tags": ["ioc"],
+			"autoGraph": false
         },
         {
             "name": "IntelligenceX",
@@ -734,7 +794,8 @@
             "icon": "intelx.png",
             "color": "#0E2C3E",
             "types": ["ip","domain","email"],
-            "tags": ["leaks"]
+            "tags": ["leaks"],
+			"autoGraph": false
         },
         {
             "name": "Intezer Analyze",
@@ -745,7 +806,8 @@
             "icon": "intezer.png",
             "color": "#253162",
             "types": ["hash"],
-            "tags": ["sandbox"]
+            "tags": ["sandbox"],
+			"autoGraph": false
         },
         {
             "name": "IPQualityScore",
@@ -755,7 +817,8 @@
             "desc": "Free phone number lookup",
             "icon": "ipqs.png",
             "color": "#F43A3A",
-            "types": ["phone"]
+            "types": ["phone"],
+			"autoGraph": false
         },
         {
             "name": "JoeSandbox",
@@ -766,7 +829,8 @@
             "icon": "joesandbox.png",
             "color": "#2B2B2B",
             "types": ["hash"],
-            "tags": ["sandbox"]
+            "tags": ["sandbox"],
+			"autoGraph": false
         },
         {
             "name": "Kaspersky",
@@ -780,7 +844,8 @@
             "icon": "kaspersky.png",
             "color": "#00A88E",
             "types": ["ip","domain","hash","cve"],
-            "tags": ["sandbox", "rep"]
+            "tags": ["sandbox", "rep"],
+			"autoGraph": false
         },
         {
             "name": "LeakCheck",
@@ -793,7 +858,8 @@
             "inputSelector": "input[name='data']",
             "submitQuery": "#button-search",
             "tags": ["leaks"],
-            "types": ["email"]
+            "types": ["email"],
+			"autoGraph": false
         },
         {
             "name": "LeakIX Leak Scope",
@@ -805,7 +871,8 @@
             "icon": "leakix.png",
             "color": "#222222",
             "types": ["ip","domain"],
-            "tags": ["leaks"]
+            "tags": ["leaks"],
+			"autoGraph": false
         },
         {
             "name": "LeakIX Service Scope",
@@ -817,7 +884,8 @@
             "icon": "leakix.png",
             "color": "#222222",
             "types": ["ip","domain"],
-            "tags": ["open-ports"]
+            "tags": ["open-ports"],
+			"autoGraph": false
         },
         {
             "name": "LeakPeek",
@@ -830,7 +898,8 @@
             "inputSelector": "#searcher",
             "submitQuery": "button.btn-success",
             "types": ["email"],
-            "tags": ["leak"]
+            "tags": ["leak"],
+			"autoGraph": false
         },
         {
             "name": "Lupovis",
@@ -841,7 +910,8 @@
             "icon": "lupovis.png",
             "color": "#1C1934",
             "types": ["ip"],
-            "tags": ["rep"]
+            "tags": ["rep"],
+			"autoGraph": false
         },
         {
             "name": "MALWARE bazaar",
@@ -852,7 +922,8 @@
             "icon": "abuse.png",
             "color": "#6C757D",
             "types": ["hash"],
-            "tags": ["ioc"]
+            "tags": ["ioc"],
+			"autoGraph": false
         },
         {
             "name": "MX Blacklist Lookup",
@@ -864,7 +935,8 @@
             "icon": "mxtoolbox.png",
             "color": "#E29439",
             "types": ["domain","ip"],
-            "tags": ["rep"]
+            "tags": ["rep"],
+			"autoGraph": false
         },
         {
             "name": "MX DNS Lookup",
@@ -875,7 +947,8 @@
             "icon": "mxtoolbox.png",
             "color": "#E29439",
             "types": ["domain"],
-            "tags": ["dns"]
+            "tags": ["dns"],
+			"autoGraph": false
         },
         {
             "name": "MX WHOIS Lookup",
@@ -886,7 +959,8 @@
             "icon": "mxtoolbox.png",
             "color": "#E29439",
             "types": ["domain"],
-            "tags": ["whois"]
+            "tags": ["whois"],
+			"autoGraph": false
         },
         {
             "name": "multiRBL Lookup",
@@ -898,7 +972,8 @@
             "icon": "multirbl.png",
             "color": "#FF0000",
             "types": ["domain","ip"],
-            "tags": ["rep"]
+            "tags": ["rep"],
+			"autoGraph": false
         },
         {
             "name": "multiRBL WHOIS",
@@ -910,7 +985,8 @@
             "icon": "multirbl.png",
             "color": "#FF0000",
             "types": ["domain"],
-            "tags": ["whois"]
+            "tags": ["whois"],
+			"autoGraph": false
         },
         {
             "name": "Netcraft",
@@ -922,7 +998,8 @@
             "icon": "netcraft.png",
             "color": "#003E51",
             "types": ["domain","url"],
-            "tags": ["rep"]
+            "tags": ["rep"],
+			"autoGraph": true
         },
         {
             "name": "NIST",
@@ -932,7 +1009,8 @@
             "desc": "National Vulnerability Database",
             "icon": "nist.png",
             "color": "#000000",
-            "types": ["cve"]
+            "types": ["cve"],
+			"autoGraph": false
         },
         {
             "name": "Norton Safeweb",
@@ -944,7 +1022,8 @@
             "icon": "norton.png",
             "color": "#FCBC34",
             "types": ["domain","url"],
-            "tags": ["rep"]
+            "tags": ["rep"],
+			"autoGraph": false
         },
         {
             "name": "OpenCVE",
@@ -954,7 +1033,8 @@
             "desc": "OpenCVE is the easiest way to track CVE updates and be alerted about new vulnerabilities.",
             "icon": "opencve.png",
             "color": "#11324b",
-            "types": ["cve"]
+            "types": ["cve"],
+			"autoGraph": false
         },
         {
             "name": "PacketTotal",
@@ -967,7 +1047,8 @@
             "icon": "packettotal.png",
             "color": "#286496",
             "types": ["ip","domain","hash"],
-            "tags": ["ioc"]
+            "tags": ["ioc"],
+			"autoGraph": false
         },
         {
             "name": "Phishunt",
@@ -978,7 +1059,8 @@
             "icon": "phishunt.png",
             "color": "#343A40",
             "types": ["ip"],
-            "tags": ["rep", "screenshot"]
+            "tags": ["rep", "screenshot"],
+			"autoGraph": false
         },
         {
             "name": "Poc-in-Github",
@@ -988,7 +1070,8 @@
             "desc": "PoC auto collect from GitHub",
             "icon": "pocingithub.png",
             "color": "#212529",
-            "types": ["cve"]
+            "types": ["cve"],
+			"autoGraph": false
         },
         {
             "name": "Polyswarm",
@@ -999,7 +1082,8 @@
             "icon": "polyswarm.png",
             "color": "#6D3AEC",
             "types": ["hash"],
-            "tags": ["sandbox"]
+            "tags": ["sandbox"],
+			"autoGraph": false
         },
         {
             "name": "Project Honeypot",
@@ -1010,7 +1094,8 @@
             "icon": "projecthoneypot.png",
             "color": "#ACACAC",
             "types": ["ip"],
-            "tags": ["rep"]
+            "tags": ["rep"],
+			"autoGraph": false
         },
         {
             "name": "Pulsedive",
@@ -1025,7 +1110,8 @@
             "icon": "pulsedive.png",
             "color": "#0E2C3E",
             "types": ["ip","domain","hash","phone","asn"],
-            "tags": ["dns","whois"]
+            "tags": ["dns","whois"],
+			"autoGraph": false
         },
         {
             "name": "Rapid7",
@@ -1035,7 +1121,8 @@
             "desc": "Vulnerability & Exploit Database",
             "icon": "rapid7.png",
             "color": "#E85E26",
-            "types": ["cve"]
+            "types": ["cve"],
+			"autoGraph": false
         },
         {
             "name": "RIPE Database",
@@ -1046,7 +1133,8 @@
             "desc": "Query the RIPE Database",
             "icon": "ripe.png",
             "color": "#080037",
-            "types": ["ip","asn"]
+            "types": ["ip","asn"],
+			"autoGraph": false
         },
         {
             "name": "SecureFeed",
@@ -1058,7 +1146,8 @@
             "icon": "securefeed.png",
             "color": "#374889",
             "types": ["ip","domain"],
-            "tags": ["rep"]
+            "tags": ["rep"],
+			"autoGraph": false
         },
         {
             "name": "SecurityHeaders",
@@ -1069,7 +1158,8 @@
             "icon": "securityheaders.png",
             "color": "#3A71D8",
             "types": ["url"],
-            "tags": ["http-headers"]
+            "tags": ["http-headers"],
+			"autoGraph": false
         },
         {
             "name": "SecurityTrails",
@@ -1081,7 +1171,8 @@
             "icon": "securitytrails.png",
             "color": "#373A47",
             "types": ["domain","ip"],
-            "tags": ["dns", "history"]
+            "tags": ["dns", "history"],
+			"autoGraph": false
         },
         {
             "name": "Shodan",
@@ -1093,7 +1184,8 @@
             "icon": "shodan.png",
             "color": "#151515",
             "types": ["domain","ip"],
-            "tags": ["open-ports"]
+            "tags": ["open-ports"],
+			"autoGraph": false
         },
         {
             "name": "Spam Database Lookup",
@@ -1106,7 +1198,8 @@
             "icon": "spamdb.gif",
             "color": "#F6C100",
             "types": ["domain","ip","email"],
-            "tags": ["rep"]
+            "tags": ["rep"],
+			"autoGraph": false
         },
         {
             "name": "Spamhaus",
@@ -1118,7 +1211,8 @@
             "icon": "spamhaus.png",
             "color": "#142741",
             "types": ["domain","ip"],
-            "tags": ["rep"]
+            "tags": ["rep"],
+			"autoGraph": false
         },
         {
             "name": "Sploitus",
@@ -1128,7 +1222,8 @@
             "desc": "Sploitus is a convenient central place for identifying the newest exploits and finding attacks that exploit known vulnerabilities. ",
             "icon": "sploitus.png",
             "color": "#5754DE",
-            "types": ["cve"]
+            "types": ["cve"],
+			"autoGraph": false
         },
         {
             "name": "SSLShopper",
@@ -1139,7 +1234,8 @@
             "icon": "sslshopper.png",
             "color": "#609CEC",
             "types": ["domain"],
-            "tags": ["tls"]
+            "tags": ["tls"],
+			"autoGraph": false
         },
         {
             "name": "Sync.me",
@@ -1149,7 +1245,8 @@
             "desc": "Find out who called",
             "icon": "syncme.png",
             "color": "#2592f8",
-            "types": ["phone"]
+            "types": ["phone"],
+			"autoGraph": false
         },
 		{
 			"name": "Talos Intelligence",
@@ -1162,7 +1259,8 @@
 			"icon": "talos.png",
 			"color": "#0077BE",
 			"types": ["domain","ip","url"],
-            "tags": ["rep"]
+            "tags": ["rep"],
+			"autoGraph": true
 		},
 		{
 			"name": "Tenable",
@@ -1172,7 +1270,8 @@
             "desc": "Tenable maintains a list of Common Vulnerabilities and Exposures (CVEs) and their affected products.",
 			"icon": "tenable.png",
 			"color": "#0F2344",
-			"types": ["cve"]
+			"types": ["cve"],
+			"autoGraph": false
 		},
         {
             "name": "Threatbook",
@@ -1184,7 +1283,8 @@
             "icon": "threatbook.png",
             "color": "#ED4734",
             "types": ["domain","ip"],
-            "tags": ["ioc"]
+            "tags": ["ioc"],
+			"autoGraph": false
         },
         {
             "name": "THREATfox",
@@ -1197,7 +1297,8 @@
             "icon": "abuse.png",
             "color": "#000000",
             "types": ["hash","domain","ip"],
-            "tags": ["ioc"]
+            "tags": ["ioc"],
+			"autoGraph": false
         },
         {
             "name": "Truecaller",
@@ -1207,7 +1308,8 @@
             "desc": "Caller ID and Spam Blocking App",
             "icon": "truecaller.png",
             "color": "#7FC3FF",
-            "types": ["phone"]
+            "types": ["phone"],
+			"autoGraph": false
         },
         {
             "name": "X (Twitter)",
@@ -1223,7 +1325,8 @@
             "icon": "x.png",
             "color": "#000000",
             "types": ["hash","domain","ip","cve","phone","asn"],
-            "tags": ["ioc"]
+            "tags": ["ioc"],
+			"autoGraph": false
         },
         {
             "name": "Wayback Machine",
@@ -1234,7 +1337,8 @@
             "icon": "webarchive.png",
             "color": "#222222",
             "types": ["url"],
-            "tags": ["history"]
+            "tags": ["history"],
+			"autoGraph": false
         },
 		{
 			"name": "URLhaus",
@@ -1247,7 +1351,8 @@
 			"icon": "abuse.png",
 			"color": "#A20300",
 			"types": ["domain","url","ip"],
-            "tags": ["ioc", "rep"]
+            "tags": ["ioc", "rep"],
+			"autoGraph": false
 		},
 		{
 			"name": "urlscan",
@@ -1261,7 +1366,8 @@
 			"icon": "urlscan.png",
             "color": "#E25A45",
 			"types": ["domain","ip","url","asn"],
-            "tags": ["whois", "dns", "screenshot"]
+            "tags": ["whois", "dns", "screenshot"],
+			"autoGraph": true
 		},
 		{
 			"name": "urlscan Public Scan",
@@ -1274,7 +1380,8 @@
             "inputSelector": "#url",
             "submitQuery": "vispublic",
 			"types": ["url"],
-            "tags": ["sandbox"]
+            "tags": ["sandbox"],
+			"autoGraph": false
 		},
 		{
 			"name": "urlscan Unlisted Scan",
@@ -1287,7 +1394,8 @@
             "inputSelector": "#url",
             "submitQuery": "visunlisted",
 			"types": ["url"],
-            "tags": ["sandbox"]
+            "tags": ["sandbox"],
+			"autoGraph": false
 		},
 		{
 			"name": "urlscan Private Scan",
@@ -1300,7 +1408,8 @@
             "inputSelector": "#url",
             "submitQuery": "visprivate",
 			"types": ["url"],
-            "tags": ["sandbox"]
+            "tags": ["sandbox"],
+			"autoGraph": false
 		},
         {
 			"name": "URLVoid",
@@ -1313,7 +1422,8 @@
             "inputSelector": "#hf-domain",
             "submitQuery": "button.btn-warning",
 			"types": ["domain"],
-            "tags": ["rep"]
+            "tags": ["rep"],
+			"autoGraph": false
 		},
         {
             "name": "URLVoid Whois",
@@ -1326,7 +1436,8 @@
             "inputSelector": "#DomainAddress",
             "submitQuery": "button.btn-primary",
             "types": ["domain"],
-            "tags": ["whois"]
+            "tags": ["whois"],
+			"autoGraph": false
         },
         {
             "name": "ViewDNS DNS Lookup",
@@ -1337,7 +1448,8 @@
             "icon": "viewdns.png",
             "color": "#00721E",
             "types": ["domain"],
-            "tags": ["dns"]
+            "tags": ["dns"],
+			"autoGraph": false
         },
         {
             "name": "ViewDNS HTTP Headers",
@@ -1348,7 +1460,8 @@
             "icon": "viewdns.png",
             "color": "#00721E",
             "types": ["domain"],
-            "tags": ["http-headers"]
+            "tags": ["http-headers"],
+			"autoGraph": false
         },
         {
             "name": "ViewDNS WHOIS",
@@ -1360,7 +1473,8 @@
             "icon": "viewdns.png",
             "color": "#00721E",
             "types": ["domain","ip"],
-            "tags": ["whois"]
+            "tags": ["whois"],
+			"autoGraph": false
         },
 		{
 			"name": "VirusTotal",
@@ -1373,7 +1487,8 @@
 			"icon": "virustotal.png",
 			"color": "#394EFF",
 			"types": ["domain","ip","hash"],
-            "tags": ["rep","whois","dns","tls"]
+            "tags": ["rep","whois","dns","tls"],
+			"autoGraph": false
 		},
         {
             "name": "VirusTotal URL scan",
@@ -1386,7 +1501,8 @@
             "inputSelector": "#urlSearchInput",
             "submitQuery": "VT",
             "types": ["url"],
-            "tags": ["sandbox", "rep"]
+            "tags": ["sandbox", "rep"],
+			"autoGraph": false
         },
         {
             "name": "Vulners",
@@ -1396,7 +1512,8 @@
             "desc": "Largest correlated database of vulnerabilities and exploits",
             "icon": "vulners.png",
             "color": "#38383A",
-            "types": ["cve"]
+            "types": ["cve"],
+			"autoGraph": false
         },
         {
             "name": "Vulmon",
@@ -1406,7 +1523,8 @@
             "desc": "Search anything related to vulnerabilities on Vulmon",
             "icon": "vulmon.png",
             "color": "#00CED1",
-            "types": ["cve"]
+            "types": ["cve"],
+			"autoGraph": false
         },
         {
             "name": "W3Techs",
@@ -1417,7 +1535,8 @@
             "icon": "w3techs.png",
             "color": "#c80000",
             "types": ["domain"],
-            "tags": ["techs"]
+            "tags": ["techs"],
+			"autoGraph": false
         },
         {
             "name": "Web Check",
@@ -1429,7 +1548,8 @@
             "icon": "webcheck.png",
             "color": "#141e2c",
             "types": ["domain", "url"],
-            "tags": ["whois","dns","tls","open-ports"]
+            "tags": ["whois","dns","tls","open-ports"],
+			"autoGraph": false
         },
         {
             "name": "WhatCMS",
@@ -1440,7 +1560,8 @@
             "icon": "whatcms.png",
             "color": "#008CBA",
             "types": ["domain"],
-            "tags": ["techs"]
+            "tags": ["techs"],
+			"autoGraph": false
         },
         {
             "name": "Whois",
@@ -1452,7 +1573,8 @@
             "icon": "whois.png",
             "color": "#FCCA54",
             "types": ["domain", "ip"],
-            "tags": ["whois"]
+            "tags": ["whois"],
+			"autoGraph": false
         },
         {
 			"name": "ZoomEye",
@@ -1464,7 +1586,8 @@
 			"icon": "zoomeye.png",
 			"color": "#0F1423",
 			"types": ["domain","ip"],
-            "tags": ["open-ports"]
+            "tags": ["open-ports"],
+			"autoGraph": false
 		}
     ]
 }

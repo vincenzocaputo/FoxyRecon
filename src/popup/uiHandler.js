@@ -386,7 +386,9 @@ function createToolsList(toolsList){
         nodeHyperlink.appendChild(nodeText);
         node.appendChild(nodeHyperlink);
 
-        optionsContainer.appendChild(graphIconContainer);
+        if(tools[i]["autoGraph"] ?? false) {
+            optionsContainer.appendChild(graphIconContainer);
+        }
         optionsContainer.appendChild(openIconContainer);
         optionsContainer.appendChild(favIconContainer);
         node.appendChild(optionsContainer);

@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Option to disable the typing animation of indicators in text fields
 - Improve indicators detection
 - Investigate option in context menu to send indicators to the popup
+- Icon to mark the tools that support the automatic graph population feature
 
 ### Change
 - Updated browser-polyfill library
