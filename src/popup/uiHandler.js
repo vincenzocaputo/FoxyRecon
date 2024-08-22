@@ -156,7 +156,7 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
     // Retrieve favourites tools from local storage
     const favTools = JSON.parse(localStorage.getItem("fav"));
 
-    if(!tag) {
+    if(!tag || tag === "default") {
         // If no tag has been provided, by default set it to "all"
         tag = "all";
     }

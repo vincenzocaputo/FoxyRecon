@@ -250,7 +250,6 @@ div.tool-tag {
 #history {
     background-color: #FFFFFF;
     width: 250px;
-    //height: 200px;
     position: absolute;
     display: none;
     z-index: 1;
@@ -297,11 +296,11 @@ div.tool-tag {
 }
 
 #filter-container-tags > label, #filter-container-types > label {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 #filter-container-tags > select, #filter-container-types > select {
-    font-size: 12px;
+    width: 100px;
 }
 
 #rel-node-name {
@@ -319,8 +318,14 @@ div.tool-tag {
 }
 
 #show-only-fav  img {
-    width: 15px;
-    height: 15px;
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 #show-only-autograph {
@@ -328,13 +333,19 @@ div.tool-tag {
     margin-right: 15px;
     width: 15px;
     height: 15px;
-    cursor: pointer;
     display: none;
 }
 
+
 #show-only-autograph  img {
-    width: 15px;
-    height: 15px;
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 #download {
@@ -358,9 +369,7 @@ div.tool-tag {
     display: none;
 }
 
-#add-node-button, #add-rel-button, #del-node-button {
-    background-color: #04D43C;
-    border: 2px solid #07A631; 
+.square-btn {
     color: white; /* White text */
     width: 20px;
     height: 20px;
@@ -368,6 +377,17 @@ div.tool-tag {
     cursor: pointer; 
     border-radius: 5px;
     position: relative;
+}
+
+
+#show-only-autograph > div.square-btn, #show-only-fav > div.square-btn {
+    background-color: #EDEDED;
+    border: 2px outset #888888;
+    cursor: pointer;
+}
+
+#show-only-autograph > div.square-btn:hover, #show-only-fav > div.square-btn:hover {
+    background-color: #CBCBCB;
 }
 
 #add-node-rel-close-button {
@@ -384,6 +404,11 @@ div.tool-tag {
 
 #del-node-button {
     border: 2px solid #8A2424;
+}
+
+#add-node-button {
+    background-color: #04D43C;
+    border: 2px solid #07A631; 
 }
 
 #add-node-button:hover {
