@@ -339,10 +339,12 @@ document.querySelector("#show-only-fav>div").addEventListener("click", (e) => {
     if (optionValue == "off" || optionValue == undefined) {
         showButtonsByType(inputString, type, selectedTag, true);
         switchButton.setAttribute("data-value", "on");
-        switchButton.querySelector("img").src = "../../assets/icons/favourite_opt_on.png";
+        switchButton.classList.add("clicked-btn");
+        switchButton.querySelector("img").src = "../../assets/icons/favourite_opt_w.png";
     } else {
         showButtonsByType(inputString, type, selectedTag, false);
         switchButton.setAttribute("data-value", "off");
+        switchButton.classList.remove("clicked-btn");
         switchButton.querySelector("img").src = "../../assets/icons/favourite_opt.png";
     }
 });
@@ -361,11 +363,13 @@ document.querySelector("#show-only-autograph>div").addEventListener("click", (e)
     if (optionValue == "off" || optionValue == undefined) {
         showButtonsByType(inputString, type, selectedTag, true);
         switchButton.setAttribute("data-value", "on");
-        switchButton.querySelector("img").src = "../../assets/icons/favourite_opt_on.png";
+        switchButton.classList.add("clicked-btn");
+        switchButton.querySelector("img").src = "../../assets/icons/favourite_opt_w.png";
     } else {
         showButtonsByType(inputString, type, selectedTag, false);
         switchButton.setAttribute("data-value", "off");
-        switchButton.querySelector("img").src = "../../assets/icons/favourite_opt_on.png";
+        switchButton.classList.remove("clicked-btn");
+        switchButton.querySelector("img").src = "../../assets/icons/graph_opt.png";
     }
 });
 

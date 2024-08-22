@@ -379,15 +379,21 @@ div.tool-tag {
     position: relative;
 }
 
-
-#show-only-autograph > div.square-btn, #show-only-fav > div.square-btn {
+.square-btn.filter-btn {
     background-color: #EDEDED;
     border: 2px outset #888888;
     cursor: pointer;
 }
 
-#show-only-autograph > div.square-btn:hover, #show-only-fav > div.square-btn:hover {
+.square-btn.filter-btn:hover {
     background-color: #CBCBCB;
+}
+
+.square-btn.filter-btn.clicked-btn {
+    background-color: #FF5300;
+    border: 2px inset #888888;
+    cursor: pointer;
+
 }
 
 #add-node-rel-close-button {
