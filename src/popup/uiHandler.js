@@ -589,8 +589,6 @@ function createIndicatorsList(indicatorsList){
         // Tag to upper case
         nodeTag.textContent = type.toUpperCase();
         nodeTag.classList.add("tool-tag");
-        // Add transparency
-        nodeTag.style.backgroundColor = "rgba(256, 256, 256, 0.3)";
         nodeTagsContainer.appendChild(nodeTag);
         nodeText.insertAdjacentElement("beforeend", nodeTagsContainer);
 
