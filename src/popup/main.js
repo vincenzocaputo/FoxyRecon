@@ -335,14 +335,15 @@ document.querySelector("#show-only-fav>div").addEventListener("click", (e) => {
     const inputString = inputField.value;
     const [type, tld] = indicatorParser.getIndicatorType(inputString);
     const selectedTag = document.querySelector("#filter-container-tags>select").value
+    const showOnlyAutograph = document.querySelector("#show-only-autograph>div").getAttribute("data-value") == "on";
     const optionValue = switchButton.getAttribute("data-value");
     if (optionValue == "off" || optionValue == undefined) {
-        showButtonsByType(inputString, type, selectedTag, true);
+        showButtonsByType(inputString, type, selectedTag, true, isOnlyAutoGraph());
         switchButton.setAttribute("data-value", "on");
         switchButton.classList.add("clicked-btn");
         switchButton.querySelector("img").src = "../../assets/icons/favourite_opt_w.png";
     } else {
-        showButtonsByType(inputString, type, selectedTag, false);
+        showButtonsByType(inputString, type, selectedTag, false, isOnlyAutoGraph());
         switchButton.setAttribute("data-value", "off");
         switchButton.classList.remove("clicked-btn");
         switchButton.querySelector("img").src = "../../assets/icons/favourite_opt.png";
@@ -361,18 +362,26 @@ document.querySelector("#show-only-autograph>div").addEventListener("click", (e)
     const selectedTag = document.querySelector("#filter-container-tags>select").value
     const optionValue = switchButton.getAttribute("data-value");
     if (optionValue == "off" || optionValue == undefined) {
-        showButtonsByType(inputString, type, selectedTag, true);
+        showButtonsByType(inputString, type, selectedTag, isOnlyFav(), true);
         switchButton.setAttribute("data-value", "on");
         switchButton.classList.add("clicked-btn");
         switchButton.querySelector("img").src = "../../assets/icons/graph_opt_w.png";
     } else {
-        showButtonsByType(inputString, type, selectedTag, false);
+        showButtonsByType(inputString, type, selectedTag, isOnlyFav(), false);
         switchButton.setAttribute("data-value", "off");
         switchButton.classList.remove("clicked-btn");
         switchButton.querySelector("img").src = "../../assets/icons/graph_opt.png";
     }
 });
 
+
+function isOnlyFav() {
+    return document.querySelector("#show-only-fav>div").getAttribute("data-value") == "on";
+}
+
+function isOnlyAutoGraph() {
+    return document.querySelector("#show-only-autograph>div").getAttribute("data-value") == "on";
+}
 /*-------------------------------GRAPH------------------------------------*/
 
 /**

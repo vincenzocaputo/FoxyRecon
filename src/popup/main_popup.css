@@ -166,6 +166,7 @@ div.tool-tag {
     height: 100%;
 }
 
+
 .tool-graph-icon {
     height: 15px;
     width: 15px;
@@ -282,14 +283,18 @@ div.tool-tag {
 }
 
 #option-box {
-    margin-top: 2px;
+    margin-top: 5px;
     margin-bottom: 2px;
     display: flex;
+    gap: 5px;
+}
+
+.separator {
+    border: 1px solid #C6C6C6;
 }
 
 #filter-container-tags, #filter-container-types {
     margin-left: 5px;
-    margin-top: 5px;
     margin-bottom: 5px;
     display: none;
 }
@@ -307,11 +312,6 @@ div.tool-tag {
 }
 
 #show-only-fav {
-    margin-top: 5px;
-    margin-left: 10px;
-    margin-right: 15px;
-    width: 15px;
-    height: 15px;
     cursor: pointer;
     display: none;
 }
@@ -328,10 +328,6 @@ div.tool-tag {
 }
 
 #show-only-autograph {
-    margin-top: 5px;
-    margin-right: 15px;
-    width: 15px;
-    height: 15px;
     display: none;
 }
 
@@ -348,8 +344,6 @@ div.tool-tag {
 }
 
 #download {
-    margin-top: 5px;
-    margin-left: 10px;
     width: 15px;
     height: 15px;
     cursor: pointer;
@@ -362,8 +356,6 @@ div.tool-tag {
 }
 
 #add-node, #add-rel, #del-node {
-    margin-top: 5px;
-    margin-left: 1px;
     cursor: pointer;
     display: none;
 }
