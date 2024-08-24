@@ -47,7 +47,7 @@ body {
 
 div.tool-entry, div.catch-res-entry {
     display: grid;
-    grid-template-columns: 6fr 1fr;
+    grid-template-columns: 1fr 6fr;
     background-color: #FFFFFF;
     border: 2px outset #596275;
     border-radius: 10px;
