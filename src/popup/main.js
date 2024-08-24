@@ -364,7 +364,7 @@ document.querySelector("#show-only-autograph>div").addEventListener("click", (e)
         showButtonsByType(inputString, type, selectedTag, true);
         switchButton.setAttribute("data-value", "on");
         switchButton.classList.add("clicked-btn");
-        switchButton.querySelector("img").src = "../../assets/icons/favourite_opt_w.png";
+        switchButton.querySelector("img").src = "../../assets/icons/graph_opt_w.png";
     } else {
         showButtonsByType(inputString, type, selectedTag, false);
         switchButton.setAttribute("data-value", "off");
