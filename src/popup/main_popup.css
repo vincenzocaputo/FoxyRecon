@@ -162,9 +162,8 @@ div.tool-tag {
 
 .tool-options-container {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 1fr 1fr;
     height: 100%;
-    //background-color: rgb(255,255,0);
 }
 
 .tool-graph-icon {
