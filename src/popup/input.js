@@ -128,7 +128,7 @@ function submitIndicator(indicator, type, tld, tag, toolName) {
     // Show the appropriate tools for the input provided
 
     showCountryFlag(tld);
-    showButtonsByType(indicator, type, tag, isOnlyFav(), isOnlyAutoGraph(), isOnlyAutoGraph(), toolName);
+    showButtonsByType(indicator, type, tag, isOnlyFav(), isOnlyAutoGraph(), isOnlyNoKey(), toolName);
     // Save the current indicator along with its type
     localStorage.setItem("indicator", indicator);
     localStorage.setItem("type", type);
@@ -169,6 +169,7 @@ inputField.addEventListener("keyup", (e) => {
         localStorage.setItem("indicator", "");
         localStorage.setItem("type", "");
         localStorage.setItem("tag", "");
+        localStorage.setItem("", "");
 
         textfieldCatch.style.display = "block";        
         textfieldTool.style.display = "none";
@@ -182,22 +183,8 @@ inputField.addEventListener("keyup", (e) => {
         let type = "";
         let inputIndicator = "";
         let fToolName = "";
-        // Get indicator + possible search filters
-        let inputs = inputString.split(" ");
-        if(inputs.length > 1) {
-            // There is a search filter
-            inputIndicator = inputs[0];
-            
-            if(inputs[1][0] === "!") {
-                fToolName = inputs[1].split("!")[1];
-            } else if(inputs[1].startsWith("tool:")) {
-                fToolName = inputs[1].split("tool:")[1];
-            } else {
-                type = "invalid";
-            }
-        } else {
-            inputIndicator = inputString;
-        }
+
+        [inputIndicator, fToolName] = getInputFilter(inputString);
 
         if(type!="invalid") {
             // Get indicator type

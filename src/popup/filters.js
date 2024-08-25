@@ -1,3 +1,25 @@
+function getInputFilter(inputString) {
+    let fToolName = "";
+    let inputIndicator = "";
+    // Get indicator + possible search filters
+    let inputs = inputString.split(" ");
+    if(inputs.length > 1) {
+        // There is a search filter
+        inputIndicator = inputs[0];
+        
+        if(inputs[1][0] === "!") {
+            fToolName = inputs[1].split("!")[1];
+        } else if(inputs[1].startsWith("tool:")) {
+            fToolName = inputs[1].split("tool:")[1];
+        } else {
+            type = "invalid";
+        }
+    } else {
+        inputIndicator = inputString;
+    }
+    return [inputIndicator, fToolName];
+}
+
 /**
  *
  * Handle tag selecting event
@@ -5,6 +27,8 @@
  */
 document.querySelector("#filter-container-tags>select").addEventListener("change", (e) => {
     let inputString = inputField.value;
+
+    [inputString, fToolName] = getInputFilter(inputString);
     let [type, tld] = indicatorParser.getIndicatorType(inputString);
     if(type === "defanged") {
         // If the input string is defanged, refang it
@@ -13,8 +37,7 @@ document.querySelector("#filter-container-tags>select").addEventListener("change
         [type, tld] = indicatorParser.getIndicatorType(inputString);
     }
     const optionValue = e.target.options[e.target.selectedIndex].value;
-    const showOnlyFavBtn = document.querySelector("#show-only-fav>div").getAttribute("data-value");
-    showButtonsByType(inputString, type, optionValue, isOnlyFav(), isOnlyAutoGraph(), isOnlyNoKey());
+    showButtonsByType(inputString, type, optionValue, isOnlyFav(), isOnlyAutoGraph(), isOnlyNoKey(), fToolName);
     if(optionValue === "all") {
         document.querySelector("#filter-container-tags>select").value = "default";
     }
@@ -37,18 +60,19 @@ document.querySelector("#filter-container-types>select").addEventListener("chang
  */
 document.querySelector("#show-only-fav>div").addEventListener("click", (e) => {
     const switchButton = document.querySelector("#show-only-fav>div");
-    const inputString = inputField.value;
+    let inputString = inputField.value;
+    [inputString, fToolName] = getInputFilter(inputString);
     const [type, tld] = indicatorParser.getIndicatorType(inputString);
     const selectedTag = document.querySelector("#filter-container-tags>select").value
     const showOnlyAutograph = document.querySelector("#show-only-autograph>div").getAttribute("data-value") == "on";
     const optionValue = switchButton.getAttribute("data-value");
     if (optionValue == "off" || optionValue == undefined) {
-        showButtonsByType(inputString, type, selectedTag, true, isOnlyAutoGraph(), isOnlyNoKey());
+        showButtonsByType(inputString, type, selectedTag, true, isOnlyAutoGraph(), isOnlyNoKey(), fToolName);
         switchButton.setAttribute("data-value", "on");
         switchButton.classList.add("clicked-btn");
         switchButton.querySelector("img").src = "../../assets/icons/favourite_opt_w.png";
     } else {
-        showButtonsByType(inputString, type, selectedTag, false, isOnlyAutoGraph(), isOnlyNoKey());
+        showButtonsByType(inputString, type, selectedTag, false, isOnlyAutoGraph(), isOnlyNoKey(), fToolName);
         switchButton.setAttribute("data-value", "off");
         switchButton.classList.remove("clicked-btn");
         switchButton.querySelector("img").src = "../../assets/icons/favourite_opt.png";
@@ -62,17 +86,18 @@ document.querySelector("#show-only-fav>div").addEventListener("click", (e) => {
  */
 document.querySelector("#show-only-autograph>div").addEventListener("click", (e) => {
     const switchButton = document.querySelector("#show-only-autograph>div");
-    const inputString = inputField.value;
+    let inputString = inputField.value;
+    [inputString, fToolName] = getInputFilter(inputString);
     const [type, tld] = indicatorParser.getIndicatorType(inputString);
     const selectedTag = document.querySelector("#filter-container-tags>select").value
     const optionValue = switchButton.getAttribute("data-value");
     if (optionValue == "off" || optionValue == undefined) {
-        showButtonsByType(inputString, type, selectedTag, isOnlyFav(), true, isOnlyNoKey());
+        showButtonsByType(inputString, type, selectedTag, isOnlyFav(), true, isOnlyNoKey(), fToolName);
         switchButton.setAttribute("data-value", "on");
         switchButton.classList.add("clicked-btn");
         switchButton.querySelector("img").src = "../../assets/icons/graph_opt_w.png";
     } else {
-        showButtonsByType(inputString, type, selectedTag, isOnlyFav(), false, isOnlyNoKey());
+        showButtonsByType(inputString, type, selectedTag, isOnlyFav(), false, isOnlyNoKey(), fToolName);
         switchButton.setAttribute("data-value", "off");
         switchButton.classList.remove("clicked-btn");
         switchButton.querySelector("img").src = "../../assets/icons/graph_opt.png";
@@ -86,17 +111,18 @@ document.querySelector("#show-only-autograph>div").addEventListener("click", (e)
  */
 document.querySelector("#show-only-nokey>div").addEventListener("click", (e) => {
     const switchButton = document.querySelector("#show-only-nokey>div");
-    const inputString = inputField.value;
+    let inputString = inputField.value;
+    [inputString, fToolName] = getInputFilter(inputString);
     const [type, tld] = indicatorParser.getIndicatorType(inputString);
     const selectedTag = document.querySelector("#filter-container-tags>select").value
     const optionValue = switchButton.getAttribute("data-value");
     if (optionValue == "off" || optionValue == undefined) {
-        showButtonsByType(inputString, type, selectedTag, isOnlyFav(), isOnlyAutoGraph(), true);
+        showButtonsByType(inputString, type, selectedTag, isOnlyFav(), isOnlyAutoGraph(), true, fToolName);
         switchButton.setAttribute("data-value", "on");
         switchButton.classList.add("clicked-btn");
         switchButton.querySelector("img").src = "../../assets/icons/key_opt.png";
     } else {
-        showButtonsByType(inputString, type, selectedTag, isOnlyFav(), isOnlyAutoGraph(), false);
+        showButtonsByType(inputString, type, selectedTag, isOnlyFav(), isOnlyAutoGraph(), false, fToolName);
         switchButton.setAttribute("data-value", "off");
         switchButton.classList.remove("clicked-btn");
         switchButton.querySelector("img").src = "../../assets/icons/no_key_opt.png";
