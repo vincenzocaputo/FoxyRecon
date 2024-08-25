@@ -342,6 +342,14 @@ function createToolsList(toolsList){
         graphIconNode.setAttribute("title", "Automatically adds nodes to the graph");
         graphIconContainer.appendChild(graphIconNode);
 
+        uiIconContainer = document.createElement("div");
+        uiIconContainer.classList.add("tool-ui-icon");
+        uiIconNode = document.createElement("img");
+
+        uiIconNode.setAttribute("src", "../../assets/icons/user-interaction.png");
+        uiIconNode.setAttribute("title", "Some user interactions may be required. Enable the auto-submit feature to automatically submit indicators");
+        uiIconContainer.appendChild(uiIconNode);
+
         // Add an icon that allow to open the resource in a new or in the current tab
         // (it depends on settings chosen by the user)
         openIconContainer = document.createElement("div");
@@ -385,6 +393,10 @@ function createToolsList(toolsList){
 
         if(tools[i]["autoGraph"] ?? false) {
             optionsContainer.appendChild(graphIconContainer);
+        }
+
+        if(tools[i]["submitQuery"] ?? false) {
+            optionsContainer.appendChild(uiIconContainer);
         }
         optionsContainer.appendChild(openIconContainer);
         optionsContainer.appendChild(favIconContainer);

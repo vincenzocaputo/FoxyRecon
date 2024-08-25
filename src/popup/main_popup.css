@@ -177,6 +177,13 @@ div.tool-tag {
     grid-column-start: 1;
 }
 
+.tool-ui-icon {
+    height: 15px;
+    width: 15px;
+    grid-column-start: 1;
+    grid-row-start: 2;
+}
+
 
 .tool-open-icon {
     height: 15px;
