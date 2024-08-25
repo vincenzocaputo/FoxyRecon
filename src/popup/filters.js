@@ -14,12 +14,7 @@ document.querySelector("#filter-container-tags>select").addEventListener("change
     }
     const optionValue = e.target.options[e.target.selectedIndex].value;
     const showOnlyFavBtn = document.querySelector("#show-only-fav>div").getAttribute("data-value");
-    if (showOnlyFavBtn == "off") {
-        showButtonsByType(inputString, type, optionValue, false);
-    } else {
-        // If show only fav option is enabled, show only favourites tools
-        showButtonsByType(inputString, type, optionValue, true);
-    }
+    showButtonsByType(inputString, type, optionValue, isOnlyFav(), isOnlyAutoGraph(), isOnlyNoKey());
     if(optionValue === "all") {
         document.querySelector("#filter-container-tags>select").value = "default";
     }
