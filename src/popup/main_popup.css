@@ -166,8 +166,10 @@ div.tool-tag {
 
 .tool-options-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     height: 100%;
+    margin-right: 2px;
+    column-gap: 2px;
 }
 
 
@@ -177,10 +179,17 @@ div.tool-tag {
     grid-column-start: 1;
 }
 
+.tool-key-icon {
+    height: 15px;
+    width: 15px;
+    grid-column-start: 2;
+    grid-row-start: 1;
+}
+
 .tool-ui-icon {
     height: 15px;
     width: 15px;
-    grid-column-start: 1;
+    grid-column-start: 2;
     grid-row-start: 2;
 }
 
@@ -188,7 +197,7 @@ div.tool-tag {
 .tool-open-icon {
     height: 15px;
     width: 15px;
-    grid-column-start: 2;
+    grid-column-start: 3;
 }
 
 .tool-options-container img {
@@ -200,9 +209,8 @@ div.tool-tag {
 .tool-fav-icon {
     height: 15px;
     width: 15px;
-    grid-column-start: 2;
+    grid-column-start: 3;
 }
-
 
 #search-box {
     display: flex;

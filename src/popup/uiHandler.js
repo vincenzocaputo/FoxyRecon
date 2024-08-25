@@ -350,6 +350,14 @@ function createToolsList(toolsList){
         uiIconNode.setAttribute("title", "Some user interactions may be required. Enable the auto-submit feature to automatically submit indicators");
         uiIconContainer.appendChild(uiIconNode);
 
+        keyIconContainer = document.createElement("div");
+        keyIconContainer.classList.add("tool-key-icon");
+        keyIconNode = document.createElement("img");
+
+        keyIconNode.setAttribute("src", "../../assets/icons/key.png");
+        keyIconNode.setAttribute("title", "This web resource requires an account to submit indicators.");
+        keyIconContainer.appendChild(keyIconNode);
+
         // Add an icon that allow to open the resource in a new or in the current tab
         // (it depends on settings chosen by the user)
         openIconContainer = document.createElement("div");
@@ -397,6 +405,10 @@ function createToolsList(toolsList){
 
         if(tools[i]["submitQuery"] ?? false) {
             optionsContainer.appendChild(uiIconContainer);
+        }
+
+        if(tools[i]["accountRequired"] ?? false) {
+            optionsContainer.appendChild(keyIconContainer);
         }
         optionsContainer.appendChild(openIconContainer);
         optionsContainer.appendChild(favIconContainer);
