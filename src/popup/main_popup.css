@@ -362,6 +362,22 @@ div.tool-tag {
     bottom: 0;
 }
 
+#show-only-nokey {
+    display: none;
+}
+
+
+#show-only-nokey  img {
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
 #download {
     width: 15px;
     height: 15px;
