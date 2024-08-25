@@ -128,7 +128,7 @@ function submitIndicator(indicator, type, tld, tag, toolName) {
     // Show the appropriate tools for the input provided
 
     showCountryFlag(tld);
-    showButtonsByType(indicator, type, tag, false, toolName);
+    showButtonsByType(indicator, type, tag, isOnlyFav(), isOnlyAutoGraph(), isOnlyAutoGraph(), toolName);
     // Save the current indicator along with its type
     localStorage.setItem("indicator", indicator);
     localStorage.setItem("type", type);

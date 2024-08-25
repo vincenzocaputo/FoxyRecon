@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Urlscan visibility scan selection
 - Indicators collection on web pages containing private IP addresses
 - MAC Address form in graph page
+- Filtering by tool name when other filters are active
 
 ## [0.21.0] - 2024-08-03
 
