@@ -201,7 +201,7 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, showOnlyAutograph,
     if (noTools) {
         document.getElementById("no-tools").style.display = "block";
     }
-    createTagsOptionsList([...new Set(tagsOptions)]);
+    createTagsOptionsList([...new Set(tagsOptions)], tag);
 
 }
 
@@ -210,7 +210,7 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, showOnlyAutograph,
  * Create filter by tags dropdown menu options
  * @param {tagsOptions} list of tags
  */
-function createTagsOptionsList(tagsOptions) {
+function createTagsOptionsList(tagsOptions, selectedTag) {
     const tagsOptionsList = document.querySelectorAll("#filter-container-tags>select option");
     let options = [];
     
@@ -236,6 +236,13 @@ function createTagsOptionsList(tagsOptions) {
             document.querySelector("#filter-container-tags>select").appendChild(option);
         }
     }
+
+    if (selectedTag && selectedTag !== "all") {
+        document.querySelector("#filter-container-tags>select").value = selectedTag;
+    } else {
+        document.querySelector("#filter-container-tags>select").value = "default";
+    }
+
 }
 
 /**

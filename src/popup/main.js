@@ -36,7 +36,7 @@ if(!indicator || indicator === "undefined") {
     const tld = localStorage.getItem("tld");
     showCountryFlag(tld);
     // Restore tag option
-    const optionValue = localStorage.getItem("tag");
+    const optionValue = localStorage.getItem("tag") ?? "all";
     // If indicator is an URL or an email show domain extraction icon
     if(type === "url" || type === "email") {
         document.getElementById("domextr-icon").style.display = "block";

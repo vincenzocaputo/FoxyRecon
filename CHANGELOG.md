@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Filtering by tool name when other filters are active
 - Filtering by tool tags when other filters are active
 - Filtering by tool name
+- Saving and restoring tag filtering
 
 ## [0.21.0] - 2024-08-03
 
