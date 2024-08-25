@@ -126,7 +126,8 @@
             "color": "#FF7A38",
             "types": ["domain"],
             "tags": ["tls"],
-			"autoGraph": false
+			"autoGraph": false,
+            "accountRequired": true
         },
         {
             "name": "Censys Hosts",
@@ -218,7 +219,8 @@
 			"color": "#2451A3",
 			"types": ["domain","ip","cve"],
             "tags": ["open-ports","rep"],
-			"autoGraph": false
+			"autoGraph": false,
+            "accountRequired": true
 		},
         {
 			"name": "crt.sh",
@@ -300,7 +302,8 @@
             "color": "#151725",
             "types": ["email", "phone"],
             "tags": ["leaks"],
-			"autoGraph": false
+			"autoGraph": false,
+            "accountRequired": true
         },
         {
             "name": "Digicert",
@@ -460,7 +463,7 @@
         {
             "name": "GitHub",
             "url": {
-                "cve": "https://github.com/search?q=%s"
+                "cve": "https://github.com/search?q=\"%s\""
             },
             "desc": "Search for technical reports, PoC and exploits",
             "icon": "github.png",
@@ -1326,7 +1329,8 @@
             "color": "#000000",
             "types": ["hash","domain","ip","cve","phone","asn"],
             "tags": ["ioc"],
-			"autoGraph": false
+			"autoGraph": false,
+            "accountRequired": true
         },
         {
             "name": "Wayback Machine",

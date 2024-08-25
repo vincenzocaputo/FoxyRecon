@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Add
 - Text animation to display entire tool names when they are too long
 - Option to disable the typing animation of indicators in text fields
-- Improve indicators detection
+- Exact string search for GitHub resource
 - Investigate option in context menu to send indicators to the popup
 - Icon to mark the tools that support the automatic graph population feature
 - Icon to mark the tools that require user interaction
@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed tools from context menu 
 - Removed phone numbers format conversion when collecting indicators. Make the conversion only when the user submits a collected phone number indicator for investigations.
 - UI improvements in graph page
+- Improve indicators detection
 - Popup UI improvements
 
 ### Fix
