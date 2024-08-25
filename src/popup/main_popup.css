@@ -47,7 +47,7 @@ body {
 
 div.tool-entry, div.catch-res-entry {
     display: grid;
-    grid-template-columns: 1fr 6fr;
+    grid-template-columns: 6fr 1fr;
     background-color: #FFFFFF;
     border: 2px outset #596275;
     border-radius: 10px;
@@ -56,6 +56,10 @@ div.tool-entry, div.catch-res-entry {
     height: 40px;
     margin-right: 5px;
     margin-bottom: 5px;
+}
+
+div.catch-res-entry {
+    grid-template-columns: 1fr 6fr;
 }
 
 div.tool-entry > a, div.catch-res-entry > a {
