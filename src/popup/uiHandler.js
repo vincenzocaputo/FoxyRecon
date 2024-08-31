@@ -441,6 +441,21 @@ function createToolsList(toolsList){
                     text.classList.remove('animate');
                 }
             }
+
+            // Add animation to tags container to see all tags, if necessary
+            const tagsContainer = container.querySelector(".tool-tags-container");
+            if (tagsContainer) {
+                const tagsContainerWidth = tagsContainer.offsetWidth;
+                const tagsWidth = tagsContainer.scrollWidth;
+
+                if (!tagsContainer.classList.contains('animate')) {
+                    if (tagsWidth > tagsContainerWidth) {
+                        tagsContainer.classList.add('animate');
+                    } else {
+                        tagsContainer.classList.remove('animate');
+                    }
+                }
+            }
         });
         // Remove the animation when the mouse leaves
         nodeText.addEventListener("mouseleave", (e) => {
@@ -449,6 +464,13 @@ function createToolsList(toolsList){
 
             if (text.classList.contains('animate')) {
                 text.classList.remove('animate');
+            }
+
+            const tagsContainer = container.querySelector(".tool-tags-container");
+            if (tagsContainer) {
+                if (tagsContainer.classList.contains('animate')) {
+                    tagsContainer.classList.remove('animate');
+                }
             }
         });
 
