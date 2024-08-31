@@ -299,10 +299,11 @@ h3 {
 
 #form {
     display: grid;
-    grid-template-columns: 1fr 5fr;
+    grid-template-columns: 2fr 6fr;
     grid-row-gap: 5px;
     grid-column-gap: 10px;
     padding: 10px;
+    font-size: 0.9em;
 }
 
 #form label {
