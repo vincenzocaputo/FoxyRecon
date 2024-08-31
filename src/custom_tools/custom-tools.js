@@ -665,7 +665,7 @@ window.onload = function() {
 
         let selectedTags = [];
 
-        document.querySelectorAll("input[type=checkbox].type_select").forEach((e)=>{
+        document.querySelectorAll("input[type=checkbox].type-select").forEach((e)=>{
             if(e.checked) {
                 jsonCode["tags"].push(e.value);
             }
