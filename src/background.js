@@ -153,6 +153,8 @@ browser.tabs.onCreated.addListener(catchIndicators);
  * @param {tld} if the selected text is a domain, report the top level domain
  */
 function showContextMenu(selectedText, type = "invalid", tld = "") {
+    const graph = new Graph();
+
     if(type !== "invalid") {
         browser.contextMenus.update('investigate', {
             enabled: true,
@@ -164,15 +166,21 @@ function showContextMenu(selectedText, type = "invalid", tld = "") {
                 browser.browserAction.openPopup();
             }
         }).then( () => browser.contextMenus.refresh() );
-        browser.contextMenus.update('create-node', {
-            enabled: true,
-            visible: true,
-            onclick: function() {
-                const graph = new Graph();
-                graph.addNode(selectedText, type);
-                
-            }
-        }).then(()=>browser.contextMenus.refresh());
+        if (graph.getNodesByLabel(selectedText).length == 0) {
+            browser.contextMenus.update('create-node', {
+                enabled: true,
+                visible: true,
+                onclick: function() {
+                    graph.addNode(selectedText, type);
+                }
+            }).then(()=>browser.contextMenus.refresh());
+        } else {
+            // The node is already in the graph
+            browser.contextMenus.update('create-node', {
+                enabled: false
+            }).then( () => browser.contextMenus.refresh() );
+        }
+
     } else {
         browser.contextMenus.update('investigate', {
             enabled: false
@@ -181,7 +189,6 @@ function showContextMenu(selectedText, type = "invalid", tld = "") {
             enabled: true,
             visible: true,
             onclick: function() {
-                const graph = new Graph();
                 const nodeId = "note--" + crypto.randomUUID();
                 const label = "Note";
                 const type = "note";

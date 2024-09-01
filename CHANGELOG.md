@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Filtering by tool name
 - Saving and restoring tag filtering
 - Bug that prevented tags from being added to custom tools
+- Graphical bug when the textarea is resized in the forms on the graph page
 
 ## [0.21.0] - 2024-08-03
 
