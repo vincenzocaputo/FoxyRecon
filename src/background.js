@@ -87,6 +87,7 @@ function createToolsMenu(toolsList) {
         contexts: ["selection"],
         visible: true,
         onclick: function() {
+
         }
     });
     browser.contextMenus.create({
@@ -94,10 +95,6 @@ function createToolsMenu(toolsList) {
         title: "Investigate",
         contexts: ["selection"],
         visible: true,
-        onclick: function() {
-            browser.browserAction.openPopup();
-            
-        }
     });
 }
 
@@ -167,11 +164,22 @@ function showContextMenu(selectedText, type = "invalid", tld = "") {
                 browser.browserAction.openPopup();
             }
         }).then( () => browser.contextMenus.refresh() );
+        browser.contextMenus.update('create-node', {
+            enabled: true,
+            visible: true,
+            onclick: function() {
+                const graph = new Graph();
+                graph.addNode(selectedText, type);
+                
+            }
+        }).then(()=>browser.contextMenus.refresh());
     } else {
         browser.contextMenus.update('investigate', {
             enabled: false
         }).then( () => browser.contextMenus.refresh() );
+
     }
+
 
 }
 
