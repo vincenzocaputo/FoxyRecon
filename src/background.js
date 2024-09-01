@@ -177,6 +177,23 @@ function showContextMenu(selectedText, type = "invalid", tld = "") {
         browser.contextMenus.update('investigate', {
             enabled: false
         }).then( () => browser.contextMenus.refresh() );
+        browser.contextMenus.update('create-node', {
+            enabled: true,
+            visible: true,
+            onclick: function() {
+                const graph = new Graph();
+                const nodeId = "note--" + crypto.randomUUID();
+                const label = "Note";
+                const type = "note";
+                const stix = {};
+                stix["id"] = nodeId;
+                stix["type"] = type;
+                stix["content"] = selectedText;
+
+                graph.addSTIXNode(nodeId, label, type, stix);
+                
+            }
+        }).then(()=>browser.contextMenus.refresh());
 
     }
 
