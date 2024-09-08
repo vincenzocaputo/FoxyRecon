@@ -603,11 +603,13 @@ div.multiple-input:has(input[disabled]),input[disabled] {
     padding: 5px;
     width: 500px;
     height: 250px;
-    font-size: 0.7em;
+    font-size: 0.8em;
     top: 0;
     right: 0;
     overflow-y: scroll;
     display: block;
     white-space: pre;
+    text-wrap: wrap;
+
 }
 
