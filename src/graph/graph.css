@@ -595,3 +595,19 @@ div.multiple-input:has(input[disabled]),input[disabled] {
     font-size: 1.05em;
 }
 
+.hover-msg {
+    position: absolute;
+    z-index: 100;
+    background-color: #FFD0B6;
+    border: 1px solid black;
+    padding: 5px;
+    width: 500px;
+    height: 250px;
+    font-size: 0.7em;
+    top: 0;
+    right: 0;
+    overflow-y: scroll;
+    display: block;
+    white-space: pre;
+}
+

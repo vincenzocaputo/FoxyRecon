@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Icon to mark the tools that support the automatic graph population feature
 - Icon to mark the tools that require user interaction
 - Icon to mark the tools that require an account
+- Popup box to show content of Note nodes
 
 ### Change
 - Updated browser-polyfill library
