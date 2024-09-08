@@ -1,12 +1,13 @@
 // Type of the last selected string
 var lastType = "";
+var selectedText = "";
 
 /**
  * Selection change event
  */
 document.addEventListener("contextmenu", (evt) => {
     indicatorParser = new IndicatorParser();
-    let selectedText = document.getSelection().toString().trim();
+    selectedText = document.getSelection().toString().trim();
 
     if(selectedText) {
         // Determine the type of the indicator selected
@@ -34,4 +35,16 @@ document.addEventListener("contextmenu", (evt) => {
         }
     }
 })
+
+
+
+
+
+browser.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+    if (message === "open-add-note-popup") {
+        createPopup(selectedText);
+    } else {
+        //
+    }
+});
 

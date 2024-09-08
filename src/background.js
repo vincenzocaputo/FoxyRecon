@@ -189,16 +189,14 @@ function showContextMenu(selectedText, type = "invalid", tld = "") {
             enabled: true,
             visible: true,
             onclick: function() {
-                const nodeId = "note--" + crypto.randomUUID();
-                const label = "Note";
-                const type = "note";
-                const stix = {};
-                stix["id"] = nodeId;
-                stix["type"] = type;
-                stix["content"] = selectedText;
-
-                graph.addSTIXNode(nodeId, label, type, stix);
-                
+                browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
+                    let activeTab = tabs[0].id;
+                    browser.tabs.sendMessage(activeTab, "open-add-note-popup")
+                        .then((response) => {
+                        })
+                        .catch((error) => {
+                        });
+                });
             }
         }).then(()=>browser.contextMenus.refresh());
 
@@ -303,6 +301,30 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             graph.addLink(fromId, toId, rel['label']);
         }
         sendResponse({msg: 1});
+    } else if (request.id === 4) {
+        const graph = new Graph();
+        const stix = request.stix;
+        const label = request.label;
+        graph.addSTIXNode(stix["id"], label, stix["type"], stix);
+        console.log(request.relName);
+        if (request.relName) {
+            const indicator = localStorage.getItem("indicator");
+            const nodes = graph.getNodesByLabel(indicator);
+
+            let nodeId;
+            if (nodes.length === 0) {
+                nodeId = graph.addNode(indicator, localStorage.getItem("type"));
+            } else {
+                nodeId = nodes[0];
+            }
+            if (request.inbound) {
+                graph.addLink(nodeId, stix["id"], request.relName);
+            }
+            if (request.outbound) {
+                graph.addLink(stix["id"], nodeId, request.relName);
+            }
+                
+        }
     } else {
         // Context Menu
         showContextMenu(request.indicator, request.type, request.tld);
