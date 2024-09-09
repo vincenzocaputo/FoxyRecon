@@ -61,10 +61,15 @@ function createPopup(selectedText) {
     const formHeader = document.createElement('div');
     formHeader.className = 'foxyrecon-form-header';
 
+    const imgElement = document.createElement('img');
+    imgElement.src = browser.runtime.getURL("assets/icons/foxyrecon-icon-32.png");
+
     // Create form title div
     const formTitle = document.createElement('div');
     formTitle.className = 'foxyrecon-form-title';
     formTitle.textContent = 'Add Node';
+    
+    formHeader.appendChild(imgElement);
     formHeader.appendChild(formTitle);
 
     // Append form header to container
@@ -143,11 +148,17 @@ function createPopup(selectedText) {
         const option = evt.target.checked;
         if (option) {
             document.querySelectorAll(".foxyrecon-form-row:nth-child(n+3)").forEach( 
-                    (el) => el.style.opacity = "100%"
+                    (el) => {
+                        el.style.opacity = "100%";
+                        el.style.visibility = "visible";
+                    }
             );
         } else {
             document.querySelectorAll(".foxyrecon-form-row:nth-child(n+3)").forEach( 
-                    (el) => el.style.opacity = "0"
+                    (el) => {
+                        el.style.opacity = "0";
+                        el.style.visibility = "hidden";
+                    }
             );
         }
 
