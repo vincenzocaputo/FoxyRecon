@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Saving and restoring tag filtering
 - Bug that prevented tags from being added to custom tools
 - Graphical bug when the textarea is resized in the forms on the graph page
+- Gray background when a relationship is added from popup  
 
 ## [0.21.0] - 2024-08-03
 

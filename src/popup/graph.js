@@ -156,6 +156,7 @@ document.querySelector("#add-node-rel-button").addEventListener("click", (e) => 
 
 
     document.getElementById("add-relationship-popup").style.display = "none";
+    document.querySelector("#background").style.display = "none";
     showMessagePopup("Relationship added to graph", MessageType.INFO);
 
 });
