@@ -170,7 +170,7 @@ selectNodeEvent = evt => {
             const msg = document.createElement("div");
             msg.className = "hover-msg";
             
-            msg.textContent = graph.getNode(selectedNode).stix.content;
+            msg.textContent = nodeSTIX.content;
             document.querySelector(".vis-network").appendChild(msg);
         }
 
