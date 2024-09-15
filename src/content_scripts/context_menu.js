@@ -1,6 +1,7 @@
 // Type of the last selected string
 var lastType = "";
 var selectedText = "";
+var selectedTextType = "";
 
 /**
  * Selection change event
@@ -12,6 +13,7 @@ document.addEventListener("contextmenu", (evt) => {
     if(selectedText) {
         // Determine the type of the indicator selected
         [type, tld] = indicatorParser.getIndicatorType(selectedText);
+        selectedTextType = type;
         if(type != "invalid"){
             if(type === "defanged") {
                 // If the input string is defanged, refang it
@@ -42,7 +44,7 @@ document.addEventListener("contextmenu", (evt) => {
 
 browser.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     if (message === "open-add-note-popup") {
-        createPopup(selectedText);
+        createPopup(selectedText, selectedTextType);
     } else {
         //
     }

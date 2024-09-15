@@ -48,7 +48,7 @@ function createInput(name, type, labelName) {
     return formRow;
 }
 
-function createPopup(selectedText) {
+function createPopup(selectedText, detectedType) {
     // Create background div
     const backgroundContainer = document.createElement('div');
     backgroundContainer.className = 'foxyrecon-background';
@@ -123,6 +123,13 @@ function createPopup(selectedText) {
     document.body.appendChild(backgroundContainer);
     document.body.appendChild(popupContainer);
 
+    if (detectedType !== "invalid") {
+        console.log(detectedType);
+        // Selected text is a valid indicator. We don't need to ask user a label for the node
+        // Hide the input field for label
+        document.querySelector(".foxyrecon-form-row:nth-child(1)").style.display = "none";
+    }
+
     document.querySelector("#foxyrecon-input-rel-in").checked = true;
 
     // Force the user to select at least one inbound or one outbound link
@@ -164,17 +171,6 @@ function createPopup(selectedText) {
 
     });
     addNodeButton.addEventListener("click", evt => {
-        const nodeId = "note--" + crypto.randomUUID();
-        let label = document.querySelector("#foxyrecon-input-label").value;
-        if (!label) {
-            label = "Note";
-        }
-        const type = "note";
-        const stix = {};
-        stix["id"] = nodeId;
-        stix["type"] = type;
-        stix["content"] = selectedText;
-
         let relName = "";
         let inbound = false;
         let outbound = false;
@@ -189,14 +185,38 @@ function createPopup(selectedText) {
             }
         }
 
-        browser.runtime.sendMessage({
-            id: 4,
-            label: label,
-            stix: stix,
-            relName: relName,
-            inbound: inbound,
-            outbound: outbound
-        });
+        if (detectedType === "invalid") {
+            // We need to defined a note node with STIX data
+            const nodeId = "note--" + crypto.randomUUID();
+            let label = document.querySelector("#foxyrecon-input-label").value;
+            if (!label) {
+                label = "Note";
+            }
+            const type = "note";
+            const stix = {};
+            stix["id"] = nodeId;
+            stix["type"] = type;
+            stix["content"] = selectedText;
+
+            browser.runtime.sendMessage({
+                id: 4,
+                label: label,
+                stix: stix,
+                relName: relName,
+                inbound: inbound,
+                outbound: outbound
+            });
+        } else {
+            // Selected text is a valid indicator
+            browser.runtime.sendMessage({
+                id: 4,
+                type: detectedType,
+                indicator: selectedText,
+                relName: relName,
+                inbound: inbound,
+                outbound: outbound
+            });
+        }
         document.querySelector(".foxyrecon-background").remove();
         document.querySelector(".foxyrecon-popup-container").remove();
     });

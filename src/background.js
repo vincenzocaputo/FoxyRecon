@@ -171,7 +171,14 @@ function showContextMenu(selectedText, type = "invalid", tld = "") {
                 enabled: true,
                 visible: true,
                 onclick: function() {
-                    graph.addNode(selectedText, type);
+                    browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
+                        let activeTab = tabs[0].id;
+                        browser.tabs.sendMessage(activeTab, "open-add-note-popup")
+                            .then((response) => {
+                            })
+                            .catch((error) => {
+                            });
+                    });
                 }
             }).then(()=>browser.contextMenus.refresh());
         } else {
@@ -256,7 +263,7 @@ function updateToolsMenu(toolsList, indicator, type) {
  * Waiting for  messages from content_script
  */
 browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    if(request.id == 1) {
+    if(request.id === 1) {
         // Autofill feature
         query = localStorage.getItem("autofill.submit-btn-query");
         inputSelector = localStorage.getItem("autofill.input-selector");
@@ -267,7 +274,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         // Consume the request (to avoid clicking the button more times for the same request)
         localStorage.setItem("autofill.submit-btn-query","");
         localStorage.setItem("autofill.input-selector","");
-    } else if (request.id == 2) {
+    } else if (request.id === 2) {
         // Auto graph generation
         if (localStorage.getItem("settings.autograph") === "true" && request.msg) {
             const resource = request.msg;
@@ -279,7 +286,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             }
             sendResponse({msg: localStorage.getItem("indicator"), map: JSON.stringify(mappings) }) 
         }
-    } else if (request.id == 3) {
+    } else if (request.id === 3) {
         const graph = new Graph();
         const rel = JSON.parse(request.msg);
 
@@ -303,25 +310,31 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         sendResponse({msg: 1});
     } else if (request.id === 4) {
         const graph = new Graph();
-        const stix = request.stix;
-        const label = request.label;
-        graph.addSTIXNode(stix["id"], label, stix["type"], stix);
-        console.log(request.relName);
+        let nodeId;
+        if (request.hasOwnProperty("type")) {
+            // We are dealing with a valid indicator
+            nodeId = graph.addNode(request.indicator, request.type);
+        } else {
+            const stix = request.stix;
+            const label = request.label;
+            graph.addSTIXNode(stix["id"], label, stix["type"], stix);
+            nodeId = stix["id"];
+        }
         if (request.relName) {
             const indicator = localStorage.getItem("indicator");
             const nodes = graph.getNodesByLabel(indicator);
 
-            let nodeId;
+            let relNodeId;
             if (nodes.length === 0) {
-                nodeId = graph.addNode(indicator, localStorage.getItem("type"));
+                relNodeId = graph.addNode(indicator, localStorage.getItem("type"));
             } else {
-                nodeId = nodes[0];
+                relNodeId = nodes[0];
             }
             if (request.inbound) {
-                graph.addLink(nodeId, stix["id"], request.relName);
+                graph.addLink(relNodeId, nodeId, request.relName);
             }
             if (request.outbound) {
-                graph.addLink(stix["id"], nodeId, request.relName);
+                graph.addLink(nodeId, relNodeId, request.relName);
             }
                 
         }
