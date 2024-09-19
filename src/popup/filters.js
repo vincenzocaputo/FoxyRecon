@@ -167,6 +167,9 @@ document.querySelector("#filter-by-tool>div").addEventListener("click", (e) => {
     const switchButton = document.querySelector("#filter-by-tool>div");
     const inputField = document.querySelector("#input-box");
     let inputString = inputField.value;
+    [inputString, fToolName] = getInputFilter(inputString);
+    const [type, tld] = indicatorParser.getIndicatorType(inputString);
+    const selectedTag = document.querySelector("#filter-container-tags>select").value
     const optionValue = switchButton.getAttribute("data-value");
     if (optionValue == "off" || optionValue == undefined) {
         inputField.value = inputField.value + " tool:"; 
@@ -179,6 +182,8 @@ document.querySelector("#filter-by-tool>div").addEventListener("click", (e) => {
         switchButton.setAttribute("data-value", "off");
         switchButton.classList.remove("clicked-btn");
         switchButton.querySelector("img").src = "../../assets/icons/tools.png";
+        showButtonsByType(inputString, type, selectedTag, isOnlyFav(), isOnlyAutoGraph(), isOnlyNoKey(), isOnlyNoInt(), "");
+
     }
 });
 
