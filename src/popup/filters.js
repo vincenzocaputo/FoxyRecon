@@ -16,8 +16,8 @@ function getInputFilter(inputString) {
         } else if(inputs[1].startsWith("tool:")) {
             fToolName = inputs[1].split("tool:")[1];
         } else {
-            type = "invalid";
-            
+            inputIndicator = "";
+
             switchButton.setAttribute("data-value", "off");
             switchButton.classList.remove("clicked-btn");
             switchButton.querySelector("img").src = "../../assets/icons/tools.png";
