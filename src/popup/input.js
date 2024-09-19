@@ -105,7 +105,7 @@ textfieldTool.addEventListener("click", function() {
     inputField.value = domain;
 
     // Show the appropriate tools for the input provided
-    showButtonsByType(domain, "domain", "all");
+    showButtonsByType(domain, "domain", "all", isOnlyFav(), isOnlyAutoGraph(), isOnlyNoKey(), isOnlyNoInt());
     // Save the current indicator along with its type
     localStorage.setItem("indicator", domain);
     localStorage.setItem("type", "domain");
@@ -128,7 +128,7 @@ function submitIndicator(indicator, type, tld, tag, toolName) {
     // Show the appropriate tools for the input provided
 
     showCountryFlag(tld);
-    showButtonsByType(indicator, type, tag, isOnlyFav(), isOnlyAutoGraph(), isOnlyNoKey(), toolName);
+    showButtonsByType(indicator, type, tag, isOnlyFav(), isOnlyAutoGraph(), isOnlyNoKey(), isOnlyNoInt(), toolName);
     // Save the current indicator along with its type
     localStorage.setItem("indicator", indicator);
     localStorage.setItem("type", type);

@@ -97,6 +97,7 @@ function showAddonMain() {
     document.getElementById("show-only-fav").style.display = "none";
     document.getElementById("show-only-autograph").style.display = "none";
     document.getElementById("show-only-nokey").style.display = "none";
+    document.getElementById("show-only-noint").style.display = "none";
     document.getElementById("no-tools").style.display = "none";
     document.getElementById("no-indicators").style.display = "none";
     // Hide download icon
@@ -122,7 +123,7 @@ function showAddonMain() {
  * @param {showOnlyNoKey} if true, show only tools that do not require accounts
  * @param {toolName} possible tool name to show
  */
-function showButtonsByType(indicator, type, tag, showOnlyFav, showOnlyAutograph, showOnlyNoKey, toolName) {
+function showButtonsByType(indicator, type, tag, showOnlyFav, showOnlyAutograph, showOnlyNoKey, showOnlyNoInt, toolName) {
     document.getElementById("filter-container-tags").style.display = "block";
     document.getElementById("filter-container-types").style.display = "none";
     document.getElementById("download").style.display = "none";
@@ -134,6 +135,7 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, showOnlyAutograph,
     document.getElementById("show-only-fav").style.display = "block";
     document.getElementById("show-only-autograph").style.display = "block";
     document.getElementById("show-only-nokey").style.display = "block";
+    document.getElementById("show-only-noint").style.display = "block";
     document.getElementById("no-tools").style.display = "none";
     document.getElementById("no-indicators").style.display = "none";
     document.getElementById("hist-icon").style.display = "none";
@@ -170,25 +172,28 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, showOnlyAutograph,
     for (i = 0; i < tools.length; i++) {
         const autoGraph = tools[i]["autoGraph"] ?? false;
         const accountRequired = tools[i]["accountRequired"] ?? false;
+        const interactionsRequired = "submitQuery" in tools[i];
         if (!showOnlyFav || favTools && favTools.includes(tools[i]["name"])) {
             if (!showOnlyAutograph || autoGraph) {
                 if (!showOnlyNoKey || !accountRequired) {
-                    if (!toolName || tools[i]["name"].toLowerCase().includes(toolName)) {
-                        if (tools[i]["types"].includes(type)) { 
-                            tagsOptions = tagsOptions.concat(tools[i]["tags"]);
-                            if (tag === "all" || (tools[i]["tags"] && tools[i]["tags"].includes(tag))) {
-                                noTools = false;
-                                resNodes[i].style.display = "grid";
-                                // Set tool description to div title
-                                resNodes[i].title = tools[i]["desc"];
-                                // Replace the placholder with the input string
-                                let url = tools[i]["url"][type];
-                                url = cookURL(url, indicator);
-                                resNodes[i].url = url;
-                                resNodes[i].name = tools[i]["name"];
-                                resNodes[i].submitQuery = tools[i]["submitQuery"];
-                                resNodes[i].inputSelector = tools[i]["inputSelector"];
-                                continue;
+                    if (!showOnlyNoInt || !interactionsRequired) {
+                        if (!toolName || tools[i]["name"].toLowerCase().includes(toolName)) {
+                            if (tools[i]["types"].includes(type)) { 
+                                tagsOptions = tagsOptions.concat(tools[i]["tags"]);
+                                if (tag === "all" || (tools[i]["tags"] && tools[i]["tags"].includes(tag))) {
+                                    noTools = false;
+                                    resNodes[i].style.display = "grid";
+                                    // Set tool description to div title
+                                    resNodes[i].title = tools[i]["desc"];
+                                    // Replace the placholder with the input string
+                                    let url = tools[i]["url"][type];
+                                    url = cookURL(url, indicator);
+                                    resNodes[i].url = url;
+                                    resNodes[i].name = tools[i]["name"];
+                                    resNodes[i].submitQuery = tools[i]["submitQuery"];
+                                    resNodes[i].inputSelector = tools[i]["inputSelector"];
+                                    continue;
+                                }
                             }
                         }
                     }

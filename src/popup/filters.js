@@ -37,7 +37,7 @@ document.querySelector("#filter-container-tags>select").addEventListener("change
         [type, tld] = indicatorParser.getIndicatorType(inputString);
     }
     const optionValue = e.target.options[e.target.selectedIndex].value;
-    showButtonsByType(inputString, type, optionValue, isOnlyFav(), isOnlyAutoGraph(), isOnlyNoKey(), fToolName);
+    showButtonsByType(inputString, type, optionValue, isOnlyFav(), isOnlyAutoGraph(), isOnlyNoKey(), isOnlyNoInt(), fToolName);
     if(optionValue === "all") {
         document.querySelector("#filter-container-tags>select").value = "default";
     }
@@ -68,12 +68,12 @@ document.querySelector("#show-only-fav>div").addEventListener("click", (e) => {
     const showOnlyAutograph = document.querySelector("#show-only-autograph>div").getAttribute("data-value") == "on";
     const optionValue = switchButton.getAttribute("data-value");
     if (optionValue == "off" || optionValue == undefined) {
-        showButtonsByType(inputString, type, selectedTag, true, isOnlyAutoGraph(), isOnlyNoKey(), fToolName);
+        showButtonsByType(inputString, type, selectedTag, true, isOnlyAutoGraph(), isOnlyNoKey(), isOnlyNoInt(), fToolName);
         switchButton.setAttribute("data-value", "on");
         switchButton.classList.add("clicked-btn");
         switchButton.querySelector("img").src = "../../assets/icons/favourite_opt_w.png";
     } else {
-        showButtonsByType(inputString, type, selectedTag, false, isOnlyAutoGraph(), isOnlyNoKey(), fToolName);
+        showButtonsByType(inputString, type, selectedTag, false, isOnlyAutoGraph(), isOnlyNoKey(), isOnlyNoInt(), fToolName);
         switchButton.setAttribute("data-value", "off");
         switchButton.classList.remove("clicked-btn");
         switchButton.querySelector("img").src = "../../assets/icons/favourite_opt.png";
@@ -93,12 +93,12 @@ document.querySelector("#show-only-autograph>div").addEventListener("click", (e)
     const selectedTag = document.querySelector("#filter-container-tags>select").value
     const optionValue = switchButton.getAttribute("data-value");
     if (optionValue == "off" || optionValue == undefined) {
-        showButtonsByType(inputString, type, selectedTag, isOnlyFav(), true, isOnlyNoKey(), fToolName);
+        showButtonsByType(inputString, type, selectedTag, isOnlyFav(), true, isOnlyNoKey(), isOnlyNoInt(), fToolName);
         switchButton.setAttribute("data-value", "on");
         switchButton.classList.add("clicked-btn");
         switchButton.querySelector("img").src = "../../assets/icons/graph_opt_w.png";
     } else {
-        showButtonsByType(inputString, type, selectedTag, isOnlyFav(), false, isOnlyNoKey(), fToolName);
+        showButtonsByType(inputString, type, selectedTag, isOnlyFav(), false, isOnlyNoKey(), isOnlyNoInt(), fToolName);
         switchButton.setAttribute("data-value", "off");
         switchButton.classList.remove("clicked-btn");
         switchButton.querySelector("img").src = "../../assets/icons/graph_opt.png";
@@ -107,7 +107,7 @@ document.querySelector("#show-only-autograph>div").addEventListener("click", (e)
 
 /**
  *
- * Handle autograph filtering clicking event
+ * Handle filtering button clicking event. Show only tools that do not require accounts
  *
  */
 document.querySelector("#show-only-nokey>div").addEventListener("click", (e) => {
@@ -118,18 +118,42 @@ document.querySelector("#show-only-nokey>div").addEventListener("click", (e) => 
     const selectedTag = document.querySelector("#filter-container-tags>select").value
     const optionValue = switchButton.getAttribute("data-value");
     if (optionValue == "off" || optionValue == undefined) {
-        showButtonsByType(inputString, type, selectedTag, isOnlyFav(), isOnlyAutoGraph(), true, fToolName);
+        showButtonsByType(inputString, type, selectedTag, isOnlyFav(), isOnlyAutoGraph(), true, isOnlyNoInt(), fToolName);
         switchButton.setAttribute("data-value", "on");
         switchButton.classList.add("clicked-btn");
         switchButton.querySelector("img").src = "../../assets/icons/key_opt.png";
     } else {
-        showButtonsByType(inputString, type, selectedTag, isOnlyFav(), isOnlyAutoGraph(), false, fToolName);
+        showButtonsByType(inputString, type, selectedTag, isOnlyFav(), isOnlyAutoGraph(), false, isOnlyNoInt(), fToolName);
         switchButton.setAttribute("data-value", "off");
         switchButton.classList.remove("clicked-btn");
         switchButton.querySelector("img").src = "../../assets/icons/no_key_opt.png";
     }
 });
 
+/**
+ *
+ * Handle filtering button clicking event. Show only tools that do not require user interactions
+ *
+ */
+document.querySelector("#show-only-noint>div").addEventListener("click", (e) => {
+    const switchButton = document.querySelector("#show-only-noint>div");
+    let inputString = inputField.value;
+    [inputString, fToolName] = getInputFilter(inputString);
+    const [type, tld] = indicatorParser.getIndicatorType(inputString);
+    const selectedTag = document.querySelector("#filter-container-tags>select").value
+    const optionValue = switchButton.getAttribute("data-value");
+    if (optionValue == "off" || optionValue == undefined) {
+        showButtonsByType(inputString, type, selectedTag, isOnlyFav(), isOnlyAutoGraph(), isOnlyNoKey(), true, fToolName);
+        switchButton.setAttribute("data-value", "on");
+        switchButton.classList.add("clicked-btn");
+        switchButton.querySelector("img").src = "../../assets/icons/int_opt.png";
+    } else {
+        showButtonsByType(inputString, type, selectedTag, isOnlyFav(), isOnlyAutoGraph(), isOnlyNoKey(), false, fToolName);
+        switchButton.setAttribute("data-value", "off");
+        switchButton.classList.remove("clicked-btn");
+        switchButton.querySelector("img").src = "../../assets/icons/no_int_opt.png";
+    }
+});
 
 function isOnlyFav() {
     return document.querySelector("#show-only-fav>div").getAttribute("data-value") == "on";
@@ -141,5 +165,9 @@ function isOnlyAutoGraph() {
 
 function isOnlyNoKey() {
     return document.querySelector("#show-only-nokey>div").getAttribute("data-value") == "on";
+}
+
+function isOnlyNoInt() {
+    return document.querySelector("#show-only-noint>div").getAttribute("data-value") == "on";
 }
 
