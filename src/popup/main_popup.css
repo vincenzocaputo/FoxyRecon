@@ -319,18 +319,21 @@ div.tool-tag {
 
 #option-box {
     margin-top: 5px;
-    margin-bottom: 2px;
+    margin-bottom: 5px;
     display: flex;
-    gap: 5px;
+    gap: 2px;
+    align-items: center;
 }
 
 .separator {
     border: 1px solid #C6C6C6;
+    display: block;
+    height: 22px;
+    margin: 0 1px 0 1px;
 }
 
 #filter-container-tags, #filter-container-types {
     margin-left: 5px;
-    margin-bottom: 5px;
     display: none;
 }
 
@@ -340,6 +343,7 @@ div.tool-tag {
 
 #filter-container-tags > select, #filter-container-types > select {
     width: 100px;
+    height: 24px;
 }
 
 #rel-node-name {
@@ -445,8 +449,8 @@ div.tool-tag {
 
 .square-btn {
     color: white; /* White text */
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     font-size: 16px; 
     cursor: pointer; 
     border-radius: 5px;
@@ -455,7 +459,7 @@ div.tool-tag {
 
 .square-btn.filter-btn {
     background-color: #EDEDED;
-    border: 2px outset #888888;
+    border: 1px outset #888888;
     cursor: pointer;
 }
 
@@ -465,7 +469,7 @@ div.tool-tag {
 
 .square-btn.filter-btn.clicked-btn {
     background-color: #FF5300;
-    border: 2px inset #888888;
+    border: 1px inset #888888;
     cursor: pointer;
 
 }
@@ -479,16 +483,16 @@ div.tool-tag {
 }
 
 #add-rel-button {
-    border: 2px solid #6413AB;
+    border: 1px solid #6413AB;
 }
 
 #del-node-button {
-    border: 2px solid #8A2424;
+    border: 1px solid #8A2424;
 }
 
 #add-node-button {
     background-color: #04D43C;
-    border: 2px solid #07A631; 
+    border: 1px solid #07A631; 
 }
 
 #add-node-button:hover {
@@ -497,8 +501,8 @@ div.tool-tag {
 
 #add-node-button  img, #add-rel-button img, #del-node-button img {
     position:absolute;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     left: 1px;
     top: 1px;
     margin: 0 auto;
