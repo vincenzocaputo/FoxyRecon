@@ -7,6 +7,16 @@ body {
     height: 100vh;
 }
 
+#background {
+    position: fixed;
+    top: 0;
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    opacity: 70%
+    
+}
+
 #foxyrecon-icon {
     height: 30px;
     width: 30px;
@@ -372,9 +382,9 @@ input:checked + .slider:before {
     text-align: center;
     background-color: rgb(255,255,255);
     border: 1px solid black;
-    width: 500px;
     height: fit-content;
     padding: 30px;
+    max-width: max-content;
 }
 
 .popup-container .form-header {
@@ -421,6 +431,8 @@ input:checked + .slider:before {
 .popup-container textarea {
     grid-column: 2;
     height: 80px;
+    max-width: 50em;
+    max-height: 25em;
 }
 
 .popup-container .subform-container {
@@ -581,5 +593,22 @@ div.multiple-input:has(input[disabled]),input[disabled] {
     margin: 0 auto auto 1em;
     line-height: 3em;
     font-size: 1.05em;
+}
+
+.hover-msg {
+    position: absolute;
+    z-index: 100;
+    background-color: #FFD0B6;
+    border: 1px solid black;
+    padding: 5px;
+    width: 500px;
+    height: 250px;
+    font-size: 0.8em;
+    top: 0;
+    right: 0;
+    overflow-y: scroll;
+    display: block;
+    white-space: pre;
+    text-wrap: wrap;
 }
 

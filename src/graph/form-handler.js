@@ -1,6 +1,10 @@
 class FormHandler {
 
     constructor(formTitle, formIcon) {
+        const outsideContainer = document.createElement("div");
+        outsideContainer.setAttribute("id", "background");
+        document.querySelector("#page-container").appendChild(outsideContainer);
+
         const popupContainer = document.createElement("div");
         const formContainer = document.createElement("div");
 
@@ -25,6 +29,7 @@ class FormHandler {
         cancelButton.classList.add("btn");
         cancelButton.classList.add("cancel-btn");
         cancelButton.addEventListener("click", evt => {
+            document.querySelector("#background").remove();
             evt.target.closest(".popup-container").remove();
         });
 

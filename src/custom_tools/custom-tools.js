@@ -50,7 +50,11 @@ function showCustomToolsList() {
         nodeImage.setAttribute("src", imageSrc);
 
         let nodeText = document.createElement("div");
-        nodeText.textContent = toolsList[i]["name"];
+        
+        const text = document.createElement("div");
+        text.textContent = toolsList[i]["name"];
+        text.classList.add("text");
+        nodeText.appendChild(text);
         nodeText.classList.add("tool-name");
 
         let color = toolsList[i]["color"];
@@ -60,7 +64,7 @@ function showCustomToolsList() {
         }
 
         tags = toolsList[i]["tags"];
-        if(tags) {
+        if(tags && tags.length > 0) {
             nodeText.classList.add("tool-name-with-tags");
             let nodeTagsContainer = document.createElement("div");
             nodeTagsContainer.classList.add("tool-tags-container");
@@ -83,6 +87,56 @@ function showCustomToolsList() {
 
     
         node.id = i;
+        
+        // Add animation to show the entire text
+        nodeText.addEventListener("mouseenter", (e) => {
+            const container = e.target;
+            const text = container.querySelector('.text');
+            const containerWidth = container.offsetWidth;
+            const textWidth = text.scrollWidth;
+
+            if (!text.classList.contains('animate')) {
+                if (textWidth > containerWidth) {
+                    text.classList.add('animate');
+                } else {
+                    text.classList.remove('animate');
+                }
+            }
+
+            // Add animation to tags container to see all tags, if necessary
+            const tagsContainer = container.querySelector(".tool-tags-container");
+            if (tagsContainer) {
+                const tagsContainerWidth = tagsContainer.offsetWidth;
+                const tagsWidth = container.offsetWidth;
+                console.log(tagsContainerWidth);
+                console.log(tagsWidth);
+
+                if (!tagsContainer.classList.contains('animate')) {
+                    if (tagsWidth < tagsContainerWidth) {
+                        tagsContainer.classList.add('animate');
+                    } else {
+                        tagsContainer.classList.remove('animate');
+                    }
+                }
+            }
+        });
+        // Remove the animation when the mouse leaves
+        nodeText.addEventListener("mouseleave", (e) => {
+            const container = e.target;
+            const text = container.querySelector('.text');
+
+            if (text.classList.contains('animate')) {
+                text.classList.remove('animate');
+            }
+
+            const tagsContainer = container.querySelector(".tool-tags-container");
+            if (tagsContainer) {
+                if (tagsContainer.classList.contains('animate')) {
+                    tagsContainer.classList.remove('animate');
+                }
+            }
+        });
+
         
         // If the user clicks on a tool in the list, fill the form with the information related to the selected tool
         node.addEventListener("click", function(e) {
@@ -210,7 +264,6 @@ function showCustomToolsList() {
         nodeImageContainer.appendChild(nodeImage);
         node.appendChild(nodeImageContainer);
         node.appendChild(nodeText);
-        node.appendChild(optionsContainer);
         toolsListNodes.appendChild(node);
 
 
@@ -665,7 +718,7 @@ window.onload = function() {
 
         let selectedTags = [];
 
-        document.querySelectorAll("input[type=checkbox].type_select").forEach((e)=>{
+        document.querySelectorAll("input[type=checkbox].type-select").forEach((e)=>{
             if(e.checked) {
                 jsonCode["tags"].push(e.value);
             }

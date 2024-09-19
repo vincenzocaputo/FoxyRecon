@@ -95,6 +95,11 @@ function showAddonMain() {
     document.getElementById("bin-icon").style.display = "none";
     // Hide show fav button
     document.getElementById("show-only-fav").style.display = "none";
+    document.getElementById("show-only-autograph").style.display = "none";
+    document.getElementById("show-only-nokey").style.display = "none";
+    document.getElementById("show-only-noint").style.display = "none";
+    document.getElementById("filter-by-tool").style.display = "none";
+    document.querySelector(".separator").style.display = "none";
     document.getElementById("no-tools").style.display = "none";
     document.getElementById("no-indicators").style.display = "none";
     // Hide download icon
@@ -116,9 +121,11 @@ function showAddonMain() {
  * @param {type} indicator type (domain, ip, url, etc.)
  * @param {tag} web resource tag (for filtering results)
  * @param {showOnlyFav} if true, show only favourites resources
+ * @param {showOnlyAutograph} if true, show only tools that support auto graph creation
+ * @param {showOnlyNoKey} if true, show only tools that do not require accounts
  * @param {toolName} possible tool name to show
  */
-function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
+function showButtonsByType(indicator, type, tag, showOnlyFav, showOnlyAutograph, showOnlyNoKey, showOnlyNoInt, toolName) {
     document.getElementById("filter-container-tags").style.display = "block";
     document.getElementById("filter-container-types").style.display = "none";
     document.getElementById("download").style.display = "none";
@@ -128,6 +135,11 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
     document.getElementById("catch-res-list").style.display = "none";
     document.querySelectorAll(".catch-res-entry").forEach(e => e.remove());
     document.getElementById("show-only-fav").style.display = "block";
+    document.getElementById("show-only-autograph").style.display = "block";
+    document.getElementById("show-only-nokey").style.display = "block";
+    document.getElementById("show-only-noint").style.display = "block";
+    document.querySelector(".separator").style.display = "block";
+    document.getElementById("filter-by-tool").style.display = "block";
     document.getElementById("no-tools").style.display = "none";
     document.getElementById("no-indicators").style.display = "none";
     document.getElementById("hist-icon").style.display = "none";
@@ -154,51 +166,51 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
     // Retrieve favourites tools from local storage
     const favTools = JSON.parse(localStorage.getItem("fav"));
 
-    if(!tag) {
+    if(!tag || tag === "default") {
         // If no tag has been provided, by default set it to "all"
         tag = "all";
     }
     let tagsOptions = [];
     let noTools = true;
+
     for (i = 0; i < tools.length; i++) {
+        const autoGraph = tools[i]["autoGraph"] ?? false;
+        const accountRequired = tools[i]["accountRequired"] ?? false;
+        const interactionsRequired = "submitQuery" in tools[i];
         if (!showOnlyFav || favTools && favTools.includes(tools[i]["name"])) {
-            if (!toolName || tools[i]["name"].toLowerCase().includes(toolName)) {
-                if (tools[i]["types"].includes(type)) { 
-                    tagsOptions = tagsOptions.concat(tools[i]["tags"]);
-                    if (tag === "all" || (tools[i]["tags"] && tools[i]["tags"].includes(tag))) {
-                        noTools = false;
-                        resNodes[i].style.display = "block";
-                        // Set tool description to div title
-                        resNodes[i].title = tools[i]["desc"];
-                        // Replace the placholder with the input string
-                        let url = tools[i]["url"][type];
-                        url = cookURL(url, indicator);
-                        resNodes[i].url = url;
-                        resNodes[i].name = tools[i]["name"];
-                        resNodes[i].submitQuery = tools[i]["submitQuery"];
-                        resNodes[i].inputSelector = tools[i]["inputSelector"];
-
-
-                    } else  {
-                        resNodes[i].style.display = "none";
+            if (!showOnlyAutograph || autoGraph) {
+                if (!showOnlyNoKey || !accountRequired) {
+                    if (!showOnlyNoInt || !interactionsRequired) {
+                        if (!toolName || tools[i]["name"].toLowerCase().includes(toolName)) {
+                            if (tools[i]["types"].includes(type)) { 
+                                tagsOptions = tagsOptions.concat(tools[i]["tags"]);
+                                if (tag === "all" || (tools[i]["tags"] && tools[i]["tags"].includes(tag))) {
+                                    noTools = false;
+                                    resNodes[i].style.display = "grid";
+                                    // Set tool description to div title
+                                    resNodes[i].title = tools[i]["desc"];
+                                    // Replace the placholder with the input string
+                                    let url = tools[i]["url"][type];
+                                    url = cookURL(url, indicator);
+                                    resNodes[i].url = url;
+                                    resNodes[i].name = tools[i]["name"];
+                                    resNodes[i].submitQuery = tools[i]["submitQuery"];
+                                    resNodes[i].inputSelector = tools[i]["inputSelector"];
+                                    continue;
+                                }
+                            }
+                        }
                     }
-                } else {
-                    // If this tools does not support this indicator type, hide its button
-                    resNodes[i].style.display = "none";
                 }
-            } else {
-                resNodes[i].style.display = "none";
             }
-        } else {
-            // If this tools does not support this indicator type, hide its button
-            resNodes[i].style.display = "none";
-        }
+        } 
+        resNodes[i].style.display = "none";
     }
 
     if (noTools) {
         document.getElementById("no-tools").style.display = "block";
     }
-    createTagsOptionsList([...new Set(tagsOptions)]);
+    createTagsOptionsList([...new Set(tagsOptions)], tag);
 
 }
 
@@ -207,7 +219,7 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, toolName) {
  * Create filter by tags dropdown menu options
  * @param {tagsOptions} list of tags
  */
-function createTagsOptionsList(tagsOptions) {
+function createTagsOptionsList(tagsOptions, selectedTag) {
     const tagsOptionsList = document.querySelectorAll("#filter-container-tags>select option");
     let options = [];
     
@@ -233,6 +245,13 @@ function createTagsOptionsList(tagsOptions) {
             document.querySelector("#filter-container-tags>select").appendChild(option);
         }
     }
+
+    if (selectedTag && selectedTag !== "all") {
+        document.querySelector("#filter-container-tags>select").value = selectedTag;
+    } else {
+        document.querySelector("#filter-container-tags>select").value = "default";
+    }
+
 }
 
 /**
@@ -279,7 +298,7 @@ function createToolsList(toolsList){
         let node = document.createElement('div');
         
         node.classList.add("tool-entry");
-        node.style.display = "none";        
+        node.style.display = "none";
         
         // Create node that will contain the link to the web resource
         let nodeHyperlink = document.createElement('a');
@@ -288,7 +307,7 @@ function createToolsList(toolsList){
         // This node will contain the resource's icon
         let nodeImageContainer = document.createElement("div");
         nodeImageContainer.classList.add("tool-icon");
-   
+
         let nodeImage = document.createElement("img");
 
         let imageSrc = toolsList[i]["icon"];
@@ -300,15 +319,12 @@ function createToolsList(toolsList){
 
         // This node will contain the web resource's name
         let nodeText = document.createElement("div");
-
-        nodeText.textContent = toolsList[i]["name"];
         
-        // If the name is too long, reduce the font size
-        if(toolsList[i]["name"].length > 15 && toolsList[i]["name"].length < 20) {
-            nodeText.style.fontSize = "90%";
-        } else if(toolsList[i]["name"].length > 19) {
-            nodeText.style.fontSize = "80%";
-        }
+        text = document.createElement("div");
+        text.textContent = toolsList[i]["name"];
+        text.classList.add("text");
+        
+        nodeText.appendChild(text);
         nodeText.classList.add("tool-name");
 
         // Set button colors
@@ -338,6 +354,31 @@ function createToolsList(toolsList){
         }
         optionsContainer = document.createElement("div");
         optionsContainer.classList.add("tool-options-container");
+
+
+        graphIconContainer = document.createElement("div");
+        graphIconContainer.classList.add("tool-graph-icon");
+        graphIconNode = document.createElement("img");
+
+        graphIconNode.setAttribute("src", "../../assets/icons/graph.png");
+        graphIconNode.setAttribute("title", "Automatically adds nodes to the graph");
+        graphIconContainer.appendChild(graphIconNode);
+
+        uiIconContainer = document.createElement("div");
+        uiIconContainer.classList.add("tool-ui-icon");
+        uiIconNode = document.createElement("img");
+
+        uiIconNode.setAttribute("src", "../../assets/icons/user-interaction.png");
+        uiIconNode.setAttribute("title", "Some user interactions may be required. Enable the auto-submit feature to automatically submit indicators");
+        uiIconContainer.appendChild(uiIconNode);
+
+        keyIconContainer = document.createElement("div");
+        keyIconContainer.classList.add("tool-key-icon");
+        keyIconNode = document.createElement("img");
+
+        keyIconNode.setAttribute("src", "../../assets/icons/key.png");
+        keyIconNode.setAttribute("title", "This web resource requires an account to submit indicators.");
+        keyIconContainer.appendChild(keyIconNode);
 
         // Add an icon that allow to open the resource in a new or in the current tab
         // (it depends on settings chosen by the user)
@@ -380,9 +421,68 @@ function createToolsList(toolsList){
         nodeHyperlink.appendChild(nodeText);
         node.appendChild(nodeHyperlink);
 
+        if(tools[i]["autoGraph"] ?? false) {
+            optionsContainer.appendChild(graphIconContainer);
+        }
+
+        if(tools[i]["submitQuery"] ?? false) {
+            optionsContainer.appendChild(uiIconContainer);
+        }
+
+        if(tools[i]["accountRequired"] ?? false) {
+            optionsContainer.appendChild(keyIconContainer);
+        }
         optionsContainer.appendChild(openIconContainer);
         optionsContainer.appendChild(favIconContainer);
         node.appendChild(optionsContainer);
+
+        // Add animation to show the entire text
+        nodeText.addEventListener("mouseenter", (e) => {
+            const container = e.target;
+            const text = container.querySelector('.text');
+            const containerWidth = container.offsetWidth;
+            const textWidth = text.scrollWidth;
+
+            if (!text.classList.contains('animate')) {
+                if (textWidth > containerWidth) {
+                    text.classList.add('animate');
+                } else {
+                    text.classList.remove('animate');
+                }
+            }
+
+            // Add animation to tags container to see all tags, if necessary
+            const tagsContainer = container.querySelector(".tool-tags-container");
+            if (tagsContainer) {
+                const tagsContainerWidth = tagsContainer.offsetWidth;
+                const tagsWidth = tagsContainer.scrollWidth;
+
+                if (!tagsContainer.classList.contains('animate')) {
+                    if (tagsWidth > tagsContainerWidth) {
+                        tagsContainer.classList.add('animate');
+                    } else {
+                        tagsContainer.classList.remove('animate');
+                    }
+                }
+            }
+        });
+        // Remove the animation when the mouse leaves
+        nodeText.addEventListener("mouseleave", (e) => {
+            const container = e.target;
+            const text = container.querySelector('.text');
+
+            if (text.classList.contains('animate')) {
+                text.classList.remove('animate');
+            }
+
+            const tagsContainer = container.querySelector(".tool-tags-container");
+            if (tagsContainer) {
+                if (tagsContainer.classList.contains('animate')) {
+                    tagsContainer.classList.remove('animate');
+                }
+            }
+        });
+
         
         // Set click event function
         node.addEventListener("click", function(e) {
@@ -465,6 +565,7 @@ function createToolsList(toolsList){
             }
         });
         document.getElementById("tools-list").appendChild(node);
+
     }
 }
 
@@ -508,18 +609,6 @@ function createIndicatorsList(indicatorsList){
         // This node will contain the web resource's name
         let nodeText = document.createElement("div");
 
-        nodeText.textContent = indicatorsList[i]['value'];
-        // If the name is too long, reduce the font size
-        if(indicatorsList[i]['value'].length > 15 && indicatorsList[i]['value'].length < 20) {
-            nodeText.style.fontSize = "90%";
-        } else if (indicatorsList[i]['value'].length > 19) {
-            text = indicatorsList[i]['value'].substring(0, 19);
-            nodeText.textContent = text + "...";
-        } else if(indicatorsList[i]['value'].length > 19) {
-            nodeText.style.fontSize = "80%";
-        }
-        nodeText.classList.add("tool-name");
-
         // Set button colors
         let color;
         // Add type to array
@@ -552,6 +641,14 @@ function createIndicatorsList(indicatorsList){
         node.style.backgroundColor = nodeText.style.backgroundColor = color;
         // If the web resource has tags, add more space for them
         nodeText.classList.add("tool-name-with-tags");
+
+        text = document.createElement("div");
+        text.textContent = indicatorsList[i]['value'];
+        text.classList.add("text");
+        
+        nodeText.appendChild(text);
+        nodeText.classList.add("tool-name");
+
         // Add container for tags
         let nodeTagsContainer = document.createElement("div");
         nodeTagsContainer.classList.add("tool-tags-container");
@@ -560,8 +657,6 @@ function createIndicatorsList(indicatorsList){
         // Tag to upper case
         nodeTag.textContent = type.toUpperCase();
         nodeTag.classList.add("tool-tag");
-        // Add transparency
-        nodeTag.style.backgroundColor = "rgba(256, 256, 256, 0.3)";
         nodeTagsContainer.appendChild(nodeTag);
         nodeText.insertAdjacentElement("beforeend", nodeTagsContainer);
 
@@ -573,6 +668,31 @@ function createIndicatorsList(indicatorsList){
         node.appendChild(nodeImageContainer);
         node.appendChild(nodeText);
 
+        // Add animation to show the entire text
+        nodeText.addEventListener("mouseenter", (e) => {
+            const container = e.target;
+            const text = container.querySelector('.text');
+            const containerWidth = container.offsetWidth;
+            const textWidth = text.scrollWidth;
+
+            if (!text.classList.contains('animate')) {
+                if (textWidth > containerWidth) {
+                    text.classList.add('animate');
+                } else {
+                    text.classList.remove('animate');
+                }
+            }
+        });
+        // Remove the animation when the mouse leaves
+        nodeText.addEventListener("mouseleave", (e) => {
+            const container = e.target;
+            const text = container.querySelector('.text');
+
+            if (text.classList.contains('animate')) {
+                text.classList.remove('animate');
+            }
+        });
+
         indicatorsListNode.appendChild(node);
         indicatorsListNode.style.display = "block";
         node.addEventListener("mouseover", function() {
@@ -582,13 +702,23 @@ function createIndicatorsList(indicatorsList){
             })
         });
         // Set click event function
-        node.addEventListener("click", function() {
-            let [type, tld] = indicatorParser.getIndicatorType(node.indicator);
+        node.addEventListener("click", function(evt) {
+            let type = evt.target.closest(".catch-res-entry").type;
+            let tld  = ""
             let value = node.indicator;
-            if(type="defanged") {
-                value = indicatorParser.refangIndicator(node.indicator); 
-                [type, tld] = indicatorParser.getIndicatorType(value);
+            if(type=="phone") {
+                value = value.replaceAll(/[^+0-9]/g, '');
+                if(value[0] !== '+') {
+                    value = '+' + value;
+                }
+            } else {
+                [type, tld] = indicatorParser.getIndicatorType(node.indicator);
+                if(type=="defanged") {
+                    value = indicatorParser.refangIndicator(node.indicator); 
+                    [type, tld] = indicatorParser.getIndicatorType(value);
+                }
             }
+
             document.getElementById("input-box").value = value;
             submitIndicator(value, type, tld);
         });
@@ -611,11 +741,11 @@ function showIndicatorsByType(indicatorType) {
             node.style.display = "none";
         } else {
             noIndicators = false;
-            node.style.display = "block";
+            node.style.display = "grid";
         }
     });
 
     if(noIndicators) {
-        document.getElementById("no-indicators").style.display="block";
+        document.getElementById("no-indicators").style.display = "grid";
     }
 }

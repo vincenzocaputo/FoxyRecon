@@ -4,6 +4,45 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [ 0.22.0 ] - 2024-09-19
+
+### Add
+- Text animation to display entire tool names when they are too long
+- Option to disable the typing animation of indicators in text fields
+- Exact string search for GitHub resource
+- Investigate option in context menu to send indicators to the popup
+- Option in the context menu to add selected text as a node to the graph
+- Option to filter tools that support auto-graph generation
+- Option to filter tools that do not require user interactions
+- Option to filter tools that do not require accounts
+- Button to filter tools by name
+- Icon to mark the tools that support the automatic graph population feature
+- Icon to mark the tools that require user interaction
+- Icon to mark the tools that require an account
+- Popup box to show content of Note nodes
+
+### Change
+- Updated browser-polyfill library
+- Speed up typing animation
+- Shrink the history drop-down menu
+- Removed tools from context menu 
+- Removed phone numbers format conversion when collecting indicators. Make the conversion only when the user submits a collected phone number indicator for investigations.
+- UI improvements in graph page
+- Improve indicators detection
+- Popup UI improvements
+
+### Fix
+- Urlscan visibility scan selection
+- Indicators collection on web pages containing private IP addresses
+- MAC Address form in graph page
+- Filtering by tool name when other filters are active
+- Filtering by tool tags when other filters are active
+- Filtering by tool name
+- Saving and restoring tag filtering
+- Bug that prevented tags from being added to custom tools
+- Graphical bug when the textarea is resized in the forms on the graph page
+- Gray background when a relationship is added from popup  
+
 ## [0.21.0] - 2024-08-03
 
 ### Add

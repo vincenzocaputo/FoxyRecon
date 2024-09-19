@@ -6,6 +6,7 @@
 		<link rel="stylesheet" href="main_popup.css"/>
 	</head>
 	<body>
+        <div id="background"></div>
         <div id="search-box">
             <div id="text-field">
                 <img id="domextr-icon" src="../../assets/icons/tool.png"/>
@@ -28,9 +29,9 @@
         </div>
         <div id="option-box">
             <div id="filter-container-tags">
-                <label for="tags">Filter by Tag:</label>
                 <select name="tags">
-                    <option value="all">All</option>
+                    <option value="default" hidden>Filter by tag</option>
+                    <option value="all">Show all</option>
                 </select>
             </div>
             <div id="filter-container-types">
@@ -40,40 +41,77 @@
                 </select>
             </div>
             <div id="show-only-fav">
-                <button value="off">
+                <div data-value="off" class="square-btn filter-btn">
                     <img src="../../assets/icons/favourite_opt.png" title="Show only favourites"/>
-                </button>
+                </div>
+            </div>
+            <div id="show-only-autograph">
+                <div date-value="off" class="square-btn filter-btn">
+                    <img src="../../assets/icons/graph_opt.png" title="Show only tools that support autograph feature"/>
+                </div>
+            </div>
+            <div id="show-only-nokey">
+                <div date-value="off" class="square-btn filter-btn">
+                    <img src="../../assets/icons/no_key_opt.png" title="Show only tools that do not require accounts"/>
+                </div>
+            </div>
+            <div id="show-only-noint">
+                <div date-value="off" class="square-btn filter-btn">
+                    <img src="../../assets/icons/no_int_opt.png" title="Show only tools that do not require user interactions"/>
+                </div>
+            </div>
+            <div id="filter-by-tool">
+                <div date-value="off" class="square-btn filter-btn">
+                    <img src="../../assets/icons/tools.png" title="Filter by tool name"/>
+                </div>
             </div>
             <div id="download">
                 <button id="download-button">
                     <img src="../../assets/icons/download.png" title="Download indicators"/>
                 </button>
             </div>
+            <div class="separator"></div>
             <div id="add-node">
-                <div id="add-node-button">
+                <div id="add-node-button" class="square-btn">
                     <img src="../../assets/icons/plus.png" title="Add node to graph">
                 </div>
             </div>
             <div id="del-node">
-                <div id="del-node-button">
+                <div id="del-node-button" class="square-btn">
                     <img src="../../assets/icons/del.png" title="Delete node from graph">
                 </div>
             </div>
             <div id="add-rel">
-                <div id="add-rel-button">
+                <div id="add-rel-button" class="square-btn">
                     <img src="../../assets/icons/link.png" title="Add relationship to graph">
                 </div>
             </div>
         </div>
          <div class="popup">
             <div id="options-popup" class="popup-container">
-                <span class="settings-title">Settings</span>
+                <div class="popup-title">
+                    <span class="settings-title">Settings</span>
+                    <div class="popup-close" id="settings-popup-close">
+                        <img src="../../assets/icons/del.png">
+                    </div>
+                </div>
                 <hr>
                 <div class="popup-container-body">
                     <div class="option-label">
                         Always open in new tab
                     </div>
                     <div class="option-value" id="open-tab-opt">
+                        <label class="switch">
+                            <input type="checkbox"/>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="option-label">
+                        Typing animation
+                        <img class="info-img" src="../../assets/icons/info_icon.png">
+                        <div class="hide-msg">Enable typing animation for indicators in text fields on websites that require user interaction.</div>
+                    </div>
+                    <div class="option-value" id="typ-anim-opt">
                         <label class="switch">
                             <input type="checkbox"/>
                             <span class="slider"></span>
@@ -293,5 +331,10 @@
         <script type="text/javascript" src="../utils/indicatorparser.js"></script>
         <script type="text/javascript" src="./uiHandler.js"></script>
         <script type="text/javascript" src="./main.js"></script>
+        <script type="text/javascript" src="./input.js"></script>
+        <script type="text/javascript" src="./filters.js"></script>
+        <script type="text/javascript" src="./options.js"></script>
+        <script type="text/javascript" src="./graph.js"></script>
+        <script type="text/javascript" src="./catch.js"></script>
 	</body>
 </html>

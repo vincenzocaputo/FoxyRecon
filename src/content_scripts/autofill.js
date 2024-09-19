@@ -2,10 +2,9 @@
 var indicator = "";
 
 function submitIndicator(query, submit, current_url) {
+                   
     if(query && submit === "true") {
         if(current_url.includes("urlscan.io")) {
-            // Get input field
-            document.getElementById(query).click();
             setTimeout(() => {
                 document.getElementById("submitbtn_text").click();
             }, 1000);
@@ -44,6 +43,10 @@ function sendMessageAndFill() {
 
         // Get the selector to find the input field
         inputSelector = resp.inputSelector;
+
+        // Get typing animation option
+        typAnimOption = resp.typAnimOption;
+
         submit = resp.submit;
 
         if(inputSelector) {
@@ -72,19 +75,31 @@ function sendMessageAndFill() {
                 inputField = document.querySelector(inputSelector);
             }
 
+            if(current_url.includes("urlscan.io")) {
+                // Select the scan visibility
+                document.getElementById(query).click();
+            }
+
             if(inputField) {
                 inputField.value = "";
-                intv = setInterval(()=>{ 
-                    const letter = indicator[0]; 
-                    if(letter) { 
-                        indicator = indicator.slice(1); 
-                        inputField.value = inputField.value + letter 
-                    } else { 
-                        inputField.dispatchEvent(new Event("input"));
-                        clearInterval(intv);
+                if(typAnimOption === "true") {
+                    intv = setInterval(()=>{ 
+                        const letter = indicator[0]; 
+                        if(letter) { 
+                            indicator = indicator.slice(1); 
+                            inputField.value = inputField.value + letter 
+                        } else { 
+                            inputField.dispatchEvent(new Event("input"));
+                            clearInterval(intv);
+                            submitIndicator(query, submit, current_url);
+                        } 
+                    }, 50);
+                } else {
+                    setTimeout(() => {
+                        inputField.value = indicator;
                         submitIndicator(query, submit, current_url);
-                    } 
-                }, 100);
+                    }, 50);
+                }
             }
         }
         }, 500);

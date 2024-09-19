@@ -258,7 +258,7 @@ editButton.addEventListener("click", evt => {
             createIPV6AddrForm(evt, "Edit IPv6 Address", selectedNodeSTIX);
             break;
         } case "mac-addr": {
-            createMacAddressForm(evt, "Edit MAC Address", selectedNodeSTIX);
+            createMacAddrForm(evt, "Edit MAC Address", selectedNodeSTIX);
             break;
         } case "network-traffic": {
             createNetworkTrafficForm(evt, "Edit Network Traffic", selectedNodeSTIX);
@@ -347,7 +347,7 @@ document.querySelectorAll(".options div").forEach( (element) => {
                 createIPV6AddrForm(evt, "Add IPv6 Address");
                 break;
             } case "mac-addr": {
-                createMacAddressForm(evt, "Add MAC Address");
+                createMacAddrForm(evt, "Add MAC Address");
                 break;
             } case "network-traffic": {
                 createNetworkTrafficForm(evt, "Add Network Traffic");

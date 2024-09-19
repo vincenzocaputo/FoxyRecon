@@ -62,13 +62,24 @@ var options = {
 var graphNodes = [];
 
 for (node of graph.getNodes()) {
-    graphNodes.push({
-        id: node.id,
-        label: node.label,
-        shape: 'image',
-        image: 'img/'+node.type+'.png',
-        stix: JSON.stringify(node.stix)
-    });
+    if (Object.hasOwn(node, "content")) {
+        graphNodes.push({
+            id: node.id,
+            label: node.label,
+            shape: 'image',
+            image: 'img/'+node.type+'.png',
+            content: node.stix.content,
+            stix: JSON.stringify(node.stix)
+        });
+    } else {
+        graphNodes.push({
+            id: node.id,
+            label: node.label,
+            shape: 'image',
+            image: 'img/'+node.type+'.png',
+            stix: JSON.stringify(node.stix)
+        });
+    }
 }
 var nodes = new vis.DataSet(graphNodes);
 var edges = new vis.DataSet(graph.getLinks());
@@ -138,6 +149,7 @@ selectNodeEvent = evt => {
         document.getElementById("add-link-button").style.display = "block";
     }
 
+    document.querySelectorAll(".hover-msg").forEach( (el) => el.remove() );
 
     if (network.getSelectedNodes().length > 0) {
         document.getElementById("edit-node-button").style.display = "block";
@@ -153,6 +165,15 @@ selectNodeEvent = evt => {
                 lastSelectedNode = node;
             }
         }
+        const nodeSTIX = graph.getNode(selectedNode).stix;
+        if (Object.hasOwn(nodeSTIX, "content")) {
+            const msg = document.createElement("div");
+            msg.className = "hover-msg";
+            
+            msg.textContent = nodeSTIX.content;
+            document.querySelector(".vis-network").appendChild(msg);
+        }
+
     } else if (network.getSelectedEdges().length > 0) {
         document.getElementById("delete-link-button").style.display = "block";
         document.getElementById("add-sco-button").style.display = "none";
