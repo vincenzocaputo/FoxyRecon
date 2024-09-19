@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Exact string search for GitHub resource
 - Investigate option in context menu to send indicators to the popup
 - Option in the context menu to add selected text as a node to the graph
+- Option to filter tools that support auto-graph generation
+- Option to filter tools that do not require user interactions
+- Option to filter tools that do not require accounts
+- Button to filter tools by name
 - Icon to mark the tools that support the automatic graph population feature
 - Icon to mark the tools that require user interaction
 - Icon to mark the tools that require an account

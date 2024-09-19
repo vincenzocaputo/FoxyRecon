@@ -6,6 +6,10 @@ function getInputFilter(inputString) {
     if(inputs.length > 1) {
         // There is a search filter
         inputIndicator = inputs[0];
+        const switchButton = document.querySelector("#filter-by-tool>div");
+        switchButton.setAttribute("data-value", "on");
+        switchButton.classList.add("clicked-btn");
+        switchButton.querySelector("img").src = "../../assets/icons/tools_on.png";
         
         if(inputs[1][0] === "!") {
             fToolName = inputs[1].split("!")[1];
@@ -13,6 +17,10 @@ function getInputFilter(inputString) {
             fToolName = inputs[1].split("tool:")[1];
         } else {
             type = "invalid";
+            
+            switchButton.setAttribute("data-value", "off");
+            switchButton.classList.remove("clicked-btn");
+            switchButton.querySelector("img").src = "../../assets/icons/tools.png";
         }
     } else {
         inputIndicator = inputString;
@@ -152,6 +160,25 @@ document.querySelector("#show-only-noint>div").addEventListener("click", (e) => 
         switchButton.setAttribute("data-value", "off");
         switchButton.classList.remove("clicked-btn");
         switchButton.querySelector("img").src = "../../assets/icons/no_int_opt.png";
+    }
+});
+
+document.querySelector("#filter-by-tool>div").addEventListener("click", (e) => {
+    const switchButton = document.querySelector("#filter-by-tool>div");
+    const inputField = document.querySelector("#input-box");
+    let inputString = inputField.value;
+    const optionValue = switchButton.getAttribute("data-value");
+    if (optionValue == "off" || optionValue == undefined) {
+        inputField.value = inputField.value + " tool:"; 
+        inputField.focus();
+        switchButton.setAttribute("data-value", "on");
+        switchButton.classList.add("clicked-btn");
+        switchButton.querySelector("img").src = "../../assets/icons/tools_on.png";
+    } else {
+        inputField.value = inputField.value.split(' ')[0]; 
+        switchButton.setAttribute("data-value", "off");
+        switchButton.classList.remove("clicked-btn");
+        switchButton.querySelector("img").src = "../../assets/icons/tools.png";
     }
 });
 
