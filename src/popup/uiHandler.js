@@ -99,6 +99,7 @@ function showAddonMain() {
     document.getElementById("show-only-nokey").style.display = "none";
     document.getElementById("show-only-noint").style.display = "none";
     document.getElementById("filter-by-tool").style.display = "none";
+    document.querySelector(".separator").style.display = "none";
     document.getElementById("no-tools").style.display = "none";
     document.getElementById("no-indicators").style.display = "none";
     // Hide download icon
@@ -137,6 +138,7 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, showOnlyAutograph,
     document.getElementById("show-only-autograph").style.display = "block";
     document.getElementById("show-only-nokey").style.display = "block";
     document.getElementById("show-only-noint").style.display = "block";
+    document.querySelector(".separator").style.display = "block";
     document.getElementById("filter-by-tool").style.display = "block";
     document.getElementById("no-tools").style.display = "none";
     document.getElementById("no-indicators").style.display = "none";

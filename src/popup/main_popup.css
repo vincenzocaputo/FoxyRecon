@@ -327,8 +327,8 @@ div.tool-tag {
 
 .separator {
     border: 1px solid #C6C6C6;
-    display: block;
     height: 22px;
+    display: none;
     margin: 0 1px 0 1px;
 }
 
