@@ -59,7 +59,8 @@ document.querySelector("#filter-container-tags>select").addEventListener("change
  */
 document.querySelector("#filter-container-types>select").addEventListener("change", (e) => {
     const optionValue = e.target.options[e.target.selectedIndex].value;
-    showIndicatorsByType(optionValue);
+    const inputString = document.getElementById("input-box").value;
+    showIndicatorsByType(optionValue, inputString);
 });
 
 /**

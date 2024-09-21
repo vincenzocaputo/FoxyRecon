@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Icon to mark the tools that require user interaction
 - Icon to mark the tools that require an account
 - Popup box to show content of Note nodes
+- Filtering for collected indicators based on value
 
 ### Change
 - Updated browser-polyfill library
