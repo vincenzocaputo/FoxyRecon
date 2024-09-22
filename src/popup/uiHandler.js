@@ -585,6 +585,8 @@ function createIndicatorsList(indicatorsList){
     document.getElementById("catch-icon").style.display = "none";
     document.getElementById("flag").style.display = "none";
     document.getElementById("disclaimer").style.display = "none";
+    // Set input field placeholder
+    document.getElementById("input-box").placeholder = "Filter indicators";
 
     let indicatorsListNode = document.getElementById("catch-res-list");
 
@@ -730,14 +732,17 @@ function createIndicatorsList(indicatorsList){
 /*
  * Show Indicators by type
  * @param {indicatorType} type of indicators to show
+ * @param {searchText} text inserted by the user to filter indicators
  */
-function showIndicatorsByType(indicatorType) {
+function showIndicatorsByType(indicatorType, searchText = "") {
     // Keep track of whether there are any indicators to display
     var noIndicators = true;
     // retrieve the list of indicators
     document.querySelectorAll(".catch-res-entry").forEach((node)=>{
         if(indicatorType != "all" && node.type != indicatorType) {
             // hide the entry
+            node.style.display = "none";
+        } else if (searchText !== "" && !node.indicator.toLowerCase().includes(searchText.toLowerCase())) {
             node.style.display = "none";
         } else {
             noIndicators = false;

@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [ 0.22.0 ] - 2024-09-19
+## [ 0.22.0 ] - 2024-09-22
 
 ### Add
 - Text animation to display entire tool names when they are too long
@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Icon to mark the tools that require user interaction
 - Icon to mark the tools that require an account
 - Popup box to show content of Note nodes
+- Filtering for collected indicators based on value
 
 ### Change
 - Updated browser-polyfill library
@@ -42,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bug that prevented tags from being added to custom tools
 - Graphical bug when the textarea is resized in the forms on the graph page
 - Gray background when a relationship is added from popup  
+- Bug that prevented the export of collected indicators
 
 ## [0.21.0] - 2024-08-03
 

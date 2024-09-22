@@ -338,6 +338,14 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             }
                 
         }
+        browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
+            let activeTab = tabs[0].id;
+            browser.tabs.sendMessage(activeTab, "show-msg:Node added to the graph")
+                .then((response) => {
+                })
+                .catch((error) => {
+                });
+        });
     } else {
         // Context Menu
         showContextMenu(request.indicator, request.type, request.tld);

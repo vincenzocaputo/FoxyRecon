@@ -47,7 +47,7 @@ document.querySelectorAll(".catch-container").forEach((v) => {
 document.getElementById("download-button").addEventListener("click", (e)=> {
     let csvData = [];
     document.querySelectorAll(".catch-res-entry").forEach((node) => {
-        if(node.style.display === "" || node.style.display === "block") {
+        if(node.style.display === "" || node.style.display === "grid") {
             csvData.push([node.title, node.type]);
         }
     });

@@ -163,58 +163,65 @@ inputField.addEventListener("keyup", (e) => {
     let inputString = inputField.value;
     // Remove badge text
     browser.browserAction.setBadgeText({text: ''});
-    // If no input was provided, show the add-on logo and the history icon
-    if(inputString === "") {
-        showAddonMain();
-        localStorage.setItem("indicator", "");
-        localStorage.setItem("type", "");
-        localStorage.setItem("tag", "");
-        localStorage.setItem("", "");
-
-        textfieldCatch.style.display = "block";        
-        textfieldTool.style.display = "none";
-
-    } else {
-        // Show the bin icon
-        document.getElementById("bin-icon").style.display = "block";
-        // Hide the catch icon
-        textfieldCatch.style.display = "none";
-        
-        let type = "";
-        let inputIndicator = "";
-        let fToolName = "";
-
-        [inputIndicator, fToolName] = getInputFilter(inputString);
-
-        if(type!="invalid") {
-            // Get indicator type
-            [type, tld] = indicatorParser.getIndicatorType(inputIndicator);
-        }
-
-        if(type === "defanged") {
-            // If the input string is defanged, refang it
-            inputIndicator = indicatorParser.refangIndicator(inputIndicator);
-            // Get the real type of the indicator
-            [type, tld] = indicatorParser.getIndicatorType(inputIndicator);
-        } 
-
-        if(type === "invalid") {
+    console.log(document.getElementById("catch-res-list").style.display);
+    if (document.getElementById("catch-res-list").style.display === "" ||
+        document.getElementById("catch-res-list").style.display === "none") {
+        // If no input was provided, show the add-on logo and the history icon
+        if(inputString === "") {
             showAddonMain();
-            showCountryFlag("");
+            localStorage.setItem("indicator", "");
+            localStorage.setItem("type", "");
+            localStorage.setItem("tag", "");
+            localStorage.setItem("", "");
+
+            textfieldCatch.style.display = "block";        
             textfieldTool.style.display = "none";
-            showMessagePopup("Please enter a valid indicator", MessageType.ERROR);
-        } else if(type === "internal") {
-            showAddonMain();
-            textfieldTool.style.display = "none";
-            showMessagePopup("The IP address is internal", MessageType.WARNING);
+
         } else {
-            // Get selected tag option
-            const selectNode = document.querySelector("#filter-container-tags>select");
-            const optionValue = selectNode.options[selectNode.selectedIndex].value;
+            // Show the bin icon
+            document.getElementById("bin-icon").style.display = "block";
+            // Hide the catch icon
+            textfieldCatch.style.display = "none";
             
-            submitIndicator(inputIndicator, type, tld, optionValue, fToolName);
-        }
+            let type = "";
+            let inputIndicator = "";
+            let fToolName = "";
 
+            [inputIndicator, fToolName] = getInputFilter(inputString);
+
+            if(type!="invalid") {
+                // Get indicator type
+                [type, tld] = indicatorParser.getIndicatorType(inputIndicator);
+            }
+
+            if(type === "defanged") {
+                // If the input string is defanged, refang it
+                inputIndicator = indicatorParser.refangIndicator(inputIndicator);
+                // Get the real type of the indicator
+                [type, tld] = indicatorParser.getIndicatorType(inputIndicator);
+            } 
+            
+            if(type === "invalid") {
+                showAddonMain();
+                showCountryFlag("");
+                textfieldTool.style.display = "none";
+                showMessagePopup("Please enter a valid indicator", MessageType.ERROR);
+            } else if(type === "internal") {
+                showAddonMain();
+                textfieldTool.style.display = "none";
+                showMessagePopup("The IP address is internal", MessageType.WARNING);
+            } else {
+                // Get selected tag option
+                const selectNode = document.querySelector("#filter-container-tags>select");
+                const optionValue = selectNode.options[selectNode.selectedIndex].value;
+                
+                submitIndicator(inputIndicator, type, tld, optionValue, fToolName);
+            }
+        }
+    } else {
+        const typeSelector = document.querySelector("#filter-container-types>select");
+        const indicatorType = typeSelector.value;
+        showIndicatorsByType(indicatorType, inputString);
     }
 });
 

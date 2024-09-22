@@ -33,10 +33,12 @@
             "src/content_scripts/add_node_popup.js",
             "src/content_scripts/context_menu.js",
             "src/content_scripts/catch.js",
+            "src/content_scripts/message-box.js",
             "src/content_scripts/autofill.js"
         ],
         "css": [
-            "src/content_scripts/css/addnode-popup.css"
+            "src/content_scripts/css/addnode-popup.css",
+            "src/content_scripts/css/message-box.css"
         ]
 
     }],
