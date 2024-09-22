@@ -22,12 +22,18 @@
 
 .foxyrecon-message-box > p {
     margin: 10px auto;
+    font-family: Verdana, sans-serif;
+    color: #155724;
+    font-size: 18px;
 }
 
 .foxyrecon-message-box > img {
     width: 32px;
     height: 32px;
-    margin: 5px auto;
+    margin: 0 auto;
+    top: 50%;
+    position: relative;
+    transform: translateY(-16px);
 }
 
 .foxyrecon-fade-out {
