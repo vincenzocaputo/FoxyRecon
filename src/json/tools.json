@@ -421,6 +421,17 @@
 			"autoGraph": false
         },
         {
+            "name": "files.ninja",
+            "url": {
+                "hash": "https://files.ninja/search?q=%s"
+            },
+            "desc": "",
+            "icon": "filesninja.png",
+            "color": "#ED8936",
+            "types": ["hash"],
+			"autoGraph": false
+        },
+        {
             "name": "FOFA",
             "url": {
                 "domain": "https://en.fofa.info/result?qbase64=%b",

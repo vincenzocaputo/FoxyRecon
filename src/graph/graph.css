@@ -53,7 +53,7 @@ body {
     margin-left: 0;
     display: grid;
     grid-template-columns: 5fr 1.5fr;
-    overflow: scroll;
+    overflow: hidden;
 }
 
 #option-palette {
