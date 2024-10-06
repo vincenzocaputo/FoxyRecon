@@ -1112,6 +1112,20 @@
 			"autoGraph": false
         },
         {
+            "name": "PSBDMP",
+            "url": {
+                "email": "https://psbdmp.ws/"
+            },
+            "desc": "The biggest archive of {paste} dumps",
+            "icon": "psbdmp.png",
+            "color": "#26265a",
+            "inputSelector": "input[name='search']",
+            "submitQuery": "button i.fa-search",
+            "types": ["email"],
+            "tags": ["leaks"],
+			"autoGraph": false
+        },
+        {
             "name": "Pulsedive",
             "url": {
                 "ip": "https://pulsedive.com/indicator/%s",
