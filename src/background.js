@@ -111,7 +111,7 @@ function catchIndicators(e) {
                         .then((response) => {
                         })
                         .catch((error) => {
-                            browser.browserAction.setBadgeText({text: ""});
+                            browser.action.setBadgeText({text: ""});
                             localStorage.setItem("catched_indicators", "[]");
                         });
             let token = 1;
@@ -122,10 +122,10 @@ function catchIndicators(e) {
                     localStorage.setItem("catched_indicators", indicatorsListJson);
                     // No indicators found. Show a message
                     if(indicatorsListJson == "[]") {
-                        browser.browserAction.setBadgeText({text: ""});
+                        browser.action.setBadgeText({text: ""});
                     } else {
                         const indicatorsList = JSON.parse(indicatorsListJson);
-                        browser.browserAction.setBadgeText({text: indicatorsList.length.toString()});
+                        browser.action.setBadgeText({text: indicatorsList.length.toString()});
                     }
                 } 
                 // Consume token
@@ -133,7 +133,7 @@ function catchIndicators(e) {
             })
         },
         error => {
-            browser.browserAction.setBadgeText({text: ""});
+            browser.action.setBadgeText({text: ""});
             localStorage.setItem("catched_indicators", "[]");
             console.error("Error: "+error);
         });
@@ -163,7 +163,7 @@ function showContextMenu(selectedText, type = "invalid", tld = "") {
                 localStorage.setItem("type", type);
                 localStorage.setItem("indicator", selectedText);
                 localStorage.setItem("tld", tld);
-                browser.browserAction.openPopup();
+                browser.action.openPopup();
             }
         }).then( () => browser.contextMenus.refresh() );
         if (graph.getNodesByLabel(selectedText).length == 0) {

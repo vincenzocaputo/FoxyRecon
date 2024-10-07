@@ -148,7 +148,7 @@ document.querySelector("#auto-catch-opt input").addEventListener("change", funct
         // Wipe indicators list
         localStorage.setItem("catched_indicators", "[]");
         // Set 0 counter as badge
-        browser.browserAction.setBadgeText({text: ""});
+        browserr.action.setBadgeText({text: ""});
     }
 });
 
