@@ -53,7 +53,8 @@
     ],
 
 	"permissions": [
-		"contextMenus"
+		"contextMenus",
+        "storage"
 	],
 
 	"action": {
