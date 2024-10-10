@@ -19,7 +19,6 @@ if (!localStorage.getItem("settings.typanim")) {
 var tools;
 loadToolsList(function(ts) {
     tools=ts;
-    createToolsMenu(tools);
 });
 
 var graphMapping;
@@ -61,7 +60,6 @@ browser.runtime.onInstalled.addListener(function(details) {
             var tools;
             loadToolsList(function(ts) {
                 tools=ts;
-                createToolsMenu(tools);
             })
 
             var graphMapping;
@@ -69,18 +67,7 @@ browser.runtime.onInstalled.addListener(function(details) {
                 graphMapping=mp;
             })
         }
-        
     }
-});
-
-
-
-/**
- * Create context menu containing the tools list
- * @param {toolsList} list of available tools
- */
-
-function createToolsMenu(toolsList) {
     browser.contextMenus.create({
         id: 'create-node',
         title: "Add new graph node",
@@ -96,7 +83,8 @@ function createToolsMenu(toolsList) {
         contexts: ["selection"],
         visible: true,
     });
-}
+});
+
 
 /**
  * Harvest and collect the indicators present in the current webpage. Save the list in the local storage.
