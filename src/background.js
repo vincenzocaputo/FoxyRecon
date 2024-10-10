@@ -144,7 +144,7 @@ function showContextMenu(selectedText, type = "invalid", tld = "") {
     const graph = new Graph();
 
     if(type !== "invalid") {
-        browser.contextMenus.update('investigate', {
+        browser.contextMenus.update(id: 'investigate', {
             enabled: true,
             visible: true,
             onclick: function() {
@@ -206,46 +206,46 @@ function showContextMenu(selectedText, type = "invalid", tld = "") {
  * @param {indicator} indicator selected by the user
  * @param {type} indicator type (domain, URL, ip, etc.)
  */
-function updateToolsMenu(toolsList, indicator, type) {
-    for (i=0; i<toolsList.length; i++){
-        let tool = toolsList[i];
-        // If the tool is not compatible, hide the menu entry
-        if(!tool["types"].includes(type)){
-            browser.contextMenus.update(i.toString(), {
-                visible: false
-            });
-        } else {
-            // Otherwise make it visible and add the click event
-            browser.contextMenus.update(i.toString(),{
-                visible: true,
-                onclick: function(){
-                    
-                    // Replace the placeholder with the selected text
-                    let url = cookURL(tool["url"][type], indicator); 
-                    // Save the indicator in the local storage
-                    localStorage.setItem("type", type);
-                    localStorage.setItem("indicator", indicator);
-                    //localStorage.setItem("graph.autocreate", "true"); 
-                    // Add the query for autofill to localstorage
-                    if(tool["submitQuery"]) {
-                        localStorage.setItem("autofill.submit-btn-query", tool["submitQuery"]);
-                    } else {
-                        localStorage.setItem("autofill.submit-btn-query", "");
-                    }
-                    if(tool["inputSelector"]) {
-                        localStorage.setItem("autofill.input-selector", tool["inputSelector"]);
-                    } else {
-                        localStorage.setItem("autofill.input-selector", "");
-                    }
-                    // Create the new tab
-                    browser.tabs.create({
-                        url: url,
-                    });
-                }
-            });
-        }
-    }
-}
+//function updateToolsMenu(toolsList, indicator, type) {
+//    for (i=0; i<toolsList.length; i++){
+//        let tool = toolsList[i];
+//        // If the tool is not compatible, hide the menu entry
+//        if(!tool["types"].includes(type)){
+//            browser.contextMenus.update(i.toString(), {
+//                visible: false
+//            });
+//        } else {
+//            // Otherwise make it visible and add the click event
+//            browser.contextMenus.update(i.toString(),{
+//                visible: true,
+//                onclick: function(){
+//                    
+//                    // Replace the placeholder with the selected text
+//                    let url = cookURL(tool["url"][type], indicator); 
+//                    // Save the indicator in the local storage
+//                    localStorage.setItem("type", type);
+//                    localStorage.setItem("indicator", indicator);
+//                    //localStorage.setItem("graph.autocreate", "true"); 
+//                    // Add the query for autofill to localstorage
+//                    if(tool["submitQuery"]) {
+//                        localStorage.setItem("autofill.submit-btn-query", tool["submitQuery"]);
+//                    } else {
+//                        localStorage.setItem("autofill.submit-btn-query", "");
+//                    }
+//                    if(tool["inputSelector"]) {
+//                        localStorage.setItem("autofill.input-selector", tool["inputSelector"]);
+//                    } else {
+//                        localStorage.setItem("autofill.input-selector", "");
+//                    }
+//                    // Create the new tab
+//                    browser.tabs.create({
+//                        url: url,
+//                    });
+//                }
+//            });
+//        }
+//    }
+//}
 
 /**
  * Waiting for  messages from content_script
