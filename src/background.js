@@ -72,16 +72,68 @@ browser.runtime.onInstalled.addListener(function(details) {
         id: 'create-node',
         title: "Add new graph node",
         contexts: ["selection"],
-        visible: true,
-        onclick: function() {
-
-        }
+        visible: true
     });
     browser.contextMenus.create({
         id: 'investigate',
         title: "Investigate",
         contexts: ["selection"],
-        visible: true,
+        visible: true
+    });
+
+    browser.contextMenus.onClicked.addListener((clickData) => {
+        indicatorParser = new IndicatorParser();
+        selectionText = clickData.selectionText.trim();
+        clickedItem = clickData.menuItemId;
+        if (selectionText) {
+            if (clickedItem === "investigate") {
+                [type, tld] = indicatorParser.getIndicatorType(selectionText);
+                selectionTextType = type;
+                if(type != "invalid"){
+                    if(type === "defanged") {
+                        // If the input string is defanged, refang it
+                        selectionText = indicatorParser.refangIndicator(selectionText);
+                        [type, tld] = indicatorParser.getIndicatorType(selectionText);
+
+                    }
+                    localStorage.setItem("type", type);
+                    localStorage.setItem("indicator", selectionText);
+                    localStorage.setItem("tld", tld);
+                    browser.action.openPopup();
+                } else {
+                    browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
+                        let activeTab = tabs[0].id;
+                        browser.tabs.sendMessage(activeTab, "show-err:The selected text is not a valid indicator.")
+                            .then((response) => {
+                            })
+                            .catch((error) => {
+                            });
+                    });
+                }
+            }
+            if (clickedItem === "create-node") {
+                const graph = new Graph();
+                if (graph.getNodesByLabel(selectionText).length == 0) {
+                    browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
+                        let activeTab = tabs[0].id;
+                        browser.tabs.sendMessage(activeTab, "open-add-note-popup")
+                            .then((response) => {
+                             })
+                            .catch((error) => {
+                            });
+                    });
+                } else {
+                    browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
+                        let activeTab = tabs[0].id;
+                        browser.tabs.sendMessage(activeTab, "show-err:The node is already in the graph")
+                            .then((response) => {
+                            })
+                            .catch((error) => {
+                            });
+                    });
+                }
+            }
+        }
     });
 });
 
@@ -133,119 +185,6 @@ function catchIndicators(e) {
 browser.tabs.onActivated.addListener(catchIndicators);
 browser.tabs.onUpdated.addListener(catchIndicators);
 browser.tabs.onCreated.addListener(catchIndicators);
-
-/**
- * Open Context Menu. If the selected text is a valid indicator, show the option to send the indicator to the popup
- * @param {selectedText} selected text
- * @param {type} indicator type
- * @param {tld} if the selected text is a domain, report the top level domain
- */
-function showContextMenu(selectedText, type = "invalid", tld = "") {
-    const graph = new Graph();
-
-    if(type !== "invalid") {
-        browser.contextMenus.update(id: 'investigate', {
-            enabled: true,
-            visible: true,
-            onclick: function() {
-                localStorage.setItem("type", type);
-                localStorage.setItem("indicator", selectedText);
-                localStorage.setItem("tld", tld);
-                browser.action.openPopup();
-            }
-        }).then( () => browser.contextMenus.refresh() );
-        if (graph.getNodesByLabel(selectedText).length == 0) {
-            browser.contextMenus.update('create-node', {
-                enabled: true,
-                visible: true,
-                onclick: function() {
-                    browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
-                        let activeTab = tabs[0].id;
-                        browser.tabs.sendMessage(activeTab, "open-add-note-popup")
-                            .then((response) => {
-                            })
-                            .catch((error) => {
-                            });
-                    });
-                }
-            }).then(()=>browser.contextMenus.refresh());
-        } else {
-            // The node is already in the graph
-            browser.contextMenus.update('create-node', {
-                enabled: false
-            }).then( () => browser.contextMenus.refresh() );
-        }
-
-    } else {
-        browser.contextMenus.update('investigate', {
-            enabled: false
-        }).then( () => browser.contextMenus.refresh() );
-        browser.contextMenus.update('create-node', {
-            enabled: true,
-            visible: true,
-            onclick: function() {
-                browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
-                    let activeTab = tabs[0].id;
-                    browser.tabs.sendMessage(activeTab, "open-add-note-popup")
-                        .then((response) => {
-                        })
-                        .catch((error) => {
-                        });
-                });
-            }
-        }).then(()=>browser.contextMenus.refresh());
-
-    }
-
-
-}
-
-/**
- * Updates context menu making visible only the tools which are compatible with the selected string
- * @param {toolsList} available tools list
- * @param {indicator} indicator selected by the user
- * @param {type} indicator type (domain, URL, ip, etc.)
- */
-//function updateToolsMenu(toolsList, indicator, type) {
-//    for (i=0; i<toolsList.length; i++){
-//        let tool = toolsList[i];
-//        // If the tool is not compatible, hide the menu entry
-//        if(!tool["types"].includes(type)){
-//            browser.contextMenus.update(i.toString(), {
-//                visible: false
-//            });
-//        } else {
-//            // Otherwise make it visible and add the click event
-//            browser.contextMenus.update(i.toString(),{
-//                visible: true,
-//                onclick: function(){
-//                    
-//                    // Replace the placeholder with the selected text
-//                    let url = cookURL(tool["url"][type], indicator); 
-//                    // Save the indicator in the local storage
-//                    localStorage.setItem("type", type);
-//                    localStorage.setItem("indicator", indicator);
-//                    //localStorage.setItem("graph.autocreate", "true"); 
-//                    // Add the query for autofill to localstorage
-//                    if(tool["submitQuery"]) {
-//                        localStorage.setItem("autofill.submit-btn-query", tool["submitQuery"]);
-//                    } else {
-//                        localStorage.setItem("autofill.submit-btn-query", "");
-//                    }
-//                    if(tool["inputSelector"]) {
-//                        localStorage.setItem("autofill.input-selector", tool["inputSelector"]);
-//                    } else {
-//                        localStorage.setItem("autofill.input-selector", "");
-//                    }
-//                    // Create the new tab
-//                    browser.tabs.create({
-//                        url: url,
-//                    });
-//                }
-//            });
-//        }
-//    }
-//}
 
 /**
  * Waiting for  messages from content_script
@@ -302,6 +241,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         if (request.hasOwnProperty("type")) {
             // We are dealing with a valid indicator
             nodeId = graph.addNode(request.indicator, request.type);
+            console.log(nodeId);
         } else {
             const stix = request.stix;
             const label = request.label;
@@ -334,8 +274,5 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                 .catch((error) => {
                 });
         });
-    } else {
-        // Context Menu
-        showContextMenu(request.indicator, request.type, request.tld);
     }
 })
