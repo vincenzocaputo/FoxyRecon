@@ -1,21 +1,21 @@
-
 /**
  *
  * Handle plus icon clicking event
  *
  */
 document.querySelector("#add-node-button").addEventListener("click", (e) => {
-    const nodeId = localStorage.getItem("indicator");
-    const nodeType = localStorage.getItem("type");
-
-    let graph = new Graph();
-    
-    if (graph.addNode(nodeId, nodeType)) {
-        document.querySelector("#add-node").style.display = "none";
-        document.querySelector("#del-node").style.display = "block";
-        document.querySelector("#add-rel").style.display = "block";
-        showMessagePopup("Node added to graph", MessageType.INFO);
-    }
+    browser.storage.local.get("indicator").then( (indicator) => {
+        const nodeId = indicator.value;
+        const nodeType = indicator.type;
+        let graph = new Graph();
+        
+        if (graph.addNode(nodeId, nodeType)) {
+            document.querySelector("#add-node").style.display = "none";
+            document.querySelector("#del-node").style.display = "block";
+            document.querySelector("#add-rel").style.display = "block";
+            showMessagePopup("Node added to graph", MessageType.INFO);
+        }
+    });
     
 });
 
@@ -25,13 +25,13 @@ document.querySelector("#add-node-button").addEventListener("click", (e) => {
  *
  */
 document.querySelector("#del-node-button").addEventListener("click", (e) => {
-    const indicator = localStorage.getItem("indicator");
-
-    let graph = new Graph();
-    graph.getNodesByLabel(indicator).forEach( (nodeId) => graph.deleteNode(nodeId) );
-    document.querySelector("#add-node").style.display = "block";
-    document.querySelector("#add-rel").style.display = "none";
-    document.querySelector("#del-node").style.display = "none";
+    browser.storage.local.get("indicator").then( (indicator) => {
+        let graph = new Graph();
+        graph.getNodesByLabel(indicator.value).forEach( (nodeId) => graph.deleteNode(nodeId) );
+        document.querySelector("#add-node").style.display = "block";
+        document.querySelector("#add-rel").style.display = "none";
+        document.querySelector("#del-node").style.display = "none";
+    });
 });
     
 
@@ -135,30 +135,28 @@ document.querySelector("#add-node-rel-button").addEventListener("click", (e) => 
     const toNodeId = document.querySelector("#to-node-name").value;
     const isOutbound = document.querySelector("#outbound-link input[type='checkbox']").checked
     const isInbound = document.querySelector("#inbound-link input[type='checkbox']").checked
-    const fromNodeLabel = localStorage.getItem("indicator");
-    const fromNodeType = localStorage.getItem("type");
 
-
-    let graph = new Graph();
-    
-    //const [toNodeType, tld] = indicatorParser.getIndicatorType(toNodeId);
-    //graph.addNode(toNodeId, toNodeType);
-
-    const fromNodeIds = graph.getNodesByLabel(fromNodeLabel);
-    for (const fromNodeId of fromNodeIds) {
-        if (isOutbound) {
-            graph.addLink(fromNodeId, toNodeId, relLabel);
+    browser.storage.local.get("indicator").then( (indicator) => {
+        const fromNodeLabel = indicator.value;
+        const fromNodeType = indicator.type;
+        let graph = new Graph();
+        //const [toNodeType, tld] = indicatorParser.getIndicatorType(toNodeId);
+        //graph.addNode(toNodeId, toNodeType);
+        const fromNodeIds = graph.getNodesByLabel(fromNodeLabel);
+        for (const fromNodeId of fromNodeIds) {
+            if (isOutbound) {
+                graph.addLink(fromNodeId, toNodeId, relLabel);
+            }
+            if (isInbound) {
+                graph.addLink(toNodeId, fromNodeId, relLabel);
+            }
         }
-        if (isInbound) {
-            graph.addLink(toNodeId, fromNodeId, relLabel);
-        }
-    }
 
 
-    document.getElementById("add-relationship-popup").style.display = "none";
-    document.querySelector("#background").style.display = "none";
-    showMessagePopup("Relationship added to graph", MessageType.INFO);
-
+        document.getElementById("add-relationship-popup").style.display = "none";
+        document.querySelector("#background").style.display = "none";
+        showMessagePopup("Relationship added to graph", MessageType.INFO);
+    });
 });
 
 /**
