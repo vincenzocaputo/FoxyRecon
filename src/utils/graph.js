@@ -44,17 +44,18 @@ class Graph {
     ]
 
     constructor() {
-        let graph = localStorage.getItem("graph");
-
-        if (!graph) {
-            // Creare new graph
-            this.graph = {
-                'nodes': [],
-                'links': []
+        browser.storage.local.get("graph").then( (graph) => {
+            if (!graph) {
+                // Creare new graph
+                this.graph = {
+                    'nodes': [],
+                    'links': []
+                }
+            } else {
+                this.graph = JSON.parse(graph);
             }
-        } else {
-            this.graph = JSON.parse(graph);
-        }
+        });
+
     }
 
     /**
@@ -82,7 +83,7 @@ class Graph {
      * Save the graph in the local storage
      */
     saveGraph() {
-        localStorage.setItem("graph", JSON.stringify(this.graph));
+        browser.storae.local.set({"graph": JSON.stringify(this.graph)});
     }
     
     /**
