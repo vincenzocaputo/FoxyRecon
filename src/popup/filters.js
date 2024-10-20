@@ -49,7 +49,9 @@ document.querySelector("#filter-container-tags>select").addEventListener("change
     if(optionValue === "all") {
         document.querySelector("#filter-container-tags>select").value = "default";
     }
-    localStorage.setItem("tag", optionValue);
+    browser.storage.local.get("indicator").then( (indicator) => {
+        indicator.tag = optionValue;
+    });
 });
 
 /**
