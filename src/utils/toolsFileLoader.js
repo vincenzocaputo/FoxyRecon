@@ -23,33 +23,31 @@ function readJSONFile(file, callback) {
 function loadToolsList(callbackFunc) {
     var tools;
     // Check if the list is already in the local storage
-    if (!localStorage.getItem('tools')) {
-        // Load the list from the JSON file
-        readJSONFile("src/json/tools.json", function(text) {
-            var data = JSON.parse(text);
-            tools = data['tools'];
-            localStorage.setItem('tools', JSON.stringify(tools));
-            console.log("tools loaded from json file");
-            if(localStorage.getItem('tools-ext')) {
-                // Load custom tools, if exist
-                toolsExt = JSON.parse(localStorage.getItem('tools-ext'));
-                console.log("custom tools loaded from local storage");
-                tools.push(...toolsExt);
-            }
-        });
-    } else {
-        // Load the tools list from the local storage
-        tools = JSON.parse(localStorage.getItem('tools'));
-        console.log("tools loaded from local storage");
-        if(localStorage.getItem('tools-ext')) {
-            // Load custom tools, if exist
-            toolsExt = JSON.parse(localStorage.getItem('tools-ext'));
-            console.log("custom tools loaded from local storage");
-            tools.push(...toolsExt);
+    browser.storage.local.get("tools").then( (storageTools) => {
+        tools = storageTools;
+        if (!tools)) {
+            // Load the list from the JSON file
+            readJSONFile("src/json/tools.json", function(text) {
+                var data = JSON.parse(text);
+                tools = data['tools'];
+
+                browser.storage.local.set({"tools": tools});
+                console.log("tools loaded from json file");
+                return browser.storage.local.get("tools-ext");
+            });
+        } else {
+            // Load the tools list from the local storage
+            console.log("tools loaded from local storage");
+            return browser.storage.local.get("tools-ext");
         }
-    }
+    }).then( (toolsExt) => {
+        // Load custom tools, if exist
+        toolsExt = JSON.parse(localStorage.getItem('tools-ext'));
+        console.log("custom tools loaded from local storage");
+        tools.push(...toolsExt);
+        callbackFunc(tools);
+    });
 
 
-    callbackFunc(tools);
 }
 
