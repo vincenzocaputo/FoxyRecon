@@ -42,7 +42,6 @@ function loadToolsList(callbackFunc) {
         }
     }).then( (toolsExt) => {
         // Load custom tools, if exist
-        toolsExt = JSON.parse(localStorage.getItem('tools-ext'));
         console.log("custom tools loaded from local storage");
         tools.push(...toolsExt);
         callbackFunc(tools);
