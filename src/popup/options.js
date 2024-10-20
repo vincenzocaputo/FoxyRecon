@@ -1,24 +1,3 @@
-function setCheckboxStatus(checkboxNode, optionName) {
-    let optionValue = localStorage.getItem(optionName);
-    if(!optionValue) {
-        // Default option: open always a new tab
-        if(optionName === "settings.newtab") {
-            optionValue = "true";
-        } else if(optionName === "settings.autosubmit") {
-            // auto-submit disabled
-            optionValue = "false";
-        } else if(optionName === "settings.autocatch") {
-            // auto-catch enabled
-            optionValue = "true";
-        } else if(optionName === "settings.autograph") {
-            optionValue = "true";
-        }
-    }
-    checkboxNode.checked = (optionValue === "true");
-    localStorage.setItem(optionName, optionValue);
-}
-
-
 document.getElementById("settings-popup-close").addEventListener("click", function() {
     const settingsPopup = document.getElementById("options-popup");
     document.querySelector("#background").style.display = "none";
@@ -45,11 +24,12 @@ document.getElementById("settings-button").addEventListener("click", function() 
     settingsPopup.style.display = "block";
     settingsPopup.classList.add("open-popup");
     
-    setCheckboxStatus(document.querySelector("#open-tab-opt input"), "settings.newtab");
-    setCheckboxStatus(document.querySelector("#typ-anim-opt input"), "settings.typanim");
-    setCheckboxStatus(document.querySelector("#auto-submit-opt input"), "settings.autosubmit");
-    setCheckboxStatus(document.querySelector("#auto-catch-opt input"), "settings.autocatch");
-    setCheckboxStatus(document.querySelector("#auto-graph-opt input"), "settings.autograph");
+    browser.storage.local.get("settings").then( (settings) => {
+        document.querySelector("#open-tab-opt input").checked = settings.newtab;
+        document.querySelector("#typ-anim-opt input").checked = settings.autosubmit;
+        document.querySelector("#auto-submit-opt input").checked = settings.autocatch;
+        document.querySelector("#auto-catch-opt input").checked = settings.autograph;
+    });
 });
 
 
@@ -102,22 +82,26 @@ document.getElementById("settings-button").addEventListener("click", function() 
 document.querySelector("#open-tab-opt input").addEventListener("change", function(evt) {
     //let linksNodes = document.getElementById("tools-list").children;
     newtabOption = evt.target.checked;
-    localStorage.setItem("settings.newtab", newtabOption);
-    // Update the open icon option inside the tools buttons
-    openOptionIcons = document.querySelectorAll(".tool-open-icon>img");
-    for(icon of openOptionIcons) {
-        if(!newtabOption) {
-            // By default the addon opens resources in the current tab
-            // let the user open in a new tab by clicking on this icon
-            icon.src = "../../assets/icons/outside.png";
-            icon.title = "Open in a new tab";
-            icon.id = "open-icon-out";
-        } else {
-            icon.src = "../../assets/icons/inside.png";
-            icon.title = "Open in current tab";
-            icon.id = "open-icon-in";
+    browser.storage.local.get("settings").then( (settings) => {
+        settings.newtab = newtabOption;
+        return browser.storage.local.set({"settings": settings});
+    }).then( (settings) => {
+        // Update the open icon option inside the tools buttons
+        openOptionIcons = document.querySelectorAll(".tool-open-icon>img");
+        for(icon of openOptionIcons) {
+            if(!newtabOption) {
+                // By default the addon opens resources in the current tab
+                // let the user open in a new tab by clicking on this icon
+                icon.src = "../../assets/icons/outside.png";
+                icon.title = "Open in a new tab";
+                icon.id = "open-icon-out";
+            } else {
+                icon.src = "../../assets/icons/inside.png";
+                icon.title = "Open in current tab";
+                icon.id = "open-icon-in";
+            }
         }
-    }
+    });
 });
 
 /**
@@ -126,7 +110,10 @@ document.querySelector("#open-tab-opt input").addEventListener("change", functio
 document.querySelector("#typ-anim-opt input").addEventListener("change", function(evt) {
     //let linksNodes = document.getElementById("tools-list").children;
     typAnimOption = evt.target.checked;
-    localStorage.setItem("settings.typanim", typAnimOption);
+    browser.storage.local.get("settings").then( (settings) => {
+        settings.typanim = typAnimOption;
+        browser.storage.local.set({"settings": settings});
+    });
 });
 
 /**
@@ -135,7 +122,10 @@ document.querySelector("#typ-anim-opt input").addEventListener("change", functio
 document.querySelector("#auto-submit-opt input").addEventListener("change", function(evt) {
     //let linksNodes = document.getElementById("tools-list").children;
     autosubmitOption = evt.target.checked;
-    localStorage.setItem("settings.autosubmit", autosubmitOption);
+    browser.storage.local.get("settings").then( (settings) => {
+        settings.autosubmit = autosubmitOption;
+        browser.storage.local.set({"settings": settings});
+    });
 });
 
 /**
@@ -143,13 +133,15 @@ document.querySelector("#auto-submit-opt input").addEventListener("change", func
  */
 document.querySelector("#auto-catch-opt input").addEventListener("change", function(evt) {
     autocatchOption = evt.target.checked;
-    localStorage.setItem("settings.autocatch", autocatchOption);
-    if (!autocatchOption) {
-        // Wipe indicators list
-        localStorage.setItem("catched_indicators", "[]");
-        // Set 0 counter as badge
-        browserr.action.setBadgeText({text: ""});
-    }
+    browser.storage.local.get("settings").then( (settings) => {
+        settings.autocatch = autocatchOption;
+        browser.storage.local.set({"settings": settings});
+        if (!autocatchOption) {
+            browser.storage.local.set({"catched_indicators": []}).then( () => {
+                browserr.action.setBadgeText({text: ""});
+            });
+        }
+    });
 });
 
 /**
@@ -157,7 +149,10 @@ document.querySelector("#auto-catch-opt input").addEventListener("change", funct
  */
 document.querySelector("#auto-graph-opt input").addEventListener("change", function(evt) {
     autographOption = evt.target.checked;
-    localStorage.setItem("settings.autograph", autographOption);
+    browser.storage.local.get("settings").then( (settings) => {
+        settings.autgraph = autographOption;
+        browser.storage.local.set({"settings": settings});
+    });
 });
 
 /**
