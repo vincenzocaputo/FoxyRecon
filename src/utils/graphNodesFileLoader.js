@@ -21,21 +21,20 @@ function readJSONFile(file, callback) {
  * @param {function} callbackFunc Callback function to call when the loading process completes
  */
 function loadGraphMapping(callbackFunc) {
-    var mapping;
     // Check if the list is already in the local storage
-    if (!localStorage.getItem('autograph-mapping')) {
-        // Load the list from the JSON file
-        readJSONFile("src/json/graph-nodes.json", function(text) {
-            var data = JSON.parse(text);
-            mapping = data['graph-nodes'];
-            localStorage.setItem('autograph-mapping', JSON.stringify(mapping));
+    browser.storage.local.get("autograph-mapping").then( (mapping) => {
+        if (!mapping) {
+            readJSONFile("src/json/graph-nodes.json", function(text) {
+                var data = JSON.parse(text);
+                mapping = data['graph-nodes'];
+                browser.storage.local.set({"autograph-mapping": mapping});
+                callbackFunc(mapping);
+            });
+        } else {
+            // Load the tools list from the local storage
             callbackFunc(mapping);
-        });
-    } else {
-        // Load the tools list from the local storage
-        mapping = JSON.parse(localStorage.getItem('autograph-mapping'));
-        callbackFunc(mapping);
-    }
+        }
+    });
 
 }
 
