@@ -25,7 +25,7 @@ function loadToolsList(callbackFunc) {
     // Check if the list is already in the local storage
     browser.storage.local.get("tools").then( (storageTools) => {
         tools = storageTools;
-        if (!tools)) {
+        if (!tools) {
             // Load the list from the JSON file
             readJSONFile("src/json/tools.json", function(text) {
                 var data = JSON.parse(text);

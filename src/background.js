@@ -11,7 +11,7 @@ browser.storage.local.get("settings").then( (s) => {
         newtab: true,
         autosubmit: true,
         autocatch: true,
-        autograph: true
+        autograph: true,
         typeanim: true
     }
     browser.storage.local.set({"settings": settings});
@@ -30,6 +30,15 @@ loadGraphMapping(function(mp) {
 browser.runtime.onInstalled.addListener(function(details) {
     let currentVersion = browser.runtime.getManifest().version;
     if(details.reason === "install" || details.reasson === "update") {
+        browser.storage.local.set({
+            "indicator": {
+                value: "",
+                type: "",
+                tag: "",
+                tld: ""
+            }
+        });
+
         if (details.reason === "instal") {
             console.log("Current version: " + currentVersion);
             browser.storage.local.set({"version": currentVersion});
@@ -67,12 +76,12 @@ browser.runtime.onInstalled.addListener(function(details) {
         var tools;
         loadToolsList(function(ts) {
             tools=ts;
-        })
+        });
 
         var graphMapping;
         loadGraphMapping(function(mp) {
             graphMapping=mp;
-        }
+        });
     }
     browser.contextMenus.create({
         id: 'create-node',
@@ -101,11 +110,15 @@ browser.runtime.onInstalled.addListener(function(details) {
                         selectionText = indicatorParser.refangIndicator(selectionText);
                         [type, tld] = indicatorParser.getIndicatorType(selectionText);
                     }
-                    browser.storage.local.set({"indicator": {
-                        "type": type,
-                        "value": selectionText,
-                        "tld": tld
-                    }).then( () => {
+                    browser.storage.local.set(
+                        {
+                            "indicator": {
+                                "type": type,
+                                "value": selectionText,
+                                "tld": tld
+                            }
+                        })
+                        .then( () => {
                         browser.action.openPopup();
                     });
                 } else {
@@ -221,10 +234,14 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             .then( (indicator) => {
                 sendResponse({msg: indicator.value, query: query, inputSelector: inputSelector, submit: submit, typAnimOption: typAnimOption});
                 // Consume the request (to avoid clicking the button more times for the same request)
-                browser.storage.local.set({ "autofill": {
-                    submitQuery: "";
-                    inputSelector: "";
-                });
+                browser.storage.local.set(
+                    { 
+                        "autofill": {
+                            submitQuery: "",
+                            inputSelector: ""
+                        }
+                    }
+                );
             });
     } else if (request.id === 2) {
         // Auto graph generation
