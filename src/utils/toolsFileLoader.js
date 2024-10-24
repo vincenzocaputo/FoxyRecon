@@ -3,50 +3,57 @@
  * @param {file} JSON file to open
  * @param {callback} callback function
  */
-function readJSONFile(file, callback) {
-    let rawFile = new XMLHttpRequest();
-    rawFile.overrideMimeType("application/json");
-    rawFile.open("GET", file, true);
-    rawFile.onreadystatechange = function() {
-        if(rawFile.readyState == 4 && rawFile.status == "200") {
-            callback(rawFile.responseText);
+function readJSONFile(file) {
+    return new Promise(function (resolve, reject) {
+        let rawFile = new XMLHttpRequest();
+        rawFile.overrideMimeType("application/json");
+        rawFile.open("GET", file, true);
+        rawFile.onreadystatechange = function() {
+            if(rawFile.readyState == 4 && rawFile.status == "200") {
+                resolve(rawFile.responseText);
+            }
         }
-    }
-    rawFile.send(null); 
+        rawFile.onerror = function() {
+            reject({
+                status: rawFile.status,
+                statusText: "Network error"
+            });
+        };
+        rawFile.send(null); 
+    });
 }
-
 
 /**
  * Load the tools list from JSON file or from local storage.
- * @param {function} callbackFunc Callback function to call when the loading process completes
  */
-function loadToolsList(callbackFunc) {
-    var tools;
-    // Check if the list is already in the local storage
-    browser.storage.local.get("tools").then( (storageTools) => {
-        tools = storageTools;
-        if (!tools) {
-            // Load the list from the JSON file
-            readJSONFile("src/json/tools.json", function(text) {
-                var data = JSON.parse(text);
-                tools = data['tools'];
-
-                browser.storage.local.set({"tools": tools});
-                console.log("tools loaded from json file");
-                return browser.storage.local.get("tools-ext");
-            });
-        } else {
-            // Load the tools list from the local storage
-            console.log("tools loaded from local storage");
-            return browser.storage.local.get("tools-ext");
-        }
-    }).then( (toolsExt) => {
-        // Load custom tools, if exist
-        console.log("custom tools loaded from local storage");
-        tools.push(...toolsExt);
-        callbackFunc(tools);
+function loadBuiltInTools() {
+    return new Promise((resolve, reject) => {
+        browser.storage.local.get("tools").then( (result) => {
+            if (result.hasOwnProperty("tools")) {
+                resolve(result);
+            } else {
+                readJSONFile("src/json/tools.json").then( (data) => {
+                    const parsedData = JSON.parse(data);
+                    return browser.storage.local.set({ "tools": parsedData["tools"]}).then( () => parsedData);
+                }).then( (parsedData) => {
+                    resolve(parsedData);
+                });
+            }
+        });
     });
-
-
 }
+
+function loadTools() {
+    return loadBuiltInTools().then( (tools) => {
+        return browser.storage.local.get("tools-ext").then( (toolsExt) => {
+            if (toolsExt.hasOwnProperty("tools-ext")) {
+                tools.push(...toolsExt);
+                return tools;
+            } else {
+                return tools;
+            }
+        });
+    });
+}
+
 
