@@ -87,7 +87,7 @@ class Graph {
      * Save the graph in the local storage
      */
     saveGraph() {
-        browser.storae.local.set({"graph": JSON.stringify(this.graph)});
+        browser.storage.local.set({"graph": this.graph});
     }
     
     /**
@@ -335,6 +335,7 @@ class Graph {
      */
     getNodesByLabel(label) {
         let filteredNodes = Array();
+        console.log(this.graph);
         for (let node of this.graph['nodes']) {
             if (node['label'] === label) {
                 filteredNodes.push(node['id']);

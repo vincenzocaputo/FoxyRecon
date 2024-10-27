@@ -4,10 +4,12 @@
  *
  */
 document.querySelector("#add-node-button").addEventListener("click", (e) => {
+    let nodeId = "";
+    let nodeType = "";
     browser.storage.local.get("indicator").then( (result) => {
         const indicator = result.indicator;
-        const nodeId = indicator.value;
-        const nodeType = indicator.type;
+        nodeId = indicator.value;
+        nodeType = indicator.type;
         return Graph.getInstance();
         
     }).then( (graph) => {
@@ -27,8 +29,9 @@ document.querySelector("#add-node-button").addEventListener("click", (e) => {
  *
  */
 document.querySelector("#del-node-button").addEventListener("click", (e) => {
+    let indicator;
     browser.storage.local.get("indicator").then( (result) => {
-        const indicator = result.indicator;
+        indicator = result.indicator;
         return Graph.getInstance();
     }).then( (graph) => {
         graph.getNodesByLabel(indicator.value).forEach( (nodeId) => graph.deleteNode(nodeId) );
