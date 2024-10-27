@@ -155,8 +155,8 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, showOnlyAutograph,
     document.getElementById("hist-icon").style.display = "none";
     document.getElementById("disclaimer").style.display = "none";
 
-    Graph.getInstance().then( (result) => {
-        const graph = result.graph;
+    Graph.getInstance().then( (graph) => {
+        console.log(graph);
         const nodeIds = graph.getNodesByLabel(indicator);
         if (nodeIds.length > 0) { 
             document.getElementById("add-node").style.display = "none";

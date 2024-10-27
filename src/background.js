@@ -97,8 +97,7 @@ browser.runtime.onInstalled.addListener(function(details) {
                 }
             }
             if (clickedItem === "create-node") {
-                Graph.getInstance().then( (result) => {
-                    const graph = result.graph;
+                Graph.getInstance().then( (graph) => {
                     if (graph.getNodesByLabel(selectionText).length == 0) {
                         browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
                             let activeTab = tabs[0].id;
@@ -229,8 +228,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             }
         });
     } else if (request.id === 3) {
-        Graph.getInstance().then( (result) => {
-            const graph = result.graph;
+        Graph.getInstance().then( (graph) => {
             const rel = JSON.parse(request.msg);
 
             let nodeIds = graph.getNodesByLabel(rel['source']['id']);
@@ -253,8 +251,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             sendResponse({msg: 1});
         });
     } else if (request.id === 4) {
-        Graph.getInstance().then( (result) => {
-            const graph = result.graph;
+        Graph.getInstance().then( (graph) => {
             let nodeId;
             if (request.hasOwnProperty("type")) {
                 // We are dealing with a valid indicator

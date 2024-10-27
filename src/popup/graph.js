@@ -10,8 +10,7 @@ document.querySelector("#add-node-button").addEventListener("click", (e) => {
         const nodeType = indicator.type;
         return Graph.getInstance();
         
-    }).then( (result) => {
-        const graph = result.graph;
+    }).then( (graph) => {
         if (graph.addNode(nodeId, nodeType)) {
             document.querySelector("#add-node").style.display = "none";
             document.querySelector("#del-node").style.display = "block";
@@ -31,8 +30,7 @@ document.querySelector("#del-node-button").addEventListener("click", (e) => {
     browser.storage.local.get("indicator").then( (result) => {
         const indicator = result.indicator;
         return Graph.getInstance();
-    }).then( (result) => {
-        const graph = result.graph;
+    }).then( (graph) => {
         graph.getNodesByLabel(indicator.value).forEach( (nodeId) => graph.deleteNode(nodeId) );
         document.querySelector("#add-node").style.display = "block";
         document.querySelector("#add-rel").style.display = "none";
@@ -47,8 +45,7 @@ document.querySelector("#del-node-button").addEventListener("click", (e) => {
  */
 document.querySelector("#add-rel-button").addEventListener("click", (e) => {
     let nodes = [];
-    Graph.getInstance().then( (result) => {
-        const graph = result.graph;
+    Graph.getInstance().then( (graph) => {
         let graphNodes = graph.getNodes();
         for (let node in graphNodes) {
             if (graphNodes[node].id != inputField.value) { 
@@ -150,8 +147,7 @@ document.querySelector("#add-node-rel-button").addEventListener("click", (e) => 
         const fromNodeLabel = indicator.value;
         const fromNodeType = indicator.type;
         return Graph.getInstance();
-    }).then( (result) => {
-        const graph = result.graph;
+    }).then( (graph) => {
         //const [toNodeType, tld] = indicatorParser.getIndicatorType(toNodeId);
         //graph.addNode(toNodeId, toNodeType);
         const fromNodeIds = graph.getNodesByLabel(fromNodeLabel);

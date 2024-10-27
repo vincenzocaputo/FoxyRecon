@@ -44,10 +44,11 @@ class Graph {
         "variant-of"
     ];
 
-    static async getInstance() {
-        const result = await browser.storage.local.get("graph");
-        const graph = result.graph || null;
-        return new Graph(graph);
+    static getInstance() {
+        return browser.storage.local.get("graph").then( (result) => {
+            const graph = result.graph || null;
+            return new Graph(graph);
+        });
     }
 
     constructor(graph) {
@@ -334,7 +335,6 @@ class Graph {
      */
     getNodesByLabel(label) {
         let filteredNodes = Array();
-        console.log(graph);
         for (let node of this.graph['nodes']) {
             if (node['label'] === label) {
                 filteredNodes.push(node['id']);
