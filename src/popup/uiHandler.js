@@ -577,7 +577,7 @@ function createToolsList(toolsList, settings, favTools){
                         browser.storage.local.get("settings").then( (result) => {
                             const settings = result.settings;
                             const newtab = settings.newtab;
-                            if(targetId === "open-icon-out" || (targetId != "open-icon-in" && (!newtab || newtab === "true"))) {
+                            if(targetId === "open-icon-out" || (targetId != "open-icon-in" && newtab)) {
                                 // Open web resource in a new tab
                                 browser.tabs.create({
                                     url: node.url
