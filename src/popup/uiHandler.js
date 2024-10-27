@@ -564,15 +564,18 @@ function createToolsList(toolsList, settings, favTools){
                         });
                     } else {
                         browser.storage.local.get("indicator").then( (result) => {
-                            const indicator = result.indicator;
-                            // If the indicator is the same as the last saved, ignore it
-                            if(indicator != historySet[0]) {
-                                if(historySet.length >= 50) {
-                                    historySet.pop();
+                            const indicator = result.indicator.value || "";
+                            browser.storage.local.get("history").then( (result) => {
+                                let historySet = result.history;
+                                // If the indicator is the same as the last saved, ignore it
+                                if(indicator && indicator != historySet[0]) {
+                                    if(historySet.length >= 50) {
+                                        historySet.pop();
+                                    }
+                                    historySet.unshift(indicator);
+                                    browser.storage.local.set({"history": historySet});
                                 }
-                                historySet.unshift(indicator);
-                                browser.storage.local.set({"history": historySet});
-                            }
+                            });
                         });
                         browser.storage.local.get("settings").then( (result) => {
                             const settings = result.settings;
