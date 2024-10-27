@@ -18,6 +18,34 @@ loadTools().then( (result) => {
     }).then( (result) => {
         const settings = result.settings;
         createToolsList(tools, settings, favTools);
+        return browser.storage.local.get("indicator");
+    }).then( (result) => {
+        const indicator = result.indicator || null;
+        if(!indicator || !indicator.value || indicator.value === "undefined") {
+            inputField.focus();
+        } else {
+            // Put the indicator in the text field
+            inputField.value = indicator.value;
+            // Restore the type of the string
+            const type = indicator.type;
+            // Restore the domain tld if present
+            const tld = indicator.tld;
+            showCountryFlag(tld);
+            // Restore tag option
+            const optionValue = indicator.tag ?? "all";
+            // If indicator is an URL or an email show domain extraction icon
+            if(type === "url" || type === "email") {
+                document.getElementById("domextr-icon").style.display = "block";
+            } else {
+                document.getElementById("domextr-icon").style.display = "none";
+            }
+            // Hide Catch! icon
+            document.getElementById("catch-icon").style.display = "none";
+            // Show the bin icon
+            document.getElementById("bin-icon").style.display = "block";
+            // Show the buttons related to the tools that support this indicator
+            showButtonsByType(indicator, type, optionValue);
+        }
     });
 
 });
@@ -156,7 +184,6 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, showOnlyAutograph,
     document.getElementById("disclaimer").style.display = "none";
 
     Graph.getInstance().then( (graph) => {
-        console.log(graph);
         const nodeIds = graph.getNodesByLabel(indicator);
         if (nodeIds.length > 0) { 
             document.getElementById("add-node").style.display = "none";
@@ -170,14 +197,15 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, showOnlyAutograph,
             }
         }
     });
-    // This node contains the list of tools
-    const toolsListNodes = document.getElementById("tools-list");
+
+
+    const toolsListNodes = document.querySelector("#tools-list");
     toolsListNodes.style.display = "block";
     const resNodes = toolsListNodes.children;
-
     // Retrieve favourites tools from local storage
     browser.storage.local.get("fav").then( (result) => {
-        const favTools = result.fav;
+        // This node contains the list of tools
+        const favTools = result.fav || Array();
         if(!tag || tag === "default") {
             // If no tag has been provided, by default set it to "all"
             tag = "all";
