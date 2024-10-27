@@ -748,7 +748,7 @@ window.onload = function() {
                 }
             }
             tools.push(jsonCode);
-            return browser.storage.local.set({"tools-ext", tools});
+            return browser.storage.local.set({"tools_ext": tools});
         }).then( (tools) => {
             showCustomToolsList();
             resetForm();
@@ -777,7 +777,7 @@ window.onload = function() {
             browser.storage.local.get("tools_ext").then( (result) => {
                 const toolsList = result.tools_ext;
                 toolsList.splice(selectedResource,1);
-                return browser.storage.local.set({"tools-ext", toolsList });
+                return browser.storage.local.set({"tools_ext": toolsList });
             }).then( () => {
                 showCustomToolsList();
                 selectedResource = -1;
@@ -874,7 +874,7 @@ window.onload = function() {
                     }
                 }
                 tools.push(mispTemplate);
-                return browser.storage.local.set({"tools-ext", tools});
+                return browser.storage.local.set({"tools_ext": tools});
             }).then( (tools) => {
                 showCustomToolsList();
             });
@@ -901,7 +901,7 @@ window.onload = function() {
                     }
                 }
                 tools.push(openctiTemplate);
-                return browser.storage.local.set({"tools-ext", tools});
+                return browser.storage.local.set({"tools_ext": tools});
             }).then( (tools) => {
                 showCustomToolsList();
             });
@@ -927,7 +927,7 @@ window.onload = function() {
                     }
                 }
                 tools.push(yetiTemplate);
-                return browser.storage.local.set({"tools-ext", tools});
+                return browser.storage.local.set({"tools_ext": tools});
             }).then( (tools) => {
                 showCustomToolsList();
             });

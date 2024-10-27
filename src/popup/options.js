@@ -166,7 +166,7 @@ document.querySelector("#auto-graph-opt input").addEventListener("change", funct
  */
 document.querySelector("#open-settings").addEventListener("click", function(evt) {
     browser.tabs.create({
-        url: '/src/custom_tools/custom-tools.html'
+        url: chrome.runtime.getURL('/src/custom_tools/custom-tools.html')
     });
 });
 
