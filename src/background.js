@@ -1,47 +1,16 @@
-// Setup default settings
-browser.storage.local.get("settings").then( (s) => {
-    console.log("Settings loaded");
-    if (!s.newtab) {
-        s.newtab
-        browser.storage.local.set({"settings.newtab": "true"});
-    }
-}, (err) => {
-    console.log("Setting default settings");
-    const defaultSettings = {
-        newtab: true,
-        autosubmit: true,
-        autocatch: true,
-        autograph: true,
-        typeanim: true
-    }
-    browser.storage.local.set({"settings": settings});
-} );
-
+importScripts('./lib/browser-polyfill.js');
+importScripts('./utils/toolsFileLoader.js');
+importScripts('./utils/storage.js');
 var tools;
-loadToolsList(function(ts) {
-    tools=ts;
-});
-
-var graphMapping;
-loadGraphMapping(function(mp) {
-    graphMapping=mp;
-});
 
 browser.runtime.onInstalled.addListener(function(details) {
     let currentVersion = browser.runtime.getManifest().version;
     if(details.reason === "install" || details.reasson === "update") {
-        browser.storage.local.set({
-            "indicator": {
-                value: "",
-                type: "",
-                tag: "",
-                tld: ""
-            }
-        });
-
-        if (details.reason === "instal") {
-            console.log("Current version: " + currentVersion);
-            browser.storage.local.set({"version": currentVersion});
+        if (details.reason === "install") {
+            createStorage().then( () => {;
+                console.log("Current version: " + currentVersion);
+                browser.storage.local.set({"version": currentVersion});
+            });
         } else if(details.reason === "update") {
             browser.storage.local.get("version")
                 .then( (installedVersion) => {
@@ -53,35 +22,30 @@ browser.runtime.onInstalled.addListener(function(details) {
                     return installedVersion;
                 })
                 .then( (installedVersion) => {
-                    if (installedVersion !== currentVersion) {
-                        browser.tabs.create({
-                            discarded: true,
-                            title: "FoxyRecon New Version",
-                            url: 'https://github.com/vincenzocaputo/FoxyRecon/releases/tag/v'+currentVersion
-                        });
-                        // If a new version was released, clean the local storage
-                        browser.storage.local.remove("tools");
-                        browser.storage.local.remove("type");
-                        browser.storage.local.remove("tag");
-                        browser.storage.local.remove("autograph-mapping");
-                        browser.storage.local.remove("submit-btn-query");
-                        browser.storage.local.remove("autofill.submit-btn-query");
-                        browser.storage.local.remove("autofill.input-selector");
-                        browser.storage.local.remove("indicator");
-                        // Add current version to local storage/
-                        browser.storage.local.set({"version": currentVersion});
-                    }
+                    setupStorageAfterUpdate().then( () => {
+                        if (installedVersion !== currentVersion) {
+                            detectStorageMigration(installedVersion, currentVersion).then( () => {
+                                browser.tabs.create({
+                                    discarded: true,
+                                    title: "FoxyRecon New Version",
+                                    url: 'https://github.com/vincenzocaputo/FoxyRecon/releases/tag/v'+currentVersion
+                                });
+                                // If a new version was released, clean the local storage
+                                browser.storage.local.remove("tools");
+                                browser.storage.local.remove("type");
+                                browser.storage.local.remove("tag");
+                                browser.storage.local.remove("autograph-mapping");
+                                browser.storage.local.remove("submit-btn-query");
+                                browser.storage.local.remove("autofill.submit-btn-query");
+                                browser.storage.local.remove("autofill.input-selector");
+                                browser.storage.local.remove("indicator");
+                                // Add current version to local storage/
+                                browser.storage.local.set({"version": currentVersion});
+                            });
+                        }
+                    });
                 });
         }
-        var tools;
-        loadToolsList(function(ts) {
-            tools=ts;
-        });
-
-        var graphMapping;
-        loadGraphMapping(function(mp) {
-            graphMapping=mp;
-        });
     }
     browser.contextMenus.create({
         id: 'create-node',
@@ -133,26 +97,28 @@ browser.runtime.onInstalled.addListener(function(details) {
                 }
             }
             if (clickedItem === "create-node") {
-                const graph = new Graph();
-                if (graph.getNodesByLabel(selectionText).length == 0) {
-                    browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
-                        let activeTab = tabs[0].id;
-                        browser.tabs.sendMessage(activeTab, "open-add-note-popup")
-                            .then((response) => {
-                             })
-                            .catch((error) => {
-                            });
-                    });
-                } else {
-                    browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
-                        let activeTab = tabs[0].id;
-                        browser.tabs.sendMessage(activeTab, "show-err:The node is already in the graph")
-                            .then((response) => {
-                            })
-                            .catch((error) => {
-                            });
-                    });
-                }
+                Graph.getInstance().then( (result) => {
+                    const graph = result.graph;
+                    if (graph.getNodesByLabel(selectionText).length == 0) {
+                        browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
+                            let activeTab = tabs[0].id;
+                            browser.tabs.sendMessage(activeTab, "open-add-note-popup")
+                                .then((response) => {
+                                 })
+                                .catch((error) => {
+                                });
+                        });
+                    } else {
+                        browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
+                            let activeTab = tabs[0].id;
+                            browser.tabs.sendMessage(activeTab, "show-err:The node is already in the graph")
+                                .then((response) => {
+                                })
+                                .catch((error) => {
+                                });
+                        });
+                    };
+                });
             }
         }
     });
@@ -258,68 +224,74 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             }
         })
         .then( (indicator) => {
-            sendResponse({msg: indicator.value, map: JSON.stringify(mappings) }) 
+            if (indicator) {
+                sendResponse({msg: indicator.value, map: JSON.stringify(mappings) });
+            }
         });
     } else if (request.id === 3) {
-        const graph = new Graph();
-        const rel = JSON.parse(request.msg);
+        Graph.getInstance().then( (result) => {
+            const graph = result.graph;
+            const rel = JSON.parse(request.msg);
 
-        let nodeIds = graph.getNodesByLabel(rel['source']['id']);
-        let fromId;
-        if (nodeIds.length === 0) {
-            fromId = graph.addNode(rel['source']['id'], rel['source']['type']);
-        } else {
-            fromId = nodeIds[0];
-        }
-        nodeIds = graph.getNodesByLabel(rel['target']['id']);
-        let toId;
-        if (nodeIds.length === 0) {
-            toId = graph.addNode(rel['target']['id'], rel['target']['type']);
-        } else {
-            toId = nodeIds[0];
-        }
-        if (!graph.linkInGraph(fromId, toId, rel['label'])) {
-            graph.addLink(fromId, toId, rel['label']);
-        }
-        sendResponse({msg: 1});
+            let nodeIds = graph.getNodesByLabel(rel['source']['id']);
+            let fromId;
+            if (nodeIds.length === 0) {
+                fromId = graph.addNode(rel['source']['id'], rel['source']['type']);
+            } else {
+                fromId = nodeIds[0];
+            }
+            nodeIds = graph.getNodesByLabel(rel['target']['id']);
+            let toId;
+            if (nodeIds.length === 0) {
+                toId = graph.addNode(rel['target']['id'], rel['target']['type']);
+            } else {
+                toId = nodeIds[0];
+            }
+            if (!graph.linkInGraph(fromId, toId, rel['label'])) {
+                graph.addLink(fromId, toId, rel['label']);
+            }
+            sendResponse({msg: 1});
+        });
     } else if (request.id === 4) {
-        const graph = new Graph();
-        let nodeId;
-        if (request.hasOwnProperty("type")) {
-            // We are dealing with a valid indicator
-            nodeId = graph.addNode(request.indicator, request.type);
-            console.log(nodeId);
-        } else {
-            const stix = request.stix;
-            const label = request.label;
-            graph.addSTIXNode(stix["id"], label, stix["type"], stix);
-            nodeId = stix["id"];
-        }
-        if (request.relName) {
-            browser.storage.local.get("indicator").then( (indicator) => {
-                const nodes = graph.getNodesByLabel(indicator.value);
+        Graph.getInstance().then( (result) => {
+            const graph = result.graph;
+            let nodeId;
+            if (request.hasOwnProperty("type")) {
+                // We are dealing with a valid indicator
+                nodeId = graph.addNode(request.indicator, request.type);
+                console.log(nodeId);
+            } else {
+                const stix = request.stix;
+                const label = request.label;
+                graph.addSTIXNode(stix["id"], label, stix["type"], stix);
+                nodeId = stix["id"];
+            }
+            if (request.relName) {
+                browser.storage.local.get("indicator").then( (indicator) => {
+                    const nodes = graph.getNodesByLabel(indicator.value);
 
-                let relNodeId;
-                if (nodes.length === 0) {
-                    relNodeId = graph.addNode(indicator.value, indicator.type);
-                } else {
-                    relNodeId = nodes[0];
-                }
-                if (request.inbound) {
-                    graph.addLink(relNodeId, nodeId, request.relName);
-                }
-                if (request.outbound) {
-                    graph.addLink(nodeId, relNodeId, request.relName);
-                }
-            });
-        }
-        browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
-            let activeTab = tabs[0].id;
-            browser.tabs.sendMessage(activeTab, "show-msg:Node added to the graph")
-                .then((response) => {
-                })
-                .catch((error) => {
+                    let relNodeId;
+                    if (nodes.length === 0) {
+                        relNodeId = graph.addNode(indicator.value, indicator.type);
+                    } else {
+                        relNodeId = nodes[0];
+                    }
+                    if (request.inbound) {
+                        graph.addLink(relNodeId, nodeId, request.relName);
+                    }
+                    if (request.outbound) {
+                        graph.addLink(nodeId, relNodeId, request.relName);
+                    }
                 });
+            }
+            browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
+                let activeTab = tabs[0].id;
+                browser.tabs.sendMessage(activeTab, "show-msg:Node added to the graph")
+                    .then((response) => {
+                    })
+                    .catch((error) => {
+                    });
+            });
         });
     }
 })

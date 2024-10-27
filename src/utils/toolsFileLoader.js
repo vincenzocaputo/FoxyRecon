@@ -5,21 +5,18 @@
  */
 function readJSONFile(file) {
     return new Promise(function (resolve, reject) {
-        let rawFile = new XMLHttpRequest();
-        rawFile.overrideMimeType("application/json");
-        rawFile.open("GET", file, true);
-        rawFile.onreadystatechange = function() {
-            if(rawFile.readyState == 4 && rawFile.status == "200") {
-                resolve(rawFile.responseText);
+        const fileURI = browser.runtime.getURL(file);
+        fetch(fileURI).then( (response) => {
+            if (!response.ok) {
+                reject({
+                    status: "error",
+                    statusText: response.status
+                });
             }
-        }
-        rawFile.onerror = function() {
-            reject({
-                status: rawFile.status,
-                statusText: "Network error"
-            });
-        };
-        rawFile.send(null); 
+            return response.json(); // Parse JSON if the file is JSON
+        }).then( (fileContent) => {
+            resolve(fileContent);
+        });
     });
 }
 
@@ -30,10 +27,10 @@ function loadBuiltInTools() {
     return new Promise((resolve, reject) => {
         browser.storage.local.get("tools").then( (result) => {
             if (result.hasOwnProperty("tools")) {
-                resolve(result);
+                resolve(result.tools);
             } else {
                 readJSONFile("src/json/tools.json").then( (data) => {
-                    const parsedData = JSON.parse(data);
+                    const parsedData = data;
                     return browser.storage.local.set({ "tools": parsedData["tools"]}).then( () => parsedData);
                 }).then( (parsedData) => {
                     resolve(parsedData);
@@ -45,9 +42,9 @@ function loadBuiltInTools() {
 
 function loadTools() {
     return loadBuiltInTools().then( (tools) => {
-        return browser.storage.local.get("tools-ext").then( (toolsExt) => {
-            if (toolsExt.hasOwnProperty("tools-ext")) {
-                tools.push(...toolsExt);
+        return browser.storage.local.get("toolsExt").then( (result) => {
+            if (result.hasOwnProperty("toolsExt")) {
+                tools.push(...result.toolsExt);
                 return tools;
             } else {
                 return tools;

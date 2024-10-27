@@ -8,7 +8,9 @@ indicatorParser = new IndicatorParser();
 
 
 // Check if there are some indicators found in the current webpage
-browser.storage.local.get("catched_indicators").then( (catchedIndicatorsList) => {
+browser.storage.local.get("catched_indicators").then( (result) => {
+    const collectedIndicatorsList = result.catched_indicators;
+
     if(collectedIndicatorsList && collectedIndicatorsList !== undefined && collectedIndicatorsList !== "undefined") {
         var count = {"ip": 0, "domain": 0, "url": 0, "email": 0, "hash": 0, "cve": 0, "phone": 0, "asn": 0};
         collectedIndicatorsList.forEach(function(indicator) {
@@ -23,7 +25,8 @@ browser.storage.local.get("catched_indicators").then( (catchedIndicatorsList) =>
 });
 
 // Check if the input string is in local storage
-browser.storage.local.get("indicator").then( (indicator) => {
+browser.storage.local.get("indicator").then( (result) => {
+    const indicator = result.indicator;
     if(!indicator.value || indicator.value === "undefined") {
         inputField.focus();
     } else {

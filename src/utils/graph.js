@@ -1,4 +1,5 @@
 class Graph {
+    static #graph = null;
     static relationshipTypes = [
         "attributed-to",
         "authored-by",
@@ -41,21 +42,23 @@ class Graph {
         "used-by",
         "uses",
         "variant-of"
-    ]
+    ];
 
-    constructor() {
-        browser.storage.local.get("graph").then( (graph) => {
-            if (!graph) {
-                // Creare new graph
-                this.graph = {
-                    'nodes': [],
-                    'links': []
-                }
-            } else {
-                this.graph = JSON.parse(graph);
+    static async getInstance() {
+        const result = await browser.storage.local.get("graph");
+        const graph = result.graph || null;
+        return new Graph(graph);
+    }
+
+    constructor(graph) {
+        if (!graph) {
+            this.graph = {
+                'nodes': [],
+                'links': []
             }
-        });
-
+        } else {
+            this.graph = graph;
+        }
     }
 
     /**
@@ -331,6 +334,7 @@ class Graph {
      */
     getNodesByLabel(label) {
         let filteredNodes = Array();
+        console.log(graph);
         for (let node of this.graph['nodes']) {
             if (node['label'] === label) {
                 filteredNodes.push(node['id']);

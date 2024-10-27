@@ -9,20 +9,22 @@ const MessageType = {
 }
 
 var tools;
-loadToolsList(function(ts){
-    tools = ts;
-    const favTools;
-    browser.storage.local.get("fav").then( (fav) => {
-        favTools = fav;
+loadTools().then( (result) => {
+    tools = result;
+    let favTools;
+    browser.storage.local.get("fav").then( (result) => {
+        favTools = result.fav;
         return browser.storage.local.get("settings");
-    }).then( (settings) => {
+    }).then( (result) => {
+        const settings = result.settings;
         createToolsList(tools, settings, favTools);
     });
+
 });
 
-browser.storage.local.get("history").then( (historySet) => {
+browser.storage.local.get("history").then( (result) => {
+    const historySet = result.history || Array();
     historyPanel = document.getElementById("history");
-    historySet = historySet || Array();
     historySet.forEach(function(h) {
         historyEntry = document.createElement("div");
         historyEntry.textContent = h;
@@ -153,26 +155,29 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, showOnlyAutograph,
     document.getElementById("hist-icon").style.display = "none";
     document.getElementById("disclaimer").style.display = "none";
 
-    let graph = new Graph();
-    const nodeIds = graph.getNodesByLabel(indicator);
-    if (nodeIds.length > 0) { 
-        document.getElementById("add-node").style.display = "none";
-        document.getElementById("add-rel").style.display = "block";
-        document.getElementById("del-node").style.display = "block";
-    } else {
-        if(type != "phone") {
-            document.getElementById("add-node").style.display = "block";
-            document.getElementById("add-rel").style.display = "none";
-            document.getElementById("del-node").style.display = "none";
+    Graph.getInstance().then( (result) => {
+        const graph = result.graph;
+        const nodeIds = graph.getNodesByLabel(indicator);
+        if (nodeIds.length > 0) { 
+            document.getElementById("add-node").style.display = "none";
+            document.getElementById("add-rel").style.display = "block";
+            document.getElementById("del-node").style.display = "block";
+        } else {
+            if(type != "phone") {
+                document.getElementById("add-node").style.display = "block";
+                document.getElementById("add-rel").style.display = "none";
+                document.getElementById("del-node").style.display = "none";
+            }
         }
-    }
+    });
     // This node contains the list of tools
     const toolsListNodes = document.getElementById("tools-list");
     toolsListNodes.style.display = "block";
     const resNodes = toolsListNodes.children;
 
     // Retrieve favourites tools from local storage
-    browser.storage.local.get("fav").then( (favTools) => {
+    browser.storage.local.get("fav").then( (result) => {
+        const favTools = result.fav;
         if(!tag || tag === "default") {
             // If no tag has been provided, by default set it to "all"
             tag = "all";
@@ -496,64 +501,70 @@ function createToolsList(toolsList, settings, favTools){
             const openPopups = document.querySelectorAll(".open-popup");
             // If settings popup is opened, don't allow clicking 
             if(node.url && openPopups.length == 0) {
-                browser.storage.local.get("settings").then( (settings) => {
+                browser.storage.local.get("settings").then( (result) => {
+                    const settings = result.settings;
 
-                browser.storage.local.set({"autofill": {
-                    inputSelector: node.inputSelector || "",
-                    submitQuery: node.submitQuery || ""
-                });
+                    browser.storage.local.set({"autofill": {
+                        inputSelector: node.inputSelector || "",
+                        submitQuery: node.submitQuery || ""
+                    }});
 
-                const targetId = e.target.id;
-                if(targetId === "add-fav") { 
-                    browser.storage.local.get("fav").then( (favTools) => {
-                        if(favTools) {
-                            favTools.push(node.name);
-                        } else {
-                            favTools = [node.name];
-                        }
-                        browser.storage.local.set({"fav": favTools});
-                        e.target.title = "Remove from favorites";
-                        e.target.id = "rem-fav";
-                        e.target.src = "../../assets/icons/favourite.png";
-                    });
-                } else if(targetId === "rem-fav") {
-                    browser.storage.local.get("fav").then( (favTools) => {
-                        if(favTools) {
-                            favTools = favTools.filter(item => item != node.name);
-                        }                
-                        browser.storage.local.set({"fav": favTools});
-                        e.target.title = "Add to favorites";
-                        e.target.id = "add-fav";
-                        e.target.src = "../../assets/icons/no_favourite.png";
-                    });
-                } else {
-                    browser.storage.local.get("indicator").then( (indicator) => {
-                        // If the indicator is the same as the last saved, ignore it
-                        if(indicator != historySet[0]) {
-                            if(historySet.length >= 50) {
-                                historySet.pop();
+                    const targetId = e.target.id;
+                    if(targetId === "add-fav") { 
+                        browser.storage.local.get("fav").then( (result) => {
+                            const favTools = result.fav || Array();
+                            if(favTools) {
+                                favTools.push(node.name);
+                            } else {
+                                favTools = [node.name];
                             }
-                            historySet.unshift(indicator);
-                            browser.storage.local.set({"history": historySet});
-                        }
-                    });
-                    browser.storage.local.get("settings").then( (settings) => {
-                        const newtab = settings.newtab;
-                        if(targetId === "open-icon-out" || (targetId != "open-icon-in" && (!newtab || newtab === "true"))) {
-                            // Open web resource in a new tab
-                            browser.tabs.create({
-                                url: node.url
-                            });
-                        } else {
-                            // Otherwise open in current tab
-                            browser.tabs.update({
-                                url: node.url
-                            });
-                        }
-                        // close popup
-                        window.close();
-                    });
-                } 
+                            browser.storage.local.set({"fav": favTools});
+                            e.target.title = "Remove from favorites";
+                            e.target.id = "rem-fav";
+                            e.target.src = "../../assets/icons/favourite.png";
+                        });
+                    } else if(targetId === "rem-fav") {
+                        browser.storage.local.get("fav").then( (result) => {
+                            const favTools = result.fav || Array();
+                            if(favTools) {
+                                favTools = favTools.filter(item => item != node.name);
+                            }                
+                            browser.storage.local.set({"fav": favTools});
+                            e.target.title = "Add to favorites";
+                            e.target.id = "add-fav";
+                            e.target.src = "../../assets/icons/no_favourite.png";
+                        });
+                    } else {
+                        browser.storage.local.get("indicator").then( (result) => {
+                            const indicator = result.indicator;
+                            // If the indicator is the same as the last saved, ignore it
+                            if(indicator != historySet[0]) {
+                                if(historySet.length >= 50) {
+                                    historySet.pop();
+                                }
+                                historySet.unshift(indicator);
+                                browser.storage.local.set({"history": historySet});
+                            }
+                        });
+                        browser.storage.local.get("settings").then( (result) => {
+                            const settings = result.settings;
+                            const newtab = settings.newtab;
+                            if(targetId === "open-icon-out" || (targetId != "open-icon-in" && (!newtab || newtab === "true"))) {
+                                // Open web resource in a new tab
+                                browser.tabs.create({
+                                    url: node.url
+                                });
+                            } else {
+                                // Otherwise open in current tab
+                                browser.tabs.update({
+                                    url: node.url
+                                });
+                            }
+                            // close popup
+                            window.close();
+                        });
+                    } 
+                });
             }
         });
         document.getElementById("tools-list").appendChild(node);

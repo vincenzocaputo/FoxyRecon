@@ -24,7 +24,8 @@ document.getElementById("settings-button").addEventListener("click", function() 
     settingsPopup.style.display = "block";
     settingsPopup.classList.add("open-popup");
     
-    browser.storage.local.get("settings").then( (settings) => {
+    browser.storage.local.get("settings").then( (result) => {
+        const settings = result.settings;
         document.querySelector("#open-tab-opt input").checked = settings.newtab;
         document.querySelector("#typ-anim-opt input").checked = settings.autosubmit;
         document.querySelector("#auto-submit-opt input").checked = settings.autocatch;
@@ -82,7 +83,8 @@ document.getElementById("settings-button").addEventListener("click", function() 
 document.querySelector("#open-tab-opt input").addEventListener("change", function(evt) {
     //let linksNodes = document.getElementById("tools-list").children;
     newtabOption = evt.target.checked;
-    browser.storage.local.get("settings").then( (settings) => {
+    browser.storage.local.get("settings").then( (result) => {
+        let settings = result.settings;
         settings.newtab = newtabOption;
         return browser.storage.local.set({"settings": settings});
     }).then( (settings) => {
@@ -110,7 +112,8 @@ document.querySelector("#open-tab-opt input").addEventListener("change", functio
 document.querySelector("#typ-anim-opt input").addEventListener("change", function(evt) {
     //let linksNodes = document.getElementById("tools-list").children;
     typAnimOption = evt.target.checked;
-    browser.storage.local.get("settings").then( (settings) => {
+    browser.storage.local.get("settings").then( (result) => {
+        let settings = result.settings;
         settings.typanim = typAnimOption;
         browser.storage.local.set({"settings": settings});
     });
@@ -122,7 +125,8 @@ document.querySelector("#typ-anim-opt input").addEventListener("change", functio
 document.querySelector("#auto-submit-opt input").addEventListener("change", function(evt) {
     //let linksNodes = document.getElementById("tools-list").children;
     autosubmitOption = evt.target.checked;
-    browser.storage.local.get("settings").then( (settings) => {
+    browser.storage.local.get("settings").then( (result) => {
+        let settings = result.settings;
         settings.autosubmit = autosubmitOption;
         browser.storage.local.set({"settings": settings});
     });
@@ -133,7 +137,8 @@ document.querySelector("#auto-submit-opt input").addEventListener("change", func
  */
 document.querySelector("#auto-catch-opt input").addEventListener("change", function(evt) {
     autocatchOption = evt.target.checked;
-    browser.storage.local.get("settings").then( (settings) => {
+    browser.storage.local.get("settings").then( (result) => {
+        let settings = result.settings;
         settings.autocatch = autocatchOption;
         browser.storage.local.set({"settings": settings});
         if (!autocatchOption) {
@@ -149,7 +154,8 @@ document.querySelector("#auto-catch-opt input").addEventListener("change", funct
  */
 document.querySelector("#auto-graph-opt input").addEventListener("change", function(evt) {
     autographOption = evt.target.checked;
-    browser.storage.local.get("settings").then( (settings) => {
+    browser.storage.local.get("settings").then( (result) => {
+        let settings = result.settings;
         settings.autgraph = autographOption;
         browser.storage.local.set({"settings": settings});
     });

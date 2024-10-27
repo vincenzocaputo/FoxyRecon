@@ -17,6 +17,7 @@ textfieldBin.addEventListener("click", function() {
         type: "",
         tag: "all",
         tld: ""
+    }
     }).then( () => {
         showAddonMain();
     });
@@ -111,11 +112,12 @@ textfieldTool.addEventListener("click", function() {
     showButtonsByType(domain, "domain", "all", isOnlyFav(), isOnlyAutoGraph(), isOnlyNoKey(), isOnlyNoInt());
     // Save the current indicator along with its type
     
-    browser.storage.local.set({"indicator":
+    browser.storage.local.set({"indicator": {
         value: "",
         type: type,
         tag: "all",
         tld: tld
+    }
     }).then( () => {
         // Hide the icon
         textfieldTool.style.display = "none";
@@ -145,7 +147,8 @@ function submitIndicator(indicator, type, tld, tag, toolName) {
         type: type,
         tld: tld,
         tag: tag
-    });
+    }});
+
     
     // If the indicator is an URL or email, show tool icon inside text field
     if(type === "url" || type === "email") {
@@ -182,7 +185,7 @@ inputField.addEventListener("keyup", (e) => {
                 type: "",
                 tag: "",
                 tld: ""
-            });
+            }});
 
             textfieldCatch.style.display = "block";        
             textfieldTool.style.display = "none";

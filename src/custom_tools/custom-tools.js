@@ -30,8 +30,9 @@ function showCustomToolsList() {
     document.querySelector("#no-tools").style.display = "none";
     const toolsListNodes = document.getElementById("tools-list");
     toolsListNodes.textContent = ''; // Remove nodes already potentially present
-    browser.storage.local.get("tools-ext").then( (toolsList) => {
-        if(toolsList == null) {
+    browser.storage.local.get("tools_ext").then( (result) => {
+        const toolsList = result.tools_ext || Array();
+        if(toolsList.length === 0) {
             document.querySelector("#no-tools").style.display = "block";
             return;
         }
@@ -733,7 +734,8 @@ window.onload = function() {
         jsonCode["color"] = document.getElementById("tool-color").value;
 
 
-        browser.storage.local.get("tools-ext").then( (tools) => {
+        browser.storage.local.get("tools_ext").then( (result) => {
+            const tools = result.tools_ext || Array();
             // Check for duplicates
             for(var i=0; i<tools.length; i++) {
                 if(tools[i]["name"] == jsonCode["name"]) {
@@ -772,10 +774,11 @@ window.onload = function() {
 
     document.querySelector("#del-res-button").addEventListener("click", (evt) => {
         if(confirm("Are you sure to delete this tool? The action cannot be undone") == true) {
-            browser.storage.local.get("tools-ext").then( (toolsList) => {
+            browser.storage.local.get("tools_ext").then( (result) => {
+                const toolsList = result.tools_ext;
                 toolsList.splice(selectedResource,1);
                 return browser.storage.local.set({"tools-ext", toolsList });
-            }).then( (toolsList) => {
+            }).then( () => {
                 showCustomToolsList();
                 selectedResource = -1;
                 resetForm();
@@ -785,7 +788,8 @@ window.onload = function() {
     });
 
     document.querySelector("#export-all-button").addEventListener("click", (evt) => {
-        browser.storage.local.get("tools-ext").then( (toolsList) => {
+        browser.storage.local.get("tools_ext").then( (result) => {
+            const toolsList = result.tools_ext;
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(toolsList, null, 2));
             let exportLink = document.createElement("a");
             exportLink.setAttribute("href", dataStr);
@@ -795,7 +799,8 @@ window.onload = function() {
     });
 
     document.querySelector("#export-button").addEventListener("click", (evt) => {
-        browser.storage.local.get("tools-ext").then( (toolsList) => {
+        browser.storage.local.get("tools_ext").then( (result) => {
+            const toolsList = result.tools_ext;
             const tool = toolsList[selectedResource];
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(tool, null, 2));
             let exportLink = document.createElement("a");
@@ -851,7 +856,8 @@ window.onload = function() {
 
     document.querySelector("#misp-template").addEventListener("click", (evt) => {
         createFormPopup('./icons/misp.png', "Add MISP", "MISP", ()=>{
-            browser.storage.local.get("tools-ext").then( (tools) => {
+            browser.storage.local.get("tools_ext").then( (result) => {
+                const tools = result.tools_ext || Array();
                 for(const [key, value] of Object.entries(mispTemplate["url"])) {
                     mispTemplate["url"][key] = value.replace("%h", document.querySelector("#template-form-hostname").value);
                     if(document.querySelector("#template-http").checked) {
