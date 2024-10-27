@@ -44,7 +44,7 @@ loadTools().then( (result) => {
             // Show the bin icon
             document.getElementById("bin-icon").style.display = "block";
             // Show the buttons related to the tools that support this indicator
-            showButtonsByType(indicator, type, optionValue);
+            showButtonsByType(indicator.value, type, optionValue);
         }
     });
 
