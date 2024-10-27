@@ -12,7 +12,7 @@ textfieldBin.addEventListener("click", function() {
     // Hide flag
     document.querySelector("#flag").style.display = "none";
     // Clean the local storage
-    browser.storage.local.set({"settings": {
+    browser.storage.local.set({"indicator": {
         value: "",
         type: "",
         tag: "all",
