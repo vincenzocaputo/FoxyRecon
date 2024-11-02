@@ -27,9 +27,10 @@ document.getElementById("settings-button").addEventListener("click", function() 
     browser.storage.local.get("settings").then( (result) => {
         const settings = result.settings;
         document.querySelector("#open-tab-opt input").checked = settings.newtab;
-        document.querySelector("#typ-anim-opt input").checked = settings.autosubmit;
-        document.querySelector("#auto-submit-opt input").checked = settings.autocatch;
-        document.querySelector("#auto-catch-opt input").checked = settings.autograph;
+        document.querySelector("#typ-anim-opt input").checked = settings.typeanim;
+        document.querySelector("#auto-submit-opt input").checked = settings.autosubmit;
+        document.querySelector("#auto-catch-opt input").checked = settings.autocatch;
+        document.querySelector("#auto-graph-opt input").checked = settings.autograph;
     });
 });
 
@@ -87,7 +88,7 @@ document.querySelector("#open-tab-opt input").addEventListener("change", functio
         let settings = result.settings;
         settings.newtab = newtabOption;
         return browser.storage.local.set({"settings": settings});
-    }).then( (settings) => {
+    }).then( () => {
         // Update the open icon option inside the tools buttons
         openOptionIcons = document.querySelectorAll(".tool-open-icon>img");
         for(icon of openOptionIcons) {
@@ -114,7 +115,9 @@ document.querySelector("#typ-anim-opt input").addEventListener("change", functio
     typAnimOption = evt.target.checked;
     browser.storage.local.get("settings").then( (result) => {
         let settings = result.settings;
-        settings.typanim = typAnimOption;
+        console.log(typAnimOption);
+        settings.typeanim = typAnimOption;
+        console.log(settings);
         browser.storage.local.set({"settings": settings});
     });
 });

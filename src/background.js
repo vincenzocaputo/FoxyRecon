@@ -1,6 +1,8 @@
 importScripts('./lib/browser-polyfill.js');
 importScripts('./utils/toolsFileLoader.js');
 importScripts('./utils/storage.js');
+importScripts('./utils/indicatorparser.js');
+importScripts('./utils/graph.js');
 var tools;
 
 browser.runtime.onInstalled.addListener(function(details) {
@@ -186,47 +188,75 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         let typAnimOption; // True for typing animation
 
         browser.storage.local.get("autofill")
-            .then( (autofill) => {
-                query = autofill.submitQuery;
-                inputSelector = autofill.inputSelector;
-                return browser.storage.local.get("settings");
+            .then( (result) => {
+                if (result.hasOwnProperty("autofill")) {
+                    const autofill = result.autofill;
+                    query = autofill.submitQuery;
+                    inputSelector = autofill.inputSelector;
+                    return browser.storage.local.get("settings");
+                } else {
+                    return Promise.resolve(null);
+                }
             })
-            .then( (settings) => {
-                submit = settings.autosubmit;
-                typAnimOption = settings.typenanim;
-                return browser.storage.local.get("indicator");
+            .then( (result) => {
+                if (result && result.hasOwnProperty("settings")) {
+                    const settings = result.settings;
+                    submit = settings.autosubmit;
+                    typAnimOption = settings.typeanim;
+                    return browser.storage.local.get("indicator");
+                } else {
+                    return Promise.resolve(null);
+                } 
             })
-            .then( (indicator) => {
-                sendResponse({msg: indicator.value, query: query, inputSelector: inputSelector, submit: submit, typAnimOption: typAnimOption});
-                // Consume the request (to avoid clicking the button more times for the same request)
-                browser.storage.local.set(
-                    { 
-                        "autofill": {
-                            submitQuery: "",
-                            inputSelector: ""
+            .then( (result) => {
+                if (result && result.hasOwnProperty("indicator")) {
+                    const indicator = result.indicator;
+                    console.log(typAnimOption);
+                    sendResponse({
+                        msg: indicator.value,
+                        query: query,
+                        inputSelector: inputSelector,
+                        submit: submit,
+                        typAnimOption: typAnimOption
+                    });
+                    // Consume the request (to avoid clicking the button more times for the same request)
+                    browser.storage.local.set(
+                        { 
+                            "autofill": {
+                                submitQuery: "",
+                                inputSelector: ""
+                            }
                         }
-                    }
-                );
+                    );
+                }
             });
+        return true;
     } else if (request.id === 2) {
         // Auto graph generation
-        browser.storage.local.get("settings").then( (settings) => {
-            if (settings.autograph && request.msg) {
-                const resource = request.msg;
-                let mappings = Array();
-                for (i=0; i<graphMapping.length; i++) {
-                    if (resource.startsWith(graphMapping[i]['source'])) {
-                        mappings.push(graphMapping[i]);
+        browser.storage.local.get("settings").then( (result) => {
+            if (result.hasOwnProperty("settings")) {
+                const settings = result.settings;
+                if (settings.autograph && request.msg) {
+                    const resource = request.msg;
+                    let mappings = Array();
+                    for (i=0; i<graphMapping.length; i++) {
+                        if (resource.startsWith(graphMapping[i]['source'])) {
+                            mappings.push(graphMapping[i]);
+                        }
                     }
+                    return browser.storage.local.get("indicator");
                 }
-                return browser.storage.local.get("indicator");
             }
+            return Promise.resolve(null);
         })
-        .then( (indicator) => {
-            if (indicator) {
-                sendResponse({msg: indicator.value, map: JSON.stringify(mappings) });
+        .then( (result) => {
+            if(result && result.hasOwnProperty("indicator")) {
+                if (indicator) {
+                    sendResponse({msg: indicator.value, map: JSON.stringify(mappings) });
+                }
             }
         });
+        return true;
     } else if (request.id === 3) {
         Graph.getInstance().then( (graph) => {
             const rel = JSON.parse(request.msg);
@@ -264,20 +294,22 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                 nodeId = stix["id"];
             }
             if (request.relName) {
-                browser.storage.local.get("indicator").then( (indicator) => {
-                    const nodes = graph.getNodesByLabel(indicator.value);
+                browser.storage.local.get("indicator").then( (result) => {
+                    if (result.hasOwnProperty("indicator")) {
+                        const nodes = graph.getNodesByLabel(indicator.value);
 
-                    let relNodeId;
-                    if (nodes.length === 0) {
-                        relNodeId = graph.addNode(indicator.value, indicator.type);
-                    } else {
-                        relNodeId = nodes[0];
-                    }
-                    if (request.inbound) {
-                        graph.addLink(relNodeId, nodeId, request.relName);
-                    }
-                    if (request.outbound) {
-                        graph.addLink(nodeId, relNodeId, request.relName);
+                        let relNodeId;
+                        if (nodes.length === 0) {
+                            relNodeId = graph.addNode(indicator.value, indicator.type);
+                        } else {
+                            relNodeId = nodes[0];
+                        }
+                        if (request.inbound) {
+                            graph.addLink(relNodeId, nodeId, request.relName);
+                        }
+                        if (request.outbound) {
+                            graph.addLink(nodeId, relNodeId, request.relName);
+                        }
                     }
                 });
             }

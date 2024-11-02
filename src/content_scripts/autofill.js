@@ -3,7 +3,7 @@ var indicator = "";
 
 function submitIndicator(query, submit, current_url) {
                    
-    if(query && submit === "true") {
+    if(query && submit) {
         if(current_url.includes("urlscan.io")) {
             setTimeout(() => {
                 document.getElementById("submitbtn_text").click();
@@ -82,7 +82,7 @@ function sendMessageAndFill() {
 
             if(inputField) {
                 inputField.value = "";
-                if(typAnimOption === "true") {
+                if(typAnimOption) {
                     intv = setInterval(()=>{ 
                         const letter = indicator[0]; 
                         if(letter) { 
