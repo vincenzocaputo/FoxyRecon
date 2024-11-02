@@ -130,9 +130,10 @@ browser.runtime.onInstalled.addListener(function(details) {
  * Harvest and collect the indicators present in the current webpage. Save the list in the local storage.
  */
 function catchIndicators(e) {
-    browser.storage.local.get("settings").then( (settings) => {
+    browser.storage.local.get("settings").then( (result) => {
+        const settings = result.settings;
         const autocatch_option = settings.autocatch;
-        if (autocatch_option && autocatch_option === "true") {
+        if (autocatch_option && autocatch_option) {
             browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
                 let activeTab = tabs[0].id;
                 // Send a message to the content script
@@ -147,15 +148,15 @@ function catchIndicators(e) {
                 browser.runtime.onMessage.addListener(function(message) {
                     if(token) {
                         const indicatorsListJson = message['indicators'];
+                        const indicatorsList = JSON.parse(indicatorsListJson);
                         // No indicators found. Show a message
-                        if(indicatorsListJson == "[]") {
+                        if(indicatorsListJson.length === 0) {
                             browser.action.setBadgeText({text: ""});
                         } else {
-                            const indicatorsList = JSON.parse(indicatorsListJson);
                             browser.action.setBadgeText({text: indicatorsList.length.toString()});
                         }
                         // Save the indicators list in the local storage
-                        browser.storage.local.set({"catched_indicators": indicatorsListJson});
+                        browser.storage.local.set({"catched_indicators": indicatorsList});
                     } 
                     // Consume token
                     token = 0;
@@ -163,7 +164,7 @@ function catchIndicators(e) {
             },
             error => {
                 browser.action.setBadgeText({text: ""});
-                browser.storage.local.set({"catched_indicators": "[]"});
+                browser.storage.local.set({"catched_indicators": []});
                 console.error("Error: "+error);
             });
         }
@@ -211,7 +212,6 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             .then( (result) => {
                 if (result && result.hasOwnProperty("indicator")) {
                     const indicator = result.indicator;
-                    console.log(typAnimOption);
                     sendResponse({
                         msg: indicator.value,
                         query: query,
@@ -286,7 +286,6 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             if (request.hasOwnProperty("type")) {
                 // We are dealing with a valid indicator
                 nodeId = graph.addNode(request.indicator, request.type);
-                console.log(nodeId);
             } else {
                 const stix = request.stix;
                 const label = request.label;
@@ -296,6 +295,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             if (request.relName) {
                 browser.storage.local.get("indicator").then( (result) => {
                     if (result.hasOwnProperty("indicator")) {
+                        const indicator = result.indicator;
                         const nodes = graph.getNodesByLabel(indicator.value);
 
                         let relNodeId;
