@@ -142,7 +142,7 @@ function catchIndicators(e) {
                             })
                             .catch((error) => {
                                 browser.action.setBadgeText({text: ""});
-                                browser.storage.local.set({"catched_indicators": "[]"});
+                                browser.storage.local.set({"catched_indicators": []});
                             });
                 let token = 1;
                 browser.runtime.onMessage.addListener(function(message) {
@@ -248,6 +248,10 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                 }
             }
             return Promise.resolve(null);
+        })
+        .then( (result) => {
+            if (result && result.hasOwnProperty(""))
+            return browser.storage.local.get("indicator");
         })
         .then( (result) => {
             if(result && result.hasOwnProperty("indicator")) {

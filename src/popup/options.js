@@ -159,7 +159,7 @@ document.querySelector("#auto-graph-opt input").addEventListener("change", funct
     autographOption = evt.target.checked;
     browser.storage.local.get("settings").then( (result) => {
         let settings = result.settings;
-        settings.autgraph = autographOption;
+        settings.autograph = autographOption;
         browser.storage.local.set({"settings": settings});
     });
 });
