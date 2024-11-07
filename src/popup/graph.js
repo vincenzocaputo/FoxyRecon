@@ -145,10 +145,13 @@ document.querySelector("#add-node-rel-button").addEventListener("click", (e) => 
     const isOutbound = document.querySelector("#outbound-link input[type='checkbox']").checked
     const isInbound = document.querySelector("#inbound-link input[type='checkbox']").checked
 
+    let fromNodeLabel;
+    let fromNodeType;
+
     browser.storage.local.get("indicator").then( (result) => {
         const indicator = result.indicator;
-        const fromNodeLabel = indicator.value;
-        const fromNodeType = indicator.type;
+        fromNodeLabel = indicator.value;
+        fromNodeType = indicator.type;
         return Graph.getInstance();
     }).then( (graph) => {
         //const [toNodeType, tld] = indicatorParser.getIndicatorType(toNodeId);

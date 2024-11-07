@@ -17,6 +17,7 @@ loadTools().then( (result) => {
         return browser.storage.local.get("settings");
     }).then( (result) => {
         const settings = result.settings;
+        console.log(tools);
         createToolsList(tools, settings, favTools);
         return browser.storage.local.get("indicator");
     }).then( (result) => {
