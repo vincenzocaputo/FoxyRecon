@@ -7,6 +7,8 @@ const edgeColorSelect = document.getElementById("edge-color-select");
 var network;
 var nodesView;
 var edgesView;
+// Save the last selected node for relationship creation
+var lastSelectedNode;
 
 Graph.getInstance().then( (graph) => {
     var options = {
@@ -137,8 +139,6 @@ Graph.getInstance().then( (graph) => {
     };
     network = new vis.Network(container, data, options);
 
-    // Save the last selected node for relationship creation
-    var lastSelectedNode;
 
     selectNodeEvent = evt => { 
         const nodeContentDiv = document.querySelector("#node-content-pane div pre");
