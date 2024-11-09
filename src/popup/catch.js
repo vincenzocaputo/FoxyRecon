@@ -5,41 +5,45 @@
  */
 document.querySelectorAll(".catch-container").forEach((v) => { 
     v.addEventListener("click", (e) => {
-        createIndicatorsList(JSON.parse(collectedIndicatorsListJson), 'all'); 
-        switch (v.id) {
-            case "catch-ip":
-                document.querySelector("#filter-container-types > select").value = "ip";
-                showIndicatorsByType("ip");
-                break;
-            case "catch-domain":
-                document.querySelector("#filter-container-types > select").value = "domain";
-                showIndicatorsByType("domain");
-                break;
-            case "catch-url":
-                document.querySelector("#filter-container-types > select").value = "url";
-                showIndicatorsByType("url");
-                break;
-            case "catch-hash":
-                document.querySelector("#filter-container-types > select").value = "hash";
-                showIndicatorsByType("hash");
-                break;
-            case "catch-email":
-                document.querySelector("#filter-container-types > select").value = "email";
-                showIndicatorsByType("email");
-                break;
-            case "catch-cve":
-                document.querySelector("#filter-container-types > select").value = "cve";
-                showIndicatorsByType("cve");
-                break;
-            case "catch-phone":
-                document.querySelector("#filter-container-types > select").value = "phone";
-                showIndicatorsByType("phone");
-                break;
-            case "catch-asn":
-                document.querySelector("#filter-container-types > select").value = "asn";
-                showIndicatorsByType("asn");
-                break;
-        }
+        browser.storage.local.get("catched_indicators").then( (result) => {
+            const collectedIndicatorsList = result.catched_indicators;
+            createIndicatorsList(collectedIndicatorsList, 'all'); 
+
+            switch (v.id) {
+                case "catch-ip":
+                    document.querySelector("#filter-container-types > select").value = "ip";
+                    showIndicatorsByType("ip");
+                    break;
+                case "catch-domain":
+                    document.querySelector("#filter-container-types > select").value = "domain";
+                    showIndicatorsByType("domain");
+                    break;
+                case "catch-url":
+                    document.querySelector("#filter-container-types > select").value = "url";
+                    showIndicatorsByType("url");
+                    break;
+                case "catch-hash":
+                    document.querySelector("#filter-container-types > select").value = "hash";
+                    showIndicatorsByType("hash");
+                    break;
+                case "catch-email":
+                    document.querySelector("#filter-container-types > select").value = "email";
+                    showIndicatorsByType("email");
+                    break;
+                case "catch-cve":
+                    document.querySelector("#filter-container-types > select").value = "cve";
+                    showIndicatorsByType("cve");
+                    break;
+                case "catch-phone":
+                    document.querySelector("#filter-container-types > select").value = "phone";
+                    showIndicatorsByType("phone");
+                    break;
+                case "catch-asn":
+                    document.querySelector("#filter-container-types > select").value = "asn";
+                    showIndicatorsByType("asn");
+                    break;
+            }
+        });
     });
 });
 

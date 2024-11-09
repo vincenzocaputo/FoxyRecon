@@ -2,12 +2,12 @@
     font-family: Verdana, sans-serif;
     position: fixed;
     top: 0;
-    right: 10px;
+    right: 0;
     z-index: 1000000;
     height: 50px;
-    margin: 20px auto;
+    margin: 0 auto;
     width: 80%;
-    max-width: 300px;
+    max-width: 500px;
     text-align: center;
     border-radius: 5px;
     box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
@@ -17,14 +17,25 @@
     color: #155724;
     opacity: 1;
     transition: opacity 1s ease; /* Smooth fade-out transition */ 
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+}
+
+.foxyrecon-message-box.err {
+    background-color: #ff9696;
+    border: 3px solid #ff6969;
+}
+
+.foxyrecon-message-box.err > p {
+    color: #7d0000;
 }
 
 .foxyrecon-message-box > p {
-    margin: 10px auto;
+    margin: auto 5px;
     font-family: Verdana, sans-serif;
     color: #155724;
-    font-size: 18px;
+    font-size: 1em;
+    text-align: left;
 }
 
 .foxyrecon-message-box > img {

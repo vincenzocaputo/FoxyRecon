@@ -18,17 +18,21 @@ function createAutonomousSystemForm(evt, title, stix={}) {
         }
 
         if (action === "add") {
-            graph.addSTIXNode(
-                fields["id"].value,
-                "AS"+fields["number"].value,
-                type,
-                stix);
+            Graph.getInstance().then( (graph) => {
+                graph.addSTIXNode(
+                    fields["id"].value,
+                    "AS"+fields["number"].value,
+                    type,
+                    stix);
+            });
         } else {
-            graph.addSTIXNode(
-                fields["id"].value,
-                "AS"+fields["number"].value,
-                type,
-                stix);
+            Graph.getInstance().then( (graph) => {
+                graph.addSTIXNode(
+                    fields["id"].value,
+                    "AS"+fields["number"].value,
+                    type,
+                    stix);
+            });
         }
     }
     formHandler.setSubmitEventListener(submitEvent);

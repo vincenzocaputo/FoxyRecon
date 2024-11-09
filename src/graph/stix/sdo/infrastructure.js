@@ -1,7 +1,7 @@
 function createInfrastructureForm(evt, title, stix={}) {
     const action = Object.keys(stix).length == 0 ? "add" : "edit";
 
-    const type = "Infrastructure";
+    const type = "infrastructure";
     const objectId = stix["id"] === undefined ? type+"--"+crypto.randomUUID() : stix["id"];
 
     const formHandler = new FormHandler(title, "img/infrastructure-nb.png");
@@ -17,19 +17,22 @@ function createInfrastructureForm(evt, title, stix={}) {
             }
         }
         if (action === "add") {
-            graph.addSTIXNode(
-                fields["id"].value,
-                fields["name"].value,
-                type,
-                stix);
+            Graph.getInstance().then( (graph) => {
+                graph.addSTIXNode(
+                    fields["id"].value,
+                    fields["name"].value,
+                    type,
+                    stix);
+            });
         } else {
-            graph.editSTIXNode(
-                fields["id"].value,
-                fields["name"].value,
-                type,
-                stix);
+            Graph.getInstance().then( (graph) => {
+                graph.editSTIXNode(
+                    fields["id"].value,
+                    fields["name"].value,
+                    type,
+                    stix);
+            });
         }
-
     }
     formHandler.setSubmitEventListener(submitEvent);
     formHandler.addFormField("hidden", "Id", "id", objectId, true);

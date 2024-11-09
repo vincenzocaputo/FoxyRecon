@@ -17,17 +17,21 @@ function createIdentityForm(evt, title, stix={}) {
             }
         }
         if (action === "add") {
-            graph.addSTIXNode(
-                fields["id"].value,
-                fields["name"].value,
-                type,
-                stix);
+            Graph.getInstance().then( (graph) => {
+                graph.addSTIXNode(
+                    fields["id"].value,
+                    fields["name"].value,
+                    type,
+                    stix);
+            });
         } else {
-            graph.exitSTIXNode(
-                fields["id"].value,
-                fields["name"].value,
-                type,
-                stix);
+            Graph.getInstance().then( (graph) => {
+                graph.exitSTIXNode(
+                    fields["id"].value,
+                    fields["name"].value,
+                    type,
+                    stix);
+            });
         }
 
     }

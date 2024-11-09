@@ -9,18 +9,57 @@ const MessageType = {
 }
 
 var tools;
-loadToolsList(function(ts){
-    tools = ts;
-    createToolsList(tools);
+loadTools().then( (result) => {
+    tools = result;
+    let favTools;
+    browser.storage.local.get("fav").then( (result) => {
+        favTools = result.fav;
+        return browser.storage.local.get("settings");
+    }).then( (result) => {
+        const settings = result.settings;
+        console.log(tools);
+        createToolsList(tools, settings, favTools);
+        return browser.storage.local.get("indicator");
+    }).then( (result) => {
+        const indicator = result.indicator || null;
+        if(!indicator || !indicator.value || indicator.value === "undefined") {
+            inputField.focus();
+        } else {
+            // Put the indicator in the text field
+            inputField.value = indicator.value;
+            // Restore the type of the string
+            const type = indicator.type;
+            // Restore the domain tld if present
+            const tld = indicator.tld;
+            showCountryFlag(tld);
+            // Restore tag option
+            const optionValue = indicator.tag ?? "all";
+            // If indicator is an URL or an email show domain extraction icon
+            if(type === "url" || type === "email") {
+                document.getElementById("domextr-icon").style.display = "block";
+            } else {
+                document.getElementById("domextr-icon").style.display = "none";
+            }
+            // Hide Catch! icon
+            document.getElementById("catch-icon").style.display = "none";
+            // Show the bin icon
+            document.getElementById("bin-icon").style.display = "block";
+            // Show the buttons related to the tools that support this indicator
+            showButtonsByType(indicator.value, type, optionValue);
+        }
+    });
+
 });
 
-historySet = JSON.parse(localStorage.getItem("history")) || Array();
-historyPanel = document.getElementById("history");
-historySet.forEach(function(h) {
-    historyEntry = document.createElement("div");
-    historyEntry.textContent = h;
-    historyEntry.classList.add("hist-entry");
-    historyPanel.appendChild(historyEntry);
+browser.storage.local.get("history").then( (result) => {
+    const historySet = result.history || Array();
+    historyPanel = document.getElementById("history");
+    historySet.forEach(function(h) {
+        historyEntry = document.createElement("div");
+        historyEntry.textContent = h;
+        historyEntry.classList.add("hist-entry");
+        historyPanel.appendChild(historyEntry);
+    });
 });
 
 
@@ -145,73 +184,74 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, showOnlyAutograph,
     document.getElementById("hist-icon").style.display = "none";
     document.getElementById("disclaimer").style.display = "none";
 
-    let graph = new Graph();
-    const nodeIds = graph.getNodesByLabel(indicator);
-    if (nodeIds.length > 0) { 
-        document.getElementById("add-node").style.display = "none";
-        document.getElementById("add-rel").style.display = "block";
-        document.getElementById("del-node").style.display = "block";
-    } else {
-        if(type != "phone") {
-            document.getElementById("add-node").style.display = "block";
-            document.getElementById("add-rel").style.display = "none";
-            document.getElementById("del-node").style.display = "none";
+    Graph.getInstance().then( (graph) => {
+        const nodeIds = graph.getNodesByLabel(indicator);
+        if (nodeIds.length > 0) { 
+            document.getElementById("add-node").style.display = "none";
+            document.getElementById("add-rel").style.display = "block";
+            document.getElementById("del-node").style.display = "block";
+        } else {
+            if(type != "phone") {
+                document.getElementById("add-node").style.display = "block";
+                document.getElementById("add-rel").style.display = "none";
+                document.getElementById("del-node").style.display = "none";
+            }
         }
-    }
-    // This node contains the list of tools
-    const toolsListNodes = document.getElementById("tools-list");
+    });
+
+
+    const toolsListNodes = document.querySelector("#tools-list");
     toolsListNodes.style.display = "block";
     const resNodes = toolsListNodes.children;
-
     // Retrieve favourites tools from local storage
-    const favTools = JSON.parse(localStorage.getItem("fav"));
+    browser.storage.local.get("fav").then( (result) => {
+        // This node contains the list of tools
+        const favTools = result.fav || Array();
+        if(!tag || tag === "default") {
+            // If no tag has been provided, by default set it to "all"
+            tag = "all";
+        }
+        let tagsOptions = [];
+        let noTools = true;
 
-    if(!tag || tag === "default") {
-        // If no tag has been provided, by default set it to "all"
-        tag = "all";
-    }
-    let tagsOptions = [];
-    let noTools = true;
-
-    for (i = 0; i < tools.length; i++) {
-        const autoGraph = tools[i]["autoGraph"] ?? false;
-        const accountRequired = tools[i]["accountRequired"] ?? false;
-        const interactionsRequired = "submitQuery" in tools[i];
-        if (!showOnlyFav || favTools && favTools.includes(tools[i]["name"])) {
-            if (!showOnlyAutograph || autoGraph) {
-                if (!showOnlyNoKey || !accountRequired) {
-                    if (!showOnlyNoInt || !interactionsRequired) {
-                        if (!toolName || tools[i]["name"].toLowerCase().includes(toolName)) {
-                            if (tools[i]["types"].includes(type)) { 
-                                tagsOptions = tagsOptions.concat(tools[i]["tags"]);
-                                if (tag === "all" || (tools[i]["tags"] && tools[i]["tags"].includes(tag))) {
-                                    noTools = false;
-                                    resNodes[i].style.display = "grid";
-                                    // Set tool description to div title
-                                    resNodes[i].title = tools[i]["desc"];
-                                    // Replace the placholder with the input string
-                                    let url = tools[i]["url"][type];
-                                    url = cookURL(url, indicator);
-                                    resNodes[i].url = url;
-                                    resNodes[i].name = tools[i]["name"];
-                                    resNodes[i].submitQuery = tools[i]["submitQuery"];
-                                    resNodes[i].inputSelector = tools[i]["inputSelector"];
-                                    continue;
+        for (i = 0; i < tools.length; i++) {
+            const autoGraph = tools[i]["autoGraph"] ?? false;
+            const accountRequired = tools[i]["accountRequired"] ?? false;
+            const interactionsRequired = "submitQuery" in tools[i];
+            if (!showOnlyFav || favTools && favTools.includes(tools[i]["name"])) {
+                if (!showOnlyAutograph || autoGraph) {
+                    if (!showOnlyNoKey || !accountRequired) {
+                        if (!showOnlyNoInt || !interactionsRequired) {
+                            if (!toolName || tools[i]["name"].toLowerCase().includes(toolName)) {
+                                if (tools[i]["types"].includes(type)) { 
+                                    tagsOptions = tagsOptions.concat(tools[i]["tags"]);
+                                    if (tag === "all" || (tools[i]["tags"] && tools[i]["tags"].includes(tag))) {
+                                        noTools = false;
+                                        resNodes[i].style.display = "grid";
+                                        // Set tool description to div title
+                                        resNodes[i].title = tools[i]["desc"];
+                                        // Replace the placholder with the input string
+                                        let url = tools[i]["url"][type];
+                                        url = cookURL(url, indicator);
+                                        resNodes[i].url = url;
+                                        resNodes[i].name = tools[i]["name"];
+                                        resNodes[i].submitQuery = tools[i]["submitQuery"];
+                                        resNodes[i].inputSelector = tools[i]["inputSelector"];
+                                        continue;
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
-        } 
-        resNodes[i].style.display = "none";
-    }
-
-    if (noTools) {
-        document.getElementById("no-tools").style.display = "block";
-    }
-    createTagsOptionsList([...new Set(tagsOptions)], tag);
-
+            } 
+            resNodes[i].style.display = "none";
+        }
+        if (noTools) {
+            document.getElementById("no-tools").style.display = "block";
+        }
+        createTagsOptionsList([...new Set(tagsOptions)], tag);
+    });
 }
 
 
@@ -288,10 +328,11 @@ function createTypesOptionsList(typesOptions) {
 /**
  * Create the tools list inside the popup
  * @param {toolsList} tools list
+ * @param {settings} settings
+ * @param {favTools} list of favourite tools
  */
-function createToolsList(toolsList){
+function createToolsList(toolsList, settings, favTools){
     // Retrieve favorites list
-    const favTools = JSON.parse(localStorage.getItem("fav"));
     var resultBox = document.getElementById("tools-list");
 	for (i=0;i<toolsList.length;i++) {
         let tool = toolsList[i];
@@ -386,7 +427,7 @@ function createToolsList(toolsList){
         openIconContainer.classList.add("tool-open-icon");
         openIconNode = document.createElement("img");
         // Get the current option
-        const newTabOption = localStorage.getItem("settings.newtab");
+        const newTabOption = settings.newtab;
         if(newTabOption && newTabOption === "false") {
             // By default the addon opens resources in the current tab
             // let the user open in a new tab by clicking on this icon
@@ -489,79 +530,73 @@ function createToolsList(toolsList){
             const openPopups = document.querySelectorAll(".open-popup");
             // If settings popup is opened, don't allow clicking 
             if(node.url && openPopups.length == 0) {
-                newtab = localStorage.getItem("settings.newtab");
-                
-                if(node.inputSelector) {
-                    localStorage.setItem("autofill.input-selector", node.inputSelector);
-                } else {
-                    localStorage.setItem("autofill.input-selector", "");
-                }
+                browser.storage.local.get("settings").then( (result) => {
+                    const settings = result.settings;
 
-                if(node.submitQuery) {
-                    localStorage.setItem("autofill.submit-btn-query", node.submitQuery);
-                } else {
-                    localStorage.setItem("autofill.submit-btn-query", "");
-                }
+                    browser.storage.local.set({"autofill": {
+                        inputSelector: node.inputSelector || "",
+                        submitQuery: node.submitQuery || ""
+                    }});
 
-                const targetId = e.target.id;
-                if(targetId === "add-fav") { 
-                    let favTools = JSON.parse(localStorage.getItem("fav"));
-                    if(favTools) {
-                        favTools.push(node.name);
+                    const targetId = e.target.id;
+                    if(targetId === "add-fav") { 
+                        browser.storage.local.get("fav").then( (result) => {
+                            const favTools = result.fav || Array();
+                            if(favTools) {
+                                favTools.push(node.name);
+                            } else {
+                                favTools = [node.name];
+                            }
+                            browser.storage.local.set({"fav": favTools});
+                            e.target.title = "Remove from favorites";
+                            e.target.id = "rem-fav";
+                            e.target.src = "../../assets/icons/favourite.png";
+                        });
+                    } else if(targetId === "rem-fav") {
+                        browser.storage.local.get("fav").then( (result) => {
+                            const favTools = result.fav || Array();
+                            if(favTools) {
+                                favTools = favTools.filter(item => item != node.name);
+                            }                
+                            browser.storage.local.set({"fav": favTools});
+                            e.target.title = "Add to favorites";
+                            e.target.id = "add-fav";
+                            e.target.src = "../../assets/icons/no_favourite.png";
+                        });
                     } else {
-                        favTools = [node.name];
-                    }
-                    localStorage.setItem("fav", JSON.stringify(favTools));
-                    e.target.title = "Remove from favorites";
-                    e.target.id = "rem-fav";
-                    e.target.src = "../../assets/icons/favourite.png";
-                } else if(targetId === "rem-fav") {
-                    let favTools = JSON.parse(localStorage.getItem("fav"));
-                    if(favTools) {
-                        favTools = favTools.filter(item => item != node.name);
-                    }                
-                    localStorage.setItem("fav", JSON.stringify(favTools));
-                    e.target.title = "Add to favorites";
-                    e.target.id = "add-fav";
-                    e.target.src = "../../assets/icons/no_favourite.png";
-                }else if(targetId === "open-icon-out" || (targetId != "open-icon-in" && (!newtab || newtab === "true"))) {
-
-                    // Add indicator to history
-                    const indicator = localStorage.getItem("indicator");
-                    // If the indicator is the same as the last saved, ignore it
-                    if(indicator != historySet[0]) {
-                        if(historySet.length >= 50) {
-                            historySet.pop();
-                        }
-                        historySet.unshift(indicator);
-                        localStorage.setItem("history", JSON.stringify(historySet));
-                    }
-
-                    // Open web resource in a new tab
-                    browser.tabs.create({
-                        url: node.url
-                    });
-                    // close popup
-                    window.close();
-                }  else {
-                    // Add indicator to history
-                    const indicator = localStorage.getItem("indicator");
-                    // If the indicator is the same as the last saved, ignore it
-                    if(indicator != historySet[0]) {
-                        if(historySet.length >= 50) {
-                            historySet.pop();
-                        }
-                        historySet.unshift(indicator);
-                        localStorage.setItem("history", JSON.stringify(historySet));
-                    }
-
-                    // Otherwise open in current tab
-                    browser.tabs.update({
-                        url: node.url
-                    });
-                    // close popup
-                    window.close();
-                }
+                        browser.storage.local.get("indicator").then( (result) => {
+                            const indicator = result.indicator.value || "";
+                            browser.storage.local.get("history").then( (result) => {
+                                let historySet = result.history;
+                                // If the indicator is the same as the last saved, ignore it
+                                if(indicator && indicator != historySet[0]) {
+                                    if(historySet.length >= 50) {
+                                        historySet.pop();
+                                    }
+                                    historySet.unshift(indicator);
+                                    browser.storage.local.set({"history": historySet});
+                                }
+                            });
+                        });
+                        browser.storage.local.get("settings").then( (result) => {
+                            const settings = result.settings;
+                            const newtab = settings.newtab;
+                            if(targetId === "open-icon-out" || (targetId != "open-icon-in" && newtab)) {
+                                // Open web resource in a new tab
+                                browser.tabs.create({
+                                    url: node.url
+                                });
+                            } else {
+                                // Otherwise open in current tab
+                                browser.tabs.update({
+                                    url: node.url
+                                });
+                            }
+                            // close popup
+                            window.close();
+                        });
+                    } 
+                });
             }
         });
         document.getElementById("tools-list").appendChild(node);

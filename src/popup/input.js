@@ -12,11 +12,15 @@ textfieldBin.addEventListener("click", function() {
     // Hide flag
     document.querySelector("#flag").style.display = "none";
     // Clean the local storage
-    localStorage.setItem("indicator", "");
-    localStorage.setItem("type", "");
-    localStorage.setItem("tag", "all");
-    localStorage.setItem("tld", "");
-    showAddonMain();
+    browser.storage.local.set({"indicator": {
+        value: "",
+        type: "",
+        tag: "all",
+        tld: ""
+    }
+    }).then( () => {
+        showAddonMain();
+    });
 });
 
 
@@ -101,18 +105,23 @@ textfieldTool.title = "Extract domain";
 textfieldTool.addEventListener("click", function() {
     const inputString = inputField.value;
     const domain = indicatorParser.getDomain(indicatorParser.refangIndicator(inputString));
-    
+    const [type, tld] = indicatorParser.getIndicatorType(domain);
     inputField.value = domain;
 
     // Show the appropriate tools for the input provided
     showButtonsByType(domain, "domain", "all", isOnlyFav(), isOnlyAutoGraph(), isOnlyNoKey(), isOnlyNoInt());
     // Save the current indicator along with its type
-    localStorage.setItem("indicator", domain);
-    localStorage.setItem("type", "domain");
-    localStorage.setItem("tag", "all");
-
-    // Hide the icon
-    textfieldTool.style.display = "none";
+    
+    browser.storage.local.set({"indicator": {
+        value: "",
+        type: type,
+        tag: "all",
+        tld: tld
+    }
+    }).then( () => {
+        // Hide the icon
+        textfieldTool.style.display = "none";
+    });
 });
 
 
@@ -130,14 +139,16 @@ function submitIndicator(indicator, type, tld, tag, toolName) {
     showCountryFlag(tld);
     showButtonsByType(indicator, type, tag, isOnlyFav(), isOnlyAutoGraph(), isOnlyNoKey(), isOnlyNoInt(), toolName);
     // Save the current indicator along with its type
-    localStorage.setItem("indicator", indicator);
-    localStorage.setItem("type", type);
-    localStorage.setItem("tld", tld);
-    //localStorage.setItem("graph.autocreate", "true");
     if(!tag) {
         tag = "all";
     }
-    localStorage.setItem("tag", tag);
+    browser.storage.local.set({"indicator": {
+        value: indicator,
+        type: type,
+        tld: tld,
+        tag: tag
+    }});
+
     
     // If the indicator is an URL or email, show tool icon inside text field
     if(type === "url" || type === "email") {
@@ -162,17 +173,19 @@ inputField.addEventListener("focus", (e) => {
 inputField.addEventListener("keyup", (e) => {
     let inputString = inputField.value;
     // Remove badge text
-    browser.browserAction.setBadgeText({text: ''});
+    browser.action.setBadgeText({text: ''});
     console.log(document.getElementById("catch-res-list").style.display);
     if (document.getElementById("catch-res-list").style.display === "" ||
         document.getElementById("catch-res-list").style.display === "none") {
         // If no input was provided, show the add-on logo and the history icon
         if(inputString === "") {
             showAddonMain();
-            localStorage.setItem("indicator", "");
-            localStorage.setItem("type", "");
-            localStorage.setItem("tag", "");
-            localStorage.setItem("", "");
+            browser.storage.local.set({"indicator": {
+                value: "",
+                type: "",
+                tag: "",
+                tld: ""
+            }});
 
             textfieldCatch.style.display = "block";        
             textfieldTool.style.display = "none";

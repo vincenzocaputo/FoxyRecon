@@ -95,90 +95,98 @@ addLinkCancelButton.addEventListener("click", evt => {
 
 deleteGraphButton.addEventListener("click", evt => {
     if (confirm("Are you sure to delete this graph?") == true) {
-        graph.deleteGraph();
-        location.reload();
+        Graph.getInstance().then( (graph) => {
+            graph.deleteGraph();
+            location.reload();
+        });
     }
 });
 
 deleteNodeButton.addEventListener("click", evt => {
     if (confirm("Are you sure to delete this node?") == true) {
-        graph.deleteNode(lastSelectedNode.id);
-        location.reload();
+        Graph.getInstance().then( (graph) => {
+            graph.deleteNode(lastSelectedNode.id);
+            location.reload();
+        });
     }
 });
 
 deleteEdgeButton.addEventListener("click", evt => {
     if (confirm("Are you sure to delete this edge?") == true) {
-        const selectedEdgeId = network.getSelectedEdges()[0];
-        const edge = edges.get(selectedEdgeId);
-        graph.deleteLink(edge.from, edge.to, edge.label);
+        Graph.getInstance().then( (graph) => {
+            const selectedEdgeId = network.getSelectedEdges()[0];
+            const edge = edges.get(selectedEdgeId);
+            graph.deleteLink(edge.from, edge.to, edge.label);
 
-        if ((edge.from.startsWith("note--") || edge.from.startsWith("report--")) 
-            && edge.label === "refers-to") {
-            const node = graph.getNode(edge.from);
-            const index = node['stix']['object_refs'].indexOf(edge.to);
-            if (index > -1) {
-                node['stix']['object_refs'].splice(index, 1);
-            }
-            graph.editSTIXNode(
-                node['id'],
-                node['label'],
-                node['type'],
-                node['stix']);
+            if ((edge.from.startsWith("note--") || edge.from.startsWith("report--")) 
+                && edge.label === "refers-to") {
+                const node = Graph.getNode(edge.from);
+                const index = node['stix']['object_refs'].indexOf(edge.to);
+                if (index > -1) {
+                    node['stix']['object_refs'].splice(index, 1);
+                }
+                graph.editSTIXNode(
+                    node['id'],
+                    node['label'],
+                    node['type'],
+                    node['stix']);
 
-        } else if (edge.to.startsWith("network-traffic--") && 
-                    (edge.from.startsWith("ipv4-addr--") ||
-                    edge.from.startsWith("ipv6-addr--") ||
-                    edge.from.startsWith("mac-addr--") ||
-                    edge.from.startsWith("domain-name--")) &&
-                    edge.label === "source-of") {
-            const node = graph.getNode(edge.to);
-            const index = node['stix']['src_ref'].indexOf(edge.from);
-            if (index > -1) {
-                node['stix']['src_ref'].splice(index, 1);
+            } else if (edge.to.startsWith("network-traffic--") && 
+                        (edge.from.startsWith("ipv4-addr--") ||
+                        edge.from.startsWith("ipv6-addr--") ||
+                        edge.from.startsWith("mac-addr--") ||
+                        edge.from.startsWith("domain-name--")) &&
+                        edge.label === "source-of") {
+                const node = Graph.getNode(edge.to);
+                const index = node['stix']['src_ref'].indexOf(edge.from);
+                if (index > -1) {
+                    node['stix']['src_ref'].splice(index, 1);
+                }
+                graph.editSTIXNode(
+                    node['id'],
+                    node['label'],
+                    node['type'],
+                    node['stix']);
+            } else if (edge.to.startsWith("network-traffic--") && 
+                        (edge.from.startsWith("ipv4-addr--") ||
+                        edge.from.startsWith("ipv6-addr--") ||
+                        edge.from.startsWith("mac-addr--") ||
+                        edge.from.startsWith("domain-name--")) &&
+                        edge.label === "destination-of") {
+                const node = Graph.getNode(edge.to);
+                const index = node['stix']['dst_ref'].indexOf(edge.from);
+                if (index > -1) {
+                    node['stix']['dst_ref'].splice(index, 1);
+                }
+                graph.editSTIXNode(
+                    node['id'],
+                    node['label'],
+                    node['type'],
+                    node['stix']);
             }
-            graph.editSTIXNode(
-                node['id'],
-                node['label'],
-                node['type'],
-                node['stix']);
-        } else if (edge.to.startsWith("network-traffic--") && 
-                    (edge.from.startsWith("ipv4-addr--") ||
-                    edge.from.startsWith("ipv6-addr--") ||
-                    edge.from.startsWith("mac-addr--") ||
-                    edge.from.startsWith("domain-name--")) &&
-                    edge.label === "destination-of") {
-            const node = graph.getNode(edge.to);
-            const index = node['stix']['dst_ref'].indexOf(edge.from);
-            if (index > -1) {
-                node['stix']['dst_ref'].splice(index, 1);
-            }
-            graph.editSTIXNode(
-                node['id'],
-                node['label'],
-                node['type'],
-                node['stix']);
-        }
-                           
-                    
-        location.reload();
+                               
+                        
+            location.reload();
+        });
     }
 });
 
 exportButton.addEventListener("click", evt => {
-    const bundleJson = graph.getBundle();
-    const link = document.createElement('a');
+    Graph.getInstance().then( (graph) => {
+        const bundleJson = graph.getBundle();
+        const link = document.createElement('a');
 
-    const blob = new Blob([bundleJson], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    link.href = url;
-    link.download = "graph.json";
+        const blob = new Blob([bundleJson], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        link.href = url;
+        link.download = "graph.json";
 
-    // Append the link to the body
-    document.body.appendChild(link);
-    link.click();
-    window.URL.revokeObjectURL(url);
-    link.remove();
+        // Append the link to the body
+        document.body.appendChild(link);
+        link.click();
+        window.URL.revokeObjectURL(url);
+        link.remove();
+    });
 });
 
 filterButton.addEventListener("click", evt => {
@@ -219,7 +227,7 @@ editButton.addEventListener("click", evt => {
             createLocationForm(evt, "Edit Location", selectedNodeSTIX);
             break;
         } case "malware-analysis": {
-            createIntrusionSetForm(evt, "Edit Malware Analysis", selectedNodeSTIX);
+            createMalwareAnalysisForm(evt, "Edit Malware Analysis", selectedNodeSTIX);
             break;
         } case "malware": {
             createMalwareForm(evt, "Edit Malware", selectedNodeSTIX);
@@ -248,8 +256,8 @@ editButton.addEventListener("click", evt => {
         } case "email-address": {
             createEmailAddressForm(evt, "Edit Email Address", selectedNodeSTIX);
             break;
-        } case "email-address": {
-            createEmailAddressForm(evt, "Edit Email Address", selectedNodeSTIX);
+        } case "file": {
+            createFileForm(evt, "Edit File", selectedNodeSTIX);
             break;
         } case "ipv4-addr": {
             createIPV4AddrForm(evt, "Edit IPv4 Address", selectedNodeSTIX);
@@ -308,7 +316,7 @@ document.querySelectorAll(".options div").forEach( (element) => {
                 createLocationForm(evt, "Add Location");
                 break;
             } case "malware-analysis": {
-                createIntrusionSetForm(evt, "Add Malware Analysis");
+                createMalwareAnalysisForm(evt, "Add Malware Analysis");
                 break;
             } case "malware": {
                 createMalwareForm(evt, "Add Malware");
@@ -337,8 +345,8 @@ document.querySelectorAll(".options div").forEach( (element) => {
             } case "email-address": {
                 createEmailAddressForm(evt, "Add Email Address");
                 break;
-            } case "email-address": {
-                createEmailAddressForm(evt, "Add Email Address");
+            } case "file": {
+                createFileForm(evt, "Add File");
                 break;
             } case "ipv4-addr": {
                 createIPV4AddrForm(evt, "Add IPv4 Address");
