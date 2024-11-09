@@ -1,5 +1,5 @@
 {
-	"manifest_version": 3,
+	"manifest_version": 2,
 	"name": "FoxyRecon",
 	"version": "0.23.0",
 	"description": "A Firefox add-on for OSINT investigations",
@@ -9,13 +9,16 @@
 		"48": "assets/icons/foxyrecon-icon-48.png"
 	},
 
-    "content_security_policy": {
-        "extension_pages": "default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'"
-    },
+    "content_security_policy": "default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'",
 
     "background": {
-        "service_worker": "src/background.js",
-        "type": "classic"
+        "scripts": [
+            "src/lib/browser-polyfill.js",
+            "src/utils/jsonLoader.js", 
+            "src/utils/utils.js",
+            "src/utils/graph.js",
+            "src/background.js"
+        ]
     },
 
     "content_scripts": [{
@@ -27,6 +30,7 @@
             "src/utils/graph.js",
             "src/content_scripts/graph.js",
             "src/content_scripts/add_node_popup.js",
+            "src/content_scripts/context_menu.js",
             "src/content_scripts/catch.js",
             "src/content_scripts/message-box.js",
             "src/content_scripts/autofill.js"
@@ -39,24 +43,18 @@
     }],
 
     "web_accessible_resources": [
-        {
-            "resources": [
-                "assets/icons/foxyrecon-icon-32.png",
-                "src/json/tools.json"
-            ],
-            "matches": ["*://*/*"]
-        }
+        "assets/icons/foxyrecon-icon-32.png"
     ],
 
 	"permissions": [
-		"contextMenus",
-        "storage"
+		"contextMenus"
 	],
 
-	"action": {
-        "default_icon": "assets/icons/foxyrecon-icon-48.png",
-        "default_title": "FoxyRecon",
-        "default_popup": "src/popup/main_popup.html"
+	"browser_action": {
+			"default_icon": "assets/icons/foxyrecon-icon-48.png",
+			"default_title": "FoxyRecon",
+			"default_popup": "src/popup/main_popup.html"
 	}
 
 }
+
