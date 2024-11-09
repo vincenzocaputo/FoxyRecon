@@ -15,17 +15,7 @@
 
     "background": {
         "service_worker": "src/background.js",
-        "type": "classic",
-        "scripts": [
-            "src/lib/browser-polyfill.js",
-            "src/utils/toolsFileLoader.js", 
-        //    "src/utils/graphNodesFileLoader.js", 
-        //    "src/utils/utils.js",
-        //    "src/utils/graph.js",
-            "src/utils/indicatorparser.js", 
-            "src/utils/storage.js",
-            "src/background.js"
-        ]
+        "type": "classic"
     },
 
     "content_scripts": [{
