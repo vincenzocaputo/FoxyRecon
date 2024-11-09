@@ -6,10 +6,11 @@ function sendMessageAndAddNodes() {
         id: 2,
         msg: current_url
     }).then((resp) => {
+        console.log(resp);
         if(!resp) {
             return;
         }
-        indicator = resp.msg;
+        const indicator = resp.msg;
 
         const map = resp.map;
 

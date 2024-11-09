@@ -37,17 +37,17 @@ function sendMessageAndFill() {
         msg: ""
     }).then((resp)=>{
         setTimeout(()=>{
-        indicator = resp.msg;
+        let indicator = resp.msg;
         // Get the query to find submit button
-        query = resp.query;
+        const query = resp.query;
 
         // Get the selector to find the input field
-        inputSelector = resp.inputSelector;
+        const inputSelector = resp.inputSelector;
 
         // Get typing animation option
-        typAnimOption = resp.typAnimOption;
+        const typAnimOption = resp.typAnimOption;
 
-        submit = resp.submit;
+        const submit = resp.submit;
 
         if(inputSelector) {
             const current_url = window.location.href;
@@ -106,9 +106,9 @@ function sendMessageAndFill() {
 
 
     },(error)=>{
-        console.error(error);
+        console.log(error);
     });   
 }
 
 
-    setTimeout(sendMessageAndFill(), 500);
+setTimeout(sendMessageAndFill(), 500);

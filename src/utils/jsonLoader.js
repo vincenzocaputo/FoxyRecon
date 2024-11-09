@@ -54,3 +54,22 @@ function loadTools() {
 }
 
 
+/**
+ * Load the graph mapping from JSON file or from local storage.
+ */
+function loadGraphMapping() {
+    return new Promise((resolve, reject) => {
+        browser.storage.local.get("graphMapping").then( (result) => {
+            if (result.hasOwnProperty("graphMapping")) {
+                resolve(result.graphMapping);
+            } else {
+                readJSONFile("src/json/graph-nodes.json").then( (data) => {
+                    const parsedData = data;
+                    return browser.storage.local.set({ "graphMapping": parsedData["graph-nodes"]}).then( () => parsedData);
+                }).then( (parsedData) => {
+                    resolve(parsedData);
+                });
+            }
+        });
+    });
+}

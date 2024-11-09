@@ -1,5 +1,5 @@
 importScripts('./lib/browser-polyfill.js');
-importScripts('./utils/toolsFileLoader.js');
+importScripts('./utils/jsonLoader.js');
 importScripts('./utils/storage.js');
 importScripts('./utils/indicatorparser.js');
 importScripts('./utils/graph.js');
@@ -212,6 +212,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             .then( (result) => {
                 if (result && result.hasOwnProperty("indicator")) {
                     const indicator = result.indicator;
+                    console.log(indicator);
                     sendResponse({
                         msg: indicator.value,
                         query: query,
@@ -232,29 +233,33 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             });
         return true;
     } else if (request.id === 2) {
+        let mappings = Array();
         // Auto graph generation
         browser.storage.local.get("settings").then( (result) => {
             if (result.hasOwnProperty("settings")) {
                 const settings = result.settings;
                 if (settings.autograph && request.msg) {
-                    const resource = request.msg;
-                    let mappings = Array();
-                    for (i=0; i<graphMapping.length; i++) {
-                        if (resource.startsWith(graphMapping[i]['source'])) {
-                            mappings.push(graphMapping[i]);
-                        }
-                    }
-                    return browser.storage.local.get("indicator");
+                    return loadGraphMapping();
                 }
             }
             return Promise.resolve(null);
         })
         .then( (result) => {
-            if (result && result.hasOwnProperty(""))
-            return browser.storage.local.get("indicator");
+            if (result) {
+                const resource = request.msg;
+                const graphMapping = result;
+                for (i=0; i<graphMapping.length; i++) {
+                    if (resource.startsWith(graphMapping[i]['source'])) {
+                        mappings.push(graphMapping[i]);
+                    }
+                }
+                return browser.storage.local.get("indicator");
+            }
+            return Promise.resolve(null);
         })
         .then( (result) => {
             if(result && result.hasOwnProperty("indicator")) {
+                const indicator = result.indicator;
                 if (indicator) {
                     sendResponse({msg: indicator.value, map: JSON.stringify(mappings) });
                 }

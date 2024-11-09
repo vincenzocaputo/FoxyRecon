@@ -63,7 +63,8 @@ function createStorage() {
                 links: []
             }
         }),
-        loadTools()
+        loadTools(),
+        loadGraphMapping()
     ]);
 }
 
@@ -72,6 +73,11 @@ function setupStorageAfterUpdate() {
         browser.storage.local.remove("tools").then( () => {
             loadToolsList().then( (tools) => {
                 console.log("Loaded %d tools", tools.length);
+            });
+        }),
+        browser.storage.local.remove("graphMapping").then( () => {
+            loadGraphMapping().then( (grapMapping) => {
+                console.log("Loaded graph mapping");
             });
         })
     ]);
