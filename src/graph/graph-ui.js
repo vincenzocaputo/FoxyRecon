@@ -227,7 +227,7 @@ editButton.addEventListener("click", evt => {
             createLocationForm(evt, "Edit Location", selectedNodeSTIX);
             break;
         } case "malware-analysis": {
-            createIntrusionSetForm(evt, "Edit Malware Analysis", selectedNodeSTIX);
+            createMalwareAnalysisForm(evt, "Edit Malware Analysis", selectedNodeSTIX);
             break;
         } case "malware": {
             createMalwareForm(evt, "Edit Malware", selectedNodeSTIX);
@@ -256,8 +256,8 @@ editButton.addEventListener("click", evt => {
         } case "email-address": {
             createEmailAddressForm(evt, "Edit Email Address", selectedNodeSTIX);
             break;
-        } case "email-address": {
-            createEmailAddressForm(evt, "Edit Email Address", selectedNodeSTIX);
+        } case "file": {
+            createFileForm(evt, "Edit File", selectedNodeSTIX);
             break;
         } case "ipv4-addr": {
             createIPV4AddrForm(evt, "Edit IPv4 Address", selectedNodeSTIX);
@@ -316,7 +316,7 @@ document.querySelectorAll(".options div").forEach( (element) => {
                 createLocationForm(evt, "Add Location");
                 break;
             } case "malware-analysis": {
-                createIntrusionSetForm(evt, "Add Malware Analysis");
+                createMalwareAnalysisForm(evt, "Add Malware Analysis");
                 break;
             } case "malware": {
                 createMalwareForm(evt, "Add Malware");
@@ -345,8 +345,8 @@ document.querySelectorAll(".options div").forEach( (element) => {
             } case "email-address": {
                 createEmailAddressForm(evt, "Add Email Address");
                 break;
-            } case "email-address": {
-                createEmailAddressForm(evt, "Add Email Address");
+            } case "file": {
+                createFileForm(evt, "Add File");
                 break;
             } case "ipv4-addr": {
                 createIPV4AddrForm(evt, "Add IPv4 Address");
