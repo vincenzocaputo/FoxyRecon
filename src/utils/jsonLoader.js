@@ -27,7 +27,7 @@ function loadBuiltInTools() {
     return new Promise((resolve, reject) => {
         browser.storage.local.get("tools").then( (result) => {
             if (result.hasOwnProperty("tools")) {
-                resolve(result.tools);
+                resolve(result);
             } else {
                 readJSONFile("src/json/tools.json").then( (data) => {
                     const parsedData = data;
@@ -41,9 +41,11 @@ function loadBuiltInTools() {
 }
 
 function loadTools() {
-    return loadBuiltInTools().then( (tools) => {
+    return loadBuiltInTools().then( (result) => {
+        const tools = result.tools;
         return browser.storage.local.get("toolsExt").then( (result) => {
             if (result.hasOwnProperty("toolsExt")) {
+                console.log(tools);
                 tools.push(...result.toolsExt);
                 return tools;
             } else {
