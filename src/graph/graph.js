@@ -4,7 +4,11 @@ const nodeSizeSlider = document.getElementById("node-size-slider");
 const edgeSizeSlider = document.getElementById("edge-size-slider");
 const edgeColorSelect = document.getElementById("edge-color-select");
 
-const graph = Graph.getInstance().then( (graph) => {
+var network;
+var nodesView;
+var edgesView;
+
+Graph.getInstance().then( (graph) => {
     var options = {
         edges:{
             arrows: {
@@ -86,6 +90,7 @@ const graph = Graph.getInstance().then( (graph) => {
 
     var nodeFilterValue = "";
     const nodesFilter = (node) => {
+        console.log(nodeFilterValue);
         if (nodeFilterValue === "") {
             return true;
         }
@@ -122,15 +127,15 @@ const graph = Graph.getInstance().then( (graph) => {
 
         return false;
     };
-    const nodesView = new vis.DataView(nodes, { filter: nodesFilter });
-    const edgesView = new vis.DataView(edges, { filter: edgesFilter });
+    nodesView = new vis.DataView(nodes, { filter: nodesFilter });
+    edgesView = new vis.DataView(edges, { filter: edgesFilter });
 
     var container = document.getElementById("graph-pane");
     var data = {
         nodes: nodesView,
         edges: edgesView,
     };
-    var network = new vis.Network(container, data, options);
+    network = new vis.Network(container, data, options);
 
     // Save the last selected node for relationship creation
     var lastSelectedNode;
