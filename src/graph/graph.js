@@ -10,60 +10,60 @@ var edgesView;
 // Save the last selected node for relationship creation
 var lastSelectedNode;
 var nodeFilterValue = "";
-
-Graph.getInstance().then( (graph) => {
-    var options = {
-        edges:{
-            arrows: {
-                to: {
-                    enabled: true,
-                    type: "arrow"
-                }
-            },
-            endPointOffset: {
-                from: 0,
-                to: 0
-            },
-            color: {
-                color: edgeColorSelect.value
-            },
-            arrowStrikethrough: false,
-            width: parseInt(edgeSizeSlider.value)
-        },
-        nodes: {
-            size: parseInt(nodeSizeSlider.value)
-        },
-        physics:{
-            enabled: true,
-            barnesHut: {
-                theta: 1.0,
-                gravitationalConstant: -parseInt(repulsionSlider.value)*1000,
-                centralGravity: 1,
-                springLength: parseInt(springLengthSlider.value),
-                springConstant: 0.04,
-                damping: 1,
-                avoidOverlap: 0
-            },
-            solver: 'barnesHut',
-            stabilization: {
+var options = {
+    edges:{
+        arrows: {
+            to: {
                 enabled: true,
-                iterations: 100
+                type: "arrow"
             }
         },
-        manipulation: {
-            addEdge: function (data, callback) {
-                if (data.from == data.to) {
-                    var r = confirm("Do you want to connect the node to itself?");
-                    if (r === true) {
-                        createRelationshipForm(data, callback);
-                    }
-                }
-                else {
+        endPointOffset: {
+            from: 0,
+            to: 0
+        },
+        color: {
+            color: edgeColorSelect.value
+        },
+        arrowStrikethrough: false,
+        width: parseInt(edgeSizeSlider.value)
+    },
+    nodes: {
+        size: parseInt(nodeSizeSlider.value)
+    },
+    physics:{
+        enabled: true,
+        barnesHut: {
+            theta: 1.0,
+            gravitationalConstant: -parseInt(repulsionSlider.value)*1000,
+            centralGravity: 1,
+            springLength: parseInt(springLengthSlider.value),
+            springConstant: 0.04,
+            damping: 1,
+            avoidOverlap: 0
+        },
+        solver: 'barnesHut',
+        stabilization: {
+            enabled: true,
+            iterations: 100
+        }
+    },
+    manipulation: {
+        addEdge: function (data, callback) {
+            if (data.from == data.to) {
+                var r = confirm("Do you want to connect the node to itself?");
+                if (r === true) {
                     createRelationshipForm(data, callback);
                 }
-            },
-        }
+            }
+            else {
+                createRelationshipForm(data, callback);
+            }
+        },
     }
+}
+
+Graph.getInstance().then( (graph) => {
 
     var graphNodes = [];
 
