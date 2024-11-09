@@ -1,10 +1,3 @@
-importScripts('./lib/browser-polyfill.js');
-importScripts('./utils/jsonLoader.js');
-importScripts('./utils/storage.js');
-importScripts('./utils/indicatorparser.js');
-importScripts('./utils/graph.js');
-var tools;
-
 browser.runtime.onInstalled.addListener(function(details) {
     let currentVersion = browser.runtime.getManifest().version;
     if(details.reason === "install" || details.reasson === "update") {

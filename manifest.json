@@ -13,7 +13,6 @@
 
     "background": {
         "scripts": [
-            "src/lib/browser-polyfill.js",
             "src/utils/jsonLoader.js", 
             "src/utils/utils.js",
             "src/utils/graph.js",
