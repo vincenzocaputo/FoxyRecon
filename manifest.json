@@ -13,6 +13,7 @@
 
     "background": {
         "scripts": [
+            "src/utils/storage.js", 
             "src/utils/jsonLoader.js", 
             "src/utils/utils.js",
             "src/utils/graph.js",
@@ -46,7 +47,8 @@
     ],
 
 	"permissions": [
-		"contextMenus"
+		"contextMenus",
+        "storage"
 	],
 
 	"browser_action": {
