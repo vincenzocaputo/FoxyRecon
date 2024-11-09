@@ -173,7 +173,7 @@ inputField.addEventListener("focus", (e) => {
 inputField.addEventListener("keyup", (e) => {
     let inputString = inputField.value;
     // Remove badge text
-    browser.action.setBadgeText({text: ''});
+    browser.browserAction.setBadgeText({text: ''});
     console.log(document.getElementById("catch-res-list").style.display);
     if (document.getElementById("catch-res-list").style.display === "" ||
         document.getElementById("catch-res-list").style.display === "none") {

@@ -78,7 +78,7 @@ browser.runtime.onInstalled.addListener(function(details) {
                             }
                         })
                         .then( () => {
-                        browser.action.openPopup();
+                        browser.browserAction.openPopup();
                     });
                 } else {
                     browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
@@ -134,7 +134,7 @@ function catchIndicators(e) {
                             .then((response) => {
                             })
                             .catch((error) => {
-                                browser.action.setBadgeText({text: ""});
+                                browser.browserAction.setBadgeText({text: ""});
                                 browser.storage.local.set({"catched_indicators": []});
                             });
                 let token = 1;
@@ -144,9 +144,9 @@ function catchIndicators(e) {
                         const indicatorsList = JSON.parse(indicatorsListJson);
                         // No indicators found. Show a message
                         if(indicatorsListJson.length === 0) {
-                            browser.action.setBadgeText({text: ""});
+                            browser.browserAction.setBadgeText({text: ""});
                         } else {
-                            browser.action.setBadgeText({text: indicatorsList.length.toString()});
+                            browser.browserAction.setBadgeText({text: indicatorsList.length.toString()});
                         }
                         // Save the indicators list in the local storage
                         browser.storage.local.set({"catched_indicators": indicatorsList});
@@ -156,7 +156,7 @@ function catchIndicators(e) {
                 })
             },
             error => {
-                browser.action.setBadgeText({text: ""});
+                browser.browserAction.setBadgeText({text: ""});
                 browser.storage.local.set({"catched_indicators": []});
                 console.error("Error: "+error);
             });
