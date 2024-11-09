@@ -11,7 +11,7 @@ function createMacAddrForm(evt, title, stix={}) {
         const macRegex = new RegExp(/^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})|([0-9a-fA-F]{4}\\.[0-9a-fA-F]{4}\\.[0-9a-fA-F]{4})$/);
 
         const macAddr = fields["value"].value;
-        if (!ipRegex.test(macAddr)) {
+        if (!macRegex.test(macAddr)) {
             alert("Provide a valid MAC address");
             evt.preventDefault();
             return false;
