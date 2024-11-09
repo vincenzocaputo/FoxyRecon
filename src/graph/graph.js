@@ -9,6 +9,7 @@ var nodesView;
 var edgesView;
 // Save the last selected node for relationship creation
 var lastSelectedNode;
+var nodeFilterValue = "";
 
 Graph.getInstance().then( (graph) => {
     var options = {
@@ -90,7 +91,6 @@ Graph.getInstance().then( (graph) => {
     var edges = new vis.DataSet(graph.getLinks());
 
 
-    var nodeFilterValue = "";
     const nodesFilter = (node) => {
         console.log(nodeFilterValue);
         if (nodeFilterValue === "") {
