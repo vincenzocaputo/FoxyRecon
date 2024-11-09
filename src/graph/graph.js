@@ -92,7 +92,6 @@ Graph.getInstance().then( (graph) => {
 
 
     const nodesFilter = (node) => {
-        console.log(nodeFilterValue);
         if (nodeFilterValue === "") {
             return true;
         }
