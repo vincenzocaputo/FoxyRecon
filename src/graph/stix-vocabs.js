@@ -282,5 +282,11 @@ const vocabularies = {
         "remote-access",
         "vulnerability-scanning",
         "unknown"
+    ],
+    "malware-result-ov": [
+        "malicious",
+        "suspicious",
+        "benign",
+        "unknown"
     ]
 }
