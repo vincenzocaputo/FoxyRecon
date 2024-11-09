@@ -39,7 +39,7 @@ class FormHandler {
         okButton.classList.add("btn");
         okButton.classList.add("add-node-btn");
 
-        okButton.addEventListener("click", this.addNodeButtokClickEvent);
+        //okButton.addEventListener("click", this.addNodeButtokClickEvent);
 
         const requireNote = document.createElement("div");
         requireNote.classList.add("required-note");
