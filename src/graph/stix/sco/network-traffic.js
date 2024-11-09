@@ -61,17 +61,21 @@ function createNetworkTrafficForm(evt, title, stix={}) {
             graph.addLink(targetNodes[entry], fields["id"].value, "destination-of");
         }
         if (action === "add") {
-            graph.addSTIXNode(
-                fields["id"].value,
-                type,
-                type,
-                stix);
+            Graph.getInstance().then( (graph) => {
+                graph.addSTIXNode(
+                    fields["id"].value,
+                    type,
+                    type,
+                    stix);
+            });
         } else {
-            graph.editSTIXNode(
-                fields["id"].value,
-                type,
-                type,
-                stix);
+            Graph.getInstance().then( (graph) => {
+                graph.editSTIXNode(
+                    fields["id"].value,
+                    type,
+                    type,
+                    stix);
+            });
         }
 
 

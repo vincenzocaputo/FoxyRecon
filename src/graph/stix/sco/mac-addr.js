@@ -25,17 +25,21 @@ function createMacAddrForm(evt, title, stix={}) {
             }
         }
         if (action === "add") {
-            graph.addSTIXNode(
-                fields["id"].value,
-                fields["value"].value,
-                type,
-                stix);
+            Graph.getInstance().then( (graph) => {
+                graph.addSTIXNode(
+                    fields["id"].value,
+                    fields["value"].value,
+                    type,
+                    stix);
+            });
         } else {
-            graph.editSTIXNode(
-                fields["id"].value,
-                fields["value"].value,
-                type,
-                stix);
+            Graph.getInstance().then( (graph) => {
+                graph.editSTIXNode(
+                    fields["id"].value,
+                    fields["value"].value,
+                    type,
+                    stix);
+            });
         }
 
     }

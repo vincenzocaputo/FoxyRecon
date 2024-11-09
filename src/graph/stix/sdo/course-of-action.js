@@ -19,17 +19,21 @@ function createCourseOfActionForm(evt, title, stix={}) {
         }
 
         if (action === "add") {
-            graph.addSTIXNode(
-                fields["id"].value,
-                fields["name"].value,
-                "course-of-action",
-                stix);
+            Graph.getInstance().then( (graph) => {
+                graph.addSTIXNode(
+                    fields["id"].value,
+                    fields["name"].value,
+                    "course-of-action",
+                    stix);
+            });
         } else {
-            graph.editSTIXNode(
-                fields["id"].value,
-                fields["name"].value,
-                "course-of-action",
-                stix);
+            Graph.getInstance().then( (graph) => {
+                graph.editSTIXNode(
+                    fields["id"].value,
+                    fields["name"].value,
+                    "course-of-action",
+                    stix);
+            });
         }
     }
     formHandler.setSubmitEventListener(submitEvent);
