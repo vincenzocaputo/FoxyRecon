@@ -10,14 +10,11 @@ function detectStorageMigration(oldVersion, newVersion) {
 
     if (oldVersion === "0" || (oldMajor === "0" && int(oldMinor) <= 22 && 
         (int(oldMajor) > 0 || int(oldMinor) >= 23))) {
-        executeMigration().then( (result) => {
-            return loadTools();
-        })
-        .then( (result) => {
-            return loadGraphMapping();
+        return executeMigration().then( (result) => {
+            return true;
         });
     } else {
-        return false;
+        return Promise.resolve(false);
     }
 }
 

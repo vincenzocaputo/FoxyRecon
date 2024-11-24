@@ -14,6 +14,7 @@ browser.runtime.onInstalled.addListener(function(details) {
                         installedVersion = result.version;
                         console.log("Installed version: " + installedVersion);
                     } else {
+                        // Probably the version in saved in the old storage
                         console.log("error, probably migration is needed");
                         // Assume that the installed version is obsolete
                         installedVersion = "0";
@@ -21,10 +22,18 @@ browser.runtime.onInstalled.addListener(function(details) {
                     return installedVersion;
                 })
                 .then( (installedVersion) => {
-                    detectStorageMigration(installedVersion, currentVersion);
+                    return detectStorageMigration(installedVersion, currentVersion);
+                })
+                .then( (result) => {
+                    return loadTools();
+                })
+                .then( (result) => {
+                    return loadGraphMapping();
+                })
+                .then( (result) => {
                     browser.tabs.create({
-                        discarded: true,
-                        title: "FoxyRecon New Version",
+                        discarded: false,
+                        //title: "FoxyRecon New Version",
                         url: 'https://github.com/vincenzocaputo/FoxyRecon/releases/tag/v'+currentVersion
                     });
                     browser.storage.local.set({"version": currentVersion});
