@@ -1254,6 +1254,18 @@
 			"autoGraph": false
         },
         {
+            "name": "Spur",
+            "url": {
+                "ip": "https://spur.us/context/%s"
+            },
+            "desc": "Spur provides cutting-edge tools and data to detect VPNs, residential proxies, and bots – helping you stay ahead of the latest evasion methods.",
+            "icon": "spur.png",
+            "color": "#6A48F2",
+            "types": ["ip"],
+            "tags": ["rep"],
+			"autoGraph": false
+        },
+        {
             "name": "SSLShopper",
             "url": {
                 "domain": "https://www.sslshopper.com/ssl-checker.html#hostname=%s"
