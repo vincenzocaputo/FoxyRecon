@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - files.ninja web resource
 - PSBDMP web resource
 - Spur tool for IP addresses
+- Cloudflare Radar tool
 
 ### Fix
 - Minor stylesheets bugs
