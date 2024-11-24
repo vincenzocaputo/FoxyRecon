@@ -109,8 +109,6 @@ function showCustomToolsList() {
                 if (tagsContainer) {
                     const tagsContainerWidth = tagsContainer.offsetWidth;
                     const tagsWidth = container.offsetWidth;
-                    console.log(tagsContainerWidth);
-                    console.log(tagsWidth);
 
                     if (!tagsContainer.classList.contains('animate')) {
                         if (tagsWidth < tagsContainerWidth) {

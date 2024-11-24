@@ -115,9 +115,7 @@ document.querySelector("#typ-anim-opt input").addEventListener("change", functio
     typAnimOption = evt.target.checked;
     browser.storage.local.get("settings").then( (result) => {
         let settings = result.settings;
-        console.log(typAnimOption);
         settings.typeanim = typAnimOption;
-        console.log(settings);
         browser.storage.local.set({"settings": settings});
     });
 });

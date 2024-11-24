@@ -52,7 +52,6 @@ textfieldCatch.addEventListener("click", function() {
                         }
                     });
                     for(let key in count) {
-                        console.log(key);
                         document.getElementById(key+"_occ").textContent = count[key];
                     }
                     collectedIndicatorsListJson = message['indicators'];
@@ -174,7 +173,6 @@ inputField.addEventListener("keyup", (e) => {
     let inputString = inputField.value;
     // Remove badge text
     browser.browserAction.setBadgeText({text: ''});
-    console.log(document.getElementById("catch-res-list").style.display);
     if (document.getElementById("catch-res-list").style.display === "" ||
         document.getElementById("catch-res-list").style.display === "none") {
         // If no input was provided, show the add-on logo and the history icon

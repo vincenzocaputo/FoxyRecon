@@ -203,7 +203,6 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             .then( (result) => {
                 if (result && result.hasOwnProperty("indicator")) {
                     const indicator = result.indicator;
-                    console.log(indicator);
                     sendResponse({
                         msg: indicator.value,
                         query: query,
