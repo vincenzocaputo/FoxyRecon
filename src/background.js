@@ -10,7 +10,7 @@ browser.runtime.onInstalled.addListener(function(details) {
             browser.storage.local.get("version")
                 .then( (result) => {
                     let installedVersion;
-                    if (result.length > 0){
+                    if (result.hasOwnProperty("version") > 0){
                         installedVersion = result.version;
                         console.log("Installed version: " + installedVersion);
                     } else {

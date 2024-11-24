@@ -8,8 +8,8 @@ function detectStorageMigration(oldVersion, newVersion) {
     const newMinor = newVersionComponents[1];
     const newPatch = newVersionComponents[2];
 
-    if (oldVersion === "0" || (oldMajor === "0" && int(oldMinor) <= 22 && 
-        (int(oldMajor) > 0 || int(oldMinor) >= 23))) {
+    if (oldVersion === "0" || (Number(oldMajor) == 0 && Number(oldMinor) <= 22 && 
+        (Number(newMajor) > 0 || Number(newMinor) >= 23))) {
         return executeMigration().then( (result) => {
             return true;
         });
