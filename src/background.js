@@ -1,6 +1,6 @@
 browser.runtime.onInstalled.addListener(function(details) {
     let currentVersion = browser.runtime.getManifest().version;
-    if(details.reason === "install" || details.reasson === "update") {
+    if(details.reason === "install" || details.reason === "update") {
         if (details.reason === "install") {
             createStorage().then( () => {;
                 console.log("Current version: " + currentVersion);
@@ -8,37 +8,26 @@ browser.runtime.onInstalled.addListener(function(details) {
             });
         } else if(details.reason === "update") {
             browser.storage.local.get("version")
-                .then( (installedVersion) => {
-                    console.log("Installed version: " + installedVersion);
-                    return installedVersion;
-                }, () => {
-                    // Assume that the installed version is obsolete
-                    installedVersion = 0;
+                .then( (result) => {
+                    let installedVersion;
+                    if (result.length > 0){
+                        installedVersion = result.version;
+                        console.log("Installed version: " + installedVersion);
+                    } else {
+                        console.log("error, probably migration is needed");
+                        // Assume that the installed version is obsolete
+                        installedVersion = "0";
+                    }
                     return installedVersion;
                 })
                 .then( (installedVersion) => {
-                    setupStorageAfterUpdate().then( () => {
-                        if (installedVersion !== currentVersion) {
-                            detectStorageMigration(installedVersion, currentVersion).then( () => {
-                                browser.tabs.create({
-                                    discarded: true,
-                                    title: "FoxyRecon New Version",
-                                    url: 'https://github.com/vincenzocaputo/FoxyRecon/releases/tag/v'+currentVersion
-                                });
-                                // If a new version was released, clean the local storage
-                                browser.storage.local.remove("tools");
-                                browser.storage.local.remove("type");
-                                browser.storage.local.remove("tag");
-                                browser.storage.local.remove("autograph-mapping");
-                                browser.storage.local.remove("submit-btn-query");
-                                browser.storage.local.remove("autofill.submit-btn-query");
-                                browser.storage.local.remove("autofill.input-selector");
-                                browser.storage.local.remove("indicator");
-                                // Add current version to local storage/
-                                browser.storage.local.set({"version": currentVersion});
-                            });
-                        }
+                    detectStorageMigration(installedVersion, currentVersion);
+                    browser.tabs.create({
+                        discarded: true,
+                        title: "FoxyRecon New Version",
+                        url: 'https://github.com/vincenzocaputo/FoxyRecon/releases/tag/v'+currentVersion
                     });
+                    browser.storage.local.set({"version": currentVersion});
                 });
         }
     }

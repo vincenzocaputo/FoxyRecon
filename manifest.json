@@ -13,6 +13,7 @@
 
     "background": {
         "scripts": [
+            "src/utils/storageMigrationUtil.js",
             "src/utils/storage.js", 
             "src/utils/jsonLoader.js", 
             "src/utils/utils.js",

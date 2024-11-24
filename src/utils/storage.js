@@ -8,18 +8,17 @@ function detectStorageMigration(oldVersion, newVersion) {
     const newMinor = newVersionComponents[1];
     const newPatch = newVersionComponents[2];
 
-    if (oldMajor === "0" && int(oldMinor) <= 22 && 
-        (int(oldMajor) > 0 || int(oldMinor) >= 23)) {
-
-        return Promise.all([
-            browser.storage.local.get("history").then( (history) => {
-                return browser.storage.local.set({"history": JSON.parse(history) || Array()});
-            }),
-        ]);
+    if (oldVersion === "0" || (oldMajor === "0" && int(oldMinor) <= 22 && 
+        (int(oldMajor) > 0 || int(oldMinor) >= 23))) {
+        executeMigration().then( (result) => {
+            return loadTools();
+        })
+        .then( (result) => {
+            return loadGraphMapping();
+        });
     } else {
-        return Promise.resolve(null);
+        return false;
     }
-    
 }
 
 function resetIndicator() {
