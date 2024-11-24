@@ -64,21 +64,6 @@ function createStorage() {
     ]);
 }
 
-function setupStorageAfterUpdate() {
-    return Promise.all([
-        browser.storage.local.remove("tools").then( () => {
-            loadToolsList().then( (tools) => {
-                console.log("Loaded %d tools", tools.length);
-            });
-        }),
-        browser.storage.local.remove("graphMapping").then( () => {
-            loadGraphMapping().then( (grapMapping) => {
-                console.log("Loaded graph mapping");
-            });
-        })
-    ]);
-}
-
 function loadStorage() {
     // Setup default settings
     browser.storage.local.get("settings").then( (s) => {
