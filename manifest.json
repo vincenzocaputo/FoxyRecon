@@ -16,6 +16,7 @@
             "src/utils/storageMigrationUtil.js",
             "src/utils/storage.js", 
             "src/utils/jsonLoader.js", 
+            "src/utils/indicatorparser.js", 
             "src/utils/utils.js",
             "src/utils/graph.js",
             "src/background.js"
@@ -57,6 +58,5 @@
 			"default_title": "FoxyRecon",
 			"default_popup": "src/popup/main_popup.html"
 	}
-
 }
 
