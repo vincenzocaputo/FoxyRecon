@@ -45,7 +45,7 @@ function loadTools() {
         const tools = result.tools;
         return browser.storage.local.get("toolsExt").then( (result) => {
             if (result.hasOwnProperty("toolsExt")) {
-                console.log(tools);
+                console.log("Loaded %s tools", tools.length);
                 tools.push(...result.toolsExt);
                 return tools;
             } else {
