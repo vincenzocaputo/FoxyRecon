@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PSBDMP web resource
 - Spur tool for IP addresses
 - Cloudflare Radar tool
+- SiceHice web resource
 
 ### Fix
 - Minor stylesheets bugs
