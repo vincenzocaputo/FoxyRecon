@@ -208,6 +208,21 @@
 			"autoGraph": false
         },
         {
+            "name": "Cloudflare Radar",
+            "url": {
+                "domain": "https://radar.cloudflare.com/domains/domain/%s",
+                "ip": "https://radar.cloudflare.com/ip/%s",
+                "url": "https://radar.cloudflare.com/scan?url=%s",
+                "asn": "https://radar.cloudflare.com/traffic/%s"
+            },
+            "desc": "Up to date global Internet trends and insights.",
+            "icon": "cloudflare.png",
+            "color": "#F38020",
+            "types": ["domain","ip","url","asn"],
+            "tags": ["whois","tls","net-activity"],
+			"autoGraph": false
+        },
+        {
 			"name": "CriminalIP",
 			"url": {
                 "domain": "https://www.criminalip.io/asset/search?query=domain%3A%s",
