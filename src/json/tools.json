@@ -798,6 +798,21 @@
 			"autoGraph": false
         },
         {
+            "name": "IBM X-Force Exchange",
+            "url": {
+                "domain": "https://exchange.xforce.ibmcloud.com/url/%s",
+                "ip": "https://exchange.xforce.ibmcloud.com/ip/%s",
+                "cve": "https://exchange.xforce.ibmcloud.com/vulnerabilities/%s",
+                "hash": "https://exchange.xforce.ibmcloud.com/malware/%s"
+            },
+            "desc": "Research, Collaborate and Act on threat intelligence",
+            "icon": "ibm.png",
+            "color": "#262626",
+            "types": ["domain","ip","cve","hash"],
+            "tags": ["ioc","rep"],
+			"autoGraph": false
+        },
+        {
             "name": "InQuest IOCDB",
             "url": {
                 "ip": "https://labs.inquest.net/iocdb/search/%s",

@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Spur tool for IP addresses
 - Cloudflare Radar tool
 - SiceHice web resource
+- IBM X-Force Exchange web resource
 
 ### Fix
 - Minor stylesheets bugs
