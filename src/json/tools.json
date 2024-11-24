@@ -1231,6 +1231,18 @@
 			"autoGraph": false
         },
         {
+            "name": "SiceHice",
+            "url": {
+                "ip": "https://www.sicehice.com/search/%s"
+            },
+            "desc": "Bulk IP Searching | Threat Data Aggregation",
+            "icon": "sicehice.png",
+            "color": "#0090C5",
+            "types": ["ip"],
+            "tags": ["rep"],
+			"autoGraph": false
+        },
+        {
             "name": "Spam Database Lookup",
             "url": {
                 "domain": "https://spamdb.org/db/%s",
