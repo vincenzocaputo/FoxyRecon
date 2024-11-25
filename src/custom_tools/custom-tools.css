@@ -196,7 +196,7 @@ h3 {
 }
 
 #import-template-button {
-    width: 13.5em;
+    width: fit-content;
     background-color: #06BEC4;
 }
 
