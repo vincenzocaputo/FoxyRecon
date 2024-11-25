@@ -25,10 +25,14 @@ browser.runtime.onInstalled.addListener(function(details) {
                     return detectStorageMigration(installedVersion, currentVersion);
                 })
                 .then( (result) => {
-                    return loadTools();
+                    return browser.storage.local.remove("tools").then( () => {
+                        return loadTools();
+                    });
                 })
                 .then( (result) => {
-                    return loadGraphMapping();
+                    return browser.storage.local.remove("graphMapping").then( () => {
+                        return loadGraphMapping();
+                    });
                 })
                 .then( (result) => {
                     browser.tabs.create({
