@@ -26,13 +26,11 @@
     "content_scripts": [{
         "matches": ["*://*/*"],
         "js": [
-            "src/lib/browser-polyfill.js",
             "src/utils/indicatorparser.js", 
             "src/utils/utils.js", 
             "src/utils/graph.js",
             "src/content_scripts/graph.js",
             "src/content_scripts/add_node_popup.js",
-            "src/content_scripts/context_menu.js",
             "src/content_scripts/catch.js",
             "src/content_scripts/message-box.js",
             "src/content_scripts/autofill.js"
@@ -57,6 +55,14 @@
 			"default_icon": "assets/icons/foxyrecon-icon-48.png",
 			"default_title": "FoxyRecon",
 			"default_popup": "src/popup/main_popup.html"
-	}
+	},
+
+    "browser_specific_settings": {
+      "gecko": {
+        "id": "foxyrecon@test.local"
+      }
+    }
+
+
 }
 
