@@ -112,7 +112,7 @@ textfieldTool.addEventListener("click", function() {
     // Save the current indicator along with its type
     
     browser.storage.local.set({"indicator": {
-        value: "",
+        value: domain,
         type: type,
         tag: "all",
         tld: tld
