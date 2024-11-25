@@ -1107,6 +1107,21 @@
 			"autoGraph": false
         },
         {
+            "name": "PhishTank",
+            "url": {
+                "url": "https://phishtank.org/index.php",
+                "asn": "https://phishtank.org/asn_search.php?asn=%s&valid=All&active=All&Search=Search"
+            },
+            "desc": "Submit suspected phishes. Track the status of your submissions. Verify other users' submissions. Develop software with our free API.",
+            "icon": "phishtank.png",
+            "color": "#167AB2",
+            "inputSelector": "input[name='isaphishurl']",
+            "submitQuery": "input.submitbutton",
+            "types": ["url","asn"],
+            "tags": ["rep", "ioc"],
+			"autoGraph": false
+        },
+        {
             "name": "Poc-in-Github",
             "url": {
                 "cve": "https://poc-in-github.motikan2010.net/api/v1/?cve_id=%s"

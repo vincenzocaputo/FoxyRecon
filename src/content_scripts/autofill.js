@@ -71,6 +71,9 @@ function sendMessageAndFill() {
                     }, 100);
                 });
                 return;
+            } else if(current_url.includes("phishtank.org/asn_search.php")) {
+                // do nothing
+                return;
             } else {
                 inputField = document.querySelector(inputSelector);
             }
