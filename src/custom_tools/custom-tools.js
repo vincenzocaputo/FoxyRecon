@@ -76,7 +76,6 @@ function showCustomToolsList() {
                     nodeTag.textContent = tags[tagIdx].toUpperCase();
                     nodeTag.classList.add("tool-tag");
 
-                    nodeTag.style.backgroundColor = "rgba(256,256,256, 0.3)";
                     nodeTagsContainer.appendChild(nodeTag);
                     nodeText.insertAdjacentElement("beforeend", nodeTagsContainer);
 
@@ -147,9 +146,9 @@ function showCustomToolsList() {
                         resetPage();
                     }
                 }
-                document.querySelectorAll(".tool-entry").forEach( v => v.style.outline = "none" );
+                document.querySelectorAll(".tool-entry").forEach( v => v.style.opacity = "0.4" );
                 const toolEntry = e.target.closest(".tool-entry");
-                toolEntry.style.outline = "5px outset #000000";
+                toolEntry.style.opacity = "1";
                 selectedResource = toolEntry.id;
                 document.querySelector("#add-res-button").style.display = "none";
                 document.querySelector("#cancel-button").style.display = "block";
@@ -826,7 +825,7 @@ window.onload = function() {
             document.querySelector("#edit-res-button").style.display = "none";
             document.querySelector("#export-button").style.display = "none";
             document.querySelector("#export-all-button").style.display = "block";
-            document.querySelectorAll(".tool-entry").forEach( v => v.style.outline = "none" );
+            document.querySelectorAll(".tool-entry").forEach( v => v.style.opacity = "1" );
             resetForm();
             resetPage();
         }

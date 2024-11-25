@@ -416,14 +416,19 @@ div.tool-entry {
     grid-template-columns: 0.5fr 5fr;
     background-color: #FFFFFF;
     border: 2px outset #596275;
-    border-radius: 10px;
+    border-radius: 15px;
     width: -moz-available;  /* For Firefox */
     width: -webkit-fill-available;  /* For Chrome */
-    height: 40px;
+    height: 60px;
     margin-right: 5px;
     margin-bottom: 5px;
     cursor: pointer;
 }
+
+div.tool-entry .text {
+    font-size: 1.3em;
+}
+
 
 div.tool-entry > div {
     display: grid;
@@ -431,17 +436,17 @@ div.tool-entry > div {
 }
 
 div.tool-entry:hover {
-    outline: 5px outset #000000;
+    box-shadow: 5px 5px 
 }
 
 div.tool-icon {
     background-color: white;
-    height: 40px;
-    width: 45px;
+    height: 60px;
+    width: 70px;
     border-right: 2px outset black;
-    border-radius: 8px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border-radius: 15px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
     position: relative;
     margin-right: 5px;
 }
@@ -458,15 +463,15 @@ div.tool-icon > img {
     left: 0;
     right: 0;
     margin: auto;
-    width: 25px;
+    width: 45px;
 }
 
 div.tool-name {
     margin-left: 3px;
-    height: 40px;
+    height: 60px;
     text-align: left;
     vertical-align: middle;
-    line-height: 40px; 
+    line-height: 60px; 
     font-size: 1em;
     font-weight: bold;
     color: white;
@@ -477,6 +482,8 @@ div.tool-name {
     position: relative;
     white-space: nowrap;
     overflow: hidden;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 div.tool-name>.text {
@@ -500,8 +507,8 @@ div.tool-name>.text.animate {
 }
 
 div.tool-name-with-tags {
-    height: 40px;
-    line-height: 20px;
+    height: 60px;
+    line-height: 30px;
 }
 
 div.tool-tags-container {
