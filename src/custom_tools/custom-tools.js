@@ -881,7 +881,8 @@ window.onload = function() {
 
     document.querySelector("#opencti-template").addEventListener("click", (evt) => {
         createFormPopup('./icons/opencti.png', "Add OpenCTI", "OpenCTI", ()=>{
-            browser.storage.local.get("toolsExt").then( (tools) => {
+            browser.storage.local.get("toolsExt").then( (result) => {
+                const tools = result.toolsExt || Array();
                 for(const [key, value] of Object.entries(openctiTemplate["url"])) {
                     openctiTemplate["url"][key] = value.replace("%h", document.querySelector("#template-form-hostname").value);
                     if(document.querySelector("#template-http").checked) {
@@ -907,7 +908,8 @@ window.onload = function() {
 
     document.querySelector("#yeti-template").addEventListener("click", (evt) => {
         createFormPopup('./icons/yeti.png', "Add YETI", "YETI", ()=>{
-            browser.storage.local.get("toolsExt").then( (tools) => {
+            browser.storage.local.get("toolsExt").then( (result) => {
+                const tools = result.toolsExt || Array();
                 for(const [key, value] of Object.entries(yetiTemplate["url"])) {
                     yetiTemplate["url"][key] = value.replace("%h", document.querySelector("#template-form-hostname").value);
                     if(document.querySelector("#template-http").checked) {
