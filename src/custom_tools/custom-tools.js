@@ -276,6 +276,7 @@ function showCustomToolsList() {
 }
 
 function resetPage() {
+    document.querySelector("#background").remove();
     document.querySelector("#main-pane").style.display = "block";
     document.querySelector("#form-pane").style.display = "none";
     document.querySelector("#cancel-button").style.display = "none";
@@ -305,6 +306,9 @@ function resetErrors() {
 function createFormPopup(formIcon, formTitle, defaultName, addEvent) {
     var buttonsContainer;
     var form;
+    const outsideBackground = document.createElement("div");
+    outsideBackground.setAttribute("id", "background");
+    document.querySelector("#page-container").appendChild(outsideBackground);
     const popupContainer = document.createElement("div");
     const formContainer = document.createElement("div");
 
@@ -329,6 +333,7 @@ function createFormPopup(formIcon, formTitle, defaultName, addEvent) {
     cancelButton.classList.add("btn");
     cancelButton.classList.add("cancel-btn");
     cancelButton.addEventListener("click", evt => {
+        resetPage();
         evt.target.closest(".popup-container").remove();
     });
 

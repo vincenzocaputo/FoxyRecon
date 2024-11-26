@@ -13,6 +13,15 @@ a {
     font-weight: bold;
 }
 
+#background {
+    position: fixed;
+    top: 0;
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    opacity: 70%;
+}
+
 #foxyrecon-icon {
     height: 30px;
     width: 30px;
