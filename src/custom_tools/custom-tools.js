@@ -274,7 +274,10 @@ function showCustomToolsList() {
 }
 
 function resetPage() {
-    document.querySelector("#background").remove();
+    const background = document.querySelector("#background");
+    if (background) {
+        background.remove();
+    }
     document.querySelector("#main-pane").style.display = "block";
     document.querySelector("#form-pane").style.display = "none";
     document.querySelector("#cancel-button").style.display = "none";
