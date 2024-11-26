@@ -2,11 +2,9 @@ var update = false;
 var selectedResource = -1;
 
 function readJSONFile(file) {
-    console.log(file);
     return new Promise(function (resolve, reject) {
         const fileURI = browser.runtime.getURL(file);
         //const fileURI = file;
-        console.log(fileURI);
         fetch(fileURI).then( (response) => {
             if (!response.ok) {
                 reject({
