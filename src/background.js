@@ -36,8 +36,6 @@ browser.runtime.onInstalled.addListener(function(details) {
                 })
                 .then( (result) => {
                     browser.tabs.create({
-                        discarded: false,
-                        //title: "FoxyRecon New Version",
                         url: 'https://github.com/vincenzocaputo/FoxyRecon/releases/tag/v'+currentVersion
                     });
                     browser.storage.local.set({"version": currentVersion});
