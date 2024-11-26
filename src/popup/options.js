@@ -143,7 +143,7 @@ document.querySelector("#auto-catch-opt input").addEventListener("change", funct
         settings.autocatch = autocatchOption;
         browser.storage.local.set({"settings": settings});
         if (!autocatchOption) {
-            browser.storage.local.set({"catched_indicators": []}).then( () => {
+            browser.storage.local.set({"catchedIndicators": []}).then( () => {
                 browserr.action.setBadgeText({text: ""});
             });
         }

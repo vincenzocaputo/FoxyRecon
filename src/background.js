@@ -131,33 +131,34 @@ function catchIndicators(e) {
                 let activeTab = tabs[0].id;
                 // Send a message to the content script
                 browser.tabs.sendMessage(activeTab, "catch")
-                            .then((response) => {
-                            })
-                            .catch((error) => {
-                                browser.browserAction.setBadgeText({text: ""});
-                                browser.storage.local.set({"catched_indicators": []});
-                            });
-                let token = 1;
-                browser.runtime.onMessage.addListener(function(message) {
-                    if(token) {
-                        const indicatorsListJson = message['indicators'];
-                        const indicatorsList = JSON.parse(indicatorsListJson);
-                        // No indicators found. Show a message
-                        if(indicatorsListJson.length === 0) {
-                            browser.browserAction.setBadgeText({text: ""});
-                        } else {
-                            browser.browserAction.setBadgeText({text: indicatorsList.length.toString()});
-                        }
-                        // Save the indicators list in the local storage
-                        browser.storage.local.set({"catched_indicators": indicatorsList});
-                    } 
-                    // Consume token
-                    token = 0;
-                })
+                    .then((response) => {
+                        let token = 1;
+                        browser.runtime.onMessage.addListener(function(message) {
+                            if(token) {
+                                const indicatorsListJson = message['indicators'];
+                                console.log(indicatorsListJson);
+                                const indicatorsList = JSON.parse(indicatorsListJson);
+                                // No indicators found. Show a message
+                                if(indicatorsListJson.length === 0) {
+                                    browser.browserAction.setBadgeText({text: ""});
+                                } else {
+                                    browser.browserAction.setBadgeText({text: indicatorsList.length.toString()});
+                                }
+                                // Save the indicators list in the local storage
+                                browser.storage.local.set({"catchedIndicators": indicatorsList});
+                            } 
+                            // Consume token
+                            token = 0;
+                        })
+                    })
+                    .catch((error) => {
+                        browser.browserAction.setBadgeText({text: ""});
+                        browser.storage.local.set({"catchedIndicators": []});
+                    });
             },
             error => {
                 browser.browserAction.setBadgeText({text: ""});
-                browser.storage.local.set({"catched_indicators": []});
+                browser.storage.local.set({"catchedIndicators": []});
                 console.error("Error: "+error);
             });
         }

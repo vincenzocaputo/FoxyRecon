@@ -8,8 +8,8 @@ indicatorParser = new IndicatorParser();
 
 
 // Check if there are some indicators found in the current webpage
-browser.storage.local.get("catched_indicators").then( (result) => {
-    const collectedIndicatorsList = result.catched_indicators;
+browser.storage.local.get("catchedIndicators").then( (result) => {
+    const collectedIndicatorsList = result.catchedIndicators;
 
     if(collectedIndicatorsList && collectedIndicatorsList.length != 0 && collectedIndicatorsList !== undefined && collectedIndicatorsList !== "undefined") {
         var count = {"ip": 0, "domain": 0, "url": 0, "email": 0, "hash": 0, "cve": 0, "phone": 0, "asn": 0};

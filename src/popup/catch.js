@@ -5,8 +5,8 @@
  */
 document.querySelectorAll(".catch-container").forEach((v) => { 
     v.addEventListener("click", (e) => {
-        browser.storage.local.get("catched_indicators").then( (result) => {
-            const collectedIndicatorsList = result.catched_indicators;
+        browser.storage.local.get("catchedIndicators").then( (result) => {
+            const collectedIndicatorsList = result.catchedIndicators;
             createIndicatorsList(collectedIndicatorsList, 'all'); 
 
             switch (v.id) {

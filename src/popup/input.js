@@ -42,6 +42,7 @@ textfieldCatch.addEventListener("click", function() {
                 // No indicators found. Show a message
                 if(message['indicators'] == "[]") {
                     showMessagePopup("No indicators found in this page", MessageType.INFO);
+                    browser.storage.local.set({"catchedIndicators": []});
                 } else {
                     //countFoundIndicators();
                     const indicatorsList = JSON.parse(message['indicators']);
@@ -54,7 +55,7 @@ textfieldCatch.addEventListener("click", function() {
                     for(let key in count) {
                         document.getElementById(key+"_occ").textContent = count[key];
                     }
-                    collectedIndicatorsListJson = message['indicators'];
+                    browser.storage.local.set({"catchedIndicators": indicatorsList});
                 }
             }
             // Consume token
