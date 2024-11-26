@@ -55,14 +55,7 @@
 			"default_icon": "assets/icons/foxyrecon-icon-48.png",
 			"default_title": "FoxyRecon",
 			"default_popup": "src/popup/main_popup.html"
-	},
-
-    "browser_specific_settings": {
-      "gecko": {
-        "id": "foxyrecon@test.local"
-      }
-    }
-
+	}
 
 }
 
