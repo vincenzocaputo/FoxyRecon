@@ -1,17 +1,25 @@
 var update = false;
 var selectedResource = -1;
 
-function readJSONFile(file, callback) {
-    let rawFile = new XMLHttpRequest();
-    rawFile.overrideMimeType("application/json");
-    rawFile.open("GET", file, true);
-    rawFile.onreadystatechange = function() {
-        if(rawFile.readyState == 4 && rawFile.status == "200") {
-            callback(rawFile.responseText);
-        }
-
-    }
-    rawFile.send(null); 
+function readJSONFile(file) {
+    console.log(file);
+    return new Promise(function (resolve, reject) {
+        const fileURI = browser.runtime.getURL(file);
+        //const fileURI = file;
+        console.log(fileURI);
+        fetch(fileURI).then( (response) => {
+            if (!response.ok) {
+                reject({
+                    status: "error",
+                    statusText: response.status
+                });
+            }
+            return response.json(); // Parse JSON if the file is JSON
+        })
+        .then( (fileContent) => {
+            resolve(fileContent);
+        });
+    });
 }
 
 function showMessageError(field_id, err_msg) {
@@ -415,16 +423,18 @@ window.onload = function() {
     var mispTemplate;
     var openctiTemplate;
     var yetiTemplate;
+    readJSONFile("src/custom_tools/templates/misp.json").then( (content)=> {
+        mispTemplate = content;
+        return readJSONFile("src/custom_tools/templates/yeti.json");
+    })
+    .then( (content) => {
+        yetiTemplate = content;
+        return readJSONFile("src/custom_tools/templates/opencti.json");
+    })
+    .then( (content) => {
+        openctiTemplate = content;
+    });
 
-    readJSONFile("templates/misp.json", jsonCode => {
-        mispTemplate = JSON.parse(jsonCode);
-    });
-    readJSONFile("templates/opencti.json", jsonCode => {
-        openctiTemplate = JSON.parse(jsonCode);
-    });
-    readJSONFile("templates/yeti.json", jsonCode => {
-        yetiTemplate = JSON.parse(jsonCode);
-    });
     resetForm();
     showCustomToolsList();
 
