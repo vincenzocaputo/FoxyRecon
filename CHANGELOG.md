@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IBM X-Force Exchange web resource
 - PhishTank web resource
 - Snyk web resource for vulnerabilities lookup
+- ioc[.]one web resource
 
 ### Fix
 - Minor stylesheets bugs
