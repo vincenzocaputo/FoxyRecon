@@ -854,6 +854,22 @@
 			"autoGraph": false
         },
         {
+            "name": "ioc[.]one",
+            "url": {
+                "ip": "https://ioc.one/auth/attribute?search=%s",
+                "domain": "https://ioc.one/auth/attribute?search=%s",
+                "url": "https://ioc.one/auth/attribute?search=%s",
+                "email": "https://ioc.one/auth/attribute?search=%s",
+                "hash": "https://ioc.one/auth/attribute?search=%s"
+            },
+            "desc": "OSINT Cyber Threat Intelligence Database",
+            "icon": "iocone.png",
+            "color": "#103834",
+            "types": ["ip","domain","url","email","hash"],
+            "tags": ["ioc"],
+			"autoGraph": false
+        },
+        {
             "name": "IPQualityScore",
             "url": {
                 "phone": "https://www.ipqualityscore.com/free-phone-number-lookup/lookup/US/%r"
