@@ -1273,6 +1273,17 @@
 			"autoGraph": false
         },
         {
+            "name": "Snyk",
+            "url": {
+                "cve": "https://security.snyk.io/vuln/?search=%s"
+            },
+            "desc": "The leading database for open source vulnerabilities and cloud misconfigurations.",
+            "icon": "snyk.png",
+            "color": "#120C68",
+            "types": ["cve"],
+			"autoGraph": false
+        },
+        {
             "name": "Spam Database Lookup",
             "url": {
                 "domain": "https://spamdb.org/db/%s",
