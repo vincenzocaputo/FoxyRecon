@@ -29,4 +29,13 @@ jobs:
         git fetch origin
         git checkout chrome
         git reset --hard origin/develop
-        git restore manifest.json 
+        git restore manifest.json
+        
+    - name: Run porting script
+      run: bash tools/port.sh
+
+    - name: Push updates to Chrome branch
+      run: |
+        git add src/ assets/
+        git commit -m "Update Chrome version"
+        git push origin chrome --force
