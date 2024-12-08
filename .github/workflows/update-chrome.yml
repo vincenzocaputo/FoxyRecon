@@ -32,7 +32,7 @@ jobs:
         git restore manifest.json
         
     - name: Run porting script
-      run: bash tools/port.sh
+      run: bash tools/chromeify.sh
 
     - name: Push updates to Chrome branch
       run: |
