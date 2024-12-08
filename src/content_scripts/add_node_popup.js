@@ -4,7 +4,7 @@ var selectedText = "";
 var selectedTextType = "";
 
 
-browser.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     indicatorParser = new IndicatorParser();
     selectedText = document.getSelection().toString().trim();
     [selectedTextType, tld] = indicatorParser.getIndicatorType(selectedText);
@@ -79,7 +79,7 @@ function createPopup(selectedText, detectedType) {
     formHeader.className = 'foxyrecon-form-header';
 
     const imgElement = document.createElement('img');
-    imgElement.src = browser.runtime.getURL("assets/icons/foxyrecon-icon-32.png");
+    imgElement.src = chrome.runtime.getURL("assets/icons/foxyrecon-icon-32.png");
 
     // Create form title div
     const formTitle = document.createElement('div');
@@ -215,7 +215,7 @@ function createPopup(selectedText, detectedType) {
             stix["type"] = type;
             stix["content"] = selectedText;
 
-            browser.runtime.sendMessage({
+            chrome.runtime.sendMessage({
                 id: 4,
                 label: label,
                 stix: stix,
@@ -225,7 +225,7 @@ function createPopup(selectedText, detectedType) {
             });
         } else {
             // Selected text is a valid indicator
-            browser.runtime.sendMessage({
+            chrome.runtime.sendMessage({
                 id: 4,
                 type: detectedType,
                 indicator: selectedText,

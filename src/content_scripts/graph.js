@@ -2,7 +2,7 @@ var indicator = "";
 
 function sendMessageAndAddNodes() {
     const current_url = window.location.href;
-    browser.runtime.sendMessage({
+    chrome.runtime.sendMessage({
         id: 2,
         msg: current_url
     }).then((resp) => {
@@ -37,7 +37,7 @@ function sendMessageAndAddNodes() {
                                         },
                                         'label': mapping['relationName']
                                     }
-                                    browser.runtime.sendMessage({
+                                    chrome.runtime.sendMessage({
                                         id: 3,
                                         msg: JSON.stringify(relationship)
                                     }).then((r) => {r.msg});
@@ -55,7 +55,7 @@ function sendMessageAndAddNodes() {
                                         },
                                         'label': mapping['relationName']
                                     }
-                                    browser.runtime.sendMessage({
+                                    chrome.runtime.sendMessage({
                                         id: 3,
                                         msg: JSON.stringify(relationship)
                                     }).then(() => {});
