@@ -28,14 +28,15 @@ jobs:
       run: |
         git fetch origin
         git checkout chrome
+        git stash push -m "Stash manifest.json before update" -- manifest.json
         git reset --hard origin/develop
-        git restore manifest.json
+        git stash pop
         
     - name: Run porting script
       run: bash tools/chromeify.sh
 
     - name: Push updates to Chrome branch
       run: |
-        git add src/ assets/
+        git add src/ assets/ manifest.json
         git commit -m "Update Chrome version"
         git push origin chrome --force
