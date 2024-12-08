@@ -32,7 +32,7 @@ function submitIndicator(query, submit, current_url) {
 
 // Send a message to background script in order to retrieve the indicator saved in the local storage
 function sendMessageAndFill() {
-    browser.runtime.sendMessage({
+    chrome.runtime.sendMessage({
         id: 1,
         msg: ""
     }).then((resp)=>{
