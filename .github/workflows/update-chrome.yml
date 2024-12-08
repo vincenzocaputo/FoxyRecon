@@ -28,9 +28,9 @@ jobs:
       run: |
         git fetch origin
         git checkout chrome
-        git stash push -m "Stash manifest.json before update" -- manifest.json
+        cp manifest.json manifest.json.v3
         git reset --hard origin/develop
-        git stash pop
+        mv manifest.json.v3 manifest.json
         
     - name: Run porting script
       run: bash tools/chromeify.sh
