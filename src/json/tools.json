@@ -100,7 +100,7 @@
             "inputSelector": "input.chakra-input",
             "submitQuery": "button.btn-primary",
             "types": ["email"],
-            "tags": ["leak"],
+            "tags": ["leaks"],
 			"autoGraph": false
         },
         {
@@ -958,7 +958,7 @@
             "inputSelector": "#searcher",
             "submitQuery": "button.btn-success",
             "types": ["email"],
-            "tags": ["leak"],
+            "tags": ["leaks"],
 			"autoGraph": false
         },
         {
