@@ -1,13 +1,18 @@
-browser.runtime.onInstalled.addListener(function(details) {
-    let currentVersion = browser.runtime.getManifest().version;
+importScripts('./utils/jsonLoader.js');
+importScripts('./utils/storage.js');
+importScripts('./utils/indicatorparser.js');
+importScripts('./utils/graph.js');
+
+chrome.runtime.onInstalled.addListener(function(details) {
+    let currentVersion = chrome.runtime.getManifest().version;
     if(details.reason === "install" || details.reason === "update") {
         if (details.reason === "install") {
             createStorage().then( () => {;
                 console.log("Current version: " + currentVersion);
-                browser.storage.local.set({"version": currentVersion});
+                chrome.storage.local.set({"version": currentVersion});
             });
         } else if(details.reason === "update") {
-            browser.storage.local.get("version")
+            chrome.storage.local.get("version")
                 .then( (result) => {
                     let installedVersion;
                     if (result.hasOwnProperty("version") > 0){
@@ -25,37 +30,37 @@ browser.runtime.onInstalled.addListener(function(details) {
                     return detectStorageMigration(installedVersion, currentVersion);
                 })
                 .then( (result) => {
-                    return browser.storage.local.remove("tools").then( () => {
+                    return chrome.storage.local.remove("tools").then( () => {
                         return loadTools();
                     });
                 })
                 .then( (result) => {
-                    return browser.storage.local.remove("graphMapping").then( () => {
+                    return chrome.storage.local.remove("graphMapping").then( () => {
                         return loadGraphMapping();
                     });
                 })
                 .then( (result) => {
-                    browser.tabs.create({
+                    chrome.tabs.create({
                         url: 'https://github.com/vincenzocaputo/FoxyRecon/releases/tag/v'+currentVersion
                     });
-                    browser.storage.local.set({"version": currentVersion});
+                    chrome.storage.local.set({"version": currentVersion});
                 });
         }
     }
-    browser.contextMenus.create({
+    chrome.contextMenus.create({
         id: 'create-node',
         title: "Add new graph node",
         contexts: ["selection"],
         visible: true
     });
-    browser.contextMenus.create({
+    chrome.contextMenus.create({
         id: 'investigate',
         title: "Investigate",
         contexts: ["selection"],
         visible: true
     });
 
-    browser.contextMenus.onClicked.addListener((clickData) => {
+    chrome.contextMenus.onClicked.addListener((clickData) => {
         indicatorParser = new IndicatorParser();
         selectionText = clickData.selectionText.trim();
         clickedItem = clickData.menuItemId;
@@ -69,7 +74,7 @@ browser.runtime.onInstalled.addListener(function(details) {
                         selectionText = indicatorParser.refangIndicator(selectionText);
                         [type, tld] = indicatorParser.getIndicatorType(selectionText);
                     }
-                    browser.storage.local.set(
+                    chrome.storage.local.set(
                         {
                             "indicator": {
                                 "type": type,
@@ -78,12 +83,12 @@ browser.runtime.onInstalled.addListener(function(details) {
                             }
                         })
                         .then( () => {
-                        browser.browserAction.openPopup();
+                        chrome.action.openPopup();
                     });
                 } else {
-                    browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
+                    chrome.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
                         let activeTab = tabs[0].id;
-                        browser.tabs.sendMessage(activeTab, "show-err:The selected text is not a valid indicator.")
+                        chrome.tabs.sendMessage(activeTab, "show-err:The selected text is not a valid indicator.")
                             .then((response) => {
                             })
                             .catch((error) => {
@@ -94,18 +99,18 @@ browser.runtime.onInstalled.addListener(function(details) {
             if (clickedItem === "create-node") {
                 Graph.getInstance().then( (graph) => {
                     if (graph.getNodesByLabel(selectionText).length == 0) {
-                        browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
+                        chrome.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
                             let activeTab = tabs[0].id;
-                            browser.tabs.sendMessage(activeTab, "open-add-note-popup")
+                            chrome.tabs.sendMessage(activeTab, "open-add-note-popup")
                                 .then((response) => {
                                  })
                                 .catch((error) => {
                                 });
                         });
                     } else {
-                        browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
+                        chrome.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
                             let activeTab = tabs[0].id;
-                            browser.tabs.sendMessage(activeTab, "show-err:The node is already in the graph")
+                            chrome.tabs.sendMessage(activeTab, "show-err:The node is already in the graph")
                                 .then((response) => {
                                 })
                                 .catch((error) => {
@@ -123,42 +128,42 @@ browser.runtime.onInstalled.addListener(function(details) {
  * Harvest and collect the indicators present in the current webpage. Save the list in the local storage.
  */
 function catchIndicators(e) {
-    browser.storage.local.get("settings").then( (result) => {
+    chrome.storage.local.get("settings").then( (result) => {
         const settings = result.settings;
         const autocatch_option = settings.autocatch;
         if (autocatch_option && autocatch_option) {
-            browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
+            chrome.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
                 let activeTab = tabs[0].id;
                 // Send a message to the content script
-                browser.tabs.sendMessage(activeTab, "catch")
+                chrome.tabs.sendMessage(activeTab, "catch")
                     .then((response) => {
                         let token = 1;
-                        browser.runtime.onMessage.addListener(function(message) {
+                        chrome.runtime.onMessage.addListener(function(message) {
                             if(token) {
                                 const indicatorsListJson = message['indicators'];
                                 console.log(indicatorsListJson);
                                 const indicatorsList = JSON.parse(indicatorsListJson);
                                 // No indicators found. Show a message
                                 if(indicatorsListJson.length === 0) {
-                                    browser.browserAction.setBadgeText({text: ""});
+                                    chrome.action.setBadgeText({text: ""});
                                 } else {
-                                    browser.browserAction.setBadgeText({text: indicatorsList.length.toString()});
+                                    chrome.action.setBadgeText({text: indicatorsList.length.toString()});
                                 }
                                 // Save the indicators list in the local storage
-                                browser.storage.local.set({"catchedIndicators": indicatorsList});
+                                chrome.storage.local.set({"catchedIndicators": indicatorsList});
                             } 
                             // Consume token
                             token = 0;
                         })
                     })
                     .catch((error) => {
-                        browser.browserAction.setBadgeText({text: ""});
-                        browser.storage.local.set({"catchedIndicators": []});
+                        chrome.action.setBadgeText({text: ""});
+                        chrome.storage.local.set({"catchedIndicators": []});
                     });
             },
             error => {
-                browser.browserAction.setBadgeText({text: ""});
-                browser.storage.local.set({"catchedIndicators": []});
+                chrome.action.setBadgeText({text: ""});
+                chrome.storage.local.set({"catchedIndicators": []});
                 console.error("Error: "+error);
             });
         }
@@ -167,14 +172,14 @@ function catchIndicators(e) {
 /**
  * When tab changes, remove the badge text
  */
-browser.tabs.onActivated.addListener(catchIndicators);
-browser.tabs.onUpdated.addListener(catchIndicators);
-browser.tabs.onCreated.addListener(catchIndicators);
+chrome.tabs.onActivated.addListener(catchIndicators);
+chrome.tabs.onUpdated.addListener(catchIndicators);
+chrome.tabs.onCreated.addListener(catchIndicators);
 
 /**
  * Waiting for  messages from content_script
  */
-browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if(request.id === 1) {
         // Autofill feature
         let query; // The CSS selector of the submit button
@@ -182,13 +187,13 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         let submit; // Defines if the input must be automatically submitted
         let typAnimOption; // True for typing animation
 
-        browser.storage.local.get("autofill")
+        chrome.storage.local.get("autofill")
             .then( (result) => {
                 if (result.hasOwnProperty("autofill")) {
                     const autofill = result.autofill;
                     query = autofill.submitQuery;
                     inputSelector = autofill.inputSelector;
-                    return browser.storage.local.get("settings");
+                    return chrome.storage.local.get("settings");
                 } else {
                     return Promise.resolve(null);
                 }
@@ -198,7 +203,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                     const settings = result.settings;
                     submit = settings.autosubmit;
                     typAnimOption = settings.typeanim;
-                    return browser.storage.local.get("indicator");
+                    return chrome.storage.local.get("indicator");
                 } else {
                     return Promise.resolve(null);
                 } 
@@ -214,7 +219,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                         typAnimOption: typAnimOption
                     });
                     // Consume the request (to avoid clicking the button more times for the same request)
-                    browser.storage.local.set(
+                    chrome.storage.local.set(
                         { 
                             "autofill": {
                                 submitQuery: "",
@@ -228,7 +233,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     } else if (request.id === 2) {
         let mappings = Array();
         // Auto graph generation
-        browser.storage.local.get("settings").then( (result) => {
+        chrome.storage.local.get("settings").then( (result) => {
             if (result.hasOwnProperty("settings")) {
                 const settings = result.settings;
                 if (settings.autograph && request.msg) {
@@ -246,7 +251,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                         mappings.push(graphMapping[i]);
                     }
                 }
-                return browser.storage.local.get("indicator");
+                return chrome.storage.local.get("indicator");
             }
             return Promise.resolve(null);
         })
@@ -295,7 +300,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                 nodeId = stix["id"];
             }
             if (request.relName) {
-                browser.storage.local.get("indicator").then( (result) => {
+                chrome.storage.local.get("indicator").then( (result) => {
                     if (result.hasOwnProperty("indicator")) {
                         const indicator = result.indicator;
                         const nodes = graph.getNodesByLabel(indicator.value);
@@ -315,9 +320,9 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                     }
                 });
             }
-            browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
+            chrome.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
                 let activeTab = tabs[0].id;
-                browser.tabs.sendMessage(activeTab, "show-msg:Node added to the graph")
+                chrome.tabs.sendMessage(activeTab, "show-msg:Node added to the graph")
                     .then((response) => {
                     })
                     .catch((error) => {

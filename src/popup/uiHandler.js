@@ -12,13 +12,13 @@ var tools;
 loadTools().then( (result) => {
     tools = result;
     let favTools;
-    browser.storage.local.get("fav").then( (result) => {
+    chrome.storage.local.get("fav").then( (result) => {
         favTools = result.fav;
-        return browser.storage.local.get("settings");
+        return chrome.storage.local.get("settings");
     }).then( (result) => {
         const settings = result.settings;
         createToolsList(tools, settings, favTools);
-        return browser.storage.local.get("indicator");
+        return chrome.storage.local.get("indicator");
     }).then( (result) => {
         const indicator = result.indicator || null;
         if(!indicator || !indicator.value || indicator.value === "undefined") {
@@ -50,7 +50,7 @@ loadTools().then( (result) => {
 
 });
 
-browser.storage.local.get("history").then( (result) => {
+chrome.storage.local.get("history").then( (result) => {
     const historySet = result.history || Array();
     historyPanel = document.getElementById("history");
     historySet.forEach(function(h) {
@@ -203,7 +203,7 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, showOnlyAutograph,
     toolsListNodes.style.display = "block";
     const resNodes = toolsListNodes.children;
     // Retrieve favourites tools from local storage
-    browser.storage.local.get("fav").then( (result) => {
+    chrome.storage.local.get("fav").then( (result) => {
         // This node contains the list of tools
         const favTools = result.fav || Array();
         if(!tag || tag === "default") {
@@ -529,43 +529,43 @@ function createToolsList(toolsList, settings, favTools){
             const openPopups = document.querySelectorAll(".open-popup");
             // If settings popup is opened, don't allow clicking 
             if(node.url && openPopups.length == 0) {
-                browser.storage.local.get("settings").then( (result) => {
+                chrome.storage.local.get("settings").then( (result) => {
                     const settings = result.settings;
 
-                    browser.storage.local.set({"autofill": {
+                    chrome.storage.local.set({"autofill": {
                         inputSelector: node.inputSelector || "",
                         submitQuery: node.submitQuery || ""
                     }});
 
                     const targetId = e.target.id;
                     if(targetId === "add-fav") { 
-                        browser.storage.local.get("fav").then( (result) => {
+                        chrome.storage.local.get("fav").then( (result) => {
                             const favTools = result.fav || Array();
                             if(favTools) {
                                 favTools.push(node.name);
                             } else {
                                 favTools = [node.name];
                             }
-                            browser.storage.local.set({"fav": favTools});
+                            chrome.storage.local.set({"fav": favTools});
                             e.target.title = "Remove from favorites";
                             e.target.id = "rem-fav";
                             e.target.src = "../../assets/icons/favourite.png";
                         });
                     } else if(targetId === "rem-fav") {
-                        browser.storage.local.get("fav").then( (result) => {
+                        chrome.storage.local.get("fav").then( (result) => {
                             const favTools = result.fav || Array();
                             if(favTools) {
                                 favTools = favTools.filter(item => item != node.name);
                             }                
-                            browser.storage.local.set({"fav": favTools});
+                            chrome.storage.local.set({"fav": favTools});
                             e.target.title = "Add to favorites";
                             e.target.id = "add-fav";
                             e.target.src = "../../assets/icons/no_favourite.png";
                         });
                     } else {
-                        browser.storage.local.get("indicator").then( (result) => {
+                        chrome.storage.local.get("indicator").then( (result) => {
                             const indicator = result.indicator.value || "";
-                            browser.storage.local.get("history").then( (result) => {
+                            chrome.storage.local.get("history").then( (result) => {
                                 let historySet = result.history;
                                 // If the indicator is the same as the last saved, ignore it
                                 if(indicator && indicator != historySet[0]) {
@@ -573,21 +573,21 @@ function createToolsList(toolsList, settings, favTools){
                                         historySet.pop();
                                     }
                                     historySet.unshift(indicator);
-                                    browser.storage.local.set({"history": historySet});
+                                    chrome.storage.local.set({"history": historySet});
                                 }
                             });
                         });
-                        browser.storage.local.get("settings").then( (result) => {
+                        chrome.storage.local.get("settings").then( (result) => {
                             const settings = result.settings;
                             const newtab = settings.newtab;
                             if(targetId === "open-icon-out" || (targetId != "open-icon-in" && newtab)) {
                                 // Open web resource in a new tab
-                                browser.tabs.create({
+                                chrome.tabs.create({
                                     url: node.url
                                 });
                             } else {
                                 // Otherwise open in current tab
-                                browser.tabs.update({
+                                chrome.tabs.update({
                                     url: node.url
                                 });
                             }
@@ -732,9 +732,9 @@ function createIndicatorsList(indicatorsList){
         indicatorsListNode.appendChild(node);
         indicatorsListNode.style.display = "block";
         node.addEventListener("mouseover", function() {
-            browser.tabs.query({active:true}).then(tabs => {
+            chrome.tabs.query({active:true}).then(tabs => {
                 let activeTab = tabs[0].id;
-                browser.tabs.sendMessage(activeTab, {'cmd':'find',indicator:node.indicator});
+                chrome.tabs.sendMessage(activeTab, {'cmd':'find',indicator:node.indicator});
             })
         });
         // Set click event function
