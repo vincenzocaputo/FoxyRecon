@@ -52,17 +52,21 @@ function createFileForm(evt, title, stix={}) {
         }
         const label = fields["name"].value === "" ? fields["id"].value : fields["name"].value;
         if (action === "add") {
-            graph.addSTIXNode(
-                fields["id"].value,
-                label,
-                type,
-                stix);
+            Graph.getInstance().then( (graph) => {
+                graph.addSTIXNode(
+                    fields["id"].value,
+                    label,
+                    type,
+                    stix);
+            });
         } else {
-            graph.editSTIXNode(
-                fields["id"].value,
-                label,
-                type,
-                stix);
+            Graph.getInstance().then( (graph) => {
+                graph.editSTIXNode(
+                    fields["id"].value,
+                    label,
+                    type,
+                    stix);
+            });
         }
 
     }

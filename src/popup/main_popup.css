@@ -214,6 +214,7 @@ div.tool-tag {
     height: 15px;
     width: 15px;
     grid-column-start: 3;
+    cursor: pointer;
 }
 
 .tool-options-container img {
@@ -226,6 +227,7 @@ div.tool-tag {
     height: 15px;
     width: 15px;
     grid-column-start: 3;
+    cursor: pointer;
 }
 
 #search-box {

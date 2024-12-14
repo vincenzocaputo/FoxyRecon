@@ -1,3 +1,20 @@
+// Type of the last selected string
+var lastType = "";
+var selectedText = "";
+var selectedTextType = "";
+
+
+browser.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+    indicatorParser = new IndicatorParser();
+    selectedText = document.getSelection().toString().trim();
+    [selectedTextType, tld] = indicatorParser.getIndicatorType(selectedText);
+    if (message === "open-add-note-popup") {
+        createPopup(selectedText, selectedTextType);
+    } else {
+        //
+    }
+});
+
 function createInput(name, type, labelName) {
     const formRow = document.createElement('div');
     formRow.className = 'foxyrecon-form-row';

@@ -1,21 +1,25 @@
-
 /**
  *
  * Handle plus icon clicking event
  *
  */
 document.querySelector("#add-node-button").addEventListener("click", (e) => {
-    const nodeId = localStorage.getItem("indicator");
-    const nodeType = localStorage.getItem("type");
-
-    let graph = new Graph();
-    
-    if (graph.addNode(nodeId, nodeType)) {
-        document.querySelector("#add-node").style.display = "none";
-        document.querySelector("#del-node").style.display = "block";
-        document.querySelector("#add-rel").style.display = "block";
-        showMessagePopup("Node added to graph", MessageType.INFO);
-    }
+    let nodeId = "";
+    let nodeType = "";
+    browser.storage.local.get("indicator").then( (result) => {
+        const indicator = result.indicator;
+        nodeId = indicator.value;
+        nodeType = indicator.type;
+        return Graph.getInstance();
+        
+    }).then( (graph) => {
+        if (graph.addNode(nodeId, nodeType)) {
+            document.querySelector("#add-node").style.display = "none";
+            document.querySelector("#del-node").style.display = "block";
+            document.querySelector("#add-rel").style.display = "block";
+            showMessagePopup("Node added to graph", MessageType.INFO);
+        }
+    });
     
 });
 
@@ -25,13 +29,16 @@ document.querySelector("#add-node-button").addEventListener("click", (e) => {
  *
  */
 document.querySelector("#del-node-button").addEventListener("click", (e) => {
-    const indicator = localStorage.getItem("indicator");
-
-    let graph = new Graph();
-    graph.getNodesByLabel(indicator).forEach( (nodeId) => graph.deleteNode(nodeId) );
-    document.querySelector("#add-node").style.display = "block";
-    document.querySelector("#add-rel").style.display = "none";
-    document.querySelector("#del-node").style.display = "none";
+    let indicator;
+    browser.storage.local.get("indicator").then( (result) => {
+        indicator = result.indicator;
+        return Graph.getInstance();
+    }).then( (graph) => {
+        graph.getNodesByLabel(indicator.value).forEach( (nodeId) => graph.deleteNode(nodeId) );
+        document.querySelector("#add-node").style.display = "block";
+        document.querySelector("#add-rel").style.display = "none";
+        document.querySelector("#del-node").style.display = "none";
+    });
 });
     
 
@@ -41,45 +48,47 @@ document.querySelector("#del-node-button").addEventListener("click", (e) => {
  */
 document.querySelector("#add-rel-button").addEventListener("click", (e) => {
     let nodes = [];
-    let graphNodes = new Graph().getNodes();
-    for (let node in graphNodes) {
-        if (graphNodes[node].id != inputField.value) { 
-            nodes.push(graphNodes[node]);
-        }
-    }
-
-    if (nodes.length == 0) {
-        showMessagePopup("You need at least one other node to create a relationship", MessageType.WARNING);
-    } else {
-        // Create options list of nodes you can connect to
-        const selectInput = document.getElementById("to-node-name");
-        selectInput.textContent = "";
-        for (let node in nodes) {
-            const newOptionElement = document.createElement("option");
-            newOptionElement.value = nodes[node].id;
-            newOptionElement.textContent = nodes[node].label;
-            selectInput.appendChild(newOptionElement);
+    Graph.getInstance().then( (graph) => {
+        let graphNodes = graph.getNodes();
+        for (let node in graphNodes) {
+            if (graphNodes[node].id != inputField.value) { 
+                nodes.push(graphNodes[node]);
+            }
         }
 
-        const addRelPopup = document.getElementById("add-relationship-popup");
+        if (nodes.length == 0) {
+            showMessagePopup("You need at least one other node to create a relationship", MessageType.WARNING);
+        } else {
+            // Create options list of nodes you can connect to
+            const selectInput = document.getElementById("to-node-name");
+            selectInput.textContent = "";
+            for (let node in nodes) {
+                const newOptionElement = document.createElement("option");
+                newOptionElement.value = nodes[node].id;
+                newOptionElement.textContent = nodes[node].label;
+                selectInput.appendChild(newOptionElement);
+            }
 
-        // Don't show pointer cursor on buttons
-        document.querySelectorAll(".tool-entry").forEach(function(entry) {
-            entry.style.cursor = "default";
-        });
+            const addRelPopup = document.getElementById("add-relationship-popup");
 
-        document.querySelector("#background").style.display = "block";
-        addRelPopup.style.display = "block";
-        addRelPopup.classList.add("open-popup");
-        const selectRelName = document.getElementById("rel-node-name");
-        selectRelName.textContent = "";
-        Graph.relationshipTypes.forEach( rtype => {
-            const optionValue = document.createElement("option");
-            optionValue.value = rtype;
-            optionValue.textContent = rtype;
-            selectRelName.appendChild(optionValue);
-        });
-    }
+            // Don't show pointer cursor on buttons
+            document.querySelectorAll(".tool-entry").forEach(function(entry) {
+                entry.style.cursor = "default";
+            });
+
+            document.querySelector("#background").style.display = "block";
+            addRelPopup.style.display = "block";
+            addRelPopup.classList.add("open-popup");
+            const selectRelName = document.getElementById("rel-node-name");
+            selectRelName.textContent = "";
+            Graph.relationshipTypes.forEach( rtype => {
+                const optionValue = document.createElement("option");
+                optionValue.value = rtype;
+                optionValue.textContent = rtype;
+                selectRelName.appendChild(optionValue);
+            });
+        }
+    });
 });
 
 /**
@@ -135,30 +144,33 @@ document.querySelector("#add-node-rel-button").addEventListener("click", (e) => 
     const toNodeId = document.querySelector("#to-node-name").value;
     const isOutbound = document.querySelector("#outbound-link input[type='checkbox']").checked
     const isInbound = document.querySelector("#inbound-link input[type='checkbox']").checked
-    const fromNodeLabel = localStorage.getItem("indicator");
-    const fromNodeType = localStorage.getItem("type");
 
+    let fromNodeLabel;
+    let fromNodeType;
 
-    let graph = new Graph();
-    
-    //const [toNodeType, tld] = indicatorParser.getIndicatorType(toNodeId);
-    //graph.addNode(toNodeId, toNodeType);
-
-    const fromNodeIds = graph.getNodesByLabel(fromNodeLabel);
-    for (const fromNodeId of fromNodeIds) {
-        if (isOutbound) {
-            graph.addLink(fromNodeId, toNodeId, relLabel);
+    browser.storage.local.get("indicator").then( (result) => {
+        const indicator = result.indicator;
+        fromNodeLabel = indicator.value;
+        fromNodeType = indicator.type;
+        return Graph.getInstance();
+    }).then( (graph) => {
+        //const [toNodeType, tld] = indicatorParser.getIndicatorType(toNodeId);
+        //graph.addNode(toNodeId, toNodeType);
+        const fromNodeIds = graph.getNodesByLabel(fromNodeLabel);
+        for (const fromNodeId of fromNodeIds) {
+            if (isOutbound) {
+                graph.addLink(fromNodeId, toNodeId, relLabel);
+            }
+            if (isInbound) {
+                graph.addLink(toNodeId, fromNodeId, relLabel);
+            }
         }
-        if (isInbound) {
-            graph.addLink(toNodeId, fromNodeId, relLabel);
-        }
-    }
 
 
-    document.getElementById("add-relationship-popup").style.display = "none";
-    document.querySelector("#background").style.display = "none";
-    showMessagePopup("Relationship added to graph", MessageType.INFO);
-
+        document.getElementById("add-relationship-popup").style.display = "none";
+        document.querySelector("#background").style.display = "none";
+        showMessagePopup("Relationship added to graph", MessageType.INFO);
+    });
 });
 
 /**

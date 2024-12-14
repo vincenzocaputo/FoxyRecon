@@ -4,6 +4,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [ 0.23.0 ] - 2024-10-06
+
+### Add
+- files.ninja web resource
+- PSBDMP web resource
+- Spur tool for IP addresses
+- Cloudflare Radar tool
+- SiceHice web resource
+- IBM X-Force Exchange web resource
+- PhishTank web resource
+- Snyk web resource for vulnerabilities lookup
+- ioc[.]one web resource
+
+### Change
+- Change local storage management APIs
+- Remove Polifyll library
+- Minor changes to make porting to Chrome possible
+
+### Fix
+- Minor stylesheets bugs
+- Minor bugs
+
 ## [ 0.22.0 ] - 2024-09-22
 
 ### Add

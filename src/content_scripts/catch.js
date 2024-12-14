@@ -53,5 +53,3 @@ browser.runtime.onMessage.addListener(function(message) {
         }
     }
 });
-
-window.addEventListener("load", catchIndicators);

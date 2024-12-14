@@ -30,17 +30,21 @@ function createUserAccountForm(evt, title, stix={}) {
             }
         }
         if (action === "add") {
-            graph.addSTIXNode(
-                fields["id"].value,
-                type,
-                type,
-                stix);
+            Graph.getInstance().then( (graph) => {
+                graph.addSTIXNode(
+                    fields["id"].value,
+                    type,
+                    type,
+                    stix);
+            });
         } else {
-            graph.editSTIXNode(
-                fields["id"].value,
-                type,
-                type,
-                stix);
+            Graph.getInstance().then( (graph) => {
+                graph.editSTIXNode(
+                    fields["id"].value,
+                    type,
+                    type,
+                    stix);
+            });
         }
 
     }

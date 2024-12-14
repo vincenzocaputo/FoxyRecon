@@ -100,7 +100,7 @@
             "inputSelector": "input.chakra-input",
             "submitQuery": "button.btn-primary",
             "types": ["email"],
-            "tags": ["leak"],
+            "tags": ["leaks"],
 			"autoGraph": false
         },
         {
@@ -205,6 +205,21 @@
             "color": "#3090C7",
             "types": ["domain","ip","email"],
             "tags": ["rep"],
+			"autoGraph": false
+        },
+        {
+            "name": "Cloudflare Radar",
+            "url": {
+                "domain": "https://radar.cloudflare.com/domains/domain/%s",
+                "ip": "https://radar.cloudflare.com/ip/%s",
+                "url": "https://radar.cloudflare.com/scan?url=%s",
+                "asn": "https://radar.cloudflare.com/traffic/%s"
+            },
+            "desc": "Up to date global Internet trends and insights.",
+            "icon": "cloudflare.png",
+            "color": "#F38020",
+            "types": ["domain","ip","url","asn"],
+            "tags": ["whois","tls","net-activity"],
 			"autoGraph": false
         },
         {
@@ -418,6 +433,17 @@
             "submitQuery": "#submitBasic",
             "types": ["domain"],
             "tags": ["whois"],
+			"autoGraph": false
+        },
+        {
+            "name": "files.ninja",
+            "url": {
+                "hash": "https://files.ninja/search?q=%s"
+            },
+            "desc": "",
+            "icon": "filesninja.png",
+            "color": "#ED8936",
+            "types": ["hash"],
 			"autoGraph": false
         },
         {
@@ -772,6 +798,21 @@
 			"autoGraph": false
         },
         {
+            "name": "IBM X-Force Exchange",
+            "url": {
+                "domain": "https://exchange.xforce.ibmcloud.com/url/%s",
+                "ip": "https://exchange.xforce.ibmcloud.com/ip/%s",
+                "cve": "https://exchange.xforce.ibmcloud.com/vulnerabilities/%s",
+                "hash": "https://exchange.xforce.ibmcloud.com/malware/%s"
+            },
+            "desc": "Research, Collaborate and Act on threat intelligence",
+            "icon": "ibm.png",
+            "color": "#262626",
+            "types": ["domain","ip","cve","hash"],
+            "tags": ["ioc","rep"],
+			"autoGraph": false
+        },
+        {
             "name": "InQuest IOCDB",
             "url": {
                 "ip": "https://labs.inquest.net/iocdb/search/%s",
@@ -810,6 +851,22 @@
             "color": "#253162",
             "types": ["hash"],
             "tags": ["sandbox"],
+			"autoGraph": false
+        },
+        {
+            "name": "ioc[.]one",
+            "url": {
+                "ip": "https://ioc.one/auth/attribute?search=%s",
+                "domain": "https://ioc.one/auth/attribute?search=%s",
+                "url": "https://ioc.one/auth/attribute?search=%s",
+                "email": "https://ioc.one/auth/attribute?search=%s",
+                "hash": "https://ioc.one/auth/attribute?search=%s"
+            },
+            "desc": "OSINT Cyber Threat Intelligence Database",
+            "icon": "iocone.png",
+            "color": "#103834",
+            "types": ["ip","domain","url","email","hash"],
+            "tags": ["ioc"],
 			"autoGraph": false
         },
         {
@@ -901,7 +958,7 @@
             "inputSelector": "#searcher",
             "submitQuery": "button.btn-success",
             "types": ["email"],
-            "tags": ["leak"],
+            "tags": ["leaks"],
 			"autoGraph": false
         },
         {
@@ -1066,6 +1123,21 @@
 			"autoGraph": false
         },
         {
+            "name": "PhishTank",
+            "url": {
+                "url": "https://phishtank.org/index.php",
+                "asn": "https://phishtank.org/asn_search.php?asn=%s&valid=All&active=All&Search=Search"
+            },
+            "desc": "Submit suspected phishes. Track the status of your submissions. Verify other users' submissions. Develop software with our free API.",
+            "icon": "phishtank.png",
+            "color": "#167AB2",
+            "inputSelector": "input[name='isaphishurl']",
+            "submitQuery": "input.submitbutton",
+            "types": ["url","asn"],
+            "tags": ["rep", "ioc"],
+			"autoGraph": false
+        },
+        {
             "name": "Poc-in-Github",
             "url": {
                 "cve": "https://poc-in-github.motikan2010.net/api/v1/?cve_id=%s"
@@ -1098,6 +1170,20 @@
             "color": "#ACACAC",
             "types": ["ip"],
             "tags": ["rep"],
+			"autoGraph": false
+        },
+        {
+            "name": "PSBDMP",
+            "url": {
+                "email": "https://psbdmp.ws/"
+            },
+            "desc": "The biggest archive of {paste} dumps",
+            "icon": "psbdmp.png",
+            "color": "#26265a",
+            "inputSelector": "input[name='search']",
+            "submitQuery": "button i.fa-search",
+            "types": ["email"],
+            "tags": ["leaks"],
 			"autoGraph": false
         },
         {
@@ -1191,6 +1277,29 @@
 			"autoGraph": false
         },
         {
+            "name": "SiceHice",
+            "url": {
+                "ip": "https://www.sicehice.com/search/%s"
+            },
+            "desc": "Bulk IP Searching | Threat Data Aggregation",
+            "icon": "sicehice.png",
+            "color": "#0090C5",
+            "types": ["ip"],
+            "tags": ["rep"],
+			"autoGraph": false
+        },
+        {
+            "name": "Snyk",
+            "url": {
+                "cve": "https://security.snyk.io/vuln/?search=%s"
+            },
+            "desc": "The leading database for open source vulnerabilities and cloud misconfigurations.",
+            "icon": "snyk.png",
+            "color": "#120C68",
+            "types": ["cve"],
+			"autoGraph": false
+        },
+        {
             "name": "Spam Database Lookup",
             "url": {
                 "domain": "https://spamdb.org/db/%s",
@@ -1226,6 +1335,18 @@
             "icon": "sploitus.png",
             "color": "#5754DE",
             "types": ["cve"],
+			"autoGraph": false
+        },
+        {
+            "name": "Spur",
+            "url": {
+                "ip": "https://spur.us/context/%s"
+            },
+            "desc": "Spur provides cutting-edge tools and data to detect VPNs, residential proxies, and bots – helping you stay ahead of the latest evasion methods.",
+            "icon": "spur.png",
+            "color": "#6A48F2",
+            "types": ["ip"],
+            "tags": ["rep"],
 			"autoGraph": false
         },
         {

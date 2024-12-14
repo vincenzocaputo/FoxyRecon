@@ -3,7 +3,7 @@ var indicator = "";
 
 function submitIndicator(query, submit, current_url) {
                    
-    if(query && submit === "true") {
+    if(query && submit) {
         if(current_url.includes("urlscan.io")) {
             setTimeout(() => {
                 document.getElementById("submitbtn_text").click();
@@ -37,17 +37,17 @@ function sendMessageAndFill() {
         msg: ""
     }).then((resp)=>{
         setTimeout(()=>{
-        indicator = resp.msg;
+        let indicator = resp.msg;
         // Get the query to find submit button
-        query = resp.query;
+        const query = resp.query;
 
         // Get the selector to find the input field
-        inputSelector = resp.inputSelector;
+        const inputSelector = resp.inputSelector;
 
         // Get typing animation option
-        typAnimOption = resp.typAnimOption;
+        const typAnimOption = resp.typAnimOption;
 
-        submit = resp.submit;
+        const submit = resp.submit;
 
         if(inputSelector) {
             const current_url = window.location.href;
@@ -71,6 +71,9 @@ function sendMessageAndFill() {
                     }, 100);
                 });
                 return;
+            } else if(current_url.includes("phishtank.org/asn_search.php")) {
+                // do nothing
+                return;
             } else {
                 inputField = document.querySelector(inputSelector);
             }
@@ -82,7 +85,7 @@ function sendMessageAndFill() {
 
             if(inputField) {
                 inputField.value = "";
-                if(typAnimOption === "true") {
+                if(typAnimOption) {
                     intv = setInterval(()=>{ 
                         const letter = indicator[0]; 
                         if(letter) { 
@@ -106,9 +109,9 @@ function sendMessageAndFill() {
 
 
     },(error)=>{
-        console.error(error);
+        console.log(error);
     });   
 }
 
 
-    setTimeout(sendMessageAndFill(), 500);
+setTimeout(sendMessageAndFill(), 500);

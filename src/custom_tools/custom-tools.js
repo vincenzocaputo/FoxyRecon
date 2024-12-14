@@ -1,17 +1,23 @@
 var update = false;
 var selectedResource = -1;
 
-function readJSONFile(file, callback) {
-    let rawFile = new XMLHttpRequest();
-    rawFile.overrideMimeType("application/json");
-    rawFile.open("GET", file, true);
-    rawFile.onreadystatechange = function() {
-        if(rawFile.readyState == 4 && rawFile.status == "200") {
-            callback(rawFile.responseText);
-        }
-
-    }
-    rawFile.send(null); 
+function readJSONFile(file) {
+    return new Promise(function (resolve, reject) {
+        const fileURI = browser.runtime.getURL(file);
+        //const fileURI = file;
+        fetch(fileURI).then( (response) => {
+            if (!response.ok) {
+                reject({
+                    status: "error",
+                    statusText: response.status
+                });
+            }
+            return response.json(); // Parse JSON if the file is JSON
+        })
+        .then( (fileContent) => {
+            resolve(fileContent);
+        });
+    });
 }
 
 function showMessageError(field_id, err_msg) {
@@ -30,248 +36,248 @@ function showCustomToolsList() {
     document.querySelector("#no-tools").style.display = "none";
     const toolsListNodes = document.getElementById("tools-list");
     toolsListNodes.textContent = ''; // Remove nodes already potentially present
-    const toolsList = JSON.parse(localStorage.getItem("tools-ext"));
-    if(toolsList == null) {
-        document.querySelector("#no-tools").style.display = "block";
-        return;
-    }
-    for (i=0; i<toolsList.length; i++) {
-        let tool = toolsList[i];
-        let node = document.createElement("div");
-
-        node.classList.add("tool-entry");
-        
-        let nodeImageContainer = document.createElement("div");
-        nodeImageContainer.classList.add("tool-icon");
-
-        let nodeImage = document.createElement("img");
-
-        let imageSrc = toolsList[i]["icon"];
-        nodeImage.setAttribute("src", imageSrc);
-
-        let nodeText = document.createElement("div");
-        
-        const text = document.createElement("div");
-        text.textContent = toolsList[i]["name"];
-        text.classList.add("text");
-        nodeText.appendChild(text);
-        nodeText.classList.add("tool-name");
-
-        let color = toolsList[i]["color"];
-        if(color != null) {
-            node.style.background = color;
-            nodeText.style.backgroundColor = color;
+    browser.storage.local.get("toolsExt").then( (result) => {
+        const toolsList = result.toolsExt || Array();
+        if(toolsList.length === 0) {
+            document.querySelector("#no-tools").style.display = "block";
+            return;
         }
+        for (i=0; i<toolsList.length; i++) {
+            let tool = toolsList[i];
+            let node = document.createElement("div");
 
-        tags = toolsList[i]["tags"];
-        if(tags && tags.length > 0) {
-            nodeText.classList.add("tool-name-with-tags");
-            let nodeTagsContainer = document.createElement("div");
-            nodeTagsContainer.classList.add("tool-tags-container");
+            node.classList.add("tool-entry");
+            
+            let nodeImageContainer = document.createElement("div");
+            nodeImageContainer.classList.add("tool-icon");
 
-            for(tagIdx=0; tagIdx<tags.length; tagIdx++) {
-                let nodeTag = document.createElement("div");
+            let nodeImage = document.createElement("img");
 
-                nodeTag.textContent = tags[tagIdx].toUpperCase();
-                nodeTag.classList.add("tool-tag");
+            let imageSrc = toolsList[i]["icon"];
+            nodeImage.setAttribute("src", imageSrc);
 
-                nodeTag.style.backgroundColor = "rgba(256,256,256, 0.3)";
-                nodeTagsContainer.appendChild(nodeTag);
-                nodeText.insertAdjacentElement("beforeend", nodeTagsContainer);
+            let nodeText = document.createElement("div");
+            
+            const text = document.createElement("div");
+            text.textContent = toolsList[i]["name"];
+            text.classList.add("text");
+            nodeText.appendChild(text);
+            nodeText.classList.add("tool-name");
 
+            let color = toolsList[i]["color"];
+            if(color != null) {
+                node.style.background = color;
+                nodeText.style.backgroundColor = color;
             }
-        }
 
-        optionsContainer = document.createElement("div");
-        optionsContainer.classList.add("tool-options-container");
+            tags = toolsList[i]["tags"];
+            if(tags && tags.length > 0) {
+                nodeText.classList.add("tool-name-with-tags");
+                let nodeTagsContainer = document.createElement("div");
+                nodeTagsContainer.classList.add("tool-tags-container");
 
-    
-        node.id = i;
-        
-        // Add animation to show the entire text
-        nodeText.addEventListener("mouseenter", (e) => {
-            const container = e.target;
-            const text = container.querySelector('.text');
-            const containerWidth = container.offsetWidth;
-            const textWidth = text.scrollWidth;
+                for(tagIdx=0; tagIdx<tags.length; tagIdx++) {
+                    let nodeTag = document.createElement("div");
 
-            if (!text.classList.contains('animate')) {
-                if (textWidth > containerWidth) {
-                    text.classList.add('animate');
-                } else {
-                    text.classList.remove('animate');
+                    nodeTag.textContent = tags[tagIdx].toUpperCase();
+                    nodeTag.classList.add("tool-tag");
+
+                    nodeTagsContainer.appendChild(nodeTag);
+                    nodeText.insertAdjacentElement("beforeend", nodeTagsContainer);
+
                 }
             }
 
-            // Add animation to tags container to see all tags, if necessary
-            const tagsContainer = container.querySelector(".tool-tags-container");
-            if (tagsContainer) {
-                const tagsContainerWidth = tagsContainer.offsetWidth;
-                const tagsWidth = container.offsetWidth;
-                console.log(tagsContainerWidth);
-                console.log(tagsWidth);
+            optionsContainer = document.createElement("div");
+            optionsContainer.classList.add("tool-options-container");
 
-                if (!tagsContainer.classList.contains('animate')) {
-                    if (tagsWidth < tagsContainerWidth) {
-                        tagsContainer.classList.add('animate');
+        
+            node.id = i;
+            
+            // Add animation to show the entire text
+            nodeText.addEventListener("mouseenter", (e) => {
+                const container = e.target;
+                const text = container.querySelector('.text');
+                const containerWidth = container.offsetWidth;
+                const textWidth = text.scrollWidth;
+
+                if (!text.classList.contains('animate')) {
+                    if (textWidth > containerWidth) {
+                        text.classList.add('animate');
                     } else {
+                        text.classList.remove('animate');
+                    }
+                }
+
+                // Add animation to tags container to see all tags, if necessary
+                const tagsContainer = container.querySelector(".tool-tags-container");
+                if (tagsContainer) {
+                    const tagsContainerWidth = tagsContainer.offsetWidth;
+                    const tagsWidth = container.offsetWidth;
+
+                    if (!tagsContainer.classList.contains('animate')) {
+                        if (tagsWidth < tagsContainerWidth) {
+                            tagsContainer.classList.add('animate');
+                        } else {
+                            tagsContainer.classList.remove('animate');
+                        }
+                    }
+                }
+            });
+            // Remove the animation when the mouse leaves
+            nodeText.addEventListener("mouseleave", (e) => {
+                const container = e.target;
+                const text = container.querySelector('.text');
+
+                if (text.classList.contains('animate')) {
+                    text.classList.remove('animate');
+                }
+
+                const tagsContainer = container.querySelector(".tool-tags-container");
+                if (tagsContainer) {
+                    if (tagsContainer.classList.contains('animate')) {
                         tagsContainer.classList.remove('animate');
                     }
                 }
-            }
-        });
-        // Remove the animation when the mouse leaves
-        nodeText.addEventListener("mouseleave", (e) => {
-            const container = e.target;
-            const text = container.querySelector('.text');
+            });
 
-            if (text.classList.contains('animate')) {
-                text.classList.remove('animate');
-            }
+            
+            // If the user clicks on a tool in the list, fill the form with the information related to the selected tool
+            node.addEventListener("click", function(e) {
+                if(document.querySelector("#form-pane").style.display == "block") {
+                    if(confirm("Are you sure to cancel? All the changes will be lost") == false) {
+                        return;
+                    } else {
+                        resetForm();
+                        resetPage();
+                    }
+                }
+                document.querySelectorAll(".tool-entry").forEach( v => v.style.opacity = "0.4" );
+                const toolEntry = e.target.closest(".tool-entry");
+                toolEntry.style.opacity = "1";
+                selectedResource = toolEntry.id;
+                document.querySelector("#add-res-button").style.display = "none";
+                document.querySelector("#cancel-button").style.display = "block";
+                document.querySelector("#edit-res-button").style.display = "block";
+                document.querySelector("#del-res-button").style.display = "block";
+                document.querySelector("#export-button").style.display = "block";
+                document.querySelector("#export-all-button").style.display = "none";
+                resetForm();
+                update = true;
+                document.querySelector("#submit-btn").textContent = "Update tool";
+                const tool = toolsList[e.currentTarget.id];
+                document.getElementById("tool-name").value = tool["name"];
+                document.getElementById("tool-name").readOnly = true;
+                document.getElementById("tool-desc").value = tool["desc"] || "";
+                if(tool["url"]["domain"]) {
+                    document.getElementById("tool-dom-url").value = tool["url"]["domain"];
+                    if(tool["inputSelector"]) {
+                        document.getElementById("tool-dom-input-csssel").value = tool["inputSelector"];
+                        document.getElementById("tool-dom-post").checked = true;
+                        document.getElementById("tool-dom-post").dispatchEvent(new Event("change"));
+                        document.getElementById("tool-dom-submit-csssel").value = tool["submitQuery"] || "";
+                    }
+                }
+                if(tool["url"]["ip"]) {
+                    document.getElementById("tool-ip-url").value = tool["url"]["ip"];
+                    if(tool["inputSelector"]) {
+                        document.getElementById("tool-ip-input-csssel").value = tool["inputSelector"];
+                        document.getElementById("tool-ip-post").checked = true;
+                        document.getElementById("tool-ip-post").dispatchEvent(new Event("change"));
+                        document.getElementById("tool-ip-submit-csssel").value = tool["submitQuery"] || "";
+                    }
+                }
+                if(tool["url"]["url"]) {
+                    document.getElementById("tool-url-url").value = tool["url"]["url"];
+                    if(tool["inputSelector"]) {
+                        document.getElementById("tool-url-input-csssel").value = tool["inputSelector"];
+                        document.getElementById("tool-url-post").checked = true;
+                        document.getElementById("tool-url-post").dispatchEvent(new Event("change"));
+                        document.getElementById("tool-url-submit-csssel").value = tool["submitQuery"] || "";
+                    }
+                }
+                if(tool["url"]["email"]) {
+                    document.getElementById("tool-email-url").value = tool["url"]["email"];
+                    if(tool["inputSelector"]) {
+                        document.getElementById("tool-email-input-csssel").value = tool["inputSelector"];
+                        document.getElementById("tool-email-post").checked = true;
+                        document.getElementById("tool-email-post").dispatchEvent(new Event("change"));
+                        document.getElementById("tool-email-submit-csssel").value = tool["submitQuery"] || "";
+                    }
+                }
+                if(tool["url"]["hash"]) {
+                    document.getElementById("tool-hash-url").value = tool["url"]["hash"];
+                    if(tool["inputSelector"]) {
+                        document.getElementById("tool-hash-input-csssel").value = tool["inputSelector"];
+                        document.getElementById("tool-hash-post").checked = true;
+                        document.getElementById("tool-hash-post").dispatchEvent(new Event("change"));
+                        document.getElementById("tool-hash-submit-csssel").value = tool["submitQuery"] || "";
+                    }
+                }
+                if(tool["url"]["cve"]) {
+                    document.getElementById("tool-cve-url").value = tool["url"]["cve"];
+                    if(tool["inputSelector"]) {
+                        document.getElementById("tool-cve-input-csssel").value = tool["inputSelector"];
+                        document.getElementById("tool-cve-post").checked = true;
+                        document.getElementById("tool-cve-post").dispatchEvent(new Event("change"));
+                        document.getElementById("tool-cve-submit-csssel").value = tool["submitQuery"] || "";
+                    }
+                }
+                if(tool["url"]["phone"]) {
+                    document.getElementById("tool-phone-url").value = tool["url"]["phone"];
+                    if(tool["inputSelector"]) {
+                        document.getElementById("tool-phone-input-csssel").value = tool["inputSelector"];
+                        document.getElementById("tool-phone-post").checked = true;
+                        document.getElementById("tool-phone-post").dispatchEvent(new Event("change"));
+                        document.getElementById("tool-phone-submit-csssel").value = tool["submitQuery"] || "";
+                    }
+                }
+                if(tool["url"]["asn"]) {
+                    document.getElementById("tool-asn-url").value = tool["url"]["asn"];
+                    if(tool["inputSelector"]) {
+                        document.getElementById("tool-asn-input-csssel").value = tool["inputSelector"];
+                        document.getElementById("tool-asn-post").checked = true;
+                        document.getElementById("tool-asn-post").dispatchEvent(new Event("change"));
+                        document.getElementById("tool-asn-submit-csssel").value = tool["submitQuery"] || "";
+                    }
+                }
+                document.getElementById("tool-icon-b64").value = tool["icon"];
+                document.querySelector("#file-upload .warn-msg").style.visibility = "visible";
+                document.getElementById("tool-color").value = tool["color"];
 
-            const tagsContainer = container.querySelector(".tool-tags-container");
-            if (tagsContainer) {
-                if (tagsContainer.classList.contains('animate')) {
-                    tagsContainer.classList.remove('animate');
+                if('tags' in tool) {
+                    tool["tags"].forEach((e)=>{
+                        document.querySelector(`input[value=${e}]`).checked = true;
+                    });
                 }
-            }
-        });
+            });
 
-        
-        // If the user clicks on a tool in the list, fill the form with the information related to the selected tool
-        node.addEventListener("click", function(e) {
-            if(document.querySelector("#form-pane").style.display == "block") {
-                if(confirm("Are you sure to cancel? All the changes will be lost") == false) {
-                    return;
-                } else {
-                    resetForm();
-                    resetPage();
-                }
-            }
-            document.querySelectorAll(".tool-entry").forEach( v => v.style.outline = "none" );
-            const toolEntry = e.target.closest(".tool-entry");
-            toolEntry.style.outline = "5px outset #000000";
-            selectedResource = toolEntry.id;
-            document.querySelector("#add-res-button").style.display = "none";
-            document.querySelector("#cancel-button").style.display = "block";
-            document.querySelector("#edit-res-button").style.display = "block";
-            document.querySelector("#del-res-button").style.display = "block";
-            document.querySelector("#export-button").style.display = "block";
-            document.querySelector("#export-all-button").style.display = "none";
-            resetForm();
-            update = true;
-            document.querySelector("#submit-btn").textContent = "Update tool";
-            const tool = toolsList[e.currentTarget.id];
-            document.getElementById("tool-name").value = tool["name"];
-            document.getElementById("tool-name").readOnly = true;
-            document.getElementById("tool-desc").value = tool["desc"] || "";
-            if(tool["url"]["domain"]) {
-                document.getElementById("tool-dom-url").value = tool["url"]["domain"];
-                if(tool["inputSelector"]) {
-                    document.getElementById("tool-dom-input-csssel").value = tool["inputSelector"];
-                    document.getElementById("tool-dom-post").checked = true;
-                    document.getElementById("tool-dom-post").dispatchEvent(new Event("change"));
-                    document.getElementById("tool-dom-submit-csssel").value = tool["submitQuery"] || "";
-                }
-            }
-            if(tool["url"]["ip"]) {
-                document.getElementById("tool-ip-url").value = tool["url"]["ip"];
-                if(tool["inputSelector"]) {
-                    document.getElementById("tool-ip-input-csssel").value = tool["inputSelector"];
-                    document.getElementById("tool-ip-post").checked = true;
-                    document.getElementById("tool-ip-post").dispatchEvent(new Event("change"));
-                    document.getElementById("tool-ip-submit-csssel").value = tool["submitQuery"] || "";
-                }
-            }
-            if(tool["url"]["url"]) {
-                document.getElementById("tool-url-url").value = tool["url"]["url"];
-                if(tool["inputSelector"]) {
-                    document.getElementById("tool-url-input-csssel").value = tool["inputSelector"];
-                    document.getElementById("tool-url-post").checked = true;
-                    document.getElementById("tool-url-post").dispatchEvent(new Event("change"));
-                    document.getElementById("tool-url-submit-csssel").value = tool["submitQuery"] || "";
-                }
-            }
-            if(tool["url"]["email"]) {
-                document.getElementById("tool-email-url").value = tool["url"]["email"];
-                if(tool["inputSelector"]) {
-                    document.getElementById("tool-email-input-csssel").value = tool["inputSelector"];
-                    document.getElementById("tool-email-post").checked = true;
-                    document.getElementById("tool-email-post").dispatchEvent(new Event("change"));
-                    document.getElementById("tool-email-submit-csssel").value = tool["submitQuery"] || "";
-                }
-            }
-            if(tool["url"]["hash"]) {
-                document.getElementById("tool-hash-url").value = tool["url"]["hash"];
-                if(tool["inputSelector"]) {
-                    document.getElementById("tool-hash-input-csssel").value = tool["inputSelector"];
-                    document.getElementById("tool-hash-post").checked = true;
-                    document.getElementById("tool-hash-post").dispatchEvent(new Event("change"));
-                    document.getElementById("tool-hash-submit-csssel").value = tool["submitQuery"] || "";
-                }
-            }
-            if(tool["url"]["cve"]) {
-                document.getElementById("tool-cve-url").value = tool["url"]["cve"];
-                if(tool["inputSelector"]) {
-                    document.getElementById("tool-cve-input-csssel").value = tool["inputSelector"];
-                    document.getElementById("tool-cve-post").checked = true;
-                    document.getElementById("tool-cve-post").dispatchEvent(new Event("change"));
-                    document.getElementById("tool-cve-submit-csssel").value = tool["submitQuery"] || "";
-                }
-            }
-            if(tool["url"]["phone"]) {
-                document.getElementById("tool-phone-url").value = tool["url"]["phone"];
-                if(tool["inputSelector"]) {
-                    document.getElementById("tool-phone-input-csssel").value = tool["inputSelector"];
-                    document.getElementById("tool-phone-post").checked = true;
-                    document.getElementById("tool-phone-post").dispatchEvent(new Event("change"));
-                    document.getElementById("tool-phone-submit-csssel").value = tool["submitQuery"] || "";
-                }
-            }
-            if(tool["url"]["asn"]) {
-                document.getElementById("tool-asn-url").value = tool["url"]["asn"];
-                if(tool["inputSelector"]) {
-                    document.getElementById("tool-asn-input-csssel").value = tool["inputSelector"];
-                    document.getElementById("tool-asn-post").checked = true;
-                    document.getElementById("tool-asn-post").dispatchEvent(new Event("change"));
-                    document.getElementById("tool-asn-submit-csssel").value = tool["submitQuery"] || "";
-                }
-            }
-            document.getElementById("tool-icon-b64").value = tool["icon"];
-            document.querySelector("#file-upload .warn-msg").style.visibility = "visible";
-            document.getElementById("tool-color").value = tool["color"];
+            document.getElementById("edit-res-button").addEventListener("click", function(e) {
+                document.querySelector("#main-pane").style.display = "none";
+                document.querySelector("#form-pane").style.display = "block";
+                document.querySelector("#cancel-button").style.display = "block";
+                document.querySelector("#del-res-button").style.display = "none";
+                document.querySelector("#add-res-button").style.display = "none";
+                document.querySelector("#edit-res-button").style.display = "none";
+                document.querySelector("#export-button").style.display = "none";
+                document.querySelector("#export-all-button").style.display = "block";
+                document.querySelector("#submit-btn").value = "Edit Tool";
 
-            if('tags' in tool) {
-                tool["tags"].forEach((e)=>{
-                    document.querySelector(`input[value=${e}]`).checked = true;
-                });
-            }
-        });
+            });
 
-        document.getElementById("edit-res-button").addEventListener("click", function(e) {
-            document.querySelector("#main-pane").style.display = "none";
-            document.querySelector("#form-pane").style.display = "block";
-            document.querySelector("#cancel-button").style.display = "block";
-            document.querySelector("#del-res-button").style.display = "none";
-            document.querySelector("#add-res-button").style.display = "none";
-            document.querySelector("#edit-res-button").style.display = "none";
-            document.querySelector("#export-button").style.display = "none";
-            document.querySelector("#export-all-button").style.display = "block";
-            document.querySelector("#submit-btn").value = "Edit Tool";
-
-        });
-
-        nodeImageContainer.appendChild(nodeImage);
-        node.appendChild(nodeImageContainer);
-        node.appendChild(nodeText);
-        toolsListNodes.appendChild(node);
-
-
-
-    }
+            nodeImageContainer.appendChild(nodeImage);
+            node.appendChild(nodeImageContainer);
+            node.appendChild(nodeText);
+            toolsListNodes.appendChild(node);
+        }
+    });
 }
 
 function resetPage() {
+    const background = document.querySelector("#background");
+    if (background) {
+        background.remove();
+    }
     document.querySelector("#main-pane").style.display = "block";
     document.querySelector("#form-pane").style.display = "none";
     document.querySelector("#cancel-button").style.display = "none";
@@ -301,6 +307,9 @@ function resetErrors() {
 function createFormPopup(formIcon, formTitle, defaultName, addEvent) {
     var buttonsContainer;
     var form;
+    const outsideBackground = document.createElement("div");
+    outsideBackground.setAttribute("id", "background");
+    document.querySelector("#page-container").appendChild(outsideBackground);
     const popupContainer = document.createElement("div");
     const formContainer = document.createElement("div");
 
@@ -325,6 +334,7 @@ function createFormPopup(formIcon, formTitle, defaultName, addEvent) {
     cancelButton.classList.add("btn");
     cancelButton.classList.add("cancel-btn");
     cancelButton.addEventListener("click", evt => {
+        resetPage();
         evt.target.closest(".popup-container").remove();
     });
 
@@ -419,16 +429,18 @@ window.onload = function() {
     var mispTemplate;
     var openctiTemplate;
     var yetiTemplate;
+    readJSONFile("src/custom_tools/templates/misp.json").then( (content)=> {
+        mispTemplate = content;
+        return readJSONFile("src/custom_tools/templates/yeti.json");
+    })
+    .then( (content) => {
+        yetiTemplate = content;
+        return readJSONFile("src/custom_tools/templates/opencti.json");
+    })
+    .then( (content) => {
+        openctiTemplate = content;
+    });
 
-    readJSONFile("templates/misp.json", jsonCode => {
-        mispTemplate = JSON.parse(jsonCode);
-    });
-    readJSONFile("templates/opencti.json", jsonCode => {
-        openctiTemplate = JSON.parse(jsonCode);
-    });
-    readJSONFile("templates/yeti.json", jsonCode => {
-        yetiTemplate = JSON.parse(jsonCode);
-    });
     resetForm();
     showCustomToolsList();
 
@@ -735,33 +747,27 @@ window.onload = function() {
         jsonCode["color"] = document.getElementById("tool-color").value;
 
 
-        if(localStorage.getItem("tools-ext")){
-            tools = JSON.parse(localStorage.getItem("tools-ext"));
-        } else {
-            tools = [];
-        }
-
-        // Check for duplicates
-        for(var i=0; i<tools.length; i++) {
-            if(tools[i]["name"] == jsonCode["name"]) {
-                if(!update) {
-                    showMessageError("tool-name", "The name is already in use");
-                    return false;
-                } else {
-                    tools[i] = jsonCode;
-                    localStorage.setItem("tools-ext", JSON.stringify(tools));
-                    showCustomToolsList();
-                    resetForm();
-                    resetPage();
-                    return true;
+        browser.storage.local.get("toolsExt").then( (result) => {
+            const tools = result.toolsExt || Array();
+            // Check for duplicates
+            for(var i=0; i<tools.length; i++) {
+                if(tools[i]["name"] == jsonCode["name"]) {
+                    if(!update) {
+                        showMessageError("tool-name", "The name is already in use");
+                    } else {
+                        tools[i] = jsonCode;
+                        return browser.storage.local.set({"toolsExt": tools});
+                    }
                 }
             }
-        }
-        tools.push(jsonCode);
-        localStorage.setItem("tools-ext", JSON.stringify(tools));
-        showCustomToolsList();
-        resetForm();
-        resetPage();
+            tools.push(jsonCode);
+            return browser.storage.local.set({"toolsExt": tools});
+        }).then( (tools) => {
+            showCustomToolsList();
+            resetForm();
+            resetPage();
+        });
+
     });
 
     document.getElementById("reset-btn").addEventListener("click", function(evt) {
@@ -781,33 +787,40 @@ window.onload = function() {
 
     document.querySelector("#del-res-button").addEventListener("click", (evt) => {
         if(confirm("Are you sure to delete this tool? The action cannot be undone") == true) {
-            const toolsList = JSON.parse(localStorage.getItem("tools-ext"));
-            toolsList.splice(selectedResource,1);
-            localStorage.setItem("tools-ext", JSON.stringify(toolsList));
-            showCustomToolsList();
-            selectedResource = -1;
-            resetForm();
-            resetPage();
+            browser.storage.local.get("toolsExt").then( (result) => {
+                const toolsList = result.toolsExt;
+                toolsList.splice(selectedResource,1);
+                return browser.storage.local.set({"toolsExt": toolsList });
+            }).then( () => {
+                showCustomToolsList();
+                selectedResource = -1;
+                resetForm();
+                resetPage();
+            });
         }
     });
 
     document.querySelector("#export-all-button").addEventListener("click", (evt) => {
-        const toolsList = JSON.parse(localStorage.getItem("tools-ext", '{}'));
-        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(toolsList, null, 2));
-        let exportLink = document.createElement("a");
-        exportLink.setAttribute("href", dataStr);
-        exportLink.setAttribute("download", "custom-tools.json");
-        exportLink.click();
+        browser.storage.local.get("toolsExt").then( (result) => {
+            const toolsList = result.toolsExt;
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(toolsList, null, 2));
+            let exportLink = document.createElement("a");
+            exportLink.setAttribute("href", dataStr);
+            exportLink.setAttribute("download", "custom-tools.json");
+            exportLink.click();
+        });
     });
 
     document.querySelector("#export-button").addEventListener("click", (evt) => {
-        const toolsList = JSON.parse(localStorage.getItem("tools-ext", '[]'));
-        const tool = toolsList[selectedResource];
-        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(tool, null, 2));
-        let exportLink = document.createElement("a");
-        exportLink.setAttribute("href", dataStr);
-        exportLink.setAttribute("download", "custom-tools.json");
-        exportLink.click();
+        browser.storage.local.get("toolsExt").then( (result) => {
+            const toolsList = result.toolsExt;
+            const tool = toolsList[selectedResource];
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(tool, null, 2));
+            let exportLink = document.createElement("a");
+            exportLink.setAttribute("href", dataStr);
+            exportLink.setAttribute("download", "custom-tools.json");
+            exportLink.click();
+        });
     });
 
     document.querySelector("#cancel-button").addEventListener("click", (evt) => {
@@ -828,7 +841,7 @@ window.onload = function() {
             document.querySelector("#edit-res-button").style.display = "none";
             document.querySelector("#export-button").style.display = "none";
             document.querySelector("#export-all-button").style.display = "block";
-            document.querySelectorAll(".tool-entry").forEach( v => v.style.outline = "none" );
+            document.querySelectorAll(".tool-entry").forEach( v => v.style.opacity = "1" );
             resetForm();
             resetPage();
         }
@@ -856,80 +869,83 @@ window.onload = function() {
 
     document.querySelector("#misp-template").addEventListener("click", (evt) => {
         createFormPopup('./icons/misp.png', "Add MISP", "MISP", ()=>{
-            tools = JSON.parse(localStorage.getItem("tools-ext")) || [];
-
-
-            for(const [key, value] of Object.entries(mispTemplate["url"])) {
-                mispTemplate["url"][key] = value.replace("%h", document.querySelector("#template-form-hostname").value);
-                if(document.querySelector("#template-http").checked) {
-                    mispTemplate["url"][key] = mispTemplate["url"][key].replace('https://', 'http://');
-                } else {
-                    mispTemplate["url"][key] = mispTemplate["url"][key].replace('http://', 'https://');
+            browser.storage.local.get("toolsExt").then( (result) => {
+                const tools = result.toolsExt || Array();
+                for(const [key, value] of Object.entries(mispTemplate["url"])) {
+                    mispTemplate["url"][key] = value.replace("%h", document.querySelector("#template-form-hostname").value);
+                    if(document.querySelector("#template-http").checked) {
+                        mispTemplate["url"][key] = mispTemplate["url"][key].replace('https://', 'http://');
+                    } else {
+                        mispTemplate["url"][key] = mispTemplate["url"][key].replace('http://', 'https://');
+                    }
                 }
-            }
-            mispTemplate["name"] = document.querySelector("#template-form-name").value;
-            // Check for duplicates
-            for(var i=0; i<tools.length; i++) {
-                if(tools[i]["name"] == mispTemplate["name"]) {
-                    alert("The name is already in use");
-                    return false;
+                mispTemplate["name"] = document.querySelector("#template-form-name").value;
+                // Check for duplicates
+                for(var i=0; i<tools.length; i++) {
+                    if(tools[i]["name"] == mispTemplate["name"]) {
+                        alert("The name is already in use");
+                    }
                 }
-            }
-            tools.push(mispTemplate);
-            localStorage.setItem("tools-ext", JSON.stringify(tools));
-            showCustomToolsList();
+                tools.push(mispTemplate);
+                return browser.storage.local.set({"toolsExt": tools});
+            }).then( (tools) => {
+                showCustomToolsList();
+            });
+
         });
     });
 
     document.querySelector("#opencti-template").addEventListener("click", (evt) => {
         createFormPopup('./icons/opencti.png', "Add OpenCTI", "OpenCTI", ()=>{
-            tools = JSON.parse(localStorage.getItem("tools-ext")) || [];
-
-            for(const [key, value] of Object.entries(openctiTemplate["url"])) {
-                openctiTemplate["url"][key] = value.replace("%h", document.querySelector("#template-form-hostname").value);
-                if(document.querySelector("#template-http").checked) {
-                    openctiTemplate["url"][key] = openctiTemplate["url"][key].replace('https://', 'http://');
-                } else {
-                    openctiTemplate["url"][key] = openctiTemplate["url"][key].replace('http://', 'https://');
+            browser.storage.local.get("toolsExt").then( (result) => {
+                const tools = result.toolsExt || Array();
+                for(const [key, value] of Object.entries(openctiTemplate["url"])) {
+                    openctiTemplate["url"][key] = value.replace("%h", document.querySelector("#template-form-hostname").value);
+                    if(document.querySelector("#template-http").checked) {
+                        openctiTemplate["url"][key] = openctiTemplate["url"][key].replace('https://', 'http://');
+                    } else {
+                        openctiTemplate["url"][key] = openctiTemplate["url"][key].replace('http://', 'https://');
+                    }
                 }
-            }
-            openctiTemplate["name"] = document.querySelector("#template-form-name").value;
-            // Check for duplicates
-            for(var i=0; i<tools.length; i++) {
-                if(tools[i]["name"] == openctiTemplate["name"]) {
-                    alert("The name is already in use");
-                    return false;
+                openctiTemplate["name"] = document.querySelector("#template-form-name").value;
+                // Check for duplicates
+                for(var i=0; i<tools.length; i++) {
+                    if(tools[i]["name"] == openctiTemplate["name"]) {
+                        alert("The name is already in use");
+                    }
                 }
-            }
-            tools.push(openctiTemplate);
-            localStorage.setItem("tools-ext", JSON.stringify(tools));
-            showCustomToolsList();
+                tools.push(openctiTemplate);
+                return browser.storage.local.set({"toolsExt": tools});
+            }).then( (tools) => {
+                showCustomToolsList();
+            });
         });
     });
 
     document.querySelector("#yeti-template").addEventListener("click", (evt) => {
         createFormPopup('./icons/yeti.png', "Add YETI", "YETI", ()=>{
-            tools = JSON.parse(localStorage.getItem("tools-ext")) || [];
-
-            for(const [key, value] of Object.entries(yetiTemplate["url"])) {
-                yetiTemplate["url"][key] = value.replace("%h", document.querySelector("#template-form-hostname").value);
-                if(document.querySelector("#template-http").checked) {
-                    yetiTemplate["url"][key] = yetiTemplate["url"][key].replace('https://', 'http://');
-                } else {
-                    yetiTemplate["url"][key] = yetiTemplate["url"][key].replace('http://', 'https://');
+            browser.storage.local.get("toolsExt").then( (result) => {
+                const tools = result.toolsExt || Array();
+                for(const [key, value] of Object.entries(yetiTemplate["url"])) {
+                    yetiTemplate["url"][key] = value.replace("%h", document.querySelector("#template-form-hostname").value);
+                    if(document.querySelector("#template-http").checked) {
+                        yetiTemplate["url"][key] = yetiTemplate["url"][key].replace('https://', 'http://');
+                    } else {
+                        yetiTemplate["url"][key] = yetiTemplate["url"][key].replace('http://', 'https://');
+                    }
                 }
-            }
-            yetiTemplate["name"] = document.querySelector("#template-form-name").value;
-            // Check for duplicates
-            for(var i=0; i<tools.length; i++) {
-                if(tools[i]["name"] == yetiTemplate["name"]) {
-                    alert("The name is already in use");
-                    return false;
+                yetiTemplate["name"] = document.querySelector("#template-form-name").value;
+                // Check for duplicates
+                for(var i=0; i<tools.length; i++) {
+                    if(tools[i]["name"] == yetiTemplate["name"]) {
+                        alert("The name is already in use");
+                    }
                 }
-            }
-            tools.push(yetiTemplate);
-            localStorage.setItem("tools-ext", JSON.stringify(tools));
-            showCustomToolsList();
+                tools.push(yetiTemplate);
+                return browser.storage.local.set({"toolsExt": tools});
+            }).then( (tools) => {
+                showCustomToolsList();
+            });
         });
     });
 
