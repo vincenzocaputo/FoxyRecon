@@ -17,6 +17,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Snyk web resource for vulnerabilities lookup
 - ioc[.]one web resource
 
+### Change
+- Change local storage management APIs
+- Remove Polifyll library
+- Minor changes to make porting to Chrome possible
+
 ### Fix
 - Minor stylesheets bugs
 - Minor bugs
