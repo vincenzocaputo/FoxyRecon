@@ -39,4 +39,4 @@ jobs:
       run: |
         git add src/ assets/ manifest.json
         git commit -m "Update Chrome version"
-        git push origin chrome --force
+        git push origin chrome-dev --force
