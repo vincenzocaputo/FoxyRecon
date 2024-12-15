@@ -3,7 +3,10 @@
 ![Mozilla Add-on](https://img.shields.io/amo/users/foxyrecon?style=plastic)
 <p align="left">
   <a href="https://addons.mozilla.org/en-US/firefox/addon/foxyrecon/">
-  <img src="._media/get-the-addon-129x45px.8041c789.png"/>
+  <img src="._media/get-the-addon-178x60px.dad84b42.png"/>
+  </a>
+  <a href="https://chromewebstore.google.com/detail/foxyrecon/adpceplidmllpibncjajnmakfeigkeci">
+  <img src="._media/get-extension-chrome.png"/>
   </a>
 </p>
 
