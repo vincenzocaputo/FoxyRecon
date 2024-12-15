@@ -540,7 +540,7 @@ function createToolsList(toolsList, settings, favTools){
                     const targetId = e.target.id;
                     if(targetId === "add-fav") { 
                         browser.storage.local.get("fav").then( (result) => {
-                            const favTools = result.fav || Array();
+                            let favTools = result.fav || Array();
                             if(favTools) {
                                 favTools.push(node.name);
                             } else {
@@ -553,7 +553,7 @@ function createToolsList(toolsList, settings, favTools){
                         });
                     } else if(targetId === "rem-fav") {
                         browser.storage.local.get("fav").then( (result) => {
-                            const favTools = result.fav || Array();
+                            let favTools = result.fav || Array();
                             if(favTools) {
                                 favTools = favTools.filter(item => item != node.name);
                             }                
