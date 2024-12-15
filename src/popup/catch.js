@@ -5,7 +5,7 @@
  */
 document.querySelectorAll(".catch-container").forEach((v) => { 
     v.addEventListener("click", (e) => {
-        browser.storage.local.get("catchedIndicators").then( (result) => {
+        chrome.storage.local.get("catchedIndicators").then( (result) => {
             const collectedIndicatorsList = result.catchedIndicators;
             createIndicatorsList(collectedIndicatorsList, 'all'); 
 

@@ -5,7 +5,7 @@
  */
 function readJSONFile(file) {
     return new Promise(function (resolve, reject) {
-        const fileURI = browser.runtime.getURL(file);
+        const fileURI = chrome.runtime.getURL(file);
         fetch(fileURI).then( (response) => {
             if (!response.ok) {
                 reject({
@@ -25,13 +25,13 @@ function readJSONFile(file) {
  */
 function loadBuiltInTools() {
     return new Promise((resolve, reject) => {
-        browser.storage.local.get("tools").then( (result) => {
+        chrome.storage.local.get("tools").then( (result) => {
             if (result.hasOwnProperty("tools")) {
                 resolve(result);
             } else {
                 readJSONFile("src/json/tools.json").then( (data) => {
                     const parsedData = data;
-                    return browser.storage.local.set({ "tools": parsedData["tools"]}).then( () => parsedData);
+                    return chrome.storage.local.set({ "tools": parsedData["tools"]}).then( () => parsedData);
                 }).then( (parsedData) => {
                     resolve(parsedData);
                 });
@@ -43,7 +43,7 @@ function loadBuiltInTools() {
 function loadTools() {
     return loadBuiltInTools().then( (result) => {
         const tools = result.tools;
-        return browser.storage.local.get("toolsExt").then( (result) => {
+        return chrome.storage.local.get("toolsExt").then( (result) => {
             if (result.hasOwnProperty("toolsExt")) {
                 console.log("Loaded %s tools", tools.length);
                 tools.push(...result.toolsExt);
@@ -61,13 +61,13 @@ function loadTools() {
  */
 function loadGraphMapping() {
     return new Promise((resolve, reject) => {
-        browser.storage.local.get("graphMapping").then( (result) => {
+        chrome.storage.local.get("graphMapping").then( (result) => {
             if (result.hasOwnProperty("graphMapping")) {
                 resolve(result.graphMapping);
             } else {
                 readJSONFile("src/json/graph-nodes.json").then( (data) => {
                     const parsedData = data;
-                    return browser.storage.local.set({ "graphMapping": parsedData["graph-nodes"]}).then( () => parsedData);
+                    return chrome.storage.local.set({ "graphMapping": parsedData["graph-nodes"]}).then( () => parsedData);
                 }).then( (parsedData) => {
                     resolve(parsedData);
                 });
