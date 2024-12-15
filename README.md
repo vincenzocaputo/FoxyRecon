@@ -1,17 +1,24 @@
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/vincenzocaputo/FoxyRecon?style=plastic)
-![Mozilla Add-on](https://img.shields.io/amo/v/foxyrecon?style=plastic)
-![Mozilla Add-on](https://img.shields.io/amo/users/foxyrecon?style=plastic)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/vincenzocaputo/FoxyRecon?style=plastic&color=%2310e317&logo=github&logoColor=white)
+![Mozilla Add-on](https://img.shields.io/amo/v/foxyrecon?style=plastic&color=%23ff6200&logo=firefox&logoColor=white)
+![Mozilla Add-on](https://img.shields.io/amo/users/foxyrecon?style=plastic&color=%23ff6200&logo=firefox&logoColor=white)
+![Chrome Add-on](https://img.shields.io/chrome-web-store/v/adpceplidmllpibncjajnmakfeigkeci?style=plastic&color=%23fff829&logo=googlechrome&logoColor=white)
+
+<h1 align="left">
+  <img src="._media/foxyrecon.png" width="50" height="50" />
+  FoxyRecon
+</h1>
+
 <p align="left">
   <a href="https://addons.mozilla.org/en-US/firefox/addon/foxyrecon/">
-  <img src="._media/get-the-addon-129x45px.8041c789.png"/>
+  <img src="._media/get-the-addon-178x60px.dad84b42.png"/>
+  </a>
+  <a href="https://chromewebstore.google.com/detail/foxyrecon/adpceplidmllpibncjajnmakfeigkeci">
+  <img src="._media/get-extension-chrome.png"/>
   </a>
 </p>
 
-<p align="center">
-  <img src="._media/foxyrecon.png" width="200" height="200" />
-</p>
 
-# FoxyRecon
+
 FoxyRecon is a Firefox add-on that helps you carry out searching and investigation activities by using over 90 Open Source Intelligence (OSINT) web resources and an internal tool to create graphs supporting the STIX format.
 
 ![Popup](._media/popup_0.22.0.gif) ![Graph](._media/graph_example.png)
