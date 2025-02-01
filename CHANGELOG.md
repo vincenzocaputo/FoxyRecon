@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fix
 - Bug that prevented tools from being removed from favorites
+- Missing PhishTank icon
 
 ## [ 0.23.0 ] - 2024-12-14
 
