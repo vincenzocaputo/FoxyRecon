@@ -69,16 +69,15 @@ browser.runtime.onInstalled.addListener(function(details) {
                         selectionText = indicatorParser.refangIndicator(selectionText);
                         [type, tld] = indicatorParser.getIndicatorType(selectionText);
                     }
-                    browser.storage.local.set(
-                        {
+                    browser.browserAction.openPopup()
+                    .then( () => {
+                        browser.storage.local.set({
                             "indicator": {
                                 "type": type,
                                 "value": selectionText,
                                 "tld": tld
                             }
                         })
-                        .then( () => {
-                        browser.browserAction.openPopup();
                     });
                 } else {
                     browser.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
