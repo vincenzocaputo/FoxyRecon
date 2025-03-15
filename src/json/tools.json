@@ -859,12 +859,13 @@
         {
             "name": "IPQualityScore",
             "url": {
+                "ip": "https://www.ipqualityscore.com/free-ip-lookup-proxy-vpn-test/lookup/%s",
                 "phone": "https://www.ipqualityscore.com/free-phone-number-lookup/lookup/US/%r"
             },
-            "desc": "Free phone number lookup",
+            "desc": "Detect Fraud and Cyber Threats With Unmatched Accuracy",
             "icon": "ipqs.png",
             "color": "#F43A3A",
-            "types": ["phone"],
+            "types": ["ip", "phone"],
 			"autoGraph": false
         },
         {

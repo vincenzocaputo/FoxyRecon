@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Add
 - Neiki.dev TIP web tool
+- Support for IP address to IPQS
 
 ### Change
 - Remove CheckPhish tool
