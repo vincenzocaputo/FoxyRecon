@@ -1096,15 +1096,15 @@
 			"autoGraph": false
         },
         {
-            "name": "PacketTotal",
+            "name": "DynamiteLab",
             "url": {
-                "ip": "https://packettotal.com/app/search?q=%s",
-                "domain": "https://packettotal.com/app/search?q=%s",
-                "hash": "https://packettotal.com/app/search?q=%s"
+                "ip": "https://lab.dynamite.ai/pcaps?folder=search&q=%s",
+                "domain": "https://lab.dynamite.ai/pcaps?folder=search&q=%s",
+                "hash": "https://lab.dynamite.ai/pcaps?folder=search&q=%s"
             },
-            "desc": "Simple, free, high-quality PCAP analysis",
-            "icon": "packettotal.png",
-            "color": "#286496",
+            "desc": "DynamiteLab delivers the easiest way to explore network behavior from packet captures. ",
+            "icon": "dynamitelab.png",
+            "color": "#185bdc",
             "types": ["ip","domain","hash"],
             "tags": ["ioc"],
 			"autoGraph": false
