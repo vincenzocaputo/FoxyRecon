@@ -1049,6 +1049,18 @@
 			"autoGraph": false
         },
         {
+            "name": "Neiki TIP",
+            "url": {
+                "hash": "https://tip.neiki.dev/search?q=hash%253A%s"
+            },
+            "desc": "Neiki.dev Threat Insights Portal",
+            "icon": "neiki.png",
+            "color": "#09aaeb",
+            "types": ["hash"],
+            "tags": ["sandbox"],
+			"autoGraph": false
+        },
+        {
             "name": "Netcraft",
             "url": {
                 "domain": "https://sitereport.netcraft.com/?url=%s",
