@@ -281,6 +281,17 @@
 			"autoGraph": false
         },
         {
+            "name": "CVE Feed",
+            "url": {
+                "cve": "https://cvefeed.io/vuln/detail/%s"
+            },
+            "desc": "open-source tool for aggregating, storing, and querying CVE data.",
+            "icon": "cvefeed.png",
+            "color": "#1f242e",
+            "types": ["cve"],
+			"autoGraph": false
+        },
+        {
             "name": "Cymru",
             "url": {
                 "hash": "https://hash.cymru.com/"
