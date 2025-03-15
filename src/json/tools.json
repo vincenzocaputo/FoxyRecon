@@ -342,8 +342,8 @@
             "desc": "dns recon & research, find & lookup dns records",
             "icon": "dnsdumpster.png",
             "color": "#323232",
-            "inputSelector": "#regularInput",
-            "submitQuery": "button.btn",
+            "inputSelector": "#target",
+            "submitQuery": "button[type='submit']",
             "types": ["domain"],
             "tags": ["dns", "open-ports"],
 			"autoGraph": false
