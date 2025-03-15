@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fix
 - Bug that prevented tools from being removed from favorites
 - Bug that prevented clicking on history entries
+- Auto submit for DNSDumpster tool
 - Missing PhishTank icon
 
 ## [ 0.23.0 ] - 2024-12-14
