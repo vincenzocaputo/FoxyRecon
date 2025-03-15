@@ -735,8 +735,8 @@
         {
             "name": "Hunter.how",
             "url": {
-                "domain": "https://hunter.how/list?searchValue=domain%253D%22%s%22",
-                "ip": "https://hunter.how/list?searchValue=ip%253D%22%s%22"
+                "domain": "https://hunter.how/list?searchValue=%s",
+                "ip": "https://hunter.how/list?searchValue=%s"
             },
             "desc": "Free internet search engine for internet researchers",
             "icon": "hunterhow.png",
