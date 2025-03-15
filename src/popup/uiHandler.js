@@ -58,6 +58,15 @@ browser.storage.local.get("history").then( (result) => {
         historyEntry.textContent = h;
         historyEntry.classList.add("hist-entry");
         historyPanel.appendChild(historyEntry);
+        historyEntry.addEventListener("click", function(e) {
+            history_indicator = e.target.textContent;
+            inputField.value = history_indicator;
+            const [type, tld] = indicatorParser.getIndicatorType(history_indicator);
+            document.querySelector("#catch-icon").style.display = "none";
+            document.querySelector("#flag").style.display = "none";
+            document.getElementById("history").style.display = "none";
+            submitIndicator(history_indicator, type, tld, "", "");
+        });
     });
 });
 

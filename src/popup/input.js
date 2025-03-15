@@ -83,18 +83,6 @@ historyIcon.addEventListener("click", function() {
     }
 });
 
-document.querySelectorAll("#history>.hist-entry").forEach((entry)=>{
-    entry.addEventListener("click", function(e) {
-        history_indicator = e.target.textContent;
-        inputField.value = history_indicator;
-        const [type, tld] = indicatorParser.getIndicatorType(history_indicator);
-        document.querySelector("#catch-icon").style.display = "none";
-        document.querySelector("#flag").style.display = "none";
-        document.getElementById("history").style.display = "none";
-        submitIndicator(history_indicator, type, tld, "", "");
-    });
-});
-
 /**
  * 
  * Handle the clicking on tool icon inside the text field
