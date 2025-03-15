@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Add
 - Neiki.dev TIP web tool
 
+### Change
+- Remove CheckPhish tool
+
 ### Fix
 - Bug that prevented tools from being removed from favorites
 - Bug that prevented clicking on history entries

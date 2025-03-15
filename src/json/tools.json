@@ -159,19 +159,6 @@
 			"autoGraph": false
         },
         {
-            "name": "Checkphish Scan",
-            "url": {
-                "domain": "https://app.checkphish.ai/live-scan?url=%s&agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36",
-                "url": "https://app.checkphish.ai/live-scan?url=%s&agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
-            },
-            "desc": "Free scanner to detect phishing & fraudulent sites in real-time.",
-            "icon": "checkphish.png",
-            "color": "#4479F3",
-            "types": ["domain","url"],
-            "tags": ["sandbox"],
-			"autoGraph": false
-        },
-        {
             "name": "CIRCL.LU",
             "url": {
                 "cve": "https://vulnerability.circl.lu/vuln/%s"
