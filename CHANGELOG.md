@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Auto submit for DNSDumpster tool
 - Hunter.how URL parameters
 - Missing PhishTank icon
+- Minor fixes in Add graph node popup
 
 ## [ 0.23.0 ] - 2024-12-14
 

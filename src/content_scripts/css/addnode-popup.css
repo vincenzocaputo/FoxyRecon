@@ -113,7 +113,7 @@
     background-color: #04D43C;
 }
 
-.foxyrecon-form .switch {
+.foxyrecon-form .foxyrecon-switch {
     position: relative;
     display: inline-block;
     width: 35px;
@@ -121,7 +121,7 @@
     cursor: pointer;
 }
 
-.foxyrecon-form .switch input { 
+.foxyrecon-form .foxyrecon-switch input { 
     opacity: 0;
     width: 35px;
     height: 21px;
@@ -129,7 +129,7 @@
     z-index: 10;
 }
 
-.foxyrecon-form .slider {
+.foxyrecon-form .foxyrecon-slider {
     position: absolute;
     top: 0;
     left: 0;
@@ -141,7 +141,7 @@
     font-size: 12px;
 }
 
-.foxyrecon-form .slider:before {
+.foxyrecon-form .foxyrecon-slider:before {
     position: absolute;
     content: "";
     height: 18px;
@@ -154,15 +154,15 @@
     transform: translateX(0);
 }
 
-.foxyrecon-form input:checked + .slider {
+.foxyrecon-form input:checked + .foxyrecon-slider {
     background-color: #FF7700;
 }
 
-.foxyrecon-form input:focus + .slider {
+.foxyrecon-form input:focus + .foxyrecon-slider {
     box-shadow: 0 0 1px #2196F3;
 }
 
-.foxyrecon-form input:checked + .slider:before {
+.foxyrecon-form input:checked + .foxyrecon-slider:before {
     transform: translateX(14px);
 }
 
