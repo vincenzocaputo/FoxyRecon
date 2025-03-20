@@ -203,6 +203,10 @@ h3 {
     background-color: #A910EB;
 }
 
+.import-btn {
+    background-color: #3968ff;
+}
+
 #import-template-button {
     width: fit-content;
     background-color: #06BEC4;
