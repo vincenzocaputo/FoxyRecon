@@ -306,6 +306,77 @@ function resetErrors() {
     document.querySelectorAll("input").forEach( v => { v.style.outline = "none" });
 }
 
+function createUploadPopup(uploadEvent) {
+    var buttonsContainer;
+    var form;
+    const outsideBackground = document.createElement("div");
+    outsideBackground.setAttribute("id", "background");
+    document.querySelector("#page-container").appendChild(outsideBackground);
+    const popupContainer = document.createElement("div");
+    const formContainer = document.createElement("div");
+
+    const formHeader = document.createElement("div");
+    formHeader.classList.add("form-header");
+
+    const formIconEl = document.createElement("img");
+    formIconEl.setAttribute("src", "../../assets/icons/import-2.png");
+
+    const formTitleEl = document.createElement("div");
+    formTitleEl.textContent = "Import tools";
+
+    formHeader.appendChild(formIconEl);
+    formHeader.appendChild(formTitleEl);
+    popupContainer.appendChild(formHeader);
+
+    buttonsContainer = document.createElement("div");
+    buttonsContainer.classList.add("buttons-container");
+    
+    const cancelButton = document.createElement("button");
+    cancelButton.textContent = "Cancel";
+    cancelButton.classList.add("btn");
+    cancelButton.classList.add("cancel-btn");
+    cancelButton.addEventListener("click", evt => {
+        resetPage();
+        evt.target.closest(".popup-container").remove();
+    });
+
+    const okButton = document.createElement("input");
+    okButton.setAttribute("type", "submit");
+    okButton.setAttribute("value", "Import");
+    okButton.classList.add("btn");
+    okButton.classList.add("add-btn");
+
+
+    form = document.createElement("form");
+    form.classList.add("upload-form");
+    buttonsContainer.appendChild(cancelButton);
+    buttonsContainer.appendChild(okButton);
+    form.setAttribute("method", "post");
+
+    popupContainer.classList.add("popup-container");
+    formContainer.classList.add("upload-form-container");
+
+    form.appendChild(formContainer);
+    form.appendChild(buttonsContainer);
+    form.addEventListener("submit", uploadEvent);
+    popupContainer.appendChild(form);
+
+    document.getElementById("page-container").appendChild(popupContainer);
+
+    const uploadLabelElement = document.createElement("label");
+    uploadLabelElement.setAttribute("for", "upload");
+    uploadLabelElement.textContent = "Upload a JSON file containing the definition of the tools to import";
+
+    var uploadInput = document.createElement("input");
+    uploadInput.setAttribute("type", "file");
+    uploadInput.setAttribute("id", "upload-input");
+    uploadInput.setAttribute("name", "upload");
+    uploadInput.setAttribute("required", "");
+
+    form.insertBefore(uploadInput, buttonsContainer);
+    form.insertBefore(uploadLabelElement, uploadInput);
+}
+
 function createFormPopup(formIcon, formTitle, defaultName, addEvent) {
     var buttonsContainer;
     var form;
@@ -348,6 +419,7 @@ function createFormPopup(formIcon, formTitle, defaultName, addEvent) {
 
 
     form = document.createElement("form");
+    form.classList.add(".form");
     buttonsContainer.appendChild(cancelButton);
     buttonsContainer.appendChild(okButton);
     form.setAttribute("method", "post");
@@ -824,6 +896,10 @@ window.onload = function() {
             exportLink.setAttribute("download", "custom-tools.json");
             exportLink.click();
         });
+    });
+
+    document.querySelector("#import-button").addEventListener("click", (evt) => {
+        createUploadPopup((e) => {});
     });
 
     document.querySelector("#cancel-button").addEventListener("click", (evt) => {

@@ -631,27 +631,52 @@ div.tool-tag {
     text-align: left;
 }
 
-.popup-container form {
+.popup-container .form {
     display: grid;
     grid-template-columns: 2fr 3fr;
     grid-row-gap: 5px;
     grid-column-gap: 10px;
 }
 
-.popup-container label {
+.popup-container .upload-form {
+    display: grid;
+    grid-template-rows: 1fr 2fr 2fr;
+    grid-row-gap: 5px;
+    text-align: left;
+}
+
+.popup-container .form label {
     grid-column: 1;
     text-align: right;
 }
 
-.popup-container input {
+.popup-container .form input {
     grid-column: 2;
 }
 
-.buttons-container {
+.popup-container .form .buttons-container {
   margin-top: 10px;
   width: 100%;
   text-align: right;
   grid-column: 2 / span 1;
+  display: flex;
+  flex-direction: row
+}
+
+.popup-container .upload-form label {
+    grid-row: 1;
+    text-align: left;
+}
+
+.popup-container .upload-form input {
+    grid-row: 2;
+}
+
+.popup-container .upload-form .buttons-container {
+  margin-top: 10px;
+  width: 100%;
+  text-align: right;
+  grid-row: 3;
   display: flex;
   flex-direction: row
 }
