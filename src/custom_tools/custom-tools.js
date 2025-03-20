@@ -306,7 +306,7 @@ function resetErrors() {
     document.querySelectorAll("input").forEach( v => { v.style.outline = "none" });
 }
 
-function createUploadPopup(uploadEvent) {
+function createUploadPopup(changeEvent, uploadEvent) {
     var buttonsContainer;
     var form;
     const outsideBackground = document.createElement("div");
@@ -371,7 +371,9 @@ function createUploadPopup(uploadEvent) {
     uploadInput.setAttribute("type", "file");
     uploadInput.setAttribute("id", "upload-input");
     uploadInput.setAttribute("name", "upload");
+    uploadInput.setAttribute("accept", "application/json");
     uploadInput.setAttribute("required", "");
+    uploadInput.addEventListener("change", changeEvent);
 
     form.insertBefore(uploadInput, buttonsContainer);
     form.insertBefore(uploadLabelElement, uploadInput);
@@ -419,7 +421,7 @@ function createFormPopup(formIcon, formTitle, defaultName, addEvent) {
 
 
     form = document.createElement("form");
-    form.classList.add(".form");
+    form.classList.add("form");
     buttonsContainer.appendChild(cancelButton);
     buttonsContainer.appendChild(okButton);
     form.setAttribute("method", "post");
@@ -899,7 +901,17 @@ window.onload = function() {
     });
 
     document.querySelector("#import-button").addEventListener("click", (evt) => {
-        createUploadPopup((e) => {});
+        var promise;
+        createUploadPopup((e) => {
+            const file = e.target.files.item(0);
+            promise = file.text().then( ( content) => {return JSON.parse(content)}); 
+        }, () => {
+            promise.then((importedTools) => {
+                browser.storage.local.get("toolsExt").then( (tools) => {
+                    browser.storage.local.set({"toolsExt": tools.toolsExt.concat(importedTools)});
+                });
+            })
+        });
     });
 
     document.querySelector("#cancel-button").addEventListener("click", (evt) => {
