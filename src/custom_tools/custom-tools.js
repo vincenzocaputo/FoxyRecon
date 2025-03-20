@@ -830,6 +830,7 @@ window.onload = function() {
                 if(tools[i]["name"] == jsonCode["name"]) {
                     if(!update) {
                         showMessageError("tool-name", "The name is already in use");
+                        return;
                     } else {
                         tools[i] = jsonCode;
                         return browser.storage.local.set({"toolsExt": tools});
@@ -837,11 +838,14 @@ window.onload = function() {
                 }
             }
             tools.push(jsonCode);
+            imageBase64.value = "";
             return browser.storage.local.set({"toolsExt": tools});
         }).then( (tools) => {
-            showCustomToolsList();
-            resetForm();
-            resetPage();
+            if (tools) {
+                showCustomToolsList();
+                resetForm();
+                resetPage();
+            }
         });
 
     });
