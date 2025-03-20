@@ -162,6 +162,7 @@ function showCustomToolsList() {
                 document.querySelector("#del-res-button").style.display = "block";
                 document.querySelector("#export-button").style.display = "block";
                 document.querySelector("#export-all-button").style.display = "none";
+                document.querySelector("#import-button").style.display = "none";
                 resetForm();
                 update = true;
                 document.querySelector("#submit-btn").textContent = "Update tool";
@@ -261,6 +262,7 @@ function showCustomToolsList() {
                 document.querySelector("#edit-res-button").style.display = "none";
                 document.querySelector("#export-button").style.display = "none";
                 document.querySelector("#export-all-button").style.display = "block";
+                document.querySelector("#import-button").style.display = "block";
                 document.querySelector("#submit-btn").value = "Edit Tool";
 
             });
@@ -783,6 +785,7 @@ window.onload = function() {
         document.querySelector("#edit-res-button").style.display = "none";
         document.querySelector("#export-button").style.display = "none";
         document.querySelector("#export-all-button").style.display = "block";
+        document.querySelector("#import-button").style.display = "block";
     });
 
     document.querySelector("#del-res-button").addEventListener("click", (evt) => {
