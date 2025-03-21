@@ -830,22 +830,24 @@ window.onload = function() {
                 if(tools[i]["name"] == jsonCode["name"]) {
                     if(!update) {
                         showMessageError("tool-name", "The name is already in use");
-                        return;
+                        return Promise.resolve(false);
                     } else {
                         tools[i] = jsonCode;
-                        return browser.storage.local.set({"toolsExt": tools});
+                        browser.storage.local.set({"toolsExt": tools}).then( () => {
+                            showCustomToolsList();
+                            resetForm();
+                            resetPage();
+                        });
                     }
                 }
             }
             tools.push(jsonCode);
             imageBase64.value = "";
-            return browser.storage.local.set({"toolsExt": tools});
-        }).then( (tools) => {
-            if (tools) {
+            browser.storage.local.set({"toolsExt": tools}).then( () => {
                 showCustomToolsList();
                 resetForm();
                 resetPage();
-            }
+            });
         });
 
     });
