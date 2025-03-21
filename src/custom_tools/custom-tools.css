@@ -84,6 +84,7 @@ a {
     padding: 5px;
     height: 90vh;
     background-color: #F7DB92;
+    overflow: scroll;
 }
 
 
