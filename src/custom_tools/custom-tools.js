@@ -908,10 +908,15 @@ window.onload = function() {
         var promise;
         createUploadPopup((e) => {
             const file = e.target.files.item(0);
-            promise = file.text().then( ( content) => {return JSON.parse(content)}); 
+            promise = file.text().then( ( content) => {
+                return JSON.parse(content)
+            }); 
         }, () => {
             promise.then((importedTools) => {
                 browser.storage.local.get("toolsExt").then( (tools) => {
+                    if (!Array.isArray(importedTools)) {
+                        importedTools = [importedTools];
+                    }
                     browser.storage.local.set({"toolsExt": tools.toolsExt.concat(importedTools)});
                 });
             })
