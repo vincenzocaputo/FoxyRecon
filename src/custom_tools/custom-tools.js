@@ -91,7 +91,6 @@ function showCustomToolsList() {
             optionsContainer = document.createElement("div");
             optionsContainer.classList.add("tool-options-container");
 
-        
             node.id = i;
             
             // Add animation to show the entire text
@@ -163,6 +162,7 @@ function showCustomToolsList() {
                 document.querySelector("#export-button").style.display = "block";
                 document.querySelector("#export-all-button").style.display = "none";
                 document.querySelector("#import-button").style.display = "none";
+                document.querySelector("#import-template-button").style.display = "none";
                 resetForm();
                 update = true;
                 document.querySelector("#submit-btn").textContent = "Update tool";
@@ -263,6 +263,7 @@ function showCustomToolsList() {
                 document.querySelector("#export-button").style.display = "none";
                 document.querySelector("#export-all-button").style.display = "block";
                 document.querySelector("#import-button").style.display = "block";
+                document.querySelector("#import-template-button").style.display = "block";
                 document.querySelector("#submit-btn").value = "Edit Tool";
 
             });
@@ -286,6 +287,10 @@ function resetPage() {
     document.querySelector("#del-res-button").style.display = "none";
     document.querySelector("#edit-res-button").style.display = "none";
     document.querySelector("#add-res-button").style.display = "block";
+    document.querySelector("#export-button").style.display = "none";
+    document.querySelector("#export-all-button").style.display = "block";
+    document.querySelector("#import-button").style.display = "block";
+    document.querySelector("#import-template-button").style.display = "block";
 }
 /**
  * Reset the input form
@@ -981,8 +986,9 @@ window.onload = function() {
         document.querySelector("#add-res-button").style.display = "none";
         document.querySelector("#edit-res-button").style.display = "none";
         document.querySelector("#export-button").style.display = "none";
-        document.querySelector("#export-all-button").style.display = "block";
-        document.querySelector("#import-button").style.display = "block";
+        document.querySelector("#export-all-button").style.display = "none";
+        document.querySelector("#import-button").style.display = "none";
+        document.querySelector("#import-template-button").style.display = "none";
     });
 
     document.querySelector("#del-res-button").addEventListener("click", (evt) => {
@@ -1085,8 +1091,6 @@ window.onload = function() {
             document.querySelector("#del-res-button").style.display = "none";
             document.querySelector("#add-res-button").style.display = "block";
             document.querySelector("#edit-res-button").style.display = "none";
-            document.querySelector("#export-button").style.display = "none";
-            document.querySelector("#export-all-button").style.display = "block";
             document.querySelectorAll(".tool-entry").forEach( v => v.style.opacity = "1" );
             resetForm();
             resetPage();
