@@ -501,6 +501,123 @@ function createFormPopup(formIcon, formTitle, defaultName, addEvent) {
     
 }
 
+function validateImportedJSON(jsonCode) {
+    const keys = Object.keys(jsonCode);
+
+    if (keys.includes('name')) {
+        if (typeof jsonCode['name'] != "string") {
+            return false;
+        }
+    } else {
+        return false;
+    }
+    if (keys.includes('description')) {
+        if (typeof jsonCode['description'] != "string") {
+            return false;
+        }
+    } else {
+        return false;
+    }
+    if (keys.includes('color')) {
+        if (typeof jsonCode['color'] == "string") {
+            const colorReg = new RegExp(/^#[0-9a-fA-F]{6}$/);
+            if (!jsonCode['color'].match(colorReg)) {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+
+    if (keys.includes('icon')) {
+        if (typeof jsonCode['icon'] == "string") {
+            const [prefix, base64] = jsonCode['icon'].split(',');
+            if (prefix != "data:image/png;base64") {
+                return false;
+            }
+            try {
+                window.atob(base64);
+            } catch (e) {
+                return false;
+            }
+        }
+    } else {
+        return false;
+    }
+
+    const validTypes = new Set(["asn",
+                                "cve",
+                                "domain",
+                                "email",
+                                "hash",
+                                "ip",
+                                "phone",
+                                "url"]);
+
+    if (keys.includes('types')) {
+        if (typeof jsonCode['types'] == "object" && jsonCode['types'].length > 0) {
+            const types = new Set(jsonCode['types']);
+            if (types.union(validTypes).size != validTypes.size) {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+    const validTags = new Set([  "dns",
+                                  "history",
+                                  "http-headers",
+                                  "ioc",
+                                  "leaks",
+                                  "net-activity",
+                                  "open-ports",
+                                  "rep",
+                                  "sandbox",
+                                  "screenshot",
+                                  "techs",
+                                  "tls",
+                                  "whois"]);
+
+    if (keys.includes('tags')) {
+        if (typeof jsonCode['tags'] == "object") {
+            const tags = new Set(jsonCode['tags']);
+            if (tags.union(validTags).size != validTags.size) {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+
+    const urlRegex = new RegExp(/^(?:http[s]?):\/\/(((?!0)(?!.*\.$)((2[0-4][0-9]|25[0-5]|1[0-9][0-9]|[1-9][0-9]|\d)\.){3}(2[0-4][0-9]|25[0-5]|1[0-9][0-9]|[1-9][0-9]|\d))|((?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}))\b(?:[-a-zA-Z0-9@:%_\+.~#?&//=]*)$/);
+    if (keys.includes('url')) {
+        if (typeof jsonCode['url'] != "object") {
+            return false;
+        } else {
+            for (const type of jsonCode['types']) {
+                const url = jsonCode['url'][type];
+                if (!url) {
+                    return false;
+                }
+                if (!url.match(urlRegex)) {
+                    return false;
+                }
+            }
+            
+        }
+    } else {
+        return false;
+    }
+
+    return true;
+}
+
 window.onload = function() {
     var mispTemplate;
     var openctiTemplate;
@@ -911,16 +1028,43 @@ window.onload = function() {
         createUploadPopup((e) => {
             const file = e.target.files.item(0);
             promise = file.text().then( ( content) => {
-                return JSON.parse(content)
+                try {
+                    return JSON.parse(content);
+                } catch(exception) {
+                    return Promise.resolve(exception);
+                }
             }); 
-        }, () => {
+        }, (evt) => {
+            evt.preventDefault();
             promise.then((importedTools) => {
-                browser.storage.local.get("toolsExt").then( (tools) => {
+                if (importedTools instanceof Error) {
+                    alert("Invalid JSON file submitted: "+importedTools.message);
+                } else {
                     if (!Array.isArray(importedTools)) {
                         importedTools = [importedTools];
                     }
-                    browser.storage.local.set({"toolsExt": tools.toolsExt.concat(importedTools)});
-                });
+                    for (const tool of importedTools) {
+                        if (!validateImportedJSON(tool)) {
+                            alert("The JSON does not contain valid tools");
+                            return;
+                        }
+                    }
+
+                    browser.storage.local.get("toolsExt").then( (tools) => {
+                        let toolsList = tools.toolsExt;
+                        for (const itool of importedTools) {
+                            for (const tool of toolsList) {
+                                if (itool['name'] === tool['name']) {
+                                    alert("The JSON file you are trying to upload contains a tool that is already defined.");
+                                    return;
+                                } 
+                            }
+                            toolsList.push(itool);
+                        }
+                        browser.storage.local.set({"toolsExt": toolsList});
+                        window.location.reload();
+                    })
+                }
             })
         });
     });
