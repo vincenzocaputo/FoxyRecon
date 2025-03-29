@@ -13,7 +13,7 @@ function createNoteForm(evt, title, stix={}) {
 
         const oldstix = stix;
 
-        const formHandler = new FormHandler(title, "img/note-nb.png");
+        const formHandler = new FormHandler(title, "img/note-noback-flat.png");
         submitEvent = evt => {
             var stix = {}
             const fields = formHandler.getFields();

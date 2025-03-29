@@ -4,7 +4,7 @@ function createIPV6AddrForm(evt, title, stix={}) {
     const type = "ipv6-addr";
     const objectId = stix["id"] === undefined ? type+"--"+crypto.randomUUID() : stix["id"];
 
-    const formHandler = new FormHandler(title, "img/ipv6-addr-nb.png");
+    const formHandler = new FormHandler(title, "img/ipv6-addr-noback-flat.png");
     submitEvent = evt => {
         var stix = {}
         const fields = formHandler.getFields();

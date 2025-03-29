@@ -17,7 +17,7 @@ function createNetworkTrafficForm(evt, title, stix={}) {
             }
         }
         const oldstix = stix;
-        const formHandler = new FormHandler(title, "img/network-traffic-nb.png");
+        const formHandler = new FormHandler(title, "img/network-traffic-noback-flat.png");
         submitEvent = evt => {
             var stix = {}
             const fields = formHandler.getFields();

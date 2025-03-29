@@ -4,7 +4,7 @@ function createAutonomousSystemForm(evt, title, stix={}) {
     const type = "autonomous-system";
     const objectId = stix["id"] === undefined ? type+"--"+crypto.randomUUID() : stix["id"];
 
-    const formHandler = new FormHandler(title, "img/autonomous-system-nb.png");
+    const formHandler = new FormHandler(title, "img/autonomous-system-noback-flat.png");
     submitEvent = evt => {
         var stix = {}
         const fields = formHandler.getFields();

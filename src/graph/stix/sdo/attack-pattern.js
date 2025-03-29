@@ -4,7 +4,7 @@ function createAttackPatternForm(evt, title, stix={}) {
     const type = "attack-pattern";
     const objectId = stix["id"] === undefined ? type+"--"+crypto.randomUUID() : stix["id"];
 
-    const formHandler = new FormHandler(title, "img/attack-pattern-nb.png");
+    const formHandler = new FormHandler(title, "img/attack-pattern-noback-flat.png");
     submitEvent = evt => {
         var stix = {}
         const fields = formHandler.getFields();
