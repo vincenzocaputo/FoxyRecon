@@ -84,6 +84,9 @@ function createUploadPopup(changeEvent, uploadEvent) {
     form.insertBefore(uploadLabelElement, uploadInput);
 }
 
+themeSelect.addEventListener("change", (evt) => {
+    renderGraph();
+});
 
 repulsionSlider.addEventListener("change", (evt) => {
     options.physics.barnesHut.gravitationalConstant = -parseInt(repulsionSlider.value)*1000;

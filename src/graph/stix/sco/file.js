@@ -4,7 +4,7 @@ function createFileForm(evt, title, stix={}) {
     const type = "file";
     const objectId = stix["id"] === undefined ? type+"--"+crypto.randomUUID() : stix["id"];
 
-    const formHandler = new FormHandler(title, "img/file-nb.png");
+    const formHandler = new FormHandler(title, "img/file-noback-flat.png");
     submitEvent = evt => {
         var stix = {}
         const fields = formHandler.getFields();

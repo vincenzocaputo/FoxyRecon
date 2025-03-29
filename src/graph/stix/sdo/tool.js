@@ -4,7 +4,7 @@ function createToolForm(evt, title, stix={}) {
     const type = "tool";
     const objectId = stix["id"] === undefined ? type+"--"+crypto.randomUUID() : stix["id"];
 
-    const formHandler = new FormHandler(title, "img/tool-nb.png");
+    const formHandler = new FormHandler(title, "img/tool-noback-flat.png");
     submitEvent = evt => {
         var stix = {}
         const fields = formHandler.getFields();

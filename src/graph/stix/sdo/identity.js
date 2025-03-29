@@ -4,7 +4,7 @@ function createIdentityForm(evt, title, stix={}) {
     const type = "identity";
     const objectId = stix["id"] === undefined ? type+"--"+crypto.randomUUID() : stix["id"];
 
-    const formHandler = new FormHandler(title, "img/identity-nb.png");
+    const formHandler = new FormHandler(title, "img/identity-noback-flat.png");
     submitEvent = evt => {
         var stix = {}
         const fields = formHandler.getFields();
