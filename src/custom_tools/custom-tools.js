@@ -1118,7 +1118,8 @@ window.onload = function() {
 
 
     document.querySelector("#misp-template").addEventListener("click", (evt) => {
-        createFormPopup('./icons/misp.png', "Add MISP", "MISP", ()=>{
+        createFormPopup('./icons/misp.png', "Add MISP", "MISP", (e)=>{
+            e.preventDefault();
             browser.storage.local.get("toolsExt").then( (result) => {
                 const tools = result.toolsExt || Array();
                 for(const [key, value] of Object.entries(mispTemplate["url"])) {
@@ -1134,19 +1135,24 @@ window.onload = function() {
                 for(var i=0; i<tools.length; i++) {
                     if(tools[i]["name"] == mispTemplate["name"]) {
                         alert("The name is already in use");
+                        return Promise.resolve(false);
                     }
                 }
                 tools.push(mispTemplate);
                 return browser.storage.local.set({"toolsExt": tools});
             }).then( (tools) => {
-                showCustomToolsList();
+                if (tools !== false) {
+                    showCustomToolsList();
+                    window.location.reload();
+                }
             });
 
         });
     });
 
     document.querySelector("#opencti-template").addEventListener("click", (evt) => {
-        createFormPopup('./icons/opencti.png', "Add OpenCTI", "OpenCTI", ()=>{
+        createFormPopup('./icons/opencti.png', "Add OpenCTI", "OpenCTI", (e)=>{
+            e.preventDefault();
             browser.storage.local.get("toolsExt").then( (result) => {
                 const tools = result.toolsExt || Array();
                 for(const [key, value] of Object.entries(openctiTemplate["url"])) {
@@ -1162,18 +1168,23 @@ window.onload = function() {
                 for(var i=0; i<tools.length; i++) {
                     if(tools[i]["name"] == openctiTemplate["name"]) {
                         alert("The name is already in use");
+                        return Promise.resolve(false);
                     }
                 }
                 tools.push(openctiTemplate);
                 return browser.storage.local.set({"toolsExt": tools});
             }).then( (tools) => {
-                showCustomToolsList();
+                if (tools !== false) {
+                    showCustomToolsList();
+                    window.location.reload();
+                }
             });
         });
     });
 
     document.querySelector("#yeti-template").addEventListener("click", (evt) => {
-        createFormPopup('./icons/yeti.png', "Add YETI", "YETI", ()=>{
+        createFormPopup('./icons/yeti.png', "Add YETI", "YETI", (e)=>{
+            e.preventDefault();
             browser.storage.local.get("toolsExt").then( (result) => {
                 const tools = result.toolsExt || Array();
                 for(const [key, value] of Object.entries(yetiTemplate["url"])) {
@@ -1189,12 +1200,16 @@ window.onload = function() {
                 for(var i=0; i<tools.length; i++) {
                     if(tools[i]["name"] == yetiTemplate["name"]) {
                         alert("The name is already in use");
+                        return Promise.resolve(false);
                     }
                 }
                 tools.push(yetiTemplate);
                 return browser.storage.local.set({"toolsExt": tools});
             }).then( (tools) => {
-                showCustomToolsList();
+                if (tools !== false) {
+                    showCustomToolsList();
+                    window.location.reload();
+                }
             });
         });
     });
