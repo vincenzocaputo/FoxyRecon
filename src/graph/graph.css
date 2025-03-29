@@ -301,6 +301,10 @@ input:checked + .slider:before {
     background-color: #E8850C;
 }
 
+.import-graph-btn {
+    background-color: #3B3CFE;
+}
+
 .btn img {
     width: 30px;
     height: 30px;
