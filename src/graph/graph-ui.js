@@ -9,6 +9,80 @@ const filterInputField = document.getElementById("filter-input-field");
 const filterButton = document.getElementById("filter-button");
 const editButton = document.getElementById("edit-node-button");
 const exportButton = document.getElementById("export-graph-button");
+const importButton = document.getElementById("import-graph-button");
+
+function createUploadPopup(changeEvent, uploadEvent) {
+    var buttonsContainer;
+    var form;
+    const outsideBackground = document.createElement("div");
+    outsideBackground.setAttribute("id", "background");
+    document.querySelector("#page-container").appendChild(outsideBackground);
+    const popupContainer = document.createElement("div");
+    const formContainer = document.createElement("div");
+
+    const formHeader = document.createElement("div");
+    formHeader.classList.add("form-header");
+
+    const formIconEl = document.createElement("img");
+    formIconEl.setAttribute("src", "../../assets/icons/import-2.png");
+
+    const formTitleEl = document.createElement("div");
+    formTitleEl.textContent = "Import graph";
+
+    formHeader.appendChild(formIconEl);
+    formHeader.appendChild(formTitleEl);
+    popupContainer.appendChild(formHeader);
+
+    buttonsContainer = document.createElement("div");
+    buttonsContainer.classList.add("buttons-container");
+    
+    const cancelButton = document.createElement("button");
+    cancelButton.textContent = "Cancel";
+    cancelButton.classList.add("btn");
+    cancelButton.classList.add("cancel-btn");
+    cancelButton.addEventListener("click", evt => {
+        resetPage();
+        evt.target.closest(".popup-container").remove();
+    });
+
+    const okButton = document.createElement("input");
+    okButton.setAttribute("type", "submit");
+    okButton.setAttribute("value", "Import");
+    okButton.classList.add("btn");
+    okButton.classList.add("add-node-btn");
+
+
+    form = document.createElement("form");
+    form.classList.add("upload-form");
+    buttonsContainer.appendChild(cancelButton);
+    buttonsContainer.appendChild(okButton);
+    form.setAttribute("method", "post");
+
+    popupContainer.classList.add("popup-container");
+    formContainer.classList.add("upload-form-container");
+
+    form.appendChild(formContainer);
+    form.appendChild(buttonsContainer);
+    form.addEventListener("submit", uploadEvent);
+    popupContainer.appendChild(form);
+
+    document.getElementById("page-container").appendChild(popupContainer);
+
+    const uploadLabelElement = document.createElement("label");
+    uploadLabelElement.setAttribute("for", "upload");
+    uploadLabelElement.textContent = "Upload a STIX file";
+
+    var uploadInput = document.createElement("input");
+    uploadInput.setAttribute("type", "file");
+    uploadInput.setAttribute("id", "upload-input");
+    uploadInput.setAttribute("name", "upload");
+    uploadInput.setAttribute("accept", "application/json");
+    uploadInput.setAttribute("required", "");
+    uploadInput.addEventListener("change", changeEvent);
+
+    form.insertBefore(uploadInput, buttonsContainer);
+    form.insertBefore(uploadLabelElement, uploadInput);
+}
 
 
 repulsionSlider.addEventListener("change", (evt) => {
@@ -186,6 +260,125 @@ exportButton.addEventListener("click", evt => {
         link.click();
         window.URL.revokeObjectURL(url);
         link.remove();
+    });
+});
+
+function getObjLabelByType(obj, type) {
+    switch (type) {
+        case "autonomous-system":
+            return "AS"+obj["number"];
+        case "domain-name":
+            return obj["value"];
+        case "email-address":
+            return obj["value"];
+        case "file":
+            return obj["name"] === "" ? obj["id"] : obj["name"];
+        case "ipv4-addr":
+            return obj["value"];
+        case "ipv6-addr":
+            return obj["value"];
+        case "mac-addr":
+            return obj["value"];
+        case "network-traffic":
+            return type;
+        case "software":
+            return obj["name"];
+        case "url":
+            return obj["value"];
+        case "user-account":
+            return type;
+        case "attack-pattern":
+            return obj["name"];
+        case "campaign":
+            return obj["name"];
+        case "course-of-action":
+            return obj["name"];
+        case "identity":
+            return obj["name"];
+        case "indicator":
+            return obj["name"];
+        case "infrastructure":
+            return obj["name"];
+        case "intrusion-set":
+            return obj["name"];
+        case "location":
+            return obj["name"];
+        case "malware-analysis":
+            return type;
+        case "malware":
+            return obj["name"];
+        case "note":
+            return type;
+        case "report":
+            return obj["name"];
+        case "threat-actor":
+            return obj["name"];
+        case "tool":
+            return obj["name"];
+        case "vulnerability":
+            return obj["name"];
+    }
+    return false;
+}
+
+importButton.addEventListener("click", evt => {
+    var promise;
+    createUploadPopup((e) => {
+        const file = e.target.files.item(0);
+        promise = file.text().then( ( content) => {
+            try {
+                return JSON.parse(content);
+            } catch(exception) {
+                return Promise.resolve(exception);
+            }
+        }); 
+    }, (evt) => {
+        evt.preventDefault();
+        promise.then((stixBundle) => {
+            if (stixBundle instanceof Error) {
+                alert("Invalid JSON file submitted: "+stixBundle.message);
+            } else {
+                if (stixBundle.hasOwnProperty("objects")) {
+                    Graph.getInstance().then( (graph) => {
+                        graph.deleteGraph();
+                        const objects = stixBundle["objects"];
+
+                        alert(objects);
+                        for (const obj of objects) {
+                            if (!obj.hasOwnProperty("id")) {
+                                alert("Invalid STIX: Object ID is missing.");
+                            }
+                            if (!obj.hasOwnProperty("type")) {
+                                alert("Invalid STIX: Object type is missing.");
+                            }
+                            const id = obj["id"];
+                            const type = obj["type"];
+                            if (type === "relationship") {
+                                graph.addLink(
+                                    obj["source_ref"],
+                                    obj["target_ref"],
+                                    obj["relationship_type"]
+                                );
+                            }
+                            else {
+                                const label = getObjLabelByType(obj, type);
+                                if (label === false) {
+                                    console.log(`Unsupported object {type}`);
+                                } else {
+                                    graph.addSTIXNode(
+                                        id,
+                                        label,
+                                        type,
+                                        obj
+                                    )
+                                }
+                            }
+                        }
+                        window.location.reload();
+                    });
+                }
+            }
+        })
     });
 });
 
