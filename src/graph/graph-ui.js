@@ -100,6 +100,11 @@ nodeSizeSlider.addEventListener("change", (evt) => {
     options.nodes.size = parseInt(nodeSizeSlider.value);
     network.setOptions(options);
 });
+labelSizeSlider.addEventListener("change", (evt) => {
+    options.nodes.font.size = parseInt(labelSizeSlider.value);
+    options.edges.font.size = parseInt(labelSizeSlider.value);
+    network.setOptions(options);
+});
 edgeSizeSlider.addEventListener("change", (evt) => {
     options.edges.width = parseInt(edgeSizeSlider.value);
     network.setOptions(options);
