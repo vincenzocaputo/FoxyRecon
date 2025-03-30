@@ -40,6 +40,20 @@ function resetSettings() {
     return browser.storage.local.set({"settings": defaultSettings});
 }
 
+function resetGraphSettings() {
+    const defaultGraphSettings = {
+        icontheme: "square-lite",
+        repulsion: 50,
+        edgelength: 50,
+        nodesize: 15,
+        edgesize: 1,
+        labelsize: 14,
+        edgecolor: "#444444",
+        nodelabelcolor: "#444444"
+    }
+    return browser.storage.local.set({"graphSettings": defaultGraphSettings});
+}
+
 function createStorage() {
     return Promise.all([
         resetIndicator(),
@@ -53,6 +67,7 @@ function createStorage() {
             }
         }),
         resetSettings(),
+        resetGraphSettings(),
         browser.storage.local.set({
             "graph": {
                 nodes: [],
@@ -71,5 +86,11 @@ function loadStorage() {
     }, (err) => {
         console.log("Setting default settings");
         defaultSettings();
+    } );
+    browser.storage.local.get("graphSettings").then( (s) => {
+        console.log("Graph Settings loaded");
+    }, (err) => {
+        console.log("Graph Setting default settings");
+        defaultGraphSettings();
     } );
 }
