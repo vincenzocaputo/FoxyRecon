@@ -4,6 +4,7 @@ const springLengthSlider = document.getElementById("spring-length-slider");
 const nodeSizeSlider = document.getElementById("node-size-slider");
 const edgeSizeSlider = document.getElementById("edge-size-slider");
 const edgeColorSelect = document.getElementById("edge-color-select");
+const labelColorSelect = document.getElementById("label-color-select");
 
 var network;
 var nodesView;
@@ -30,7 +31,14 @@ var options = {
         width: parseInt(edgeSizeSlider.value)
     },
     nodes: {
-        size: parseInt(nodeSizeSlider.value)
+        size: parseInt(nodeSizeSlider.value),
+        font: {
+            face: 'arial',
+            strokeWidth: 0.5,
+            strokeColor: "#FFFFFF",
+            color: labelColorSelect.value,
+            bold: 'true'
+        }
     },
     physics:{
         enabled: true,

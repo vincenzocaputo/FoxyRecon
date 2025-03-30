@@ -109,6 +109,11 @@ edgeColorSelect.addEventListener("change", (evt) => {
     network.setOptions(options);
 });
 
+labelColorSelect.addEventListener("change", (evt) => {
+    options.nodes.font.color = labelColorSelect.value;
+    network.setOptions(options);
+});
+
 addSDOButton.addEventListener("mouseenter", (evt) => {
     addSDOOptions.style.display = "block";
 });
