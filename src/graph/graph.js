@@ -2,8 +2,10 @@ const themeSelect = document.getElementById("theme-select");
 const repulsionSlider = document.getElementById("charge-slider");
 const springLengthSlider = document.getElementById("spring-length-slider");
 const nodeSizeSlider = document.getElementById("node-size-slider");
+const labelSizeSlider = document.getElementById("label-size-slider");
 const edgeSizeSlider = document.getElementById("edge-size-slider");
 const edgeColorSelect = document.getElementById("edge-color-select");
+const labelColorSelect = document.getElementById("label-color-select");
 
 var network;
 var nodesView;
@@ -27,10 +29,21 @@ var options = {
             color: edgeColorSelect.value
         },
         arrowStrikethrough: false,
-        width: parseInt(edgeSizeSlider.value)
+        width: parseInt(edgeSizeSlider.value),
+        font: {
+            size: parseInt(labelSizeSlider.value)
+        }
     },
     nodes: {
-        size: parseInt(nodeSizeSlider.value)
+        size: parseInt(nodeSizeSlider.value),
+        font: {
+            face: 'arial',
+            strokeWidth: 0.5,
+            strokeColor: "#FFFFFF",
+            color: labelColorSelect.value,
+            bold: 'true',
+            size: parseInt(labelSizeSlider.value)
+        }
     },
     physics:{
         enabled: true,
