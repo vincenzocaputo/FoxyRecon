@@ -9,6 +9,7 @@ const filterInputField = document.getElementById("filter-input-field");
 const filterButton = document.getElementById("filter-button");
 const editButton = document.getElementById("edit-node-button");
 const exportButton = document.getElementById("export-graph-button");
+const investigateButton = document.getElementById("investigate-button");
 const importButton = document.getElementById("import-graph-button");
 
 const resetButton = document.getElementById("reset-button");
@@ -223,6 +224,7 @@ addLinkButton.addEventListener("click", evt => {
     addSCOButton.style.display = "none";
     addLinkButton.style.display = "none";
     deleteGraphButton.style.display = "none";
+    investigateButton.style.display = "none";
     network.addEdgeMode();
 });
 
@@ -234,6 +236,7 @@ addLinkCancelButton.addEventListener("click", evt => {
     addSCOButton.style.display = "block";
     addLinkButton.style.display = "block";
     deleteGraphButton.style.display = "block";
+    investigateButton.style.display = "none";
     network.disableEditMode();
 });
 
@@ -451,6 +454,23 @@ importButton.addEventListener("click", evt => {
             }
         })
     });
+});
+
+investigateButton.addEventListener("click", (evt) => {
+    const indicator = investigateButton.getAttribute("indicator"); 
+    indicatorParser = new IndicatorParser();
+    [type, tld] = indicatorParser.getIndicatorType(indicator);
+    browser.browserAction.openPopup()
+    .then( () => {
+        browser.storage.local.set({
+            "indicator": {
+                "type": type,
+                "value": indicator,
+                "tld": tld
+            }
+        })
+    });
+
 });
 
 filterButton.addEventListener("click", evt => {
