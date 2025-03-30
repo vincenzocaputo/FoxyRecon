@@ -177,6 +177,7 @@ function renderGraph() {
             document.getElementById("delete-node-button").style.display = "none";
             document.getElementById("edit-node-button").style.display = "none";
             document.getElementById("delete-link-button").style.display = "none";
+            document.getElementById("investigate-button").style.display = "none";
             if (!addingLinkSwitch) {
                 document.getElementById("add-sco-button").style.display = "block";
                 document.getElementById("add-sdo-button").style.display = "block";
@@ -194,6 +195,23 @@ function renderGraph() {
                 const selectedNode = network.getSelectedNodes()[0];
                 for (node of graphNodes) {
                     if (node.id == selectedNode) {
+                        const stixParsed = JSON.parse(node.stix);
+                        if (stixParsed.type === "domain-name" ||
+                            stixParsed.type === "ipv4-addr" ||
+                            stixParsed.type === "file" ||
+                            stixParsed.type === "url" ||
+                            stixParsed.type === "email-addr") {
+                            document.getElementById("investigate-button").style.display = "block";
+                            document.getElementById("investigate-button").setAttribute("indicator", stixParsed.value);
+                        }
+                        if (stixParsed.type === "vulnerability") {
+                            document.getElementById("investigate-button").style.display = "block";
+                            document.getElementById("investigate-button").setAttribute("indicator", stixParsed.name);
+                        }
+                        if (stixParsed.type === "autonomous-system") {
+                            document.getElementById("investigate-button").style.display = "block";
+                            document.getElementById("investigate-button").setAttribute("indicator", "AS"+stixParsed.number);
+                        }
                         nodeContentDiv.textContent = JSON.stringify(JSON.parse(node.stix), null, 2);
 
                         lastSelectedNode = node;
