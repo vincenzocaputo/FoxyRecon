@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Neiki.dev TIP web tool
 - Support for IP address to IPQS
 - Add CVEFeed web resource
+- Feature to import custom tools from JSON file
+- Feature to import graph from JSON file
+- Graph icon themes
+- New graph settings
 
 ### Change
 - Remove CheckPhish tool
