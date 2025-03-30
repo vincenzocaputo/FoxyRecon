@@ -11,6 +11,8 @@ const editButton = document.getElementById("edit-node-button");
 const exportButton = document.getElementById("export-graph-button");
 const importButton = document.getElementById("import-graph-button");
 
+const resetButton = document.getElementById("reset-button");
+
 function createUploadPopup(changeEvent, uploadEvent) {
     var buttonsContainer;
     var form;
@@ -86,37 +88,93 @@ function createUploadPopup(changeEvent, uploadEvent) {
 
 themeSelect.addEventListener("change", (evt) => {
     renderGraph();
+    browser.storage.local.get("graphSettings").then( (result) => {
+        var settings = result.graphSettings;
+        settings.icontheme = themeSelect.value;
+        browser.storage.local.set({"graphSettings": settings});
+    });
 });
 
 repulsionSlider.addEventListener("change", (evt) => {
     options.physics.barnesHut.gravitationalConstant = -parseInt(repulsionSlider.value)*1000;
     network.setOptions(options);
+    browser.storage.local.get("graphSettings").then( (result) => {
+        var settings = result.graphSettings;
+        settings.repulsion = repulsionSlider.value;
+        browser.storage.local.set({"graphSettings": settings});
+    });
 });
 springLengthSlider.addEventListener("change", (evt) => {
     options.physics.barnesHut.springLength = parseInt(springLengthSlider.value);
     network.setOptions(options);
+    browser.storage.local.get("graphSettings").then( (result) => {
+        var settings = result.graphSettings;
+        settings.edgelength = springLengthSlider.value;
+        browser.storage.local.set({"graphSettings": settings});
+    });
 });
 nodeSizeSlider.addEventListener("change", (evt) => {
     options.nodes.size = parseInt(nodeSizeSlider.value);
     network.setOptions(options);
+    browser.storage.local.get("graphSettings").then( (result) => {
+        var settings = result.graphSettings;
+        settings.nodesize = nodeSizeSlider.value;
+        browser.storage.local.set({"graphSettings": settings});
+    });
 });
 labelSizeSlider.addEventListener("change", (evt) => {
     options.nodes.font.size = parseInt(labelSizeSlider.value);
     options.edges.font.size = parseInt(labelSizeSlider.value);
     network.setOptions(options);
+    browser.storage.local.get("graphSettings").then( (result) => {
+        var settings = result.graphSettings;
+        settings.labelsize = labelSizeSlider.value;
+        browser.storage.local.set({"graphSettings": settings});
+    });
 });
 edgeSizeSlider.addEventListener("change", (evt) => {
     options.edges.width = parseInt(edgeSizeSlider.value);
     network.setOptions(options);
+    browser.storage.local.get("graphSettings").then( (result) => {
+        var settings = result.graphSettings;
+        settings.edgesize = edgeSizeSlider.value;
+        browser.storage.local.set({"graphSettings": settings});
+    });
 });
 edgeColorSelect.addEventListener("change", (evt) => {
     options.edges.color.color = edgeColorSelect.value;
     network.setOptions(options);
+    browser.storage.local.get("graphSettings").then( (result) => {
+        var settings = result.graphSettings;
+        settings.edgecolor = edgeColorSelect.value;
+        browser.storage.local.set({"graphSettings": settings});
+    });
 });
 
 labelColorSelect.addEventListener("change", (evt) => {
     options.nodes.font.color = labelColorSelect.value;
     network.setOptions(options);
+    browser.storage.local.get("graphSettings").then( (result) => {
+        var settings = result.graphSettings;
+        settings.nodelabelcolor = labelColorSelect.value;
+        browser.storage.local.set({"graphSettings": settings});
+    });
+});
+
+resetButton.addEventListener("click", (evt) => {
+    const defaultGraphSettings = {
+        icontheme: "square-lite",
+        repulsion: 50,
+        edgelength: 50,
+        nodesize: 15,
+        edgesize: 1,
+        labelsize: 14,
+        edgecolor: "#444444",
+        nodelabelcolor: "#444444"
+    }
+    browser.storage.local.set({"graphSettings": defaultGraphSettings}).then( () => {
+        window.location.reload();
+    });
 });
 
 addSDOButton.addEventListener("mouseenter", (evt) => {

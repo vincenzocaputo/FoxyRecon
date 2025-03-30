@@ -13,69 +13,84 @@ var edgesView;
 // Save the last selected node for relationship creation
 var lastSelectedNode;
 var nodeFilterValue = "";
-var options = {
-    edges:{
-        arrows: {
-            to: {
-                enabled: true,
-                type: "arrow"
+var options;
+browser.storage.local.get("graphSettings").then( (result) => {
+    const graphSettings = result.graphSettings;
+
+    themeSelect.value = graphSettings.icontheme;
+    repulsionSlider.value = graphSettings.repulsion;
+    springLengthSlider.value = graphSettings.edgelength;
+    nodeSizeSlider.value = graphSettings.nodesize;
+    edgeSizeSlider.value = graphSettings.edgesize;
+    labelSizeSlider.value = graphSettings.labelsize;
+    edgeColorSelect.value = graphSettings.edgecolor;
+    labelColorSelect.value = graphSettings.nodelabelcolor;
+
+    options = {
+        edges:{
+            arrows: {
+                to: {
+                    enabled: true,
+                    type: "arrow"
+                }
+            },
+            endPointOffset: {
+                from: 0,
+                to: 0
+            },
+            color: {
+                color: edgeColorSelect.value
+            },
+            arrowStrikethrough: false,
+            width: parseInt(edgeSizeSlider.value),
+            font: {
+                size: parseInt(labelSizeSlider.value)
             }
         },
-        endPointOffset: {
-            from: 0,
-            to: 0
+        nodes: {
+            size: parseInt(nodeSizeSlider.value),
+            font: {
+                face: 'arial',
+                strokeWidth: 0.5,
+                strokeColor: "#FFFFFF",
+                color: labelColorSelect.value,
+                bold: 'true',
+                size: parseInt(labelSizeSlider.value)
+            }
         },
-        color: {
-            color: edgeColorSelect.value
-        },
-        arrowStrikethrough: false,
-        width: parseInt(edgeSizeSlider.value),
-        font: {
-            size: parseInt(labelSizeSlider.value)
-        }
-    },
-    nodes: {
-        size: parseInt(nodeSizeSlider.value),
-        font: {
-            face: 'arial',
-            strokeWidth: 0.5,
-            strokeColor: "#FFFFFF",
-            color: labelColorSelect.value,
-            bold: 'true',
-            size: parseInt(labelSizeSlider.value)
-        }
-    },
-    physics:{
-        enabled: true,
-        barnesHut: {
-            theta: 1.0,
-            gravitationalConstant: -parseInt(repulsionSlider.value)*1000,
-            centralGravity: 1,
-            springLength: parseInt(springLengthSlider.value),
-            springConstant: 0.04,
-            damping: 1,
-            avoidOverlap: 0
-        },
-        solver: 'barnesHut',
-        stabilization: {
+        physics:{
             enabled: true,
-            iterations: 100
-        }
-    },
-    manipulation: {
-        addEdge: function (data, callback) {
-            if (data.from == data.to) {
-                var r = confirm("Do you want to connect the node to itself?");
-                if (r === true) {
+            barnesHut: {
+                theta: 1.0,
+                gravitationalConstant: -parseInt(repulsionSlider.value)*1000,
+                centralGravity: 1,
+                springLength: parseInt(springLengthSlider.value),
+                springConstant: 0.04,
+                damping: 1,
+                avoidOverlap: 0
+            },
+            solver: 'barnesHut',
+            stabilization: {
+                enabled: true,
+                iterations: 100
+            }
+        },
+        manipulation: {
+            addEdge: function (data, callback) {
+                if (data.from == data.to) {
+                    var r = confirm("Do you want to connect the node to itself?");
+                    if (r === true) {
+                        createRelationshipForm(data, callback);
+                    }
+                }
+                else {
                     createRelationshipForm(data, callback);
                 }
-            }
-            else {
-                createRelationshipForm(data, callback);
-            }
-        },
+            },
+        }
     }
-}
+    renderGraph();
+});
 
 function renderGraph() {
     Graph.getInstance().then( (graph) => {
@@ -205,5 +220,3 @@ function renderGraph() {
         network.on('dragging', selectNodeEvent);
     });
 }
-
-renderGraph();
