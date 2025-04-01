@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Odin web tool
 - Add Wannabrowser web tool
 - Add Palo Alto Networks URL Filtering web tool
+- Add Wappalyzer web tool
 
 ### Change
 - Remove CheckPhish tool

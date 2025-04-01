@@ -1074,6 +1074,18 @@
 			"autoGraph": false
         },
         {
+            "name": "NerdyData",
+            "url": {
+                "domain": "https://www.nerdydata.com/domains/%s"
+            },
+            "desc": "NerdyData will help you find which websites use certain SaaS technologies.",
+            "icon": "nerdydata.png",
+            "color": "#04508d",
+            "types": ["domain"],
+            "tags": ["techs"],
+			"autoGraph": false
+        },
+        {
             "name": "Netcraft",
             "url": {
                 "domain": "https://sitereport.netcraft.com/?url=%s",
@@ -1502,6 +1514,19 @@
             "color": "#222222",
             "types": ["url"],
             "tags": ["history"],
+			"autoGraph": false
+        },
+        {
+            "name": "Wappalyzer",
+            "url": {
+                "domain": "https://www.wappalyzer.com/lookup/%s"
+            },
+            "desc": "Identify technologies on websites",
+            "icon": "wappalyzer.png",
+            "color": "#4608ad",
+            "types": ["domain"],
+            "tags": ["techs"],
+            "accountRequired": true,
 			"autoGraph": false
         },
 		{
