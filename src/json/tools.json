@@ -1097,6 +1097,20 @@
 			"autoGraph": false
         },
         {
+            "name": "Odin",
+            "url": {
+                "ip": "https://search.odin.io/hosts/%s/summary",
+                "domain": "https://search.odin.io/hosts?query=hostnames.name%3A%22%s%22",
+                "asn": "https://search.odin.io/hosts?query=asn.number%3A%22%s%22"
+            },
+            "desc": "Search for Hosts, CVEs & Exposed Buckets/Files",
+            "icon": "odin.png",
+            "color": "#4a67b2",
+            "types": ["ip","domain","asn"],
+            "tags": ["open-ports","whois"],
+			"autoGraph": false
+        },
+        {
             "name": "OpenCVE",
             "url": {
                 "cve": "https://www.opencve.io/cve/%s"

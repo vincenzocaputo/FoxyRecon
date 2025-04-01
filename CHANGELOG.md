@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Graph icon themes
 - New graph settings
 - Shortcut for popup opening
+- Add Odin web tool
 
 ### Change
 - Remove CheckPhish tool
