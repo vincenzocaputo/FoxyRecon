@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Shortcut for popup opening
 - Add Odin web tool
 - Add Wannabrowser web tool
+- Add Palo Alto Networks URL Filtering web tool
 
 ### Change
 - Remove CheckPhish tool

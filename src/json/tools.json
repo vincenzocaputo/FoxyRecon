@@ -384,6 +384,20 @@
 			"autoGraph": false
 		},
         {
+            "name": "DynamiteLab",
+            "url": {
+                "ip": "https://lab.dynamite.ai/pcaps?folder=search&q=%s",
+                "domain": "https://lab.dynamite.ai/pcaps?folder=search&q=%s",
+                "hash": "https://lab.dynamite.ai/pcaps?folder=search&q=%s"
+            },
+            "desc": "DynamiteLab delivers the easiest way to explore network behavior from packet captures. ",
+            "icon": "dynamitelab.png",
+            "color": "#185bdc",
+            "types": ["ip","domain","hash"],
+            "tags": ["ioc"],
+			"autoGraph": false
+        },
+        {
             "name": "Emailrep",
             "url": {
                 "email": "https://emailrep.io/%r"
@@ -1122,17 +1136,17 @@
 			"autoGraph": false
         },
         {
-            "name": "DynamiteLab",
+            "name": "PAN URL Filtering",
             "url": {
-                "ip": "https://lab.dynamite.ai/pcaps?folder=search&q=%s",
-                "domain": "https://lab.dynamite.ai/pcaps?folder=search&q=%s",
-                "hash": "https://lab.dynamite.ai/pcaps?folder=search&q=%s"
+                "url": "https://urlfiltering.paloaltonetworks.com/"
             },
-            "desc": "DynamiteLab delivers the easiest way to explore network behavior from packet captures. ",
-            "icon": "dynamitelab.png",
-            "color": "#185bdc",
-            "types": ["ip","domain","hash"],
-            "tags": ["ioc"],
+            "desc": "Enter a domain or URL into the search engine to view details about its current URL categories. To request recategorization of this website, click Request Change below the search results.",
+            "icon": "pan.png",
+            "color": "#fa582d",
+            "inputSelector": "#id_url",
+            "submitQuery": "button[type='submit']",
+            "types": ["url"],
+            "tags": ["rep"],
 			"autoGraph": false
         },
         {
