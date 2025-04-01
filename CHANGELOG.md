@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Feature to import graph from JSON file
 - Graph icon themes
 - New graph settings
+- Shortcut for popup opening
 
 ### Change
 - Remove CheckPhish tool

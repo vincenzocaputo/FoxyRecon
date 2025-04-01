@@ -55,7 +55,16 @@
 			"default_icon": "assets/icons/foxyrecon-icon-48.png",
 			"default_title": "FoxyRecon",
 			"default_popup": "src/popup/main_popup.html"
-	}
+	},
+
+    "commands": {
+      "open-popup": {
+        "suggested_key": {
+          "default": "Ctrl+Shift+F"
+        },
+        "description": "Open popup"
+      }
+    }
 
 }
 

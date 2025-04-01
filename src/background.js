@@ -117,7 +117,11 @@ browser.runtime.onInstalled.addListener(function(details) {
     });
 });
 
-
+browser.commands.onCommand.addListener((command) => {
+    if (command === "open-popup") {
+        browser.browserAction.openPopup()
+    }
+});
 /**
  * Harvest and collect the indicators present in the current webpage. Save the list in the local storage.
  */
