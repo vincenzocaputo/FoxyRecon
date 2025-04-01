@@ -189,7 +189,7 @@ class Graph {
                     break;
                 case 'hash':
                     stix = { 
-                        id: 'ipv4-addr--'+uuid,
+                        id: 'file--'+uuid,
                         type: 'file',
                         value: nodeValue
                     }
