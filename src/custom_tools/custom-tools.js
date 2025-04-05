@@ -960,6 +960,7 @@ window.onload = function() {
                             resetForm();
                             resetPage();
                         });
+                        return Promise.resolve(true);
                     }
                 }
             }
