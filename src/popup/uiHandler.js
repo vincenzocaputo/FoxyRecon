@@ -45,6 +45,7 @@ loadTools().then( (result) => {
             document.getElementById("bin-icon").style.display = "block";
             // Show the buttons related to the tools that support this indicator
             showButtonsByType(indicator.value, type, optionValue);
+            inputField.focus();
         }
     });
 
