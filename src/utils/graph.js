@@ -341,7 +341,6 @@ class Graph {
      */
     getNodesByLabel(label) {
         let filteredNodes = Array();
-        console.log(this.graph);
         for (let node of this.graph['nodes']) {
             if (node['label'] === label) {
                 filteredNodes.push(node['id']);
