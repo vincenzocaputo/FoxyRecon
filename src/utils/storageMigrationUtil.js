@@ -27,7 +27,17 @@ function executeMigration() {
             }
             }),
             browser.storage.local.set({"settings": settings}),
-            browser.storage.local.set({"graph": graph})
+            browser.storage.local.set({"graph": graph}),
+            browser.storage.local.set({"graphSettings": {
+                icontheme: "square-lite",
+                repulsion: 50,
+                edgelength: 50,
+                nodesize: 15,
+                edgesize: 1,
+                labelsize: 14,
+                edgecolor: "#444444",
+                nodelabelcolor: "#444444"
+            }})
         ]);
     }
 }
