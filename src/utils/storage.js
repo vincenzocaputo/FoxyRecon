@@ -13,6 +13,8 @@ function detectStorageMigration(oldVersion, newVersion) {
         return executeMigration().then( (result) => {
             return true;
         });
+    } else if (Number(newMajor) > 0 || Number(newMinor) >= 24) {
+        resetGraphSettings(); 
     } else {
         return Promise.resolve(false);
     }
