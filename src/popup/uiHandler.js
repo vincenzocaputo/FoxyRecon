@@ -231,7 +231,7 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, showOnlyAutograph,
                 if (!showOnlyAutograph || autoGraph) {
                     if (!showOnlyNoKey || !accountRequired) {
                         if (!showOnlyNoInt || !interactionsRequired) {
-                            if (!toolName || tools[i]["name"].toLowerCase().includes(toolName)) {
+                            if (!toolName || tools[i]["name"].toLowerCase().includes(toolName.toLowerCase())) {
                                 if (tools[i]["types"].includes(type)) { 
                                     tagsOptions = tagsOptions.concat(tools[i]["tags"]);
                                     if (tag === "all" || (tools[i]["tags"] && tools[i]["tags"].includes(tag))) {
