@@ -119,7 +119,7 @@
         {
             "name": "Censys Certificates",
             "url": {
-                "domain": "https://search.censys.io/search?resource=certificates&sort=RELEVANCE&per_page=25&virtual_hosts=EXCLUDE&q=%s"
+                "domain": "https://platform.censys.io/search?q=%22%s%22+and+cert.fingerprint_sha256%3A+*"
             },
             "desc": "Hosts and networks search engine",
             "icon": "censys.png",
@@ -132,15 +132,16 @@
         {
             "name": "Censys Hosts",
             "url": {
-                "ip": "https://search.censys.io/search?resource=hosts&sort=RELEVANCE&per_page=25&virtual_hosts=EXCLUDE&q=%s",
-                "domain": "https://search.censys.io/search?resource=hosts&sort=RELEVANCE&per_page=25&virtual_hosts=EXCLUDE&q=%s"
+                "ip": "https://platform.censys.io/hosts/%s",
+                "domain": "https://platform.censys.io/search?q=web.hostname%3D%22%s%22"
             },
             "desc": "Hosts and networks search engine",
             "icon": "censys.png",
             "color": "#FF7A38",
             "types": ["ip", "domain"],
             "tags": ["open-ports"],
-			"autoGraph": false
+			"autoGraph": false,
+            "accountRequired": true
         },
         {
             "name": "CentralOps",
