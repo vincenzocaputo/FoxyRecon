@@ -28,9 +28,7 @@ textfieldBin.addEventListener("click", function() {
  * Handle the clicking on IoC Catch icon inside the text field
  *
  */
-var textfieldCatch = document.querySelector("#catch-icon");
-textfieldCatch.title = "Collect indicators on this page";
-textfieldCatch.addEventListener("click", function() {
+function collectIndicators() {
     // Get the id of the current active tab in the current window
     browser.tabs.query({active:true, currentWindow:true}).then(tabs => {
         let activeTab = tabs[0].id;
@@ -56,6 +54,7 @@ textfieldCatch.addEventListener("click", function() {
                         document.getElementById(key+"_occ").textContent = count[key];
                     }
                     browser.storage.local.set({"catchedIndicators": indicatorsList});
+
                 }
             }
             // Consume token
@@ -65,7 +64,11 @@ textfieldCatch.addEventListener("click", function() {
     error => {
         console.error("Error: "+error)
     });
-});
+}
+var textfieldCatch = document.querySelector("#catch-icon");
+textfieldCatch.title = "Collect indicators on this page";
+textfieldCatch.addEventListener("click", collectIndicators);
+document.querySelector("#catch-caption>img").addEventListener("click", collectIndicators);
 
 
 /**

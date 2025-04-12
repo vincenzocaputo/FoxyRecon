@@ -989,6 +989,13 @@ input:checked + .slider:before {
     padding-top: 10px;
 }
 
+#catch-caption>img {
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    display: inline-block;
+}
+
 #disclaimer {
     font-size: 9px;
     text-align: center;
