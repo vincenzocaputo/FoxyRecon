@@ -287,6 +287,7 @@ div.tool-tag {
 #history {
     background-color: #FFFFFF;
     width: 250px;
+    height: 200px;
     position: absolute;
     display: none;
     z-index: 1;
