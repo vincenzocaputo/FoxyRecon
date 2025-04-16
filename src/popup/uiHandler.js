@@ -437,7 +437,8 @@ function createToolsList(toolsList, settings, favTools){
         openIconNode = document.createElement("img");
         // Get the current option
         const newTabOption = settings.newtab;
-        if(newTabOption && newTabOption === "false") {
+        console.log("TAB OPTION: "+newTabOption);
+        if(!newTabOption) {
             // By default the addon opens resources in the current tab
             // let the user open in a new tab by clicking on this icon
             openIconNode.src = "../../assets/icons/outside.png";

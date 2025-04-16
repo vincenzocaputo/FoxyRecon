@@ -134,7 +134,7 @@ document.querySelector("#auto-submit-opt input").addEventListener("change", func
 });
 
 /**
- * Handle auto-submit option checkbox change event
+ * Handle auto-catch option checkbox change event
  */
 document.querySelector("#auto-catch-opt input").addEventListener("change", function(evt) {
     autocatchOption = evt.target.checked;
