@@ -1100,6 +1100,19 @@
 			"autoGraph": true
         },
         {
+            "name": "Netify",
+            "url": {
+                "ip": "https://www.netify.ai/resources/ips/%s",
+                "domain": "https://www.netify.ai/resources/hostnames/%s"
+            },
+            "desc": "Netify provides full transparency into what’s happening on the network. Local deep packet network monitoring coupled with cloud-based analytics to deliver exceptional, business-driven results.",
+            "icon": "netify.png",
+            "color": "#fca53d",
+            "types": ["ip","domain"],
+            "tags": ["net-activity"],
+			"autoGraph": true
+        },
+        {
             "name": "NIST",
             "url": {
                 "cve": "https://nvd.nist.gov/vuln/detail/%s"

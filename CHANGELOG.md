@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Wappalyzer web tool
 - European Union Vulnerability Database (EUVD) tool
 - Add VARIoT web resource
+- Add Netify web resource
 
 ### Change
 - Remove CheckPhish tool
