@@ -4,7 +4,7 @@ function createLocationForm(evt, title, stix={}) {
     const type = "location";
     const objectId = stix["id"] === undefined ? type+"--"+crypto.randomUUID() : stix["id"];
 
-    const formHandler = new FormHandler(title, "img/location-nb.png");
+    const formHandler = new FormHandler(title, "img/location-noback-flat.png");
     submitEvent = evt => {
         var stix = {}
         const fields = formHandler.getFields();

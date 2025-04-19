@@ -91,7 +91,6 @@ function showCustomToolsList() {
             optionsContainer = document.createElement("div");
             optionsContainer.classList.add("tool-options-container");
 
-        
             node.id = i;
             
             // Add animation to show the entire text
@@ -162,6 +161,8 @@ function showCustomToolsList() {
                 document.querySelector("#del-res-button").style.display = "block";
                 document.querySelector("#export-button").style.display = "block";
                 document.querySelector("#export-all-button").style.display = "none";
+                document.querySelector("#import-button").style.display = "none";
+                document.querySelector("#import-template-button").style.display = "none";
                 resetForm();
                 update = true;
                 document.querySelector("#submit-btn").textContent = "Update tool";
@@ -261,6 +262,8 @@ function showCustomToolsList() {
                 document.querySelector("#edit-res-button").style.display = "none";
                 document.querySelector("#export-button").style.display = "none";
                 document.querySelector("#export-all-button").style.display = "block";
+                document.querySelector("#import-button").style.display = "block";
+                document.querySelector("#import-template-button").style.display = "block";
                 document.querySelector("#submit-btn").value = "Edit Tool";
 
             });
@@ -284,6 +287,10 @@ function resetPage() {
     document.querySelector("#del-res-button").style.display = "none";
     document.querySelector("#edit-res-button").style.display = "none";
     document.querySelector("#add-res-button").style.display = "block";
+    document.querySelector("#export-button").style.display = "none";
+    document.querySelector("#export-all-button").style.display = "block";
+    document.querySelector("#import-button").style.display = "block";
+    document.querySelector("#import-template-button").style.display = "block";
 }
 /**
  * Reset the input form
@@ -302,6 +309,79 @@ function resetForm() {
 function resetErrors() {
     document.querySelectorAll(".error-msg").forEach( v => { v.style.display = "none" });
     document.querySelectorAll("input").forEach( v => { v.style.outline = "none" });
+}
+
+function createUploadPopup(changeEvent, uploadEvent) {
+    var buttonsContainer;
+    var form;
+    const outsideBackground = document.createElement("div");
+    outsideBackground.setAttribute("id", "background");
+    document.querySelector("#page-container").appendChild(outsideBackground);
+    const popupContainer = document.createElement("div");
+    const formContainer = document.createElement("div");
+
+    const formHeader = document.createElement("div");
+    formHeader.classList.add("form-header");
+
+    const formIconEl = document.createElement("img");
+    formIconEl.setAttribute("src", "../../assets/icons/import-2.png");
+
+    const formTitleEl = document.createElement("div");
+    formTitleEl.textContent = "Import tools";
+
+    formHeader.appendChild(formIconEl);
+    formHeader.appendChild(formTitleEl);
+    popupContainer.appendChild(formHeader);
+
+    buttonsContainer = document.createElement("div");
+    buttonsContainer.classList.add("buttons-container");
+    
+    const cancelButton = document.createElement("button");
+    cancelButton.textContent = "Cancel";
+    cancelButton.classList.add("btn");
+    cancelButton.classList.add("cancel-btn");
+    cancelButton.addEventListener("click", evt => {
+        resetPage();
+        evt.target.closest(".popup-container").remove();
+    });
+
+    const okButton = document.createElement("input");
+    okButton.setAttribute("type", "submit");
+    okButton.setAttribute("value", "Import");
+    okButton.classList.add("btn");
+    okButton.classList.add("add-btn");
+
+
+    form = document.createElement("form");
+    form.classList.add("upload-form");
+    buttonsContainer.appendChild(cancelButton);
+    buttonsContainer.appendChild(okButton);
+    form.setAttribute("method", "post");
+
+    popupContainer.classList.add("popup-container");
+    formContainer.classList.add("upload-form-container");
+
+    form.appendChild(formContainer);
+    form.appendChild(buttonsContainer);
+    form.addEventListener("submit", uploadEvent);
+    popupContainer.appendChild(form);
+
+    document.getElementById("page-container").appendChild(popupContainer);
+
+    const uploadLabelElement = document.createElement("label");
+    uploadLabelElement.setAttribute("for", "upload");
+    uploadLabelElement.textContent = "Upload a JSON file containing the definition of the tools to import";
+
+    var uploadInput = document.createElement("input");
+    uploadInput.setAttribute("type", "file");
+    uploadInput.setAttribute("id", "upload-input");
+    uploadInput.setAttribute("name", "upload");
+    uploadInput.setAttribute("accept", "application/json");
+    uploadInput.setAttribute("required", "");
+    uploadInput.addEventListener("change", changeEvent);
+
+    form.insertBefore(uploadInput, buttonsContainer);
+    form.insertBefore(uploadLabelElement, uploadInput);
 }
 
 function createFormPopup(formIcon, formTitle, defaultName, addEvent) {
@@ -346,6 +426,7 @@ function createFormPopup(formIcon, formTitle, defaultName, addEvent) {
 
 
     form = document.createElement("form");
+    form.classList.add("form");
     buttonsContainer.appendChild(cancelButton);
     buttonsContainer.appendChild(okButton);
     form.setAttribute("method", "post");
@@ -423,6 +504,123 @@ function createFormPopup(formIcon, formTitle, defaultName, addEvent) {
     form.insertBefore(radioGroup, buttonsContainer);
     form.insertBefore(radioGroupLabel, radioGroup);
     
+}
+
+function validateImportedJSON(jsonCode) {
+    const keys = Object.keys(jsonCode);
+
+    if (keys.includes('name')) {
+        if (typeof jsonCode['name'] != "string") {
+            return false;
+        }
+    } else {
+        return false;
+    }
+    if (keys.includes('description')) {
+        if (typeof jsonCode['description'] != "string") {
+            return false;
+        }
+    } else {
+        return false;
+    }
+    if (keys.includes('color')) {
+        if (typeof jsonCode['color'] == "string") {
+            const colorReg = new RegExp(/^#[0-9a-fA-F]{6}$/);
+            if (!jsonCode['color'].match(colorReg)) {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+
+    if (keys.includes('icon')) {
+        if (typeof jsonCode['icon'] == "string") {
+            const [prefix, base64] = jsonCode['icon'].split(',');
+            if (prefix != "data:image/png;base64") {
+                return false;
+            }
+            try {
+                window.atob(base64);
+            } catch (e) {
+                return false;
+            }
+        }
+    } else {
+        return false;
+    }
+
+    const validTypes = new Set(["asn",
+                                "cve",
+                                "domain",
+                                "email",
+                                "hash",
+                                "ip",
+                                "phone",
+                                "url"]);
+
+    if (keys.includes('types')) {
+        if (typeof jsonCode['types'] == "object" && jsonCode['types'].length > 0) {
+            const types = new Set(jsonCode['types']);
+            if (types.union(validTypes).size != validTypes.size) {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+    const validTags = new Set([  "dns",
+                                  "history",
+                                  "http-headers",
+                                  "ioc",
+                                  "leaks",
+                                  "net-activity",
+                                  "open-ports",
+                                  "rep",
+                                  "sandbox",
+                                  "screenshot",
+                                  "techs",
+                                  "tls",
+                                  "whois"]);
+
+    if (keys.includes('tags')) {
+        if (typeof jsonCode['tags'] == "object") {
+            const tags = new Set(jsonCode['tags']);
+            if (tags.union(validTags).size != validTags.size) {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+
+    const urlRegex = new RegExp(/^(?:http[s]?):\/\/(((?!0)(?!.*\.$)((2[0-4][0-9]|25[0-5]|1[0-9][0-9]|[1-9][0-9]|\d)\.){3}(2[0-4][0-9]|25[0-5]|1[0-9][0-9]|[1-9][0-9]|\d))|((?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}))\b(?:[-a-zA-Z0-9@:%_\+.~#?&//=]*)$/);
+    if (keys.includes('url')) {
+        if (typeof jsonCode['url'] != "object") {
+            return false;
+        } else {
+            for (const type of jsonCode['types']) {
+                const url = jsonCode['url'][type];
+                if (!url) {
+                    return false;
+                }
+                if (!url.match(urlRegex)) {
+                    return false;
+                }
+            }
+            
+        }
+    } else {
+        return false;
+    }
+
+    return true;
 }
 
 window.onload = function() {
@@ -754,18 +952,25 @@ window.onload = function() {
                 if(tools[i]["name"] == jsonCode["name"]) {
                     if(!update) {
                         showMessageError("tool-name", "The name is already in use");
+                        return Promise.resolve(false);
                     } else {
                         tools[i] = jsonCode;
-                        return browser.storage.local.set({"toolsExt": tools});
+                        browser.storage.local.set({"toolsExt": tools}).then( () => {
+                            showCustomToolsList();
+                            resetForm();
+                            resetPage();
+                        });
+                        return Promise.resolve(true);
                     }
                 }
             }
             tools.push(jsonCode);
-            return browser.storage.local.set({"toolsExt": tools});
-        }).then( (tools) => {
-            showCustomToolsList();
-            resetForm();
-            resetPage();
+            imageBase64.value = "";
+            browser.storage.local.set({"toolsExt": tools}).then( () => {
+                showCustomToolsList();
+                resetForm();
+                resetPage();
+            });
         });
 
     });
@@ -782,7 +987,9 @@ window.onload = function() {
         document.querySelector("#add-res-button").style.display = "none";
         document.querySelector("#edit-res-button").style.display = "none";
         document.querySelector("#export-button").style.display = "none";
-        document.querySelector("#export-all-button").style.display = "block";
+        document.querySelector("#export-all-button").style.display = "none";
+        document.querySelector("#import-button").style.display = "none";
+        document.querySelector("#import-template-button").style.display = "none";
     });
 
     document.querySelector("#del-res-button").addEventListener("click", (evt) => {
@@ -823,6 +1030,52 @@ window.onload = function() {
         });
     });
 
+    document.querySelector("#import-button").addEventListener("click", (evt) => {
+        var promise;
+        createUploadPopup((e) => {
+            const file = e.target.files.item(0);
+            promise = file.text().then( ( content) => {
+                try {
+                    return JSON.parse(content);
+                } catch(exception) {
+                    return Promise.resolve(exception);
+                }
+            }); 
+        }, (evt) => {
+            evt.preventDefault();
+            promise.then((importedTools) => {
+                if (importedTools instanceof Error) {
+                    alert("Invalid JSON file submitted: "+importedTools.message);
+                } else {
+                    if (!Array.isArray(importedTools)) {
+                        importedTools = [importedTools];
+                    }
+                    for (const tool of importedTools) {
+                        if (!validateImportedJSON(tool)) {
+                            alert("The JSON does not contain valid tools");
+                            return;
+                        }
+                    }
+
+                    browser.storage.local.get("toolsExt").then( (tools) => {
+                        let toolsList = tools.toolsExt;
+                        for (const itool of importedTools) {
+                            for (const tool of toolsList) {
+                                if (itool['name'] === tool['name']) {
+                                    alert("The JSON file you are trying to upload contains a tool that is already defined.");
+                                    return;
+                                } 
+                            }
+                            toolsList.push(itool);
+                        }
+                        browser.storage.local.set({"toolsExt": toolsList});
+                        window.location.reload();
+                    })
+                }
+            })
+        });
+    });
+
     document.querySelector("#cancel-button").addEventListener("click", (evt) => {
         let resp = false;
         const formPaneDisplay = document.querySelector("#form-pane").style.display;
@@ -839,8 +1092,6 @@ window.onload = function() {
             document.querySelector("#del-res-button").style.display = "none";
             document.querySelector("#add-res-button").style.display = "block";
             document.querySelector("#edit-res-button").style.display = "none";
-            document.querySelector("#export-button").style.display = "none";
-            document.querySelector("#export-all-button").style.display = "block";
             document.querySelectorAll(".tool-entry").forEach( v => v.style.opacity = "1" );
             resetForm();
             resetPage();
@@ -868,7 +1119,8 @@ window.onload = function() {
 
 
     document.querySelector("#misp-template").addEventListener("click", (evt) => {
-        createFormPopup('./icons/misp.png', "Add MISP", "MISP", ()=>{
+        createFormPopup('./icons/misp.png', "Add MISP", "MISP", (e)=>{
+            e.preventDefault();
             browser.storage.local.get("toolsExt").then( (result) => {
                 const tools = result.toolsExt || Array();
                 for(const [key, value] of Object.entries(mispTemplate["url"])) {
@@ -884,19 +1136,24 @@ window.onload = function() {
                 for(var i=0; i<tools.length; i++) {
                     if(tools[i]["name"] == mispTemplate["name"]) {
                         alert("The name is already in use");
+                        return Promise.resolve(false);
                     }
                 }
                 tools.push(mispTemplate);
                 return browser.storage.local.set({"toolsExt": tools});
             }).then( (tools) => {
-                showCustomToolsList();
+                if (tools !== false) {
+                    showCustomToolsList();
+                    window.location.reload();
+                }
             });
 
         });
     });
 
     document.querySelector("#opencti-template").addEventListener("click", (evt) => {
-        createFormPopup('./icons/opencti.png', "Add OpenCTI", "OpenCTI", ()=>{
+        createFormPopup('./icons/opencti.png', "Add OpenCTI", "OpenCTI", (e)=>{
+            e.preventDefault();
             browser.storage.local.get("toolsExt").then( (result) => {
                 const tools = result.toolsExt || Array();
                 for(const [key, value] of Object.entries(openctiTemplate["url"])) {
@@ -912,18 +1169,23 @@ window.onload = function() {
                 for(var i=0; i<tools.length; i++) {
                     if(tools[i]["name"] == openctiTemplate["name"]) {
                         alert("The name is already in use");
+                        return Promise.resolve(false);
                     }
                 }
                 tools.push(openctiTemplate);
                 return browser.storage.local.set({"toolsExt": tools});
             }).then( (tools) => {
-                showCustomToolsList();
+                if (tools !== false) {
+                    showCustomToolsList();
+                    window.location.reload();
+                }
             });
         });
     });
 
     document.querySelector("#yeti-template").addEventListener("click", (evt) => {
-        createFormPopup('./icons/yeti.png', "Add YETI", "YETI", ()=>{
+        createFormPopup('./icons/yeti.png', "Add YETI", "YETI", (e)=>{
+            e.preventDefault();
             browser.storage.local.get("toolsExt").then( (result) => {
                 const tools = result.toolsExt || Array();
                 for(const [key, value] of Object.entries(yetiTemplate["url"])) {
@@ -939,12 +1201,16 @@ window.onload = function() {
                 for(var i=0; i<tools.length; i++) {
                     if(tools[i]["name"] == yetiTemplate["name"]) {
                         alert("The name is already in use");
+                        return Promise.resolve(false);
                     }
                 }
                 tools.push(yetiTemplate);
                 return browser.storage.local.set({"toolsExt": tools});
             }).then( (tools) => {
-                showCustomToolsList();
+                if (tools !== false) {
+                    showCustomToolsList();
+                    window.location.reload();
+                }
             });
         });
     });

@@ -4,7 +4,7 @@ function createThreatActorForm(evt, title, stix={}) {
     const type = "threat-actor";
     const objectId = stix["id"] === undefined ? type+"--"+crypto.randomUUID() : stix["id"];
 
-    const formHandler = new FormHandler(title, "img/threat-actor-nb.png");
+    const formHandler = new FormHandler(title, "img/threat-actor-noback-flat.png");
     submitEvent = evt => {
         var stix = {}
         const fields = formHandler.getFields();

@@ -139,9 +139,15 @@ class Graph {
     addSTIXNode(id, label, type, stix) {
         if(!this.nodeInGraph(id)) {
             const createdDate = new Date().toISOString();
-            stix["created"] = createdDate;
-            stix["modified"] = createdDate;
-            stix["spec_version"] = "2.1";
+            if (!stix.hasOwnProperty("created")) {
+                stix["created"] = createdDate;
+            }
+            if (!stix.hasOwnProperty("modified")) {
+                stix["modified"] = createdDate;
+            }
+            if (!stix.hasOwnProperty("spec_version")) {
+                stix["spec_version"] = "2.1";
+            }
             this.graph["nodes"].push({
                 id: id,
                 label: label,
@@ -183,7 +189,7 @@ class Graph {
                     break;
                 case 'hash':
                     stix = { 
-                        id: 'ipv4-addr--'+uuid,
+                        id: 'file--'+uuid,
                         type: 'file',
                         value: nodeValue
                     }
@@ -335,7 +341,6 @@ class Graph {
      */
     getNodesByLabel(label) {
         let filteredNodes = Array();
-        console.log(this.graph);
         for (let node of this.graph['nodes']) {
             if (node['label'] === label) {
                 filteredNodes.push(node['id']);

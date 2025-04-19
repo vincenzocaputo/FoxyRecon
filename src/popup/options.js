@@ -134,7 +134,7 @@ document.querySelector("#auto-submit-opt input").addEventListener("change", func
 });
 
 /**
- * Handle auto-submit option checkbox change event
+ * Handle auto-catch option checkbox change event
  */
 document.querySelector("#auto-catch-opt input").addEventListener("change", function(evt) {
     autocatchOption = evt.target.checked;
@@ -144,7 +144,7 @@ document.querySelector("#auto-catch-opt input").addEventListener("change", funct
         browser.storage.local.set({"settings": settings});
         if (!autocatchOption) {
             browser.storage.local.set({"catchedIndicators": []}).then( () => {
-                browserr.action.setBadgeText({text: ""});
+                browser.browserAction.setBadgeText({text: ""});
             });
         }
     });

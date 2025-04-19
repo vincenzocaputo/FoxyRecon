@@ -4,7 +4,7 @@ function createIntrusionSetForm(evt, title, stix={}) {
     const type = "intrusion-set";
     const objectId = stix["id"] === undefined ? type+"--"+crypto.randomUUID() : stix["id"];
 
-    const formHandler = new FormHandler(title, "img/intrusion-set-nb.png");
+    const formHandler = new FormHandler(title, "img/intrusion-set-noback-flat.png");
     submitEvent = evt => {
         var stix = {}
         const fields = formHandler.getFields();
