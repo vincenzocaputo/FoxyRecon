@@ -54,7 +54,6 @@ function collectIndicators() {
                         document.getElementById(key+"_occ").textContent = count[key];
                     }
                     chrome.storage.local.set({"catchedIndicators": indicatorsList});
-
                 }
             }
             // Consume token
