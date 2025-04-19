@@ -160,17 +160,6 @@
 			"autoGraph": false
         },
         {
-            "name": "CIRCL.LU",
-            "url": {
-                "cve": "https://vulnerability.circl.lu/vuln/%s"
-            },
-            "desc": "Computer Incident Response Center Luxembourg (CIRCL) vulnerability lookup",
-            "icon": "circllu.png",
-            "color": "#E1414B",
-            "types": ["cve"],
-			"autoGraph": false
-        },
-        {
             "name": "CISA KEV",
             "url": {
                 "cve": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?search_api_fulltext=%s"
@@ -1703,6 +1692,17 @@
             "submitQuery": "VT",
             "types": ["url"],
             "tags": ["sandbox", "rep"],
+			"autoGraph": false
+        },
+        {
+            "name": "vulnerability-lookup",
+            "url": {
+                "cve": "https://vulnerability.circl.lu/vuln/%s"
+            },
+            "desc": "Fast vulnerability lookup correlation from different sources (CIRCL.lu)",
+            "icon": "vulnerability-lookup.png",
+            "color": "#55d0ed",
+            "types": ["cve"],
 			"autoGraph": false
         },
         {

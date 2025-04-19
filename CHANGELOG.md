@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Change
 - Remove CheckPhish tool
 - Replace PacketTotal with DynamiteLab (its successor)
+- Update CIRCL.lu web resource to vulnerability-lookup
 
 ### Fix
 - Bug that prevented tools from being removed from favorites
