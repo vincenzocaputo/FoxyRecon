@@ -449,6 +449,17 @@
 			"autoGraph": false
         },
         {
+            "name": "EUVD (enisa)",
+            "url": {
+                "cve": "https://euvd.enisa.europa.eu/vulnerability/%s"
+            },
+            "desc": "European Union Vulnerability Database",
+            "icon": "euvd.png",
+            "color": "#004f9f",
+            "types": ["cve"],
+			"autoGraph": false
+        },
+        {
             "name": "files.ninja",
             "url": {
                 "hash": "https://files.ninja/search?q=%s"

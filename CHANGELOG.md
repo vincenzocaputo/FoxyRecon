@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Wannabrowser web tool
 - Add Palo Alto Networks URL Filtering web tool
 - Add Wappalyzer web tool
+- European Union Vulnerability Database (EUVD) tool
 
 ### Change
 - Remove CheckPhish tool
