@@ -21,7 +21,7 @@ function detectStorageMigration(oldVersion, newVersion) {
 }
 
 function resetIndicator() {
-    browser.storage.local.set({
+    chrome.storage.local.set({
         "indicator": {
             value: "",
             type: "",
@@ -39,7 +39,7 @@ function resetSettings() {
         autograph: false,
         typeanim: true
     }
-    return browser.storage.local.set({"settings": defaultSettings});
+    return chrome.storage.local.set({"settings": defaultSettings});
 }
 
 function resetGraphSettings() {
@@ -53,16 +53,16 @@ function resetGraphSettings() {
         edgecolor: "#444444",
         nodelabelcolor: "#444444"
     }
-    return browser.storage.local.set({"graphSettings": defaultGraphSettings});
+    return chrome.storage.local.set({"graphSettings": defaultGraphSettings});
 }
 
 function createStorage() {
     return Promise.all([
         resetIndicator(),
-        browser.storage.local.set({"history": Array()}),
-        browser.storage.local.set({"toolsExt": Array()}),
-        browser.storage.local.set({"fav": Array()}),
-        browser.storage.local.set({
+        chrome.storage.local.set({"history": Array()}),
+        chrome.storage.local.set({"toolsExt": Array()}),
+        chrome.storage.local.set({"fav": Array()}),
+        chrome.storage.local.set({
             "autofill": {
                 inputSelector: "",
                 submitQuery: ""
@@ -70,7 +70,7 @@ function createStorage() {
         }),
         resetSettings(),
         resetGraphSettings(),
-        browser.storage.local.set({
+        chrome.storage.local.set({
             "graph": {
                 nodes: [],
                 links: []
@@ -83,13 +83,13 @@ function createStorage() {
 
 function loadStorage() {
     // Setup default settings
-    browser.storage.local.get("settings").then( (s) => {
+    chrome.storage.local.get("settings").then( (s) => {
         console.log("Settings loaded");
     }, (err) => {
         console.log("Setting default settings");
         defaultSettings();
     } );
-    browser.storage.local.get("graphSettings").then( (s) => {
+    chrome.storage.local.get("graphSettings").then( (s) => {
         console.log("Graph Settings loaded");
     }, (err) => {
         console.log("Graph Setting default settings");

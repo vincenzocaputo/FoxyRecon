@@ -18,17 +18,17 @@ function executeMigration() {
 
         localStorage.clear();
         return Promise.all([
-            browser.storage.local.set({"history": history}),
-            browser.storage.local.set({"toolsExt": toolsExt}),
-            browser.storage.local.set({"fav": fav}),
-            browser.storage.local.set({"autofill": {
+            chrome.storage.local.set({"history": history}),
+            chrome.storage.local.set({"toolsExt": toolsExt}),
+            chrome.storage.local.set({"fav": fav}),
+            chrome.storage.local.set({"autofill": {
                 inputSelector: "",
                 submitQuery: ""
             }
             }),
-            browser.storage.local.set({"settings": settings}),
-            browser.storage.local.set({"graph": graph}),
-            browser.storage.local.set({"graphSettings": {
+            chrome.storage.local.set({"settings": settings}),
+            chrome.storage.local.set({"graph": graph}),
+            chrome.storage.local.set({"graphSettings": {
                 icontheme: "square-lite",
                 repulsion: 50,
                 edgelength: 50,

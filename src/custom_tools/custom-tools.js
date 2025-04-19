@@ -3,7 +3,7 @@ var selectedResource = -1;
 
 function readJSONFile(file) {
     return new Promise(function (resolve, reject) {
-        const fileURI = browser.runtime.getURL(file);
+        const fileURI = chrome.runtime.getURL(file);
         //const fileURI = file;
         fetch(fileURI).then( (response) => {
             if (!response.ok) {
@@ -36,7 +36,7 @@ function showCustomToolsList() {
     document.querySelector("#no-tools").style.display = "none";
     const toolsListNodes = document.getElementById("tools-list");
     toolsListNodes.textContent = ''; // Remove nodes already potentially present
-    browser.storage.local.get("toolsExt").then( (result) => {
+    chrome.storage.local.get("toolsExt").then( (result) => {
         const toolsList = result.toolsExt || Array();
         if(toolsList.length === 0) {
             document.querySelector("#no-tools").style.display = "block";
@@ -945,7 +945,7 @@ window.onload = function() {
         jsonCode["color"] = document.getElementById("tool-color").value;
 
 
-        browser.storage.local.get("toolsExt").then( (result) => {
+        chrome.storage.local.get("toolsExt").then( (result) => {
             const tools = result.toolsExt || Array();
             // Check for duplicates
             for(var i=0; i<tools.length; i++) {
@@ -955,7 +955,7 @@ window.onload = function() {
                         return Promise.resolve(false);
                     } else {
                         tools[i] = jsonCode;
-                        browser.storage.local.set({"toolsExt": tools}).then( () => {
+                        chrome.storage.local.set({"toolsExt": tools}).then( () => {
                             showCustomToolsList();
                             resetForm();
                             resetPage();
@@ -966,7 +966,7 @@ window.onload = function() {
             }
             tools.push(jsonCode);
             imageBase64.value = "";
-            browser.storage.local.set({"toolsExt": tools}).then( () => {
+            chrome.storage.local.set({"toolsExt": tools}).then( () => {
                 showCustomToolsList();
                 resetForm();
                 resetPage();
@@ -994,10 +994,10 @@ window.onload = function() {
 
     document.querySelector("#del-res-button").addEventListener("click", (evt) => {
         if(confirm("Are you sure to delete this tool? The action cannot be undone") == true) {
-            browser.storage.local.get("toolsExt").then( (result) => {
+            chrome.storage.local.get("toolsExt").then( (result) => {
                 const toolsList = result.toolsExt;
                 toolsList.splice(selectedResource,1);
-                return browser.storage.local.set({"toolsExt": toolsList });
+                return chrome.storage.local.set({"toolsExt": toolsList });
             }).then( () => {
                 showCustomToolsList();
                 selectedResource = -1;
@@ -1008,7 +1008,7 @@ window.onload = function() {
     });
 
     document.querySelector("#export-all-button").addEventListener("click", (evt) => {
-        browser.storage.local.get("toolsExt").then( (result) => {
+        chrome.storage.local.get("toolsExt").then( (result) => {
             const toolsList = result.toolsExt;
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(toolsList, null, 2));
             let exportLink = document.createElement("a");
@@ -1019,7 +1019,7 @@ window.onload = function() {
     });
 
     document.querySelector("#export-button").addEventListener("click", (evt) => {
-        browser.storage.local.get("toolsExt").then( (result) => {
+        chrome.storage.local.get("toolsExt").then( (result) => {
             const toolsList = result.toolsExt;
             const tool = toolsList[selectedResource];
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(tool, null, 2));
@@ -1057,7 +1057,7 @@ window.onload = function() {
                         }
                     }
 
-                    browser.storage.local.get("toolsExt").then( (tools) => {
+                    chrome.storage.local.get("toolsExt").then( (tools) => {
                         let toolsList = tools.toolsExt;
                         for (const itool of importedTools) {
                             for (const tool of toolsList) {
@@ -1068,7 +1068,7 @@ window.onload = function() {
                             }
                             toolsList.push(itool);
                         }
-                        browser.storage.local.set({"toolsExt": toolsList});
+                        chrome.storage.local.set({"toolsExt": toolsList});
                         window.location.reload();
                     })
                 }
@@ -1121,7 +1121,7 @@ window.onload = function() {
     document.querySelector("#misp-template").addEventListener("click", (evt) => {
         createFormPopup('./icons/misp.png', "Add MISP", "MISP", (e)=>{
             e.preventDefault();
-            browser.storage.local.get("toolsExt").then( (result) => {
+            chrome.storage.local.get("toolsExt").then( (result) => {
                 const tools = result.toolsExt || Array();
                 for(const [key, value] of Object.entries(mispTemplate["url"])) {
                     mispTemplate["url"][key] = value.replace("%h", document.querySelector("#template-form-hostname").value);
@@ -1140,7 +1140,7 @@ window.onload = function() {
                     }
                 }
                 tools.push(mispTemplate);
-                return browser.storage.local.set({"toolsExt": tools});
+                return chrome.storage.local.set({"toolsExt": tools});
             }).then( (tools) => {
                 if (tools !== false) {
                     showCustomToolsList();
@@ -1154,7 +1154,7 @@ window.onload = function() {
     document.querySelector("#opencti-template").addEventListener("click", (evt) => {
         createFormPopup('./icons/opencti.png', "Add OpenCTI", "OpenCTI", (e)=>{
             e.preventDefault();
-            browser.storage.local.get("toolsExt").then( (result) => {
+            chrome.storage.local.get("toolsExt").then( (result) => {
                 const tools = result.toolsExt || Array();
                 for(const [key, value] of Object.entries(openctiTemplate["url"])) {
                     openctiTemplate["url"][key] = value.replace("%h", document.querySelector("#template-form-hostname").value);
@@ -1173,7 +1173,7 @@ window.onload = function() {
                     }
                 }
                 tools.push(openctiTemplate);
-                return browser.storage.local.set({"toolsExt": tools});
+                return chrome.storage.local.set({"toolsExt": tools});
             }).then( (tools) => {
                 if (tools !== false) {
                     showCustomToolsList();
@@ -1186,7 +1186,7 @@ window.onload = function() {
     document.querySelector("#yeti-template").addEventListener("click", (evt) => {
         createFormPopup('./icons/yeti.png', "Add YETI", "YETI", (e)=>{
             e.preventDefault();
-            browser.storage.local.get("toolsExt").then( (result) => {
+            chrome.storage.local.get("toolsExt").then( (result) => {
                 const tools = result.toolsExt || Array();
                 for(const [key, value] of Object.entries(yetiTemplate["url"])) {
                     yetiTemplate["url"][key] = value.replace("%h", document.querySelector("#template-form-hostname").value);
@@ -1205,7 +1205,7 @@ window.onload = function() {
                     }
                 }
                 tools.push(yetiTemplate);
-                return browser.storage.local.set({"toolsExt": tools});
+                return chrome.storage.local.set({"toolsExt": tools});
             }).then( (tools) => {
                 if (tools !== false) {
                     showCustomToolsList();
