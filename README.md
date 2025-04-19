@@ -19,7 +19,7 @@
 
 
 
-FoxyRecon is a Firefox add-on that helps you carry out searching and investigation activities by using over 90 Open Source Intelligence (OSINT) web resources and an internal tool to create graphs supporting the STIX format.
+FoxyRecon is a Firefox add-on that helps you carry out searching and investigation activities by using over 120 Open Source Intelligence (OSINT) web resources and an internal tool to create graphs supporting the STIX format.
 
 ![Popup](._media/popup_0.22.0.gif) ![Graph](._media/graph_example.png)
 

@@ -1,10 +1,10 @@
 function createEmailAddressForm(evt, title, stix={}) {
     const action = Object.keys(stix).length == 0 ? "add" : "edit";
 
-    const type = "email-address";
+    const type = "email-addr";
     const objectId = stix["id"] === undefined ? type+"--"+crypto.randomUUID() : stix["id"];
 
-    const formHandler = new FormHandler(title, "img/email-address-noback-flat.png");
+    const formHandler = new FormHandler(title, "img/email-addr-noback-flat.png");
     submitEvent = evt => {
         var stix = {}
         const fields = formHandler.getFields();
