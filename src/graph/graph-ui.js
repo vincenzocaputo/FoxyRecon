@@ -417,7 +417,6 @@ importButton.addEventListener("click", evt => {
                         graph.deleteGraph();
                         const objects = stixBundle["objects"];
 
-                        alert(objects);
                         for (const obj of objects) {
                             if (!obj.hasOwnProperty("id")) {
                                 alert("Invalid STIX: Object ID is missing.");
