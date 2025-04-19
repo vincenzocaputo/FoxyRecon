@@ -27,7 +27,7 @@ jobs:
     - name: Update Chrome branch with changes from develop
       run: |
         git fetch origin
-        git checkout chrome
+        git checkout chrome-dev
         cp manifest.json manifest.json.v3
         git reset --hard origin/develop
         mv manifest.json.v3 manifest.json
@@ -39,4 +39,4 @@ jobs:
       run: |
         git add src/ assets/ manifest.json
         git commit -m "Update Chrome version"
-        git push origin chrome --force
+        git push origin chrome-dev --force

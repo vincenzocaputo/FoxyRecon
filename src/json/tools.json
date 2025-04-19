@@ -119,7 +119,7 @@
         {
             "name": "Censys Certificates",
             "url": {
-                "domain": "https://search.censys.io/search?resource=certificates&sort=RELEVANCE&per_page=25&virtual_hosts=EXCLUDE&q=%s"
+                "domain": "https://platform.censys.io/search?q=%22%s%22+and+cert.fingerprint_sha256%3A+*"
             },
             "desc": "Hosts and networks search engine",
             "icon": "censys.png",
@@ -132,15 +132,16 @@
         {
             "name": "Censys Hosts",
             "url": {
-                "ip": "https://search.censys.io/search?resource=hosts&sort=RELEVANCE&per_page=25&virtual_hosts=EXCLUDE&q=%s",
-                "domain": "https://search.censys.io/search?resource=hosts&sort=RELEVANCE&per_page=25&virtual_hosts=EXCLUDE&q=%s"
+                "ip": "https://platform.censys.io/hosts/%s",
+                "domain": "https://platform.censys.io/search?q=web.hostname%3D%22%s%22"
             },
             "desc": "Hosts and networks search engine",
             "icon": "censys.png",
             "color": "#FF7A38",
             "types": ["ip", "domain"],
             "tags": ["open-ports"],
-			"autoGraph": false
+			"autoGraph": false,
+            "accountRequired": true
         },
         {
             "name": "CentralOps",
@@ -156,30 +157,6 @@
             "submitQuery": "#go",
             "types": ["domain","ip","email"],
             "tags": ["whois", "dns"],
-			"autoGraph": false
-        },
-        {
-            "name": "Checkphish Scan",
-            "url": {
-                "domain": "https://app.checkphish.ai/live-scan?url=%s&agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36",
-                "url": "https://app.checkphish.ai/live-scan?url=%s&agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
-            },
-            "desc": "Free scanner to detect phishing & fraudulent sites in real-time.",
-            "icon": "checkphish.png",
-            "color": "#4479F3",
-            "types": ["domain","url"],
-            "tags": ["sandbox"],
-			"autoGraph": false
-        },
-        {
-            "name": "CIRCL.LU",
-            "url": {
-                "cve": "https://vulnerability.circl.lu/vuln/%s"
-            },
-            "desc": "Computer Incident Response Center Luxembourg (CIRCL) vulnerability lookup",
-            "icon": "circllu.png",
-            "color": "#E1414B",
-            "types": ["cve"],
 			"autoGraph": false
         },
         {
@@ -294,6 +271,17 @@
 			"autoGraph": false
         },
         {
+            "name": "CVE Feed",
+            "url": {
+                "cve": "https://cvefeed.io/vuln/detail/%s"
+            },
+            "desc": "open-source tool for aggregating, storing, and querying CVE data.",
+            "icon": "cvefeed.png",
+            "color": "#1f242e",
+            "types": ["cve"],
+			"autoGraph": false
+        },
+        {
             "name": "Cymru",
             "url": {
                 "hash": "https://hash.cymru.com/"
@@ -342,8 +330,8 @@
             "desc": "dns recon & research, find & lookup dns records",
             "icon": "dnsdumpster.png",
             "color": "#323232",
-            "inputSelector": "#regularInput",
-            "submitQuery": "button.btn",
+            "inputSelector": "#target",
+            "submitQuery": "button[type='submit']",
             "types": ["domain"],
             "tags": ["dns", "open-ports"],
 			"autoGraph": false
@@ -385,6 +373,20 @@
             "tags": ["dns", "history"],
 			"autoGraph": false
 		},
+        {
+            "name": "DynamiteLab",
+            "url": {
+                "ip": "https://lab.dynamite.ai/pcaps?folder=search&q=%s",
+                "domain": "https://lab.dynamite.ai/pcaps?folder=search&q=%s",
+                "hash": "https://lab.dynamite.ai/pcaps?folder=search&q=%s"
+            },
+            "desc": "DynamiteLab delivers the easiest way to explore network behavior from packet captures. ",
+            "icon": "dynamitelab.png",
+            "color": "#185bdc",
+            "types": ["ip","domain","hash"],
+            "tags": ["ioc"],
+			"autoGraph": false
+        },
         {
             "name": "Emailrep",
             "url": {
@@ -433,6 +435,17 @@
             "submitQuery": "#submitBasic",
             "types": ["domain"],
             "tags": ["whois"],
+			"autoGraph": false
+        },
+        {
+            "name": "EUVD (enisa)",
+            "url": {
+                "cve": "https://euvd.enisa.europa.eu/vulnerability/%s"
+            },
+            "desc": "European Union Vulnerability Database",
+            "icon": "euvd.png",
+            "color": "#004f9f",
+            "types": ["cve"],
 			"autoGraph": false
         },
         {
@@ -748,8 +761,8 @@
         {
             "name": "Hunter.how",
             "url": {
-                "domain": "https://hunter.how/list?searchValue=domain%253D%22%s%22",
-                "ip": "https://hunter.how/list?searchValue=ip%253D%22%s%22"
+                "domain": "https://hunter.how/list?searchValue=%s",
+                "ip": "https://hunter.how/list?searchValue=%s"
             },
             "desc": "Free internet search engine for internet researchers",
             "icon": "hunterhow.png",
@@ -872,12 +885,13 @@
         {
             "name": "IPQualityScore",
             "url": {
+                "ip": "https://www.ipqualityscore.com/free-ip-lookup-proxy-vpn-test/lookup/%s",
                 "phone": "https://www.ipqualityscore.com/free-phone-number-lookup/lookup/US/%r"
             },
-            "desc": "Free phone number lookup",
+            "desc": "Detect Fraud and Cyber Threats With Unmatched Accuracy",
             "icon": "ipqs.png",
             "color": "#F43A3A",
-            "types": ["phone"],
+            "types": ["ip", "phone"],
 			"autoGraph": false
         },
         {
@@ -1049,6 +1063,30 @@
 			"autoGraph": false
         },
         {
+            "name": "Neiki TIP",
+            "url": {
+                "hash": "https://tip.neiki.dev/search?q=hash%253A%s"
+            },
+            "desc": "Neiki.dev Threat Insights Portal",
+            "icon": "neiki.png",
+            "color": "#09aaeb",
+            "types": ["hash"],
+            "tags": ["sandbox"],
+			"autoGraph": false
+        },
+        {
+            "name": "NerdyData",
+            "url": {
+                "domain": "https://www.nerdydata.com/domains/%s"
+            },
+            "desc": "NerdyData will help you find which websites use certain SaaS technologies.",
+            "icon": "nerdydata.png",
+            "color": "#04508d",
+            "types": ["domain"],
+            "tags": ["techs"],
+			"autoGraph": false
+        },
+        {
             "name": "Netcraft",
             "url": {
                 "domain": "https://sitereport.netcraft.com/?url=%s",
@@ -1059,6 +1097,19 @@
             "color": "#003E51",
             "types": ["domain","url"],
             "tags": ["rep"],
+			"autoGraph": true
+        },
+        {
+            "name": "Netify",
+            "url": {
+                "ip": "https://www.netify.ai/resources/ips/%s",
+                "domain": "https://www.netify.ai/resources/hostnames/%s"
+            },
+            "desc": "Netify provides full transparency into what’s happening on the network. Local deep packet network monitoring coupled with cloud-based analytics to deliver exceptional, business-driven results.",
+            "icon": "netify.png",
+            "color": "#fca53d",
+            "types": ["ip","domain"],
+            "tags": ["net-activity"],
 			"autoGraph": true
         },
         {
@@ -1086,6 +1137,20 @@
 			"autoGraph": false
         },
         {
+            "name": "Odin",
+            "url": {
+                "ip": "https://search.odin.io/hosts/%s/summary",
+                "domain": "https://search.odin.io/hosts?query=hostnames.name%3A%22%s%22",
+                "asn": "https://search.odin.io/hosts?query=asn.number%3A%22%s%22"
+            },
+            "desc": "Search for Hosts, CVEs & Exposed Buckets/Files",
+            "icon": "odin.png",
+            "color": "#4a67b2",
+            "types": ["ip","domain","asn"],
+            "tags": ["open-ports","whois"],
+			"autoGraph": false
+        },
+        {
             "name": "OpenCVE",
             "url": {
                 "cve": "https://www.opencve.io/cve/%s"
@@ -1097,17 +1162,17 @@
 			"autoGraph": false
         },
         {
-            "name": "PacketTotal",
+            "name": "PAN URL Filtering",
             "url": {
-                "ip": "https://packettotal.com/app/search?q=%s",
-                "domain": "https://packettotal.com/app/search?q=%s",
-                "hash": "https://packettotal.com/app/search?q=%s"
+                "url": "https://urlfiltering.paloaltonetworks.com/"
             },
-            "desc": "Simple, free, high-quality PCAP analysis",
-            "icon": "packettotal.png",
-            "color": "#286496",
-            "types": ["ip","domain","hash"],
-            "tags": ["ioc"],
+            "desc": "Enter a domain or URL into the search engine to view details about its current URL categories. To request recategorization of this website, click Request Change below the search results.",
+            "icon": "pan.png",
+            "color": "#fa582d",
+            "inputSelector": "#id_url",
+            "submitQuery": "button[type='submit']",
+            "types": ["url"],
+            "tags": ["rep"],
 			"autoGraph": false
         },
         {
@@ -1465,6 +1530,19 @@
             "tags": ["history"],
 			"autoGraph": false
         },
+        {
+            "name": "Wappalyzer",
+            "url": {
+                "domain": "https://www.wappalyzer.com/lookup/%s"
+            },
+            "desc": "Identify technologies on websites",
+            "icon": "wappalyzer.png",
+            "color": "#4608ad",
+            "types": ["domain"],
+            "tags": ["techs"],
+            "accountRequired": true,
+			"autoGraph": false
+        },
 		{
 			"name": "URLhaus",
 			"url": {
@@ -1565,6 +1643,17 @@
 			"autoGraph": false
         },
         {
+            "name": "VARIoT",
+            "url": {
+                "cve": "https://www.variotdbs.pl/vulns/?vendor=&model=&version=&cve=%s&var_id=&cwe=&threat_type=&free_text="
+            },
+            "desc": "VARIoT IoT vulnerabilities and exploits databases",
+            "icon": "variot.png",
+            "color": "#212529",
+            "types": ["cve"],
+			"autoGraph": false
+        },
+        {
             "name": "ViewDNS DNS Lookup",
             "url": {
                 "domain": "https://viewdns.info/dnsrecord/?domain=%s"
@@ -1630,6 +1719,17 @@
 			"autoGraph": false
         },
         {
+            "name": "vulnerability-lookup",
+            "url": {
+                "cve": "https://vulnerability.circl.lu/vuln/%s"
+            },
+            "desc": "Fast vulnerability lookup correlation from different sources (CIRCL.lu)",
+            "icon": "vulnerability-lookup.png",
+            "color": "#55d0ed",
+            "types": ["cve"],
+			"autoGraph": false
+        },
+        {
             "name": "Vulners",
             "url": {
                 "cve": "https://vulners.com/cve/%s"
@@ -1649,6 +1749,18 @@
             "icon": "vulmon.png",
             "color": "#00CED1",
             "types": ["cve"],
+			"autoGraph": false
+        },
+        {
+            "name": "Wannabrowser (GET)",
+            "url": {
+                "url": "https://www.wannabrowser.net/#get=%s"
+            },
+            "desc": "Simulate any Browser",
+            "icon": "wannabrowser.png",
+            "color": "#538ec0",
+            "types": ["url"],
+            "tags": ["http-headers"],
 			"autoGraph": false
         },
         {

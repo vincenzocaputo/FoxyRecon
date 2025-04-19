@@ -287,6 +287,7 @@ div.tool-tag {
 #history {
     background-color: #FFFFFF;
     width: 250px;
+    height: 200px;
     position: absolute;
     display: none;
     z-index: 1;
@@ -987,6 +988,13 @@ input:checked + .slider:before {
 
 #catch-caption {
     padding-top: 10px;
+}
+
+#catch-caption>img {
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    display: inline-block;
 }
 
 #disclaimer {

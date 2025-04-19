@@ -12,7 +12,7 @@ function createReportForm(evt, title, stix={}) {
         }
 
         const oldstix = stix;
-        const formHandler = new FormHandler(title, "img/report-nb.png");
+        const formHandler = new FormHandler(title, "img/report-noback-flat.png");
         submitEvent = evt => {
             var stix = {}
             const fields = formHandler.getFields();

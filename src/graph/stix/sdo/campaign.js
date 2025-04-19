@@ -4,7 +4,7 @@ function createCampaignForm(evt, title, stix={}) {
     const type = "campaign";
     const objectId = stix["id"] === undefined ? type+"--"+crypto.randomUUID() : stix["id"];
 
-    const formHandler = new FormHandler(title, "img/campaign-nb.png");
+    const formHandler = new FormHandler(title, "img/campaign-noback-flat.png");
     submitEvent = evt => {
         var stix = {}
         const fields = formHandler.getFields();

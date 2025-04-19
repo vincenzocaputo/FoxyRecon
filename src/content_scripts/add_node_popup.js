@@ -29,10 +29,10 @@ function createInput(name, type, labelName) {
 
     if (type === "checkbox") {
         const inputSwitch = document.createElement('div');
-        inputSwitch.className = 'switch';
+        inputSwitch.className = 'foxyrecon-switch';
 
         const slider = document.createElement('slider');
-        slider.className = 'slider';
+        slider.className = 'foxyrecon-slider';
 
         // Create input element
         input.type = type;

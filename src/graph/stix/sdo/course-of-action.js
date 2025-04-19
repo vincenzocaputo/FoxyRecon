@@ -4,7 +4,7 @@ function createCourseOfActionForm(evt, title, stix={}) {
     const type = "course-of-action";
     const objectId = stix["id"] === undefined ? type+"--"+crypto.randomUUID() : stix["id"];
 
-    const formHandler = new FormHandler(title, "img/course-of-action-nb.png");
+    const formHandler = new FormHandler(title, "img/course-of-action-noback-flat.png");
     submitEvent = evt => {
         var stix = {}
         const fields = formHandler.getFields();

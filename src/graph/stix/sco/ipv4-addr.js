@@ -4,7 +4,7 @@ function createIPV4AddrForm(evt, title, stix={}) {
     const type = "ipv4-addr";
     const objectId = stix["id"] === undefined ? type+"--"+crypto.randomUUID() : stix["id"];
 
-    const formHandler = new FormHandler(title, "img/ipv4-addr-nb.png");
+    const formHandler = new FormHandler(title, "img/ipv4-addr-noback-flat.png");
     submitEvent = evt => {
         var stix = {}
         const fields = formHandler.getFields();

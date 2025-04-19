@@ -4,7 +4,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [ 0.23.0 ] - 2024-10-06
+## [ 0.24.1 ] - 2025-04-19
+
+### Add
+- Neiki.dev TIP web tool
+- Support for IP address to IPQS
+- Add CVEFeed web resource
+- Feature to import custom tools from JSON file
+- Feature to import graph from JSON file
+- Graph icon themes
+- New graph settings
+- Shortcut for popup opening
+- Add Odin web tool
+- Add Wannabrowser web tool
+- Add Palo Alto Networks URL Filtering web tool
+- Add Wappalyzer web tool
+- European Union Vulnerability Database (EUVD) tool
+- Add VARIoT web resource
+- Add Netify web resource
+
+### Change
+- Remove CheckPhish tool
+- Replace PacketTotal with DynamiteLab (its successor)
+- Update CIRCL.lu web resource to vulnerability-lookup
+
+### Fix
+- Bug that prevented tools from being removed from favorites
+- Bug that prevented clicking on history entries
+- Auto submit for DNSDumpster tool
+- Hunter.how URL parameters
+- Missing PhishTank icon
+- Minor fixes in Add graph node popup
+
+## [ 0.23.0 ] - 2024-12-14
 
 ### Add
 - files.ninja web resource

@@ -74,16 +74,15 @@ chrome.runtime.onInstalled.addListener(function(details) {
                         selectionText = indicatorParser.refangIndicator(selectionText);
                         [type, tld] = indicatorParser.getIndicatorType(selectionText);
                     }
-                    chrome.storage.local.set(
-                        {
+                    chrome.action.openPopup()
+                    .then( () => {
+                        chrome.storage.local.set({
                             "indicator": {
                                 "type": type,
                                 "value": selectionText,
                                 "tld": tld
                             }
                         })
-                        .then( () => {
-                        chrome.action.openPopup();
                     });
                 } else {
                     chrome.tabs.query({active:true, lastFocusedWindow: true}).then(tabs => {    
@@ -123,7 +122,11 @@ chrome.runtime.onInstalled.addListener(function(details) {
     });
 });
 
-
+chrome.commands.onCommand.addListener((command) => {
+    if (command === "open-popup") {
+        chrome.action.openPopup()
+    }
+});
 /**
  * Harvest and collect the indicators present in the current webpage. Save the list in the local storage.
  */
@@ -300,22 +303,25 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                 nodeId = stix["id"];
             }
             if (request.relName) {
-                chrome.storage.local.get("indicator").then( (result) => {
-                    if (result.hasOwnProperty("indicator")) {
-                        const indicator = result.indicator;
-                        const nodes = graph.getNodesByLabel(indicator.value);
+                chrome.storage.local.get("history").then( (result) => {
+                    if (result.hasOwnProperty("history")) {
+                        const history = result.history;
+                        if (history.length > 0 ) {
+                            const indicator = history[0];
+                            const nodes = graph.getNodesByLabel(indicator);
 
-                        let relNodeId;
-                        if (nodes.length === 0) {
-                            relNodeId = graph.addNode(indicator.value, indicator.type);
-                        } else {
-                            relNodeId = nodes[0];
-                        }
-                        if (request.inbound) {
-                            graph.addLink(relNodeId, nodeId, request.relName);
-                        }
-                        if (request.outbound) {
-                            graph.addLink(nodeId, relNodeId, request.relName);
+                            let relNodeId;
+                            if (nodes.length === 0) {
+                                relNodeId = graph.addNode(indicator, indicator.type);
+                            } else {
+                                relNodeId = nodes[0];
+                            }
+                            if (request.inbound) {
+                                graph.addLink(relNodeId, nodeId, request.relName);
+                            }
+                            if (request.outbound) {
+                                graph.addLink(nodeId, relNodeId, request.relName);
+                            }
                         }
                     }
                 });

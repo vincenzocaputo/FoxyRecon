@@ -12,9 +12,9 @@ function getInputFilter(inputString) {
         switchButton.querySelector("img").src = "../../assets/icons/tools_on.png";
         
         if(inputs[1][0] === "!") {
-            fToolName = inputs[1].split("!")[1];
+            fToolName = inputString.split("!")[1];
         } else if(inputs[1].startsWith("tool:")) {
-            fToolName = inputs[1].split("tool:")[1];
+            fToolName = inputString.split("tool:")[1];
         } else {
             inputIndicator = "";
 

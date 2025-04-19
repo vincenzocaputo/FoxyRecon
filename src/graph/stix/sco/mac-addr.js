@@ -4,7 +4,7 @@ function createMacAddrForm(evt, title, stix={}) {
     const type = "mac-addr";
     const objectId = stix["id"] === undefined ? type+"--"+crypto.randomUUID() : stix["id"];
 
-    const formHandler = new FormHandler(title, "img/mac-addr-nb.png");
+    const formHandler = new FormHandler(title, "img/mac-addr-noback-flat.png");
     submitEvent = evt => {
         var stix = {}
         const fields = formHandler.getFields();

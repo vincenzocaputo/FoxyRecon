@@ -45,6 +45,7 @@ loadTools().then( (result) => {
             document.getElementById("bin-icon").style.display = "block";
             // Show the buttons related to the tools that support this indicator
             showButtonsByType(indicator.value, type, optionValue);
+            inputField.focus();
         }
     });
 
@@ -58,6 +59,15 @@ chrome.storage.local.get("history").then( (result) => {
         historyEntry.textContent = h;
         historyEntry.classList.add("hist-entry");
         historyPanel.appendChild(historyEntry);
+        historyEntry.addEventListener("click", function(e) {
+            history_indicator = e.target.textContent;
+            inputField.value = history_indicator;
+            const [type, tld] = indicatorParser.getIndicatorType(history_indicator);
+            document.querySelector("#catch-icon").style.display = "none";
+            document.querySelector("#flag").style.display = "none";
+            document.getElementById("history").style.display = "none";
+            submitIndicator(history_indicator, type, tld, "", "");
+        });
     });
 });
 
@@ -221,7 +231,7 @@ function showButtonsByType(indicator, type, tag, showOnlyFav, showOnlyAutograph,
                 if (!showOnlyAutograph || autoGraph) {
                     if (!showOnlyNoKey || !accountRequired) {
                         if (!showOnlyNoInt || !interactionsRequired) {
-                            if (!toolName || tools[i]["name"].toLowerCase().includes(toolName)) {
+                            if (!toolName || tools[i]["name"].toLowerCase().includes(toolName.toLowerCase())) {
                                 if (tools[i]["types"].includes(type)) { 
                                     tagsOptions = tagsOptions.concat(tools[i]["tags"]);
                                     if (tag === "all" || (tools[i]["tags"] && tools[i]["tags"].includes(tag))) {
@@ -427,7 +437,8 @@ function createToolsList(toolsList, settings, favTools){
         openIconNode = document.createElement("img");
         // Get the current option
         const newTabOption = settings.newtab;
-        if(newTabOption && newTabOption === "false") {
+        console.log("TAB OPTION: "+newTabOption);
+        if(!newTabOption) {
             // By default the addon opens resources in the current tab
             // let the user open in a new tab by clicking on this icon
             openIconNode.src = "../../assets/icons/outside.png";
@@ -540,7 +551,7 @@ function createToolsList(toolsList, settings, favTools){
                     const targetId = e.target.id;
                     if(targetId === "add-fav") { 
                         chrome.storage.local.get("fav").then( (result) => {
-                            const favTools = result.fav || Array();
+                            let favTools = result.fav || Array();
                             if(favTools) {
                                 favTools.push(node.name);
                             } else {
@@ -553,7 +564,7 @@ function createToolsList(toolsList, settings, favTools){
                         });
                     } else if(targetId === "rem-fav") {
                         chrome.storage.local.get("fav").then( (result) => {
-                            const favTools = result.fav || Array();
+                            let favTools = result.fav || Array();
                             if(favTools) {
                                 favTools = favTools.filter(item => item != node.name);
                             }                

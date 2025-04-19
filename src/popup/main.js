@@ -21,6 +21,7 @@ chrome.storage.local.get("catchedIndicators").then( (result) => {
                 indCountContainer.textContent = count[key];
             }
         }
+
     }
 });
 
