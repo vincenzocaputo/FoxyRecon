@@ -343,7 +343,7 @@ function getObjLabelByType(obj, type) {
             return "AS"+obj["number"];
         case "domain-name":
             return obj["value"];
-        case "email-address":
+        case "email-addr":
             return obj["value"];
         case "file":
             return obj["name"] === "" ? obj["id"] : obj["name"];
@@ -536,7 +536,7 @@ editButton.addEventListener("click", evt => {
         } case "domain-name": {
             createDomainNameForm(evt, "Edit Domain Name", selectedNodeSTIX);
             break;
-        } case "email-address": {
+        } case "email-addr": {
             createEmailAddressForm(evt, "Edit Email Address", selectedNodeSTIX);
             break;
         } case "file": {
@@ -625,7 +625,7 @@ document.querySelectorAll(".options div").forEach( (element) => {
             } case "domain-name": {
                 createDomainNameForm(evt, "Add Domain Name");
                 break;
-            } case "email-address": {
+            } case "email-addr": {
                 createEmailAddressForm(evt, "Add Email Address");
                 break;
             } case "file": {
