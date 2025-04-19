@@ -144,7 +144,7 @@ document.querySelector("#auto-catch-opt input").addEventListener("change", funct
         browser.storage.local.set({"settings": settings});
         if (!autocatchOption) {
             browser.storage.local.set({"catchedIndicators": []}).then( () => {
-                browser.action.setBadgeText({text: ""});
+                browser.browserAction.setBadgeText({text: ""});
             });
         }
     });
