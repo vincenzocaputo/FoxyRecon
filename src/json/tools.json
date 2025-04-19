@@ -1630,6 +1630,17 @@
 			"autoGraph": false
         },
         {
+            "name": "VARIoT",
+            "url": {
+                "cve": "https://www.variotdbs.pl/vulns/?vendor=&model=&version=&cve=%s&var_id=&cwe=&threat_type=&free_text="
+            },
+            "desc": "VARIoT IoT vulnerabilities and exploits databases",
+            "icon": "variot.png",
+            "color": "#212529",
+            "types": ["cve"],
+			"autoGraph": false
+        },
+        {
             "name": "ViewDNS DNS Lookup",
             "url": {
                 "domain": "https://viewdns.info/dnsrecord/?domain=%s"

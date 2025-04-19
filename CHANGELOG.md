@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Palo Alto Networks URL Filtering web tool
 - Add Wappalyzer web tool
 - European Union Vulnerability Database (EUVD) tool
+- Add VARIoT web resource
 
 ### Change
 - Remove CheckPhish tool
