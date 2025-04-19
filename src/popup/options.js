@@ -24,7 +24,7 @@ document.getElementById("settings-button").addEventListener("click", function() 
     settingsPopup.style.display = "block";
     settingsPopup.classList.add("open-popup");
     
-    browser.storage.local.get("settings").then( (result) => {
+    chrome.storage.local.get("settings").then( (result) => {
         const settings = result.settings;
         document.querySelector("#open-tab-opt input").checked = settings.newtab;
         document.querySelector("#typ-anim-opt input").checked = settings.typeanim;
@@ -84,10 +84,10 @@ document.getElementById("settings-button").addEventListener("click", function() 
 document.querySelector("#open-tab-opt input").addEventListener("change", function(evt) {
     //let linksNodes = document.getElementById("tools-list").children;
     newtabOption = evt.target.checked;
-    browser.storage.local.get("settings").then( (result) => {
+    chrome.storage.local.get("settings").then( (result) => {
         let settings = result.settings;
         settings.newtab = newtabOption;
-        return browser.storage.local.set({"settings": settings});
+        return chrome.storage.local.set({"settings": settings});
     }).then( () => {
         // Update the open icon option inside the tools buttons
         openOptionIcons = document.querySelectorAll(".tool-open-icon>img");
@@ -113,10 +113,10 @@ document.querySelector("#open-tab-opt input").addEventListener("change", functio
 document.querySelector("#typ-anim-opt input").addEventListener("change", function(evt) {
     //let linksNodes = document.getElementById("tools-list").children;
     typAnimOption = evt.target.checked;
-    browser.storage.local.get("settings").then( (result) => {
+    chrome.storage.local.get("settings").then( (result) => {
         let settings = result.settings;
         settings.typeanim = typAnimOption;
-        browser.storage.local.set({"settings": settings});
+        chrome.storage.local.set({"settings": settings});
     });
 });
 
@@ -126,10 +126,10 @@ document.querySelector("#typ-anim-opt input").addEventListener("change", functio
 document.querySelector("#auto-submit-opt input").addEventListener("change", function(evt) {
     //let linksNodes = document.getElementById("tools-list").children;
     autosubmitOption = evt.target.checked;
-    browser.storage.local.get("settings").then( (result) => {
+    chrome.storage.local.get("settings").then( (result) => {
         let settings = result.settings;
         settings.autosubmit = autosubmitOption;
-        browser.storage.local.set({"settings": settings});
+        chrome.storage.local.set({"settings": settings});
     });
 });
 
@@ -138,13 +138,13 @@ document.querySelector("#auto-submit-opt input").addEventListener("change", func
  */
 document.querySelector("#auto-catch-opt input").addEventListener("change", function(evt) {
     autocatchOption = evt.target.checked;
-    browser.storage.local.get("settings").then( (result) => {
+    chrome.storage.local.get("settings").then( (result) => {
         let settings = result.settings;
         settings.autocatch = autocatchOption;
-        browser.storage.local.set({"settings": settings});
+        chrome.storage.local.set({"settings": settings});
         if (!autocatchOption) {
-            browser.storage.local.set({"catchedIndicators": []}).then( () => {
-                browser.action.setBadgeText({text: ""});
+            chrome.storage.local.set({"catchedIndicators": []}).then( () => {
+                chrome.action.setBadgeText({text: ""});
             });
         }
     });
@@ -155,10 +155,10 @@ document.querySelector("#auto-catch-opt input").addEventListener("change", funct
  */
 document.querySelector("#auto-graph-opt input").addEventListener("change", function(evt) {
     autographOption = evt.target.checked;
-    browser.storage.local.get("settings").then( (result) => {
+    chrome.storage.local.get("settings").then( (result) => {
         let settings = result.settings;
         settings.autograph = autographOption;
-        browser.storage.local.set({"settings": settings});
+        chrome.storage.local.set({"settings": settings});
     });
 });
 
@@ -166,7 +166,7 @@ document.querySelector("#auto-graph-opt input").addEventListener("change", funct
  * Handle open settings page button click event
  */
 document.querySelector("#open-settings").addEventListener("click", function(evt) {
-    browser.tabs.create({
+    chrome.tabs.create({
         url: chrome.runtime.getURL('/src/custom_tools/custom-tools.html')
     });
 });
