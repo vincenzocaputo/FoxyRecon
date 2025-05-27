@@ -42,6 +42,18 @@
 			"autoGraph": true
         },
         {
+            "name": "APNIC WHOWAS",
+            "url": {
+                "ip": "https://www.apnic.net/static/whowas-ui/#%s"
+            },
+            "desc": "The APNIC whowas service provides visibility into prior states of APNIC resource registration records.",
+            "icon": "apnic.png",
+            "color": "#006fab",
+            "types": ["ip"],
+            "tags": ["whois","history"],
+			"autoGraph": false
+        },
+        {
             "name": "AttackerKB",
             "url": {
                 "cve": "https://attackerkb.com/search?q=%s"

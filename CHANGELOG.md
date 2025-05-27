@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [ Unreleased ]
 
+### Add
+- APNIC web resoource
+
 ### Change
 - Update Emailrep properties (an account is now required)
 
