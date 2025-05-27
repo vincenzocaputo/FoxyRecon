@@ -397,7 +397,8 @@
             "color": "#2FD3AA",
             "types": ["email"],
             "tags": ["rep"],
-			"autoGraph": false
+			"autoGraph": false,
+            "accountRequired": true
         },
         {
             "name": "EmobileTracker",

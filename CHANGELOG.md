@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [ Unreleased ]
 
+### Change
+- Update Emailrep properties (an account is now required)
+
 ### Fix
 - Automatic field population on HIBP
 
