@@ -704,8 +704,8 @@
             "desc": "Check if your email or phone is in a data breach",
             "icon": "hibp.png",
             "color": "#2A698A",
-            "inputSelector": "#Account",
-            "submitQuery": "#searchPwnage", 
+            "inputSelector": "#emailInput",
+            "submitQuery": "#checkButton", 
             "types": ["email", "phone"],
             "tags": ["leaks"],
 			"autoGraph": false
