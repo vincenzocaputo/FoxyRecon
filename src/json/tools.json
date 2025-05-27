@@ -175,7 +175,7 @@
             "url": {
                 "domain": "https://cleantalk.org/blacklists/%s",
                 "ip": "https://cleantalk.org/blacklists/%s",
-                "email": "https://cleantalk.org/blacklists/%s"
+                "email": "https://cleantalk.org/blacklists/%r"
             },
             "desc": "Check IP Addresses, Email, Subnet, Domain for Spam in Blacklists Database.",
             "icon": "cleantalk.png",
