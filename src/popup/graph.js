@@ -6,7 +6,7 @@
 document.querySelector("#add-node-button").addEventListener("click", (e) => {
     let nodeId = "";
     let nodeType = "";
-    browser.storage.local.get("indicator").then( (result) => {
+    chrome.storage.local.get("indicator").then( (result) => {
         const indicator = result.indicator;
         nodeId = indicator.value;
         nodeType = indicator.type;
@@ -30,7 +30,7 @@ document.querySelector("#add-node-button").addEventListener("click", (e) => {
  */
 document.querySelector("#del-node-button").addEventListener("click", (e) => {
     let indicator;
-    browser.storage.local.get("indicator").then( (result) => {
+    chrome.storage.local.get("indicator").then( (result) => {
         indicator = result.indicator;
         return Graph.getInstance();
     }).then( (graph) => {
@@ -148,7 +148,7 @@ document.querySelector("#add-node-rel-button").addEventListener("click", (e) => 
     let fromNodeLabel;
     let fromNodeType;
 
-    browser.storage.local.get("indicator").then( (result) => {
+    chrome.storage.local.get("indicator").then( (result) => {
         const indicator = result.indicator;
         fromNodeLabel = indicator.value;
         fromNodeType = indicator.type;
@@ -188,7 +188,7 @@ document.querySelector("#add-node-rel-close-button").addEventListener("click", f
  * Handle open graph page button click event
  */
 document.querySelector("#open-graph").addEventListener("click", function(evt) {
-    browser.tabs.create({
+    chrome.tabs.create({
         url: '/src/graph/graph.html'
     });
 });

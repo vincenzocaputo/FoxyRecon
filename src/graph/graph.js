@@ -14,7 +14,7 @@ var edgesView;
 var lastSelectedNode;
 var nodeFilterValue = "";
 var options;
-browser.storage.local.get("graphSettings").then( (result) => {
+chrome.storage.local.get("graphSettings").then( (result) => {
     const graphSettings = result.graphSettings;
 
     themeSelect.value = graphSettings.icontheme;
