@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "FoxyRecon",
-	"version": "0.24.1",
+	"version": "0.24.2",
 	"description": "A Firefox add-on for OSINT investigations",
 
 	"icons": {
