@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fix
 - Automatic field population on HIBP
 - Email address encoding in Cleantalk URL
+- Threat Actor editing form in graph
 
 ## [ 0.24.1 ] - 2025-04-19
 
