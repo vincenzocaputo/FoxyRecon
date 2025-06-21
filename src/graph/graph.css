@@ -319,8 +319,8 @@ input:checked + .slider:before {
 .btn .button-label {
   height: 32px;
   line-height: 32px;
-  float: left;
   margin-left: 5px;
+  text-align: left;
 }
 
 #add-link-button {
