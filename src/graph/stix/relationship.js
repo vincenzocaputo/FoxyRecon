@@ -1,5 +1,5 @@
 function createRelationshipForm(data, callback) {
-    const formHandler = new FormHandler("Add Relationship", "img/relationship-noback-flat.png");
+    const formHandler = new FormHandler("Add Relationship", "img/relationship.png");
     submitEvent = evt => {
         Graph.getInstance().then( (graph) => {
             var stix = {}

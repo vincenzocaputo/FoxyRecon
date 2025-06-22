@@ -42,6 +42,18 @@
 			"autoGraph": true
         },
         {
+            "name": "APNIC WHOWAS",
+            "url": {
+                "ip": "https://www.apnic.net/static/whowas-ui/#%s"
+            },
+            "desc": "The APNIC whowas service provides visibility into prior states of APNIC resource registration records.",
+            "icon": "apnic.png",
+            "color": "#006fab",
+            "types": ["ip"],
+            "tags": ["whois","history"],
+			"autoGraph": false
+        },
+        {
             "name": "AttackerKB",
             "url": {
                 "cve": "https://attackerkb.com/search?q=%s"
@@ -175,7 +187,7 @@
             "url": {
                 "domain": "https://cleantalk.org/blacklists/%s",
                 "ip": "https://cleantalk.org/blacklists/%s",
-                "email": "https://cleantalk.org/blacklists/%s"
+                "email": "https://cleantalk.org/blacklists/%r"
             },
             "desc": "Check IP Addresses, Email, Subnet, Domain for Spam in Blacklists Database.",
             "icon": "cleantalk.png",
@@ -397,7 +409,8 @@
             "color": "#2FD3AA",
             "types": ["email"],
             "tags": ["rep"],
-			"autoGraph": false
+			"autoGraph": false,
+            "accountRequired": true
         },
         {
             "name": "EmobileTracker",
@@ -704,8 +717,8 @@
             "desc": "Check if your email or phone is in a data breach",
             "icon": "hibp.png",
             "color": "#2A698A",
-            "inputSelector": "#Account",
-            "submitQuery": "#searchPwnage", 
+            "inputSelector": "#emailInput",
+            "submitQuery": "#checkButton", 
             "types": ["email", "phone"],
             "tags": ["leaks"],
 			"autoGraph": false

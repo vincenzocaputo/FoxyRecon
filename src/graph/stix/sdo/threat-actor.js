@@ -41,7 +41,7 @@ function createThreatActorForm(evt, title, stix={}) {
     formHandler.addFormField("text", "Name", "name", stix["name"], true);
     formHandler.addFormField("textarea", "Description", "description", stix["description"]);
     formHandler.addMultipleInputField("Threat Actor Types", "threat_actor_types", vocabularies["threat-actor-type-ov"], false, stix["threat_actor_types"]);
-    formHandler.addMultipleInputField("Aliases", "aliases", stix["aliases"]);
+    formHandler.addMultipleInputField("Aliases", "aliases", [], false, stix["aliases"]);
     formHandler.addFormField("datetime-local", "First Seen", "first_seen", stix["first_seen"]);
     formHandler.addFormField("datetime-local", "Last Seen", "last_seen", stix["last_seen"]);
     formHandler.addMultipleInputField("Threat Actor Roles", "roles", vocabularies["threat-actor-role-ov"], false, stix["roles"]);
