@@ -229,12 +229,13 @@
         {
 			"name": "crt.sh",
 			"url": {
-                "domain": "https://crt.sh/?q=%s"
+                "domain": "https://crt.sh/?q=%s",
+                "hash": "https://crt.sh/?q=%s"
             },
             "desc": "Certificate search",
 			"icon": "crtsh.png",
 			"color": "#00B373",
-			"types": ["domain"],
+			"types": ["domain", "hash"],
             "tags": ["tls"],
 			"autoGraph": false
 		},
@@ -538,6 +539,17 @@
             "icon": "google.png",
             "color": "#EA4335",
             "types": ["domain","ip","email","hash","cve","phone","asn"],
+			"autoGraph": false
+        },
+        {
+            "name": "Google (Favicon)",
+            "url": {
+                "domain": "https://www.google.com/s2/favicons?domain=%s&sz=32"
+            },
+            "desc": "Get the favicon of a domain (Google API)",
+            "icon": "google.png",
+            "color": "#EA4335",
+            "types": ["domain"],
 			"autoGraph": false
         },
         {
@@ -989,6 +1001,19 @@
 			"autoGraph": false
         },
         {
+            "name": "Lookyloo (CIRCL.lu)",
+            "url": {
+                "domain": "https://lookyloo.circl.lu/hostnames/%s?from_popup=True",
+                "url": "https://lookyloo.circl.lu/urls/%b?from_popup=True"
+            },
+            "desc": "Check and review URLs and website (by CIRCL.lu)",
+            "icon": "lookyloo.png",
+            "color": "#0D6EFD",
+            "types": ["domain","url"],
+            "tags": ["screenshot","sandbox"],
+			"autoGraph": false
+        },
+        {
             "name": "Lupovis",
             "url": {
                 "ip": "https://prowl.lupovis.io/?ip=%s"
@@ -998,6 +1023,18 @@
             "color": "#1C1934",
             "types": ["ip"],
             "tags": ["rep"],
+			"autoGraph": false
+        },
+        {
+            "name": "MalShare",
+            "url": {
+                "hash": "https://malshare.com/sample.php?action=detail&hash=%s"
+            },
+            "desc": "The MalShare Project is a community driven public malware repository that works to provide free access to malware samples",
+            "icon": "malshare.png",
+            "color": "#060606",
+            "types": ["hash"],
+            "tags": ["ioc"],
 			"autoGraph": false
         },
         {
@@ -1478,8 +1515,8 @@
         {
             "name": "Threatbook",
             "url": {
-                "domain": "https://threatbook.io/domain/%s",
-                "ip": "https://threatbook.io/ip/%s"
+                "domain": "https://i.threatbook.io/research/%s",
+                "ip": "https://i.threatbook.io/research/%s"
             },
             "desc": "ThreatBook CTI provides high-fidelity intelligence collected from alerts from real customer cases.",
             "icon": "threatbook.png",
@@ -1791,8 +1828,8 @@
         {
             "name": "Web Check",
             "url": {
-                "url": "https://web-check.as93.net/results/%s",
-                "domain": "https://web-check.as93.net/results/%s"
+                "url": "https://web-check.xyz/check/%s",
+                "domain": "https://web-check.xyz/check/%s"
             },
             "desc": "Get an insight into the inner-workings of a given website: uncover potential attack vectors, analyse server architecture, view security configurations, and learn what technologies a site is using.",
             "icon": "webcheck.png",
