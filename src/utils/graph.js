@@ -45,7 +45,7 @@ class Graph {
     ];
 
     static getInstance() {
-        return browser.storage.local.get("graph").then( (result) => {
+        return chrome.storage.local.get("graph").then( (result) => {
             const graph = result.graph || null;
             return new Graph(graph);
         });
@@ -87,7 +87,7 @@ class Graph {
      * Save the graph in the local storage
      */
     saveGraph() {
-        browser.storage.local.set({"graph": this.graph});
+        chrome.storage.local.set({"graph": this.graph});
     }
     
     /**
