@@ -65,6 +65,20 @@
 			"autoGraph": false
         },
         {
+            "name": "BetaMeta",
+            "url": {
+                "url": "https://meta.narka.io/time"
+            },
+            "desc": "Extract and visualize temporal metadata from any URL. Discover creation dates, modification history, and hidden timestamps.",
+            "icon": "betameta.png",
+            "color": "#E63946",
+            "inputSelector": "#url",
+            "submitQuery": "button.search-btn",
+            "types": ["url"],
+            "tags": ["history"],
+			"autoGraph": false
+        },
+        {
             "name": "BotScout",
             "url": {
                 "ip": "https://botscout.com/search.htm?sterm=%s&stype=q",

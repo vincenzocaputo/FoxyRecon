@@ -24,6 +24,10 @@ function submitIndicator(query, submit, current_url) {
             }
             document.querySelector(query).click();
             
+        } else if(current_url.includes("meta.narka.io/time")) {
+            document.querySelector("input[name='check_crtsh']").checked = true;
+            document.querySelector("input[name='check_archive']").checked = true;
+            document.querySelector(query).click();
         } else {
             document.querySelector(query).click();
         }
