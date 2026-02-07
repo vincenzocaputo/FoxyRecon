@@ -348,6 +348,18 @@
             "tags": ["tls"],
 			"autoGraph": false
         },
+		{
+			"name": "DNS History",
+			"url": {
+                "domain": "http://dnshistory.org/dns-records/%s"
+            },
+            "desc": "Here at DNS History we have been crawling DNS records since 2009, our database currently contains over 1 billion domains and over 12 billion DNS records. ",
+			"icon": "dnshistory.png",
+			"color": "#7EB10C",
+			"types": ["domain"],
+            "tags": ["dns", "history"],
+			"autoGraph": false
+		},
         {
             "name": "dnsdumpster",
             "url": {
@@ -374,6 +386,18 @@
             "tags": ["sandbox"],
 			"autoGraph": false
 		},
+        {
+            "name": "Domain Digger",
+            "url": {
+                "domain": "https://digger.tools/lookup/%s/"
+            },
+            "desc": "Find all DNS records, WHOIS data, SSL/TLS certificate history, subdomains and more",
+            "icon": "digger.png",
+            "color": "#09090B",
+            "types": ["domain"],
+            "tags": ["dns","whois","tls"],
+			"autoGraph": false
+        },
 		{
 			"name": "Domain tools",
 			"url": {
@@ -385,18 +409,6 @@
 			"color": "#888888",
 			"types": ["domain", "ip"],
             "tags": ["whois"],
-			"autoGraph": false
-		},
-		{
-			"name": "DNS History",
-			"url": {
-                "domain": "http://dnshistory.org/dns-records/%s"
-            },
-            "desc": "Here at DNS History we have been crawling DNS records since 2009, our database currently contains over 1 billion domains and over 12 billion DNS records. ",
-			"icon": "dnshistory.png",
-			"color": "#7EB10C",
-			"types": ["domain"],
-            "tags": ["dns", "history"],
 			"autoGraph": false
 		},
         {
