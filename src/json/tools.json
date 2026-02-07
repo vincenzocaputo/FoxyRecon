@@ -1043,7 +1043,7 @@
             "url": {
                 "ip": "https://prowl.lupovis.io/?ip=%s"
             },
-            "desc": "We identify, collect, analyze, and classify adversaries for you! With Prowl, you spend less time on what doesn't matter more time concentrating on what does.",
+            "desc": "We identify, collect, analyze, and classify adversaries for you! With Prowl, you spend less time on  what doesn't matter more time concentrating on what does.",
             "icon": "lupovis.png",
             "color": "#1C1934",
             "types": ["ip"],
@@ -1858,6 +1858,21 @@
             "icon": "whatcms.png",
             "color": "#008CBA",
             "types": ["domain"],
+            "tags": ["techs"],
+			"autoGraph": false
+        },
+        {
+            "name": "WordPress Theme Search",
+            "url": {
+                "domain": "https://whatwpthemeisthat.com/",
+                "url": "https://whatwpthemeisthat.com/"
+            },
+            "desc": "What WordPress Theme Is That is a free online tool allows you to easily detect what WordPress theme a site uses. Additionally, it will also detect what WordPress Plugins are being used.",
+            "icon": "wts.png",
+            "color": "#72C02C",
+            "inputSelector": "#searchf",
+            "submitQuery": "#check",
+            "types": ["domain", "url"],
             "tags": ["techs"],
 			"autoGraph": false
         },
