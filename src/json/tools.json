@@ -65,6 +65,19 @@
 			"autoGraph": false
         },
         {
+            "name": "BotScout",
+            "url": {
+                "ip": "https://botscout.com/search.htm?sterm=%s&stype=q",
+                "email": "https://botscout.com/search.htm?sterm=%s&stype=q"
+            },
+            "desc": "Anti-bot and anti-spam service designed to prevent automated scripts (bots) from abusing websites through fake registrations, forum spamming, and form misuse",
+            "icon": "botscout.png",
+            "color": "#6766fe",
+            "types": ["ip","email"],
+            "tags": ["rep"],
+			"autoGraph": false
+        },
+        {
             "name": "bgp.tools",
             "url": {
                 "ip": "https://bgp.tools/prefix/%s",

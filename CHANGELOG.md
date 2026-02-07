@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [ 0.24.4 ] - 2026-02-07
 
+### Add
+- BotScout web service
+
 ### Change
 - Remove PSBDMP (service ceased)
 
