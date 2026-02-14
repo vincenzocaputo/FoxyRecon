@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Change
 - Remove PSBDMP (service ceased)
+- Remove BGPVIew (service ceased)
 
 ## [ 0.24.3 ] - 2025-11-23
 

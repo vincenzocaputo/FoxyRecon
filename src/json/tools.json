@@ -105,18 +105,6 @@
 			"autoGraph": false
         },
         {
-            "name": "BGPView",
-            "url": {
-                "ip": "https://bgpview.io/ip/%s",
-                "asn": "https://bgpview.io/asn/%n"
-            },
-            "desc": "AS analysis tool",
-            "icon": "bgpview.png",
-            "color": "#2C94B3",
-            "types": ["ip","asn"],
-			"autoGraph": false
-        },
-        {
             "name": "Browserling",
             "url": {
                 "url": "https://www.browserling.com/browse/win/7/chrome/92/%s"
