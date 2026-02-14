@@ -200,6 +200,18 @@
 			"autoGraph": false
         },
         {
+            "name": "Certificate Details",
+            "url": {
+                "domain": "https://certificatedetails.com/%s"
+            },
+            "desc": "Inspect and download certificates from your browser",
+            "icon": "certificatedetails.png",
+            "color": "#F4511E",
+            "types": ["domain"],
+            "tags": ["tls"],
+			"autoGraph": false
+        },
+        {
             "name": "CISA KEV",
             "url": {
                 "cve": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?search_api_fulltext=%s"

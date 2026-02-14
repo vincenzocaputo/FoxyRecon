@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - BetaMeta Temporal Analysis Engine
 - DNSArchive web tool
 - BacklinkWatch web tool
+- Certificate Details web service
 
 ### Change
 - Remove PSBDMP (service ceased)
