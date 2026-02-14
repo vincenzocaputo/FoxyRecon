@@ -65,6 +65,19 @@
 			"autoGraph": false
         },
         {
+            "name": "Backlink Watch",
+            "url": {
+                "url": "https://www.backlinkwatch.com/"
+            },
+            "desc": "Get complete detailed information about quality and quantity of backlinks pointing to your website.",
+            "icon": "url_icon.png",
+            "color": "#3c88c4",
+            "inputSelector": "input[type='url']",
+            "submitQuery": "#submission",
+            "types": ["url"],
+			"autoGraph": false
+        },
+        {
             "name": "BetaMeta",
             "url": {
                 "url": "https://meta.narka.io/time"
