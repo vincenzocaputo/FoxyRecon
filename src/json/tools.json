@@ -362,6 +362,19 @@
             "tags": ["dns", "history"],
 			"autoGraph": false
 		},
+		{
+			"name": "DNSArchive",
+			"url": {
+                "domain": "https://dnsarchive.net/domain/%s",
+                "ip": "https://dnsarchive.net/ipv4/%s"
+            },
+            "desc": "Search our DNS repository of IP Addresses, domains, their records and history.",
+			"icon": "dnsarchive.png",
+			"color": "#004792",
+			"types": ["domain","ip"],
+            "tags": ["dns", "history"],
+			"autoGraph": false
+		},
         {
             "name": "dnsdumpster",
             "url": {

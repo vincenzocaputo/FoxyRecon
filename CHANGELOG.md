@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Domain Digger tool
 - WordPress Theme Search tool
 - BetaMeta Temporal Analysis Engine
+- DNSArchive web tool
 
 ### Change
 - Remove PSBDMP (service ceased)
