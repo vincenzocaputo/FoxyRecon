@@ -815,9 +815,9 @@
         {
             "name": "HudsonRock",
             "url": {
-                "email": "https://www.hudsonrock.com/email-search?email=%s"
+                "email": "https://cavalier.hudsonrock.com/api/json/v2/osint-tools/search-by-email?email=%s"
             },
-            "desc": "Search specific email addresses to find out if your employees, customers, users or partners have been compromised by info-stealing malware.",
+            "desc": "Discover if an email address is associated with a computer that was infected",
             "icon": "hudsonrock.png",
             "color": "#FECD4E",
             "types": ["email"],
@@ -827,12 +827,24 @@
         {
             "name": "HudsonRock",
             "url": {
-                "domain": "https://www.hudsonrock.com/search?domain=%s"
+                "domain": "https://cavalier.hudsonrock.com/api/json/v2/osint-tools/search-by-domain?domain=%s"
             },
-            "desc": "Discover whether your, or your vendor’s corporate infrastructure has been compromised by Infostealers.",
+            "desc": "Search the impact of Infostealer infection on a domain",
             "icon": "hudsonrock.png",
             "color": "#FECD4E",
             "types": ["domain"],
+            "tags": ["leaks"],
+			"autoGraph": false
+        },
+        {
+            "name": "HudsonRock",
+            "url": {
+                "ip": "https://cavalier.hudsonrock.com/api/json/v2/osint-tools/search-by-ip?ip=%s"
+            },
+            "desc": "Discover if an IP address is associated with an Infostealer infection",
+            "icon": "hudsonrock.png",
+            "color": "#FECD4E",
+            "types": ["ip"],
             "tags": ["leaks"],
 			"autoGraph": false
         },
