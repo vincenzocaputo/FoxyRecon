@@ -1187,6 +1187,20 @@
 			"autoGraph": false
         },
         {
+            "name": "MITRE ATT&CK Software",
+            "url": {
+                "malware": "https://attack.mitre.org/software/"
+            },
+            "desc": "Collection of malware tracked by MITRE ATT&CK",
+            "icon": "mitre.png",
+            "color": "#C63F1F",
+            "inputSelector": "#v-attckmatrix",
+            "submitQuery": "local-find",
+            "types": ["malware"],
+            "tags": ["cti"],
+			"autoGraph": false
+        },
+        {
             "name": "MX Blacklist Lookup",
             "url": {
                 "domain": "https://mxtoolbox.com/SuperTool.aspx?action=blacklist%3a%s&run=toolpage",
