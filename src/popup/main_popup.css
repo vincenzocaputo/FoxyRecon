@@ -312,6 +312,36 @@ div.tool-tag {
     cursor: pointer;
 }
 
+#special-input-types {
+    display: none;
+    z-index: 1;
+    position: fixed;
+    background-color: white;
+    border-radius: 0 0 5px 5px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: #6E6C69;
+}
+
+#special-input-types table {
+    border-collapse: collapse;
+}
+
+#special-input-types tr {
+    cursor: pointer;
+    display: flex;
+    padding: 5px
+}
+
+#special-input-types img {
+    width: 20px;
+    height: 20px;
+}
+
+#special-input-types tr:hover {
+    background-color: #FF7700;
+}
+
 #text-field > input {
     height: 25px;
     width: 100%;
