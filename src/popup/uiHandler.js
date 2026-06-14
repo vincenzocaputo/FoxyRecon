@@ -24,10 +24,14 @@ loadTools().then( (result) => {
         if(!indicator || !indicator.value || indicator.value === "undefined") {
             inputField.focus();
         } else {
-            // Put the indicator in the text field
-            inputField.value = indicator.value;
             // Restore the type of the string
             const type = indicator.type;
+            // Put the indicator in the text field
+            if (type === "threat-actor" || type === "malware") {
+                inputField.value = `${type}:${indicator.value}`; 
+            } else {
+                inputField.value = indicator.value;
+            }
             // Restore the domain tld if present
             const tld = indicator.tld;
             showCountryFlag(tld);
@@ -39,8 +43,6 @@ loadTools().then( (result) => {
             } else {
                 document.getElementById("domextr-icon").style.display = "none";
             }
-            // Hide Catch! icon
-            document.getElementById("catch-icon").style.display = "none";
             // Show the bin icon
             document.getElementById("bin-icon").style.display = "block";
             // Show the buttons related to the tools that support this indicator
@@ -63,7 +65,6 @@ browser.storage.local.get("history").then( (result) => {
             history_indicator = e.target.textContent;
             inputField.value = history_indicator;
             const [type, tld] = indicatorParser.getIndicatorType(history_indicator);
-            document.querySelector("#catch-icon").style.display = "none";
             document.querySelector("#flag").style.display = "none";
             document.getElementById("history").style.display = "none";
             submitIndicator(history_indicator, type, tld, "", "");
@@ -160,6 +161,7 @@ function showAddonMain() {
     document.getElementById("hist-icon").style.display = "block";
     // Hide flag
     document.getElementById("flag").style.display = "none";
+    document.getElementById("special-input-types").style.display = "none";
 }
 
 
@@ -627,7 +629,6 @@ function createIndicatorsList(indicatorsList){
     document.getElementById("main").style.display = "none";
     document.getElementById("bin-icon").style.display = "block";
     document.getElementById("hist-icon").style.display = "none";
-    document.getElementById("catch-icon").style.display = "none";
     document.getElementById("flag").style.display = "none";
     document.getElementById("disclaimer").style.display = "none";
     // Set input field placeholder

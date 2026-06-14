@@ -7,7 +7,6 @@ const textfieldBin = document.getElementById("bin-icon");
 textfieldBin.addEventListener("click", function() {
     // Clear the text input field
     inputField.value = "";
-    textfieldCatch.style.display = "block";        
     textfieldTool.style.display = "none";
     // Hide flag
     document.querySelector("#flag").style.display = "none";
@@ -65,10 +64,7 @@ function collectIndicators() {
         console.error("Error: "+error)
     });
 }
-var textfieldCatch = document.querySelector("#catch-icon");
-textfieldCatch.title = "Collect indicators on this page";
-textfieldCatch.addEventListener("click", collectIndicators);
-document.querySelector("#catch-caption>img").addEventListener("click", collectIndicators);
+document.querySelector("#catch-caption>button").addEventListener("click", collectIndicators);
 
 
 /**
@@ -84,6 +80,36 @@ historyIcon.addEventListener("click", function() {
     } else {
         document.getElementById("history").style.display = "block";
     }
+});
+
+/**
+ * Handle the clicking on Plus icon inside the text field
+ *
+ */
+var plusIcon = document.getElementById("plus-search-icon");
+plusIcon.addEventListener("click", function() {
+    let divDisplay = document.getElementById("special-input-types").style.display;
+    if(divDisplay == "block") {
+        document.getElementById("special-input-types").style.display = "none";
+    } else {
+        document.getElementById("special-input-types").style.display = "block";
+    }
+});
+
+var threatActorTag = document.getElementById("threat-actor-tag");
+threatActorTag.addEventListener("click", function() {
+    showAddonMain();
+    inputField.value = "threat-actor:";
+    inputField.focus();
+    document.getElementById("special-input-types").style.display = "none";
+});
+
+var malwareTag = document.getElementById("malware-tag");
+malwareTag.addEventListener("click", function() {
+    showAddonMain();
+    inputField.value = "malware:";
+    inputField.focus();
+    document.getElementById("special-input-types").style.display = "none";
 });
 
 /**
@@ -154,6 +180,7 @@ function submitIndicator(indicator, type, tld, tag, toolName) {
 
 inputField.addEventListener("focus", (e) => {
     document.getElementById("history").style.display = "none";
+    document.getElementById("special-input-types").style.display = "none";
 });
 
 /**
@@ -177,14 +204,12 @@ inputField.addEventListener("keyup", (e) => {
                 tld: ""
             }});
 
-            textfieldCatch.style.display = "block";        
             textfieldTool.style.display = "none";
 
         } else {
             // Show the bin icon
             document.getElementById("bin-icon").style.display = "block";
             // Hide the catch icon
-            textfieldCatch.style.display = "none";
             
             let type = "";
             let inputIndicator = "";
@@ -195,6 +220,10 @@ inputField.addEventListener("keyup", (e) => {
             if(type!="invalid") {
                 // Get indicator type
                 [type, tld] = indicatorParser.getIndicatorType(inputIndicator);
+            }
+
+            if (type === "threat-actor" || type === "malware") {
+                inputIndicator = inputIndicator.split(":")[1];
             }
 
             if(type === "defanged") {

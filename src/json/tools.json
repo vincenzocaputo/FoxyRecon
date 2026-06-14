@@ -32,13 +32,15 @@
             "url": {
                 "ip": "https://otx.alienvault.com/indicator/ip/%s",
                 "domain":"https://otx.alienvault.com/indicator/domain/%s",
-                "hash": "https://otx.alienvault.com/indicator/file/%s"
+                "hash": "https://otx.alienvault.com/indicator/file/%s",
+                "malware": "https://otx.alienvault.com/browse/global/malware?q=%s",
+                "threat-actor": "https://otx.alienvault.com/browse/global/adversaries?q=%s"
             },
             "desc": "Open Threat Exchange",
             "icon": "alienvault.png",
             "color": "#000000",
-            "types": ["ip","domain","hash"],
-            "tags": ["ioc","dns","whois"],
+            "types": ["ip","domain","hash","malware","threat-actor"],
+            "tags": ["ioc","dns","whois","cti"],
 			"autoGraph": true
         },
         {
@@ -65,6 +67,46 @@
 			"autoGraph": false
         },
         {
+            "name": "Backlink Watch",
+            "url": {
+                "url": "https://www.backlinkwatch.com/"
+            },
+            "desc": "Get complete detailed information about quality and quantity of backlinks pointing to your website.",
+            "icon": "url_icon.png",
+            "color": "#3c88c4",
+            "inputSelector": "input[type='url']",
+            "submitQuery": "#submission",
+            "types": ["url"],
+			"autoGraph": false
+        },
+        {
+            "name": "BetaMeta",
+            "url": {
+                "url": "https://meta.narka.io/time"
+            },
+            "desc": "Extract and visualize temporal metadata from any URL. Discover creation dates, modification history, and hidden timestamps.",
+            "icon": "betameta.png",
+            "color": "#E63946",
+            "inputSelector": "#url",
+            "submitQuery": "button.search-btn",
+            "types": ["url"],
+            "tags": ["history"],
+			"autoGraph": false
+        },
+        {
+            "name": "BotScout",
+            "url": {
+                "ip": "https://botscout.com/search.htm?sterm=%s&stype=q",
+                "email": "https://botscout.com/search.htm?sterm=%s&stype=q"
+            },
+            "desc": "Anti-bot and anti-spam service designed to prevent automated scripts (bots) from abusing websites through fake registrations, forum spamming, and form misuse",
+            "icon": "botscout.png",
+            "color": "#6766fe",
+            "types": ["ip","email"],
+            "tags": ["rep"],
+			"autoGraph": false
+        },
+        {
             "name": "bgp.tools",
             "url": {
                 "ip": "https://bgp.tools/prefix/%s",
@@ -75,18 +117,6 @@
             "color": "#000000",
             "types": ["ip","asn"],
             "tags": ["whois","dns"],
-			"autoGraph": false
-        },
-        {
-            "name": "BGPView",
-            "url": {
-                "ip": "https://bgpview.io/ip/%s",
-                "asn": "https://bgpview.io/asn/%n"
-            },
-            "desc": "AS analysis tool",
-            "icon": "bgpview.png",
-            "color": "#2C94B3",
-            "types": ["ip","asn"],
 			"autoGraph": false
         },
         {
@@ -169,6 +199,18 @@
             "submitQuery": "#go",
             "types": ["domain","ip","email"],
             "tags": ["whois", "dns"],
+			"autoGraph": false
+        },
+        {
+            "name": "Certificate Details",
+            "url": {
+                "domain": "https://certificatedetails.com/%s"
+            },
+            "desc": "Inspect and download certificates from your browser",
+            "icon": "certificatedetails.png",
+            "color": "#F4511E",
+            "types": ["domain"],
+            "tags": ["tls"],
 			"autoGraph": false
         },
         {
@@ -335,6 +377,31 @@
             "tags": ["tls"],
 			"autoGraph": false
         },
+		{
+			"name": "DNS History",
+			"url": {
+                "domain": "http://dnshistory.org/dns-records/%s"
+            },
+            "desc": "Here at DNS History we have been crawling DNS records since 2009, our database currently contains over 1 billion domains and over 12 billion DNS records. ",
+			"icon": "dnshistory.png",
+			"color": "#7EB10C",
+			"types": ["domain"],
+            "tags": ["dns", "history"],
+			"autoGraph": false
+		},
+		{
+			"name": "DNSArchive",
+			"url": {
+                "domain": "https://dnsarchive.net/domain/%s",
+                "ip": "https://dnsarchive.net/ipv4/%s"
+            },
+            "desc": "Search our DNS repository of IP Addresses, domains, their records and history.",
+			"icon": "dnsarchive.png",
+			"color": "#004792",
+			"types": ["domain","ip"],
+            "tags": ["dns", "history"],
+			"autoGraph": false
+		},
         {
             "name": "dnsdumpster",
             "url": {
@@ -361,6 +428,18 @@
             "tags": ["sandbox"],
 			"autoGraph": false
 		},
+        {
+            "name": "Domain Digger",
+            "url": {
+                "domain": "https://digger.tools/lookup/%s/"
+            },
+            "desc": "Find all DNS records, WHOIS data, SSL/TLS certificate history, subdomains and more",
+            "icon": "digger.png",
+            "color": "#09090B",
+            "types": ["domain"],
+            "tags": ["dns","whois","tls"],
+			"autoGraph": false
+        },
 		{
 			"name": "Domain tools",
 			"url": {
@@ -372,18 +451,6 @@
 			"color": "#888888",
 			"types": ["domain", "ip"],
             "tags": ["whois"],
-			"autoGraph": false
-		},
-		{
-			"name": "DNS History",
-			"url": {
-                "domain": "http://dnshistory.org/dns-records/%s"
-            },
-            "desc": "Here at DNS History we have been crawling DNS records since 2009, our database currently contains over 1 billion domains and over 12 billion DNS records. ",
-			"icon": "dnshistory.png",
-			"color": "#7EB10C",
-			"types": ["domain"],
-            "tags": ["dns", "history"],
 			"autoGraph": false
 		},
         {
@@ -489,13 +556,15 @@
         {
             "name": "FortiGuard",
             "url": {
-                "cve": "https://www.fortiguard.com/search?q=%s"
+                "cve": "https://www.fortiguard.com/search?q=%s",
+                "threat-actor": "https://fortiguard.fortinet.com/threatintel-search?q=%s",
+                "malware": "https://fortiguard.fortinet.com/threatintel-search?q=%s"
             },
             "desc": "Search threat advisories",
             "icon": "fortiguard.png",
             "color": "#DA291C",
-            "types": ["cve"],
-            "tags": ["rep"],
+            "types": ["cve","malware","threat-actor"],
+            "tags": ["rep","cti"],
 			"autoGraph": false
         },
         {
@@ -750,9 +819,9 @@
         {
             "name": "HudsonRock",
             "url": {
-                "email": "https://www.hudsonrock.com/email-search?email=%s"
+                "email": "https://cavalier.hudsonrock.com/api/json/v2/osint-tools/search-by-email?email=%s"
             },
-            "desc": "Search specific email addresses to find out if your employees, customers, users or partners have been compromised by info-stealing malware.",
+            "desc": "Discover if an email address is associated with a computer that was infected",
             "icon": "hudsonrock.png",
             "color": "#FECD4E",
             "types": ["email"],
@@ -762,12 +831,24 @@
         {
             "name": "HudsonRock",
             "url": {
-                "domain": "https://www.hudsonrock.com/search?domain=%s"
+                "domain": "https://cavalier.hudsonrock.com/api/json/v2/osint-tools/search-by-domain?domain=%s"
             },
-            "desc": "Discover whether your, or your vendor’s corporate infrastructure has been compromised by Infostealers.",
+            "desc": "Search the impact of Infostealer infection on a domain",
             "icon": "hudsonrock.png",
             "color": "#FECD4E",
             "types": ["domain"],
+            "tags": ["leaks"],
+			"autoGraph": false
+        },
+        {
+            "name": "HudsonRock",
+            "url": {
+                "ip": "https://cavalier.hudsonrock.com/api/json/v2/osint-tools/search-by-ip?ip=%s"
+            },
+            "desc": "Discover if an IP address is associated with an Infostealer infection",
+            "icon": "hudsonrock.png",
+            "color": "#FECD4E",
+            "types": ["ip"],
             "tags": ["leaks"],
 			"autoGraph": false
         },
@@ -1018,11 +1099,26 @@
             "url": {
                 "ip": "https://prowl.lupovis.io/?ip=%s"
             },
-            "desc": "We identify, collect, analyze, and classify adversaries for you! With Prowl, you spend less time on what doesn't matter more time concentrating on what does.",
+            "desc": "We identify, collect, analyze, and classify adversaries for you! With Prowl, you spend less time on  what doesn't matter more time concentrating on what does.",
             "icon": "lupovis.png",
             "color": "#1C1934",
             "types": ["ip"],
             "tags": ["rep"],
+			"autoGraph": false
+        },
+        {
+            "name": "malpedia",
+            "url": {
+                "threat-actor": "https://malpedia.caad.fkie.fraunhofer.de/",
+                "malware": "https://malpedia.caad.fkie.fraunhofer.de/"
+            },
+            "desc": "The primary goal of Malpedia is to provide a resource for rapid identification and actionable context when investigating malware.",
+            "icon": "malpedia.png",
+            "color": "#B22000",
+            "inputSelector": "#quicksearch",
+            "submitQuery": "",
+            "types": ["malware","threat-actor"],
+            "tags": ["cti"],
 			"autoGraph": false
         },
         {
@@ -1040,13 +1136,68 @@
         {
             "name": "MALWARE bazaar",
             "url": {
-                "hash": "https://bazaar.abuse.ch/browse/?search=sha256%3A%s"
+                "hash": "https://bazaar.abuse.ch/browse/?search=sha256%3A%s",
+                "malware": "https://bazaar.abuse.ch/browse.php?search=tag%3A%s"
             },
             "desc": "Malware samples sharing",
             "icon": "abuse.png",
             "color": "#6C757D",
-            "types": ["hash"],
+            "types": ["hash","malware"],
             "tags": ["ioc"],
+			"autoGraph": false
+        },
+        {
+            "name": "Microsoft Threat Search",
+            "url": {
+                "malware": "https://www.microsoft.com/en-us/wdsi/threats/threat-search?query=%s"
+            },
+            "desc": "Microsoft Threat Encyclopedia",
+            "icon": "microsoft.png",
+            "color": "#03A7F2",
+            "types": ["malware"],
+            "tags": ["cti"],
+			"autoGraph": false
+        },
+        {
+            "name": "MISP Threat Actor Galaxy",
+            "url": {
+                "threat-actor": "https://misp-galaxy.org/threat-actor/"
+            },
+            "desc": "Listing of actor groups tracked by the MISP Galaxy Project",
+            "icon": "misp.png",
+            "color": "#19C9F0",
+            "inputSelector": "main div.md-content",
+            "submitQuery": "local-find",
+            "types": ["threat-actor"],
+            "tags": ["cti"],
+			"autoGraph": false
+        },
+        {
+            "name": "MITRE ATT&CK Groups",
+            "url": {
+                "threat-actor": "https://attack.mitre.org/groups/"
+            },
+            "desc": "Collection of cyber adversaries tracked by MITRE ATT&CK",
+            "icon": "mitre.png",
+            "color": "#C63F1F",
+            "inputSelector": "#v-attckmatrix",
+            "submitQuery": "local-find",
+            "types": ["threat-actor"],
+            "tags": ["cti"],
+			"autoGraph": false
+        },
+        {
+            "name": "MITRE ATT&CK Software",
+            "url": {
+                "malware": "https://attack.mitre.org/software/"
+            },
+            "desc": "Collection of malware tracked by MITRE ATT&CK",
+            "icon": "mitre.png",
+            "color": "#C63F1F",
+            "inputSelector": "#v-attckmatrix",
+            "submitQuery": "local-find",
+            "types": ["malware"],
+            "tags": ["cti"],
 			"autoGraph": false
         },
         {
@@ -1212,6 +1363,18 @@
 			"autoGraph": false
         },
         {
+            "name": "ORKL",
+            "url": {
+                "threat-actor": "https://orkl.eu/tas?orkl_ta[query]=%s"
+            },
+            "desc": "A searchable corpus of public cyber threat intelligence reports, built for the security research community.",
+            "icon": "orkl.png",
+            "color": "#0369A1",
+            "types": ["threat-actor"],
+            "tags": ["cti"],
+			"autoGraph": false
+        },
+        {
             "name": "PAN URL Filtering",
             "url": {
                 "url": "https://urlfiltering.paloaltonetworks.com/"
@@ -1288,20 +1451,6 @@
 			"autoGraph": false
         },
         {
-            "name": "PSBDMP",
-            "url": {
-                "email": "https://psbdmp.ws/"
-            },
-            "desc": "The biggest archive of {paste} dumps",
-            "icon": "psbdmp.png",
-            "color": "#26265a",
-            "inputSelector": "input[name='search']",
-            "submitQuery": "button i.fa-search",
-            "types": ["email"],
-            "tags": ["leaks"],
-			"autoGraph": false
-        },
-        {
             "name": "Pulsedive",
             "url": {
                 "ip": "https://pulsedive.com/indicator/%s",
@@ -1315,6 +1464,30 @@
             "color": "#0E2C3E",
             "types": ["ip","domain","hash","phone","asn"],
             "tags": ["dns","whois"],
+			"autoGraph": false
+        },
+        {
+            "name": "Ransomfeed",
+            "url": {
+                "threat-actor": "https://ransomfeed.it/?page=search&q=%s"
+            },
+            "desc": "Platform to monitor ransomware around the world.",
+            "icon": "ransomfeed.png",
+            "color": "#23283A",
+            "types": ["threat-actor"],
+            "tags": ["cti"],
+			"autoGraph": false
+        },
+        {
+            "name": "Ransomlook",
+            "url": {
+                "threat-actor": "https://www.ransomlook.io/browse?q=%s"
+            },
+            "desc": "Open, searchable ransomware group intelligence with live stats, posts and an API.",
+            "icon": "ransomlook.png",
+            "color": "#0F1117",
+            "types": ["threat-actor"],
+            "tags": ["cti"],
 			"autoGraph": false
         },
         {
@@ -1513,17 +1686,33 @@
 			"autoGraph": false
 		},
         {
-            "name": "Threatbook",
+            "name": "The Threat Codex",
+            "url": {
+                "cve": "https://threatcodex.com/",
+                "malware": "https://threatcodex.com/",
+                "threat-actor": "https://threatcodex.com/"
+            },
+            "desc": "This website monitors publications related to threat actors, malware families, vulnerabilities, and online services.",
+            "icon": "threatcodex.png",
+            "color": "#2F4858",
+            "inputSelector": "#topbar_search",
+            "submitQuery": "",
+            "types": ["cve","malware","threat-actor"],
+            "tags": ["cti"],
+			"autograph": false
+        },
+        {
+            "name": "threatbook",
             "url": {
                 "domain": "https://i.threatbook.io/research/%s",
                 "ip": "https://i.threatbook.io/research/%s"
             },
-            "desc": "ThreatBook CTI provides high-fidelity intelligence collected from alerts from real customer cases.",
+            "desc": "threatbook cti provides high-fidelity intelligence collected from alerts from real customer cases.",
             "icon": "threatbook.png",
-            "color": "#ED4734",
+            "color": "#ed4734",
             "types": ["domain","ip"],
             "tags": ["ioc"],
-			"autoGraph": false
+			"autograph": false
         },
         {
             "name": "THREATfox",
@@ -1535,8 +1724,20 @@
             "desc": "Indicators of Compromises sharing",
             "icon": "abuse.png",
             "color": "#000000",
-            "types": ["hash","domain","ip"],
+            "types": ["hash"],
             "tags": ["ioc"],
+			"autoGraph": false
+        },
+        {
+            "name": "TrendMicro",
+            "url": {
+                "malware": "https://www.trendmicro.com/vinfo/us/threat-encyclopedia/search/%s"
+            },
+            "desc": "Latest information on malware and vulnerabilities from Trend Micro.",
+            "icon": "trendmicro.png",
+            "color": "#D71920",
+            "types": ["malware"],
+            "tags": ["cti"],
 			"autoGraph": false
         },
         {
@@ -1598,12 +1799,13 @@
 			"url": {
                 "domain": "https://urlhaus.abuse.ch/browse.php?search=%s",
                 "url": "https://urlhaus.abuse.ch/browse.php?search=%s",
-                "ip": "https://urlhaus.abuse.ch/browse.php?search=%s"
+                "ip": "https://urlhaus.abuse.ch/browse.php?search=%s",
+                "malware": "https://urlhaus.abuse.ch/browse.php?search=tag:%s"
             },
             "desc": "Lookup malicious URLs that are being used for malware distribution",
 			"icon": "abuse.png",
 			"color": "#A20300",
-			"types": ["domain","url","ip"],
+			"types": ["domain","url","ip","malware"],
             "tags": ["ioc", "rep"],
 			"autoGraph": false
 		},
@@ -1847,6 +2049,21 @@
             "icon": "whatcms.png",
             "color": "#008CBA",
             "types": ["domain"],
+            "tags": ["techs"],
+			"autoGraph": false
+        },
+        {
+            "name": "WordPress Theme Search",
+            "url": {
+                "domain": "https://whatwpthemeisthat.com/",
+                "url": "https://whatwpthemeisthat.com/"
+            },
+            "desc": "What WordPress Theme Is That is a free online tool allows you to easily detect what WordPress theme a site uses. Additionally, it will also detect what WordPress Plugins are being used.",
+            "icon": "wts.png",
+            "color": "#72C02C",
+            "inputSelector": "#searchf",
+            "submitQuery": "#check",
+            "types": ["domain", "url"],
             "tags": ["techs"],
 			"autoGraph": false
         },
