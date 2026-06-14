@@ -27,6 +27,14 @@ class IndicatorParser {
      */
     getIndicatorType(indicator) {
 
+        // Search by Threat Actor or Malware
+        let inputText = indicator.split(":");
+        if (inputText.length > 1) {
+            let tag = inputText[0];
+            if (tag == "threat-actor" || tag == "malware") {
+                return [tag, ""];
+            }
+        }
         if(indicator.match(this.domain)) {
             // Extract the tld
             const match = indicator.match(this.domain);
