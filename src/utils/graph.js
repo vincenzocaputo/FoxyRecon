@@ -228,6 +228,22 @@ class Graph {
                     }
                     this.addSTIXNode(stix.id, nodeValue, 'autonomous-system', stix);
                     break;
+                case 'threat-actor':
+                    stix = {
+                        id: 'threat-actor--'+uuid,
+                        type: 'threat-actor',
+                        name: nodeValue,
+                    }
+                    this.addSTIXNode(stix.id, nodeValue, 'threat-actor', stix);
+                    break;
+                case 'malware':
+                    stix = {
+                        id: 'malware--'+uuid,
+                        type: 'malware',
+                        name: nodeValue,
+                    }
+                    this.addSTIXNode(stix.id, nodeValue, 'malware', stix);
+                    break;
 
             }
             this.saveGraph();

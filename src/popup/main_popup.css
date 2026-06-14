@@ -249,7 +249,7 @@ div.tool-tag {
     align-items: center;
 }
 
-#text-field #domextr-icon, #catch-icon, #hist-icon, #flag {
+#text-field #domextr-icon, #hist-icon, #plus-search-icon, #flag {
     width: 24px;
     height: 24px;
 }
@@ -263,7 +263,7 @@ div.tool-tag {
     display: none;
 }
 
-#catch-icon, #hist-icon {
+#plus-search-icon, #hist-icon, #plus-search-icon {
     display: block;
     cursor: pointer;
 }
@@ -272,9 +272,10 @@ div.tool-tag {
     display: none;
 }
 
-#hist-icon { 
+#hist-icon, #plus-search-icon  { 
     height: 20px;
     width: 20px;
+    margin-left: 2px;
 }
 
 #bin-icon {
@@ -311,9 +312,39 @@ div.tool-tag {
     cursor: pointer;
 }
 
+#special-input-types {
+    display: none;
+    z-index: 1;
+    position: fixed;
+    background-color: white;
+    border-radius: 0 0 5px 5px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: #6E6C69;
+}
+
+#special-input-types table {
+    border-collapse: collapse;
+}
+
+#special-input-types tr {
+    cursor: pointer;
+    display: flex;
+    padding: 5px
+}
+
+#special-input-types img {
+    width: 20px;
+    height: 20px;
+}
+
+#special-input-types tr:hover {
+    background-color: #FF7700;
+}
+
 #text-field > input {
     height: 25px;
-    width: 250px;
+    width: 100%;
     margin-left: 5px;
     border: none;
     background: transparent;
@@ -988,9 +1019,15 @@ input:checked + .slider:before {
 
 #catch-caption {
     padding-top: 10px;
+    text-align: center;
 }
 
-#catch-caption>img {
+#catch-caption button {
+    display: inline-flex;
+    align-items: center;
+}
+
+#catch-caption img {
     height: 25px;
     width: 25px;
     cursor: pointer;
