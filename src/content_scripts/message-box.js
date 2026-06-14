@@ -6,7 +6,7 @@ function showMessageBox(message, error) {
     }
 
     const img = document.createElement("img");
-    img.src = browser.runtime.getURL("assets/icons/foxyrecon-icon-32.png");
+    img.src = chrome.runtime.getURL("assets/icons/foxyrecon-icon-32.png");
 
     const messageContainer = document.createElement("p");
     messageContainer.textContent = message;
@@ -26,7 +26,7 @@ function showMessageBox(message, error) {
     }, 2000);
 }
 
-browser.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     if (message.split(":")[0] === "show-msg") {
         showMessageBox(message.split(":")[1], false);
     }
