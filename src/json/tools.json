@@ -1334,6 +1334,18 @@
 			"autoGraph": false
         },
         {
+            "name": "ORKL",
+            "url": {
+                "threat-actor": "https://orkl.eu/tas?orkl_ta[query]=%s"
+            },
+            "desc": "A searchable corpus of public cyber threat intelligence reports, built for the security research community.",
+            "icon": "orkl.png",
+            "color": "#0369A1",
+            "types": ["threat-actor"],
+            "tags": ["cti"],
+			"autoGraph": false
+        },
+        {
             "name": "PAN URL Filtering",
             "url": {
                 "url": "https://urlfiltering.paloaltonetworks.com/"
