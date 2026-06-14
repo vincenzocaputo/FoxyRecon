@@ -249,7 +249,7 @@ div.tool-tag {
     align-items: center;
 }
 
-#text-field #domextr-icon, #catch-icon, #hist-icon, #plus-search-icon, #flag {
+#text-field #domextr-icon, #hist-icon, #plus-search-icon, #flag {
     width: 24px;
     height: 24px;
 }
@@ -263,7 +263,7 @@ div.tool-tag {
     display: none;
 }
 
-#catch-icon, #hist-icon, #plus-search-icon {
+#plus-search-icon, #hist-icon, #plus-search-icon {
     display: block;
     cursor: pointer;
 }

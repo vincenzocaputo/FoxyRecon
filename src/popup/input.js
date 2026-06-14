@@ -68,7 +68,7 @@ function collectIndicators() {
 var textfieldCatch = document.querySelector("#catch-icon");
 textfieldCatch.title = "Collect indicators on this page";
 textfieldCatch.addEventListener("click", collectIndicators);
-document.querySelector("#catch-caption>img").addEventListener("click", collectIndicators);
+document.querySelector("#catch-caption>button").addEventListener("click", collectIndicators);
 
 
 /**
