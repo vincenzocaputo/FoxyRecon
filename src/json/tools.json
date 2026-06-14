@@ -32,13 +32,15 @@
             "url": {
                 "ip": "https://otx.alienvault.com/indicator/ip/%s",
                 "domain":"https://otx.alienvault.com/indicator/domain/%s",
-                "hash": "https://otx.alienvault.com/indicator/file/%s"
+                "hash": "https://otx.alienvault.com/indicator/file/%s",
+                "malware": "https://otx.alienvault.com/browse/global/malware?q=%s",
+                "threat-actor": "https://otx.alienvault.com/browse/global/adversaries?q=%s"
             },
             "desc": "Open Threat Exchange",
             "icon": "alienvault.png",
             "color": "#000000",
-            "types": ["ip","domain","hash"],
-            "tags": ["ioc","dns","whois"],
+            "types": ["ip","domain","hash","malware","threat-actor"],
+            "tags": ["ioc","dns","whois","cti"],
 			"autoGraph": true
         },
         {
@@ -554,13 +556,15 @@
         {
             "name": "FortiGuard",
             "url": {
-                "cve": "https://www.fortiguard.com/search?q=%s"
+                "cve": "https://www.fortiguard.com/search?q=%s",
+                "threat-actor": "https://fortiguard.fortinet.com/threatintel-search?q=%s",
+                "malware": "https://fortiguard.fortinet.com/threatintel-search?q=%s"
             },
             "desc": "Search threat advisories",
             "icon": "fortiguard.png",
             "color": "#DA291C",
-            "types": ["cve"],
-            "tags": ["rep"],
+            "types": ["cve","malware","threat-actor"],
+            "tags": ["rep","cti"],
 			"autoGraph": false
         },
         {
@@ -1117,13 +1121,40 @@
         {
             "name": "MALWARE bazaar",
             "url": {
-                "hash": "https://bazaar.abuse.ch/browse/?search=sha256%3A%s"
+                "hash": "https://bazaar.abuse.ch/browse/?search=sha256%3A%s",
+                "malware": "https://bazaar.abuse.ch/browse.php?search=tag%3A%s"
             },
             "desc": "Malware samples sharing",
             "icon": "abuse.png",
             "color": "#6C757D",
-            "types": ["hash"],
+            "types": ["hash","malware"],
             "tags": ["ioc"],
+			"autoGraph": false
+        },
+        {
+            "name": "Microsoft Threat Search",
+            "url": {
+                "malware": "https://www.microsoft.com/en-us/wdsi/threats/threat-search?query=%s"
+            },
+            "desc": "Microsoft Threat Encyclopedia",
+            "icon": "microsoft.png",
+            "color": "#03A7F2",
+            "types": ["malware"],
+            "tags": ["cti"],
+			"autoGraph": false
+        },
+        {
+            "name": "MITRE ATT&CK Groups",
+            "url": {
+                "threat-actor": "https://attack.mitre.org/groups/"
+            },
+            "desc": "Collection of cyber adversaries tracked by MITRE ATT&CK",
+            "icon": "mitre.png",
+            "color": "#C63F1F",
+            "inputSelector": "#v-attckmatrix",
+            "submitQuery": "local-find",
+            "types": ["threat-actor"],
+            "tags": ["cti"],
 			"autoGraph": false
         },
         {
@@ -1392,6 +1423,21 @@
 			"autoGraph": false
         },
         {
+            "name": "malpedia",
+            "url": {
+                "threat-actor": "https://malpedia.caad.fkie.fraunhofer.de/",
+                "malware": "https://malpedia.caad.fkie.fraunhofer.de/"
+            },
+            "desc": "The primary goal of Malpedia is to provide a resource for rapid identification and actionable context when investigating malware.",
+            "icon": "malpedia.png",
+            "color": "#B22000",
+            "inputSelector": "#quicksearch",
+            "submitQuery": "",
+            "types": ["malware","threat-actor"],
+            "tags": ["cti"],
+			"autoGraph": false
+        },
+        {
             "name": "RIPE Database",
             "url": {
                 "ip": "https://apps.db.ripe.net/db-web-ui/query?searchtext=%s",
@@ -1576,17 +1622,33 @@
 			"autoGraph": false
 		},
         {
-            "name": "Threatbook",
+            "name": "The Threat Codex",
+            "url": {
+                "cve": "https://threatcodex.com/",
+                "malware": "https://threatcodex.com/",
+                "threat-actor": "https://threatcodex.com/"
+            },
+            "desc": "This website monitors publications related to threat actors, malware families, vulnerabilities, and online services.",
+            "icon": "threatcodex.png",
+            "color": "#2F4858",
+            "inputSelector": "#topbar_search",
+            "submitQuery": "",
+            "types": ["cve","malware","threat-actor"],
+            "tags": ["cti"],
+			"autograph": false
+        },
+        {
+            "name": "threatbook",
             "url": {
                 "domain": "https://i.threatbook.io/research/%s",
                 "ip": "https://i.threatbook.io/research/%s"
             },
-            "desc": "ThreatBook CTI provides high-fidelity intelligence collected from alerts from real customer cases.",
+            "desc": "threatbook cti provides high-fidelity intelligence collected from alerts from real customer cases.",
             "icon": "threatbook.png",
-            "color": "#ED4734",
+            "color": "#ed4734",
             "types": ["domain","ip"],
             "tags": ["ioc"],
-			"autoGraph": false
+			"autograph": false
         },
         {
             "name": "THREATfox",
@@ -1598,8 +1660,20 @@
             "desc": "Indicators of Compromises sharing",
             "icon": "abuse.png",
             "color": "#000000",
-            "types": ["hash","domain","ip"],
+            "types": ["hash"],
             "tags": ["ioc"],
+			"autoGraph": false
+        },
+        {
+            "name": "TrendMicro",
+            "url": {
+                "malware": "https://www.trendmicro.com/vinfo/us/threat-encyclopedia/search/%s"
+            },
+            "desc": "Latest information on malware and vulnerabilities from Trend Micro.",
+            "icon": "trendmicro.png",
+            "color": "#D71920",
+            "types": ["malware"],
+            "tags": ["cti"],
 			"autoGraph": false
         },
         {
@@ -1661,12 +1735,13 @@
 			"url": {
                 "domain": "https://urlhaus.abuse.ch/browse.php?search=%s",
                 "url": "https://urlhaus.abuse.ch/browse.php?search=%s",
-                "ip": "https://urlhaus.abuse.ch/browse.php?search=%s"
+                "ip": "https://urlhaus.abuse.ch/browse.php?search=%s",
+                "malware": "https://urlhaus.abuse.ch/browse.php?search=tag:%s"
             },
             "desc": "Lookup malicious URLs that are being used for malware distribution",
 			"icon": "abuse.png",
 			"color": "#A20300",
-			"types": ["domain","url","ip"],
+			"types": ["domain","url","ip","malware"],
             "tags": ["ioc", "rep"],
 			"autoGraph": false
 		},
