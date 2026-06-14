@@ -37,6 +37,7 @@ document.querySelector("#filter-container-tags>select").addEventListener("change
     let inputString = inputField.value;
 
     [inputString, fToolName] = getInputFilter(inputString);
+
     let [type, tld] = indicatorParser.getIndicatorType(inputString);
     if(type === "defanged") {
         // If the input string is defanged, refang it

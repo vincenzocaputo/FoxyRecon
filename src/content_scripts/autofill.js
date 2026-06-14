@@ -34,6 +34,36 @@ function submitIndicator(query, submit, current_url) {
     }
 }
 
+function findAndHighlight(divSelector, text) {
+    const container = document.querySelector(divSelector);
+
+    if (!container || !text) return false;
+
+    const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
+
+    let textNode;
+    while ((textNode = walker.nextNode())) {
+        const index = textNode.nodeValue.toLowerCase().indexOf(text.toLowerCase());
+
+        if (index !== -1) {
+            const range = document.createRange();
+            range.setStart(textNode, index);
+            range.setEnd(textNode, index + text.length);
+
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+
+            range.startContainer.parentElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+            return true;
+        }
+    }
+    return false;
+}
+
 // Send a message to background script in order to retrieve the indicator saved in the local storage
 function sendMessageAndFill() {
     browser.runtime.sendMessage({
@@ -57,7 +87,14 @@ function sendMessageAndFill() {
             const current_url = window.location.href;
 
             let inputField;
-            if(current_url.includes("virustotal.com")) {
+            if(query === "local-find") {
+                const found = findAndHighlight(inputSelector, indicator);
+                if(!found) {
+                   showMessageBox(`No matches for ${indicator}`, true); 
+                }
+                return;
+                
+            } else if(current_url.includes("virustotal.com")) {
                 // Get input field
                 inputField = document.querySelector('home-view').shadowRoot.querySelector(inputSelector);
                 window.addEventListener('load', function () {

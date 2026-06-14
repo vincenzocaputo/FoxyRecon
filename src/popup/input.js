@@ -197,6 +197,10 @@ inputField.addEventListener("keyup", (e) => {
                 [type, tld] = indicatorParser.getIndicatorType(inputIndicator);
             }
 
+            if (type === "threat-actor" || type === "malware") {
+                inputIndicator = inputIndicator.split(":")[1];
+            }
+
             if(type === "defanged") {
                 // If the input string is defanged, refang it
                 inputIndicator = indicatorParser.refangIndicator(inputIndicator);

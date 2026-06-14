@@ -1144,6 +1144,20 @@
 			"autoGraph": false
         },
         {
+            "name": "MISP Threat Actor Galaxy",
+            "url": {
+                "threat-actor": "https://misp-galaxy.org/threat-actor/"
+            },
+            "desc": "Listing of actor groups tracked by the MISP Galaxy Project",
+            "icon": "misp.png",
+            "color": "#19C9F0",
+            "inputSelector": "main div.md-content",
+            "submitQuery": "local-find",
+            "types": ["threat-actor"],
+            "tags": ["cti"],
+			"autoGraph": false
+        },
+        {
             "name": "MITRE ATT&CK Groups",
             "url": {
                 "threat-actor": "https://attack.mitre.org/groups/"

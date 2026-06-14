@@ -24,10 +24,14 @@ loadTools().then( (result) => {
         if(!indicator || !indicator.value || indicator.value === "undefined") {
             inputField.focus();
         } else {
-            // Put the indicator in the text field
-            inputField.value = indicator.value;
             // Restore the type of the string
             const type = indicator.type;
+            // Put the indicator in the text field
+            if (type === "threat-actor" || type === "malware") {
+                inputField.value = `${type}:${indicator.value}`; 
+            } else {
+                inputField.value = indicator.value;
+            }
             // Restore the domain tld if present
             const tld = indicator.tld;
             showCountryFlag(tld);

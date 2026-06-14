@@ -249,7 +249,7 @@ div.tool-tag {
     align-items: center;
 }
 
-#text-field #domextr-icon, #catch-icon, #hist-icon, #flag {
+#text-field #domextr-icon, #catch-icon, #hist-icon, #plus-search-icon, #flag {
     width: 24px;
     height: 24px;
 }
@@ -263,7 +263,7 @@ div.tool-tag {
     display: none;
 }
 
-#catch-icon, #hist-icon {
+#catch-icon, #hist-icon, #plus-search-icon {
     display: block;
     cursor: pointer;
 }
@@ -272,9 +272,10 @@ div.tool-tag {
     display: none;
 }
 
-#hist-icon { 
+#hist-icon, #plus-search-icon  { 
     height: 20px;
     width: 20px;
+    margin-left: 2px;
 }
 
 #bin-icon {
@@ -313,7 +314,7 @@ div.tool-tag {
 
 #text-field > input {
     height: 25px;
-    width: 250px;
+    width: 100%;
     margin-left: 5px;
     border: none;
     background: transparent;
