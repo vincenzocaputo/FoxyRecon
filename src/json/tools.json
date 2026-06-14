@@ -1107,6 +1107,21 @@
 			"autoGraph": false
         },
         {
+            "name": "malpedia",
+            "url": {
+                "threat-actor": "https://malpedia.caad.fkie.fraunhofer.de/",
+                "malware": "https://malpedia.caad.fkie.fraunhofer.de/"
+            },
+            "desc": "The primary goal of Malpedia is to provide a resource for rapid identification and actionable context when investigating malware.",
+            "icon": "malpedia.png",
+            "color": "#B22000",
+            "inputSelector": "#quicksearch",
+            "submitQuery": "",
+            "types": ["malware","threat-actor"],
+            "tags": ["cti"],
+			"autoGraph": false
+        },
+        {
             "name": "MalShare",
             "url": {
                 "hash": "https://malshare.com/sample.php?action=detail&hash=%s"
@@ -1438,6 +1453,18 @@
 			"autoGraph": false
         },
         {
+            "name": "Ransomlook",
+            "url": {
+                "threat-actor": "https://www.ransomlook.io/browse?q=%s"
+            },
+            "desc": "Open, searchable ransomware group intelligence with live stats, posts and an API.",
+            "icon": "ransomlook.png",
+            "color": "#0F1117",
+            "types": ["threat-actor"],
+            "tags": ["cti"],
+			"autoGraph": false
+        },
+        {
             "name": "Rapid7",
             "url": {
                 "cve": "https://www.rapid7.com/db/?q=%s"
@@ -1446,21 +1473,6 @@
             "icon": "rapid7.png",
             "color": "#E85E26",
             "types": ["cve"],
-			"autoGraph": false
-        },
-        {
-            "name": "malpedia",
-            "url": {
-                "threat-actor": "https://malpedia.caad.fkie.fraunhofer.de/",
-                "malware": "https://malpedia.caad.fkie.fraunhofer.de/"
-            },
-            "desc": "The primary goal of Malpedia is to provide a resource for rapid identification and actionable context when investigating malware.",
-            "icon": "malpedia.png",
-            "color": "#B22000",
-            "inputSelector": "#quicksearch",
-            "submitQuery": "",
-            "types": ["malware","threat-actor"],
-            "tags": ["cti"],
 			"autoGraph": false
         },
         {
