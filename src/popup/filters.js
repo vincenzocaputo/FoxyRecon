@@ -2,7 +2,13 @@ function getInputFilter(inputString) {
     let fToolName = "";
     let inputIndicator = "";
     // Get indicator + possible search filters
+    if (inputString.startsWith("threat-actor:") ||
+        inputString.startsWith("malware:")) {
+        return [inputString, fToolName];
+    }
+
     let inputs = inputString.split(" ");
+
     if(inputs.length > 1) {
         // There is a search filter
         inputIndicator = inputs[0];
