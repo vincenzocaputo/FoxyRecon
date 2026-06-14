@@ -330,7 +330,8 @@ div.tool-tag {
 #special-input-types tr {
     cursor: pointer;
     display: flex;
-    padding: 5px
+    padding: 5px;
+    align-items: center;
 }
 
 #special-input-types img {
