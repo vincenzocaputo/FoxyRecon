@@ -1453,6 +1453,18 @@
 			"autoGraph": false
         },
         {
+            "name": "Ransomfeed",
+            "url": {
+                "threat-actor": "https://ransomfeed.it/?page=search&q=%s"
+            },
+            "desc": "Platform to monitor ransomware around the world.",
+            "icon": "ransomfeed.png",
+            "color": "#23283A",
+            "types": ["threat-actor"],
+            "tags": ["cti"],
+			"autoGraph": false
+        },
+        {
             "name": "Ransomlook",
             "url": {
                 "threat-actor": "https://www.ransomlook.io/browse?q=%s"
