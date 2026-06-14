@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [ 0.25.0 ] - Unreleased
+
+### Add
+- Search capabilities for malware and threat actors.
+- New resources for malware and threat actors lookup.
+- WordPress Theme Search tool
+- BotScout resource
+- Domain Digger tool
+- BetMeta Temporal Analysis Engine
+- DNSArchive resource
+- Certificate Details web service
+- Hudson Rock resources
+
+### Change
+- The popup main view has a visible button to collect indicators
+- Removed psbdmp and BGPView (resources no more available)
+- Update Hudson Rock endpoints
+
+
 ## [ 0.24.4 ] - 2026-02-07
 
 ### Add

@@ -989,9 +989,15 @@ input:checked + .slider:before {
 
 #catch-caption {
     padding-top: 10px;
+    text-align: center;
 }
 
-#catch-caption>img {
+#catch-caption button {
+    display: inline-flex;
+    align-items: center;
+}
+
+#catch-caption img {
     height: 25px;
     width: 25px;
     cursor: pointer;
