@@ -1,5 +1,5 @@
 // Get addon version from manifest file
-const manifest = browser.runtime.getManifest();
+const manifest = chrome.runtime.getManifest();
 document.getElementById("addon-version").textContent = "VERSION "+manifest.version+" (BETA)";
 
 var inputField = document.getElementById("input-box");
@@ -8,7 +8,7 @@ indicatorParser = new IndicatorParser();
 
 
 // Check if there are some indicators found in the current webpage
-browser.storage.local.get("catchedIndicators").then( (result) => {
+chrome.storage.local.get("catchedIndicators").then( (result) => {
     const collectedIndicatorsList = result.catchedIndicators;
 
     if(collectedIndicatorsList && collectedIndicatorsList.length != 0 && collectedIndicatorsList !== undefined && collectedIndicatorsList !== "undefined") {

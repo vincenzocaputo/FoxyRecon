@@ -38,13 +38,13 @@ function catchIndicators() {
         }
     }
     if(indicators) {
-        browser.runtime.sendMessage({
+        chrome.runtime.sendMessage({
          "indicators": JSON.stringify(indicators)
         }).then(message=>{console.log(message)},error=>{console.error(error)});
     }
 }
 
-browser.runtime.onMessage.addListener(function(message) {
+chrome.runtime.onMessage.addListener(function(message) {
     if (message === "catch") {
         catchIndicators();
     } else if (message['cmd'] === 'find') {

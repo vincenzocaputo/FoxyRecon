@@ -11,7 +11,7 @@ textfieldBin.addEventListener("click", function() {
     // Hide flag
     document.querySelector("#flag").style.display = "none";
     // Clean the local storage
-    browser.storage.local.set({"indicator": {
+    chrome.storage.local.set({"indicator": {
         value: "",
         type: "",
         tag: "all",
@@ -29,17 +29,17 @@ textfieldBin.addEventListener("click", function() {
  */
 function collectIndicators() {
     // Get the id of the current active tab in the current window
-    browser.tabs.query({active:true, currentWindow:true}).then(tabs => {
+    chrome.tabs.query({active:true, currentWindow:true}).then(tabs => {
         let activeTab = tabs[0].id;
         // Send a message to the content script
-        browser.tabs.sendMessage(activeTab, "catch");
+        chrome.tabs.sendMessage(activeTab, "catch");
         let token = 1;
-        browser.runtime.onMessage.addListener(function(message) {
+        chrome.runtime.onMessage.addListener(function(message) {
             if(token) {
                 // No indicators found. Show a message
                 if(message['indicators'] == "[]") {
                     showMessagePopup("No indicators found in this page", MessageType.INFO);
-                    browser.storage.local.set({"catchedIndicators": []});
+                    chrome.storage.local.set({"catchedIndicators": []});
                 } else {
                     //countFoundIndicators();
                     const indicatorsList = JSON.parse(message['indicators']);
@@ -52,7 +52,7 @@ function collectIndicators() {
                     for(let key in count) {
                         document.getElementById(key+"_occ").textContent = count[key];
                     }
-                    browser.storage.local.set({"catchedIndicators": indicatorsList});
+                    chrome.storage.local.set({"catchedIndicators": indicatorsList});
 
                 }
             }
@@ -129,7 +129,7 @@ textfieldTool.addEventListener("click", function() {
     showButtonsByType(domain, "domain", "all", isOnlyFav(), isOnlyAutoGraph(), isOnlyNoKey(), isOnlyNoInt());
     // Save the current indicator along with its type
     
-    browser.storage.local.set({"indicator": {
+    chrome.storage.local.set({"indicator": {
         value: domain,
         type: type,
         tag: "all",
@@ -159,7 +159,7 @@ function submitIndicator(indicator, type, tld, tag, toolName) {
     if(!tag) {
         tag = "all";
     }
-    browser.storage.local.set({"indicator": {
+    chrome.storage.local.set({"indicator": {
         value: indicator,
         type: type,
         tld: tld,
@@ -191,13 +191,13 @@ inputField.addEventListener("focus", (e) => {
 inputField.addEventListener("keyup", (e) => {
     let inputString = inputField.value;
     // Remove badge text
-    browser.browserAction.setBadgeText({text: ''});
+    chrome.action.setBadgeText({text: ''});
     if (document.getElementById("catch-res-list").style.display === "" ||
         document.getElementById("catch-res-list").style.display === "none") {
         // If no input was provided, show the add-on logo and the history icon
         if(inputString === "") {
             showAddonMain();
-            browser.storage.local.set({"indicator": {
+            chrome.storage.local.set({"indicator": {
                 value: "",
                 type: "",
                 tag: "",
