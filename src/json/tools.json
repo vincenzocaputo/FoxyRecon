@@ -1588,6 +1588,32 @@
 			"autoGraph": false
         },
         {
+            "name": "SOCRadar (CVE Radar)",
+            "url": {
+                "cve": "https://socradar.io/free-tools/cve-radar/%s"
+            },
+            "desc": "Explore SOCRadar Free Tools for dark web exposure, attack surface discovery, vulnerability intelligence, and SOC triage workflows.",
+            "icon": "socradar.png",
+            "color": "#ff4562",
+            "types": ["cve"],
+			"autoGraph": false
+        },
+        {
+            "name": "SOCRadar (IOC Radar)",
+            "url": {
+                "ip": "https://socradar.io/free-tools/ioc-radar/%s",
+                "domain": "https://socradar.io/free-tools/ioc-radar/%s",
+                "cve": "https://socradar.io/free-tools/ioc-radar/%s",
+                "threat-actor": "https://socradar.io/free-tools/ioc-radar/actors/%s"
+            },
+            "desc": "Explore SOCRadar Free Tools for dark web exposure, attack surface discovery, vulnerability intelligence, and SOC triage workflows.",
+            "icon": "socradar.png",
+            "color": "#ff4562",
+            "types": ["ip", "domain", "cve", "threat-actor"],
+            "tags": ["cti"],
+			"autoGraph": false
+        },
+        {
             "name": "Spam Database Lookup",
             "url": {
                 "domain": "https://spamdb.org/db/%s",
